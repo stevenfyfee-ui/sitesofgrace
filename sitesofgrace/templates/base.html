@@ -1,46 +1,118 @@
-{% load static wagtailcore_tags wagtailuserbar %}
-
+{% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %} — Sites of Grace{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ page.search_description }}{% endblock %}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  {% with s=settings.core.SiteSettings %}
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Sites of Grace — home">
+        {% if s.logo %}
+          {% image s.logo max-160x60 alt="Sites of Grace" class="brand-logo" %}
+        {% else %}
+          <span class="brand-wordmark">Sites of Grace</span>
         {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </a>
 
-        {# Force all links in the live preview panel to be opened in a new tab #}
-        {% if request.in_preview_panel %}
-        <base target="_blank">
+      <nav class="primary-nav" aria-label="Primary">
+        {# Renders the "main" menu managed in Wagtail admin (Settings > Main menu). #}
+        {% main_menu max_levels=2 template="menus/main_menu.html" sub_menu_template="menus/sub_menu.html" %}
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-primary" href="#">Begin Your Journey</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+    {# Mobile menu mirrors the same main menu #}
+    <div class="mobile-nav" id="mobileNav" hidden>
+      {% main_menu max_levels=2 template="menus/mobile_menu.html" sub_menu_template="menus/mobile_sub_menu.html" %}
+    </div>
+  </header>
+
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        {% if s.logo %}
+          {% image s.logo max-180x64 alt="Sites of Grace" class="footer-logo" %}
+        {% else %}
+          <span class="footer-wordmark">Sites of Grace</span>
         {% endif %}
+        <p class="footer-summary">{{ s.footer_summary }}</p>
+        <div class="social">
+          {% if s.facebook_url %}<a href="{{ s.facebook_url }}" aria-label="Facebook">f</a>{% endif %}
+          {% if s.instagram_url %}<a href="{{ s.instagram_url }}" aria-label="Instagram">◎</a>{% endif %}
+          {% if s.youtube_url %}<a href="{{ s.youtube_url }}" aria-label="YouTube">▶</a>{% endif %}
+          {% if s.x_url %}<a href="{{ s.x_url }}" aria-label="X">✕</a>{% endif %}
+        </div>
+      </div>
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/sitesofgrace.css' %}">
+      {# Each footer column is a "flat menu" managed in admin by its handle. #}
+      <div class="footer-col">
+        <h3>Explore</h3>
+        {% flat_menu "footer-explore" show_menu_heading=False template="menus/footer_menu.html" %}
+      </div>
+      <div class="footer-col">
+        <h3>Learn</h3>
+        {% flat_menu "footer-learn" show_menu_heading=False template="menus/footer_menu.html" %}
+      </div>
+      <div class="footer-col">
+        <h3>About &amp; Trust</h3>
+        {% flat_menu "footer-about" show_menu_heading=False template="menus/footer_menu.html" %}
+      </div>
 
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
-    </head>
+      <div class="footer-newsletter">
+        <h3>{{ s.newsletter_heading }}</h3>
+        <p>{{ s.newsletter_text }}</p>
+        {# Wire this action to your newsletter provider (e.g. Mailchimp/Buttondown) later. #}
+        <div class="newsletter-form">
+          <label class="sr-only" for="nl-email">Your email</label>
+          <input id="nl-email" type="email" placeholder="Your email" autocomplete="email">
+          <button class="btn btn-gold" type="button">Sign up</button>
+        </div>
+      </div>
+    </div>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    <div class="footer-base">
+      <div class="container footer-base-inner">
+        <p class="disclaimer">{{ s.disclaimer }}</p>
+        <p class="copyright">© {% now "Y" %} Sites of Grace. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  {% endwith %}
 
-        {% block content %}{% endblock %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/sitesofgrace.js' %}"></script>
-
-        {% block extra_js %}
-        {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
+  <script>
+    // Minimal mobile menu toggle — no framework needed for the shell.
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('mobileNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.hasAttribute('hidden');
+        if (open) { nav.removeAttribute('hidden'); } else { nav.setAttribute('hidden', ''); }
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
 </html>

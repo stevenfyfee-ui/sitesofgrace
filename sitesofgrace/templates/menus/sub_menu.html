@@ -1,0 +1,8 @@
+{% load menu_tags %}
+<ul class="subnav">
+  {% for item in menu_items %}
+    <li class="nav-item {{ item.active_class }}">
+      <a href="{{ item.href }}">{{ item.text }}</a>
+    </li>
+  {% endfor %}
+</ul>

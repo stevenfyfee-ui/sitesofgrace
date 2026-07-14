@@ -1,0 +1,13 @@
+{% load menu_tags %}
+<ul class="nav-list">
+  {% for item in menu_items %}
+    <li class="nav-item {{ item.active_class }}{% if item.has_children_in_menu %} has-submenu{% endif %}">
+      <a href="{{ item.href }}"{% if item.has_children_in_menu %} aria-haspopup="true"{% endif %}>
+        {{ item.text }}{% if item.has_children_in_menu %} <span class="caret" aria-hidden="true">▾</span>{% endif %}
+      </a>
+      {% if item.has_children_in_menu %}
+        {% sub_menu item %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

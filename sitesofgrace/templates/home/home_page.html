@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>{{ page.hero_heading }}</h1>
+    <p class="hero-intro">{{ page.hero_intro }}</p>
+    <div class="hero-ctas">
+      {% if page.primary_cta_text %}<a class="btn btn-primary" href="{{ page.primary_cta_link }}">{{ page.primary_cta_text }}</a>{% endif %}
+      {% if page.secondary_cta_text %}<a class="btn btn-gold" href="{{ page.secondary_cta_link }}">{{ page.secondary_cta_text }}</a>{% endif %}
+    </div>
+  </div>
+</section>
+
+{# Feature cards, category strips, and the map preview drop in here in the next pass. #}
+{% endblock %}
