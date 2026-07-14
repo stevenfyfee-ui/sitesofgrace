@@ -1,0 +1,17 @@
+{% load wagtailadmin_tags %}
+
+{% block filter_partials %}
+    {% include "wagtailadmin/shared/listing/filter_partials.html" %}
+{% endblock %}
+
+<form id="page-reorder-form">
+    {% csrf_token %}
+
+    {% block before_results %}{% endblock %}
+
+    {% component table %}
+
+    {% if is_paginated %}
+        {% include "wagtailadmin/shared/pagination_nav.html" with items=page_obj linkurl=index_url %}
+    {% endif %}
+</form>
