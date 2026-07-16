@@ -8,7 +8,7 @@
 
 {# ---------- Hero ---------- #}
 <section class="hero{% if page.hero_image %} hero--image{% endif %}"
-  {% if page.hero_image %}style="background-image: linear-gradient(rgba(3,37,83,.45),rgba(3,37,83,.45)), url('{% image page.hero_image width-1800 as h %}{{ h.url }}');"{% endif %}>
+  {% if page.hero_image %}style="background-image: linear-gradient(rgba(3,37,83,.25),rgba(3,37,83,.25)), url('{% image page.hero_image width-1800 as h %}{{ h.url }}');"{% endif %}>
   <div class="container hero-inner">
     <h1>{{ page.hero_heading }}</h1>
     <p class="hero-intro">{{ page.hero_intro }}</p>
