@@ -1,19 +1,135 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}home{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
 
 {% block content %}
-<section class="hero">
+
+{# ---------- Hero ---------- #}
+<section class="hero{% if page.hero_image %} hero--image{% endif %}"
+  {% if page.hero_image %}style="background-image: linear-gradient(rgba(3,37,83,.45),rgba(3,37,83,.45)), url('{% image page.hero_image width-1800 as h %}{{ h.url }}');"{% endif %}>
   <div class="container hero-inner">
     <h1>{{ page.hero_heading }}</h1>
     <p class="hero-intro">{{ page.hero_intro }}</p>
     <div class="hero-ctas">
       {% if page.primary_cta_text %}<a class="btn btn-primary" href="{{ page.primary_cta_link }}">{{ page.primary_cta_text }}</a>{% endif %}
-      {% if page.secondary_cta_text %}<a class="btn btn-gold" href="{{ page.secondary_cta_link }}">{{ page.secondary_cta_text }}</a>{% endif %}
+      {% if page.secondary_cta_text %}<a class="btn btn-secondary" href="{{ page.secondary_cta_link }}">{{ page.secondary_cta_text }}</a>{% endif %}
     </div>
   </div>
 </section>
 
-{# Feature cards, category strips, and the map preview drop in here in the next pass. #}
+{# ---------- Feature cards ---------- #}
+{% if page.feature_cards.all %}
+<section class="feature-cards">
+  <div class="container feature-grid">
+    {% for card in page.feature_cards.all %}
+      <article class="feature-card">
+        {% if card.icon %}<div class="feature-icon">{% image card.icon max-72x72 %}</div>{% endif %}
+        <h2>{{ card.title }}</h2>
+        <p>{{ card.blurb }}</p>
+        {% if card.link_page %}
+          <a class="tertiary" href="{% pageurl card.link_page %}">{{ card.link_text }} ›</a>
+        {% elif card.link_url %}
+          <a class="tertiary" href="{{ card.link_url }}">{{ card.link_text }} ›</a>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{# ---------- Featured Sites ---------- #}
+{% if page.featured_sites.all %}
+<section class="feature-strip">
+  <div class="container">
+    <div class="strip-head"><h2>{{ page.featured_sites_heading }}</h2></div>
+    <div class="strip-grid">
+      {% for item in page.featured_sites.all %}
+        <a class="strip-card" href="{% if item.site_page %}{% pageurl item.site_page %}{% else %}#{% endif %}">
+          <div class="strip-img">{% if item.image_override %}{% image item.image_override fill-320x200 %}{% endif %}</div>
+          <div class="strip-label">{% if item.title_override %}{{ item.title_override }}{% elif item.site_page %}{{ item.site_page.title }}{% endif %}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ---------- Featured Saints ---------- #}
+{% if page.featured_saints.all %}
+<section class="feature-strip alt">
+  <div class="container">
+    <div class="strip-head"><h2>{{ page.featured_saints_heading }}</h2></div>
+    <div class="strip-grid">
+      {% for item in page.featured_saints.all %}
+        <a class="strip-card" href="{% if item.saint_page %}{% pageurl item.saint_page %}{% else %}#{% endif %}">
+          <div class="strip-img">{% if item.image_override %}{% image item.image_override fill-320x200 %}{% endif %}</div>
+          <div class="strip-label">{% if item.title_override %}{{ item.title_override }}{% elif item.saint_page %}{{ item.saint_page.title }}{% endif %}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ---------- Community teaser ---------- #}
+<section class="community">
+  <div class="container community-inner">
+    <div class="community-copy">
+      <h2>{{ page.community_heading }}</h2>
+      <p>{{ page.community_intro }}</p>
+      {% if page.journey_bullets.all %}
+        <ul class="journey-list">
+          {% for b in page.journey_bullets.all %}
+            <li><strong>{{ b.title }}</strong><span>{{ b.text }}</span></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if page.community_cta_text %}<a class="btn btn-primary" href="{{ page.community_cta_link }}">{{ page.community_cta_text }}</a>{% endif %}
+    </div>
+    {% if page.community_image %}<div class="community-img">{% image page.community_image fill-460x520 %}</div>{% endif %}
+  </div>
+</section>
+
+{# ---------- Store picks ---------- #}
+{% if page.store_picks.all %}
+<section class="store-strip">
+  <div class="container">
+    <div class="strip-head"><h2>{{ page.store_heading }}</h2></div>
+    <div class="store-grid">
+      {% for pick in page.store_picks.all %}
+        <a class="store-card" href="{{ pick.link_url|default:'#' }}">
+          <div class="store-cover">{% if pick.cover %}{% image pick.cover fill-180x240 %}{% endif %}</div>
+          <strong>{{ pick.title }}</strong>
+          {% if pick.subtitle %}<span class="store-sub">{{ pick.subtitle }}</span>{% endif %}
+          {% if pick.price %}<span class="store-price">{{ pick.price }}</span>{% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ---------- Partners ---------- #}
+{% if page.partners.all or page.partners_quote %}
+<section class="partners-band">
+  <div class="container partners-inner">
+    <h2>{{ page.partners_heading }}</h2>
+    <div class="partner-logos">
+      {% for p in page.partners.all %}
+        <a class="partner" href="{{ p.link_url|default:'#' }}">
+          {% if p.logo %}{% image p.logo max-140x64 %}{% else %}{{ p.name }}{% endif %}
+        </a>
+      {% endfor %}
+    </div>
+    {% if page.partners_quote %}
+      <blockquote class="partners-quote">“{{ page.partners_quote }}”
+        {% if page.partners_quote_source %}<cite>— {{ page.partners_quote_source }}</cite>{% endif %}
+      </blockquote>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
 {% endblock %}

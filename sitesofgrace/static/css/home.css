@@ -1,0 +1,132 @@
+/* ============================================================
+   Sites of Grace — homepage sections
+   Uses the brand tokens defined in site.css (:root).
+   ============================================================ */
+
+.home main { background: var(--ivory); }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--parchment);
+  border-bottom: 1px solid var(--gold-soft);
+}
+.hero.hero--image { background-size: cover; background-position: center; }
+.hero-inner {
+  max-width: 820px; margin-inline: auto; text-align: center;
+  padding: 84px 20px 72px;
+}
+.hero h1 {
+  font-family: var(--serif-display); font-weight: 600;
+  font-size: clamp(34px, 5vw, 60px); line-height: 1.05; margin: 0 0 18px;
+  color: var(--navy);
+}
+.hero--image h1, .hero--image .hero-intro { color: var(--ivory); }
+.hero-intro { font-size: clamp(16px, 2vw, 20px); line-height: 1.6; margin: 0 auto 28px; max-width: 620px; color: var(--blue); }
+.hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-secondary {
+  background: var(--ivory); color: var(--navy); border: 1px solid var(--gold);
+}
+.btn-secondary:hover { background: var(--parchment); }
+
+/* ---------- Feature cards ---------- */
+.feature-cards { padding: 60px 0; }
+.feature-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+}
+.feature-card { text-align: center; padding: 8px 12px; }
+.feature-icon {
+  width: 84px; height: 84px; margin: 0 auto 16px;
+  border: 1px solid var(--gold-soft); border-radius: 50% 50% 12px 12px;
+  display: grid; place-items: center; color: var(--gold);
+}
+.feature-icon img { max-width: 48px; height: auto; }
+.feature-card h2 {
+  font-family: var(--serif-titling); font-size: 18px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--navy); margin: 0 0 10px;
+}
+.feature-card p { font-size: 14.5px; line-height: 1.6; color: #33405a; margin: 0 0 12px; }
+.tertiary { font-family: var(--sans); font-weight: 600; font-size: 13.5px; color: var(--blue); }
+.tertiary:hover { color: var(--gold); }
+
+/* ---------- Featured strips (Sites / Saints) ---------- */
+.feature-strip { padding: 54px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }
+.feature-strip.alt { background: var(--ivory); }
+.strip-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.strip-head h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: 28px;
+  color: var(--navy); margin: 0; white-space: nowrap;
+}
+.strip-head::after { content: ""; flex: 1; height: 1px; background: var(--gold-soft); }
+.strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.strip-card {
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 14px;
+  overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; display: block;
+}
+.feature-strip.alt .strip-card { background: var(--parchment); }
+.strip-card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -20px rgba(3,37,83,.4); }
+.strip-img {
+  height: 168px; background: linear-gradient(155deg, var(--blue), var(--navy));
+  display: grid; place-items: center;
+}
+.strip-img img { width: 100%; height: 100%; object-fit: cover; }
+.strip-label {
+  padding: 14px 16px; font-family: var(--serif-display); font-size: 19px;
+  color: var(--navy); font-weight: 600;
+}
+
+/* ---------- Community teaser ---------- */
+.community { padding: 66px 0; }
+.community-inner {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+}
+.community-copy h2 { font-family: var(--serif-display); font-size: 34px; color: var(--navy); margin: 0 0 14px; }
+.community-copy p { font-size: 16px; line-height: 1.7; color: #33405a; margin: 0 0 22px; max-width: 52ch; }
+.journey-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 14px; }
+.journey-list li { position: relative; padding-left: 30px; }
+.journey-list li::before {
+  content: "✦"; position: absolute; left: 0; top: 2px; color: var(--gold);
+}
+.journey-list strong { display: block; color: var(--navy); }
+.journey-list span { font-size: 14px; color: var(--stone); }
+.community-img { border-radius: 200px 200px 16px 16px; overflow: hidden; border: 1px solid var(--gold-soft); }
+.community-img img { width: 100%; height: auto; display: block; }
+
+/* ---------- Store strip ---------- */
+.store-strip { padding: 56px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }
+.store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.store-card { text-align: center; display: block; }
+.store-cover {
+  min-height: 200px; border-radius: 8px; overflow: hidden; margin-bottom: 12px;
+  background: linear-gradient(160deg, var(--navy), var(--gold));
+  display: grid; place-items: center; box-shadow: 0 12px 26px -14px rgba(3,37,83,.4);
+}
+.store-cover img { width: 100%; height: 100%; object-fit: cover; }
+.store-card strong { display: block; font-size: 14px; color: var(--navy); }
+.store-sub { display: block; font-size: 12.5px; color: var(--stone); margin-top: 2px; }
+.store-price { display: block; font-size: 13px; color: var(--gold); font-weight: 600; margin-top: 4px; }
+
+/* ---------- Partners band ---------- */
+.partners-band { padding: 46px 0; }
+.partners-inner { text-align: center; }
+.partners-inner h2 {
+  font-family: var(--serif-titling); font-size: 15px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 22px;
+}
+.partner-logos { display: flex; flex-wrap: wrap; gap: 34px; justify-content: center; align-items: center; }
+.partner { color: var(--stone); font-family: var(--serif-display); font-size: 18px; opacity: .8; transition: opacity .15s ease; }
+.partner:hover { opacity: 1; }
+.partners-quote {
+  font-family: var(--serif-display); font-style: italic; font-size: 22px;
+  color: var(--gold); margin: 30px auto 0; max-width: 640px;
+}
+.partners-quote cite { display: block; font-size: 14px; color: var(--stone); font-style: normal; margin-top: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .feature-grid, .strip-grid, .store-grid { grid-template-columns: repeat(2, 1fr); }
+  .community-inner { grid-template-columns: 1fr; }
+  .community-img { max-width: 420px; }
+}
+@media (max-width: 560px) {
+  .feature-grid, .strip-grid, .store-grid { grid-template-columns: 1fr; }
+}
