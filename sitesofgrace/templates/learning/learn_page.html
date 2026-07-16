@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}learn{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/learn.css' %}">{% endblock %}
+
+{% block content %}
+
+<article class="learn-page">
+
+  {# ---------- Hero ---------- #}
+  <header class="learn-hero">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <div class="divider" aria-hidden="true"><span>✛</span></div>
+      {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+    </div>
+  </header>
+
+  {# ---------- Sections ---------- #}
+  {% if page.sections.all %}
+  <div class="container learn-sections">
+    {% for s in page.sections.all %}
+      <section class="learn-section">
+        <div class="learn-icon{% if not s.icon %} placeholder{% endif %}">
+          {% if s.icon %}{% image s.icon max-64x64 %}{% else %}<span aria-hidden="true">✦</span>{% endif %}
+        </div>
+        <div class="learn-body">
+          <h2>{{ s.heading }}</h2>
+          {{ s.body|richtext }}
+          {% if s.link_text %}
+            {% if s.link_page %}
+              <a class="learn-link" href="{% pageurl s.link_page %}">{{ s.link_text }} →</a>
+            {% elif s.link_url %}
+              <a class="learn-link" href="{{ s.link_url }}">{{ s.link_text }} →</a>
+            {% endif %}
+          {% endif %}
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {# ---------- Closing band ---------- #}
+  {% if page.closing_heading or page.closing_text %}
+  <aside class="learn-closing">
+    <div class="container learn-closing-inner">
+      {% if page.closing_heading %}<h2>{{ page.closing_heading }}</h2>{% endif %}
+      <div class="divider" aria-hidden="true"><span>✛</span></div>
+      {% if page.closing_text %}<p>{{ page.closing_text }}</p>{% endif %}
+      {% if page.closing_cta_text %}
+        <a class="btn btn-primary" href="{% if page.closing_cta_page %}{% pageurl page.closing_cta_page %}{% else %}{{ page.closing_cta_url|default:'#' }}{% endif %}">{{ page.closing_cta_text }}</a>
+      {% endif %}
+    </div>
+  </aside>
+  {% endif %}
+
+</article>
+{% endblock %}
