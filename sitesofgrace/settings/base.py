@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "home",
     "learning",
     "search",
+    "catalog",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",

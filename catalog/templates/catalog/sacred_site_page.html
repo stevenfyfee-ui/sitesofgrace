@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}catalog catalog-site{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
+
+{% block content %}
+<article class="catalog-page">
+
+  {# ---------- Hero ---------- #}
+  <header class="catalog-hero">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <div class="catalog-badges">
+        {% if page.category %}<span class="badge badge-category">{{ page.category }}</span>{% endif %}
+        {% if page.canonical_status %}<span class="badge badge-status">{{ page.canonical_status }}</span>{% endif %}
+      </div>
+      {% if page.locality or page.country or page.date_display or page.feast_day %}
+        <div class="catalog-meta">
+          {% if page.locality or page.country %}
+            <span>{{ page.locality }}{% if page.locality and page.country %}, {% endif %}{{ page.country }}</span>
+          {% endif %}
+          {% if page.date_display %}<span>{{ page.date_display }}</span>{% endif %}
+          {% if page.feast_day %}<span>Feast day: {{ page.feast_day }}</span>{% endif %}
+        </div>
+      {% endif %}
+      {% if page.summary_short %}<p class="catalog-lede">{{ page.summary_short }}</p>{% endif %}
+      {% if page.associated_saint %}
+        <a class="catalog-saint-link" href="{% pageurl page.associated_saint %}">{{ page.associated_saint.title }} →</a>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.featured_image %}
+    <div class="catalog-image container">
+      {% image page.featured_image width-900 %}
+    </div>
+  {% endif %}
+
+  {# ---------- Narrative sections ---------- #}
+  <div class="catalog-sections">
+    {% if page.the_story %}
+      <section class="catalog-section">
+        <h2>The Story</h2>
+        {{ page.the_story|richtext }}
+      </section>
+    {% endif %}
+    {% if page.church_recognition %}
+      <section class="catalog-section">
+        <h2>Church Recognition</h2>
+        {{ page.church_recognition|richtext }}
+      </section>
+    {% endif %}
+    {% if page.catholic_teaching %}
+      <section class="catalog-section">
+        <h2>Catholic Teaching</h2>
+        {{ page.catholic_teaching|richtext }}
+      </section>
+    {% endif %}
+    {% if page.pilgrimage_info %}
+      <section class="catalog-section">
+        <h2>Visiting &amp; Pilgrimage</h2>
+        {{ page.pilgrimage_info|richtext }}
+      </section>
+    {% endif %}
+    {% if page.go_deeper %}
+      <section class="catalog-section">
+        <h2>Go Deeper</h2>
+        {{ page.go_deeper|richtext }}
+      </section>
+    {% endif %}
+  </div>
+
+  {% if page.topics.all %}
+    <div class="catalog-tags">
+      {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+    </div>
+  {% endif %}
+
+  {% if page.latitude and page.longitude %}
+    <section class="catalog-map">
+      <h2>Location</h2>
+      <p>{{ page.latitude }}, {{ page.longitude }}</p>
+      {% if page.location_link %}
+        <a class="catalog-map-link" href="{{ page.location_link }}" target="_blank" rel="noopener">View on map →</a>
+      {% endif %}
+    </section>
+  {% endif %}
+
+</article>
+{% endblock %}

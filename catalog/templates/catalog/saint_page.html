@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}catalog catalog-saint{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
+
+{% block content %}
+<article class="catalog-page">
+
+  {# ---------- Hero ---------- #}
+  <header class="catalog-hero">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      {% if page.honorific_type or page.feast_day %}
+        <div class="catalog-meta">
+          {% if page.honorific_type %}<span>{{ page.honorific_type }}</span>{% endif %}
+          {% if page.feast_day %}<span>Feast day: {{ page.feast_day }}</span>{% endif %}
+        </div>
+      {% endif %}
+      {% if page.significance %}<p class="catalog-lede">{{ page.significance }}</p>{% endif %}
+    </div>
+  </header>
+
+  {% if page.portrait %}
+    <div class="catalog-image container">
+      {% image page.portrait width-500 %}
+    </div>
+  {% endif %}
+
+  {% if page.born or page.died or page.canonized or page.patronage %}
+    <dl class="catalog-facts">
+      {% if page.born %}<div class="catalog-fact"><dt>Born</dt><dd>{{ page.born }}</dd></div>{% endif %}
+      {% if page.died %}<div class="catalog-fact"><dt>Died</dt><dd>{{ page.died }}</dd></div>{% endif %}
+      {% if page.canonized %}<div class="catalog-fact"><dt>Canonized</dt><dd>{{ page.canonized }}</dd></div>{% endif %}
+      {% if page.patronage %}<div class="catalog-fact"><dt>Patronage</dt><dd>{{ page.patronage }}</dd></div>{% endif %}
+    </dl>
+  {% endif %}
+
+  {% if page.body %}
+    <div class="catalog-sections">
+      <section class="catalog-section">
+        {{ page.body|richtext }}
+      </section>
+    </div>
+  {% endif %}
+
+  {% if page.topics.all %}
+    <div class="catalog-tags">
+      {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+    </div>
+  {% endif %}
+
+  {% if page.sites.all %}
+    <section class="catalog-related">
+      <h2>Sacred sites connected to this saint</h2>
+      <div class="catalog-site-grid">
+        {% for site in page.sites.all %}
+          <a class="catalog-site-card" href="{% pageurl site %}">
+            <strong>{{ site.title }}</strong>
+            {% if site.locality or site.country %}
+              <span>{{ site.locality }}{% if site.locality and site.country %}, {% endif %}{{ site.country }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+</article>
+{% endblock %}
