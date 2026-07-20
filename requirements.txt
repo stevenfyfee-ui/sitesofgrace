@@ -5,6 +5,7 @@ certifi==2026.6.17
 charset-normalizer==3.4.9
 defusedxml==0.7.1
 Django==6.0.7
+django-allauth==65.18.0
 django-cogwheels==0.3
 django-filter==26.1
 django-modelcluster==6.5

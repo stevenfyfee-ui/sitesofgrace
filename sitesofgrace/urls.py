@@ -15,6 +15,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
+    path("accounts/", include("allauth.urls")),
 ]
 
 

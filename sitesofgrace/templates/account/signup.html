@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}auth{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    <h1>Begin your journey</h1>
+    <p class="auth-lede">Create your pilgrim account.</p>
+
+    {% if form.non_field_errors %}
+      <ul class="auth-errors">
+        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post" action="{% url 'account_signup' %}" class="auth-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="auth-field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<p class="auth-help">{{ field.help_text }}</p>{% endif %}
+          {% for error in field.errors %}<p class="auth-field-error">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+      {{ redirect_field }}
+      <button type="submit" class="btn btn-primary auth-submit">Sign Up</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
+  </div>
+</section>
+{% endblock %}
