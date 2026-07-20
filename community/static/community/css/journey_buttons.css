@@ -1,0 +1,19 @@
+/* ============================================================
+   Sites of Grace — reusable "journey" status buttons
+   Uses brand tokens from site.css (:root). Safe to include more
+   than once per page (e.g. a map listing many sites).
+   ============================================================ */
+
+.journey-buttons {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  margin: 22px 0 0;
+}
+
+.journey-btn {
+  background: var(--ivory); color: var(--navy); border: 1px solid var(--gold);
+  cursor: pointer;
+}
+.journey-btn:hover { background: var(--parchment); }
+.journey-btn.active {
+  background: var(--gold); color: #fff; border-color: var(--gold);
+}

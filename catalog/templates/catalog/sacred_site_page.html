@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags %}
 
 {% block body_class %}catalog catalog-site{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
@@ -28,6 +28,7 @@
       {% if page.associated_saint %}
         <a class="catalog-saint-link" href="{% pageurl page.associated_saint %}">{{ page.associated_saint.title }} →</a>
       {% endif %}
+      {% journey_buttons page %}
     </div>
   </header>
 

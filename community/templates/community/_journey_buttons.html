@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'community/css/journey_buttons.css' %}">
+
+<div class="journey-buttons" data-site-id="{{ site.pk }}" data-set-url="{% url 'journey_set' %}">
+  {% if is_authenticated %}
+    <button type="button" class="btn journey-btn{% if current_status == 'saved' %} active{% endif %}" data-status="saved">
+      {% if current_status == 'saved' %}✓ Saved to my journey{% else %}Save to my journey{% endif %}
+    </button>
+    <button type="button" class="btn journey-btn{% if current_status == 'visited' %} active{% endif %}" data-status="visited">
+      {% if current_status == 'visited' %}✓ Visited{% else %}Mark as visited{% endif %}
+    </button>
+  {% else %}
+    <a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Save to my journey</a>
+    <a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Mark as visited</a>
+  {% endif %}
+</div>
+
+<script src="{% static 'community/js/journey_buttons.js' %}" defer></script>
