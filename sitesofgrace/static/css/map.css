@@ -1,0 +1,66 @@
+/* ============================================================
+   Sites of Grace — Interactive map
+   Uses brand tokens from site.css (:root).
+   ============================================================ */
+
+.map-wrap { position: relative; }
+
+/* ---------- Custom pins ---------- */
+.site-pin-icon { background: transparent; border: none; }
+.site-pin { filter: drop-shadow(0 3px 4px rgba(3, 37, 83, .35)); }
+
+/* ---------- Clusters (override Leaflet.markercluster's default green/yellow/orange) ---------- */
+.site-cluster-icon { background: transparent; border: none; }
+.cluster-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: var(--navy); border: 2px solid var(--gold);
+  color: var(--ivory); font-family: var(--sans); font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px -4px rgba(3, 37, 83, .5);
+}
+
+/* ---------- Legend ---------- */
+.map-legend {
+  position: absolute; top: 16px; right: 16px; z-index: 1000;
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 12px;
+  padding: 12px 14px; box-shadow: 0 12px 30px -16px rgba(3, 37, 83, .5);
+  display: flex; flex-direction: column; gap: 6px; max-width: 220px;
+}
+.map-legend-item {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: 0; padding: 4px 2px; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; color: var(--navy); text-align: left;
+}
+.map-legend-item.is-off { opacity: .4; }
+.map-legend-swatch {
+  width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--gold-soft);
+  flex: none;
+}
+
+/* ---------- Popup card (theme Leaflet's own popup chrome -- it's white by default) ---------- */
+.leaflet-popup-content-wrapper {
+  background: var(--ivory);
+  border: 1px solid var(--gold-soft);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px -18px rgba(3, 37, 83, .45);
+  color: var(--navy);
+}
+.leaflet-popup-content { margin: 16px 20px; }
+.leaflet-popup-tip { background: var(--ivory); box-shadow: none; }
+.leaflet-container a.leaflet-popup-close-button { color: var(--navy); }
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus { color: var(--gold); }
+
+.map-popup { font-family: var(--sans); min-width: 200px; }
+.map-popup h3 {
+  font-family: var(--serif-display); font-weight: 600; font-size: 19px;
+  color: var(--navy); margin: 0 0 4px;
+}
+.map-popup .map-popup-meta { font-size: 12.5px; color: var(--stone); margin: 0 0 8px; }
+.map-popup p { font-size: 13.5px; line-height: 1.55; color: #2f3a52; margin: 0 0 10px; }
+.map-popup-link {
+  display: inline-block; font-weight: 600; font-size: 13px; color: var(--blue); margin-bottom: 10px;
+}
+.map-popup-link:hover { color: var(--gold); }
+.map-popup .journey-buttons { justify-content: flex-start; margin-top: 6px; }
+.map-popup .journey-btn { font-size: 12.5px; padding: 7px 12px; }

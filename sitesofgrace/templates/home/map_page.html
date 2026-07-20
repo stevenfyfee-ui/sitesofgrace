@@ -4,7 +4,11 @@
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+  integrity="sha256-YU3qCpj/P06tdPBJGPax0bm6Q1wltfwjsho5TR4+TYc=" crossorigin="">
 <link rel="stylesheet" href="{% static 'community/css/journey_buttons.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -14,18 +18,22 @@
 </section>
 
 <section class="container">
-  <div id="sacredMap"
-    data-sites-url="{% url 'sacred_sites_json' %}"
-    data-journey-set-url="{% url 'journey_set' %}"
-    data-authenticated="{{ request.user.is_authenticated|yesno:'true,false' }}"
-    data-login-url="{% url 'account_login' %}"
-    style="height:min(68vh,620px);border:1px solid var(--gold-soft);border-radius:16px;"></div>
+  <div class="map-wrap">
+    <div id="sacredMap"
+      data-sites-url="{% url 'sacred_sites_json' %}"
+      data-journey-set-url="{% url 'journey_set' %}"
+      data-authenticated="{{ request.user.is_authenticated|yesno:'true,false' }}"
+      data-login-url="{% url 'account_login' %}"
+      style="height:min(68vh,620px);border:1px solid var(--gold-soft);border-radius:16px;"></div>
+  </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
+  integrity="sha256-Hk4dIpcqOSb0hZjgyvFOP+cEmDXUKKNE/tT542ZbNQg=" crossorigin=""></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
 <script>
   (function () {
@@ -36,11 +44,108 @@
     var loginUrl = el.dataset.loginUrl;
     var journeySetUrl = el.dataset.journeySetUrl;
 
+    // Single source of truth for category colors -- used for pins and the
+    // legend swatches. The popup's category label reuses the site page's
+    // own .badge.badge-category style instead of a per-category color.
+    var CATEGORY_STYLES = {
+      'Marian Apparition':   { fill: '#FDF9F2', stroke: '#032553', dot: '#032553' },
+      'Eucharistic Miracle': { fill: '#C79A42', stroke: '#C79A42', dot: '#FDF9F2' },
+      'Saints & Tombs':      { fill: '#032553', stroke: '#032553', dot: '#C79A42' },
+      'Holy Land':           { fill: '#F9F1E8', stroke: '#C79A42', dot: '#C79A42' },
+      'Shrine & Basilica':   { fill: '#173A61', stroke: '#173A61', dot: '#FDF9F2' },
+    };
+    var DEFAULT_STYLE = { fill: '#173A61', stroke: '#173A61', dot: '#FDF9F2' };
+
+    function styleFor(category) {
+      return CATEGORY_STYLES[category] || DEFAULT_STYLE;
+    }
+
+    function pinIcon(category) {
+      var s = styleFor(category);
+      var html =
+        '<svg class="site-pin" width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.5"/>' +
+        '<circle cx="13" cy="13" r="5" fill="' + s.dot + '"/>' +
+        '</svg>';
+      return L.divIcon({
+        html: html,
+        className: 'site-pin-icon',
+        iconSize: [26, 34],
+        iconAnchor: [13, 34],
+        popupAnchor: [0, -30],
+      });
+    }
+
+    function clusterIcon(cluster) {
+      var count = cluster.getChildCount();
+      var size = count < 10 ? 34 : count < 50 ? 42 : 52;
+      return L.divIcon({
+        html: '<div class="cluster-inner">' + count + '</div>',
+        className: 'site-cluster-icon',
+        iconSize: L.point(size, size),
+      });
+    }
+
+    function popupHtml(site) {
+      var locationLine = [site.locality, site.country].filter(Boolean).join(', ');
+      return (
+        '<div class="map-popup">' +
+        '<span class="badge badge-category">' + site.category + '</span>' +
+        '<h3>' + site.title + '</h3>' +
+        (locationLine ? '<p class="map-popup-meta">' + locationLine + '</p>' : '') +
+        (site.summary_short ? '<p>' + site.summary_short + '</p>' : '') +
+        '<a class="map-popup-link" href="' + site.url + '">Read more →</a>' +
+        window.SoGJourneyButtons.render(site, {
+          isAuthenticated: isAuthenticated,
+          loginUrl: loginUrl,
+          setUrl: journeySetUrl,
+          nextUrl: window.location.pathname + '?site=' + encodeURIComponent(site.slug),
+        }) +
+        '</div>'
+      );
+    }
+
     var map = L.map(el).setView([20, 0], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
+
+    var clusterGroup = L.markerClusterGroup({ iconCreateFunction: clusterIcon, maxClusterRadius: 50 });
+    map.addLayer(clusterGroup);
+
+    // ---------- Legend / category filter ----------
+    var legendEl = document.createElement('div');
+    legendEl.className = 'map-legend';
+    legendEl.innerHTML = Object.keys(CATEGORY_STYLES).map(function (category) {
+      var s = CATEGORY_STYLES[category];
+      return (
+        '<button type="button" class="map-legend-item" data-category="' + category + '">' +
+        '<span class="map-legend-swatch" style="background:' + s.fill + ';border-color:' + s.stroke + '"></span>' +
+        category +
+        '</button>'
+      );
+    }).join('');
+    el.parentElement.appendChild(legendEl);
+
+    var markersByCategory = {};
+    var categoryVisible = {};
+    Object.keys(CATEGORY_STYLES).forEach(function (category) { categoryVisible[category] = true; });
+
+    legendEl.addEventListener('click', function (e) {
+      var item = e.target.closest('.map-legend-item');
+      if (!item) return;
+      var category = item.dataset.category;
+      var list = markersByCategory[category] || [];
+      var showing = !categoryVisible[category];
+      categoryVisible[category] = showing;
+      item.classList.toggle('is-off', !showing);
+      if (showing) {
+        clusterGroup.addLayers(list);
+      } else {
+        clusterGroup.removeLayers(list);
+      }
+    });
 
     var params = new URLSearchParams(window.location.search);
     var focusSlug = params.get('site');
@@ -52,25 +157,19 @@
         var bounds = [];
 
         data.sites.forEach(function (site) {
-          var marker = L.marker([site.latitude, site.longitude]).addTo(map);
-          marker.bindPopup(
-            '<strong>' + site.title + '</strong>' +
-            (site.locality || site.country ? '<br>' + [site.locality, site.country].filter(Boolean).join(', ') : '') +
-            '<br><a href="' + site.url + '">Visit page →</a>' +
-            window.SoGJourneyButtons.render(site, {
-              isAuthenticated: isAuthenticated,
-              loginUrl: loginUrl,
-              setUrl: journeySetUrl,
-              nextUrl: window.location.pathname + '?site=' + encodeURIComponent(site.slug),
-            })
-          );
+          var marker = L.marker([site.latitude, site.longitude], { icon: pinIcon(site.category) });
+          marker.bindPopup(popupHtml(site));
+          clusterGroup.addLayer(marker);
+
           markers[site.slug] = marker;
           bounds.push([site.latitude, site.longitude]);
+          (markersByCategory[site.category] = markersByCategory[site.category] || []).push(marker);
         });
 
         if (focusSlug && markers[focusSlug]) {
-          map.setView(markers[focusSlug].getLatLng(), 12);
-          markers[focusSlug].openPopup();
+          clusterGroup.zoomToShowLayer(markers[focusSlug], function () {
+            markers[focusSlug].openPopup();
+          });
         } else if (bounds.length) {
           map.fitBounds(bounds, { padding: [30, 30] });
         }

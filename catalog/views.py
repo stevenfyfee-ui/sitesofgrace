@@ -27,6 +27,7 @@ def sites_json(request):
                 "latitude": float(site.latitude),
                 "longitude": float(site.longitude),
                 "url": site.url,
+                "summary_short": site.summary_short,
                 "journey_status": journey_statuses.get(site.pk),
             }
             for site in sites
