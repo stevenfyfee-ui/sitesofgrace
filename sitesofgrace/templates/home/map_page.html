@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{% endblock %}
 
 {% block content %}
 <section class="container prose">
@@ -7,10 +13,52 @@
 </section>
 
 <section class="container">
-  {# Placeholder container. Next pass: mount your existing Leaflet prototype here
-     and feed it from a JSON endpoint over SitePage records. #}
-  <div id="sacredMap" style="height:min(68vh,620px);border:1px solid var(--gold-soft);border-radius:16px;background:var(--parchment);display:grid;place-items:center;color:var(--stone);">
-    Map loads here — Leaflet integration is the next step.
-  </div>
+  <div id="sacredMap" data-sites-url="{% url 'sacred_sites_json' %}"
+    style="height:min(68vh,620px);border:1px solid var(--gold-soft);border-radius:16px;"></div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  (function () {
+    var el = document.getElementById('sacredMap');
+    if (!el || !window.L) return;
+
+    var map = L.map(el).setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    var params = new URLSearchParams(window.location.search);
+    var focusSlug = params.get('site');
+
+    fetch(el.dataset.sitesUrl)
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        var markers = {};
+        var bounds = [];
+
+        data.sites.forEach(function (site) {
+          var marker = L.marker([site.latitude, site.longitude]).addTo(map);
+          marker.bindPopup(
+            '<strong>' + site.title + '</strong>' +
+            (site.locality || site.country ? '<br>' + [site.locality, site.country].filter(Boolean).join(', ') : '') +
+            '<br><a href="' + site.url + '">Visit page →</a>'
+          );
+          markers[site.slug] = marker;
+          bounds.push([site.latitude, site.longitude]);
+        });
+
+        if (focusSlug && markers[focusSlug]) {
+          map.setView(markers[focusSlug].getLatLng(), 12);
+          markers[focusSlug].openPopup();
+        } else if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      });
+  })();
+</script>
 {% endblock %}

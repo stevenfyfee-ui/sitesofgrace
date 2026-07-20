@@ -13,6 +13,8 @@ CATEGORY_CHOICES = [
     ("Shrine & Basilica", "Shrine & Basilica"),
 ]
 
+MAP_PAGE_SLUG = "interactive-map"
+
 CANONICAL_STATUS_CHOICES = [
     ("Nihil obstat", "Nihil obstat"),
     ("Prae oculis habeatur", "Prae oculis habeatur"),
@@ -158,3 +160,8 @@ class SacredSitePage(Page):
         FieldPanel("go_deeper"),
         FieldPanel("notes_internal"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["map_page"] = Page.objects.filter(slug=MAP_PAGE_SLUG).first()
+        return context

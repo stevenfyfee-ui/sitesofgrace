@@ -77,13 +77,18 @@
     </div>
   {% endif %}
 
-  {% if page.latitude and page.longitude %}
+  {% if page.location_link %}
     <section class="catalog-map">
       <h2>Location</h2>
-      <p>{{ page.latitude }}, {{ page.longitude }}</p>
-      {% if page.location_link %}
-        <a class="catalog-map-link" href="{{ page.location_link }}" target="_blank" rel="noopener">View on map →</a>
+      <a class="catalog-map-link" href="{{ page.location_link }}" target="_blank" rel="noopener">Visit the official website ↗</a>
+      {% if page.latitude and page.longitude and map_page %}
+        <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
       {% endif %}
+    </section>
+  {% elif page.latitude and page.longitude and map_page %}
+    <section class="catalog-map">
+      <h2>Location</h2>
+      <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
     </section>
   {% endif %}
 
