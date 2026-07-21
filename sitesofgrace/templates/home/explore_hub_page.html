@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}explore-hub{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
+
+{% block content %}
+<header class="hub-header">
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+    {% if page.intro %}<p class="lead">{{ page.intro }}</p>{% endif %}
+  </div>
+</header>
+
+<section class="hub-cards">
+  <div class="container hub-grid">
+    {% for card in hub_cards %}
+      {% if card.clickable %}
+        <a class="hub-card" href="{{ card.url }}">
+          {% include "home/includes/_hub_card_inner.html" %}
+        </a>
+      {% else %}
+        <div class="hub-card is-disabled">
+          {% include "home/includes/_hub_card_inner.html" %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

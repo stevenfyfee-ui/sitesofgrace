@@ -18,6 +18,20 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageC
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 
+from catalog.models import CATEGORY_STYLES, DEFAULT_CATEGORY_STYLE, SacredSitePage, SaintPage
+
+# Explore-hub card colors, keyed by the (StandardPage) category page's slug --
+# reuses the same fill/stroke/dot tokens as the interactive map's category
+# styles so hub tiles, map pins, and directory chips all agree.
+HUB_CARD_STYLES = {
+    "marian-apparitions": CATEGORY_STYLES["Marian Apparition"],
+    "eucharistic-miracles": CATEGORY_STYLES["Eucharistic Miracle"],
+    "saints-and-tombs": CATEGORY_STYLES["Saints & Tombs"],
+    "holy-lands": CATEGORY_STYLES["Holy Land"],
+    "shrines-and-basilicas": CATEGORY_STYLES["Shrine & Basilica"],
+    "saints": CATEGORY_STYLES["Saints & Tombs"],
+}
+
 
 class HomePage(Page):
     # --- Hero ---
@@ -233,13 +247,94 @@ class Partner(Orderable):
 # --- Unchanged structural pages from the bones ---
 
 class StandardPage(Page):
+    LAYOUT_CHOICES = [
+        ("default", "Default"),
+        ("explore_hub", "Explore hub (category card grid)"),
+        ("category_directory", "Category directory (site card grid)"),
+        ("saints_directory", "Saints directory (saint card grid)"),
+    ]
+
     intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
+    layout = models.CharField(max_length=30, choices=LAYOUT_CHOICES, default="default")
+    teaser = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="One-line description shown on this page's card when it's linked from a hub page.",
+    )
+    card_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Falls back to a branded color placeholder if not set.",
+    )
 
-    content_panels = Page.content_panels + [FieldPanel("intro"), FieldPanel("body")]
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("body"),
+        MultiFieldPanel(
+            [FieldPanel("layout"), FieldPanel("teaser"), FieldPanel("card_image")],
+            heading="Hub / directory display",
+        ),
+    ]
 
     class Meta:
         verbose_name = "Standard page"
+
+    def get_template(self, request, *args, **kwargs):
+        return {
+            "explore_hub": "home/explore_hub_page.html",
+            "category_directory": "home/directory_page.html",
+            "saints_directory": "home/directory_page.html",
+        }.get(self.layout, "home/standard_page.html")
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if self.layout == "explore_hub":
+            context["hub_cards"] = self._get_hub_cards()
+        elif self.layout in ("category_directory", "saints_directory"):
+            context["directory_cards"] = self._get_directory_cards()
+        return context
+
+    def _hub_card(self, child, clickable):
+        return {
+            "title": child.title,
+            "teaser": getattr(child, "teaser", ""),
+            "image": getattr(child, "card_image", None),
+            "url": child.url if clickable else None,
+            "clickable": clickable,
+            "style": HUB_CARD_STYLES.get(child.slug, DEFAULT_CATEGORY_STYLE),
+        }
+
+    def _get_hub_cards(self):
+        cards = [
+            self._hub_card(child, clickable=child.slug != "pilgrimage-routes")
+            for child in self.get_children().live().specific()
+        ]
+        saints_page = Page.objects.live().filter(slug="saints").first()
+        if saints_page:
+            insert_at = len(cards) - 1 if cards and cards[-1]["title"] == "Pilgrimage Routes" else len(cards)
+            cards.insert(insert_at, self._hub_card(saints_page.specific, clickable=True))
+        return cards
+
+    def _get_directory_cards(self):
+        cards = []
+        for child in self.get_children().live().specific():
+            if isinstance(child, SacredSitePage):
+                cards.append({
+                    "title": child.title,
+                    "chip": child.category,
+                    "style": CATEGORY_STYLES.get(child.category, DEFAULT_CATEGORY_STYLE),
+                    "bio": child.summary_short,
+                    "url": child.url,
+                })
+            elif isinstance(child, SaintPage):
+                cards.append({
+                    "title": child.title,
+                    "meta": child.feast_day,
+                    "bio": child.significance,
+                    "url": child.url,
+                })
+        return cards
 
 
 class MapPage(Page):

@@ -121,12 +121,47 @@
 }
 .partners-quote cite { display: block; font-size: 14px; color: var(--stone); font-style: normal; margin-top: 6px; }
 
+/* ---------- Hub header (Explore hub + category/saints directories) ---------- */
+.hub-header { padding: 56px 0 20px; text-align: center; }
+.hub-header h1 {
+  font-family: var(--serif-display); font-weight: 600;
+  font-size: clamp(32px, 5vw, 52px); color: var(--navy); margin: 0 0 12px;
+}
+.hub-header .lead { font-size: 17px; line-height: 1.6; color: var(--blue); max-width: 640px; margin: 0 auto; }
+
+/* ---------- Explore hub cards ---------- */
+.hub-cards { padding: 36px 0 70px; }
+.hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.hub-card {
+  display: block; background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 16px;
+  overflow: hidden; transition: transform .18s ease, box-shadow .18s ease;
+}
+.hub-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(3,37,83,.4); }
+.hub-card.is-disabled { opacity: .55; pointer-events: none; }
+.hub-card-media { height: 160px; display: grid; place-items: center; }
+.hub-card-media img { width: 100%; height: 100%; object-fit: cover; }
+.hub-card-media-label {
+  font-family: var(--serif-titling); font-size: 20px; letter-spacing: .04em;
+  text-transform: uppercase; text-align: center; padding: 0 18px;
+}
+.hub-card-body { padding: 18px 20px 22px; }
+.hub-card-body h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: 21px; color: var(--navy);
+  margin: 0 0 8px; display: flex; align-items: center; gap: 8px;
+}
+.hub-card-soon {
+  font-family: var(--sans); font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--gold); border: 1px solid var(--gold-soft);
+  border-radius: 999px; padding: 3px 9px;
+}
+.hub-card-body p { font-size: 14.5px; line-height: 1.6; color: #33405a; margin: 0; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
-  .feature-grid, .strip-grid, .store-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid, .strip-grid, .store-grid, .hub-grid { grid-template-columns: repeat(2, 1fr); }
   .community-inner { grid-template-columns: 1fr; }
   .community-img { max-width: 420px; }
 }
 @media (max-width: 560px) {
-  .feature-grid, .strip-grid, .store-grid { grid-template-columns: 1fr; }
+  .feature-grid, .strip-grid, .store-grid, .hub-grid { grid-template-columns: 1fr; }
 }

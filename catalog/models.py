@@ -13,6 +13,18 @@ CATEGORY_CHOICES = [
     ("Shrine & Basilica", "Shrine & Basilica"),
 ]
 
+# Single source of truth for per-category colors, mirrored in the interactive
+# map's CATEGORY_STYLES JS object (home/templates/home/map_page.html) so pins,
+# legend swatches, and category chips/tiles elsewhere on the site all agree.
+CATEGORY_STYLES = {
+    "Marian Apparition":   {"fill": "#FDF9F2", "stroke": "#032553", "dot": "#032553"},
+    "Eucharistic Miracle": {"fill": "#C79A42", "stroke": "#C79A42", "dot": "#FDF9F2"},
+    "Saints & Tombs":      {"fill": "#032553", "stroke": "#032553", "dot": "#C79A42"},
+    "Holy Land":           {"fill": "#F9F1E8", "stroke": "#C79A42", "dot": "#C79A42"},
+    "Shrine & Basilica":   {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F2"},
+}
+DEFAULT_CATEGORY_STYLE = {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F2"}
+
 MAP_PAGE_SLUG = "interactive-map"
 
 CANONICAL_STATUS_CHOICES = [

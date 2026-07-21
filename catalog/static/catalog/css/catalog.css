@@ -28,6 +28,7 @@
   display: inline-flex; align-items: center;
   font-family: var(--sans); font-size: 12.5px; font-weight: 600;
   letter-spacing: .03em; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid transparent;
 }
 .badge-category { background: var(--navy); color: var(--ivory); }
 .badge-status { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
@@ -118,10 +119,26 @@
 }
 .catalog-site-card span { font-size: 13px; color: var(--stone); }
 
+/* ---------- Directory grid (category / saints directory pages) ---------- */
+.directory-intro { padding: 0 20px 8px; }
+.directory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 64px; }
+.directory-card {
+  background: var(--parchment); border: 1px solid var(--gold-soft); border-radius: 14px;
+  padding: 20px 18px; display: block; transition: transform .18s ease, box-shadow .18s ease;
+}
+.directory-card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -20px rgba(3,37,83,.4); }
+.directory-card .badge { margin-bottom: 10px; }
+.directory-card strong {
+  display: block; font-family: var(--serif-display); font-size: 19px;
+  color: var(--navy); font-weight: 600; margin-bottom: 6px;
+}
+.directory-card p { font-size: 14px; line-height: 1.55; color: #33405a; margin: 0; }
+.directory-empty { padding: 30px 0 70px; text-align: center; color: var(--stone); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .catalog-site-grid { grid-template-columns: repeat(2, 1fr); }
+  .catalog-site-grid, .directory-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
-  .catalog-site-grid { grid-template-columns: 1fr; }
+  .catalog-site-grid, .directory-grid { grid-template-columns: 1fr; }
 }

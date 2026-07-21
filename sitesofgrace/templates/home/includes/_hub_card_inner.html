@@ -1,0 +1,12 @@
+{% load wagtailimages_tags %}
+<div class="hub-card-media" style="background:linear-gradient(155deg,{{ card.style.fill }},{{ card.style.stroke }});">
+  {% if card.image %}
+    {% image card.image fill-480x300 %}
+  {% else %}
+    <span class="hub-card-media-label" style="color:{{ card.style.dot }};">{{ card.title }}</span>
+  {% endif %}
+</div>
+<div class="hub-card-body">
+  <h2>{{ card.title }}{% if not card.clickable %} <span class="hub-card-soon">Coming soon</span>{% endif %}</h2>
+  {% if card.teaser %}<p>{{ card.teaser }}</p>{% endif %}
+</div>
