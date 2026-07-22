@@ -54,7 +54,7 @@ class SiteSettings(BaseSiteSetting):
     newsletter_text = models.CharField(
         max_length=240,
         blank=True,
-        default="Sacred-site spotlights, Catholic teaching, and pilgrimage ideas each week.",
+        default="Receive sacred site spotlights, Catholic teaching, pilgrimage ideas, and prayers each week.",
     )
 
     # --- Trust / legal ---
@@ -95,3 +95,14 @@ class SiteSettings(BaseSiteSetting):
 
     class Meta:
         verbose_name = "Site settings"
+
+
+class NewsletterSignup(models.Model):
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.email

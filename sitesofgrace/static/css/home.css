@@ -48,7 +48,94 @@
 .tertiary { font-family: var(--sans); font-weight: 600; font-size: 13.5px; color: var(--blue); }
 .tertiary:hover { color: var(--gold); }
 
-/* ---------- Featured strips (Sites / Saints) ---------- */
+/* ---------- Pilgrim band (Destinations / Journey / Store) ---------- */
+.pilgrim-band { padding: 8px 0 60px; }
+.pilgrim-band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+
+.pilgrim-card {
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 18px;
+  padding: 26px 24px; display: flex; flex-direction: column;
+}
+
+.pilgrim-card-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  padding-bottom: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--gold-soft);
+}
+.pilgrim-card-head h2 {
+  font-family: var(--serif-titling); font-weight: 500; font-size: 14px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--navy); margin: 0;
+}
+.pilgrim-card-head-solo { justify-content: flex-start; }
+.pilgrim-view-all {
+  font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--blue);
+  white-space: nowrap;
+}
+.pilgrim-view-all:hover { color: var(--gold); }
+.pilgrim-empty { font-size: 14px; color: var(--stone); line-height: 1.6; }
+
+/* ---- Destinations carousel ---- */
+.pilgrim-carousel { position: relative; }
+.pilgrim-destinations-track {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: 4px; scrollbar-width: none;
+}
+.pilgrim-destinations-track::-webkit-scrollbar { display: none; }
+.pilgrim-dest-card { flex: 0 0 148px; scroll-snap-align: start; display: block; }
+.pilgrim-dest-img {
+  height: 130px; border-radius: 90px 90px 12px 12px; overflow: hidden;
+  background: linear-gradient(155deg, var(--blue), var(--navy));
+  border: 1px solid var(--gold-soft);
+}
+.pilgrim-dest-img img { width: 100%; height: 100%; object-fit: cover; }
+.pilgrim-dest-body { padding: 10px 2px 0; }
+.pilgrim-dest-title {
+  display: flex; align-items: center; gap: 5px; font-family: var(--serif-display);
+  font-weight: 600; font-size: 14.5px; color: var(--navy);
+}
+.pilgrim-pin { color: var(--gold); flex: none; }
+.pilgrim-dest-loc { display: block; font-size: 12px; color: var(--stone); margin-top: 2px; }
+.pilgrim-carousel-arrow {
+  position: absolute; top: 50px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--ivory); border: 1px solid var(--gold-soft); color: var(--navy);
+  display: grid; place-items: center; cursor: pointer; font-size: 15px; line-height: 1;
+  box-shadow: 0 6px 16px -8px rgba(3,37,83,.4); z-index: 2;
+}
+.pilgrim-carousel-arrow:hover { color: var(--gold); }
+.pilgrim-carousel-prev { left: -12px; }
+.pilgrim-carousel-next { right: -12px; }
+
+/* ---- Journey column ---- */
+.pilgrim-journey-inner { display: flex; flex-direction: column; gap: 18px; flex: 1; }
+.pilgrim-journey-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.pilgrim-journey-list li { display: flex; align-items: flex-start; gap: 12px; }
+.pilgrim-journey-icon {
+  width: 34px; height: 34px; flex: none; border: 1px solid var(--gold-soft); border-radius: 50%;
+  display: grid; place-items: center; color: var(--gold);
+}
+.pilgrim-journey-text { display: flex; flex-direction: column; }
+.pilgrim-journey-text strong { font-family: var(--sans); font-size: 14px; color: var(--navy); }
+.pilgrim-journey-text span { font-size: 12.5px; color: var(--stone); line-height: 1.4; }
+.pilgrim-journey-photo {
+  border-radius: 90px 90px 12px 12px; overflow: hidden; border: 1px solid var(--gold-soft);
+  min-height: 140px; background: linear-gradient(160deg, var(--navy), var(--gold));
+}
+.pilgrim-journey-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pilgrim-journey .btn { align-self: flex-start; }
+
+/* ---- Store column ---- */
+.pilgrim-store-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 18px; }
+.pilgrim-store-card { text-align: center; display: block; }
+.pilgrim-store-cover {
+  min-height: 110px; border-radius: 8px; overflow: hidden; margin-bottom: 8px;
+  background: linear-gradient(160deg, var(--navy), var(--gold));
+  display: grid; place-items: center; box-shadow: 0 10px 20px -12px rgba(3,37,83,.4);
+}
+.pilgrim-store-cover img { width: 100%; height: 100%; object-fit: cover; }
+.pilgrim-store-card strong { display: block; font-size: 12.5px; color: var(--navy); line-height: 1.3; }
+.pilgrim-store-price { display: block; font-size: 12px; color: var(--gold); font-weight: 600; margin-top: 2px; }
+.pilgrim-store-cta { align-self: flex-start; }
+
+/* ---------- Featured strip (Featured Saints) ---------- */
 .feature-strip { padding: 54px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }
 .feature-strip.alt { background: var(--ivory); }
 .strip-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
@@ -74,36 +161,20 @@
   color: var(--navy); font-weight: 600;
 }
 
-/* ---------- Community teaser ---------- */
-.community { padding: 66px 0; }
-.community-inner {
-  display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+/* ---------- Newsletter ---------- */
+.newsletter-section {
+  padding: 60px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft);
+  text-align: center;
 }
-.community-copy h2 { font-family: var(--serif-display); font-size: 34px; color: var(--navy); margin: 0 0 14px; }
-.community-copy p { font-size: 16px; line-height: 1.7; color: #33405a; margin: 0 0 22px; max-width: 52ch; }
-.journey-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 14px; }
-.journey-list li { position: relative; padding-left: 30px; }
-.journey-list li::before {
-  content: "✦"; position: absolute; left: 0; top: 2px; color: var(--gold);
+.newsletter-inner { max-width: 560px; margin: 0 auto; }
+.newsletter-inner h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: clamp(26px, 4vw, 32px);
+  color: var(--navy); margin: 0 0 10px;
 }
-.journey-list strong { display: block; color: var(--navy); }
-.journey-list span { font-size: 14px; color: var(--stone); }
-.community-img { border-radius: 200px 200px 16px 16px; overflow: hidden; border: 1px solid var(--gold-soft); }
-.community-img img { width: 100%; height: auto; display: block; }
-
-/* ---------- Store strip ---------- */
-.store-strip { padding: 56px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }
-.store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-.store-card { text-align: center; display: block; }
-.store-cover {
-  min-height: 200px; border-radius: 8px; overflow: hidden; margin-bottom: 12px;
-  background: linear-gradient(160deg, var(--navy), var(--gold));
-  display: grid; place-items: center; box-shadow: 0 12px 26px -14px rgba(3,37,83,.4);
-}
-.store-cover img { width: 100%; height: 100%; object-fit: cover; }
-.store-card strong { display: block; font-size: 14px; color: var(--navy); }
-.store-sub { display: block; font-size: 12.5px; color: var(--stone); margin-top: 2px; }
-.store-price { display: block; font-size: 13px; color: var(--gold); font-weight: 600; margin-top: 4px; }
+.newsletter-inner p { font-size: 15.5px; line-height: 1.6; color: #33405a; margin: 0 0 24px; }
+.newsletter-inner .newsletter-form { margin: 0 auto; }
+.newsletter-success { font-family: var(--sans); font-weight: 600; color: var(--navy); }
+.newsletter-error { font-size: 13px; color: var(--red); margin-top: 10px; }
 
 /* ---------- Partners band ---------- */
 .partners-band { padding: 46px 0; }
@@ -158,10 +229,11 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
-  .feature-grid, .strip-grid, .store-grid, .hub-grid { grid-template-columns: repeat(2, 1fr); }
-  .community-inner { grid-template-columns: 1fr; }
-  .community-img { max-width: 420px; }
+  .feature-grid, .strip-grid, .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  .pilgrim-band-grid { grid-template-columns: 1fr; }
+  .pilgrim-journey-inner { flex-direction: column-reverse; }
 }
 @media (max-width: 560px) {
-  .feature-grid, .strip-grid, .store-grid, .hub-grid { grid-template-columns: 1fr; }
+  .feature-grid, .strip-grid, .hub-grid { grid-template-columns: 1fr; }
+  .pilgrim-store-grid { grid-template-columns: repeat(2, 1fr); }
 }

@@ -39,23 +39,110 @@
 </section>
 {% endif %}
 
-{# ---------- Featured Sites ---------- #}
-{% if page.featured_sites.all %}
-<section class="feature-strip">
-  <div class="container">
-    <div class="strip-head"><h2>{{ page.featured_sites_heading }}</h2></div>
-    <div class="strip-grid">
-      {% for item in page.featured_sites.all %}
-        <a class="strip-card" href="{% if item.site_page %}{% pageurl item.site_page %}{% else %}#{% endif %}">
-          <div class="strip-img">{% if item.image_override %}{% image item.image_override fill-320x200 %}{% endif %}</div>
-          <div class="strip-label">{% if item.title_override %}{{ item.title_override }}{% elif item.site_page %}{{ item.site_page.title }}{% endif %}</div>
-        </a>
-      {% endfor %}
+{# ---------- Pilgrim band: Destinations / Journey / Store ---------- #}
+<section class="pilgrim-band">
+  <div class="container pilgrim-band-grid">
+
+    {# -- Featured Pilgrimage Destinations -- #}
+    <div class="pilgrim-card pilgrim-destinations">
+      <div class="pilgrim-card-head">
+        <h2>{{ page.featured_sites_heading }}</h2>
+        <a class="pilgrim-view-all" href="/explore/">View all destinations ›</a>
+      </div>
+      {% if page.featured_sites.all %}
+        <div class="pilgrim-carousel">
+          <button type="button" class="pilgrim-carousel-arrow pilgrim-carousel-prev" aria-label="Scroll left">‹</button>
+          <div class="pilgrim-destinations-track">
+            {% for item in page.featured_sites.all %}
+              <a class="pilgrim-dest-card" href="{% if item.site_page %}{% pageurl item.site_page %}{% else %}#{% endif %}">
+                <div class="pilgrim-dest-img">
+                  {% if item.display_image %}{% image item.display_image fill-260x220 %}{% endif %}
+                </div>
+                <div class="pilgrim-dest-body">
+                  <span class="pilgrim-dest-title">
+                    <svg class="pilgrim-pin" width="11" height="14" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="currentColor"/>
+                      <circle cx="13" cy="13" r="5" fill="#fff"/>
+                    </svg>
+                    {{ item.display_title }}
+                  </span>
+                  {% if item.locality_line %}<span class="pilgrim-dest-loc">{{ item.locality_line }}</span>{% endif %}
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+          <button type="button" class="pilgrim-carousel-arrow pilgrim-carousel-next" aria-label="Scroll right">›</button>
+        </div>
+      {% else %}
+        <p class="pilgrim-empty">Featured destinations will appear here once added in the admin.</p>
+      {% endif %}
     </div>
+
+    {# -- Your Journey, Your Story -- #}
+    <div class="pilgrim-card pilgrim-journey">
+      <div class="pilgrim-card-head pilgrim-card-head-solo">
+        <h2>{{ page.community_heading }}</h2>
+      </div>
+      <div class="pilgrim-journey-inner">
+        <div class="pilgrim-journey-copy">
+          {% if page.journey_bullets.all %}
+            <ul class="pilgrim-journey-list">
+              {% for b in page.journey_bullets.all %}
+                <li>
+                  <span class="pilgrim-journey-icon">
+                    {% if b.title == "Track Visited Sites" %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    {% elif b.title == "Upload Photos" %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    {% elif b.title == "Share Your Story" %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    {% elif b.title == "Connect & Pray" %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    {% else %}
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+                    {% endif %}
+                  </span>
+                  <span class="pilgrim-journey-text"><strong>{{ b.title }}</strong><span>{{ b.text }}</span></span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'passport' %}">Join Our Community</a>
+          {% else %}
+            <a class="btn btn-primary" href="{{ page.community_cta_link }}">Join Our Community</a>
+          {% endif %}
+        </div>
+        <div class="pilgrim-journey-photo">
+          {% if page.community_image %}{% image page.community_image fill-260x340 %}{% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# -- Books, Films & More -- #}
+    <div class="pilgrim-card pilgrim-store">
+      <div class="pilgrim-card-head">
+        <h2>{{ page.store_heading }}</h2>
+        <a class="pilgrim-view-all" href="/store/">View all ›</a>
+      </div>
+      {% if page.store_picks.all %}
+        <div class="pilgrim-store-grid">
+          {% for pick in page.store_picks.all %}
+            <a class="pilgrim-store-card" href="{{ pick.link_url|default:'#' }}">
+              <div class="pilgrim-store-cover">{% if pick.cover %}{% image pick.cover fill-140x190 %}{% endif %}</div>
+              <strong>{{ pick.title }}</strong>
+              {% if pick.price %}<span class="pilgrim-store-price">{{ pick.price }}</span>{% endif %}
+            </a>
+          {% endfor %}
+        </div>
+        <a class="btn btn-primary pilgrim-store-cta" href="/store/">Visit our store</a>
+      {% else %}
+        <p class="pilgrim-empty">Store picks will appear here once added in the admin.</p>
+      {% endif %}
+    </div>
+
   </div>
 </section>
-{% endif %}
-
 {# ---------- Featured Saints ---------- #}
 {% if page.featured_saints.all %}
 <section class="feature-strip alt">
@@ -73,43 +160,25 @@
 </section>
 {% endif %}
 
-{# ---------- Community teaser ---------- #}
-<section class="community">
-  <div class="container community-inner">
-    <div class="community-copy">
-      <h2>{{ page.community_heading }}</h2>
-      <p>{{ page.community_intro }}</p>
-      {% if page.journey_bullets.all %}
-        <ul class="journey-list">
-          {% for b in page.journey_bullets.all %}
-            <li><strong>{{ b.title }}</strong><span>{{ b.text }}</span></li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-      {% if page.community_cta_text %}<a class="btn btn-primary" href="{{ page.community_cta_link }}">{{ page.community_cta_text }}</a>{% endif %}
-    </div>
-    {% if page.community_image %}<div class="community-img">{% image page.community_image fill-460x520 %}</div>{% endif %}
+{# ---------- Newsletter ---------- #}
+<section class="newsletter-section">
+  <div class="container newsletter-inner">
+    <h2>{{ s.newsletter_heading }}</h2>
+    <p>{{ s.newsletter_text }}</p>
+    {% if request.GET.subscribed %}
+      <p class="newsletter-success">Thank you for subscribing!</p>
+    {% else %}
+      <form method="post" action="{% url 'newsletter_signup' %}" class="newsletter-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <label class="sr-only" for="home-nl-email">Your email</label>
+        <input id="home-nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+        <button class="btn btn-gold" type="submit">Sign up</button>
+      </form>
+      {% if request.GET.newsletter_error %}<p class="newsletter-error">Please enter a valid email address.</p>{% endif %}
+    {% endif %}
   </div>
 </section>
-
-{# ---------- Store picks ---------- #}
-{% if page.store_picks.all %}
-<section class="store-strip">
-  <div class="container">
-    <div class="strip-head"><h2>{{ page.store_heading }}</h2></div>
-    <div class="store-grid">
-      {% for pick in page.store_picks.all %}
-        <a class="store-card" href="{{ pick.link_url|default:'#' }}">
-          <div class="store-cover">{% if pick.cover %}{% image pick.cover fill-180x240 %}{% endif %}</div>
-          <strong>{{ pick.title }}</strong>
-          {% if pick.subtitle %}<span class="store-sub">{{ pick.subtitle }}</span>{% endif %}
-          {% if pick.price %}<span class="store-price">{{ pick.price }}</span>{% endif %}
-        </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
 
 {# ---------- Partners ---------- #}
 {% if page.partners.all or page.partners_quote %}

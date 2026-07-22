@@ -8,6 +8,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from catalog import views as catalog_views
 from community import views as community_views
+from core import views as core_views
 from search import views as search_views
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
+    path("newsletter/signup/", core_views.newsletter_signup, name="newsletter_signup"),
     path("accounts/", include("allauth.urls")),
     path("journey/", include("community.urls")),
     path("passport/", community_views.passport_dashboard, name="passport"),

@@ -67,16 +67,19 @@ class HomePage(Page):
         blank=True,
         default=(
             "Create your personal pilgrim profile, track the sacred places you have "
-            "visited, save future destinations, and share the moments that deepened "
-            "your faith."
+            "visited, save future destinations, upload photos, and share the moments "
+            "that deepened your faith."
         ),
     )
     community_image = models.ForeignKey(
         "wagtailimages.Image", null=True, blank=True,
         on_delete=models.SET_NULL, related_name="+",
     )
+    # Logged-out fallback CTA -- logged-in visitors see a hardcoded "My Pilgrim
+    # Passport" link to /passport/ instead (home_page.html), since that
+    # destination depends on auth state rather than editorial choice.
     community_cta_text = models.CharField(max_length=40, blank=True, default="Begin Your Journey")
-    community_cta_link = models.CharField(max_length=255, blank=True, default="#")
+    community_cta_link = models.CharField(max_length=255, blank=True, default="/accounts/signup/")
 
     # --- Partners ---
     partners_heading = models.CharField(max_length=80, blank=True, default="Pilgrimage Partners")
@@ -182,6 +185,26 @@ class FeaturedSite(Orderable):
         FieldPanel("image_override"),
         FieldPanel("title_override"),
     ]
+
+    @property
+    def display_title(self):
+        if self.title_override:
+            return self.title_override
+        return self.site_page.title if self.site_page else ""
+
+    @property
+    def display_image(self):
+        if self.image_override:
+            return self.image_override
+        return getattr(self.site_page.specific, "featured_image", None) if self.site_page else None
+
+    @property
+    def locality_line(self):
+        if not self.site_page:
+            return ""
+        specific = self.site_page.specific
+        parts = [getattr(specific, "locality", ""), getattr(specific, "country", "")]
+        return ", ".join(part for part in parts if part)
 
 
 class FeaturedSaint(Orderable):
