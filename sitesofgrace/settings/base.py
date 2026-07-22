@@ -137,7 +137,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/passport/"
 LOGOUT_REDIRECT_URL = "/"
 
 # django-allauth (public visitor accounts; Wagtail admin login is separate

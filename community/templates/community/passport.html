@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags %}
+
+{% block body_class %}passport{% endblock %}
+{% block title %}Pilgrim Passport{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'community/css/passport.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="hub-header">
+  <div class="container">
+    <h1>Pilgrim Passport</h1>
+    <p class="lead">Welcome back{% if profile.display_name %}, {{ profile.display_name }}{% endif %}. Here's your pilgrimage so far.</p>
+  </div>
+</header>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>My Map</h2></div>
+  {% if has_map_sites %}
+    <div class="map-wrap">
+      <div id="passportMap"
+        data-journey-url="{% url 'passport_journey_json' %}"
+        style="height:min(60vh,480px);border:1px solid var(--gold-soft);border-radius:16px;"></div>
+    </div>
+  {% else %}
+    <div class="passport-map-empty">
+      <p>Your personal map will appear here once you save a sacred site with a known location to your journey.</p>
+      <a class="btn btn-secondary" href="/explore/">Explore sacred sites</a>
+    </div>
+  {% endif %}
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>Visited <span class="passport-count">({{ visited_entries|length }})</span></h2></div>
+  {% if visited_entries %}
+    <div class="strip-grid">
+      {% for entry in visited_entries %}
+        <a class="strip-card" href="{{ entry.site.url }}">
+          <div class="strip-img">{% if entry.site.featured_image %}{% image entry.site.featured_image fill-320x200 %}{% endif %}</div>
+          <div class="strip-label">{{ entry.site.title }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="directory-empty">You haven't marked any sites as visited yet.</div>
+  {% endif %}
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>Want to Visit <span class="passport-count">({{ want_entries|length }})</span></h2></div>
+  {% if want_entries %}
+    <div class="strip-grid">
+      {% for entry in want_entries %}
+        <a class="strip-card" href="{{ entry.site.url }}">
+          <div class="strip-img">{% if entry.site.featured_image %}{% image entry.site.featured_image fill-320x200 %}{% endif %}</div>
+          <div class="strip-label">{{ entry.site.title }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="directory-empty">No sites on your want-to-visit list yet.</div>
+  {% endif %}
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>Saved <span class="passport-count">({{ saved_entries|length }})</span></h2></div>
+  {% if saved_entries %}
+    <div class="strip-grid">
+      {% for entry in saved_entries %}
+        <a class="strip-card" href="{{ entry.site.url }}">
+          <div class="strip-img">{% if entry.site.featured_image %}{% image entry.site.featured_image fill-320x200 %}{% endif %}</div>
+          <div class="strip-label">{{ entry.site.title }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="directory-empty">You haven't saved any sites yet.</div>
+  {% endif %}
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>Travel Plans</h2></div>
+  <div class="passport-placeholder">
+    <h2>Coming soon</h2>
+    <p>Travel Plans will connect to Plan Your Pilgrimage, so you can build an itinerary around the sites in your journey.</p>
+  </div>
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>My Photos</h2></div>
+  <div class="passport-placeholder">
+    <h2>Coming soon</h2>
+    <p>My Photos will connect to pilgrim contributions, so you can share photos from the sites you've visited.</p>
+  </div>
+</section>
+
+<section class="container passport-section">
+  <div class="strip-head"><h2>My Profile</h2></div>
+  <div class="passport-profile">
+    <div class="passport-avatar">
+      {% if profile.avatar %}<img src="{{ profile.avatar.url }}" alt="">{% else %}{{ initial }}{% endif %}
+    </div>
+    <div class="passport-profile-info">
+      <h2>{{ profile.display_name|default:request.user.get_username }}</h2>
+      <p>{{ profile.home_country|default:"No home country set" }} &middot; {{ profile.get_journey_visibility_display }} journey</p>
+    </div>
+    <a class="btn btn-secondary" href="{% url 'passport_profile_edit' %}">Edit Profile</a>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if has_map_sites %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  (function () {
+    var el = document.getElementById('passportMap');
+    if (!el || !window.L) return;
+
+    // Pin color reflects JOURNEY STATUS, not category (unlike the main
+    // interactive map) -- red = visited, white/navy-border = saved or
+    // wants-to-visit.
+    var RED = { fill: '#D96B5F', stroke: '#032553' };
+    var WHITE = { fill: '#FDF9F2', stroke: '#032553' };
+
+    function pinIcon(status) {
+      var s = status === 'visited' ? RED : WHITE;
+      var html =
+        '<svg class="site-pin" width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.5"/>' +
+        '<circle cx="13" cy="13" r="5" fill="' + s.stroke + '"/>' +
+        '</svg>';
+      return L.divIcon({
+        html: html,
+        className: 'site-pin-icon',
+        iconSize: [26, 34],
+        iconAnchor: [13, 34],
+        popupAnchor: [0, -30],
+      });
+    }
+
+    function popupHtml(site) {
+      var statusLabel = site.status === 'visited' ? 'Visited' : 'In my journey';
+      return (
+        '<div class="map-popup">' +
+        '<span class="badge badge-status">' + statusLabel + '</span>' +
+        '<h3>' + site.name + '</h3>' +
+        '<a class="map-popup-link" href="' + site.url + '">View site &rarr;</a>' +
+        '</div>'
+      );
+    }
+
+    var map = L.map(el).setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    var legendEl = document.createElement('div');
+    legendEl.className = 'map-legend passport-legend';
+    legendEl.innerHTML =
+      '<span class="map-legend-item"><span class="map-legend-swatch" style="background:' + RED.fill + ';border-color:' + RED.stroke + '"></span>Visited</span>' +
+      '<span class="map-legend-item"><span class="map-legend-swatch" style="background:' + WHITE.fill + ';border-color:' + WHITE.stroke + '"></span>In my journey</span>';
+    el.parentElement.appendChild(legendEl);
+
+    fetch(el.dataset.journeyUrl)
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        var bounds = [];
+        data.sites.forEach(function (site) {
+          var marker = L.marker([site.lat, site.lng], { icon: pinIcon(site.status) }).addTo(map);
+          marker.bindPopup(popupHtml(site));
+          bounds.push([site.lat, site.lng]);
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      });
+  })();
+</script>
+{% endif %}
+{% endblock %}

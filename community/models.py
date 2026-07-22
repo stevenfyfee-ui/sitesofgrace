@@ -15,6 +15,7 @@ class PilgrimProfile(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="pilgrim_profile"
     )
     display_name = models.CharField(max_length=120, blank=True)
+    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
     home_country = models.CharField(max_length=120, blank=True)
     journey_visibility = models.CharField(
         max_length=20, choices=VISIBILITY_CHOICES, default=VISIBILITY_PRIVATE
