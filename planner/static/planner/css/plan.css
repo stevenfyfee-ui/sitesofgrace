@@ -1,0 +1,43 @@
+.plan-hero { padding: 56px 0 32px; }
+.plan-hero-img { border-radius: 200px 200px 18px 18px; overflow: hidden; border: 1px solid var(--gold-soft); margin-bottom: 28px; }
+.plan-hero-img img { width: 100%; height: auto; display: block; }
+.plan-title { font-family: var(--serif-display); font-weight: 600; font-size: clamp(30px, 5vw, 44px); color: var(--navy); margin: 0 0 14px; }
+.plan-intro { font-size: 17px; line-height: 1.7; color: #33405a; max-width: 62ch; }
+.plan-calculator { padding: 8px 0 48px; }
+.plan-calc-placeholder { background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 16px; padding: 48px; text-align: center; color: var(--stone, #6b6355); font-family: var(--serif-display); }
+.plan-disclaimer { padding: 28px 0 64px; }
+.plan-disclaimer .container { border-top: 1px solid var(--gold-soft); padding-top: 20px; }
+.plan-disclaimer-label { font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0 0 6px; }
+.plan-disclaimer p { font-size: 13.5px; line-height: 1.6; color: #6b6355; margin: 0 0 6px; max-width: 70ch; }
+
+/* ---- Calculator ---- */
+.plan-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.plan-calc-controls { display: grid; gap: 18px; background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 16px; padding: 26px; }
+.plan-field { display: flex; flex-direction: column; gap: 6px; }
+.plan-field label { font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); }
+.plan-field select, .plan-field input { font-family: var(--sans); font-size: 15px; padding: 10px 12px; border: 1px solid var(--gold-soft); border-radius: 10px; background: #fff; color: var(--navy); }
+.plan-field select:focus, .plan-field input:focus { outline: none; border-color: var(--gold); }
+.plan-airport { font-size: 12.5px; color: #6b6355; margin: 2px 0 0; }
+.plan-breakdown { background: var(--navy); color: var(--ivory); border-radius: 16px; padding: 28px; }
+.plan-lines { list-style: none; margin: 0 0 18px; padding: 0; }
+.plan-lines li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-family: var(--sans); font-size: 15px; }
+.plan-lines li span:first-child { color: rgba(253,249,242,.8); }
+.plan-lines li span:last-child { font-weight: 600; }
+.plan-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 8px; }
+.plan-total-label { font-family: var(--serif-display); font-size: 18px; color: var(--gold); }
+.plan-total-val { font-family: var(--serif-display); font-size: 30px; font-weight: 600; }
+.plan-perperson { font-size: 13px; color: rgba(253,249,242,.75); margin-top: 4px; }
+.plan-basis { font-size: 12px; color: rgba(253,249,242,.65); margin: 14px 0 0; line-height: 1.5; }
+@media (max-width: 800px) { .plan-calc { grid-template-columns: 1fr; } }
+
+.plan-journey-picks { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }
+.plan-journey-label { font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+.plan-pick { font-family: var(--sans); font-size: 14px; padding: 7px 14px; border: 1px solid var(--gold-soft); border-radius: 999px; background: var(--ivory); color: var(--navy); cursor: pointer; transition: all .15s ease; }
+.plan-pick:hover { border-color: var(--gold); background: #fff; }
+
+.plan-booking { margin-top: 24px; background: var(--parchment); border: 1px solid var(--gold-soft); border-radius: 14px; padding: 20px 24px; }
+.plan-booking-label { font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 0 0 8px; }
+.plan-booking-soon { font-size: 14px; line-height: 1.6; color: #33405a; margin: 0; max-width: 70ch; }
+.plan-booking-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.plan-booking-links a { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--navy); }
+.plan-booking-links a:hover { color: var(--gold); }

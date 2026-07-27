@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}<link rel="stylesheet" href="{% static 'planner/css/plan.css' %}">{% endblock %}
+
+{% block content %}
+<section class="plan-hero">
+  <div class="container">
+    {% if page.hero_image %}<div class="plan-hero-img">{% image page.hero_image fill-1200x420 %}</div>{% endif %}
+    <h1 class="plan-title">{{ page.heading|default:page.title }}</h1>
+    {% if page.intro %}<div class="plan-intro">{{ page.intro|richtext }}</div>{% endif %}
+  </div>
+</section>
+
+<section class="plan-calculator">
+  <div class="container">
+    {% if journey_destinations %}
+    <div class="plan-journey-picks">
+      <span class="plan-journey-label">From your journey</span>
+      {% for j in journey_destinations %}
+        <button type="button" class="plan-pick" data-dest-id="{{ j.id }}">{{ j.city }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="plan-calc" id="plan-calc">
+      <div class="plan-calc-controls">
+        <div class="plan-field">
+          <label for="pc-dest">Destination</label>
+          <select id="pc-dest"></select>
+          <p class="plan-airport" id="pc-airport"></p>
+        </div>
+        <div class="plan-field">
+          <label for="pc-party">Travelers</label>
+          <input type="number" id="pc-party" min="1" max="40" step="1">
+        </div>
+        <div class="plan-field">
+          <label for="pc-nights">Nights</label>
+          <input type="number" id="pc-nights" min="1" max="60" step="1">
+        </div>
+        <div class="plan-field">
+          <label for="pc-tier">Lodging</label>
+          <select id="pc-tier">
+            <option value="budget">Budget</option>
+            <option value="mid" selected>Mid-range</option>
+            <option value="comfort">Comfort</option>
+          </select>
+        </div>
+      </div>
+      <div class="plan-breakdown">
+        <ul class="plan-lines">
+          <li><span>Flights</span><span id="pc-flights"></span></li>
+          <li><span>Hotels</span><span id="pc-hotels"></span></li>
+          <li><span>Meals</span><span id="pc-meals"></span></li>
+          <li><span>Local transport</span><span id="pc-transport"></span></li>
+          <li><span>Estimated extras</span><span id="pc-misc"></span></li>
+        </ul>
+        <div class="plan-total">
+          <span class="plan-total-label">Estimated total</span>
+          <span class="plan-total-val" id="pc-total"></span>
+        </div>
+        <div class="plan-perperson"><span id="pc-perperson"></span> per person</div>
+        <p class="plan-basis" id="pc-basis"></p>
+      </div>
+    </div>
+
+    <div class="plan-booking">
+      <p class="plan-booking-label">Booking</p>
+      {% if booking_links %}
+        <ul class="plan-booking-links">
+          {% for link in booking_links %}
+            <li><a href="{{ link.url }}" rel="nofollow sponsored" target="_blank">{{ link.label }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="plan-booking-soon">Direct booking is coming soon. For now, use the estimate above to plan your budget, then book flights and lodging through your preferred travel site.</p>
+      {% endif %}
+    </div>
+
+    {{ plan_data|json_script:"plan-data" }}
+    <script src="{% static 'planner/js/plan.js' %}" defer></script>
+  </div>
+</section>
+
+{% if page.disclaimer %}
+<section class="plan-disclaimer">
+  <div class="container"><p class="plan-disclaimer-label">Please note</p>{{ page.disclaimer|richtext }}</div>
+</section>
+{% endif %}
+{% endblock %}
