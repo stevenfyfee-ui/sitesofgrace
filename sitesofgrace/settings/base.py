@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "catalog",
     "community",
     "planner",
+    "store",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'store/css/store.css' %}">{% endblock %}
+{% block content %}
+<section class="store-hero">
+  <div class="container">
+    <h1 class="store-title">{{ page.heading|default:page.title }}</h1>
+    {% if page.intro %}<div class="store-intro">{{ page.intro|richtext }}</div>{% endif %}
+    {% if store_settings.affiliate_disclosure %}
+      <div class="store-disclosure">{{ store_settings.affiliate_disclosure|richtext }}</div>
+    {% endif %}
+  </div>
+</section>
+<section class="store-listing">
+  <div class="container">
+    <div class="store-filter">
+      <a class="store-chip{% if not selected_category %} is-active{% endif %}" href="{% pageurl page %}">All</a>
+      {% for cat in categories %}
+        <a class="store-chip{% if selected_category == cat %} is-active{% endif %}" href="?category={{ cat|urlencode }}">{{ cat }}</a>
+      {% endfor %}
+    </div>
+    {% if products %}
+      <div class="store-grid">
+        {% for p in products %}
+          <div class="store-card">
+            <a class="store-card-media" href="{{ p.get_url }}" target="_blank"{% if p.is_affiliate %} rel="nofollow sponsored"{% endif %}>
+              {% if p.image %}{% image p.image fill-360x430 %}{% else %}<span class="store-card-noimg"></span>{% endif %}
+            </a>
+            <div class="store-card-body">
+              <span class="store-card-cat">{{ p.category }}</span>
+              <h3 class="store-card-title">{{ p.title }}</h3>
+              {% if p.subtitle %}<p class="store-card-sub">{{ p.subtitle }}</p>{% endif %}
+              {% if p.description %}<p class="store-card-desc">{{ p.description }}</p>{% endif %}
+              <div class="store-card-foot">
+                {% if p.show_price %}<span class="store-card-price">{{ p.price }}</span>{% else %}<span></span>{% endif %}
+                <a class="btn btn-primary store-card-cta" href="{{ p.get_url }}" target="_blank"{% if p.is_affiliate %} rel="nofollow sponsored"{% endif %}>{{ p.cta_label }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="store-empty">Products are on the way — check back soon.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
