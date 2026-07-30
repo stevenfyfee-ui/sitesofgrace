@@ -24,27 +24,22 @@
     {% endif %}
     <div class="plan-calc" id="plan-calc">
       <div class="plan-calc-controls">
-        <div class="plan-field">
-          <label for="pc-dest">Destination</label>
-          <select id="pc-dest"></select>
-          <p class="plan-airport" id="pc-airport"></p>
+        <div class="plan-global-fields">
+          <div class="plan-field">
+            <label for="pc-party">Travelers</label>
+            <input type="number" id="pc-party" min="1" max="40" step="1">
+          </div>
+          <div class="plan-field">
+            <label for="pc-tier">Lodging</label>
+            <select id="pc-tier">
+              <option value="budget">Budget</option>
+              <option value="mid" selected>Mid-range</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
         </div>
-        <div class="plan-field">
-          <label for="pc-party">Travelers</label>
-          <input type="number" id="pc-party" min="1" max="40" step="1">
-        </div>
-        <div class="plan-field">
-          <label for="pc-nights">Nights</label>
-          <input type="number" id="pc-nights" min="1" max="60" step="1">
-        </div>
-        <div class="plan-field">
-          <label for="pc-tier">Lodging</label>
-          <select id="pc-tier">
-            <option value="budget">Budget</option>
-            <option value="mid" selected>Mid-range</option>
-            <option value="comfort">Comfort</option>
-          </select>
-        </div>
+        <div id="pc-stops" class="plan-stops"></div>
+        <button type="button" id="pc-add-stop" class="plan-add-stop">+ Add a stop</button>
       </div>
       <div class="plan-breakdown">
         <ul class="plan-lines">

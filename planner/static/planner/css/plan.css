@@ -41,3 +41,12 @@
 .plan-booking-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
 .plan-booking-links a { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--navy); }
 .plan-booking-links a:hover { color: var(--gold); }
+
+.plan-global-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.plan-stops { display: grid; gap: 14px; margin-top: 4px; }
+.plan-stop { position: relative; display: grid; grid-template-columns: 1fr 92px; gap: 12px; align-items: start; background: #fff; border: 1px solid var(--gold-soft); border-radius: 12px; padding: 14px 42px 14px 14px; }
+.plan-stop .plan-airport { grid-column: 1 / -1; margin: 0; }
+.pc-remove-stop { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--gold-soft); background: var(--ivory); color: var(--navy); cursor: pointer; line-height: 1; font-size: 16px; }
+.pc-remove-stop:hover { border-color: var(--gold); color: var(--gold); }
+.plan-add-stop { justify-self: start; margin-top: 4px; font-family: var(--sans); font-weight: 600; font-size: 14px; padding: 9px 16px; border: 1px dashed var(--gold); border-radius: 999px; background: transparent; color: var(--navy); cursor: pointer; }
+.plan-add-stop:hover { background: var(--ivory); }

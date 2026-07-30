@@ -81,6 +81,7 @@ class CalculatorDefaults(BaseGenericSetting):
     hotel_tier_midrange_multiplier = models.DecimalField(max_digits=4, decimal_places=2, default=1.00)
     hotel_tier_comfort_multiplier = models.DecimalField(max_digits=4, decimal_places=2, default=1.60)
     misc_buffer_percent = models.PositiveIntegerField(default=12)
+    inter_destination_hop_usd = models.DecimalField(max_digits=8, decimal_places=2, default=150)
     currency = models.CharField(max_length=8, default="USD")
 
     panels = [
@@ -92,6 +93,7 @@ class CalculatorDefaults(BaseGenericSetting):
         FieldPanel("hotel_tier_midrange_multiplier"),
         FieldPanel("hotel_tier_comfort_multiplier"),
         FieldPanel("misc_buffer_percent"),
+        FieldPanel("inter_destination_hop_usd"),
         FieldPanel("currency"),
     ]
 
@@ -181,6 +183,7 @@ class PlanPage(Page):
                 "mid": float(defaults.hotel_tier_midrange_multiplier),
                 "comfort": float(defaults.hotel_tier_comfort_multiplier),
                 "misc_pct": defaults.misc_buffer_percent,
+                "hop": float(defaults.inter_destination_hop_usd),
                 "currency": defaults.currency,
             },
             "selected_id": selected_id,
