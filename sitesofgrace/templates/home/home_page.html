@@ -125,19 +125,19 @@
         <h2>{{ page.store_heading }}</h2>
         <a class="pilgrim-view-all" href="/store/">View all ›</a>
       </div>
-      {% if page.store_picks.all %}
+      {% if featured_products %}
         <div class="pilgrim-store-grid">
-          {% for pick in page.store_picks.all %}
-            <a class="pilgrim-store-card" href="{{ pick.link_url|default:'#' }}">
-              <div class="pilgrim-store-cover">{% if pick.cover %}{% image pick.cover fill-140x190 %}{% endif %}</div>
-              <strong>{{ pick.title }}</strong>
-              {% if pick.price %}<span class="pilgrim-store-price">{{ pick.price }}</span>{% endif %}
+          {% for p in featured_products %}
+            <a class="pilgrim-store-card" href="{{ p.get_url }}" target="_blank"{% if p.is_affiliate %} rel="nofollow sponsored"{% endif %}>
+              <div class="pilgrim-store-cover">{% if p.image %}{% image p.image fill-140x190 %}{% endif %}</div>
+              <strong>{{ p.title }}</strong>
+              {% if p.show_price %}<span class="pilgrim-store-price">{{ p.price }}</span>{% endif %}
             </a>
           {% endfor %}
         </div>
         <a class="btn btn-primary pilgrim-store-cta" href="/store/">Visit our store</a>
       {% else %}
-        <p class="pilgrim-empty">Store picks will appear here once added in the admin.</p>
+        <p class="pilgrim-empty">Featured products will appear here once you mark products as featured in the admin.</p>
       {% endif %}
     </div>
 

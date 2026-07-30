@@ -140,6 +140,14 @@ class HomePage(Page):
     class Meta:
         verbose_name = "Home page"
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        from store.models import StoreProduct
+        context["featured_products"] = StoreProduct.objects.filter(
+            live=True, featured=True
+        )[:4]
+        return context
+
 
 class FeatureCard(Orderable):
     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name="feature_cards")
