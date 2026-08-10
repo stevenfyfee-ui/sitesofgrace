@@ -160,25 +160,10 @@
 </section>
 {% endif %}
 
-{# ---------- Newsletter ---------- #}
-<section class="newsletter-section">
-  <div class="container newsletter-inner">
-    <h2>{{ s.newsletter_heading }}</h2>
-    <p>{{ s.newsletter_text }}</p>
-    {% if request.GET.subscribed %}
-      <p class="newsletter-success">Thank you for subscribing!</p>
-    {% else %}
-      <form method="post" action="{% url 'newsletter_signup' %}" class="newsletter-form">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <label class="sr-only" for="home-nl-email">Your email</label>
-        <input id="home-nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
-        <button class="btn btn-gold" type="submit">Sign up</button>
-      </form>
-      {% if request.GET.newsletter_error %}<p class="newsletter-error">Please enter a valid email address.</p>{% endif %}
-    {% endif %}
-  </div>
-</section>
+{# ---------- News feed ---------- #}
+{% if page.news_enabled and news_items %}
+  {% include "home/includes/_news_feed.html" %}
+{% endif %}
 
 {# ---------- Partners ---------- #}
 {% if page.partners.all or page.partners_quote %}

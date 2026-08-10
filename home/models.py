@@ -86,6 +86,18 @@ class HomePage(Page):
     partners_quote = models.CharField(max_length=200, blank=True)
     partners_quote_source = models.CharField(max_length=80, blank=True)
 
+    # --- News feed ---
+    news_heading = models.CharField(max_length=120, blank=True, default="News from the Sacred Places")
+    news_intro = models.TextField(
+        blank=True,
+        default=(
+            "Shrine announcements, pilgrimage news, feast celebrations, and events "
+            "— from trusted Catholic newsrooms."
+        ),
+    )
+    news_enabled = models.BooleanField(default=True)
+    news_count = models.IntegerField(default=6)
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -132,6 +144,15 @@ class HomePage(Page):
             ],
             heading="Partners",
         ),
+        MultiFieldPanel(
+            [
+                FieldPanel("news_heading"),
+                FieldPanel("news_intro"),
+                FieldPanel("news_enabled"),
+                FieldPanel("news_count"),
+            ],
+            heading="News feed",
+        ),
     ]
 
     max_count = 1
@@ -146,6 +167,23 @@ class HomePage(Page):
         context["featured_products"] = StoreProduct.objects.filter(
             live=True, featured=True
         )[:4]
+
+        try:
+            from news.models import TOPIC_CHOICES, NewsItem, NewsSource
+            news_items = list(
+                NewsItem.objects.filter(hidden=False).select_related("source")[:self.news_count]
+            )
+            present_topics = {item.topic for item in news_items}
+            context["news_items"] = news_items
+            context["news_topics"] = [(v, label) for v, label in TOPIC_CHOICES if v in present_topics]
+            context["news_last_updated"] = NewsSource.objects.filter(
+                enabled=True, last_fetched__isnull=False
+            ).order_by("-last_fetched").values_list("last_fetched", flat=True).first()
+        except Exception:
+            context["news_items"] = []
+            context["news_topics"] = []
+            context["news_last_updated"] = None
+
         return context
 
 

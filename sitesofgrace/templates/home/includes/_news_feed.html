@@ -1,0 +1,59 @@
+{# News feed band -- replaces the old newsletter section as the page's closing band. #}
+<section class="news-feed-section">
+  <div class="container news-feed-inner">
+    <div class="news-feed-head">
+      <h2>{{ page.news_heading }}</h2>
+      {% if page.news_intro %}<p class="news-feed-intro">{{ page.news_intro }}</p>{% endif %}
+    </div>
+
+    {% if news_topics %}
+      <div class="news-chips" role="group" aria-label="Filter news by topic">
+        <button type="button" class="news-chip is-active" data-topic="all">All</button>
+        {% for value, label in news_topics %}
+          <button type="button" class="news-chip" data-topic="{{ value }}">{{ label }}</button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="news-grid" id="newsGrid">
+      {% for item in news_items %}
+        <article class="news-card" data-topic="{{ item.topic }}">
+          {% if item.image_url %}
+            <div class="news-card-media"><img src="{{ item.image_url }}" alt="" loading="lazy"></div>
+          {% endif %}
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-source-badge">{{ item.source.name }}</span>
+              <span class="news-topic-label">{{ item.get_topic_display }}</span>
+              <span class="news-date">{{ item.published_at|timesince }} ago</span>
+            </div>
+            <h3 class="news-headline">{{ item.title }}</h3>
+            <p class="news-excerpt">{{ item.excerpt }}</p>
+            <a class="news-read-link" href="{{ item.link }}" target="_blank" rel="noopener">Read at {{ item.source.name }} ↗</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <p class="news-attribution">Headlines are aggregated from public RSS feeds and link to the original publisher.</p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var chips = document.querySelectorAll('.news-chips .news-chip');
+    var cards = document.querySelectorAll('#newsGrid .news-card');
+    if (!chips.length || !cards.length) return;
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+        var topic = chip.getAttribute('data-topic');
+        cards.forEach(function (card) {
+          var show = topic === 'all' || card.getAttribute('data-topic') === topic;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>

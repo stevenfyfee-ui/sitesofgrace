@@ -95,12 +95,18 @@
       <div class="footer-newsletter">
         <h3>{{ s.newsletter_heading }}</h3>
         <p>{{ s.newsletter_text }}</p>
-        {# Wire this action to your newsletter provider (e.g. Mailchimp/Buttondown) later. #}
-        <div class="newsletter-form">
-          <label class="sr-only" for="nl-email">Your email</label>
-          <input id="nl-email" type="email" placeholder="Your email" autocomplete="email">
-          <button class="btn btn-gold" type="button">Sign up</button>
-        </div>
+        {% if request.GET.subscribed %}
+          <p class="newsletter-success">Thank you for subscribing!</p>
+        {% else %}
+          <form method="post" action="{% url 'newsletter_signup' %}" class="newsletter-form">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <label class="sr-only" for="nl-email">Your email</label>
+            <input id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+            <button class="btn btn-gold" type="submit">Sign up</button>
+          </form>
+          {% if request.GET.newsletter_error %}<p class="newsletter-error">Please enter a valid email address.</p>{% endif %}
+        {% endif %}
       </div>
     </div>
 
