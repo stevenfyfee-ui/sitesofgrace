@@ -1,7 +1,9 @@
 from django.db import models
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
-from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
@@ -11,6 +13,8 @@ CATEGORY_CHOICES = [
     ("Devotionals & Sacramentals", "Devotionals & Sacramentals"),
     ("Clothing", "Clothing"),
     ("Gifts", "Gifts"),
+    ("Subscriptions", "Subscriptions"),
+    ("Calendars & Planners", "Calendars & Planners"),
 ]
 
 KIND_CHOICES = [
@@ -18,9 +22,19 @@ KIND_CHOICES = [
     ("own", "Our own product"),
 ]
 
+LAYOUT_CHOICES = [
+    ("card", "Card (grid)"),
+    ("feature", "Feature (full-width)"),
+]
+
+CTA_MODE_CHOICES = [
+    ("link", "Link (Link URL / Amazon)"),
+    ("waitlist", "Waitlist (collects an email, no payment)"),
+]
+
 
 @register_snippet
-class StoreProduct(models.Model):
+class StoreProduct(ClusterableModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True, help_text="Author, artist, or brand")
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)
@@ -49,6 +63,25 @@ class StoreProduct(models.Model):
     live = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    layout = models.CharField(max_length=10, choices=LAYOUT_CHOICES, default="card")
+    long_description = RichTextField(blank=True, help_text="Shown only in feature layout.")
+    ribbon_text = models.CharField(
+        max_length=60, blank=True, help_text='e.g. "Quarterly Subscription", "New for 2027"',
+    )
+    spotlight_title = models.CharField(
+        max_length=120, blank=True, help_text='e.g. "Autumn 2026 · Lourdes, France"',
+    )
+    spotlight_note = models.CharField(
+        max_length=120, blank=True, help_text='e.g. "Shipping the first week of October"',
+    )
+    fine_print = models.CharField(
+        max_length=300, blank=True, help_text="Shipping and renewal terms shown under the buttons.",
+    )
+    cta_mode = models.CharField(
+        max_length=10, choices=CTA_MODE_CHOICES, default="link",
+        help_text="Waitlist collects an email instead of linking out -- no payment is taken.",
+    )
+
     panels = [
         FieldPanel("title"),
         FieldPanel("subtitle"),
@@ -62,6 +95,20 @@ class StoreProduct(models.Model):
         FieldPanel("featured"),
         FieldPanel("sort_order"),
         FieldPanel("live"),
+        MultiFieldPanel(
+            [
+                FieldPanel("layout"),
+                FieldPanel("ribbon_text"),
+                FieldPanel("long_description"),
+                FieldPanel("spotlight_title"),
+                FieldPanel("spotlight_note"),
+                FieldPanel("fine_print"),
+                FieldPanel("cta_mode"),
+                InlinePanel("inclusions", label="Inclusion"),
+                InlinePanel("price_options", label="Price option"),
+            ],
+            heading="Feature layout",
+        ),
     ]
 
     class Meta:
@@ -75,11 +122,21 @@ class StoreProduct(models.Model):
         return self.kind == "affiliate"
 
     @property
+    def is_feature(self):
+        return self.layout == "feature"
+
+    @property
     def show_price(self):
         return self.kind == "own" and bool(self.price)
 
     @property
+    def default_price_option(self):
+        return self.price_options.filter(is_default=True).first() or self.price_options.first()
+
+    @property
     def cta_label(self):
+        if self.cta_mode == "waitlist":
+            return "Join the Waitlist"
         if self.kind == "own":
             return "Buy"
         return "View on Amazon" if self.amazon_asin else "View item"
@@ -91,6 +148,44 @@ class StoreProduct(models.Model):
             base = "https://www.amazon.com/dp/%s/" % self.amazon_asin
             return "%s?tag=%s" % (base, tag) if tag else base
         return self.link_url
+
+
+class ProductInclusion(Orderable):
+    product = ParentalKey(StoreProduct, on_delete=models.CASCADE, related_name="inclusions")
+    lead_in = models.CharField(max_length=60, blank=True, help_text="Bolded opening phrase, e.g. \"A blessed rosary\"")
+    text = models.CharField(max_length=200)
+
+    panels = [FieldPanel("lead_in"), FieldPanel("text")]
+
+
+class ProductPriceOption(Orderable):
+    product = ParentalKey(StoreProduct, on_delete=models.CASCADE, related_name="price_options")
+    label = models.CharField(max_length=60, help_text='e.g. "Full Year · 4 boxes"')
+    amount = models.CharField(max_length=20, help_text='e.g. "$196"')
+    unit = models.CharField(max_length=20, blank=True, help_text='e.g. "/yr"')
+    note = models.CharField(max_length=60, blank=True, help_text='e.g. "Save $20"')
+    is_default = models.BooleanField(default=False)
+
+    panels = [
+        FieldPanel("label"),
+        FieldPanel("amount"),
+        FieldPanel("unit"),
+        FieldPanel("note"),
+        FieldPanel("is_default"),
+    ]
+
+
+class WaitlistSignup(models.Model):
+    product = models.ForeignKey(StoreProduct, on_delete=models.CASCADE, related_name="waitlist_signups")
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        unique_together = [("product", "email")]
+
+    def __str__(self):
+        return f"{self.email} → {self.product}"
 
 
 @register_setting
@@ -134,6 +229,9 @@ class StoreIndexPage(Page):
             selected = ""
         context["categories"] = [v for v, _ in CATEGORY_CHOICES]
         context["selected_category"] = selected
-        context["products"] = products
+        context["feature_products"] = products.filter(layout="feature").prefetch_related(
+            "inclusions", "price_options"
+        )
+        context["products"] = products.filter(layout="card")
         context["store_settings"] = StoreSettings.objects.first()
         return context

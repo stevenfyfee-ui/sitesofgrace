@@ -10,6 +10,7 @@ from catalog import views as catalog_views
 from community import views as community_views
 from core import views as core_views
 from search import views as search_views
+from store import views as store_views
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -18,6 +19,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
     path("newsletter/signup/", core_views.newsletter_signup, name="newsletter_signup"),
+    path("store/waitlist/", store_views.waitlist_signup, name="waitlist_signup"),
     path("accounts/", include("allauth.urls")),
     path("journey/", include("community.urls")),
     path("passport/", community_views.passport_dashboard, name="passport"),

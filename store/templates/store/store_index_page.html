@@ -19,6 +19,88 @@
         <a class="store-chip{% if selected_category == cat %} is-active{% endif %}" href="?category={{ cat|urlencode }}">{{ cat }}</a>
       {% endfor %}
     </div>
+    {% if feature_products %}
+      <div class="store-feature-band">
+        {% for p in feature_products %}
+          <article class="store-feature">
+            <div class="store-feature-art{% if not p.image %} store-feature-art--fallback{% endif %}">
+              {% if p.image %}
+                {% image p.image fill-640x520 %}
+              {% else %}
+                <div class="store-feature-fallback-inner">
+                  {% if p.ribbon_text %}<span class="store-feature-fallback-ribbon">{{ p.ribbon_text }}</span>{% endif %}
+                  <span class="store-feature-fallback-title">{{ p.title }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <div class="store-feature-body">
+              <div class="store-feature-head">
+                {% if p.ribbon_text %}<span class="store-feature-ribbon">{{ p.ribbon_text }}</span>{% endif %}
+                <span class="store-feature-cat">{{ p.category }}</span>
+              </div>
+              <h2 class="store-feature-title">{{ p.title }}</h2>
+              {% if p.subtitle %}<p class="store-feature-sub">{{ p.subtitle }}</p>{% endif %}
+              {% if p.long_description %}
+                <div class="store-feature-desc">{{ p.long_description|richtext }}</div>
+              {% elif p.description %}
+                <p class="store-feature-desc">{{ p.description }}</p>
+              {% endif %}
+
+              {% if p.spotlight_title or p.spotlight_note %}
+                <div class="store-feature-spotlight">
+                  {% if p.spotlight_title %}<strong>{{ p.spotlight_title }}</strong>{% endif %}
+                  {% if p.spotlight_note %}<span>{{ p.spotlight_note }}</span>{% endif %}
+                </div>
+              {% endif %}
+
+              {% if p.inclusions.all %}
+                <ul class="store-feature-inclusions">
+                  {% for item in p.inclusions.all %}
+                    <li>{% if item.lead_in %}<strong>{{ item.lead_in }}</strong> {% endif %}{{ item.text }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              {% if p.price_options.all %}
+                <div class="store-price-options" data-price-group>
+                  {% for opt in p.price_options.all %}
+                    <button type="button" class="store-price-option{% if opt.is_default %} is-active{% endif %}">
+                      <span class="store-price-label">{{ opt.label }}</span>
+                      <span class="store-price-amount">{{ opt.amount }}{% if opt.unit %}<small>{{ opt.unit }}</small>{% endif %}</span>
+                      {% if opt.note %}<span class="store-price-note">{{ opt.note }}</span>{% endif %}
+                    </button>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <div class="store-feature-ctas">
+                {% if p.cta_mode == "waitlist" %}
+                  {% if request.GET.waitlisted and request.GET.product_id == p.id|stringformat:"s" %}
+                    <p class="store-waitlist-success">You're on the list — we'll email you when it's ready.</p>
+                  {% else %}
+                    <form method="post" action="{% url 'waitlist_signup' %}" class="store-waitlist-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="product_id" value="{{ p.id }}">
+                      <input type="hidden" name="next" value="{{ request.path }}">
+                      <label class="sr-only" for="waitlist-email-{{ p.id }}">Your email</label>
+                      <input id="waitlist-email-{{ p.id }}" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+                      <button class="btn btn-gold" type="submit">{{ p.cta_label }}</button>
+                    </form>
+                    {% if request.GET.waitlist_error and request.GET.product_id == p.id|stringformat:"s" %}
+                      <p class="store-waitlist-error">Please enter a valid email address.</p>
+                    {% endif %}
+                  {% endif %}
+                {% else %}
+                  <a class="btn btn-primary" href="{{ p.get_url }}" target="_blank" rel="noopener">{{ p.cta_label }}</a>
+                {% endif %}
+              </div>
+
+              {% if p.fine_print %}<p class="store-feature-fineprint">{{ p.fine_print }}</p>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
     {% if products %}
       <div class="store-grid">
         {% for p in products %}
@@ -44,4 +126,19 @@
     {% endif %}
   </div>
 </section>
+
+{% if feature_products %}
+<script>
+  (function () {
+    document.querySelectorAll('[data-price-group]').forEach(function (group) {
+      group.querySelectorAll('.store-price-option').forEach(function (option) {
+        option.addEventListener('click', function () {
+          group.querySelectorAll('.store-price-option').forEach(function (o) { o.classList.remove('is-active'); });
+          option.classList.add('is-active');
+        });
+      });
+    });
+  })();
+</script>
+{% endif %}
 {% endblock %}
