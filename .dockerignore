@@ -1,3 +1,7 @@
+# Version control / local tool state
+.git
+.claude
+
 # Django project
 /media/
 /static/

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
@@ -104,11 +105,11 @@ WSGI_APPLICATION = "sitesofgrace.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "sitesofgrace",
-        "USER": "sog",
-        "PASSWORD": "local-dev-only-change-me",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.environ.get("DB_NAME", "sitesofgrace"),
+        "USER": os.environ.get("DB_USER", "sog"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
 

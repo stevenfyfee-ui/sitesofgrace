@@ -1,0 +1,126 @@
+# ---------------------------------------------------------------------------
+# DigitalOcean App Platform spec for sitesofgrace.
+#
+# Values you must fill in by hand before this can be applied (doctl apps
+# create/update, or pasted into the App Platform UI) — nothing below is a
+# working value, all placeholders read REPLACE_ME or are marked with a
+# comment:
+#
+#   name                              - confirm the app name you want on App Platform
+#   region                            - e.g. nyc, sfo, ams (pick your target DO region)
+#   services[0].github.repo           - "owner/repo" once this is pushed to GitHub
+#   services[0].github.branch         - deploy branch, e.g. "main"
+#   jobs[0].github.repo / branch      - must match the service's repo/branch
+#   services[0].instance_size_slug    - verify this is still the current slug for
+#                                        "1 vCPU / 1 GiB, Standard" via
+#                                        `doctl apps tier instance-size list`;
+#                                        DO has renamed these slugs before.
+#   databases[0].version              - confirm current supported Postgres version
+#   SECRET_KEY                        - long random value, e.g. `openssl rand -base64 48`
+#   SITE_PRIVATE                      - "true" while pre-launch, unset/"false" to go public
+#   SITE_PRIVATE_USER                 - HTTP Basic Auth username for the private-preview gate
+#   SITE_PRIVATE_PASSWORD             - HTTP Basic Auth password for the private-preview gate
+#   SPACES_KEY                        - DO Spaces access key
+#   SPACES_SECRET                     - DO Spaces secret key
+#   SPACES_BUCKET                     - DO Spaces bucket name
+#   SPACES_REGION                     - Spaces region, e.g. nyc3
+#   SPACES_ENDPOINT_URL               - e.g. https://nyc3.digitaloceanspaces.com
+#   SPACES_CDN_DOMAIN                 - optional CDN/custom domain fronting Spaces;
+#                                        leave blank to use the default Spaces URL
+#
+# Not covered here: custom domains, DEPLOY.md's "going public" checklist
+# (SECURE_HSTS_SECONDS / SECURE_HSTS_PRELOAD in settings/production.py still
+# need raising by hand when the site leaves private preview).
+# ---------------------------------------------------------------------------
+
+name: sitesofgrace
+region: nyc
+
+services:
+  - name: web
+    dockerfile_path: Dockerfile
+    source_dir: /
+    github:
+      repo: REPLACE_ME/sitesofgrace
+      branch: main
+      deploy_on_push: true
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-1gb
+    health_check:
+      http_path: /health/
+      port: 8080
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${sitesofgrace-db.DATABASE_URL}
+      - key: SECRET_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: ALLOWED_HOSTS
+        scope: RUN_TIME
+        value: ${APP_DOMAIN}
+      - key: WAGTAILADMIN_BASE_URL
+        scope: RUN_TIME
+        value: https://${APP_DOMAIN}
+      - key: CSRF_TRUSTED_ORIGINS
+        scope: RUN_TIME
+        value: ${APP_DOMAIN}
+      - key: SITE_PRIVATE
+        scope: RUN_TIME
+        value: "true"
+      - key: SITE_PRIVATE_USER
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: SITE_PRIVATE_PASSWORD
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: SPACES_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: SPACES_SECRET
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: SPACES_BUCKET
+        scope: RUN_TIME
+        value: REPLACE_ME
+      - key: SPACES_REGION
+        scope: RUN_TIME
+        value: REPLACE_ME
+      - key: SPACES_ENDPOINT_URL
+        scope: RUN_TIME
+        value: REPLACE_ME
+      - key: SPACES_CDN_DOMAIN
+        scope: RUN_TIME
+        value: ""
+
+jobs:
+  - name: migrate
+    kind: PRE_DEPLOY
+    dockerfile_path: Dockerfile
+    source_dir: /
+    github:
+      repo: REPLACE_ME/sitesofgrace
+      branch: main
+    run_command: python manage.py migrate --noinput
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-1gb
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${sitesofgrace-db.DATABASE_URL}
+      - key: SECRET_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+
+databases:
+  - name: sitesofgrace-db
+    engine: PG
+    production: true
+    version: "17"
