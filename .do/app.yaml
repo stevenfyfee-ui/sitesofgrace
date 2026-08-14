@@ -41,7 +41,7 @@ services:
     dockerfile_path: Dockerfile
     source_dir: /
     github:
-      repo: REPLACE_ME/sitesofgrace
+      repo: stevenfyfee-ui/sitesofgrace
       branch: main
       deploy_on_push: true
     http_port: 8080
@@ -105,7 +105,7 @@ jobs:
     dockerfile_path: Dockerfile
     source_dir: /
     github:
-      repo: REPLACE_ME/sitesofgrace
+      repo: stevenfyfee-ui/sitesofgrace
       branch: main
     run_command: python manage.py migrate --noinput
     instance_count: 1
