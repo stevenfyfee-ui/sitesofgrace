@@ -15,7 +15,7 @@ def health(request):
 
 
 def robots_txt(request):
-    if getattr(settings, "SITE_PRIVATE", False):
+    if getattr(settings, "SITE_NOINDEX", False):
         content = "User-agent: *\nDisallow: /\n"
     else:
         content = (

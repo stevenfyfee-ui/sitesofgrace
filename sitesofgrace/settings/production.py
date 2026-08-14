@@ -15,6 +15,7 @@ missing SECRET_KEY/DATABASE_URL at genuine runtime is a hard failure.
 
 import logging
 import os
+import re
 import sys
 
 import dj_database_url
@@ -111,8 +112,10 @@ X_FRAME_OPTIONS = "DENY"
 
 # The health check must not be forced through the HTTPS redirect: App
 # Platform's rollout prober hits it over plain HTTP. Django matches these
-# patterns against request.path with the leading slash stripped.
-SECURE_REDIRECT_EXEMPT = [r"^health/$"]
+# patterns against request.path with the leading slash stripped. Derived
+# from HEALTH_CHECK_PATH (base.py) rather than hardcoded, so this can't
+# drift from core.middleware.HealthCheckMiddleware/SitePrivateMiddleware.
+SECURE_REDIRECT_EXEMPT = [r"^" + re.escape(HEALTH_CHECK_PATH.lstrip("/")) + r"$"]
 
 
 # --- Site-wide privacy (HTTP Basic Auth) -----------------------------------
@@ -124,6 +127,12 @@ SECURE_REDIRECT_EXEMPT = [r"^health/$"]
 SITE_PRIVATE = _truthy(os.environ.get("SITE_PRIVATE", ""))
 SITE_PRIVATE_USER = os.environ.get("SITE_PRIVATE_USER", "")
 SITE_PRIVATE_PASSWORD = os.environ.get("SITE_PRIVATE_PASSWORD", "")
+
+# Separate from SITE_PRIVATE on purpose: crawler exposure and access control
+# are different concerns (e.g. switching to Wagtail-native page privacy
+# while SITE_PRIVATE stays unset). See core/middleware.py:NoindexMiddleware
+# and core/views.py:robots_txt.
+SITE_NOINDEX = _truthy(os.environ.get("SITE_NOINDEX", ""))
 
 
 # --- Static & media storage -----------------------------------------------
@@ -196,3 +205,14 @@ MIDDLEWARE[_security_index + 1 : _security_index + 1] = [
     "core.middleware.SitePrivateMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+# HealthCheckMiddleware must be the absolute first entry: it has to run
+# before SecurityMiddleware/CommonMiddleware ever call anything that
+# triggers ALLOWED_HOSTS validation (see its docstring). NoindexMiddleware
+# comes right after so it wraps every real response — including
+# SitePrivateMiddleware's 401s — but not the health check's short-circuit,
+# which doesn't need an X-Robots-Tag header.
+MIDDLEWARE = [
+    "core.middleware.HealthCheckMiddleware",
+    "core.middleware.NoindexMiddleware",
+] + MIDDLEWARE

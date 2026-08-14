@@ -4,9 +4,50 @@ import logging
 import secrets
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 logger = logging.getLogger(__name__)
+
+
+class HealthCheckMiddleware:
+    """Answer the platform's health probe before anything else can reject it.
+
+    App Platform probes by pod IP, so Host is an ephemeral IP:port that can
+    never be in ALLOWED_HOSTS. CommonMiddleware.process_request calls
+    request.get_host() unconditionally, which raises DisallowedHost (-> 400)
+    before the health view would ever run. This middleware must therefore
+    run first — before SecurityMiddleware, CommonMiddleware, or anything
+    else — and must never call get_host(), build_absolute_uri(), or any
+    other ALLOWED_HOSTS-validated accessor. Reading PATH_INFO directly off
+    request.META is the only host-independent way to see the path.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.META.get("PATH_INFO") == settings.HEALTH_CHECK_PATH:
+            return JsonResponse({"status": "ok"})
+        return self.get_response(request)
+
+
+class NoindexMiddleware:
+    """Add X-Robots-Tag to every response while SITE_NOINDEX is on.
+
+    Deliberately independent of SITE_PRIVATE/SitePrivateMiddleware: this
+    site can go noindex (still finishing content) while access control is
+    handled a different way (e.g. Wagtail-native page privacy), or vice
+    versa, so the two must be settable independently.
+    """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        if getattr(settings, "SITE_NOINDEX", False):
+            response["X-Robots-Tag"] = "noindex, nofollow"
+        return response
 
 
 class SitePrivateMiddleware:
@@ -15,12 +56,6 @@ class SitePrivateMiddleware:
     Fails closed: any missing/malformed credential, header, or config is
     treated as unauthorized rather than allowed through.
     """
-
-    # Exact match, no trailing-slash normalization (this middleware runs
-    # before CommonMiddleware's APPEND_SLASH). .do/app.yaml's health check
-    # path must be exactly "/health/" or the deploy will never go healthy.
-    # Keep in sync with SECURE_REDIRECT_EXEMPT in settings/production.py.
-    HEALTH_CHECK_PATH = "/health/"
 
     # Realm must stay pure ASCII: Django encodes header values as latin-1
     # and MIME-encodes anything outside that range, which mangles the
@@ -35,12 +70,10 @@ class SitePrivateMiddleware:
         if not getattr(settings, "SITE_PRIVATE", False):
             return self.get_response(request)
 
-        response = self._handle(request)
-        response["X-Robots-Tag"] = "noindex, nofollow"
-        return response
+        return self._handle(request)
 
     def _handle(self, request):
-        if request.path == self.HEALTH_CHECK_PATH:
+        if request.path == settings.HEALTH_CHECK_PATH:
             return self.get_response(request)
 
         expected_user = getattr(settings, "SITE_PRIVATE_USER", "")

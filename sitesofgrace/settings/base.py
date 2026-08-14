@@ -74,6 +74,12 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
+# Shared by core.middleware.HealthCheckMiddleware (bypasses ALLOWED_HOSTS
+# validation entirely), core.middleware.SitePrivateMiddleware (exempted from
+# the Basic Auth gate), settings/production.py's SECURE_REDIRECT_EXEMPT, and
+# the URL route below — one source of truth so they can't drift apart.
+HEALTH_CHECK_PATH = "/health/"
+
 ROOT_URLCONF = "sitesofgrace.urls"
 
 TEMPLATES = [

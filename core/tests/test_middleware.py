@@ -1,9 +1,11 @@
 import base64
 
+from django.conf import settings
 from django.http import HttpResponse
-from django.test import RequestFactory, SimpleTestCase, override_settings
+from django.test import Client, RequestFactory, SimpleTestCase, override_settings
 
-from core.middleware import SitePrivateMiddleware
+from core.middleware import HealthCheckMiddleware, NoindexMiddleware, SitePrivateMiddleware
+from core.views import robots_txt
 
 
 def _get_response(request):
@@ -103,7 +105,7 @@ class SitePrivateMiddlewareTests(SimpleTestCase):
         SITE_PRIVATE=True, SITE_PRIVATE_USER="editor", SITE_PRIVATE_PASSWORD="secret"
     )
     def test_health_check_path_bypasses_auth(self):
-        response = self.middleware(self._request(path=SitePrivateMiddleware.HEALTH_CHECK_PATH))
+        response = self.middleware(self._request(path=settings.HEALTH_CHECK_PATH))
         self.assertEqual(response.status_code, 200)
 
     @override_settings(
@@ -116,17 +118,15 @@ class SitePrivateMiddlewareTests(SimpleTestCase):
     @override_settings(
         SITE_PRIVATE=True, SITE_PRIVATE_USER="editor", SITE_PRIVATE_PASSWORD="secret"
     )
-    def test_x_robots_tag_present_when_active(self):
+    def test_does_not_set_x_robots_tag_itself(self):
+        # X-Robots-Tag is now driven solely by SITE_NOINDEX via
+        # NoindexMiddleware (see NoindexMiddlewareTests below) — access
+        # control and crawler exposure are independent settings.
         response = self.middleware(self._request())
-        self.assertEqual(response["X-Robots-Tag"], "noindex, nofollow")
+        self.assertNotIn("X-Robots-Tag", response)
 
         auth = _basic_auth_header("editor", "secret")
         response = self.middleware(self._request(auth_header=auth))
-        self.assertEqual(response["X-Robots-Tag"], "noindex, nofollow")
-
-    @override_settings(SITE_PRIVATE=False)
-    def test_x_robots_tag_absent_when_inactive(self):
-        response = self.middleware(self._request())
         self.assertNotIn("X-Robots-Tag", response)
 
     def test_www_authenticate_survives_header_encoding_unmangled(self):
@@ -144,3 +144,115 @@ class SitePrivateMiddlewareTests(SimpleTestCase):
         # internally, and a non-latin-1 value would be silently MIME-encoded
         # instead of failing loudly here.
         SitePrivateMiddleware.WWW_AUTHENTICATE.encode("latin-1")
+
+
+class HealthCheckMiddlewareTests(SimpleTestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_health_path_returns_200_without_calling_get_response(self):
+        def _explodes(request):
+            raise AssertionError("get_response must not be called for the health path")
+
+        middleware = HealthCheckMiddleware(_explodes)
+        request = self.factory.get(settings.HEALTH_CHECK_PATH)
+        response = middleware(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {"status": "ok"})
+
+    def test_non_health_path_passes_through(self):
+        middleware = HealthCheckMiddleware(_get_response)
+        response = middleware(self.factory.get("/"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"ok")
+
+    def test_health_bypasses_allowed_hosts(self):
+        # Regression test for the production outage: App Platform's
+        # readiness probe hits /health/ using the pod's ephemeral IP as
+        # Host, which can never be in ALLOWED_HOSTS. Before
+        # HealthCheckMiddleware existed, CommonMiddleware.process_request
+        # called request.get_host() unconditionally and raised
+        # DisallowedHost (-> 400) before the health view ever ran. This
+        # exercises the real middleware chain (not just this middleware in
+        # isolation), so it would have failed against the old code.
+        middleware_stack = [
+            "core.middleware.HealthCheckMiddleware",
+            "django.middleware.common.CommonMiddleware",
+        ]
+        with override_settings(ALLOWED_HOSTS=["example.com"], MIDDLEWARE=middleware_stack):
+            client = Client()
+            response = client.get(settings.HEALTH_CHECK_PATH, HTTP_HOST="10.1.2.3:8080")
+        self.assertEqual(response.status_code, 200)
+
+    def test_health_bypasses_site_private_gate(self):
+        middleware_stack = [
+            "core.middleware.HealthCheckMiddleware",
+            "core.middleware.SitePrivateMiddleware",
+        ]
+        with override_settings(
+            SITE_PRIVATE=True,
+            SITE_PRIVATE_USER="editor",
+            SITE_PRIVATE_PASSWORD="secret",
+            MIDDLEWARE=middleware_stack,
+        ):
+            client = Client()
+            response = client.get(settings.HEALTH_CHECK_PATH)
+        self.assertEqual(response.status_code, 200)
+
+    def test_non_health_path_disallowed_host_still_400(self):
+        # Proves HealthCheckMiddleware only exempts the health path — it
+        # doesn't accidentally swallow ALLOWED_HOSTS validation for
+        # everything else.
+        middleware_stack = [
+            "core.middleware.HealthCheckMiddleware",
+            "django.middleware.common.CommonMiddleware",
+        ]
+        with override_settings(ALLOWED_HOSTS=["example.com"], MIDDLEWARE=middleware_stack):
+            client = Client()
+            response = client.get("/", HTTP_HOST="10.1.2.3:8080")
+        self.assertEqual(response.status_code, 400)
+
+
+class NoindexMiddlewareTests(SimpleTestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.middleware = NoindexMiddleware(_get_response)
+
+    @override_settings(SITE_NOINDEX=True)
+    def test_header_present_when_active(self):
+        response = self.middleware(self.factory.get("/"))
+        self.assertEqual(response["X-Robots-Tag"], "noindex, nofollow")
+
+    @override_settings(SITE_NOINDEX=False)
+    def test_header_absent_when_inactive(self):
+        response = self.middleware(self.factory.get("/"))
+        self.assertNotIn("X-Robots-Tag", response)
+
+    @override_settings(SITE_NOINDEX=True)
+    def test_applies_regardless_of_site_private(self):
+        # Must apply to every response, not only ones that happen to pass
+        # through SitePrivateMiddleware's gate.
+        def _unauthorized(request):
+            return HttpResponse("Authentication required", status=401)
+
+        middleware = NoindexMiddleware(_unauthorized)
+        response = middleware(self.factory.get("/"))
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response["X-Robots-Tag"], "noindex, nofollow")
+
+
+class RobotsTxtViewTests(SimpleTestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    @override_settings(SITE_NOINDEX=True)
+    def test_noindex_true_disallows_all(self):
+        response = robots_txt(self.factory.get("/robots.txt"))
+        self.assertIn(b"Disallow: /", response.content)
+
+    @override_settings(SITE_NOINDEX=False)
+    def test_noindex_false_allows_and_points_at_sitemap(self):
+        response = robots_txt(self.factory.get("/robots.txt"))
+        self.assertIn(b"Allow: /", response.content)
+        self.assertIn(b"Sitemap:", response.content)
+        self.assertNotIn(b"Disallow:", response.content)

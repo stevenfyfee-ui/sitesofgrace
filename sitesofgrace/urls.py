@@ -13,7 +13,7 @@ from search import views as search_views
 from store import views as store_views
 
 urlpatterns = [
-    path("health/", core_views.health, name="health"),
+    path(settings.HEALTH_CHECK_PATH.lstrip("/"), core_views.health, name="health"),
     path("robots.txt", core_views.robots_txt, name="robots_txt"),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
