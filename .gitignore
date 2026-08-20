@@ -1,4 +1,4 @@
-# Python
+﻿# Python
 __pycache__/
 *.py[cod]
 venv/
@@ -20,3 +20,13 @@ db.sqlite3-journal
 Thumbs.db
 .vscode/
 .idea/
+
+# Database dumps - contain the user table
+*.dump
+*.sql
+
+# Local dev settings
+sitesofgrace/settings/local.py
+
+# Compose override
+docker-compose.override.yml
