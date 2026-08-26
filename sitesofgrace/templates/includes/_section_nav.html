@@ -1,0 +1,24 @@
+{% load static %}
+{% comment %}
+  "On this page" section navigation.
+
+  Usage:  {% include "includes/_section_nav.html" with sections=page.section_nav %}
+
+  `sections` is a list of {"id": ..., "label": ...}. Renders as a sticky rail in
+  the left margin on wide screens and a sticky chip bar under the header below
+  that -- both driven by the same markup, switched in CSS. Hidden entirely when
+  there is only one section, since a table of contents with one entry is noise.
+{% endcomment %}
+{% if sections|length > 1 %}
+  <nav class="section-nav" aria-labelledby="section-nav-title" data-section-nav>
+    <p class="section-nav-title" id="section-nav-title">On this page</p>
+    <ul class="section-nav-list">
+      {% for item in sections %}
+        <li class="section-nav-item">
+          <a class="section-nav-link" href="#{{ item.id }}" data-section-link="{{ item.id }}">{{ item.label }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  <script src="{% static 'js/section-nav.js' %}" defer></script>
+{% endif %}

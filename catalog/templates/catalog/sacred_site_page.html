@@ -33,66 +33,48 @@
     </div>
   </header>
 
-  {% if page.featured_image %}
-    <div class="catalog-image container">
-      {% image page.featured_image width-900 %}
-    </div>
-  {% endif %}
+  {# ---------- Body, with the "On this page" rail alongside ---------- #}
+  <div class="section-layout">
+    {% include "includes/_section_nav.html" with sections=page.section_nav %}
+    <div class="section-layout-main">
 
-  {# ---------- Narrative sections ---------- #}
-  <div class="catalog-sections">
-    {% if page.the_story %}
-      <section class="catalog-section">
-        <h2>The Story</h2>
-        {{ page.the_story|richtext }}
-      </section>
-    {% endif %}
-    {% if page.church_recognition %}
-      <section class="catalog-section">
-        <h2>Church Recognition</h2>
-        {{ page.church_recognition|richtext }}
-      </section>
-    {% endif %}
-    {% if page.catholic_teaching %}
-      <section class="catalog-section">
-        <h2>Catholic Teaching</h2>
-        {{ page.catholic_teaching|richtext }}
-      </section>
-    {% endif %}
-    {% if page.pilgrimage_info %}
-      <section class="catalog-section">
-        <h2>Visiting &amp; Pilgrimage</h2>
-        {{ page.pilgrimage_info|richtext }}
-      </section>
-    {% endif %}
-    {% if page.go_deeper %}
-      <section class="catalog-section">
-        <h2>Go Deeper</h2>
-        {{ page.go_deeper|richtext }}
-      </section>
-    {% endif %}
-  </div>
-
-  {% if page.topics.all %}
-    <div class="catalog-tags">
-      {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
-    </div>
-  {% endif %}
-
-  {% if page.location_link %}
-    <section class="catalog-map">
-      <h2>Location</h2>
-      <a class="catalog-map-link" href="{{ page.location_link }}" target="_blank" rel="noopener">Visit the official website ↗</a>
-      {% if page.latitude and page.longitude and map_page %}
-        <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
+      {% if page.featured_image %}
+        <div class="catalog-image container">
+          {% image page.featured_image width-900 %}
+        </div>
       {% endif %}
-    </section>
-  {% elif page.latitude and page.longitude and map_page %}
-    <section class="catalog-map">
-      <h2>Location</h2>
-      <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
-    </section>
-  {% endif %}
+
+      {% if page.narrative_sections %}
+        <div class="catalog-sections">
+          {% for s in page.narrative_sections %}
+            <section class="catalog-section section-anchor" id="{{ s.anchor }}">
+              <h2>{{ s.label }}</h2>
+              {{ s.body|richtext }}
+            </section>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if page.topics.all %}
+        <div class="catalog-tags">
+          {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+        </div>
+      {% endif %}
+
+      {% if page.has_location_section %}
+        <section class="catalog-map section-anchor" id="location">
+          <h2>Location</h2>
+          {% if page.location_link %}
+            <a class="catalog-map-link" href="{{ page.location_link }}" target="_blank" rel="noopener">Visit the official website ↗</a>
+          {% endif %}
+          {% if page.latitude and page.longitude and map_page %}
+            <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
+          {% endif %}
+        </section>
+      {% endif %}
+
+    </div>
+  </div>
 
 </article>
 {% endblock %}

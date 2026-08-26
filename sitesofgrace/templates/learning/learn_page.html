@@ -17,27 +17,34 @@
     </div>
   </header>
 
-  {# ---------- Sections ---------- #}
-  {% if page.sections.all %}
-  <div class="container learn-sections">
-    {% for s in page.sections.all %}
-      <section class="learn-section">
-        <div class="learn-icon{% if not s.icon %} placeholder{% endif %}">
-          {% if s.icon %}{% image s.icon max-64x64 %}{% else %}<span aria-hidden="true">✦</span>{% endif %}
-        </div>
-        <div class="learn-body">
-          <h2>{{ s.heading }}</h2>
-          {{ s.body|richtext }}
-          {% if s.link_text %}
-            {% if s.link_page %}
-              <a class="learn-link" href="{% pageurl s.link_page %}">{{ s.link_text }} →</a>
-            {% elif s.link_url %}
-              <a class="learn-link" href="{{ s.link_url }}">{{ s.link_text }} →</a>
-            {% endif %}
-          {% endif %}
-        </div>
-      </section>
-    {% endfor %}
+  {# ---------- Sections, with the "On this page" rail alongside ---------- #}
+  {% if page.nav_sections %}
+  <div class="section-layout">
+    {% include "includes/_section_nav.html" with sections=page.section_nav %}
+    <div class="section-layout-main">
+      <div class="container learn-sections">
+        {% for item in page.nav_sections %}
+          {% with s=item.section %}
+          <section class="learn-section section-anchor" id="{{ item.anchor }}">
+            <div class="learn-icon{% if not s.icon %} placeholder{% endif %}">
+              {% if s.icon %}{% image s.icon max-64x64 %}{% else %}<span aria-hidden="true">✦</span>{% endif %}
+            </div>
+            <div class="learn-body">
+              <h2>{{ s.heading }}</h2>
+              {{ s.body|richtext }}
+              {% if s.link_text %}
+                {% if s.link_page %}
+                  <a class="learn-link" href="{% pageurl s.link_page %}">{{ s.link_text }} →</a>
+                {% elif s.link_url %}
+                  <a class="learn-link" href="{{ s.link_url }}">{{ s.link_text }} →</a>
+                {% endif %}
+              {% endif %}
+            </div>
+          </section>
+          {% endwith %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
   {% endif %}
 

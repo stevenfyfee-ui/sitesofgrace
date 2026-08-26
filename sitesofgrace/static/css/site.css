@@ -183,3 +183,79 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* ---------- Section navigation ("On this page") ----------
+   One markup component, two layouts: a sticky chip bar under the header by
+   default, and a sticky rail in the left margin from 1200px up, where the
+   1180px container has room for it beside the 900px reading column. */
+
+.section-layout > :first-child { margin-top: 0; }
+
+.section-nav {
+  position: sticky; top: 84px; z-index: 900;
+  background: rgba(253, 249, 242, .95);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gold-soft);
+  margin-bottom: 6px;
+}
+.section-nav-title {
+  font-family: var(--serif-titling, var(--serif-display)); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--stone);
+  margin: 0; padding: 10px 20px 0;
+}
+.section-nav-list {
+  display: flex; gap: 8px; list-style: none; margin: 0;
+  padding: 10px 20px; overflow-x: auto; scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.section-nav-list::-webkit-scrollbar { display: none; }
+.section-nav-item { flex: none; scroll-snap-align: center; }
+.section-nav-link {
+  display: block; white-space: nowrap; padding: 7px 14px; border-radius: 999px;
+  border: 1px solid var(--gold-soft); background: var(--ivory);
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--blue); text-decoration: none; transition: color .15s, border-color .15s;
+}
+.section-nav-link:hover { color: var(--navy); border-color: var(--gold); }
+.section-nav-link[aria-current="true"] {
+  color: var(--navy); border-color: var(--gold); background: var(--parchment);
+}
+
+/* Anchor targets clear the sticky header (84px) plus the chip bar. */
+.section-anchor { scroll-margin-top: 150px; }
+
+@media (min-width: 1200px) {
+  .section-layout {
+    display: grid; grid-template-columns: 210px minmax(0, 900px); gap: 40px;
+    width: min(1150px, calc(100% - 40px)); margin-inline: auto; align-items: start;
+  }
+  .section-layout-main { min-width: 0; }
+
+  .section-nav {
+    position: sticky; top: 108px; z-index: 1;
+    background: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+    border-bottom: 0; border-left: 1px solid var(--gold-soft);
+    margin-bottom: 0; padding: 4px 0 4px 18px;
+  }
+  .section-nav-title { padding: 0 0 12px; }
+  .section-nav-list {
+    display: block; padding: 0; overflow: visible;
+  }
+  .section-nav-item { margin-bottom: 2px; }
+  .section-nav-link {
+    white-space: normal; border: 0; background: none; border-radius: 0;
+    padding: 7px 0 7px 14px; margin-left: -19px;
+    border-left: 2px solid transparent;
+    font-weight: 500; font-size: 13.5px; line-height: 1.35; color: var(--stone);
+  }
+  .section-nav-link:hover { color: var(--navy); background: none; }
+  .section-nav-link[aria-current="true"] {
+    color: var(--navy); font-weight: 600; background: none;
+    border-left-color: var(--gold);
+  }
+  .section-anchor { scroll-margin-top: 108px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

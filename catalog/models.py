@@ -1,9 +1,12 @@
 from django.db import models
+from django.utils.functional import cached_property
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
+
+from core.section_nav import headings_with_anchors
 
 CATEGORY_CHOICES = [
     ("Marian Apparition", "Marian Apparition"),
@@ -107,6 +110,24 @@ class SaintPage(Page):
         ),
     ]
 
+    # A saint's body is one freeform rich-text field rather than discrete
+    # records, so the "On this page" rail is built from the H2s the editor wrote.
+    @cached_property
+    def _parsed_body(self):
+        return headings_with_anchors(self.body)
+
+    @property
+    def body_html(self):
+        """The rich-text body with an id on every H2. Use instead of `body|richtext`."""
+        return self._parsed_body[0]
+
+    @property
+    def section_nav(self):
+        items = list(self._parsed_body[1])
+        if self.sites.exists():
+            items.append({"id": "connected-sites", "label": "Connected Sites"})
+        return items
+
 
 class SacredSitePage(Page):
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)
@@ -172,6 +193,39 @@ class SacredSitePage(Page):
         FieldPanel("go_deeper"),
         FieldPanel("notes_internal"),
     ]
+
+    # (anchor id, rail label, field name) -- the narrative body of a site page,
+    # in the order it is rendered. Adding a field here adds it to the rail.
+    NARRATIVE_SECTIONS = [
+        ("the-story", "The Story", "the_story"),
+        ("church-recognition", "Church Recognition", "church_recognition"),
+        ("catholic-teaching", "Catholic Teaching", "catholic_teaching"),
+        ("visiting-pilgrimage", "Visiting & Pilgrimage", "pilgrimage_info"),
+        ("go-deeper", "Go Deeper", "go_deeper"),
+    ]
+
+    @cached_property
+    def narrative_sections(self):
+        """Only the narrative fields the editor actually filled in."""
+        return [
+            {"anchor": anchor, "label": label, "body": getattr(self, field)}
+            for anchor, label, field in self.NARRATIVE_SECTIONS
+            if getattr(self, field)
+        ]
+
+    @property
+    def has_location_section(self):
+        return bool(self.location_link or (self.latitude and self.longitude))
+
+    @property
+    def section_nav(self):
+        items = [
+            {"id": section["anchor"], "label": section["label"]}
+            for section in self.narrative_sections
+        ]
+        if self.has_location_section:
+            items.append({"id": "location", "label": "Location"})
+        return items
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

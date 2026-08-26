@@ -10,10 +10,13 @@ Icons are optional — leave them blank and a styled placeholder frame shows unt
 image files are added later.
 """
 from django.db import models
+from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
+
+from core.section_nav import AnchorFactory
 
 
 class LearnPage(Page):
@@ -51,6 +54,25 @@ class LearnPage(Page):
 
     class Meta:
         verbose_name = "Learn page"
+
+    @cached_property
+    def nav_sections(self):
+        """
+        Sections paired with a unique anchor id, so the template can render the
+        section and the "On this page" rail from the same source of truth.
+        """
+        anchors = AnchorFactory()
+        return [
+            {"anchor": anchors.make(section.heading), "section": section}
+            for section in self.sections.all()
+        ]
+
+    @property
+    def section_nav(self):
+        return [
+            {"id": item["anchor"], "label": item["section"].heading}
+            for item in self.nav_sections
+        ]
 
 
 class LearnSection(Orderable):
