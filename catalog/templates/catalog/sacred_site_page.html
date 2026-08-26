@@ -34,7 +34,7 @@
   </header>
 
   {# ---------- Body, with the "On this page" rail alongside ---------- #}
-  <div class="section-layout">
+  <div class="section-layout{% if page.section_nav|length > 1 %} section-layout--with-nav{% endif %}">
     {% include "includes/_section_nav.html" with sections=page.section_nav %}
     <div class="section-layout-main">
 

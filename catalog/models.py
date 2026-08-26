@@ -6,8 +6,6 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 
-from core.section_nav import headings_with_anchors
-
 CATEGORY_CHOICES = [
     ("Marian Apparition", "Marian Apparition"),
     ("Eucharistic Miracle", "Eucharistic Miracle"),
@@ -109,24 +107,6 @@ class SaintPage(Page):
             heading="Editorial (internal)",
         ),
     ]
-
-    # A saint's body is one freeform rich-text field rather than discrete
-    # records, so the "On this page" rail is built from the H2s the editor wrote.
-    @cached_property
-    def _parsed_body(self):
-        return headings_with_anchors(self.body)
-
-    @property
-    def body_html(self):
-        """The rich-text body with an id on every H2. Use instead of `body|richtext`."""
-        return self._parsed_body[0]
-
-    @property
-    def section_nav(self):
-        items = list(self._parsed_body[1])
-        if self.sites.exists():
-            items.append({"id": "connected-sites", "label": "Connected Sites"})
-        return items
 
 
 class SacredSitePage(Page):

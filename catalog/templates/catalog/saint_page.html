@@ -21,61 +21,50 @@
     </div>
   </header>
 
-  {# ---------- Body, with the "On this page" rail alongside ----------
-       Anchors here come from the H2s inside the rich-text body (see
-       SaintPage.body_html), so `page.body_html` is used in place of
-       `page.body|richtext`. #}
-  <div class="section-layout">
-    {% include "includes/_section_nav.html" with sections=page.section_nav %}
-    <div class="section-layout-main">
-
-      {% if page.portrait %}
-        <div class="catalog-image container">
-          {% image page.portrait width-500 %}
-        </div>
-      {% endif %}
-
-      {% if page.born or page.died or page.canonized or page.patronage %}
-        <dl class="catalog-facts">
-          {% if page.born %}<div class="catalog-fact"><dt>Born</dt><dd>{{ page.born }}</dd></div>{% endif %}
-          {% if page.died %}<div class="catalog-fact"><dt>Died</dt><dd>{{ page.died }}</dd></div>{% endif %}
-          {% if page.canonized %}<div class="catalog-fact"><dt>Canonized</dt><dd>{{ page.canonized }}</dd></div>{% endif %}
-          {% if page.patronage %}<div class="catalog-fact"><dt>Patronage</dt><dd>{{ page.patronage }}</dd></div>{% endif %}
-        </dl>
-      {% endif %}
-
-      {% if page.body %}
-        <div class="catalog-sections">
-          <section class="catalog-section">
-            {{ page.body_html }}
-          </section>
-        </div>
-      {% endif %}
-
-      {% if page.topics.all %}
-        <div class="catalog-tags">
-          {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
-        </div>
-      {% endif %}
-
-      {% if page.sites.all %}
-        <section class="catalog-related section-anchor" id="connected-sites">
-          <h2>Sacred sites connected to this saint</h2>
-          <div class="catalog-site-grid">
-            {% for site in page.sites.all %}
-              <a class="catalog-site-card" href="{% pageurl site %}">
-                <strong>{{ site.title }}</strong>
-                {% if site.locality or site.country %}
-                  <span>{{ site.locality }}{% if site.locality and site.country %}, {% endif %}{{ site.country }}</span>
-                {% endif %}
-              </a>
-            {% endfor %}
-          </div>
-        </section>
-      {% endif %}
-
+  {% if page.portrait %}
+    <div class="catalog-image container">
+      {% image page.portrait width-500 %}
     </div>
-  </div>
+  {% endif %}
+
+  {% if page.born or page.died or page.canonized or page.patronage %}
+    <dl class="catalog-facts">
+      {% if page.born %}<div class="catalog-fact"><dt>Born</dt><dd>{{ page.born }}</dd></div>{% endif %}
+      {% if page.died %}<div class="catalog-fact"><dt>Died</dt><dd>{{ page.died }}</dd></div>{% endif %}
+      {% if page.canonized %}<div class="catalog-fact"><dt>Canonized</dt><dd>{{ page.canonized }}</dd></div>{% endif %}
+      {% if page.patronage %}<div class="catalog-fact"><dt>Patronage</dt><dd>{{ page.patronage }}</dd></div>{% endif %}
+    </dl>
+  {% endif %}
+
+  {% if page.body %}
+    <div class="catalog-sections">
+      <section class="catalog-section">
+        {{ page.body|richtext }}
+      </section>
+    </div>
+  {% endif %}
+
+  {% if page.topics.all %}
+    <div class="catalog-tags">
+      {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+    </div>
+  {% endif %}
+
+  {% if page.sites.all %}
+    <section class="catalog-related">
+      <h2>Sacred sites connected to this saint</h2>
+      <div class="catalog-site-grid">
+        {% for site in page.sites.all %}
+          <a class="catalog-site-card" href="{% pageurl site %}">
+            <strong>{{ site.title }}</strong>
+            {% if site.locality or site.country %}
+              <span>{{ site.locality }}{% if site.locality and site.country %}, {% endif %}{{ site.country }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 
 </article>
 {% endblock %}
