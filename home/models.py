@@ -57,8 +57,12 @@ class HomePage(Page):
     secondary_cta_link = models.CharField(max_length=255, blank=True, default="#")
 
     # --- Section headings (editable) ---
-    featured_sites_heading = models.CharField(max_length=80, blank=True, default="Featured Sacred Sites")
-    featured_saints_heading = models.CharField(max_length=80, blank=True, default="Featured Saints")
+    featured_sites_heading = models.CharField(
+        max_length=80, blank=True, default="Featured Sites and Saints",
+        help_text="Heading for the combined sites + saints bucket at the left of the pilgrim band.",
+    )
+    # Retained so existing content isn't dropped; the store bucket no longer
+    # renders on the homepage (the subscription bucket replaced it).
     store_heading = models.CharField(max_length=80, blank=True, default="Books, Films & More")
 
     # --- Community teaser ("Your Journey, Your Story") ---
@@ -80,6 +84,46 @@ class HomePage(Page):
     # destination depends on auth state rather than editorial choice.
     community_cta_text = models.CharField(max_length=40, blank=True, default="Begin Your Journey")
     community_cta_link = models.CharField(max_length=255, blank=True, default="/accounts/signup/")
+
+    # --- Subscription bucket ("Pilgrimage From Home") ---
+    # Replaces the old store bucket on the right of the pilgrim band.
+    subscription_heading = models.CharField(
+        max_length=80, blank=True, default="Pilgrimage From Home",
+        help_text="Small heading across the top of the bucket.",
+    )
+    subscription_title = models.CharField(
+        max_length=120, blank=True, default="The Pilgrim's Box",
+        help_text="Name of the subscription, shown large under the image.",
+    )
+    subscription_intro = models.TextField(
+        blank=True,
+        default=(
+            "Four times a year a package arrives from a different holy place \u2014 real "
+            "devotionals sourced from the shrine itself, with a letter that tells the "
+            "story behind them."
+        ),
+    )
+    subscription_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Large image for the bucket. Use a tall/portrait crop \u2014 it is "
+                  "displayed the same way as the Your Journey photo.",
+    )
+    subscription_price_line = models.CharField(
+        max_length=80, blank=True, default="$54 a quarter \u00b7 cancel anytime",
+    )
+    subscription_product = models.ForeignKey(
+        "store.StoreProduct", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Choose the subscription product to show its email "
+                  "waitlist form right here on the homepage. Leave blank to show a "
+                  "plain button instead.",
+    )
+    subscription_cta_text = models.CharField(max_length=40, blank=True, default="Join the Waitlist")
+    subscription_cta_link = models.CharField(
+        max_length=255, blank=True, default="/store/",
+        help_text="Where the button goes when no product is chosen above.",
+    )
 
     # --- Partners ---
     partners_heading = models.CharField(max_length=80, blank=True, default="Pilgrimage Partners")
@@ -113,12 +157,12 @@ class HomePage(Page):
         ),
         InlinePanel("feature_cards", heading="Feature cards", max_num=8),
         MultiFieldPanel(
-            [FieldPanel("featured_sites_heading"), InlinePanel("featured_sites", label="Featured site")],
-            heading="Featured Sites",
-        ),
-        MultiFieldPanel(
-            [FieldPanel("featured_saints_heading"), InlinePanel("featured_saints", label="Featured saint")],
-            heading="Featured Saints",
+            [
+                FieldPanel("featured_sites_heading"),
+                InlinePanel("featured_sites", label="Featured site", max_num=2),
+                InlinePanel("featured_saints", label="Featured saint", max_num=2),
+            ],
+            heading="Featured Sites and Saints",
         ),
         MultiFieldPanel(
             [
@@ -132,8 +176,18 @@ class HomePage(Page):
             heading="Community teaser",
         ),
         MultiFieldPanel(
-            [FieldPanel("store_heading"), InlinePanel("store_picks", label="Store pick")],
-            heading="Store picks",
+            [
+                FieldPanel("subscription_heading"),
+                FieldPanel("subscription_title"),
+                FieldPanel("subscription_intro"),
+                FieldPanel("subscription_image"),
+                InlinePanel("subscription_bullets", label="Bullet", max_num=4),
+                FieldPanel("subscription_price_line"),
+                FieldPanel("subscription_product"),
+                FieldPanel("subscription_cta_text"),
+                FieldPanel("subscription_cta_link"),
+            ],
+            heading="Subscription bucket",
         ),
         MultiFieldPanel(
             [
@@ -163,10 +217,6 @@ class HomePage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        from store.models import StoreProduct
-        context["featured_products"] = StoreProduct.objects.filter(
-            live=True, featured=True
-        )[:4]
 
         try:
             from news.models import TOPIC_CHOICES, NewsItem, NewsSource
@@ -272,6 +322,25 @@ class FeaturedSaint(Orderable):
         FieldPanel("title_override"),
     ]
 
+    @property
+    def display_title(self):
+        if self.title_override:
+            return self.title_override
+        return self.saint_page.title if self.saint_page else ""
+
+    @property
+    def display_image(self):
+        if self.image_override:
+            return self.image_override
+        return getattr(self.saint_page.specific, "portrait", None) if self.saint_page else None
+
+    @property
+    def locality_line(self):
+        """Feast day, so saint tiles carry a second line like site tiles do."""
+        if not self.saint_page:
+            return ""
+        return getattr(self.saint_page.specific, "feast_day", "")
+
 
 class JourneyBullet(Orderable):
     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name="journey_bullets")
@@ -279,6 +348,13 @@ class JourneyBullet(Orderable):
     text = models.CharField(max_length=200, blank=True)
 
     panels = [FieldPanel("title"), FieldPanel("text")]
+
+
+class SubscriptionBullet(Orderable):
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name="subscription_bullets")
+    text = models.CharField(max_length=120)
+
+    panels = [FieldPanel("text")]
 
 
 class StorePick(Orderable):

@@ -30,3 +30,6 @@ sitesofgrace/settings/local.py
 
 # Compose override
 docker-compose.override.yml
+
+# Local Spaces credentials scratch file - never commit
+spaces_creds.txt
