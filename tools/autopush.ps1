@@ -254,7 +254,12 @@ $messageLines = @(
     "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 )
 $msgFile = Join-Path $env:TEMP "autopush-msg-$PID.txt"
-Set-Content -Path $msgFile -Value ($messageLines -join [Environment]::NewLine) -Encoding UTF8
+# UTF8 without a byte-order mark: Set-Content -Encoding UTF8 writes one on
+# Windows PowerShell 5.1, and git puts it straight into the commit subject.
+[System.IO.File]::WriteAllText(
+    $msgFile,
+    ($messageLines -join [Environment]::NewLine),
+    (New-Object System.Text.UTF8Encoding($false)))
 
 $before = (Invoke-Git @('rev-parse', '--short', 'HEAD') 30).Output
 $r = Invoke-Git @('commit', '-F', $msgFile) 120

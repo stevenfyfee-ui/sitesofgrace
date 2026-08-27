@@ -154,7 +154,11 @@ $lines = @(
     '',
     'Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>'
 )
-Set-Content -Path $msgFile -Value ($lines -join [Environment]::NewLine) -Encoding UTF8
+# UTF8 without a byte-order mark - see the note in autopush.ps1.
+[System.IO.File]::WriteAllText(
+    $msgFile,
+    ($lines -join [Environment]::NewLine),
+    (New-Object System.Text.UTF8Encoding($false)))
 $r = Invoke-G @('commit','-F',$msgFile)
 Remove-Item $msgFile -Force -ErrorAction SilentlyContinue
 if ($r.Code -ne 0) { Fail 'git commit failed.' $r.Out }
