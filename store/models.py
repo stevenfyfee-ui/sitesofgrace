@@ -1,20 +1,24 @@
 from django.db import models
+from django.db.models import Count, Q
+from django.utils.text import slugify
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.models import Orderable, Page
-from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
-CATEGORY_CHOICES = [
-    ("Books", "Books"),
-    ("Films", "Films"),
-    ("Devotionals & Sacramentals", "Devotionals & Sacramentals"),
-    ("Clothing", "Clothing"),
-    ("Gifts", "Gifts"),
-    ("Subscriptions", "Subscriptions"),
-    ("Calendars & Planners", "Calendars & Planners"),
+# The buckets the store shipped with. These are only used to seed the
+# ProductCategory table the first time migrations run -- after that, categories
+# are edited in the admin under Store -> Categories, not here.
+DEFAULT_CATEGORIES = [
+    "Books",
+    "Films",
+    "Devotionals & Sacramentals",
+    "Clothing",
+    "Gifts",
+    "Subscriptions",
+    "Calendars & Planners",
 ]
 
 KIND_CHOICES = [
@@ -33,11 +37,67 @@ CTA_MODE_CHOICES = [
 ]
 
 
-@register_snippet
+class ProductCategory(models.Model):
+    """A store bucket. Add, rename, reorder, or hide these in the admin."""
+
+    name = models.CharField(max_length=60, unique=True)
+    slug = models.SlugField(
+        max_length=60, unique=True, blank=True,
+        help_text="Used in the ?category= link. Leave blank and it is generated from the name.",
+    )
+    description = models.CharField(
+        max_length=200, blank=True,
+        help_text="Optional internal note. Not shown on the site.",
+    )
+    sort_order = models.IntegerField(
+        default=0, help_text="Lower numbers appear first in the filter row.",
+    )
+    live = models.BooleanField(
+        default=True,
+        help_text="Uncheck to take this bucket and everything in it off the store page, "
+                  "without deleting anything.",
+    )
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("slug"),
+        FieldPanel("sort_order"),
+        FieldPanel("live"),
+        FieldPanel("description"),
+    ]
+
+    class Meta:
+        ordering = ["sort_order", "name"]
+        verbose_name = "product category"
+        verbose_name_plural = "product categories"
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.name)[:56] or "category"
+            slug = base
+            n = 2
+            while ProductCategory.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = "%s-%d" % (base, n)
+                n += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+
+    def product_count(self):
+        return self.products.filter(live=True).count()
+
+    product_count.short_description = "Live products"
+
+
 class StoreProduct(ClusterableModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200, blank=True, help_text="Author, artist, or brand")
-    category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)
+    category = models.ForeignKey(
+        ProductCategory, null=True, on_delete=models.SET_NULL, related_name="products",
+        help_text="Which bucket this shows up under on the store page.",
+    )
     kind = models.CharField(max_length=10, choices=KIND_CHOICES, default="affiliate")
     description = models.TextField(blank=True)
     image = models.ForeignKey(
@@ -60,7 +120,7 @@ class StoreProduct(ClusterableModel):
     )
     featured = models.BooleanField(default=False, help_text="Show on the homepage band.")
     sort_order = models.IntegerField(default=0)
-    live = models.BooleanField(default=True)
+    live = models.BooleanField(default=True, help_text="Uncheck to take this off the store page.")
     created_at = models.DateTimeField(auto_now_add=True)
 
     layout = models.CharField(max_length=10, choices=LAYOUT_CHOICES, default="card")
@@ -83,21 +143,36 @@ class StoreProduct(ClusterableModel):
     )
 
     panels = [
-        FieldPanel("title"),
-        FieldPanel("subtitle"),
-        FieldPanel("category"),
-        FieldPanel("kind"),
-        FieldPanel("description"),
-        FieldPanel("image"),
-        FieldPanel("amazon_asin"),
-        FieldPanel("link_url"),
-        FieldPanel("price"),
-        FieldPanel("featured"),
-        FieldPanel("sort_order"),
-        FieldPanel("live"),
         MultiFieldPanel(
             [
+                FieldPanel("title"),
+                FieldPanel("subtitle"),
+                FieldPanel("category"),
+                FieldPanel("kind"),
+                FieldPanel("description"),
+                FieldPanel("image"),
+            ],
+            heading="The basics",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("amazon_asin"),
+                FieldPanel("link_url"),
+                FieldPanel("price"),
+            ],
+            heading="Where it links and what it costs",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("live"),
+                FieldPanel("featured"),
+                FieldPanel("sort_order"),
                 FieldPanel("layout"),
+            ],
+            heading="Placement",
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel("ribbon_text"),
                 FieldPanel("long_description"),
                 FieldPanel("spotlight_title"),
@@ -107,7 +182,8 @@ class StoreProduct(ClusterableModel):
                 InlinePanel("inclusions", label="Inclusion"),
                 InlinePanel("price_options", label="Price option"),
             ],
-            heading="Feature layout",
+            heading="Feature layout extras",
+            classname="collapsed",
         ),
     ]
 
@@ -116,6 +192,23 @@ class StoreProduct(ClusterableModel):
 
     def __str__(self):
         return self.title
+
+    def admin_thumb(self):
+        if not self.image:
+            return ""
+        try:
+            from django.utils.html import format_html
+
+            rendition = self.image.get_rendition("fill-50x50")
+            return format_html(
+                '<img src="{}" width="50" height="50" alt="" '
+                'style="border-radius:4px;object-fit:cover;">',
+                rendition.url,
+            )
+        except Exception:
+            return ""
+
+    admin_thumb.short_description = ""
 
     @property
     def is_affiliate(self):
@@ -180,6 +273,8 @@ class WaitlistSignup(models.Model):
     email = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    panels = [FieldPanel("product"), FieldPanel("email")]
+
     class Meta:
         ordering = ["-created_at"]
         unique_together = [("product", "email")]
@@ -207,6 +302,46 @@ class StoreSettings(BaseGenericSetting):
         verbose_name = "Store settings"
 
 
+def store_listing_context(request):
+    """Everything the store listing template needs.
+
+    Shared by store.StoreIndexPage and home.StorePage so the product grid
+    renders no matter which page type is sitting at /store/.
+    """
+    categories = list(
+        ProductCategory.objects.filter(live=True)
+        .annotate(n_live=Count("products", filter=Q(products__live=True)))
+        .filter(n_live__gt=0)
+    )
+    by_slug = {c.slug: c for c in categories}
+
+    selected = (request.GET.get("category") or "").strip()
+    if selected and selected not in by_slug:
+        # Tolerate the old ?category=Books links, which used the name.
+        match = next((c for c in categories if c.name.lower() == selected.lower()), None)
+        selected = match.slug if match else ""
+
+    # A hidden category takes its products off the store page with it. Products
+    # whose category was deleted outright stay visible, just without a bucket.
+    products = (
+        StoreProduct.objects.filter(live=True)
+        .filter(Q(category__live=True) | Q(category__isnull=True))
+        .select_related("category")
+    )
+    if selected:
+        products = products.filter(category__slug=selected)
+
+    return {
+        "categories": categories,
+        "selected_category": selected,
+        "feature_products": products.filter(layout="feature").prefetch_related(
+            "inclusions", "price_options"
+        ),
+        "products": products.filter(layout="card"),
+        "store_settings": StoreSettings.objects.first(),
+    }
+
+
 class StoreIndexPage(Page):
     heading = models.CharField(max_length=200, blank=True)
     intro = RichTextField(blank=True)
@@ -219,19 +354,5 @@ class StoreIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        from store.models import StoreProduct, StoreSettings, CATEGORY_CHOICES
-        valid = {v for v, _ in CATEGORY_CHOICES}
-        selected = request.GET.get("category", "")
-        products = StoreProduct.objects.filter(live=True)
-        if selected in valid:
-            products = products.filter(category=selected)
-        else:
-            selected = ""
-        context["categories"] = [v for v, _ in CATEGORY_CHOICES]
-        context["selected_category"] = selected
-        context["feature_products"] = products.filter(layout="feature").prefetch_related(
-            "inclusions", "price_options"
-        )
-        context["products"] = products.filter(layout="card")
-        context["store_settings"] = StoreSettings.objects.first()
+        context.update(store_listing_context(request))
         return context

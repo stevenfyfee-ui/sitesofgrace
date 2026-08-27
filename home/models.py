@@ -496,6 +496,13 @@ class MapPage(Page):
 
 
 class StorePage(Page):
+    """The original store stub.
+
+    It now renders the same product listing as store.StoreIndexPage, so whichever
+    of the two is live at /store/ shows the catalog. Run
+    `python manage.py store_pages` to see which one that is.
+    """
+
     intro = models.TextField(
         blank=True,
         default="Prayer resources, study guides, and pilgrimage keepsakes — coming soon.",
@@ -506,3 +513,10 @@ class StorePage(Page):
 
     class Meta:
         verbose_name = "Store page"
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        from store.models import store_listing_context
+
+        context.update(store_listing_context(request))
+        return context

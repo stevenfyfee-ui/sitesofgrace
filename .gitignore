@@ -33,3 +33,13 @@ docker-compose.override.yml
 
 # Local Spaces credentials scratch file - never commit
 spaces_creds.txt
+
+# Auto-push watcher (tools/autopush.ps1) - local state, never commit
+tools/autopush.log
+tools/autopush.log.old
+tools/.autopush-state
+.autopush-pause
+AUTOPUSH-BLOCKED.txt
+push-store-changes.bat
+sync-and-push.bat
+tools/pending/
