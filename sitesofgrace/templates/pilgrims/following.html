@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Following{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Following</h1></div>
+
+  {% if request.GET.unfollowed %}<p class="pilgrims-flash">Unfollowed.</p>{% endif %}
+
+  {% if rows %}
+    <ul class="pilgrim-list">
+      {% for follow in rows %}
+        <li class="pilgrim-row">
+          <a class="pilgrim-row-avatar" href="{% url 'pilgrims:profile_detail' handle=follow.following.pilgrim.handle %}">
+            {% if follow.following.pilgrim.avatar %}<img src="{{ follow.following.pilgrim.avatar.url }}" alt="">{% else %}{{ follow.following.pilgrim.display_name|default:follow.following.pilgrim.handle|first|upper }}{% endif %}
+          </a>
+          <div class="pilgrim-row-name">
+            <strong>{{ follow.following.pilgrim.display_name|default:follow.following.pilgrim.handle }}</strong>
+            <span>@{{ follow.following.pilgrim.handle }}</span>
+          </div>
+          <div class="pilgrim-row-actions">
+            <form method="post" action="{% url 'pilgrims:unfollow' follow.following.pk %}">
+              {% csrf_token %}<input type="hidden" name="next" value="{% url 'pilgrims:following' %}">
+              <button type="submit" class="btn btn-secondary">Unfollow</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="pilgrim-list-empty">You aren't following anyone yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

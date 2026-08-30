@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Profile Settings{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Profile Settings</h1></div>
+
+  {% if request.GET.saved %}<p class="pilgrims-saved-notice">Saved.</p>{% endif %}
+
+  <div class="pilgrims-settings-card">
+    {% if form.non_field_errors %}
+      <ul class="auth-errors">
+        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="auth-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="auth-field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<p class="auth-help">{{ field.help_text }}</p>{% endif %}
+          {% for error in field.errors %}<p class="auth-field-error">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary auth-submit">Save Changes</button>
+    </form>
+
+    <p class="auth-switch"><a href="{% url 'pilgrims:profile_detail' handle=profile.handle %}">&larr; Back to my profile</a></p>
+  </div>
+</div>
+{% endblock %}

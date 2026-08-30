@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "learning",
     "search",
     "catalog",
-    "community",
+    "pilgrims",
     "planner",
     "store",
     "news",
@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     "wagtailmenus",
     "allauth",
     "allauth.account",
+    # Installed (with its migrations applied) but unconfigured — no
+    # SOCIALACCOUNT_PROVIDERS yet. Adding Google sign-in later is then a
+    # config change, not a migration, because the app's tables already exist.
+    "allauth.socialaccount",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -63,6 +67,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Must stay first (before SecurityMiddleware) so it wraps every real
+    # response in every environment, not just production — the /pilgrims/
+    # and /accounts/ noindex requirement is permanent, not a deploy-time
+    # toggle. production.py prepends HealthCheckMiddleware ahead of this one
+    # (see its own MIDDLEWARE comment) so the health probe itself is
+    # untouched; nothing else needs to run before it.
+    "core.middleware.NoindexMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -147,15 +158,37 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-LOGIN_REDIRECT_URL = "/passport/"
+LOGIN_REDIRECT_URL = "/pilgrims/"
 LOGOUT_REDIRECT_URL = "/"
 
 # django-allauth (public visitor accounts; Wagtail admin login is separate
 # and keeps using django.contrib.auth directly via ModelBackend above).
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
-ACCOUNT_EMAIL_VERIFICATION = "none"
+# Mandatory: an unverified account cannot log in at all, so it can never do
+# anything beyond the marketing page — there is no separate "verified" gate
+# to enforce in views.
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Sites of Grace] "
+# Merges the age-confirmation checkbox into allauth's generated signup form.
+ACCOUNT_SIGNUP_FORM_CLASS = "pilgrims.forms.AgeConfirmationSignupForm"
+
+# --- Outbound email ---------------------------------------------------------
+# Real provider config lives entirely in the environment — no credentials in
+# source control. dev.py overrides EMAIL_BACKEND back to the console backend
+# unconditionally, so a developer with no SMTP env vars set still gets a
+# working (printed) verification email.
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend"
+)
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "no-reply@sitesofgrace.com")
+SERVER_EMAIL = os.environ.get("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
 
 
 # Internationalization

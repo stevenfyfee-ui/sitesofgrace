@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static account %}
+
+{% block body_class %}auth{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    {% if confirmation %}
+      {% user_display confirmation.email_address.user as user_display %}
+      {% if can_confirm %}
+        <h1>Confirm your email</h1>
+        <p class="auth-lede">Confirm that {{ confirmation.email_address.email }} belongs to {{ user_display }}.</p>
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="auth-form">
+          {% csrf_token %}
+          {{ redirect_field }}
+          <button type="submit" class="btn btn-primary auth-submit">Confirm</button>
+        </form>
+      {% else %}
+        <h1>Already confirmed</h1>
+        <p class="auth-lede">That email is already confirmed by a different account.</p>
+      {% endif %}
+    {% else %}
+      <h1>Link expired</h1>
+      <p class="auth-lede">This confirmation link has expired or is invalid.</p>
+      <p class="auth-switch"><a href="{% url 'account_login' %}">&larr; Back to sign in</a></p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

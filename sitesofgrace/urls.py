@@ -7,8 +7,8 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from catalog import views as catalog_views
-from community import views as community_views
 from core import views as core_views
+from pilgrims import views as pilgrims_views
 from search import views as search_views
 from store import views as store_views
 
@@ -23,10 +23,16 @@ urlpatterns = [
     path("newsletter/signup/", core_views.newsletter_signup, name="newsletter_signup"),
     path("store/waitlist/", store_views.waitlist_signup, name="waitlist_signup"),
     path("accounts/", include("allauth.urls")),
-    path("journey/", include("community.urls")),
-    path("passport/", community_views.passport_dashboard, name="passport"),
-    path("passport/journey.json", community_views.passport_journey_json, name="passport_journey_json"),
-    path("passport/profile/", community_views.passport_profile_edit, name="passport_profile_edit"),
+    # Names below (journey_set, passport, passport_journey_json,
+    # passport_profile_edit) are kept exactly as they were under the former
+    # `community` app: home_page.html, catalog/sacred_site_page.html, and
+    # home/map_page.html all reference them by name and needed zero changes
+    # when that app was absorbed into `pilgrims`.
+    path("journey/set/", pilgrims_views.site_visit_toggle, name="journey_set"),
+    path("passport/", pilgrims_views.passport_dashboard, name="passport"),
+    path("passport/journey.json", pilgrims_views.passport_journey_json, name="passport_journey_json"),
+    path("passport/profile/", pilgrims_views.passport_profile_edit, name="passport_profile_edit"),
+    path("pilgrims/", include("pilgrims.urls")),
 ]
 
 

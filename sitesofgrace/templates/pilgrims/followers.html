@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Followers{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Followers</h1></div>
+
+  {% if request.GET.removed %}<p class="pilgrims-flash">Removed.</p>{% endif %}
+  {% if request.GET.blocked %}<p class="pilgrims-flash">Blocked.</p>{% endif %}
+
+  {% if rows %}
+    <ul class="pilgrim-list">
+      {% for follow in rows %}
+        <li class="pilgrim-row">
+          <a class="pilgrim-row-avatar" href="{% url 'pilgrims:profile_detail' handle=follow.follower.pilgrim.handle %}">
+            {% if follow.follower.pilgrim.avatar %}<img src="{{ follow.follower.pilgrim.avatar.url }}" alt="">{% else %}{{ follow.follower.pilgrim.display_name|default:follow.follower.pilgrim.handle|first|upper }}{% endif %}
+          </a>
+          <div class="pilgrim-row-name">
+            <strong>{{ follow.follower.pilgrim.display_name|default:follow.follower.pilgrim.handle }}</strong>
+            <span>@{{ follow.follower.pilgrim.handle }}</span>
+          </div>
+          <div class="pilgrim-row-actions">
+            <form method="post" action="{% url 'pilgrims:remove_follower' follow.follower.pk %}">
+              {% csrf_token %}<input type="hidden" name="next" value="{% url 'pilgrims:followers' %}">
+              <button type="submit" class="btn btn-secondary">Remove</button>
+            </form>
+            <form method="post" action="{% url 'pilgrims:block' follow.follower.pk %}">
+              {% csrf_token %}<input type="hidden" name="next" value="{% url 'pilgrims:followers' %}">
+              <button type="submit" class="btn btn-secondary">Block</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="pilgrim-list-empty">No followers yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

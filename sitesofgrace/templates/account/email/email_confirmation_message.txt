@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}{% blocktrans %}Peace be with you,{% endblocktrans %}
+
+{% blocktrans %}You're receiving this email because this address was used to register a Pilgrim Portal account on Sites of Grace.{% endblocktrans %}
+
+{% if code %}{% blocktrans %}Your email verification code is listed below. Please enter it in your open browser window.{% endblocktrans %}
+
+{{ code }}{% else %}{% blocktrans %}Confirm your email to finish creating your account:{% endblocktrans %}
+
+{{ activate_url }}{% endif %}
+
+{% blocktrans %}If you didn't request this, you can safely ignore this email.{% endblocktrans %}
+
+{% blocktrans %}Sites of Grace{% endblocktrans %}
+{% endautoescape %}

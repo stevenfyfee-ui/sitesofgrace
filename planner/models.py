@@ -155,10 +155,10 @@ class PlanPage(Page):
 
         journey_destinations = []
         if request.user.is_authenticated:
-            from community.models import JourneyEntry
+            from pilgrims.models import SiteVisit
             seen = set()
-            for entry in JourneyEntry.objects.filter(user=request.user).select_related("site"):
-                dc = self._match_destination(entry.site)
+            for visit in SiteVisit.objects.filter(owner=request.user).select_related("site"):
+                dc = self._match_destination(visit.site)
                 if dc and dc.id not in seen:
                     seen.add(dc.id)
                     journey_destinations.append({"id": dc.id, "city": dc.city})

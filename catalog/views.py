@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 
 from catalog.models import SacredSitePage
-from community.models import JourneyEntry
+from pilgrims.models import SiteVisit
 
 
 def sites_json(request):
@@ -10,7 +10,7 @@ def sites_json(request):
     journey_statuses = {}
     if request.user.is_authenticated:
         journey_statuses = dict(
-            JourneyEntry.objects.filter(user=request.user, site__in=sites).values_list(
+            SiteVisit.objects.filter(owner=request.user, site__in=sites).values_list(
                 "site_id", "status"
             )
         )

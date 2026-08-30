@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}{{ profile.display_name|default:profile.handle }}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+{% if is_self and has_map_sites %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endif %}
+<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  {% if request.GET.followed %}<p class="pilgrims-flash">You're now following {{ profile.display_name|default:profile.handle }}.</p>{% endif %}
+  {% if request.GET.requested %}<p class="pilgrims-flash">Follow request sent.</p>{% endif %}
+  {% if request.GET.unfollowed %}<p class="pilgrims-flash">Unfollowed.</p>{% endif %}
+  {% if request.GET.approved %}<p class="pilgrims-flash">Request approved.</p>{% endif %}
+  {% if request.GET.declined %}<p class="pilgrims-flash">Request declined.</p>{% endif %}
+  {% if request.GET.blocked %}<p class="pilgrims-flash">Blocked.</p>{% endif %}
+  {% if request.GET.unblocked %}<p class="pilgrims-flash">Unblocked.</p>{% endif %}
+  {% if request.GET.already_following %}<p class="pilgrims-flash is-error">You're already connected to this pilgrim.</p>{% endif %}
+  {% if request.GET.rate_limited %}<p class="pilgrims-flash is-error">You've sent a lot of follow requests today — try again tomorrow.</p>{% endif %}
+  {% if request.GET.blocked_error %}<p class="pilgrims-flash is-error">You can't follow this pilgrim.</p>{% endif %}
+  {% if request.GET.follow_error %}<p class="pilgrims-flash is-error">That wasn't a valid request.</p>{% endif %}
+
+  <div class="pilgrim-header">
+    <div class="pilgrim-avatar">
+      {% if profile.avatar %}<img src="{{ profile.avatar.url }}" alt="">{% else %}{{ profile.display_name|default:profile.handle|first|upper }}{% endif %}
+    </div>
+    <div class="pilgrim-header-info">
+      <h1>{{ profile.display_name|default:profile.handle }}</h1>
+      <span class="pilgrim-handle">@{{ profile.handle }}</span>
+      {% if can_view and profile.bio %}<p class="pilgrim-bio">{{ profile.bio }}</p>{% endif %}
+      <div class="pilgrim-counts">
+        {% if is_self %}
+          <a href="{% url 'pilgrims:followers' %}"><strong>{{ follower_count }}</strong> Followers</a>
+          <a href="{% url 'pilgrims:following' %}"><strong>{{ following_count }}</strong> Following</a>
+          {% if pending_request_count %}<a href="{% url 'pilgrims:requests' %}"><strong>{{ pending_request_count }}</strong> Requests</a>{% endif %}
+        {% else %}
+          <span><strong>{{ follower_count }}</strong> Followers</span>
+          <span><strong>{{ following_count }}</strong> Following</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="pilgrim-header-actions">
+      {% if is_self %}
+        <a class="btn btn-secondary" href="{% url 'pilgrims:settings' %}">Edit Profile</a>
+      {% elif not request.user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to follow</a>
+      {% elif owner_blocked_viewer and not viewer_blocked_owner %}
+        {# Owner has blocked the viewer — no action available. #}
+      {% elif viewer_blocked_owner %}
+        <form method="post" action="{% url 'pilgrims:unblock' owner.pk %}">
+          {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="btn btn-secondary">Unblock</button>
+        </form>
+      {% else %}
+        {% if follow_state == "accepted" %}
+          <form method="post" action="{% url 'pilgrims:unfollow' owner.pk %}">
+            {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit" class="btn btn-secondary">Following · Unfollow</button>
+          </form>
+        {% elif follow_state == "pending" %}
+          <form method="post" action="{% url 'pilgrims:unfollow' owner.pk %}">
+            {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit" class="btn btn-secondary">Requested · Cancel</button>
+          </form>
+        {% else %}
+          <form method="post" action="{% url 'pilgrims:follow' owner.pk %}">
+            {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit" class="btn btn-primary">{% if profile.is_private %}Request to Follow{% else %}Follow{% endif %}</button>
+          </form>
+        {% endif %}
+        <form method="post" action="{% url 'pilgrims:block' owner.pk %}">
+          {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="btn btn-secondary">Block</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="pilgrims-head"><h2>Badges</h2></div>
+  {% if badges %}
+    <div class="pilgrim-badges">
+      {% for award in badges %}
+        <div class="pilgrim-badge tier-{{ award.badge.tier }}" title="{{ award.badge.description }}">
+          <div class="pilgrim-badge-icon">
+            {% if award.badge.icon %}{% image award.badge.icon fill-56x56 %}{% else %}✦{% endif %}
+          </div>
+          <span class="pilgrim-badge-name">{{ award.badge.name }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="pilgrim-badges-empty">No badges yet.</p>
+  {% endif %}
+
+  {% if not can_view %}
+    <div class="pilgrim-private-notice">
+      This pilgrim's journey is private. {% if request.user.is_authenticated %}Follow them to see it.{% else %}Sign in to request to follow.{% endif %}
+    </div>
+  {% else %}
+
+    {% if is_self and has_map_sites %}
+    <div class="pilgrims-section">
+      <div class="pilgrims-head"><h2>My Map</h2></div>
+      <div id="passportMap" data-journey-url="{% url 'passport_journey_json' %}"
+        style="height:min(50vh,420px);border:1px solid var(--gold-soft);border-radius:16px;"></div>
+    </div>
+    {% endif %}
+
+    <div class="pilgrims-section">
+      <div class="pilgrims-head"><h2>Visited <span class="passport-count">({{ visited|length }})</span></h2></div>
+      {% if visited %}
+        <div class="strip-grid">
+          {% for visit in visited %}
+            <a class="strip-card" href="{{ visit.site.url }}">
+              <div class="strip-img">{% if visit.site.featured_image %}{% image visit.site.featured_image fill-320x200 %}{% endif %}</div>
+              <div class="strip-label">{{ visit.site.title }}</div>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="directory-empty">No visited sites yet.</div>
+      {% endif %}
+    </div>
+
+    <div class="pilgrims-section">
+      <div class="pilgrims-head"><h2>Want to Go <span class="passport-count">({{ want_to_go|length }})</span></h2></div>
+      {% if want_to_go %}
+        <div class="strip-grid">
+          {% for visit in want_to_go %}
+            <a class="strip-card" href="{{ visit.site.url }}">
+              <div class="strip-img">{% if visit.site.featured_image %}{% image visit.site.featured_image fill-320x200 %}{% endif %}</div>
+              <div class="strip-label">{{ visit.site.title }}</div>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="directory-empty">Nothing on the want-to-go list yet.</div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if is_self and has_map_sites %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  (function () {
+    var el = document.getElementById('passportMap');
+    if (!el || !window.L) return;
+    var RED = { fill: '#D96B5F', stroke: '#032553' };
+    var WHITE = { fill: '#FDF9F2', stroke: '#032553' };
+    function pinIcon(status) {
+      var s = status === 'visited' ? RED : WHITE;
+      var html =
+        '<svg class="site-pin" width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.5"/>' +
+        '<circle cx="13" cy="13" r="5" fill="' + s.stroke + '"/>' +
+        '</svg>';
+      return L.divIcon({ html: html, className: 'site-pin-icon', iconSize: [26, 34], iconAnchor: [13, 34], popupAnchor: [0, -30] });
+    }
+    function popupHtml(site) {
+      var statusLabel = site.status === 'visited' ? 'Visited' : 'In my journey';
+      return '<div class="map-popup"><span class="badge badge-status">' + statusLabel + '</span><h3>' + site.name + '</h3><a class="map-popup-link" href="' + site.url + '">View site &rarr;</a></div>';
+    }
+    var map = L.map(el).setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18, attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+    fetch(el.dataset.journeyUrl)
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        var bounds = [];
+        data.sites.forEach(function (site) {
+          var marker = L.marker([site.lat, site.lng], { icon: pinIcon(site.status) }).addTo(map);
+          marker.bindPopup(popupHtml(site));
+          bounds.push([site.lat, site.lng]);
+        });
+        if (bounds.length) { map.fitBounds(bounds, { padding: [30, 30] }); }
+      });
+  })();
+</script>
+{% endif %}
+{% endblock %}

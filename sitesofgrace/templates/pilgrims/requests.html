@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Follow Requests{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Follow Requests</h1></div>
+
+  {% if request.GET.approved %}<p class="pilgrims-flash">Request approved.</p>{% endif %}
+  {% if request.GET.declined %}<p class="pilgrims-flash">Request declined.</p>{% endif %}
+
+  {% if incoming %}
+    <ul class="pilgrim-list">
+      {% for follow in incoming %}
+        <li class="pilgrim-row">
+          <a class="pilgrim-row-avatar" href="{% url 'pilgrims:profile_detail' handle=follow.follower.pilgrim.handle %}">
+            {% if follow.follower.pilgrim.avatar %}<img src="{{ follow.follower.pilgrim.avatar.url }}" alt="">{% else %}{{ follow.follower.pilgrim.display_name|default:follow.follower.pilgrim.handle|first|upper }}{% endif %}
+          </a>
+          <div class="pilgrim-row-name">
+            <strong>{{ follow.follower.pilgrim.display_name|default:follow.follower.pilgrim.handle }}</strong>
+            <span>@{{ follow.follower.pilgrim.handle }}</span>
+          </div>
+          <div class="pilgrim-row-actions">
+            <form method="post" action="{% url 'pilgrims:approve' follow.pk %}">
+              {% csrf_token %}<input type="hidden" name="next" value="{% url 'pilgrims:requests' %}">
+              <button type="submit" class="btn btn-primary">Approve</button>
+            </form>
+            <form method="post" action="{% url 'pilgrims:decline' follow.pk %}">
+              {% csrf_token %}<input type="hidden" name="next" value="{% url 'pilgrims:requests' %}">
+              <button type="submit" class="btn btn-secondary">Decline</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="pilgrim-list-empty">No pending follow requests.</div>
+  {% endif %}
+</div>
+{% endblock %}

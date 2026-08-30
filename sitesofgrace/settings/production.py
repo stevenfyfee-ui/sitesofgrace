@@ -209,10 +209,8 @@ MIDDLEWARE[_security_index + 1 : _security_index + 1] = [
 # HealthCheckMiddleware must be the absolute first entry: it has to run
 # before SecurityMiddleware/CommonMiddleware ever call anything that
 # triggers ALLOWED_HOSTS validation (see its docstring). NoindexMiddleware
-# comes right after so it wraps every real response — including
-# SitePrivateMiddleware's 401s — but not the health check's short-circuit,
-# which doesn't need an X-Robots-Tag header.
-MIDDLEWARE = [
-    "core.middleware.HealthCheckMiddleware",
-    "core.middleware.NoindexMiddleware",
-] + MIDDLEWARE
+# is already in base.py's MIDDLEWARE (first, ahead of SecurityMiddleware),
+# so it lands right after HealthCheckMiddleware here — wrapping every real
+# response, including SitePrivateMiddleware's 401s, but not the health
+# check's short-circuit, which doesn't need an X-Robots-Tag header.
+MIDDLEWARE = ["core.middleware.HealthCheckMiddleware"] + MIDDLEWARE

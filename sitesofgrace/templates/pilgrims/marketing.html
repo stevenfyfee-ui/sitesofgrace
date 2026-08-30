@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Pilgrim Portal{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<section class="pilgrims-marketing">
+  <div class="container">
+    <h1>The Pilgrim Portal</h1>
+    <p>
+      Keep photos of the sacred sites you've visited, track where you'd still like
+      to go, and share your journey with the people you've connected with —
+      a quieter, more personal corner of Sites of Grace.
+    </p>
+    <a class="btn btn-primary" href="{% url 'account_signup' %}?next={% url 'pilgrims:home' %}">Begin Your Journey</a>
+    <a class="btn btn-secondary" href="{% url 'account_login' %}?next={% url 'pilgrims:home' %}">Sign in</a>
+  </div>
+</section>
+{% endblock %}

@@ -38,14 +38,23 @@ class NoindexMiddleware:
     site can go noindex (still finishing content) while access control is
     handled a different way (e.g. Wagtail-native page privacy), or vice
     versa, so the two must be settable independently.
+
+    The Pilgrim Portal (/pilgrims/) and its auth flow (/accounts/) are
+    ALWAYS noindexed, regardless of SITE_NOINDEX — pilgrim profiles and
+    account pages must never be crawlable, on principle rather than as a
+    pre-launch toggle. This must not depend on any view remembering to set
+    the header itself.
     """
+
+    ALWAYS_NOINDEX_PREFIXES = ("/pilgrims/", "/accounts/")
 
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
         response = self.get_response(request)
-        if getattr(settings, "SITE_NOINDEX", False):
+        always_noindex = request.path.startswith(self.ALWAYS_NOINDEX_PREFIXES)
+        if always_noindex or getattr(settings, "SITE_NOINDEX", False):
             response["X-Robots-Tag"] = "noindex, nofollow"
         return response
 
