@@ -150,30 +150,30 @@ if not SPACES_BUCKET and not _RUNNING_COLLECTSTATIC:
         "EPHEMERAL filesystem — they will be LOST on the next deploy."
     )
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {
-            "access_key": os.environ.get("SPACES_KEY", ""),
-            "secret_key": os.environ.get("SPACES_SECRET", ""),
-            "bucket_name": SPACES_BUCKET,
-            "region_name": os.environ.get("SPACES_REGION", ""),
-            "endpoint_url": os.environ.get("SPACES_ENDPOINT_URL", ""),
-            "custom_domain": os.environ.get("SPACES_CDN_DOMAIN") or None,
-            "default_acl": "public-read",
-            "querystring_auth": False,
-            "file_overwrite": False,
-            "object_parameters": {
-                "CacheControl": "max-age=31536000, public",
-            },
+# Only "default" and "staticfiles" are overridden here — "pilgrim_private"
+# (base.py) is inherited as-is via `from .base import *` above and reused
+# unchanged, since it already reads the same SPACES_* env vars.
+STORAGES["default"] = {
+    "BACKEND": "storages.backends.s3.S3Storage",
+    "OPTIONS": {
+        "access_key": os.environ.get("SPACES_KEY", ""),
+        "secret_key": os.environ.get("SPACES_SECRET", ""),
+        "bucket_name": SPACES_BUCKET,
+        "region_name": os.environ.get("SPACES_REGION", ""),
+        "endpoint_url": os.environ.get("SPACES_ENDPOINT_URL", ""),
+        "custom_domain": os.environ.get("SPACES_CDN_DOMAIN") or None,
+        "default_acl": "public-read",
+        "querystring_auth": False,
+        "file_overwrite": False,
+        "object_parameters": {
+            "CacheControl": "max-age=31536000, public",
         },
     },
-    # CompressedManifestStaticFilesStorage gives hashed, immutable filenames
-    # so a Wagtail upgrade can't leave browsers serving stale CSS/JS from
-    # cache. This intentionally replaces the base STORAGES dict wholesale.
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
+}
+# CompressedManifestStaticFilesStorage gives hashed, immutable filenames so a
+# Wagtail upgrade can't leave browsers serving stale CSS/JS from cache.
+STORAGES["staticfiles"] = {
+    "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
 }
 
 

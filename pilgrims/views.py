@@ -2,7 +2,8 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.db.models import Max
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -11,13 +12,15 @@ from django.views.decorators.http import require_POST
 
 from catalog.models import SacredSitePage
 
+from . import imaging
 from .forms import ProfileSettingsForm
-from .models import Block, Follow, PilgrimProfile, SiteVisit
-from .permissions import can_interact, can_view_profile_detail, is_following
+from .models import Block, Follow, PilgrimPhoto, PilgrimProfile, SiteVisit
+from .permissions import can_interact, can_view_profile_detail, can_view_photo, is_following
 
 User = get_user_model()
 
 FOLLOW_REQUESTS_PER_DAY = 50
+PHOTO_UPLOADS_PER_HOUR = 100
 
 
 def _redirect_next(request, flag):
@@ -276,3 +279,191 @@ def site_visit_toggle(request):
         new_status = visit.status
 
     return JsonResponse({"status": new_status})
+
+
+# --- Photos (phase 2) --------------------------------------------------------
+
+def _mark_visited(owner, site):
+    """Same model, same manager pattern as site_visit_toggle above — the
+    upload flow's "mark visited" checkbox is not a second way to create a
+    visit, just another caller of it. Never overwrites an existing
+    visited_on, and only upgrades (never downgrades) an existing status."""
+    visit, created = SiteVisit.objects.get_or_create(
+        owner=owner, site=site,
+        defaults={"status": SiteVisit.STATUS_VISITED, "visited_on": timezone.localdate()},
+    )
+    if not created and visit.status != SiteVisit.STATUS_VISITED:
+        visit.status = SiteVisit.STATUS_VISITED
+        if not visit.visited_on:
+            visit.visited_on = timezone.localdate()
+        visit.save(update_fields=["status", "visited_on"])
+    return visit
+
+
+def _photo_thumb_context(photo):
+    return {
+        "uuid": str(photo.uuid),
+        "caption": photo.caption,
+        "thumb_url": photo.thumb.url,
+    }
+
+
+@login_required
+def photo_site_search(request):
+    """Backs the searchable site picker on the upload form."""
+    query = request.GET.get("q", "").strip()
+    sites = SacredSitePage.objects.live()
+    if query:
+        sites = sites.filter(title__icontains=query)
+    sites = sites.order_by("title")[:20]
+    return JsonResponse({
+        "sites": [
+            {
+                "id": site.pk,
+                "slug": site.slug,
+                "title": site.title,
+                "locality": site.locality,
+                "country": site.country,
+                "already_visited": SiteVisit.objects.filter(
+                    owner=request.user, site=site, status=SiteVisit.STATUS_VISITED
+                ).exists(),
+            }
+            for site in sites
+        ]
+    })
+
+
+@login_required
+def photo_upload(request):
+    if request.method != "POST":
+        return render(request, "pilgrims/photo_upload.html")
+
+    since = timezone.now() - timedelta(hours=1)
+    uploaded_this_hour = PilgrimPhoto.objects.filter(
+        owner=request.user, created_at__gte=since
+    ).count()
+    if uploaded_this_hour >= PHOTO_UPLOADS_PER_HOUR:
+        return JsonResponse(
+            {"success": False, "error": "rate_limited",
+             "message": "You've uploaded a lot of photos this hour — try again later."},
+            status=200,
+        )
+
+    site_id = request.POST.get("site_id")
+    upload = request.FILES.get("photo")
+    if not site_id or not upload:
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": "Missing site or file."}, status=200
+        )
+    site = get_object_or_404(SacredSitePage.objects.live(), pk=site_id)
+
+    try:
+        processed = imaging.process_upload(upload)
+    except imaging.UploadTooLargeError as exc:
+        return JsonResponse({"success": False, "error": "too_large", "message": str(exc)}, status=200)
+    except imaging.UnsupportedImageError as exc:
+        return JsonResponse({"success": False, "error": "unsupported", "message": str(exc)}, status=200)
+
+    if PilgrimPhoto.objects.filter(owner=request.user, content_hash=processed.content_hash).exists():
+        return JsonResponse(
+            {"success": False, "error": "duplicate",
+             "message": "You've already uploaded this photo."},
+            status=200,
+        )
+
+    caption = request.POST.get("caption", "")[:300]
+    taken_on = request.POST.get("taken_on") or None
+    photo = PilgrimPhoto.create_from_processed(
+        owner=request.user, site=site, processed=processed, caption=caption, taken_on=taken_on,
+    )
+
+    if request.POST.get("mark_visited") == "on":
+        _mark_visited(request.user, site)
+
+    return JsonResponse({"success": True, "photo": _photo_thumb_context(photo)})
+
+
+@login_required
+def photo_library(request):
+    """Grouped by site, most-recently-active site first."""
+    site_ids = list(
+        PilgrimPhoto.objects.filter(owner=request.user)
+        .values("site_id")
+        .annotate(last_activity=Max("created_at"))
+        .order_by("-last_activity")
+        .values_list("site_id", flat=True)
+    )
+    sites_by_id = SacredSitePage.objects.in_bulk(site_ids)
+    visited_site_ids = set(
+        SiteVisit.objects.filter(
+            owner=request.user, site_id__in=site_ids, status=SiteVisit.STATUS_VISITED
+        ).values_list("site_id", flat=True)
+    )
+
+    groups = []
+    for site_id in site_ids:
+        site = sites_by_id.get(site_id)
+        if site is None:
+            continue
+        photos = list(PilgrimPhoto.objects.filter(owner=request.user, site=site)[:6])
+        groups.append({
+            "site": site,
+            "count": PilgrimPhoto.objects.filter(owner=request.user, site=site).count(),
+            "preview_photos": photos,
+            "is_visited": site_id in visited_site_ids,
+        })
+
+    return render(request, "pilgrims/photo_library.html", {"groups": groups})
+
+
+@login_required
+def photo_album(request, site_slug):
+    site = get_object_or_404(SacredSitePage, slug=site_slug)
+    photos = PilgrimPhoto.objects.filter(owner=request.user, site=site)
+    is_visited = SiteVisit.objects.filter(
+        owner=request.user, site=site, status=SiteVisit.STATUS_VISITED
+    ).exists()
+    return render(request, "pilgrims/photo_album.html", {
+        "site": site, "photos": photos, "is_visited": is_visited,
+    })
+
+
+@login_required
+def photo_detail(request, photo_uuid):
+    photo = get_object_or_404(PilgrimPhoto.objects.select_related("site", "owner"), uuid=photo_uuid)
+    if not can_view_photo(request.user, photo):
+        raise Http404
+    return render(request, "pilgrims/photo_detail.html", {"photo": photo})
+
+
+@login_required
+@require_POST
+def photo_delete(request, photo_uuid):
+    photo = get_object_or_404(PilgrimPhoto, uuid=photo_uuid, owner=request.user)
+    site_slug = photo.site.slug
+    photo.delete()
+    return HttpResponseRedirect(f"{reverse('pilgrims:photo_album', args=[site_slug])}?deleted=1")
+
+
+@login_required
+@require_POST
+def photo_bulk_delete(request):
+    photo_uuids = request.POST.getlist("photo_uuid")
+    qs = PilgrimPhoto.objects.filter(owner=request.user, uuid__in=photo_uuids)
+    site = qs.first().site if qs.exists() else None
+    count = qs.count()
+    qs.delete()
+    if site is None:
+        return redirect("pilgrims:photo_library")
+    return HttpResponseRedirect(
+        f"{reverse('pilgrims:photo_album', args=[site.slug])}?deleted={count}"
+    )
+
+
+@login_required
+@require_POST
+def photo_caption_edit(request, photo_uuid):
+    photo = get_object_or_404(PilgrimPhoto, uuid=photo_uuid, owner=request.user)
+    photo.caption = request.POST.get("caption", "")[:300]
+    photo.save(update_fields=["caption", "updated_at"])
+    return JsonResponse({"success": True, "caption": photo.caption})

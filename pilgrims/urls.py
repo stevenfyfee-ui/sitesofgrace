@@ -19,4 +19,13 @@ urlpatterns = [
     path("remove-follower/<int:user_id>/", views.remove_follower, name="remove_follower"),
     path("block/<int:user_id>/", views.block_user, name="block"),
     path("unblock/<int:user_id>/", views.unblock_user, name="unblock"),
+
+    path("photos/sites/search/", views.photo_site_search, name="photo_site_search"),
+    path("photos/upload/", views.photo_upload, name="photo_upload"),
+    path("my/photos/", views.photo_library, name="photo_library"),
+    path("my/photos/<slug:site_slug>/", views.photo_album, name="photo_album"),
+    path("photos/<uuid:photo_uuid>/", views.photo_detail, name="photo_detail"),
+    path("photos/<uuid:photo_uuid>/delete/", views.photo_delete, name="photo_delete"),
+    path("photos/<uuid:photo_uuid>/caption/", views.photo_caption_edit, name="photo_caption_edit"),
+    path("photos/bulk-delete/", views.photo_bulk_delete, name="photo_bulk_delete"),
 ]

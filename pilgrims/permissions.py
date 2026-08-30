@@ -49,3 +49,10 @@ def accepted_following_ids(user):
     return Follow.objects.filter(
         follower=user, status=Follow.STATUS_ACCEPTED
     ).values_list("following_id", flat=True)
+
+
+def can_view_photo(viewer, photo) -> bool:
+    """Owner-only in phase 2 — no feed, no follower sharing, no public
+    sharing yet. Routed through here (rather than a bare `==` check in the
+    view) so phase 3/4 only need to widen this one function."""
+    return getattr(viewer, "is_authenticated", False) and viewer.pk == photo.owner_id

@@ -15,9 +15,12 @@ migration 0003_migrate_from_community for the one-time data copy, and
 import uuid
 
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.snippets.models import register_snippet
+
+from .storage import get_pilgrim_private_storage
 
 
 # Handles that would collide with a real route or read as an official/system
@@ -178,6 +181,101 @@ class SiteVisit(models.Model):
 
     def __str__(self):
         return f"{self.owner} - {self.site} ({self.status})"
+
+
+class PilgrimPhoto(models.Model):
+    """A pilgrim's own photo of a sacred site.
+
+    Private by default (phase 2 scope): only `original`/`large`/`feed`/
+    `thumb` on the `pilgrim_private` storage are used. The `public_*` /
+    `is_public_on_site` / `hidden_*` fields are declared now so phase 4
+    (public sharing) doesn't need a second migration on a table that will
+    already hold rows — nothing sets or reads them yet.
+
+    An album is never a model — it's just
+    PilgrimPhoto.objects.filter(owner=..., site=...).
+    """
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="photos"
+    )
+    # PROTECT: an editor deleting or unpublishing a SacredSitePage in the
+    # Wagtail admin must never silently destroy a pilgrim's photos. See
+    # pilgrims/wagtail_hooks.py for the admin-side guard that turns the
+    # resulting ProtectedError into a clear editor-facing message instead of
+    # a 500.
+    site = models.ForeignKey(
+        "catalog.SacredSitePage", on_delete=models.PROTECT, related_name="pilgrim_photos"
+    )
+    caption = models.CharField(max_length=300, blank=True)
+    taken_on = models.DateField(null=True, blank=True)
+
+    # Private storage (pilgrim_private) — see sitesofgrace/settings/base.py
+    # and pilgrims/storage.py (why this can't just be storage="pilgrim_private").
+    original = models.FileField(storage=get_pilgrim_private_storage, max_length=255)
+    large = models.ImageField(storage=get_pilgrim_private_storage, max_length=255)
+    feed = models.ImageField(storage=get_pilgrim_private_storage, max_length=255)
+    thumb = models.ImageField(storage=get_pilgrim_private_storage, max_length=255)
+
+    width = models.PositiveIntegerField()
+    height = models.PositiveIntegerField()
+    byte_size = models.PositiveIntegerField()
+    content_hash = models.CharField(max_length=64)  # sha256 hex, duplicate detection
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # --- Public-share fields: unused until phase 4 ---
+    is_public_on_site = models.BooleanField(default=False)
+    public_shared_at = models.DateTimeField(null=True, blank=True)
+    public_credit = models.CharField(
+        max_length=20, choices=PilgrimProfile.CREDIT_CHOICES, blank=True
+    )
+    # No storage= given -> Django's own default_storage (the CDN-fronted
+    # public bucket). Only ever populated once a photo is actually shared
+    # publicly, in phase 4.
+    public_large = models.ImageField(null=True, blank=True)
+    public_thumb = models.ImageField(null=True, blank=True)
+    hidden_by_staff = models.BooleanField(default=False)
+    hidden_reason = models.CharField(max_length=255, blank=True)
+    hidden_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-taken_on", "-created_at"]
+        indexes = [
+            models.Index(fields=["owner", "site"]),
+            models.Index(fields=["site", "is_public_on_site", "hidden_by_staff"]),
+        ]
+
+    def __str__(self):
+        return f"{self.owner} — {self.site} ({self.uuid})"
+
+    @classmethod
+    def create_from_processed(cls, *, owner, site, processed, caption="", taken_on=None):
+        """processed: an imaging.ProcessedPhoto. Writes all four private
+        derivatives to storage and saves the row in one call."""
+        photo = cls(
+            owner=owner,
+            site=site,
+            caption=caption,
+            taken_on=taken_on,
+            width=processed.width,
+            height=processed.height,
+            byte_size=processed.byte_size,
+            content_hash=processed.content_hash,
+        )
+        base = f"pilgrims/{owner.pilgrim.uuid}/{photo.uuid}"
+        photo.original.save(
+            f"{base}/original.{processed.original_ext}",
+            ContentFile(processed.original_bytes),
+            save=False,
+        )
+        photo.large.save(f"{base}/large.jpg", ContentFile(processed.large_bytes), save=False)
+        photo.feed.save(f"{base}/feed.jpg", ContentFile(processed.feed_bytes), save=False)
+        photo.thumb.save(f"{base}/thumb.jpg", ContentFile(processed.thumb_bytes), save=False)
+        photo.save()
+        return photo
 
 
 @register_snippet

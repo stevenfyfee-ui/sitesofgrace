@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 
-from .models import PilgrimProfile, RESERVED_HANDLES
+from .models import PilgrimPhoto, PilgrimProfile, RESERVED_HANDLES
+
+PHOTO_FILE_FIELDS = ("original", "large", "feed", "thumb", "public_large", "public_thumb")
 
 
 def generate_unique_handle(user):
@@ -32,3 +34,14 @@ def create_pilgrim_profile(sender, instance, created, **kwargs):
     PilgrimProfile.objects.get_or_create(
         user=instance, defaults={"handle": generate_unique_handle(instance)}
     )
+
+
+@receiver(post_delete, sender=PilgrimPhoto)
+def delete_pilgrim_photo_files(sender, instance, **kwargs):
+    """Fires for both instance.delete() and queryset.delete() (bulk delete
+    sends post_delete per row too), so bulk-delete in the album view can't
+    leave orphaned objects in Spaces."""
+    for field_name in PHOTO_FILE_FIELDS:
+        field_file = getattr(instance, field_name)
+        if field_file:
+            field_file.storage.delete(field_file.name)

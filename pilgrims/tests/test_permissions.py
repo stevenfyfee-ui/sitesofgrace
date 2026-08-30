@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase
 
-from .models import Block, Follow
-from .permissions import (
+from ..models import Block, Follow
+from ..permissions import (
     accepted_following_ids,
     can_interact,
     can_view_profile_detail,

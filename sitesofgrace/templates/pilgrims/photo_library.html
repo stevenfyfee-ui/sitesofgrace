@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static pilgrim_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}My Photos{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>My Photos</h1></div>
+
+  {% if request.GET.deleted %}<p class="pilgrims-flash">Deleted.</p>{% endif %}
+
+  <a class="btn btn-primary" href="{% url 'pilgrims:photo_upload' %}">Upload Photos</a>
+
+  {% if groups %}
+    <div class="photo-album-list">
+      {% for group in groups %}
+        <a class="photo-album-row" href="{% url 'pilgrims:photo_album' group.site.slug %}">
+          <div class="photo-album-thumbs">
+            {% for photo in group.preview_photos %}
+              <img src="{% pilgrim_photo_url photo 'thumb' %}" alt="">
+            {% endfor %}
+          </div>
+          <div class="photo-album-info">
+            <strong>{{ group.site.title }}</strong>
+            <span>{{ group.count }} photo{{ group.count|pluralize }}{% if group.is_visited %} · Visited{% endif %}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="pilgrim-list-empty">No photos yet. Upload your first one above.</div>
+  {% endif %}
+</div>
+{% endblock %}

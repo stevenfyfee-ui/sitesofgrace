@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Upload Photos{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Upload Photos</h1></div>
+
+  <form id="photoUploadForm" action="{% url 'pilgrims:photo_upload' %}" method="post" enctype="multipart/form-data" class="photo-upload-form">
+    {% csrf_token %}
+
+    <div class="auth-field">
+      <label for="siteSearch">Sacred site</label>
+      <input type="text" id="siteSearch" autocomplete="off" placeholder="Search sacred sites…">
+      <div id="siteResults" class="pilgrims-site-results"></div>
+      <p class="auth-help">Selected: <strong id="selectedSiteLabel">none yet</strong></p>
+      <input type="hidden" id="siteIdInput" name="site_id">
+    </div>
+
+    <div class="auth-field">
+      <label for="photoFiles">Photos</label>
+      <input type="file" id="photoFiles" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple>
+      <p class="auth-help">JPEG, PNG, WEBP, or HEIC. Up to 25 MB each.</p>
+    </div>
+
+    <div class="auth-field">
+      <label for="sharedCaption">Caption (applies to all, editable later)</label>
+      <input type="text" id="sharedCaption" maxlength="300">
+    </div>
+
+    <div class="auth-field">
+      <label for="sharedDate">Date taken (optional, applies to all)</label>
+      <input type="date" id="sharedDate">
+    </div>
+
+    <div class="auth-field">
+      <label><input type="checkbox" id="markVisited" checked> Mark this site as visited</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary auth-submit">Upload</button>
+  </form>
+
+  <ul id="uploadQueue" class="upload-queue"></ul>
+
+  <p class="auth-switch"><a href="{% url 'pilgrims:photo_library' %}">&larr; Back to my photos</a></p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var form = document.getElementById('photoUploadForm');
+  var siteSearchInput = document.getElementById('siteSearch');
+  var siteResults = document.getElementById('siteResults');
+  var siteIdInput = document.getElementById('siteIdInput');
+  var selectedSiteLabel = document.getElementById('selectedSiteLabel');
+  var fileInput = document.getElementById('photoFiles');
+  var queueEl = document.getElementById('uploadQueue');
+  var captionInput = document.getElementById('sharedCaption');
+  var dateInput = document.getElementById('sharedDate');
+  var markVisitedInput = document.getElementById('markVisited');
+
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+
+  var searchTimer;
+  siteSearchInput.addEventListener('input', function () {
+    clearTimeout(searchTimer);
+    var q = siteSearchInput.value.trim();
+    if (!q) { siteResults.innerHTML = ''; return; }
+    searchTimer = setTimeout(function () {
+      fetch('{% url "pilgrims:photo_site_search" %}?q=' + encodeURIComponent(q))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          siteResults.innerHTML = '';
+          data.sites.forEach(function (site) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'pilgrims-site-option';
+            btn.textContent = site.title + (site.locality ? ' — ' + site.locality : '');
+            btn.addEventListener('click', function () {
+              siteIdInput.value = site.id;
+              selectedSiteLabel.textContent = site.title;
+              siteResults.innerHTML = '';
+              siteSearchInput.value = '';
+              markVisitedInput.checked = !site.already_visited;
+            });
+            siteResults.appendChild(btn);
+          });
+        });
+    }, 250);
+  });
+
+  function uploadOne(file) {
+    var row = document.createElement('li');
+    row.className = 'upload-row';
+    row.innerHTML =
+      '<span class="upload-name"></span>' +
+      '<progress value="0" max="100"></progress>' +
+      '<span class="upload-status">Uploading…</span>';
+    row.querySelector('.upload-name').textContent = file.name;
+    queueEl.appendChild(row);
+
+    var progressEl = row.querySelector('progress');
+    var statusEl = row.querySelector('.upload-status');
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', form.action, true);
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+    xhr.upload.addEventListener('progress', function (e) {
+      if (e.lengthComputable) {
+        progressEl.value = Math.round((e.loaded / e.total) * 100);
+      }
+    });
+    xhr.onload = function () {
+      var data = null;
+      try { data = JSON.parse(xhr.responseText); } catch (err) { /* leave null */ }
+      if (data && data.success) {
+        statusEl.textContent = 'Done';
+        row.classList.add('is-success');
+      } else {
+        statusEl.textContent = (data && data.message) || 'Failed';
+        row.classList.add('is-error');
+      }
+    };
+    xhr.onerror = function () {
+      statusEl.textContent = 'Network error';
+      row.classList.add('is-error');
+    };
+
+    var formData = new FormData();
+    formData.append('site_id', siteIdInput.value);
+    formData.append('photo', file);
+    if (captionInput.value) formData.append('caption', captionInput.value);
+    if (dateInput.value) formData.append('taken_on', dateInput.value);
+    formData.append('mark_visited', markVisitedInput.checked ? 'on' : 'off');
+    xhr.send(formData);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!siteIdInput.value) { window.alert('Choose a sacred site first.'); return; }
+    var files = Array.prototype.slice.call(fileInput.files);
+    if (!files.length) { window.alert('Choose at least one photo.'); return; }
+    queueEl.innerHTML = '';
+    files.forEach(uploadOne);
+  });
+})();
+</script>
+{% endblock %}

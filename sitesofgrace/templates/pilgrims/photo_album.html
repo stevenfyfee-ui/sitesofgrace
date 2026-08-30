@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static pilgrim_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}{{ site.title }} — My Photos{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>{{ site.title }}{% if is_visited %} <span class="passport-count">Visited</span>{% endif %}</h1></div>
+
+  {% if request.GET.deleted %}<p class="pilgrims-flash">Deleted.</p>{% endif %}
+
+  <a class="btn btn-primary" href="{% url 'pilgrims:photo_upload' %}">Upload More</a>
+
+  {% if photos %}
+    <form id="bulkDeleteForm" method="post" action="{% url 'pilgrims:photo_bulk_delete' %}">
+      {% csrf_token %}
+      <div class="photo-grid">
+        {% for photo in photos %}
+          <div class="photo-tile">
+            <label class="photo-select">
+              <input type="checkbox" name="photo_uuid" value="{{ photo.uuid }}">
+              Select
+            </label>
+            <a class="photo-tile-img" href="{% url 'pilgrims:photo_detail' photo.uuid %}">
+              <img src="{% pilgrim_photo_url photo 'thumb' %}" alt="">
+            </a>
+            <input
+              type="text"
+              class="photo-caption-input"
+              value="{{ photo.caption }}"
+              maxlength="300"
+              placeholder="Add a caption…"
+              data-caption-url="{% url 'pilgrims:photo_caption_edit' photo.uuid %}">
+          </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-secondary">Delete Selected</button>
+    </form>
+  {% else %}
+    <div class="pilgrim-list-empty">No photos here yet.</div>
+  {% endif %}
+
+  <p class="auth-switch"><a href="{% url 'pilgrims:photo_library' %}">&larr; Back to all my photos</a></p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+
+  document.querySelectorAll('.photo-caption-input').forEach(function (input) {
+    var lastSaved = input.value;
+    input.addEventListener('blur', function () {
+      if (input.value === lastSaved) return;
+      fetch(input.dataset.captionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: new URLSearchParams({ caption: input.value }),
+      }).then(function (r) { return r.json(); }).then(function (data) {
+        if (data.success) { lastSaved = data.caption; }
+      });
+    });
+  });
+})();
+</script>
+{% endblock %}

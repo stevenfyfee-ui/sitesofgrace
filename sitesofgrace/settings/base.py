@@ -223,12 +223,48 @@ MEDIA_URL = "/media/"
 
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
+#
+# Read here (not just in production.py) because "pilgrim_private" must be
+# usable from a dev machine too — presigned-URL signing is S3/Spaces-specific
+# behavior that a local FileSystemStorage can't stand in for, so verifying it
+# means pointing dev at the real bucket via these same env vars (e.g. in the
+# untracked sitesofgrace/settings/local.py). No credentials are hardcoded.
+SPACES_BUCKET = os.environ.get("SPACES_BUCKET", "")
+SPACES_KEY = os.environ.get("SPACES_KEY", "")
+SPACES_SECRET = os.environ.get("SPACES_SECRET", "")
+SPACES_REGION = os.environ.get("SPACES_REGION", "")
+SPACES_ENDPOINT_URL = os.environ.get("SPACES_ENDPOINT_URL", "")
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+    # Same bucket as "default", different prefix and ACL. Pilgrim photos are
+    # private by default and must never be reachable through the public
+    # bucket/CDN path — see pilgrims/models.py:PilgrimPhoto and
+    # pilgrims/imaging.py.
+    "pilgrim_private": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": SPACES_KEY,
+            "secret_key": SPACES_SECRET,
+            "bucket_name": SPACES_BUCKET,
+            "region_name": SPACES_REGION,
+            "endpoint_url": SPACES_ENDPOINT_URL,
+            "location": "private",
+            "default_acl": "private",
+            "querystring_auth": True,
+            "querystring_expire": 900,
+            # Must stay False: a custom/CDN domain makes S3Storage.url()
+            # return a bare, unsigned URL (it assumes the CDN handles auth),
+            # which would silently defeat every presigned-URL protection
+            # below.
+            "custom_domain": False,
+            "file_overwrite": False,
+        },
     },
 }
 

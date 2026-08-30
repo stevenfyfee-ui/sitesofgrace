@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static pilgrim_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Photo — {{ photo.site.title }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>{{ photo.site.title }}</h1></div>
+
+  <div class="photo-detail">
+    <img class="photo-detail-img" src="{% pilgrim_photo_url photo 'large' %}" alt="{{ photo.caption }}">
+    <div class="photo-detail-info">
+      {% if photo.caption %}<p class="pilgrim-bio">{{ photo.caption }}</p>{% endif %}
+      {% if photo.taken_on %}<p class="auth-help">Taken {{ photo.taken_on }}</p>{% endif %}
+
+      <form method="post" action="{% url 'pilgrims:photo_delete' photo.uuid %}" onsubmit="return confirm('Delete this photo? This cannot be undone.');">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <p class="auth-switch"><a href="{% url 'pilgrims:photo_album' photo.site.slug %}">&larr; Back to {{ photo.site.title }}</a></p>
+</div>
+{% endblock %}

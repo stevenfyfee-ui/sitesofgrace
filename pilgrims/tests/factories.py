@@ -1,0 +1,49 @@
+"""Small in-memory fixture builders shared across the pilgrims test package.
+
+Builds real, decodable JPEG bytes with Pillow directly — no extra test-only
+dependency (piexif etc.) — so imaging.py is exercised against genuine EXIF
+data, including a real embedded GPS IFD.
+"""
+import io
+
+from django.core.files.uploadedfile import SimpleUploadedFile
+from PIL import Image
+from PIL.TiffImagePlugin import IFDRational
+
+ORIENTATION_TAG = 0x0112
+GPS_IFD_TAG = 0x8825
+
+_SAMPLE_GPS_IFD = {
+    1: "N",
+    2: (IFDRational(40, 1), IFDRational(44, 1), IFDRational(0, 1)),
+    3: "W",
+    4: (IFDRational(73, 1), IFDRational(59, 1), IFDRational(0, 1)),
+}
+
+
+def make_jpeg_bytes(*, width=800, height=600, color=(200, 50, 50), with_gps=False,
+                     orientation=None):
+    image = Image.new("RGB", (width, height), color)
+    buf = io.BytesIO()
+
+    if with_gps or orientation:
+        exif = image.getexif()
+        if orientation:
+            exif[ORIENTATION_TAG] = orientation
+        if with_gps:
+            exif[GPS_IFD_TAG] = _SAMPLE_GPS_IFD
+        image.save(buf, format="JPEG", exif=exif)
+    else:
+        image.save(buf, format="JPEG")
+    return buf.getvalue()
+
+
+def make_uploaded_jpeg(name="photo.jpg", **kwargs):
+    data = make_jpeg_bytes(**kwargs)
+    return SimpleUploadedFile(name, data, content_type="image/jpeg")
+
+
+def make_uploaded_fake_image(name="fake.jpg"):
+    """A non-image renamed to look like a jpeg — must be rejected by decoded
+    format, not filename/Content-Type."""
+    return SimpleUploadedFile(name, b"this is definitely not a jpeg", content_type="image/jpeg")
