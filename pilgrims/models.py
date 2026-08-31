@@ -15,6 +15,7 @@ migration 0003_migrate_from_community for the one-time data copy, and
 import uuid
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db import models
 from wagtail.admin.panels import FieldPanel
@@ -331,3 +332,151 @@ class AwardedBadge(models.Model):
 
     def __str__(self):
         return f"{self.user} — {self.badge}"
+
+
+class Post(models.Model):
+    """Visible to the owner and their ACCEPTED followers — full stop.
+
+    No visibility field: there is only one audience for a post, so nothing
+    to store. photo_count/comment_count are denormalized counters kept in
+    sync by the views that create/delete PostPhoto/Comment rows (there's no
+    signal for this — see pilgrims/views.py — since the counters only ever
+    change through those same few code paths).
+    """
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts"
+    )
+    # PROTECT + null=True: a post doesn't have to be about one specific
+    # site, but if it is, deleting that SacredSitePage must not silently
+    # destroy the post (same reasoning as PilgrimPhoto.site).
+    site = models.ForeignKey(
+        "catalog.SacredSitePage", null=True, blank=True,
+        on_delete=models.PROTECT, related_name="pilgrim_posts",
+    )
+    caption = models.TextField(max_length=2000, blank=True)
+    photo_count = models.PositiveIntegerField(default=0)
+    comment_count = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["owner", "created_at"]),
+        ]
+
+    def __str__(self):
+        return f"Post by {self.owner} ({self.uuid})"
+
+
+class PostPhoto(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_photos")
+    photo = models.ForeignKey(PilgrimPhoto, on_delete=models.CASCADE, related_name="post_photos")
+    sort_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
+        constraints = [
+            models.UniqueConstraint(fields=["post", "photo"], name="unique_post_photo"),
+        ]
+
+    def clean(self):
+        if self.photo_id and self.post_id and self.photo.owner_id != self.post.owner_id:
+            raise ValidationError("A post can only include photos owned by the same pilgrim.")
+
+    def __str__(self):
+        return f"{self.photo} in {self.post}"
+
+
+class Comment(models.Model):
+    """Attaches to a Post and ONLY a Post (never a bare photo) — deliberate:
+    it's what makes it structurally impossible to comment on a photo once
+    it's shared to a public site page in phase 4. `photo`, when set, scopes
+    the comment to one photo within the post rather than the post overall.
+    """
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    photo = models.ForeignKey(
+        PilgrimPhoto, null=True, blank=True, on_delete=models.CASCADE, related_name="comments"
+    )
+    parent = models.ForeignKey(
+        "self", null=True, blank=True, on_delete=models.CASCADE, related_name="replies"
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comments"
+    )
+    body = models.TextField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    edited_at = models.DateTimeField(null=True, blank=True)
+    # Soft delete: a thread with a hole in it still makes sense; one with a
+    # row physically gone does not. Render "comment removed" instead.
+    is_deleted = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_at"]
+        indexes = [
+            models.Index(fields=["post", "created_at"]),
+        ]
+
+    def clean(self):
+        if self.parent_id and self.parent.parent_id:
+            raise ValidationError("Replies are one level deep only — can't reply to a reply.")
+        if self.photo_id and self.post_id and not self.post.post_photos.filter(photo_id=self.photo_id).exists():
+            raise ValidationError("That photo isn't part of this post.")
+
+    def __str__(self):
+        return f"Comment by {self.author} on {self.post}"
+
+
+class Notification(models.Model):
+    VERB_FOLLOW_REQUEST = "follow_request"
+    VERB_FOLLOW_ACCEPTED = "follow_accepted"
+    VERB_COMMENT_ON_POST = "comment_on_post"
+    VERB_COMMENT_REPLY = "comment_reply"
+    VERB_CHOICES = [
+        (VERB_FOLLOW_REQUEST, "New follower request"),
+        (VERB_FOLLOW_ACCEPTED, "Follow approved"),
+        (VERB_COMMENT_ON_POST, "Comment on your post"),
+        (VERB_COMMENT_REPLY, "Reply to your comment"),
+    ]
+
+    recipient = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="notifications"
+    )
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="+"
+    )
+    verb = models.CharField(max_length=20, choices=VERB_CHOICES)
+    # Not a ForeignKey on purpose: the target is a different model per verb
+    # (PilgrimProfile.uuid for the two follow verbs, Post.uuid for the two
+    # comment verbs) and there are only ever two of those, so a
+    # GenericForeignKey would be more machinery than the two-way dispatch in
+    # get_target_url() below.
+    target_uuid = models.UUIDField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["recipient", "read_at"]),
+        ]
+
+    def __str__(self):
+        return f"{self.get_verb_display()} for {self.recipient}"
+
+    def get_target_url(self):
+        from django.urls import reverse
+
+        if self.verb in (self.VERB_FOLLOW_REQUEST, self.VERB_FOLLOW_ACCEPTED):
+            profile = PilgrimProfile.objects.filter(uuid=self.target_uuid).first()
+            if profile is None:
+                return None
+            return reverse("pilgrims:profile_detail", args=[profile.handle])
+        post = Post.objects.filter(uuid=self.target_uuid).first()
+        if post is None:
+            return None
+        return reverse("pilgrims:post_detail", args=[post.uuid])

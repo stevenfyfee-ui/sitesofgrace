@@ -275,7 +275,19 @@ STORAGES = {
             # presigned-URL protection below — and this bucket has no CDN
             # anyway.
             "custom_domain": None,
-            "file_overwrite": False,
+            # True (not False, unlike "default"): every key here is
+            # pilgrims/<owner-uuid>/<photo-uuid>/<field>.<ext> — a fresh
+            # UUID per photo, so a real collision is not a real risk. This
+            # is required, not just harmless: with file_overwrite=False,
+            # Storage.save() calls .exists() (S3 HeadObject) before every
+            # save to dodge a collision, and this bucket's scoped key has
+            # no s3:ListBucket — DigitalOcean Spaces (like S3) answers
+            # HeadObject on a KEY THAT DOESN'T EXIST with 403, not 404,
+            # when the caller can't list the bucket, and django-storages
+            # only treats 404 as "doesn't exist" (s3.py:exists()). Every
+            # single upload would 403 on that pre-check. Confirmed live
+            # against sitesofgrace-pilgrims — see the phase-3 report.
+            "file_overwrite": True,
         },
     },
 }

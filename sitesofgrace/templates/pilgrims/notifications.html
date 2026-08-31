@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Notifications{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Notifications</h1></div>
+
+  {% if notifications %}
+    <ul class="notification-list">
+      {% for note in notifications %}
+        <li class="notification-row{% if not note.read_at %} is-unread{% endif %}">
+          <span>
+            <strong>{{ note.actor.pilgrim.display_name|default:note.actor.pilgrim.handle }}</strong>
+            {{ note.get_verb_display|lower }}
+          </span>
+          {% with url=note.get_target_url %}
+            {% if url %}<a href="{{ url }}">View</a>{% endif %}
+          {% endwith %}
+          <span class="notification-time">{{ note.created_at|timesince }} ago</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="pilgrim-list-empty">No notifications yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

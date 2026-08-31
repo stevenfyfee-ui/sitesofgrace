@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static pilgrim_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}Feed{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrims-head"><h1>Feed</h1></div>
+  <a class="btn btn-primary" href="{% url 'pilgrims:post_compose' %}">Share a Photo</a>
+
+  {% if is_first_page and follows_nobody and not posts %}
+    <div class="feed-empty">
+      <p>Your feed is quiet because you aren't following any pilgrims yet.</p>
+      <a class="btn btn-primary" href="{% url 'pilgrims:following' %}">Find pilgrims to follow</a>
+      <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">Go to my own library</a>
+    </div>
+  {% elif not posts %}
+    <div class="feed-empty"><p>Nothing new right now.</p></div>
+  {% else %}
+    <div class="feed-list">
+      {% for post in posts %}
+        {% with photos=post.post_photos.all %}
+        <article class="feed-card">
+          <div class="feed-card-head">
+            <a class="feed-card-avatar" href="{% url 'pilgrims:profile_detail' handle=post.owner.pilgrim.handle %}">
+              {% if post.owner.pilgrim.avatar %}<img src="{{ post.owner.pilgrim.avatar.url }}" alt="">{% else %}{{ post.owner.pilgrim.display_name|default:post.owner.pilgrim.handle|first|upper }}{% endif %}
+            </a>
+            <div class="feed-card-byline">
+              <strong>{{ post.owner.pilgrim.display_name|default:post.owner.pilgrim.handle }}</strong>
+              <span>{{ post.created_at|timesince }} ago{% if post.site %} · {{ post.site.title }}{% endif %}</span>
+            </div>
+          </div>
+
+          {% if photos %}
+            <div class="feed-card-photos">
+              <a class="feed-card-photo-main" href="{% url 'pilgrims:post_detail' post.uuid %}">
+                <img src="{% pilgrim_photo_url photos.0.photo 'feed' %}" alt="">
+              </a>
+              {% if photos|length > 1 %}
+                <div class="feed-card-strip">
+                  {% for pp in photos|slice:"1:" %}
+                    <a href="{% url 'pilgrims:post_detail' post.uuid %}"><img src="{% pilgrim_photo_url pp.photo 'thumb' %}" alt=""></a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="feed-card-body">
+            {% if post.caption %}<p class="feed-card-caption">{{ post.caption }}</p>{% endif %}
+          </div>
+
+          <div class="feed-card-comments">
+            <p class="feed-card-comment-count">
+              <a href="{% url 'pilgrims:post_detail' post.uuid %}">{{ post.comment_count }} comment{{ post.comment_count|pluralize }}</a>
+            </p>
+            {% for comment in post.preview_comments %}
+              <p class="feed-card-comment"><strong>{{ comment.author.pilgrim.display_name|default:comment.author.pilgrim.handle }}</strong> {{ comment.body }}</p>
+            {% endfor %}
+          </div>
+        </article>
+        {% endwith %}
+      {% endfor %}
+    </div>
+
+    {% if next_cursor %}
+      <div class="feed-load-more">
+        <a class="btn btn-secondary" href="?cursor={{ next_cursor }}">Load more</a>
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

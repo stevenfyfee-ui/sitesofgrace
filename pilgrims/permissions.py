@@ -52,7 +52,72 @@ def accepted_following_ids(user):
 
 
 def can_view_photo(viewer, photo) -> bool:
-    """Owner-only in phase 2 — no feed, no follower sharing, no public
-    sharing yet. Routed through here (rather than a bare `==` check in the
-    view) so phase 3/4 only need to widen this one function."""
+    """Owner-only, for a BARE photo not attached to any post (the
+    /pilgrims/photos/<uuid>/ detail view, and the library/album views).
+    A photo embedded in a Post is a different question — see
+    can_view_post below, which is what feed/post_detail views gate on."""
     return getattr(viewer, "is_authenticated", False) and viewer.pk == photo.owner_id
+
+
+def can_view_post(viewer, post) -> bool:
+    """Owner, or an accepted follower, and not blocked. No other audience —
+    see pilgrims/models.py:Post for why there's no visibility field to
+    check instead."""
+    if getattr(viewer, "is_authenticated", False) and viewer.pk == post.owner_id:
+        return True
+    if _is_blocked_either_way(viewer, post.owner):
+        return False
+    return is_following(viewer, post.owner)
+
+
+def can_comment(viewer, post) -> bool:
+    """can_view_post, plus the commenter must be logged in with a verified
+    email. In practice every logged-in account already has one —
+    ACCOUNT_EMAIL_VERIFICATION="mandatory" blocks login otherwise — so the
+    real teeth here are for an account created outside that flow (e.g.
+    `manage.py createsuperuser`, which has no allauth EmailAddress row at
+    all). Staff gets no bypass here either, consistent with the rest of
+    this module."""
+    if not getattr(viewer, "is_authenticated", False):
+        return False
+    if not can_view_post(viewer, post):
+        return False
+    from allauth.account.models import EmailAddress
+
+    return EmailAddress.objects.filter(user=viewer, verified=True).exists()
+
+
+def visible_posts_for(viewer):
+    """The feed queryset. ONE query for the posts themselves plus one each
+    for the two prefetches, regardless of how many posts come back — see
+    pilgrims/tests/test_feed.py:test_feed_query_count_does_not_scale."""
+    from django.db.models import Prefetch
+
+    from .models import Comment, Post, PostPhoto
+
+    if not getattr(viewer, "is_authenticated", False):
+        return Post.objects.none()
+
+    owner_ids = set(accepted_following_ids(viewer))
+    owner_ids.add(viewer.pk)
+    blocked_ids = set(Block.objects.filter(blocker=viewer).values_list("blocked_id", flat=True))
+    blocked_ids |= set(Block.objects.filter(blocked=viewer).values_list("blocker_id", flat=True))
+    owner_ids -= blocked_ids
+
+    preview_comments = (
+        Comment.objects.filter(parent__isnull=True, is_deleted=False)
+        .select_related("author", "author__pilgrim")
+        .order_by("created_at")
+    )
+
+    return (
+        Post.objects.filter(owner_id__in=owner_ids)
+        .select_related("owner", "owner__pilgrim", "site")
+        .prefetch_related(
+            Prefetch(
+                "post_photos",
+                queryset=PostPhoto.objects.select_related("photo").order_by("sort_order"),
+            ),
+            Prefetch("comments", queryset=preview_comments[:3], to_attr="preview_comments"),
+        )
+    )

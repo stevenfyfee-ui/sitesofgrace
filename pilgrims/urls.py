@@ -28,4 +28,14 @@ urlpatterns = [
     path("photos/<uuid:photo_uuid>/delete/", views.photo_delete, name="photo_delete"),
     path("photos/<uuid:photo_uuid>/caption/", views.photo_caption_edit, name="photo_caption_edit"),
     path("photos/bulk-delete/", views.photo_bulk_delete, name="photo_bulk_delete"),
+
+    path("feed/", views.feed, name="feed"),
+    path("posts/new/", views.post_compose, name="post_compose"),
+    path("posts/photos-for-site/", views.compose_photos_for_site, name="compose_photos_for_site"),
+    path("posts/<uuid:post_uuid>/", views.post_detail, name="post_detail"),
+    path("posts/<uuid:post_uuid>/delete/", views.post_delete, name="post_delete"),
+    path("posts/<uuid:post_uuid>/comments/", views.comment_add, name="comment_add"),
+    path("comments/<uuid:comment_uuid>/delete/", views.comment_delete, name="comment_delete"),
+
+    path("notifications/", views.notifications_list, name="notifications"),
 ]

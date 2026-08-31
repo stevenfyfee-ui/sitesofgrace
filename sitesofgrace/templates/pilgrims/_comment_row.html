@@ -1,0 +1,36 @@
+{% load static %}
+<div class="comment-row{% if comment.parent_id %} is-reply{% endif %}">
+  <div class="comment-row-avatar">
+    {% if comment.author.pilgrim.avatar %}<img src="{{ comment.author.pilgrim.avatar.url }}" alt="">{% else %}{{ comment.author.pilgrim.display_name|default:comment.author.pilgrim.handle|first|upper }}{% endif %}
+  </div>
+  <div class="comment-row-body">
+    {% if comment.is_deleted %}
+      <span class="comment-row-removed">Comment removed</span>
+    {% else %}
+      <strong>{{ comment.author.pilgrim.display_name|default:comment.author.pilgrim.handle }}</strong>
+      {{ comment.body }}
+      <div class="pilgrim-row-actions">
+        {% if not comment.parent_id and can_comment %}
+          <button type="button" class="reply-toggle" data-target="reply-form-{{ comment.uuid }}">Reply</button>
+        {% endif %}
+        {% if request.user.pk == comment.author_id or request.user.pk == post_owner_id %}
+          <form class="comment-delete-form" method="post" action="{% url 'pilgrims:comment_delete' comment.uuid %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        {% endif %}
+      </div>
+      {% if not comment.parent_id and can_comment %}
+        <form id="reply-form-{{ comment.uuid }}" class="comment-form" method="post" action="{% url 'pilgrims:comment_add' post_uuid %}" hidden>
+          {% csrf_token %}
+          <input type="hidden" name="parent_uuid" value="{{ comment.uuid }}">
+          <input type="text" name="body" maxlength="2000" placeholder="Write a reply…" required>
+          <button type="submit" class="btn btn-gold">Reply</button>
+        </form>
+      {% endif %}
+    {% endif %}
+    {% for reply in comment.replies.all %}
+      {% include "pilgrims/_comment_row.html" with comment=reply post_owner_id=post_owner_id post_uuid=post_uuid can_comment=can_comment %}
+    {% endfor %}
+  </div>
+</div>

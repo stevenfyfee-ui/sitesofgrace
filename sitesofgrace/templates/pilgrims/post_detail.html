@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static pilgrim_tags %}
+
+{% block body_class %}pilgrims{% endblock %}
+{% block title %}{{ post.owner.pilgrim.display_name|default:post.owner.pilgrim.handle }}'s post{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pilgrim-header">
+    <a class="pilgrim-avatar" href="{% url 'pilgrims:profile_detail' handle=post.owner.pilgrim.handle %}">
+      {% if post.owner.pilgrim.avatar %}<img src="{{ post.owner.pilgrim.avatar.url }}" alt="">{% else %}{{ post.owner.pilgrim.display_name|default:post.owner.pilgrim.handle|first|upper }}{% endif %}
+    </a>
+    <div class="pilgrim-header-info">
+      <h1>{{ post.owner.pilgrim.display_name|default:post.owner.pilgrim.handle }}</h1>
+      <span class="pilgrim-handle">{{ post.created_at|date:"F j, Y" }}{% if post.site %} · {{ post.site.title }}{% endif %}</span>
+    </div>
+    {% if post.owner_id == request.user.pk %}
+      <div class="pilgrim-header-actions">
+        <form method="post" action="{% url 'pilgrims:post_delete' post.uuid %}" onsubmit="return confirm('Delete this post?');">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary">Delete Post</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if post.caption %}<p class="pilgrim-bio">{{ post.caption }}</p>{% endif %}
+
+  {% if post_photos %}
+    <div class="post-photos-lightbox-main">
+      <img id="lightboxMain" src="{% pilgrim_photo_url post_photos.0.photo 'large' %}" alt="">
+    </div>
+    {% if post_photos|length > 1 %}
+      <div class="feed-card-strip">
+        {% for pp in post_photos %}
+          <img class="lightbox-thumb" data-large="{% pilgrim_photo_url pp.photo 'large' %}" src="{% pilgrim_photo_url pp.photo 'thumb' %}" alt="">
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for pp in post_photos %}
+      <div class="post-photo-thread">
+        <p class="feed-card-comment-count">{{ pp.photo.caption }} · {{ pp.photo.thread|length }} comment{{ pp.photo.thread|length|pluralize }} on this photo</p>
+        {% for comment in pp.photo.thread %}
+          {% include "pilgrims/_comment_row.html" with comment=comment post_owner_id=post.owner_id post_uuid=post.uuid can_comment=can_comment %}
+        {% endfor %}
+        {% if can_comment %}
+          {% include "pilgrims/_comment_form.html" with post=post photo_uuid=pp.photo.uuid %}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="pilgrims-head"><h2>Comments <span class="passport-count">({{ post.comment_count }})</span></h2></div>
+  {% for comment in post_level_comments %}
+    {% include "pilgrims/_comment_row.html" with comment=comment post_owner_id=post.owner_id post_uuid=post.uuid can_comment=can_comment %}
+  {% empty %}
+    <div class="pilgrim-list-empty">No comments yet.</div>
+  {% endfor %}
+  {% if can_comment %}
+    {% include "pilgrims/_comment_form.html" with post=post photo_uuid="" %}
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var main = document.getElementById('lightboxMain');
+  document.querySelectorAll('.lightbox-thumb').forEach(function (thumb) {
+    thumb.addEventListener('click', function () {
+      main.src = thumb.dataset.large;
+    });
+  });
+
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+
+  document.querySelectorAll('.comment-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = form.querySelector('input[name="body"]');
+      var formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+        body: formData,
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.success) {
+            window.location.reload();
+          } else {
+            window.alert(data.message || 'Could not post comment.');
+          }
+        });
+    });
+  });
+
+  document.querySelectorAll('.reply-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (target) target.hidden = !target.hidden;
+    });
+  });
+
+  document.querySelectorAll('.comment-delete-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!window.confirm('Remove this comment?')) return;
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+      }).then(function () { window.location.reload(); });
+    });
+  });
+})();
+</script>
+{% endblock %}

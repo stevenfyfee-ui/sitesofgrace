@@ -1,8 +1,12 @@
+import base64
+import uuid as uuid_module
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import Max
+from django.core.exceptions import ValidationError
+from django.db import transaction
+from django.db.models import F, Max, Q
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -14,13 +18,22 @@ from catalog.models import SacredSitePage
 
 from . import imaging
 from .forms import ProfileSettingsForm
-from .models import Block, Follow, PilgrimPhoto, PilgrimProfile, SiteVisit
-from .permissions import can_interact, can_view_profile_detail, can_view_photo, is_following
+from .models import (
+    Block, Comment, Follow, Notification, PilgrimPhoto, PilgrimProfile, Post, PostPhoto,
+    SiteVisit,
+)
+from .permissions import (
+    can_comment, can_interact, can_view_photo, can_view_post, can_view_profile_detail,
+    is_following, visible_posts_for,
+)
 
 User = get_user_model()
 
 FOLLOW_REQUESTS_PER_DAY = 50
 PHOTO_UPLOADS_PER_HOUR = 100
+POSTS_PER_HOUR = 20
+COMMENTS_PER_HOUR = 30
+FEED_PAGE_SIZE = 20
 
 
 def _redirect_next(request, flag):
@@ -157,6 +170,11 @@ def follow_user(request, user_id):
         status=status,
         responded_at=None if status == Follow.STATUS_PENDING else timezone.now(),
     )
+    if status == Follow.STATUS_PENDING:
+        Notification.objects.create(
+            recipient=target, actor=request.user,
+            verb=Notification.VERB_FOLLOW_REQUEST, target_uuid=request.user.pilgrim.uuid,
+        )
     return _redirect_next(request, "requested" if status == Follow.STATUS_PENDING else "followed")
 
 
@@ -174,6 +192,10 @@ def approve_request(request, follow_id):
     follow.status = Follow.STATUS_ACCEPTED
     follow.responded_at = timezone.now()
     follow.save(update_fields=["status", "responded_at"])
+    Notification.objects.create(
+        recipient=follow.follower, actor=request.user,
+        verb=Notification.VERB_FOLLOW_ACCEPTED, target_uuid=request.user.pilgrim.uuid,
+    )
     return _redirect_next(request, "approved")
 
 
@@ -467,3 +489,261 @@ def photo_caption_edit(request, photo_uuid):
     photo.caption = request.POST.get("caption", "")[:300]
     photo.save(update_fields=["caption", "updated_at"])
     return JsonResponse({"success": True, "caption": photo.caption})
+
+
+# --- Feed, posts, comments (phase 3) -----------------------------------------
+
+def _encode_cursor(post):
+    raw = f"{post.created_at.isoformat()}|{post.uuid}"
+    return base64.urlsafe_b64encode(raw.encode()).decode()
+
+
+def _decode_cursor(raw):
+    try:
+        decoded = base64.urlsafe_b64decode(raw.encode()).decode()
+        created_at_str, uuid_str = decoded.split("|", 1)
+        created_at = timezone.datetime.fromisoformat(created_at_str)
+        return created_at, uuid_module.UUID(uuid_str)
+    except (ValueError, TypeError):
+        return None
+
+
+@login_required
+def feed(request):
+    qs = visible_posts_for(request.user)
+
+    cursor = request.GET.get("cursor")
+    decoded = _decode_cursor(cursor) if cursor else None
+    if decoded:
+        cursor_created_at, cursor_uuid = decoded
+        qs = qs.filter(
+            Q(created_at__lt=cursor_created_at)
+            | (Q(created_at=cursor_created_at) & Q(uuid__lt=cursor_uuid))
+        )
+
+    posts = list(qs.order_by("-created_at", "-uuid")[: FEED_PAGE_SIZE + 1])
+    has_more = len(posts) > FEED_PAGE_SIZE
+    posts = posts[:FEED_PAGE_SIZE]
+    next_cursor = _encode_cursor(posts[-1]) if posts and has_more else None
+
+    follows_nobody = not decoded and not accepted_following_ids_exists(request.user)
+
+    return render(request, "pilgrims/feed.html", {
+        "posts": posts,
+        "next_cursor": next_cursor,
+        "is_first_page": cursor is None,
+        "follows_nobody": follows_nobody,
+    })
+
+
+def accepted_following_ids_exists(user):
+    return Follow.objects.filter(follower=user, status=Follow.STATUS_ACCEPTED).exists()
+
+
+@login_required
+def compose_photos_for_site(request):
+    site_id = request.GET.get("site_id")
+    photos = PilgrimPhoto.objects.filter(owner=request.user, site_id=site_id).order_by("-created_at")
+    return JsonResponse({
+        "photos": [
+            {"uuid": str(p.uuid), "thumb_url": p.thumb.url, "caption": p.caption}
+            for p in photos
+        ]
+    })
+
+
+@login_required
+def post_compose(request):
+    if request.method != "POST":
+        my_sites = (
+            SacredSitePage.objects.filter(pilgrim_photos__owner=request.user)
+            .distinct()
+            .order_by("title")
+        )
+        return render(request, "pilgrims/post_compose.html", {"my_sites": my_sites})
+
+    since = timezone.now() - timedelta(hours=1)
+    posted_this_hour = Post.objects.filter(owner=request.user, created_at__gte=since).count()
+    if posted_this_hour >= POSTS_PER_HOUR:
+        return JsonResponse(
+            {"success": False, "error": "rate_limited",
+             "message": "You've posted a lot this hour — try again later."},
+            status=200,
+        )
+
+    photo_uuids = request.POST.getlist("photo_uuid")
+    caption = request.POST.get("caption", "")[:2000]
+    if not photo_uuids:
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": "Choose at least one photo."},
+            status=200,
+        )
+
+    photos = list(PilgrimPhoto.objects.filter(owner=request.user, uuid__in=photo_uuids))
+    photos_by_uuid = {str(p.uuid): p for p in photos}
+    ordered_photos = [photos_by_uuid[u] for u in photo_uuids if u in photos_by_uuid]
+    if not ordered_photos:
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": "Those photos couldn't be found."},
+            status=200,
+        )
+
+    sites = {p.site_id for p in ordered_photos}
+    post_site_id = ordered_photos[0].site_id if len(sites) == 1 else None
+
+    with transaction.atomic():
+        post = Post.objects.create(
+            owner=request.user, site_id=post_site_id, caption=caption,
+            photo_count=len(ordered_photos),
+        )
+        PostPhoto.objects.bulk_create([
+            PostPhoto(post=post, photo=photo, sort_order=i)
+            for i, photo in enumerate(ordered_photos)
+        ])
+
+    return JsonResponse({"success": True, "post_uuid": str(post.uuid)})
+
+
+@login_required
+def post_detail(request, post_uuid):
+    post = get_object_or_404(
+        Post.objects.select_related("owner", "owner__pilgrim", "site"), uuid=post_uuid
+    )
+    if not can_view_post(request.user, post):
+        raise Http404
+
+    post_photos = list(post.post_photos.select_related("photo").order_by("sort_order"))
+    comments = (
+        Comment.objects.filter(post=post)
+        .select_related("author", "author__pilgrim", "photo")
+        .prefetch_related("replies__author", "replies__author__pilgrim")
+        .order_by("created_at")
+    )
+    post_level_comments = [c for c in comments if c.photo_id is None and c.parent_id is None]
+    comments_by_photo = {}
+    for c in comments:
+        if c.photo_id and c.parent_id is None:
+            comments_by_photo.setdefault(c.photo_id, []).append(c)
+
+    for pp in post_photos:
+        pp.photo.thread = comments_by_photo.get(pp.photo_id, [])
+
+    return render(request, "pilgrims/post_detail.html", {
+        "post": post,
+        "post_photos": post_photos,
+        "post_level_comments": post_level_comments,
+        "can_comment": can_comment(request.user, post),
+    })
+
+
+@login_required
+@require_POST
+def post_delete(request, post_uuid):
+    post = get_object_or_404(Post, uuid=post_uuid, owner=request.user)
+    post.delete()
+    return redirect("pilgrims:feed")
+
+
+@login_required
+@require_POST
+def comment_add(request, post_uuid):
+    post = get_object_or_404(Post, uuid=post_uuid)
+    if not can_comment(request.user, post):
+        return JsonResponse(
+            {"success": False, "error": "forbidden", "message": "You can't comment on this post."},
+            status=200,
+        )
+
+    since = timezone.now() - timedelta(hours=1)
+    posted_this_hour = Comment.objects.filter(author=request.user, created_at__gte=since).count()
+    if posted_this_hour >= COMMENTS_PER_HOUR:
+        return JsonResponse(
+            {"success": False, "error": "rate_limited",
+             "message": "You've commented a lot this hour — try again later."},
+            status=200,
+        )
+
+    body = request.POST.get("body", "").strip()[:2000]
+    if not body:
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": "Comment can't be empty."}, status=200
+        )
+
+    photo = None
+    photo_uuid = request.POST.get("photo_uuid")
+    if photo_uuid:
+        photo = get_object_or_404(PilgrimPhoto, uuid=photo_uuid, post_photos__post=post)
+
+    parent = None
+    parent_uuid = request.POST.get("parent_uuid")
+    if parent_uuid:
+        parent = get_object_or_404(Comment, uuid=parent_uuid, post=post)
+        if parent.parent_id:
+            return JsonResponse(
+                {"success": False, "error": "invalid",
+                 "message": "Replies are one level deep only."},
+                status=200,
+            )
+
+    comment = Comment(post=post, photo=photo, parent=parent, author=request.user, body=body)
+    try:
+        comment.full_clean()
+    except ValidationError as exc:
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": " ".join(exc.messages)}, status=200
+        )
+    comment.save()
+    Post.objects.filter(pk=post.pk).update(comment_count=F("comment_count") + 1)
+
+    # Two independent facts, not one event: if the post owner is also the
+    # parent comment's author, they get BOTH notifications — "someone
+    # commented on your post" and "someone replied to your comment" are
+    # both true and worth surfacing separately, not deduped into one.
+    if post.owner_id != request.user.pk:
+        Notification.objects.create(
+            recipient=post.owner, actor=request.user,
+            verb=Notification.VERB_COMMENT_ON_POST, target_uuid=post.uuid,
+        )
+    if parent and parent.author_id != request.user.pk:
+        Notification.objects.create(
+            recipient=parent.author, actor=request.user,
+            verb=Notification.VERB_COMMENT_REPLY, target_uuid=post.uuid,
+        )
+
+    return JsonResponse({
+        "success": True,
+        "comment": {
+            "uuid": str(comment.uuid),
+            "body": comment.body,
+            "author": comment.author.pilgrim.display_name or comment.author.pilgrim.handle,
+        },
+    })
+
+
+@login_required
+@require_POST
+def comment_delete(request, comment_uuid):
+    comment = get_object_or_404(Comment.objects.select_related("post"), uuid=comment_uuid)
+    if request.user.pk not in (comment.author_id, comment.post.owner_id):
+        raise Http404
+    if not comment.is_deleted:
+        comment.is_deleted = True
+        comment.body = ""
+        comment.save(update_fields=["is_deleted", "body"])
+        Post.objects.filter(pk=comment.post_id).update(comment_count=F("comment_count") - 1)
+    return JsonResponse({"success": True})
+
+
+# --- Notifications (phase 3) -------------------------------------------------
+
+@login_required
+def notifications_list(request):
+    notifications = list(
+        Notification.objects.filter(recipient=request.user)
+        .select_related("actor", "actor__pilgrim")
+        .order_by("-created_at")[:50]
+    )
+    Notification.objects.filter(recipient=request.user, read_at__isnull=True).update(
+        read_at=timezone.now()
+    )
+    return render(request, "pilgrims/notifications.html", {"notifications": notifications})

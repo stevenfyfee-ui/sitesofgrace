@@ -290,3 +290,28 @@ a { color: inherit; text-decoration: none; }
   .richtext-image.left,
   .richtext-image.right { float: none; width: 100%; margin: 22px 0; }
 }
+/* ---------- Rich-text images ----------
+   Wagtail already writes the editor's alignment choice onto the tag as
+   `richtext-image left|right|full-width`; nothing styled it, so every image
+   rendered as a block in the text flow. Left/right float beside the copy and
+   unfloat on narrow screens. The hero image is outside the rich text and is
+   untouched by all of this. */
+
+.richtext-image {
+  max-width: 100%; height: auto; display: block;
+  border-radius: 12px; border: 1px solid var(--gold-soft);
+}
+.richtext-image.full-width { width: 100%; margin: 26px 0; }
+.richtext-image.left  { float: left;  width: min(40%, 340px); margin: 6px 30px 20px 0; }
+.richtext-image.right { float: right; width: min(40%, 340px); margin: 6px 0 20px 30px; }
+
+.catalog-section::after,
+.learn-body::after,
+.rich-text::after {
+  content: ""; display: block; clear: both;
+}
+
+@media (max-width: 760px) {
+  .richtext-image.left,
+  .richtext-image.right { float: none; width: 100%; margin: 22px 0; }
+}

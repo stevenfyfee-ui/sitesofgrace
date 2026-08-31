@@ -47,3 +47,15 @@ def make_uploaded_fake_image(name="fake.jpg"):
     """A non-image renamed to look like a jpeg — must be rejected by decoded
     format, not filename/Content-Type."""
     return SimpleUploadedFile(name, b"this is definitely not a jpeg", content_type="image/jpeg")
+
+
+def verify_email(user):
+    """User.objects.create_user() (used throughout these tests) doesn't go
+    through allauth's signup flow, so it leaves no EmailAddress row at all —
+    exactly the gap permissions.can_comment()'s verified-email check exists
+    to catch. Call this for any test user that should be able to comment."""
+    from allauth.account.models import EmailAddress
+
+    EmailAddress.objects.update_or_create(
+        user=user, email=user.email, defaults={"verified": True, "primary": True}
+    )

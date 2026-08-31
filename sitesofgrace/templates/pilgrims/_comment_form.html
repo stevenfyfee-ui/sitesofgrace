@@ -1,0 +1,7 @@
+{% load static %}
+<form class="comment-form" method="post" action="{% url 'pilgrims:comment_add' post.uuid %}">
+  {% csrf_token %}
+  {% if photo_uuid %}<input type="hidden" name="photo_uuid" value="{{ photo_uuid }}">{% endif %}
+  <input type="text" name="body" maxlength="2000" placeholder="Write a comment…" required>
+  <button type="submit" class="btn btn-gold">Post</button>
+</form>

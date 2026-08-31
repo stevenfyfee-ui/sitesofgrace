@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags menu_tags %}
+{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +36,11 @@
 
       <div class="header-actions">
         {% if request.user.is_authenticated %}
+          <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
+          {% unread_notification_count request.user as unread_count %}
+          <a class="btn btn-secondary pilgrims-nav-bell" href="{% url 'pilgrims:notifications' %}">
+            Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}
+          </a>
           <a class="btn btn-primary" aria-label="Pilgrim Portal" href="{% url 'pilgrims:profile_detail' handle=request.user.pilgrim.handle %}">{{ request.user.pilgrim.display_name|default:request.user.get_username }}</a>
         {% else %}
           <a class="btn btn-primary" aria-label="Pilgrim Portal" href="{% url 'account_login' %}?next={% url 'pilgrims:home' %}">Sign in</a>
