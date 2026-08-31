@@ -9,13 +9,18 @@ bucket. It exercises the exact OPTIONS from sitesofgrace/settings/base.py's
 "location" prefix — the whole bucket is private), so a change to those
 options that breaks signing fails here first.
 
-What this file deliberately does NOT cover: confirming the unsigned path
-actually 403s against the real sitesofgrace-pilgrims bucket. That requires
-real SPACES_PRIVATE_* dev credentials this environment doesn't have — see
-the phase-2 report.
+Everything in this file was subsequently confirmed against the real
+sitesofgrace-pilgrims bucket by a one-off script (not part of the suite,
+since it needs real SPACES_PRIVATE_* credentials this environment doesn't
+reliably have) — see the phase-2 live-verification report: multipart
+upload past the 8MB threshold, presigned URL host/signature, unsigned-path
+403, HeadObject existence checks (object-level only, never a bucket-level
+List call — the Limited Access key can't do those), 10s-expiry 403, and
+delete removing all four derivatives.
 """
 from urllib.parse import urlparse
 
+from django.conf import settings
 from django.test import SimpleTestCase
 from storages.backends.s3 import S3Storage
 
@@ -70,3 +75,51 @@ class PrivateStorageSigningTests(SimpleTestCase):
         url = storage.url("pilgrims/owner-uuid/photo-uuid/original.jpg")
         self.assertNotIn("X-Amz-Signature", url)
         self.assertTrue(url.startswith("https://cdn.example.com/"))
+
+
+class MultipartUploadThresholdTests(SimpleTestCase):
+    """A real phone photo is typically well over 8MB. boto3's S3 transfer
+    manager switches from a single PutObject to
+    CreateMultipartUpload/UploadPart/CompleteMultipartUpload above its
+    `multipart_threshold` — a different call set, against the same scoped
+    Limited Access key. Confirmed live (see module docstring) that an
+    8.06MB upload through the real view succeeds; these guard against a
+    future config change silently disabling that path without anyone
+    re-running the live check."""
+
+    def test_pilgrim_private_options_do_not_override_transfer_config(self):
+        # The only way to change the multipart threshold/behavior is a
+        # "transfer_config" (or legacy AWS_S3_TRANSFER_CONFIG) OPTIONS key.
+        # base.py must never add one without a deliberate reason.
+        options = settings.STORAGES["pilgrim_private"]["OPTIONS"]
+        self.assertNotIn("transfer_config", options)
+
+    def test_default_transfer_config_multipart_threshold_is_8mb(self):
+        storage = _private_storage()
+        self.assertEqual(storage.transfer_config.multipart_threshold, 8 * 1024 * 1024)
+
+    def test_default_transfer_config_multipart_chunksize_is_8mb(self):
+        storage = _private_storage()
+        self.assertEqual(storage.transfer_config.multipart_chunksize, 8 * 1024 * 1024)
+
+
+class RealSettingsConfigTests(SimpleTestCase):
+    """Guards the actual sitesofgrace/settings/base.py OPTIONS dict itself
+    (not just the reconstructed fixture above) against silent drift on any
+    of the values the live verification depends on."""
+
+    def test_pilgrim_private_options(self):
+        options = settings.STORAGES["pilgrim_private"]["OPTIONS"]
+        self.assertEqual(options["region_name"], "sfo3")
+        self.assertEqual(options["endpoint_url"], "https://sfo3.digitaloceanspaces.com")
+        self.assertIsNone(options["custom_domain"])
+        self.assertTrue(options["querystring_auth"])
+        self.assertEqual(options["querystring_expire"], 900)
+        self.assertEqual(options["default_acl"], "private")
+        # Required so Storage.save() never calls HeadObject to check for a
+        # collision before saving — every key here is UUID-based and can't
+        # really collide, and this key can't distinguish "doesn't exist"
+        # from "forbidden" without s3:ListBucket (confirmed live: HeadObject
+        # on a key that never existed returns 403, not 404).
+        self.assertTrue(options["file_overwrite"])
+        self.assertNotIn("location", options)
