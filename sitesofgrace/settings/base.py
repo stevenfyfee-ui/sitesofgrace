@@ -224,16 +224,28 @@ MEDIA_URL = "/media/"
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
 #
-# Read here (not just in production.py) because "pilgrim_private" must be
-# usable from a dev machine too — presigned-URL signing is S3/Spaces-specific
-# behavior that a local FileSystemStorage can't stand in for, so verifying it
-# means pointing dev at the real bucket via these same env vars (e.g. in the
-# untracked sitesofgrace/settings/local.py). No credentials are hardcoded.
+# Two separate Spaces buckets, both in sfo3, each with ITS OWN credentials —
+# not one bucket with a private prefix. "default" (sitesofgrace-media2, CDN
+# on) is the existing public CMS media bucket; "pilgrim_private"
+# (sitesofgrace-pilgrims, CDN off) is a second bucket for private pilgrim
+# photos, reachable only via SPACES_PRIVATE_KEY/SPACES_PRIVATE_SECRET — a
+# DigitalOcean "Limited Access" key scoped to that one bucket, object-level
+# operations only (no ListAllMyBuckets/HeadBucket/versioning/lifecycle/CORS/
+# policy calls). Read here (not just in production.py) so it's usable from a
+# dev machine too — presigned-URL signing is S3/Spaces-specific behavior a
+# local FileSystemStorage can't stand in for, so verifying it means pointing
+# dev at the real bucket via these same env vars (e.g. in the untracked
+# sitesofgrace/settings/local.py). No credentials are hardcoded, logged, or
+# committed.
 SPACES_BUCKET = os.environ.get("SPACES_BUCKET", "")
 SPACES_KEY = os.environ.get("SPACES_KEY", "")
 SPACES_SECRET = os.environ.get("SPACES_SECRET", "")
 SPACES_REGION = os.environ.get("SPACES_REGION", "")
 SPACES_ENDPOINT_URL = os.environ.get("SPACES_ENDPOINT_URL", "")
+
+SPACES_PRIVATE_BUCKET = os.environ.get("SPACES_PRIVATE_BUCKET", "")
+SPACES_PRIVATE_KEY = os.environ.get("SPACES_PRIVATE_KEY", "")
+SPACES_PRIVATE_SECRET = os.environ.get("SPACES_PRIVATE_SECRET", "")
 
 STORAGES = {
     "default": {
@@ -242,27 +254,27 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
-    # Same bucket as "default", different prefix and ACL. Pilgrim photos are
-    # private by default and must never be reachable through the public
-    # bucket/CDN path — see pilgrims/models.py:PilgrimPhoto and
-    # pilgrims/imaging.py.
+    # A separate bucket (sitesofgrace-pilgrims) with a separate, narrowly-
+    # scoped key — not just a private prefix on the public bucket. See
+    # pilgrims/models.py:PilgrimPhoto and pilgrims/imaging.py. The whole
+    # bucket is private, so no "location" prefix is needed.
     "pilgrim_private": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "access_key": SPACES_KEY,
-            "secret_key": SPACES_SECRET,
-            "bucket_name": SPACES_BUCKET,
+            "access_key": SPACES_PRIVATE_KEY,
+            "secret_key": SPACES_PRIVATE_SECRET,
+            "bucket_name": SPACES_PRIVATE_BUCKET,
             "region_name": SPACES_REGION,
             "endpoint_url": SPACES_ENDPOINT_URL,
-            "location": "private",
             "default_acl": "private",
             "querystring_auth": True,
             "querystring_expire": 900,
-            # Must stay False: a custom/CDN domain makes S3Storage.url()
-            # return a bare, unsigned URL (it assumes the CDN handles auth),
-            # which would silently defeat every presigned-URL protection
-            # below.
-            "custom_domain": False,
+            # Must stay None/False: a custom/CDN domain makes
+            # S3Storage.url() return a bare, unsigned URL (it assumes the
+            # CDN handles auth), which would silently defeat every
+            # presigned-URL protection below — and this bucket has no CDN
+            # anyway.
+            "custom_domain": None,
             "file_overwrite": False,
         },
     },

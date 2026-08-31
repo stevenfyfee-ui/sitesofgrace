@@ -15,9 +15,10 @@ which bit the first version of this file:
    LazyObject), `makemigrations` serializes that RESOLVED instance into the
    migration file — every OPTIONS kwarg spelled out literally, including
    access_key/secret_key. In this repo those happen to be empty strings
-   today, but the moment SPACES_KEY/SPACES_SECRET are set in whatever
-   environment next runs makemigrations, the real Spaces credentials would
-   be written into a migration file and committed to git.
+   today, but the moment SPACES_PRIVATE_KEY/SPACES_PRIVATE_SECRET are set in
+   whatever environment next runs makemigrations, the real
+   sitesofgrace-pilgrims credentials would be written into a migration file
+   and committed to git.
 
 The fix for both: pass a plain module-level CALLABLE. Field.__init__ calls
 it once (its return value — this module's LazyObject — becomes the field's
