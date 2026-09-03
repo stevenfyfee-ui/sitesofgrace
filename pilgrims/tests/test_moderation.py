@@ -1,13 +1,98 @@
 from django.contrib.auth.models import User
 from django.core import mail
-from django.test import Client
+from django.test import Client, RequestFactory, override_settings
 from django.urls import reverse
 
 from .. import sharing
 from ..models import ModerationAction, PhotoReport, PilgrimPhoto
 from ..permissions import staff_can_view_reported_photo
+from ..views import _client_ip, _ip_hash
 from .factories import grant_wagtail_admin_access
 from .test_sharing import _make_photo, _make_site, _PublicAndPrivateStorageTestCase
+
+
+class ClientIpSpoofingTests(_PublicAndPrivateStorageTestCase):
+    """The security bug: split(",")[0] on X-Forwarded-For trusts whatever
+    the CLIENT put there. App Platform's edge proxy appends the real
+    address rather than replacing the header, so a forged
+    "X-Forwarded-For: 1.2.3.4" becomes "1.2.3.4, <real ip>" by the time it
+    reaches Django — the real ip is on the RIGHT, and with exactly one
+    trusted hop (the default) that's the only entry that should count."""
+
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def _request_with_xff(self, xff, remote_addr="203.0.113.9"):
+        request = self.factory.get("/pilgrims/photos/x/report/")
+        request.META["HTTP_X_FORWARDED_FOR"] = xff
+        request.META["REMOTE_ADDR"] = remote_addr
+        return request
+
+    @override_settings(TRUSTED_PROXY_COUNT=1)
+    def test_forged_leftmost_entry_is_ignored(self):
+        # Attacker sends X-Forwarded-For: 9.9.9.9 ; the one trusted proxy in
+        # front of the app appends the real address behind it.
+        request = self._request_with_xff("9.9.9.9, 198.51.100.7")
+        self.assertEqual(_client_ip(request), "198.51.100.7")
+
+    @override_settings(TRUSTED_PROXY_COUNT=1)
+    def test_rotating_the_forged_prefix_does_not_change_the_hash(self):
+        # The whole point of the attack: spoof a different leftmost value
+        # per request to look like a different reporter/uploader each time.
+        # If the fix works, every one of these hashes to the same value,
+        # because only the trusted (rightmost) hop is ever read.
+        real_hop = "198.51.100.7"
+        hashes = {
+            _ip_hash(self._request_with_xff(f"{fake}, {real_hop}"))
+            for fake in ("1.1.1.1", "2.2.2.2", "9.9.9.9", "not-even-an-ip")
+        }
+        self.assertEqual(len(hashes), 1, "rotating the spoofed prefix must not change the computed hash")
+
+    @override_settings(TRUSTED_PROXY_COUNT=1)
+    def test_no_xff_header_falls_back_to_remote_addr(self):
+        request = self.factory.get("/pilgrims/photos/x/report/")
+        request.META["REMOTE_ADDR"] = "203.0.113.9"
+        self.assertEqual(_client_ip(request), "203.0.113.9")
+
+    @override_settings(TRUSTED_PROXY_COUNT=2)
+    def test_fewer_hops_than_trusted_falls_back_to_remote_addr(self):
+        # With 2 trusted hops configured, a header with only 1 entry isn't
+        # enough to confidently identify which position is trustworthy —
+        # don't guess, fall back to the safe default rather than trusting
+        # the one (possibly attacker-supplied) entry present.
+        request = self._request_with_xff("9.9.9.9")
+        self.assertEqual(_client_ip(request), "203.0.113.9")
+
+    def test_report_rate_limit_cannot_be_bypassed_by_rotating_xff(self):
+        owner = User.objects.create_user("xff_owner", "xff_owner@example.com", "pw")
+        site = _make_site(slug="xff-site")
+        photos = [_make_photo(owner, site, width=50 + i, height=50 + i) for i in range(10)]
+        for p in photos:
+            sharing.share_photo(p, credit="display_name")
+
+        client = Client()
+        real_hop = "198.51.100.55"
+        for i, photo in enumerate(photos):
+            client.post(
+                reverse("pilgrims:report_photo", args=[photo.uuid]),
+                {"reason": PhotoReport.REASON_COPYRIGHT},
+                # A different forged leftmost value every request, same
+                # trusted rightmost hop each time.
+                HTTP_X_FORWARDED_FOR=f"10.0.0.{i}, {real_hop}",
+                REMOTE_ADDR="192.0.2.100",  # the proxy's own address, not the client's
+            )
+
+        one_more = _make_photo(owner, site, width=999, height=999)
+        sharing.share_photo(one_more, credit="display_name")
+        response = client.post(
+            reverse("pilgrims:report_photo", args=[one_more.uuid]),
+            {"reason": PhotoReport.REASON_COPYRIGHT},
+            HTTP_X_FORWARDED_FOR=f"10.0.0.99, {real_hop}",
+            REMOTE_ADDR="192.0.2.100",
+        )
+        data = response.json()
+        self.assertFalse(data["success"], "rotating the spoofed XFF prefix must not bypass the rate limit")
+        self.assertEqual(data["error"], "rate_limited")
 
 
 class AutoHideTests(_PublicAndPrivateStorageTestCase):

@@ -44,9 +44,24 @@ REPORTS_PER_HOUR_PER_IP = 10
 
 
 def _client_ip(request):
-    forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
-    if forwarded:
-        return forwarded.split(",")[0].strip()
+    """The real client IP — trusting exactly settings.TRUSTED_PROXY_COUNT
+    hops of X-Forwarded-For, counted from the RIGHT, never the left.
+
+    X-Forwarded-For is a client-suppliable header that each proxy hop
+    APPENDS to (never replaces) as it forwards the request. A client that
+    sends `X-Forwarded-For: 1.2.3.4` gets that value echoed straight back
+    as the leftmost entry once App Platform's edge proxy appends the real
+    address after it — `split(",")[0]` would trust the attacker completely.
+    The trustworthy entries are the last TRUSTED_PROXY_COUNT of them, added
+    by infrastructure we actually control.
+    """
+    trusted_count = settings.TRUSTED_PROXY_COUNT
+    if trusted_count > 0:
+        forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+        if forwarded:
+            hops = [hop.strip() for hop in forwarded.split(",") if hop.strip()]
+            if len(hops) >= trusted_count:
+                return hops[-trusted_count]
     return request.META.get("REMOTE_ADDR", "")
 
 

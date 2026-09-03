@@ -196,6 +196,17 @@ SERVER_EMAIL = os.environ.get("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
 # silently or hardcoding an address.
 MODERATION_EMAIL = os.environ.get("MODERATION_EMAIL") or DEFAULT_FROM_EMAIL
 
+# Number of trusted reverse-proxy hops in front of the app — DigitalOcean
+# App Platform's single edge load balancer, by default. Used by
+# pilgrims.views._client_ip to read the correct entry from X-Forwarded-For:
+# that header is a client-suppliable value that each hop APPENDS to (never
+# replaces), so the only trustworthy entries are the last
+# TRUSTED_PROXY_COUNT of them — never the leftmost, which is whatever the
+# client sent. Safe to leave at 1 in dev: `runserver` requests never carry
+# an X-Forwarded-For header at all, so _client_ip falls straight back to
+# REMOTE_ADDR regardless of this value.
+TRUSTED_PROXY_COUNT = int(os.environ.get("TRUSTED_PROXY_COUNT", "1"))
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
