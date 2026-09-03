@@ -127,6 +127,11 @@ class Follow(models.Model):
         indexes = [
             models.Index(fields=["following", "status"]),
             models.Index(fields=["follower", "status"]),
+            # Backs the follow-request rate limit's
+            # filter(follower=X, created_at__gte=Y) — neither index above
+            # has created_at, so without this Postgres can only prefix-seek
+            # to this follower's rows and scan them for the date filter.
+            models.Index(fields=["follower", "created_at"]),
         ]
 
     def __str__(self):
@@ -247,6 +252,10 @@ class PilgrimPhoto(models.Model):
         indexes = [
             models.Index(fields=["owner", "site"]),
             models.Index(fields=["site", "is_public_on_site", "hidden_by_staff"]),
+            # Backs the upload rate limit's
+            # filter(owner=X, created_at__gte=Y) — (owner, site) doesn't
+            # cover a created_at range scan.
+            models.Index(fields=["owner", "created_at"]),
         ]
 
     def __str__(self):
@@ -419,6 +428,12 @@ class Comment(models.Model):
         ordering = ["created_at"]
         indexes = [
             models.Index(fields=["post", "created_at"]),
+            # Backs the comment rate limit's
+            # filter(author=X, created_at__gte=Y) — the (post, created_at)
+            # index above doesn't have author as a leading column, so this
+            # query would otherwise fall back to the plain single-column
+            # index Django creates for the author FK by default.
+            models.Index(fields=["author", "created_at"]),
         ]
 
     def clean(self):
