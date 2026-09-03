@@ -1,0 +1,63 @@
+{% load static wagtailcore_tags %}
+{% comment %}
+  "Plan Your Visit" -- the Quick Card plus up to twelve collapsible panels,
+  grouped into four clusters.
+
+  Native <details>/<summary>, deliberately: keyboard support and the disclosure
+  role come for free, the panels still open with JS blocked, and every body is
+  in the DOM while collapsed so Ctrl-F and crawlers both find it. Do not
+  replace this with a JS accordion.
+
+  Panel ids are the section's `kind`, which is what makes
+  /explore/.../lourdes/#where-to-stay a stable deep link.
+{% endcomment %}
+<section class="catalog-section section-anchor plan-visit" id="plan-your-visit">
+  <h2>Plan Your Visit</h2>
+
+  {% if page.show_quick_card %}
+    <div class="plan-quickcard">
+      <h3 class="plan-quickcard-title">The Pilgrim&rsquo;s Quick Card</h3>
+      <dl class="plan-quickcard-grid">
+        {% for label, value, note in page.quick_card_cells %}
+          <div class="plan-qc-cell">
+            <dt>{{ label }}</dt>
+            <dd>
+              {{ value }}
+              {% if note %}<span class="plan-qc-note">{{ note }}</span>{% endif %}
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+      <p class="plan-quickcard-foot">
+        <a class="plan-qc-link" href="/plan/?site={{ page.slug }}">Estimate the cost of this trip &rarr;</a>
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="plan-toolbar">
+    <span class="plan-hint">Open only what you need.</span>
+    <button type="button" class="plan-toggle-all" data-plan-toggle-all aria-expanded="false">
+      Expand all
+    </button>
+  </div>
+
+  {% for cluster_label, sections in page.plan_clusters %}
+    <div class="plan-cluster">
+      <p class="plan-cluster-label">{{ cluster_label }}</p>
+      {% for section in sections %}
+        <details class="plan-panel" id="{{ section.kind }}" data-plan-panel>
+          <summary class="plan-summary">
+            <span class="plan-summary-icon" aria-hidden="true">{{ section.display_number }}</span>
+            <span class="plan-summary-text">
+              {{ section.label }}
+              {% if section.teaser %}<span class="plan-teaser">{{ section.teaser }}</span>{% endif %}
+            </span>
+            <span class="plan-chevron" aria-hidden="true">&#9662;</span>
+          </summary>
+          <div class="plan-panel-body">{{ section.body|richtext }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+<script src="{% static 'js/plan-your-visit.js' %}" defer></script>

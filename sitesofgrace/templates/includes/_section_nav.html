@@ -8,14 +8,32 @@
   the left margin on wide screens and a sticky chip bar under the header below
   that -- both driven by the same markup, switched in CSS. Hidden entirely when
   there is only one section, since a table of contents with one entry is noise.
+
+  An entry may also carry "children": a second level of {"id", "label"} for
+  sections that contain their own sub-sections (a site page's "Plan Your Visit"
+  and its twelve panels). Children are a display level only -- they are NOT
+  counted by the `sections|length > 1` gate below, because that gate also
+  decides whether the page becomes a two-column grid. A page whose only
+  top-level entry carries twelve children still has one entry, and must not get
+  the rail. Children render only in rail mode; in chip-bar mode the section's
+  own headings are the sub-navigation.
 {% endcomment %}
 {% if sections|length > 1 %}
   <nav class="section-nav" aria-labelledby="section-nav-title" data-section-nav>
     <p class="section-nav-title" id="section-nav-title">On this page</p>
     <ul class="section-nav-list">
       {% for item in sections %}
-        <li class="section-nav-item">
+        <li class="section-nav-item{% if item.children %} section-nav-item--parent{% endif %}"{% if item.children %} data-section-parent="{{ item.id }}"{% endif %}>
           <a class="section-nav-link" href="#{{ item.id }}" data-section-link="{{ item.id }}">{{ item.label }}</a>
+          {% if item.children %}
+            <ul class="section-nav-sublist">
+              {% for child in item.children %}
+                <li class="section-nav-subitem">
+                  <a class="section-nav-sublink" href="#{{ child.id }}" data-section-link="{{ child.id }}">{{ child.label }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>

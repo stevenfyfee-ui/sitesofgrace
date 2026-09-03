@@ -1,10 +1,16 @@
 from django.db import models
 from django.utils.functional import cached_property
-from modelcluster.fields import ParentalManyToManyField
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField
-from wagtail.models import Page
+from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
+
+from catalog.travel_sections import (
+    TRAVEL_CLUSTERS,
+    TRAVEL_LABELS,
+    TRAVEL_SECTION_CHOICES,
+)
 
 CATEGORY_CHOICES = [
     ("Marian Apparition", "Marian Apparition"),
@@ -142,6 +148,21 @@ class SacredSitePage(Page):
     location_link = models.URLField(blank=True)
     notes_internal = models.TextField(blank=True)
 
+    # --- The Pilgrim's Quick Card ---------------------------------------
+    # Six short facts above the collapsed travel panels. Most readers get
+    # their answer here without opening anything. The sixth cell is the
+    # existing feast_day field -- deliberately not duplicated.
+    quick_ideal_stay = models.CharField(max_length=40, blank=True)
+    quick_ideal_stay_note = models.CharField(max_length=60, blank=True)
+    quick_best_months = models.CharField(max_length=40, blank=True)
+    quick_best_months_note = models.CharField(max_length=60, blank=True)
+    quick_airport = models.CharField(max_length=60, blank=True)
+    quick_airport_note = models.CharField(max_length=60, blank=True)
+    quick_language = models.CharField(max_length=60, blank=True)
+    quick_language_note = models.CharField(max_length=60, blank=True)
+    quick_accessibility = models.CharField(max_length=40, blank=True)
+    quick_accessibility_note = models.CharField(max_length=60, blank=True)
+
     content_panels = Page.content_panels + [
         FieldPanel("featured_image"),
         MultiFieldPanel(
@@ -169,9 +190,30 @@ class SacredSitePage(Page):
         FieldPanel("the_story"),
         FieldPanel("church_recognition"),
         FieldPanel("catholic_teaching"),
-        FieldPanel("pilgrimage_info"),
+        MultiFieldPanel(
+            [
+                FieldPanel("quick_ideal_stay"),
+                FieldPanel("quick_ideal_stay_note"),
+                FieldPanel("quick_best_months"),
+                FieldPanel("quick_best_months_note"),
+                FieldPanel("quick_airport"),
+                FieldPanel("quick_airport_note"),
+                FieldPanel("quick_language"),
+                FieldPanel("quick_language_note"),
+                FieldPanel("quick_accessibility"),
+                FieldPanel("quick_accessibility_note"),
+            ],
+            heading="The Pilgrim's Quick Card",
+            classname="collapsed",
+        ),
+        InlinePanel("travel_sections", label="Plan Your Visit section"),
         FieldPanel("go_deeper"),
         FieldPanel("notes_internal"),
+        MultiFieldPanel(
+            [FieldPanel("pilgrimage_info")],
+            heading="Visiting & Pilgrimage (legacy -- no longer displayed)",
+            classname="collapsed",
+        ),
     ]
 
     # (anchor id, rail label, field name) -- the narrative body of a site page,
@@ -180,7 +222,9 @@ class SacredSitePage(Page):
         ("the-story", "The Story", "the_story"),
         ("church-recognition", "Church Recognition", "church_recognition"),
         ("catholic-teaching", "Catholic Teaching", "catholic_teaching"),
-        ("visiting-pilgrimage", "Visiting & Pilgrimage", "pilgrimage_info"),
+        # "visiting-pilgrimage" retired: its content moved into the
+        # "Plan Your Visit" travel sections. pilgrimage_info is kept on the
+        # model for one deploy so a rollback cannot lose text.
         ("go-deeper", "Go Deeper", "go_deeper"),
     ]
 
@@ -197,12 +241,104 @@ class SacredSitePage(Page):
     def has_location_section(self):
         return bool(self.location_link or (self.latitude and self.longitude))
 
+    @cached_property
+    def plan_clusters(self):
+        """[(cluster label, [section, ...]), ...] -- filled sections only.
+
+        Order comes from TRAVEL_CLUSTERS, not from the inline's sort_order, so
+        every site page reads in the same shape. A cluster with nothing filled
+        in renders nothing at all.
+        """
+        by_kind = {section.kind: section for section in self.travel_sections.all()}
+        clusters = []
+        number = 0
+        for _, cluster_label, items in TRAVEL_CLUSTERS:
+            rows = []
+            for key, _ in items:
+                section = by_kind.get(key)
+                if section is None:
+                    continue
+                number += 1
+                # Panels are numbered across the whole section, counting only
+                # the ones that render, so a page with five of twelve reads
+                # 1-5 rather than skipping numbers.
+                section.display_number = number
+                rows.append(section)
+            if rows:
+                clusters.append((cluster_label, rows))
+        return clusters
+
+    @cached_property
+    def plan_sections(self):
+        """The filled travel sections, flat, in canonical reading order."""
+        return [section for _, rows in self.plan_clusters for section in rows]
+
+    @property
+    def has_plan_section(self):
+        return bool(self.plan_clusters)
+
+    @cached_property
+    def quick_card_cells(self):
+        """[(label, value, note), ...] for the cells the editor filled in."""
+        candidates = [
+            ("Ideal stay", self.quick_ideal_stay, self.quick_ideal_stay_note),
+            ("Best months", self.quick_best_months, self.quick_best_months_note),
+            ("Nearest airport", self.quick_airport, self.quick_airport_note),
+            ("Language & currency", self.quick_language, self.quick_language_note),
+            ("Feast day", self.feast_day, ""),
+            ("Accessibility", self.quick_accessibility, self.quick_accessibility_note),
+        ]
+        return [(label, value, note) for label, value, note in candidates if value]
+
+    @property
+    def show_quick_card(self):
+        """One fact is worse than none -- a half-empty card reads as broken."""
+        return len(self.quick_card_cells) >= 2
+
+    @cached_property
+    def body_blocks(self):
+        """The page body in render order: narrative sections and the plan block.
+
+        The rail is derived from this same list, so the order a reader scrolls
+        through and the order the rail lists can never drift apart. "Plan Your
+        Visit" sits after Catholic Teaching and before Go Deeper -- you learn
+        what the place is, then how to get there, then what to read next.
+        """
+        blocks = []
+        for section in self.narrative_sections:
+            blocks.append({"kind": "narrative", "section": section})
+            if section["anchor"] == "catholic-teaching" and self.has_plan_section:
+                blocks.append({"kind": "plan"})
+        if self.has_plan_section and not any(b["kind"] == "plan" for b in blocks):
+            blocks.append({"kind": "plan"})
+        return blocks
+
     @property
     def section_nav(self):
-        items = [
-            {"id": section["anchor"], "label": section["label"]}
-            for section in self.narrative_sections
-        ]
+        """Top-level rail entries. "Plan Your Visit" carries `children`.
+
+        Children are a second rail level, NOT extra top-level entries: the
+        `sections|length > 1` gate that decides whether the rail -- and with it
+        the two-column grid -- renders at all counts this list only. Twelve
+        children make the rail look full while the top-level count is still
+        one, which is exactly how the saint pages collapsed in 22cee897.
+        """
+        items = []
+        for block in self.body_blocks:
+            if block["kind"] == "narrative":
+                section = block["section"]
+                items.append({"id": section["anchor"], "label": section["label"]})
+            else:
+                items.append(
+                    {
+                        "id": "plan-your-visit",
+                        "label": "Plan Your Visit",
+                        "children": [
+                            {"id": s.kind, "label": TRAVEL_LABELS[s.kind]}
+                            for s in self.plan_sections
+                        ],
+                    }
+                )
         if self.has_location_section:
             items.append({"id": "location", "label": "Location"})
         return items
@@ -211,3 +347,48 @@ class SacredSitePage(Page):
         context = super().get_context(request, *args, **kwargs)
         context["map_page"] = Page.objects.filter(slug=MAP_PAGE_SLUG).first()
         return context
+
+
+class SiteTravelSection(Orderable):
+    """One panel of the "Plan Your Visit" section on a sacred site page.
+
+    `kind` is a fixed choice rather than free text because it doubles as the
+    URL anchor: /explore/.../lourdes/#where-to-stay. Free-text labels would be
+    slugified, so a reworded heading would quietly break every shared and
+    indexed deep link. The unique constraint is what guarantees one anchor
+    cannot appear twice on a page.
+    """
+
+    page = ParentalKey(
+        "catalog.SacredSitePage",
+        related_name="travel_sections",
+        on_delete=models.CASCADE,
+    )
+    kind = models.CharField(max_length=40, choices=TRAVEL_SECTION_CHOICES)
+    teaser = models.CharField(
+        max_length=90,
+        blank=True,
+        help_text="One line under the heading, readable while the panel is closed.",
+    )
+    body = RichTextField()
+
+    panels = [
+        FieldPanel("kind"),
+        FieldPanel("teaser"),
+        FieldPanel("body"),
+    ]
+
+    class Meta(Orderable.Meta):
+        constraints = [
+            models.UniqueConstraint(
+                fields=["page", "kind"],
+                name="unique_travel_section_per_page",
+            ),
+        ]
+
+    @property
+    def label(self):
+        return TRAVEL_LABELS.get(self.kind, self.kind)
+
+    def __str__(self):
+        return f"{self.page.title} - {self.label}"

@@ -44,13 +44,17 @@
         </div>
       {% endif %}
 
-      {% if page.narrative_sections %}
+      {% if page.body_blocks %}
         <div class="catalog-sections">
-          {% for s in page.narrative_sections %}
-            <section class="catalog-section section-anchor" id="{{ s.anchor }}">
-              <h2>{{ s.label }}</h2>
-              {{ s.body|richtext }}
-            </section>
+          {% for block in page.body_blocks %}
+            {% if block.kind == "narrative" %}
+              <section class="catalog-section section-anchor" id="{{ block.section.anchor }}">
+                <h2>{{ block.section.label }}</h2>
+                {{ block.section.body|richtext }}
+              </section>
+            {% else %}
+              {% include "catalog/includes/_plan_your_visit.html" %}
+            {% endif %}
           {% endfor %}
         </div>
       {% endif %}

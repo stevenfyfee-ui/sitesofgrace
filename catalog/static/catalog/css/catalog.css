@@ -151,3 +151,147 @@
 @media (max-width: 560px) {
   .catalog-site-grid, .directory-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- "Plan Your Visit" ----------
+   The Quick Card answers the common questions in six facts; the twelve panels
+   below it are native <details>, collapsed by default, grouped into four
+   clusters. Brand tokens come from site.css. */
+
+.plan-visit { padding-top: 34px; }
+
+/* Quick Card */
+.plan-quickcard {
+  border: 1px solid var(--gold); border-radius: 16px;
+  background: var(--parchment); padding: 20px 22px; margin: 0 0 24px;
+  box-shadow: 0 14px 40px -30px rgba(3, 37, 83, .5);
+}
+.plan-quickcard-title {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--serif-titling, var(--serif-display));
+  font-size: 10.5px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 14px;
+}
+.plan-quickcard-title::after {
+  content: ""; flex: 1; height: 1px; background: var(--gold-soft);
+}
+.plan-quickcard-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px 20px; margin: 0;
+}
+.plan-qc-cell dt {
+  font-family: var(--sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--stone);
+  margin: 0 0 2px;
+}
+.plan-qc-cell dd {
+  margin: 0; font-family: var(--serif-display); font-size: 19px;
+  line-height: 1.2; color: var(--navy);
+}
+.plan-qc-note {
+  display: block; font-family: var(--sans); font-size: 11.5px;
+  line-height: 1.4; color: var(--stone); margin-top: 3px;
+}
+.plan-quickcard-foot {
+  margin: 18px 0 0; padding-top: 15px; border-top: 1px solid var(--gold-soft);
+}
+.plan-qc-link {
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--blue); text-decoration: none;
+}
+.plan-qc-link:hover { color: var(--navy); text-decoration: underline; }
+
+/* Toolbar */
+.plan-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin: 0 0 12px;
+}
+.plan-hint {
+  font-family: var(--serif-display); font-style: italic;
+  font-size: 15px; color: var(--stone);
+}
+.plan-toggle-all {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+  cursor: pointer; background: #fff; border: 1px solid var(--gold-soft);
+  color: var(--blue); padding: 7px 14px; border-radius: 999px;
+  transition: border-color .15s, color .15s;
+}
+.plan-toggle-all:hover { border-color: var(--gold); color: var(--navy); }
+
+/* Clusters */
+.plan-cluster { margin-bottom: 22px; }
+.plan-cluster-label {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--serif-titling, var(--serif-display));
+  font-size: 10.5px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--blue); margin: 0 0 9px;
+}
+.plan-cluster-label::before { content: "\2726"; color: var(--gold); font-size: 11px; }
+.plan-cluster-label::after {
+  content: ""; flex: 1; height: 1px; background: var(--gold-soft);
+}
+
+/* Panels */
+.plan-panel {
+  background: #fff; border: 1px solid var(--gold-soft); border-radius: 12px;
+  margin-bottom: 8px; overflow: hidden; transition: border-color .15s;
+}
+.plan-panel:hover { border-color: var(--gold); }
+.plan-panel[open] {
+  border-color: var(--gold);
+  box-shadow: 0 12px 34px -26px rgba(3, 37, 83, .45);
+}
+.plan-summary {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  list-style: none; padding: 15px 18px;
+  font-family: var(--serif-display); font-size: 20.5px; font-weight: 600;
+  color: var(--navy); scroll-margin-top: 150px;
+}
+.plan-summary::-webkit-details-marker { display: none; }
+.plan-summary:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.plan-summary-icon {
+  flex: none; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--parchment); border: 1px solid var(--gold-soft);
+  display: grid; place-items: center;
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--gold);
+}
+.plan-panel[open] .plan-summary-icon {
+  background: var(--navy); border-color: var(--navy); color: var(--gold);
+}
+.plan-summary-text { flex: 1; line-height: 1.2; }
+.plan-teaser {
+  display: block; font-family: var(--sans); font-size: 12.5px;
+  font-weight: 400; color: var(--stone); margin-top: 3px;
+}
+.plan-chevron { flex: none; color: var(--gold); font-size: 12px; transition: transform .2s ease; }
+.plan-panel[open] .plan-chevron { transform: rotate(180deg); }
+.plan-panel-body { padding: 0 18px 18px 58px; }
+.plan-panel-body p,
+.plan-panel-body ul,
+.plan-panel-body ol { font-size: 15px; line-height: 1.7; color: #33405a; margin: 0 0 12px; }
+.plan-panel-body > :last-child { margin-bottom: 0; }
+
+@media (min-width: 1200px) {
+  .plan-summary { scroll-margin-top: 108px; }
+}
+@media (max-width: 760px) {
+  .plan-quickcard-grid { grid-template-columns: repeat(2, 1fr); }
+  .plan-panel-body { padding-left: 18px; }
+  .plan-summary { font-size: 18px; padding: 13px 14px; gap: 10px; }
+}
+
+/* Print: the whole plan, expanded, without the furniture. plan-your-visit.js
+   opens every panel on beforeprint and restores them afterwards. */
+@media print {
+  .section-nav,
+  .plan-toolbar,
+  .plan-quickcard-foot,
+  .catalog-hero .journey-buttons,
+  .site-plan-link { display: none !important; }
+  .section-layout--with-nav { display: block; width: auto; }
+  .plan-panel {
+    border-color: #ccc; box-shadow: none; break-inside: avoid;
+  }
+  .plan-summary { font-size: 17px; }
+  .plan-summary-icon, .plan-chevron { display: none; }
+  .plan-panel-body { padding-left: 18px; }
+}

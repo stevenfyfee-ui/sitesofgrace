@@ -5,6 +5,11 @@
  * plain fragment anchors, so everything still works with this file blocked.
  * All this adds is highlighting whichever section you are currently reading --
  * and, in the mobile chip-bar layout, keeping that chip scrolled into view.
+ *
+ * Entries may carry a second level (a site page's "Plan Your Visit" and its
+ * twelve panels). Those sub-links point at <details> panels, which the observer
+ * picks up like any other target; the extra work here is keeping the PARENT lit
+ * and its sub-list open while any of its children is the current section.
  */
 (function () {
   "use strict";
@@ -29,6 +34,33 @@
 
   var activeId = null;
 
+  // Parent entries and the ids they own, so a current child can light its
+  // parent too. Empty on pages with a flat rail, where all of this is inert.
+  var parents = Array.prototype.slice.call(
+    nav.querySelectorAll("[data-section-parent]")
+  ).map(function (item) {
+    var childLinks = item.querySelectorAll(".section-nav-sublink");
+    var ids = Array.prototype.map.call(childLinks, function (childLink) {
+      return childLink.getAttribute("data-section-link");
+    });
+    var parentId = item.getAttribute("data-section-parent");
+    return { item: item, id: parentId, ids: ids.concat([parentId]) };
+  });
+
+  function syncParents(id) {
+    parents.forEach(function (parent) {
+      var owns = parent.ids.indexOf(id) !== -1;
+      parent.item.classList.toggle("is-open", owns);
+      var parentLink = linksById[parent.id];
+      if (!parentLink) return;
+      if (owns && id !== parent.id) {
+        parentLink.setAttribute("aria-current", "true");
+      } else if (!owns) {
+        parentLink.removeAttribute("aria-current");
+      }
+    });
+  }
+
   function setActive(id) {
     if (id === activeId || !linksById[id]) return;
     if (activeId && linksById[activeId]) {
@@ -37,6 +69,7 @@
     activeId = id;
     var link = linksById[id];
     link.setAttribute("aria-current", "true");
+    syncParents(id);
 
     // Chip-bar layout only: keep the active chip visible. The list does not
     // scroll in the desktop rail layout, so this is a no-op there.
