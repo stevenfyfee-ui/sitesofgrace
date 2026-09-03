@@ -83,6 +83,11 @@ class PilgrimProfile(models.Model):
     public_credit_default = models.CharField(
         max_length=20, choices=CREDIT_CHOICES, default=CREDIT_DISPLAY_NAME
     )
+    # Staff moderation lever (phase 4): a suspended pilgrim can still use
+    # the private portal normally — upload, follow, post to the feed — this
+    # only blocks the one action that puts their photos in front of the
+    # public internet. See ModerationAction "suspend_sharing".
+    can_share_publicly = models.BooleanField(default=True)
     age_confirmed_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -256,10 +261,27 @@ class PilgrimPhoto(models.Model):
             # filter(owner=X, created_at__gte=Y) — (owner, site) doesn't
             # cover a created_at range scan.
             models.Index(fields=["owner", "created_at"]),
+            # Backs the public-share rate limit's
+            # filter(owner=X, public_shared_at__gte=Y).
+            models.Index(fields=["owner", "public_shared_at"]),
         ]
 
     def __str__(self):
         return f"{self.owner} — {self.site} ({self.uuid})"
+
+    @property
+    def public_credit_label(self):
+        """How to credit this photo on the public gallery, per whichever
+        choice was in effect at share time (public_credit) — never the
+        owner's current live preference, which could change later."""
+        if self.public_credit == PilgrimProfile.CREDIT_ANONYMOUS:
+            return "A pilgrim"
+        profile = self.owner.pilgrim
+        name = profile.display_name or profile.handle
+        if self.public_credit == PilgrimProfile.CREDIT_FIRST_NAME_ONLY:
+            parts = name.split()
+            return parts[0] if parts else name
+        return name
 
     @classmethod
     def create_from_processed(cls, *, owner, site, processed, caption="", taken_on=None):
@@ -495,3 +517,110 @@ class Notification(models.Model):
         if post is None:
             return None
         return reverse("pilgrims:post_detail", args=[post.uuid])
+
+
+class PhotoReport(models.Model):
+    REASON_SEXUAL = "sexual"
+    REASON_MINOR_SAFETY = "minor_safety"
+    REASON_VIOLENCE = "violence"
+    REASON_HATEFUL = "hateful"
+    REASON_COPYRIGHT = "copyright"
+    REASON_NOT_THIS_SITE = "not_this_site"
+    REASON_OTHER = "other"
+    REASON_CHOICES = [
+        (REASON_SEXUAL, "Sexual content"),
+        (REASON_MINOR_SAFETY, "Minor safety"),
+        (REASON_VIOLENCE, "Violence"),
+        (REASON_HATEFUL, "Hateful content"),
+        (REASON_COPYRIGHT, "Copyright"),
+        (REASON_NOT_THIS_SITE, "Not actually this site"),
+        (REASON_OTHER, "Other"),
+    ]
+
+    STATUS_OPEN = "open"
+    STATUS_ACTIONED = "actioned"
+    STATUS_DISMISSED = "dismissed"
+    STATUS_CHOICES = [
+        (STATUS_OPEN, "Open"),
+        (STATUS_ACTIONED, "Actioned"),
+        (STATUS_DISMISSED, "Dismissed"),
+    ]
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    photo = models.ForeignKey(PilgrimPhoto, on_delete=models.CASCADE, related_name="reports")
+    # Anonymous visitors can report — reporter is null for those, and
+    # reporter_ip_hash (never the raw IP) is how apply_auto_hide_policy
+    # tells two anonymous reports apart from the same person filing twice.
+    reporter = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="photo_reports",
+    )
+    reporter_ip_hash = models.CharField(max_length=64)
+    reason = models.CharField(max_length=20, choices=REASON_CHOICES)
+    note = models.TextField(max_length=1000, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_OPEN)
+    handled_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+    )
+    handled_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["photo", "status"]),
+            # Backs the report rate limit's
+            # filter(reporter_ip_hash=X, created_at__gte=Y).
+            models.Index(fields=["reporter_ip_hash", "created_at"]),
+        ]
+
+    def __str__(self):
+        return f"Report on {self.photo_id} ({self.get_reason_display()})"
+
+
+class ModerationAction(models.Model):
+    """APPEND-ONLY: no view or admin registration here ever gets an update
+    or delete path. Every staff action against a pilgrim photo — including
+    just viewing one under the one deliberate no-staff-bypass exception
+    (see permissions.staff_can_view_reported_photo) — writes a row here."""
+
+    ACTION_VIEW_REPORTED_PHOTO = "view_reported_photo"
+    ACTION_HIDE = "hide"
+    ACTION_UNHIDE = "unhide"
+    ACTION_DISMISS_REPORT = "dismiss_report"
+    ACTION_DELETE_PHOTO = "delete_photo"
+    ACTION_SUSPEND_SHARING = "suspend_sharing"
+    ACTION_REINSTATE_SHARING = "reinstate_sharing"
+    ACTION_CHOICES = [
+        (ACTION_VIEW_REPORTED_PHOTO, "Viewed reported photo"),
+        (ACTION_HIDE, "Hid photo"),
+        (ACTION_UNHIDE, "Unhid photo"),
+        (ACTION_DISMISS_REPORT, "Dismissed report"),
+        (ACTION_DELETE_PHOTO, "Deleted photo"),
+        (ACTION_SUSPEND_SHARING, "Suspended owner's public sharing"),
+        (ACTION_REINSTATE_SHARING, "Reinstated owner's public sharing"),
+    ]
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="moderation_actions"
+    )
+    action = models.CharField(max_length=30, choices=ACTION_CHOICES)
+    photo = models.ForeignKey(
+        PilgrimPhoto, null=True, blank=True, on_delete=models.SET_NULL, related_name="moderation_actions"
+    )
+    report = models.ForeignKey(
+        PhotoReport, null=True, blank=True, on_delete=models.SET_NULL, related_name="moderation_actions"
+    )
+    owner_affected = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    note = models.CharField(max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.get_action_display()} by {self.actor} at {self.created_at}"

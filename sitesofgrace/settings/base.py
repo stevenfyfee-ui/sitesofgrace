@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "news",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
@@ -189,6 +190,11 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "no-reply@sitesofgrace.com")
 SERVER_EMAIL = os.environ.get("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
+
+# Every pilgrim-photo report emails this address with a direct link to the
+# moderation queue. Falls back to DEFAULT_FROM_EMAIL rather than failing
+# silently or hardcoding an address.
+MODERATION_EMAIL = os.environ.get("MODERATION_EMAIL") or DEFAULT_FROM_EMAIL
 
 
 # Internationalization

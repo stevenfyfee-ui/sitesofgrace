@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}catalog catalog-gallery{% endblock %}
+{% block title %}Pilgrim Photos — {{ site_page.title }}{% endblock %}
+{% block meta_description %}Photos of {{ site_page.title }} shared by pilgrims who have visited.{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}"><link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">{% endblock %}
+
+{% block extra_head %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pilgrim Photos — {{ site_page.title }}">
+<meta property="og:description" content="Photos of {{ site_page.title }} shared by pilgrims who have visited.">
+{% if photos_page.object_list.0 %}<meta property="og:image" content="{{ photos_page.object_list.0.public_large.url }}">{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Pilgrim Photos — {{ site_page.title|escapejs }}",
+  "associatedMedia": [
+    {% for photo in photos_page %}
+    {
+      "@type": "ImageObject",
+      "contentUrl": "{{ photo.public_large.url|escapejs }}",
+      "thumbnailUrl": "{{ photo.public_thumb.url|escapejs }}",
+      "caption": "{{ photo.caption|escapejs }}",
+      "creditText": "{{ photo.public_credit_label|escapejs }}",
+      "uploadDate": "{{ photo.public_shared_at|date:'c' }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <header class="hub-header">
+    <h1>Pilgrim Photos</h1>
+    <p class="lead">{{ site_page.title }} · {{ total_count }} photo{{ total_count|pluralize }}</p>
+  </header>
+
+  {% if photos_page %}
+    <div class="photo-grid gallery-public-grid">
+      {% for photo in photos_page %}
+        <figure class="photo-tile gallery-public-tile">
+          <div class="photo-tile-img">
+            <img src="{{ photo.public_large.url }}" alt="{{ photo.caption }}" loading="lazy">
+          </div>
+          <figcaption>
+            {% if photo.caption %}<p class="feed-card-caption">{{ photo.caption }}</p>{% endif %}
+            <p class="gallery-credit-line">
+              {{ photo.public_credit_label }} · {{ photo.public_shared_at|date:"F Y" }}
+            </p>
+          </figcaption>
+
+          <div class="gallery-tile-actions">
+            <button type="button" class="reply-toggle" data-target="report-form-{{ photo.uuid }}">Report this photo</button>
+            {% if request.user.is_staff %}
+              <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="hide">
+                <input type="hidden" name="reason" value="Hidden from the public gallery by staff.">
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button type="submit" class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Staff: Hide</button>
+              </form>
+            {% endif %}
+          </div>
+
+          <form id="report-form-{{ photo.uuid }}" class="report-form" method="post" action="{% url 'pilgrims:report_photo' photo.uuid %}" hidden>
+            {% csrf_token %}
+            <select name="reason" required>
+              <option value="">Why are you reporting this?</option>
+              {% for value, label in report_reason_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+            <textarea name="note" maxlength="1000" placeholder="Optional details"></textarea>
+            <button type="submit" class="btn btn-gold">Submit report</button>
+            <p class="report-form-status"></p>
+          </form>
+        </figure>
+      {% endfor %}
+    </div>
+
+    {% if photos_page.has_other_pages %}
+      <nav class="feed-load-more">
+        {% if photos_page.has_previous %}<a class="btn btn-secondary" href="?page={{ photos_page.previous_page_number }}">Previous</a>{% endif %}
+        <span>Page {{ photos_page.number }} of {{ photos_page.paginator.num_pages }}</span>
+        {% if photos_page.has_next %}<a class="btn btn-secondary" href="?page={{ photos_page.next_page_number }}">Next</a>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="pilgrim-list-empty">No photos have been shared here yet.</div>
+  {% endif %}
+
+  <p class="gallery-disclaimer">
+    Photos are shared by pilgrims who have visited. They do not represent the shrine or the Catholic Church.
+  </p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  document.querySelectorAll('.reply-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (target) target.hidden = !target.hidden;
+    });
+  });
+
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+
+  document.querySelectorAll('.report-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = form.querySelector('.report-form-status');
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+        body: new FormData(form),
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          status.textContent = data.message || '';
+          if (data.success) { form.querySelectorAll('select,textarea,button[type=submit]').forEach(function (el) { el.disabled = true; }); }
+        });
+    });
+  });
+})();
+</script>
+{% endblock %}

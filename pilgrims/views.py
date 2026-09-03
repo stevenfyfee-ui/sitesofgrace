@@ -1,10 +1,14 @@
 import base64
+import hashlib
+import logging
 import uuid as uuid_module
 from datetime import timedelta
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.db import transaction
 from django.db.models import F, Max, Q
 from django.http import Http404, HttpResponseRedirect, JsonResponse
@@ -16,15 +20,16 @@ from django.views.decorators.http import require_POST
 
 from catalog.models import SacredSitePage
 
-from . import imaging
+from . import imaging, sharing
 from .forms import ProfileSettingsForm
 from .models import (
-    Block, Comment, Follow, Notification, PilgrimPhoto, PilgrimProfile, Post, PostPhoto,
-    SiteVisit,
+    Block, Comment, Follow, Notification, PhotoReport, PilgrimPhoto, PilgrimProfile, Post,
+    PostPhoto, SiteVisit,
 )
+from .moderation import apply_auto_hide_policy
 from .permissions import (
-    can_comment, can_interact, can_view_photo, can_view_post, can_view_profile_detail,
-    is_following, visible_posts_for,
+    can_comment, can_interact, can_share_photo, can_view_photo, can_view_post,
+    can_view_profile_detail, is_following, visible_posts_for,
 )
 
 User = get_user_model()
@@ -34,6 +39,20 @@ PHOTO_UPLOADS_PER_HOUR = 100
 POSTS_PER_HOUR = 20
 COMMENTS_PER_HOUR = 30
 FEED_PAGE_SIZE = 20
+PUBLIC_SHARES_PER_DAY = 10
+REPORTS_PER_HOUR_PER_IP = 10
+
+
+def _client_ip(request):
+    forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR", "")
+
+
+def _ip_hash(request):
+    ip = _client_ip(request)
+    return hashlib.sha256(f"{ip}{settings.SECRET_KEY}".encode()).hexdigest()
 
 
 def _redirect_next(request, flag):
@@ -455,7 +474,11 @@ def photo_detail(request, photo_uuid):
     photo = get_object_or_404(PilgrimPhoto.objects.select_related("site", "owner"), uuid=photo_uuid)
     if not can_view_photo(request.user, photo):
         raise Http404
-    return render(request, "pilgrims/photo_detail.html", {"photo": photo})
+    return render(request, "pilgrims/photo_detail.html", {
+        "photo": photo,
+        "can_share": can_share_photo(request.user, photo),
+        "credit_choices": PilgrimProfile.CREDIT_CHOICES,
+    })
 
 
 @login_required
@@ -747,3 +770,99 @@ def notifications_list(request):
         read_at=timezone.now()
     )
     return render(request, "pilgrims/notifications.html", {"notifications": notifications})
+
+
+# --- Public sharing (phase 4) -------------------------------------------------
+
+@login_required
+@require_POST
+def photo_share(request, photo_uuid):
+    photo = get_object_or_404(PilgrimPhoto, uuid=photo_uuid)
+    if not can_share_photo(request.user, photo):
+        return JsonResponse(
+            {"success": False, "error": "forbidden", "message": "You can't share this photo publicly."},
+            status=200,
+        )
+
+    since = timezone.now() - timedelta(hours=24)
+    shared_today = PilgrimPhoto.objects.filter(owner=request.user, public_shared_at__gte=since).count()
+    if shared_today >= PUBLIC_SHARES_PER_DAY:
+        return JsonResponse(
+            {"success": False, "error": "rate_limited",
+             "message": "You've shared a lot today — try again tomorrow."},
+            status=200,
+        )
+
+    credit = request.POST.get("credit", "")
+    if credit not in dict(PilgrimProfile.CREDIT_CHOICES):
+        credit = request.user.pilgrim.public_credit_default
+
+    sharing.share_photo(photo, credit=credit)
+    return JsonResponse({"success": True})
+
+
+@login_required
+@require_POST
+def photo_unshare(request, photo_uuid):
+    photo = get_object_or_404(PilgrimPhoto, uuid=photo_uuid, owner=request.user)
+    sharing.unshare_photo(photo)
+    return JsonResponse({"success": True})
+
+
+def _send_moderation_email(report):
+    from django.urls import reverse as url_reverse
+
+    admin_path = url_reverse("pilgrim_moderation_photo_detail", args=[report.photo.uuid])
+    admin_url = f"{settings.WAGTAILADMIN_BASE_URL}{admin_path}"
+    try:
+        send_mail(
+            subject=f"[Sites of Grace] Photo reported: {report.get_reason_display()}",
+            message=(
+                f"A pilgrim photo was reported.\n\n"
+                f"Reason: {report.get_reason_display()}\n"
+                f"Note: {report.note or '(none)'}\n\n"
+                f"Review it here: {admin_url}\n"
+            ),
+            from_email=None,
+            recipient_list=[settings.MODERATION_EMAIL],
+            fail_silently=False,
+        )
+    except Exception:
+        logging.getLogger(__name__).exception("Failed to send moderation report email")
+
+
+@require_POST
+def report_photo(request, photo_uuid):
+    """Anonymous visitors can report — no @login_required."""
+    photo = get_object_or_404(
+        PilgrimPhoto, uuid=photo_uuid, is_public_on_site=True, hidden_by_staff=False
+    )
+    ip_hash = _ip_hash(request)
+
+    since = timezone.now() - timedelta(hours=1)
+    recent_reports = PhotoReport.objects.filter(reporter_ip_hash=ip_hash, created_at__gte=since).count()
+    if recent_reports >= REPORTS_PER_HOUR_PER_IP:
+        return JsonResponse(
+            {"success": False, "error": "rate_limited",
+             "message": "Too many reports from this connection — try again later."},
+            status=200,
+        )
+
+    reason = request.POST.get("reason", "")
+    if reason not in dict(PhotoReport.REASON_CHOICES):
+        return JsonResponse(
+            {"success": False, "error": "invalid", "message": "Choose a reason."}, status=200
+        )
+
+    note = request.POST.get("note", "")[:1000]
+    reporter = request.user if request.user.is_authenticated else None
+
+    report = PhotoReport.objects.create(
+        photo=photo, reporter=reporter, reporter_ip_hash=ip_hash, reason=reason, note=note,
+    )
+    apply_auto_hide_policy(photo)
+    _send_moderation_email(report)
+
+    return JsonResponse(
+        {"success": True, "message": "Thank you — this has been reported to our moderators."}
+    )

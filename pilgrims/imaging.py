@@ -80,6 +80,25 @@ def _encode_jpeg(image, quality):
     return buf.getvalue()
 
 
+def strip_all_exif_jpeg(data, *, quality=90):
+    """Re-encodes image bytes as JPEG with NO exif at all — used when a
+    photo crosses from the private bucket to the public gallery (phase 4).
+
+    The private derivatives (large/feed/thumb) are already saved via
+    _encode_jpeg() above, which never passes an exif= kwarg in the first
+    place, so in practice they already carry none. This function doesn't
+    rely on that: it decodes to raw pixels and re-saves with nothing
+    exif-shaped ever touched, so "all EXIF stripped" holds even if that
+    upstream behavior ever changed.
+    """
+    image = Image.open(io.BytesIO(data))
+    image.load()
+    rgb = image.convert("RGB") if image.mode not in ("RGB", "L") else image
+    buf = io.BytesIO()
+    rgb.save(buf, format="JPEG", quality=quality, optimize=True, progressive=True)
+    return buf.getvalue()
+
+
 def process_upload(uploaded_file):
     """uploaded_file: a Django UploadedFile. Raises UploadTooLargeError or
     UnsupportedImageError; otherwise returns a ProcessedPhoto."""

@@ -49,6 +49,21 @@ def make_uploaded_fake_image(name="fake.jpg"):
     return SimpleUploadedFile(name, b"this is definitely not a jpeg", content_type="image/jpeg")
 
 
+def grant_wagtail_admin_access(user):
+    """is_staff (Django's own flag, which our own permissions/views check)
+    is NOT enough to reach any /admin/ URL — Wagtail wraps every
+    admin urlpattern, including hook-registered ones like the moderation
+    queue, in require_admin_access(), which checks the separate
+    wagtailadmin.access_admin permission. Grant that too for any test user
+    that needs to actually load a moderation admin view (function-level
+    permission tests like staff_can_view_reported_photo don't need this —
+    only client.get()/post() against the /admin/... URLs do)."""
+    from django.contrib.auth.models import Permission
+
+    permission = Permission.objects.get(codename="access_admin", content_type__app_label="wagtailadmin")
+    user.user_permissions.add(permission)
+
+
 def verify_email(user):
     """User.objects.create_user() (used throughout these tests) doesn't go
     through allauth's signup flow, so it leaves no EmailAddress row at all —

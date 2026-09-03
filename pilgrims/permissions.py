@@ -121,3 +121,47 @@ def visible_posts_for(viewer):
             Prefetch("comments", queryset=preview_comments[:3], to_attr="preview_comments"),
         )
     )
+
+
+def can_share_photo(viewer, photo) -> bool:
+    """Owner, with a verified email, whose sharing privilege hasn't been
+    suspended by staff. Doesn't check whether it's already shared — the
+    view decides what "share" vs. "unshare" means for the current state."""
+    if not getattr(viewer, "is_authenticated", False):
+        return False
+    if viewer.pk != photo.owner_id:
+        return False
+    profile = getattr(viewer, "pilgrim", None)
+    if profile is None or not profile.can_share_publicly:
+        return False
+    from allauth.account.models import EmailAddress
+
+    return EmailAddress.objects.filter(user=viewer, verified=True).exists()
+
+
+def staff_can_view_reported_photo(staff_user, photo) -> bool:
+    """The ONE deliberate exception to "staff get no bypass" established in
+    can_view_profile_detail/can_view_post/can_view_photo above: a staff
+    member may view a specific photo THAT HAS AN OPEN REPORT against it,
+    through the moderation view only — not the owner's other photos, not
+    their feed, not their profile.
+
+    Every grant writes a ModerationAction row BEFORE returning True, so
+    this bypass can never be exercised silently — including a staff member
+    just looking, not yet acting."""
+    if not (getattr(staff_user, "is_authenticated", False) and staff_user.is_staff):
+        return False
+
+    from .models import ModerationAction, PhotoReport
+
+    if not PhotoReport.objects.filter(photo=photo, status=PhotoReport.STATUS_OPEN).exists():
+        return False
+
+    ModerationAction.objects.create(
+        actor=staff_user,
+        action=ModerationAction.ACTION_VIEW_REPORTED_PHOTO,
+        photo=photo,
+        owner_affected=photo.owner,
+        note="Viewed via the moderation queue.",
+    )
+    return True

@@ -15,6 +15,29 @@
       {% if photo.caption %}<p class="pilgrim-bio">{{ photo.caption }}</p>{% endif %}
       {% if photo.taken_on %}<p class="auth-help">Taken {{ photo.taken_on }}</p>{% endif %}
 
+      {% if photo.is_public_on_site and not photo.hidden_by_staff %}
+        <p class="pilgrims-flash">Shared publicly on {{ photo.site.title }}'s gallery.</p>
+        <form method="post" action="{% url 'pilgrims:photo_unshare' photo.uuid %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary">Remove from Public Gallery</button>
+        </form>
+      {% elif photo.hidden_by_staff %}
+        <p class="pilgrims-flash is-error">This photo was hidden by staff and is not visible on the public gallery.</p>
+      {% elif can_share %}
+        <form method="post" action="{% url 'pilgrims:photo_share' photo.uuid %}" class="auth-form">
+          {% csrf_token %}
+          <div class="auth-field">
+            <label for="creditSelect">Credit me as</label>
+            <select id="creditSelect" name="credit">
+              {% for value, label in credit_choices %}
+                <option value="{{ value }}"{% if value == request.user.pilgrim.public_credit_default %} selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-gold">Share to {{ photo.site.title }}'s Gallery</button>
+        </form>
+      {% endif %}
+
       <form method="post" action="{% url 'pilgrims:photo_delete' photo.uuid %}" onsubmit="return confirm('Delete this photo? This cannot be undone.');">
         {% csrf_token %}
         <button type="submit" class="btn btn-secondary">Delete</button>

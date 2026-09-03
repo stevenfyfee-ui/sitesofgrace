@@ -1,7 +1,9 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
@@ -11,6 +13,9 @@ from catalog.travel_sections import (
     TRAVEL_LABELS,
     TRAVEL_SECTION_CHOICES,
 )
+
+GALLERY_PREVIEW_COUNT = 8
+GALLERY_PAGE_SIZE = 24
 
 CATEGORY_CHOICES = [
     ("Marian Apparition", "Marian Apparition"),
@@ -115,7 +120,7 @@ class SaintPage(Page):
     ]
 
 
-class SacredSitePage(Page):
+class SacredSitePage(RoutablePageMixin, Page):
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)
     canonical_status = models.CharField(max_length=60, blank=True, choices=CANONICAL_STATUS_CHOICES)
     locality = models.CharField(max_length=160, blank=True)
@@ -343,10 +348,58 @@ class SacredSitePage(Page):
             items.append({"id": "location", "label": "Location"})
         return items
 
+    def public_photos_queryset(self):
+        """is_public_on_site=True, hidden_by_staff=False, newest share
+        first — the gallery is nothing more than this query, at two
+        different page sizes (preview strip vs. the full /gallery/ page)."""
+        from pilgrims.models import PilgrimPhoto
+
+        return (
+            PilgrimPhoto.objects.filter(site=self, is_public_on_site=True, hidden_by_staff=False)
+            .select_related("owner", "owner__pilgrim")
+            .order_by("-public_shared_at")
+        )
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["map_page"] = Page.objects.filter(slug=MAP_PAGE_SLUG).first()
+        public_photos = self.public_photos_queryset()
+        context["gallery_preview_photos"] = list(public_photos[:GALLERY_PREVIEW_COUNT])
+        context["gallery_total_count"] = public_photos.count()
         return context
+
+    @route(r"^gallery/$")
+    def gallery_view(self, request):
+        from django.http import Http404
+        from django.shortcuts import render
+
+        # Wagtail's own RoutablePageMixin.route() already refuses to reach
+        # this view for an unpublished page (it checks self.live before
+        # resolving any subroute) — this is a second, explicit check so
+        # that guarantee doesn't depend on staying aware of that internal
+        # behavior.
+        if not self.live:
+            raise Http404
+
+        photos_qs = self.public_photos_queryset()
+        paginator = Paginator(photos_qs, GALLERY_PAGE_SIZE)
+        page_number = request.GET.get("page")
+        try:
+            photos_page = paginator.page(page_number)
+        except PageNotAnInteger:
+            photos_page = paginator.page(1)
+        except EmptyPage:
+            photos_page = paginator.page(paginator.num_pages) if paginator.num_pages else paginator.page(1)
+
+        from pilgrims.models import PhotoReport
+
+        return render(request, "catalog/sacred_site_gallery.html", {
+            "page": self,
+            "site_page": self,
+            "photos_page": photos_page,
+            "total_count": paginator.count,
+            "report_reason_choices": PhotoReport.REASON_CHOICES,
+        })
 
 
 class SiteTravelSection(Orderable):

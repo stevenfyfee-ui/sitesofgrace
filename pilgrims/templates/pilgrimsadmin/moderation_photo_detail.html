@@ -1,0 +1,105 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n pilgrim_tags %}
+
+{% block titletag %}Moderation — {{ photo.uuid }}{% endblock %}
+
+{% block content %}
+  {% include "wagtailadmin/shared/header.html" with title="Reported Photo" icon="warning" %}
+
+  <div class="nice-padding">
+    <p><a href="{% url 'pilgrim_moderation_queue' %}">&larr; Back to queue</a></p>
+
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <div style="flex:0 0 320px;">
+        <img src="{% pilgrim_photo_url photo 'thumb' %}" alt="" style="max-width:100%; border-radius:8px;">
+      </div>
+      <div style="flex:1; min-width:280px;">
+        <h2>Photo details</h2>
+        <ul>
+          <li><strong>Owner:</strong> {{ photo.owner.pilgrim.display_name|default:photo.owner.pilgrim.handle }} ({{ photo.owner.email }})</li>
+          <li><strong>Site:</strong> {{ photo.site.title }}</li>
+          <li><strong>Caption:</strong> {{ photo.caption|default:"—" }}</li>
+          <li><strong>Uploaded:</strong> {{ photo.created_at }}</li>
+          <li><strong>Publicly shared:</strong> {{ photo.is_public_on_site|yesno:"Yes,No" }}{% if photo.public_shared_at %} ({{ photo.public_shared_at }}){% endif %}</li>
+          <li><strong>Hidden by staff:</strong> {{ photo.hidden_by_staff|yesno:"Yes,No" }}{% if photo.hidden_reason %} — {{ photo.hidden_reason }}{% endif %}</li>
+          <li><strong>Owner can share publicly:</strong> {{ photo.owner.pilgrim.can_share_publicly|yesno:"Yes,No" }}</li>
+        </ul>
+
+        <h2>Actions</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          {% if photo.hidden_by_staff %}
+            <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="unhide">
+              <button type="submit" class="button">Unhide</button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="hide">
+              <input type="hidden" name="reason" value="Hidden by staff review.">
+              <button type="submit" class="button no">Hide</button>
+            </form>
+          {% endif %}
+
+          <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}" onsubmit="return confirm('Permanently delete this photo?');">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="delete_photo">
+            <button type="submit" class="button no">Delete Photo</button>
+          </form>
+
+          {% if photo.owner.pilgrim.can_share_publicly %}
+            <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="suspend_sharing">
+              <button type="submit" class="button no">Suspend Owner's Sharing</button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="reinstate_sharing">
+              <button type="submit" class="button">Reinstate Owner's Sharing</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <h2>Reports on this photo</h2>
+    <table class="listing">
+      <thead>
+        <tr><th>When</th><th>Reason</th><th>Note</th><th>Reporter</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for report in reports %}
+          <tr>
+            <td>{{ report.created_at|timesince }} ago</td>
+            <td>{{ report.get_reason_display }}</td>
+            <td>{{ report.note|default:"—" }}</td>
+            <td>{% if report.reporter %}{{ report.reporter.email }}{% else %}Anonymous{% endif %}</td>
+            <td>{{ report.get_status_display }}</td>
+            <td>
+              {% if report.status == "open" %}
+                <form method="post" action="{% url 'pilgrim_moderation_action' photo.uuid %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="dismiss_report">
+                  <input type="hidden" name="report_id" value="{{ report.pk }}">
+                  <button type="submit" class="button button-small">Dismiss</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if other_reports_same_owner %}
+      <h2>Other open reports on this owner's photos</h2>
+      <ul>
+        {% for report in other_reports_same_owner %}
+          <li><a href="{% url 'pilgrim_moderation_photo_detail' report.photo.uuid %}">{{ report.photo.uuid }}</a> — {{ report.get_reason_display }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}

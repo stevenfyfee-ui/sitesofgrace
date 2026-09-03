@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags community_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags %}
 
 {% block body_class %}catalog catalog-site{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
@@ -74,6 +74,22 @@
           {% if page.latitude and page.longitude and map_page %}
             <a class="catalog-map-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map →</a>
           {% endif %}
+        </section>
+      {% endif %}
+
+      {% if gallery_preview_photos %}
+        <section class="catalog-gallery-preview section-anchor" id="pilgrim-photos">
+          <h2>Pilgrim Photos</h2>
+          <div class="gallery-preview-grid">
+            {% for photo in gallery_preview_photos %}
+              <a class="gallery-preview-tile" href="{% routablepageurl page 'gallery_view' %}">
+                <img src="{{ photo.public_thumb.url }}" alt="">
+              </a>
+            {% endfor %}
+          </div>
+          <a class="catalog-map-link" href="{% routablepageurl page 'gallery_view' %}">
+            See all {{ gallery_total_count }} pilgrim photo{{ gallery_total_count|pluralize }} →
+          </a>
         </section>
       {% endif %}
 

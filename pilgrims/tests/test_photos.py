@@ -12,7 +12,7 @@ import tempfile
 from django.contrib.auth.models import User
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
-from wagtail.models import Page
+from wagtail.models import Page, Site
 
 from catalog.models import SacredSitePage
 
@@ -22,11 +22,16 @@ from .factories import make_uploaded_fake_image, make_uploaded_jpeg
 
 
 def _make_site(slug="test-shrine", title="Test Shrine", live=True):
-    root = Page.objects.get(pk=1)
+    # Attach under the default Site's OWN root_page (not the bare tree root,
+    # pk=1) — page.url resolves to None for a page that isn't a descendant
+    # of any Site's root_page, and this project's root_page is the "home"
+    # page a few levels below pk=1, not pk=1 itself.
+    default_site = Site.objects.filter(is_default_site=True).first()
+    parent = default_site.root_page if default_site else Page.objects.get(pk=1)
     site = SacredSitePage(
         title=title, slug=slug, category="Shrine & Basilica", live=live,
     )
-    root.add_child(instance=site)
+    parent.add_child(instance=site)
     return site
 
 

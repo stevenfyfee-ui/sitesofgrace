@@ -38,4 +38,8 @@ urlpatterns = [
     path("comments/<uuid:comment_uuid>/delete/", views.comment_delete, name="comment_delete"),
 
     path("notifications/", views.notifications_list, name="notifications"),
+
+    path("photos/<uuid:photo_uuid>/share/", views.photo_share, name="photo_share"),
+    path("photos/<uuid:photo_uuid>/unshare/", views.photo_unshare, name="photo_unshare"),
+    path("photos/<uuid:photo_uuid>/report/", views.report_photo, name="report_photo"),
 ]
