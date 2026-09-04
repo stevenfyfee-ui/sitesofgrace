@@ -1,0 +1,171 @@
+{
+  "trail": {
+    "slug": "camino-de-santiago",
+    "title": "The Camino de Santiago (Camino Frances)",
+    "trail_type": "Walking route",
+    "line_color": "navy",
+    "region": "The Pyrenees and northern Spain",
+    "country": "France & Spain",
+    "start_point": "Saint-Jean-Pied-de-Port, France",
+    "end_point": "Santiago de Compostela, Spain",
+    "length_display": "About 490 miles / 790 km",
+    "duration_display": "30-35 days on foot",
+    "best_season": "May-June and September-October",
+    "waymarking": "Yellow arrows and the scallop shell",
+    "official_url": "https://oficinadelperegrino.com/en/",
+    "summary_short": "The Camino de Santiago is a network of ancient pilgrim roads that all end at the tomb of the apostle St. James. Its most walked branch, the Camino Frances, runs about 790 kilometres from the French Pyrenees across northern Spain.",
+    "the_story": "Catholic tradition holds that the apostle James the Great preached in Roman Hispania before returning to Jerusalem, where he was martyred around AD 44, and that his disciples carried his body back to the coast of Galicia. In the early ninth century a hermit named Pelayo reported strange lights over a wooded hillside; Bishop Theodemir of Iria Flavia examined the site and identified the tomb found there as the apostle's. King Alfonso II of Asturias ordered a church built over it. The present cathedral was begun in 1075 and consecrated in 1211.\n\nBy the eleventh to thirteenth centuries Santiago ranked with Jerusalem and Rome among Christendom's great pilgrimages. Kings and monasteries built bridges, hospices and hospitals along the road, and the twelfth-century Codex Calixtinus described its stages, rivers and shrines. Pilgrims wore a scallop shell as their badge. The pilgrimage declined after the sixteenth century; in 1589 the relics were hidden from an English raid and their location was forgotten until 1879, when they were rediscovered and authenticated by Pope Leo XIII in 1884.\n\nThe modern revival owes much to Elias Valina Sampedro, parish priest of O Cebreiro, who in the 1980s marked the route with the yellow arrows still followed today. The Council of Europe named it the first European Cultural Route in 1987, and UNESCO inscribed it in 1993. More than 500,000 people now receive the Compostela each year. Walking the whole Camino Frances takes most people about five weeks, staying in albergues and ending in the Praza do Obradoiro.",
+    "church_recognition": "The pilgrimage to the tomb of St. James is one of the oldest continuously kept devotions in the Latin Church. Pope Leo XIII authenticated the relics rediscovered beneath the cathedral in the bull Deus Omnipotens of 1884, and the Holy See has confirmed the Jacobean Holy Year ever since: whenever July 25, the feast of St. James, falls on a Sunday, the cathedral's Holy Door on the Praza da Quintana is opened for the year, and pilgrims who pass through it, go to confession, receive Communion, attend Mass and pray for the Pope's intentions may obtain a plenary indulgence. Holy Years follow an irregular 6-5-6-11 year cycle. The next is 2027; the Holy Door is opened on December 31, 2026 and closed on December 31, 2027.\n\nThe Pilgrim's Reception Office in Santiago issues the Compostela to those who complete at least the final 100 kilometres on foot or horseback, or 200 kilometres by bicycle, and who make the journey for religious or spiritual reasons. Distance is proven by the credencial, the pilgrim passport, stamped along the way. Those walking only the minimum distance are asked for two stamps a day. A non-religious Certificate of Welcome is available to anyone who prefers it.\n\nThe Camino Frances and the northern routes were inscribed as UNESCO World Heritage in 1993 and extended in 2015; the old town of Santiago de Compostela has been World Heritage since 1985.",
+    "catholic_teaching": "A pilgrimage is a prayer made with the feet. The Church has never taught that walking to a shrine earns anything by itself -- what it teaches is that the body prays too, that penance freely chosen can heal what sin has bent, and that the communion of saints is real enough to walk toward. St. James is not a memory in Galicia; he is a brother whose bones are under the altar and whose intercession the Church asks.\n\nThe indulgence attached to the Holy Door expresses the same doctrine. Sin forgiven in confession still leaves damage behind, and the Church, out of the merits of Christ and the saints, can apply that treasury to the healing of what remains. That is why the conditions are sacramental -- confession, Communion, prayer for the Pope's intentions -- and not merely a matter of arriving.",
+    "walking_the_route": "The Camino Frances runs about 790 kilometres (490 miles) from Saint-Jean-Pied-de-Port in France to Santiago de Compostela. Published figures range from roughly 764 to 800 km depending on which variants are walked, and the distances listed for each stop below are approximate for the same reason. Most people finish in 30 to 35 days at 20-25 km a day; by bicycle it is about two weeks.\n\nLate spring (May-June) and early autumn (September-October) are the classic windows: mild weather, long daylight, and every albergue open. About four in five pilgrims arrive between May and October. July and August are hottest across the Meseta and busiest. In winter, snow closes the high Route Napoleon out of Saint-Jean and the passes around O Cebreiro.\n\nCarry the credencial from the first day and have it stamped at albergues, churches, bars and town halls -- it is what proves the journey. Albergues are simple dormitory hostels run by municipalities, parishes, confraternities and private owners, usually a few euros a night, generally first-come and for one night only. The way is marked with yellow arrows painted on walls, kerbs and rocks, and with the scallop shell on concrete markers; in Galicia the markers also count down the kilometres remaining.\n\nSantiago Cathedral celebrates Pilgrim's Masses daily at 7:30 a.m., 9:30 a.m., noon and 7:30 p.m. The botafumeiro, the 80-kilogram censer swung across the transept, is used on about eleven major feast days a year and can otherwise be requested in advance by pilgrim groups -- it is not part of every Mass. The tomb of St. James lies in the crypt beneath the main altar.",
+    "go_deeper": "The Pilgrim's Reception Office (oficinadelperegrino.com) publishes the official rules for the Compostela and the credencial. The cathedral's own site (catedraldesantiago.es) carries Mass times and the botafumeiro schedule. The Xunta de Galicia (caminodesantiago.gal) maintains route and albergue information.\n\nThe Camino Frances is one of several recognized routes. The Camino Portugues runs about 260 km from Porto or 620 km from Lisbon; the Camino del Norte follows the Bay of Biscay some 820 km from Irun; the Camino Primitivo, the oldest, climbs about 315 km from Oviedo; the Camino Ingles covers about 120 km from Ferrol, the short route used by medieval pilgrims arriving by ship; and the Via de la Plata is the longest, roughly 1,000 km north from Seville.",
+    "notes_internal": "Researched September 2026. Stop coordinates are town-centre or principal-church points; cumulative distances are drawn from a single published stage table and are approximate to within 10-20 km. There is no single official length for the Camino Frances. All stops except Santiago are waypoints -- promoting one to a full site page is a matter of writing the page and choosing it on the stop.",
+    "stops": [
+      {
+        "name": "Saint-Jean-Pied-de-Port",
+        "locality": "Pyrenees-Atlantiques, France",
+        "latitude": 43.16473,
+        "longitude": -1.23729,
+        "note": "The walled Basque town at the foot of the Pyrenees where most pilgrims collect their credencial before climbing the Route Napoleon.",
+        "distance_display": "Start"
+      },
+      {
+        "name": "Roncesvalles",
+        "locality": "Navarre, Spain",
+        "latitude": 43.00917,
+        "longitude": -1.32,
+        "note": "First Spanish stop over the Pyrenees, built around the Royal Collegiate Church of Santa Maria, a Gothic monastery that has sheltered pilgrims since the twelfth century.",
+        "distance_display": "~26 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Pamplona",
+        "locality": "Navarre, Spain",
+        "latitude": 42.81687,
+        "longitude": -1.64323,
+        "note": "The first city on the route, with the Gothic cathedral of Santa Maria la Real and its cloister, long a resting place for pilgrims entering Navarre.",
+        "distance_display": "~69 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Puente la Reina",
+        "locality": "Navarre, Spain",
+        "latitude": 42.671117,
+        "longitude": -1.818736,
+        "note": "Where the French and Aragonese ways merge, crossed by an eleventh-century Romanesque bridge built for the use of pilgrims.",
+        "distance_display": "~93 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Estella-Lizarra",
+        "locality": "Navarre, Spain",
+        "latitude": 42.67182,
+        "longitude": -2.03226,
+        "note": "Praised in the medieval Codex Calixtinus, with the Romanesque church of San Pedro de la Rua and its cloister above the pilgrim street.",
+        "distance_display": "~115 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Logrono",
+        "locality": "La Rioja, Spain",
+        "latitude": 42.465,
+        "longitude": -2.44556,
+        "note": "Capital of La Rioja, entered over the Ebro, with the co-cathedral of Santa Maria de la Redonda and its twin baroque towers.",
+        "distance_display": "~165 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Santo Domingo de la Calzada",
+        "locality": "La Rioja, Spain",
+        "latitude": 42.4402,
+        "longitude": -2.9537,
+        "note": "Named for the saint who built roads, a bridge and a hospice for pilgrims; its cathedral keeps a live hen and rooster recalling the legend of the hanged pilgrim.",
+        "distance_display": "~216 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Burgos",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.340806,
+        "longitude": -3.704472,
+        "note": "Home of the Gothic cathedral of Santa Maria, a World Heritage Site in its own right since 1984 and the burial place of El Cid.",
+        "distance_display": "~288 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Fromista",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.26667,
+        "longitude": -4.40546,
+        "note": "Site of San Martin de Tours, an eleventh-century church considered one of the purest examples of Spanish Romanesque on the whole route.",
+        "distance_display": "~355 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Carrion de los Condes",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.3413,
+        "longitude": -4.6007,
+        "note": "A major medieval monastic town, with the carved portal of Santa Maria del Camino and the monastery of San Zoilo, before the long Roman road across the Meseta.",
+        "distance_display": "~374 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Sahagun",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.372,
+        "longitude": -5.03044,
+        "note": "Once the great Cluniac abbey known as the Spanish Cluny, and home to some of the earliest Mudejar brick churches in Spain.",
+        "distance_display": "~414 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Leon",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.60556,
+        "longitude": -5.57,
+        "note": "Its cathedral holds nearly 1,800 square metres of medieval stained glass, and the Basilica of San Isidoro contains the frescoed royal pantheon of the kings of Leon.",
+        "distance_display": "~471 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Astorga",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.45889,
+        "longitude": -6.06333,
+        "note": "Where the Via de la Plata joins the Camino Frances; the cathedral of Santa Maria stands beside Gaudi's Episcopal Palace, now the Museum of the Ways.",
+        "distance_display": "~520 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Ponferrada",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.54664,
+        "longitude": -6.59619,
+        "note": "Dominated by the Templar castle raised to protect pilgrims crossing El Bierzo, near the Basilica of the Virgen de la Encina.",
+        "distance_display": "~573 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Villafranca del Bierzo",
+        "locality": "Castile and Leon, Spain",
+        "latitude": 42.60601,
+        "longitude": -6.81069,
+        "note": "The Romanesque church of Santiago has a Puerta del Perdon, where pilgrims too ill to cross the mountains could receive the same indulgence as those reaching Santiago.",
+        "distance_display": "~596 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "O Cebreiro",
+        "locality": "Galicia, Spain",
+        "latitude": 42.708056,
+        "longitude": -7.043306,
+        "note": "A stone mountain village and the gateway to Galicia, with round thatched pallozas and the church of Santa Maria a Real, site of a celebrated Eucharistic miracle.",
+        "distance_display": "~624 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "name": "Sarria",
+        "locality": "Galicia, Spain",
+        "latitude": 42.7777,
+        "longitude": -7.41447,
+        "note": "The most common starting point on the whole Camino, because it sits just over the 100 km needed to earn the Compostela.",
+        "distance_display": "~665 km from Saint-Jean-Pied-de-Port"
+      },
+      {
+        "site": "santiago-de-compostela",
+        "name": "Santiago de Compostela",
+        "locality": "Galicia, Spain",
+        "latitude": 42.88052,
+        "longitude": -8.54569,
+        "note": "The journey's end: the cathedral built over the tomb of St. James, where pilgrims attend the Pilgrim's Mass and, in a Holy Year, pass through the Holy Door.",
+        "distance_display": "~790 km from Saint-Jean-Pied-de-Port"
+      }
+    ]
+  }
+}

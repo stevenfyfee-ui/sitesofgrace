@@ -18,7 +18,14 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageC
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 
-from catalog.models import CATEGORY_STYLES, DEFAULT_CATEGORY_STYLE, SacredSitePage, SaintPage
+from catalog.models import (
+    CATEGORY_STYLES,
+    DEFAULT_CATEGORY_STYLE,
+    TRAIL_COLORS,
+    PilgrimageTrailPage,
+    SacredSitePage,
+    SaintPage,
+)
 
 # Explore-hub card colors, keyed by the (StandardPage) category page's slug --
 # reuses the same fill/stroke/dot tokens as the interactive map's category
@@ -30,6 +37,11 @@ HUB_CARD_STYLES = {
     "holy-lands": CATEGORY_STYLES["Holy Land"],
     "shrines-and-basilicas": CATEGORY_STYLES["Shrine & Basilica"],
     "saints": CATEGORY_STYLES["Saints & Tombs"],
+    "pilgrimage-routes": {
+        "fill": TRAIL_COLORS["gold"],
+        "stroke": TRAIL_COLORS["navy"],
+        "dot": TRAIL_COLORS["navy"],
+    },
 }
 
 
@@ -450,9 +462,22 @@ class StandardPage(Page):
             "style": HUB_CARD_STYLES.get(child.slug, DEFAULT_CATEGORY_STYLE),
         }
 
+    @staticmethod
+    def _hub_card_is_clickable(child):
+        """Pilgrimage Routes was a placeholder card with nowhere to go.
+
+        Rather than keep that hardcoded, the card lights up on its own the
+        moment the routes page has a live child -- so the first published
+        trail is what makes it clickable, and nothing has to be remembered
+        and changed by hand later.
+        """
+        if child.slug != "pilgrimage-routes":
+            return True
+        return child.get_children().live().exists()
+
     def _get_hub_cards(self):
         cards = [
-            self._hub_card(child, clickable=child.slug != "pilgrimage-routes")
+            self._hub_card(child, clickable=self._hub_card_is_clickable(child))
             for child in self.get_children().live().specific()
         ]
         saints_page = Page.objects.live().filter(slug="saints").first()
@@ -477,6 +502,21 @@ class StandardPage(Page):
                     "title": child.title,
                     "meta": child.feast_day,
                     "bio": child.significance,
+                    "url": child.url,
+                })
+            elif isinstance(child, PilgrimageTrailPage):
+                # A trail's chip is its own line color, so the directory card
+                # and the line on the map read as the same object.
+                cards.append({
+                    "title": child.title,
+                    "chip": child.trail_type,
+                    "style": {
+                        "fill": child.line_hex,
+                        "stroke": child.line_hex,
+                        "dot": "#FDF9F2",
+                    },
+                    "meta": child.length_display,
+                    "bio": child.summary_short,
                     "url": child.url,
                 })
         return cards

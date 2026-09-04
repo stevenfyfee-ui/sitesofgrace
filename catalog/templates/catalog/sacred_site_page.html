@@ -2,7 +2,10 @@
 {% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags %}
 
 {% block body_class %}catalog catalog-site{% endblock %}
-{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+{% if page.trail_positions %}<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">{% endif %}
+{% endblock %}
 
 {% block content %}
 <article class="catalog-page">
@@ -30,6 +33,7 @@
       {% endif %}
       {% journey_buttons page %}
       <a class="site-plan-link" href="/plan/?site={{ page.slug }}">Plan a trip here</a>
+      {% include "catalog/includes/_trail_band.html" %}
     </div>
   </header>
 

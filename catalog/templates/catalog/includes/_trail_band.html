@@ -1,0 +1,40 @@
+{% comment %}
+  "Stop 7 of 21 on the California Mission Trail", with the neighbours.
+
+  A pilgrim standing at one mission wants the next one, not a trip back to the
+  trail page and down its list. Rendered once per trail this site belongs to,
+  because a site can sit on more than one route.
+{% endcomment %}
+{% if page.trail_positions %}
+  {% for position in page.trail_positions %}
+    <nav class="trail-band" aria-label="Position on {{ position.trail.title }}">
+      <p class="trail-band-kicker">
+        <span class="trail-band-dot" style="background:{{ position.trail.line_hex }}" aria-hidden="true"></span>
+        Stop {{ position.number }} of {{ position.total }} on
+        <a href="{{ position.trail.url }}">{{ position.trail.title }}</a>
+      </p>
+      <div class="trail-band-links">
+        {% if position.previous %}
+          <span class="trail-band-link trail-band-link--prev">
+            &larr;
+            {% if position.previous.url %}
+              <a href="{{ position.previous.url }}">{{ position.previous.display_title }}</a>
+            {% else %}
+              {{ position.previous.display_title }}
+            {% endif %}
+          </span>
+        {% endif %}
+        {% if position.next %}
+          <span class="trail-band-link trail-band-link--next">
+            {% if position.next.url %}
+              <a href="{{ position.next.url }}">{{ position.next.display_title }}</a>
+            {% else %}
+              {{ position.next.display_title }}
+            {% endif %}
+            &rarr;
+          </span>
+        {% endif %}
+      </div>
+    </nav>
+  {% endfor %}
+{% endif %}

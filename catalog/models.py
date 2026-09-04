@@ -39,6 +39,40 @@ DEFAULT_CATEGORY_STYLE = {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F
 
 MAP_PAGE_SLUG = "interactive-map"
 
+# Where pilgrimage trails are filed in the page tree. The Explore hub already
+# carries a "Pilgrimage Routes" card; it stays unclickable until this page has
+# a live child (see home.StandardPage._hub_card_is_clickable).
+TRAILS_PARENT_SLUG = "pilgrimage-routes"
+
+# Trail line colors, mirrored in the map JS via the trails JSON payload rather
+# than duplicated there -- the server sends the hex, so this dict is the only
+# place a color is written down. Kept inside the brand palette so a trail line
+# never fights the category pins it runs between.
+TRAIL_COLORS = {
+    "gold":       "#C79A42",
+    "navy":       "#032553",
+    "slate":      "#173A61",
+    "terracotta": "#A65A3A",
+    "olive":      "#6B7B4A",
+    "plum":       "#6A4568",
+}
+TRAIL_COLOR_CHOICES = [
+    ("gold", "Gold"),
+    ("navy", "Navy"),
+    ("slate", "Slate blue"),
+    ("terracotta", "Terracotta"),
+    ("olive", "Olive"),
+    ("plum", "Plum"),
+]
+DEFAULT_TRAIL_COLOR = "gold"
+
+TRAIL_TYPE_CHOICES = [
+    ("Walking route", "Walking route"),
+    ("Driving route", "Driving route"),
+    ("Mixed route", "Mixed route"),
+    ("Devotional route", "Devotional route"),
+]
+
 CANONICAL_STATUS_CHOICES = [
     ("Nihil obstat", "Nihil obstat"),
     ("Prae oculis habeatur", "Prae oculis habeatur"),
@@ -348,6 +382,37 @@ class SacredSitePage(RoutablePageMixin, Page):
             items.append({"id": "location", "label": "Location"})
         return items
 
+    @cached_property
+    def trail_positions(self):
+        """Where this site sits on any live trail that includes it.
+
+        A site can belong to more than one trail (San Juan Capistrano is on the
+        Mission Trail; a Serra route would claim it too), so this is a list, not
+        a single value. Each entry carries the neighbours, which is what lets
+        the site page offer "previous stop / next stop" without the reader
+        having to go back out to the trail page.
+        """
+        positions = []
+        for stop in self.trail_stops.all().select_related("trail"):
+            trail = stop.trail
+            if not trail.live:
+                continue
+            ordered = trail.ordered_stops
+            try:
+                index = [s.pk for s in ordered].index(stop.pk)
+            except ValueError:  # pragma: no cover - stop vanished mid-request
+                continue
+            positions.append({
+                "trail": trail,
+                "stop": stop,
+                "number": index + 1,
+                "total": len(ordered),
+                "previous": ordered[index - 1] if index > 0 else None,
+                "next": ordered[index + 1] if index + 1 < len(ordered) else None,
+            })
+        positions.sort(key=lambda entry: entry["trail"].title)
+        return positions
+
     def public_photos_queryset(self):
         """is_public_on_site=True, hidden_by_staff=False, newest share
         first — the gallery is nothing more than this query, at two
@@ -445,3 +510,344 @@ class SiteTravelSection(Orderable):
 
     def __str__(self):
         return f"{self.page.title} - {self.label}"
+
+
+class PilgrimageTrailPage(Page):
+    """A route made of ordered stops -- the Camino, the Mission Trail.
+
+    A trail is deliberately NOT a SacredSitePage with many coordinates. A site
+    answers "what happened here"; a trail answers "in what order do I walk
+    this", and its stops are a sequence whose order is the content. Modelling it
+    as its own page type is what lets a stop be either a full site page or a
+    bare waypoint, and lets the map draw a line rather than a cloud of pins.
+    """
+
+    trail_type = models.CharField(
+        max_length=40,
+        choices=TRAIL_TYPE_CHOICES,
+        default="Walking route",
+    )
+    region = models.CharField(max_length=160, blank=True, help_text="e.g. Northern Spain")
+    country = models.CharField(max_length=160, blank=True, help_text="e.g. France & Spain")
+    start_point = models.CharField(max_length=160, blank=True)
+    end_point = models.CharField(max_length=160, blank=True)
+
+    length_display = models.CharField(
+        max_length=80, blank=True, help_text='e.g. "490 miles / 790 km"'
+    )
+    duration_display = models.CharField(
+        max_length=80, blank=True, help_text='e.g. "30-35 days on foot"'
+    )
+    best_season = models.CharField(max_length=80, blank=True)
+    waymarking = models.CharField(
+        max_length=80, blank=True, help_text='e.g. "Yellow arrows and scallop shells"'
+    )
+
+    summary_short = models.TextField(blank=True)
+    the_story = RichTextField(blank=True)
+    church_recognition = RichTextField(blank=True)
+    catholic_teaching = RichTextField(blank=True)
+    walking_the_route = RichTextField(blank=True)
+    go_deeper = RichTextField(blank=True)
+
+    featured_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    line_color = models.CharField(
+        max_length=20,
+        choices=TRAIL_COLOR_CHOICES,
+        default=DEFAULT_TRAIL_COLOR,
+        help_text="Color of this trail's line on the interactive map.",
+    )
+    topics = ParentalManyToManyField("catalog.Topic", blank=True, related_name="trails")
+    official_url = models.URLField(blank=True)
+    notes_internal = models.TextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("featured_image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("trail_type"),
+                FieldPanel("region"),
+                FieldPanel("country"),
+                FieldPanel("start_point"),
+                FieldPanel("end_point"),
+                FieldPanel("official_url"),
+                FieldPanel("line_color"),
+            ],
+            heading="The route",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("length_display"),
+                FieldPanel("duration_display"),
+                FieldPanel("best_season"),
+                FieldPanel("waymarking"),
+            ],
+            heading="The Pilgrim's Quick Card",
+        ),
+        FieldPanel("summary_short"),
+        FieldPanel("the_story"),
+        FieldPanel("church_recognition"),
+        FieldPanel("catholic_teaching"),
+        FieldPanel("walking_the_route"),
+        InlinePanel("stops", label="Stop", heading="Stops, in order along the route"),
+        FieldPanel("go_deeper"),
+        FieldPanel("topics"),
+        FieldPanel("notes_internal"),
+    ]
+
+    class Meta:
+        verbose_name = "Pilgrimage trail page"
+
+    # Same shape as SacredSitePage.NARRATIVE_SECTIONS so the two page types
+    # read alike and share includes/_section_nav.html unchanged.
+    NARRATIVE_SECTIONS = [
+        ("the-story", "The Story", "the_story"),
+        ("church-recognition", "Church Recognition", "church_recognition"),
+        ("catholic-teaching", "Catholic Teaching", "catholic_teaching"),
+        ("walking-the-route", "Walking the Route", "walking_the_route"),
+        ("go-deeper", "Go Deeper", "go_deeper"),
+    ]
+
+    @property
+    def line_hex(self):
+        return TRAIL_COLORS.get(self.line_color, TRAIL_COLORS[DEFAULT_TRAIL_COLOR])
+
+    @cached_property
+    def ordered_stops(self):
+        """Every stop in route order, page-backed or not.
+
+        This is the trail's content, so it is read once and cached: the stop
+        list, the map payload, and each member site's "stop 7 of 21" band all
+        derive from this one query.
+        """
+        return list(self.stops.all().select_related("site"))
+
+    @cached_property
+    def stops_for_display(self):
+        """Stops numbered 1..n, in route order, ready for the template."""
+        rows = []
+        for index, stop in enumerate(self.ordered_stops, start=1):
+            stop.stop_number = index
+            rows.append(stop)
+        return rows
+
+    @cached_property
+    def mapped_stops(self):
+        """The stops that can actually be drawn -- the line is these, in order.
+
+        A stop with no coordinates (a page still missing its lat/lng, a
+        waypoint typed without one) is kept in the reading list but skipped
+        here, so a half-filled stop shortens the line instead of dropping the
+        map to a single point or throwing.
+        """
+        return [stop for stop in self.stops_for_display if stop.has_coordinates]
+
+    @property
+    def has_map(self):
+        return len(self.mapped_stops) >= 2
+
+    @cached_property
+    def site_stops(self):
+        """Stops that have their own site page."""
+        return [stop for stop in self.stops_for_display if stop.site_id]
+
+    @cached_property
+    def quick_card_cells(self):
+        """[(label, value), ...] for the cells the editor filled in."""
+        duration_label = {
+            "Walking route": "Time to walk",
+            "Driving route": "Time to drive",
+        }.get(self.trail_type, "Time needed")
+        candidates = [
+            ("Length", self.length_display),
+            (duration_label, self.duration_display),
+            ("Best season", self.best_season),
+            ("Starts", self.start_point),
+            ("Ends", self.end_point),
+            ("Waymarking", self.waymarking),
+        ]
+        return [(label, value) for label, value in candidates if value]
+
+    @property
+    def show_quick_card(self):
+        """One fact is worse than none -- same rule as the site pages."""
+        return len(self.quick_card_cells) >= 2
+
+    @cached_property
+    def narrative_sections(self):
+        return [
+            {"anchor": anchor, "label": label, "body": getattr(self, field)}
+            for anchor, label, field in self.NARRATIVE_SECTIONS
+            if getattr(self, field)
+        ]
+
+    @cached_property
+    def body_blocks(self):
+        """Render order: the narrative, with the stop list before "Go Deeper".
+
+        The reader learns what the road is, then walks down the list of places
+        on it, then finds what to read next -- and because the rail is derived
+        from this same list, scroll order and rail order cannot drift apart.
+        """
+        blocks = []
+        stops_placed = False
+        for section in self.narrative_sections:
+            if section["anchor"] == "go-deeper" and self.stops_for_display and not stops_placed:
+                blocks.append({"kind": "stops"})
+                stops_placed = True
+            blocks.append({"kind": "narrative", "section": section})
+        if self.stops_for_display and not stops_placed:
+            blocks.append({"kind": "stops"})
+        return blocks
+
+    @property
+    def section_nav(self):
+        items = []
+        if self.has_map:
+            items.append({"id": "the-route", "label": "The Route"})
+        for block in self.body_blocks:
+            if block["kind"] == "narrative":
+                section = block["section"]
+                items.append({"id": section["anchor"], "label": section["label"]})
+            else:
+                items.append({"id": "stops", "label": "Stops Along the Way"})
+        return items
+
+    def map_payload(self):
+        """What the map JS needs to draw this trail. Also used by trails_json."""
+        return {
+            "slug": self.slug,
+            "title": self.title,
+            "url": self.url,
+            "trail_type": self.trail_type,
+            "color": self.line_hex,
+            "length_display": self.length_display,
+            "summary_short": self.summary_short,
+            "stops": [
+                {
+                    "number": stop.stop_number,
+                    "title": stop.display_title,
+                    "locality": stop.display_locality,
+                    "latitude": float(stop.latitude),
+                    "longitude": float(stop.longitude),
+                    "url": stop.url,
+                    "note": stop.note,
+                    "has_page": bool(stop.site_id),
+                }
+                for stop in self.mapped_stops
+            ],
+        }
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["map_page"] = Page.objects.filter(slug=MAP_PAGE_SLUG).first()
+        return context
+
+
+class TrailStop(Orderable):
+    """One place on a trail, in route order.
+
+    A stop is either a full site page or a bare waypoint. That split is the
+    whole point: the Camino has to draw through Pamplona and Burgos long before
+    either has a page written, and the Mission Trail wants every one of its
+    twenty-one stops to BE a page. Promoting a waypoint later is one field
+    change -- choose the page, and the typed name and coordinates stop being
+    used, without the route ever breaking.
+    """
+
+    trail = ParentalKey(
+        "catalog.PilgrimageTrailPage",
+        related_name="stops",
+        on_delete=models.CASCADE,
+    )
+    site = models.ForeignKey(
+        "catalog.SacredSitePage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="trail_stops",
+        help_text="Choose the sacred site page for this stop, if it has one.",
+    )
+    waypoint_name = models.CharField(
+        max_length=160,
+        blank=True,
+        help_text="Only for a stop with no page of its own yet. Ignored when a site page is chosen.",
+    )
+    waypoint_locality = models.CharField(max_length=160, blank=True)
+    waypoint_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    waypoint_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    note = models.CharField(
+        max_length=300,
+        blank=True,
+        help_text="One line on why this stop matters, shown in the stop list and map popup.",
+    )
+    distance_display = models.CharField(
+        max_length=60,
+        blank=True,
+        help_text='e.g. "288 km from the start"',
+    )
+
+    panels = [
+        FieldPanel("site"),
+        MultiFieldPanel(
+            [
+                FieldPanel("waypoint_name"),
+                FieldPanel("waypoint_locality"),
+                FieldPanel("waypoint_latitude"),
+                FieldPanel("waypoint_longitude"),
+            ],
+            heading="Waypoint (only if this stop has no page yet)",
+            classname="collapsed",
+        ),
+        FieldPanel("note"),
+        FieldPanel("distance_display"),
+    ]
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        super().clean()
+        if not self.site_id and not self.waypoint_name.strip():
+            raise ValidationError(
+                {"waypoint_name": "Choose a site page, or give this waypoint a name."}
+            )
+
+    @property
+    def display_title(self):
+        return self.site.title if self.site_id else self.waypoint_name
+
+    @property
+    def display_locality(self):
+        if self.site_id:
+            parts = [self.site.locality, self.site.country]
+        else:
+            parts = [self.waypoint_locality]
+        return ", ".join(part for part in parts if part)
+
+    @property
+    def latitude(self):
+        return self.site.latitude if self.site_id else self.waypoint_latitude
+
+    @property
+    def longitude(self):
+        return self.site.longitude if self.site_id else self.waypoint_longitude
+
+    @property
+    def has_coordinates(self):
+        return self.latitude is not None and self.longitude is not None
+
+    @property
+    def url(self):
+        """The stop's own page, or nothing -- a waypoint is not a dead link."""
+        if self.site_id and self.site.live:
+            return self.site.url
+        return ""
+
+    def __str__(self):
+        return f"{self.trail.title} - {self.display_title}"

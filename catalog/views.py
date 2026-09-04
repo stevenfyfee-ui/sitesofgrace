@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 
-from catalog.models import SacredSitePage
+from catalog.models import PilgrimageTrailPage, SacredSitePage
 from pilgrims.models import SiteVisit
 
 
@@ -33,3 +33,25 @@ def sites_json(request):
             for site in sites
         ]
     })
+
+
+def trails_json(request):
+    """The trail lines for the interactive map.
+
+    Deliberately a second endpoint rather than another key on
+    sacred-sites.json: the pins are per-visitor (they carry the signed-in
+    pilgrim's journey status) while the lines are the same for everybody, so
+    keeping them apart lets this one be cached later without touching the
+    other. `?trail=<slug>` narrows it to one route, which is what a trail
+    page's own map asks for.
+    """
+    trails = PilgrimageTrailPage.objects.live().prefetch_related("stops__site")
+
+    slug = request.GET.get("trail")
+    if slug:
+        trails = trails.filter(slug=slug)
+
+    payloads = [trail.map_payload() for trail in trails]
+    # A one-stop trail has no line to draw; sending it anyway would put a
+    # lone unnumbered marker on the map with nothing to explain it.
+    return JsonResponse({"trails": [p for p in payloads if len(p["stops"]) >= 2]})

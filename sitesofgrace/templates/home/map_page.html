@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'community/css/journey_buttons.css' %}">
 <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
 <link rel="stylesheet" href="{% static 'css/map.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -21,6 +22,7 @@
   <div class="map-wrap">
     <div id="sacredMap"
       data-sites-url="{% url 'sacred_sites_json' %}"
+      data-trails-url="{% url 'pilgrimage_trails_json' %}"
       data-journey-set-url="{% url 'journey_set' %}"
       data-authenticated="{{ request.user.is_authenticated|yesno:'true,false' }}"
       data-login-url="{% url 'account_login' %}"
@@ -35,6 +37,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
   integrity="sha256-Hk4dIpcqOSb0hZjgyvFOP+cEmDXUKKNE/tT542ZbNQg=" crossorigin=""></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
+<script src="{% static 'js/trails.js' %}"></script>
 <script>
   (function () {
     var el = document.getElementById('sacredMap');
@@ -145,6 +148,48 @@
       } else {
         clusterGroup.removeLayers(list);
       }
+    });
+
+    // ---------- Pilgrimage trails ----------
+    // Lines only here, and each one gets its own legend row so a reader can
+    // put the Camino away and still see the pins underneath it. The trail
+    // legend is built after the fetch because, unlike the five categories,
+    // the list of trails is editorial and changes.
+    var trailLegendEl = document.createElement('div');
+    trailLegendEl.className = 'map-legend map-legend--trails';
+    el.parentElement.appendChild(trailLegendEl);
+
+    var trailLayers = {};
+
+    trailLegendEl.addEventListener('click', function (e) {
+      var item = e.target.closest('.map-legend-item');
+      if (!item) return;
+      var layer = trailLayers[item.dataset.trail];
+      if (!layer) return;
+      var showing = !map.hasLayer(layer.group);
+      item.classList.toggle('is-off', !showing);
+      if (showing) {
+        layer.group.addTo(map);
+      } else {
+        map.removeLayer(layer.group);
+      }
+    });
+
+    window.SoGTrails.fetch(el.dataset.trailsUrl).then(function (trails) {
+      if (!trails.length) return;
+      trailLegendEl.innerHTML =
+        '<span class="map-legend-heading">Pilgrimage routes</span>' +
+        trails.map(function (trail) {
+          return (
+            '<button type="button" class="map-legend-item" data-trail="' + trail.slug + '">' +
+            '<span class="map-legend-line" style="background:' + trail.color + '"></span>' +
+            trail.title +
+            '</button>'
+          );
+        }).join('');
+      trails.forEach(function (trail) {
+        trailLayers[trail.slug] = window.SoGTrails.draw(map, trail, { showStops: false });
+      });
     });
 
     var params = new URLSearchParams(window.location.search);

@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+  A trail page reads like a site page on purpose -- same hero, same badges,
+  same "On this page" rail, same narrative headings -- so a reader who has
+  learned one layout already knows this one. The two things it does that a
+  site page cannot are the route map and the numbered stop list, and both sit
+  where the eye expects them: the shape of the journey first, the places on it
+  after the story that explains why they are there.
+{% endcomment %}
+
+{% block body_class %}catalog catalog-trail{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">
+{% if page.has_map %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{# map.css themes Leaflet's own popup chrome, which is white out of the box. #}
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<article class="catalog-page">
+
+  {# ---------- Hero ---------- #}
+  <header class="catalog-hero">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <div class="catalog-badges">
+        <span class="badge badge-category" style="background:{{ page.line_hex }};border-color:{{ page.line_hex }};color:#FDF9F2;">{{ page.trail_type }}</span>
+        {% if page.length_display %}<span class="badge badge-status">{{ page.length_display }}</span>{% endif %}
+      </div>
+      {% if page.region or page.country %}
+        <div class="catalog-meta">
+          <span>{{ page.region }}{% if page.region and page.country %} &middot; {% endif %}{{ page.country }}</span>
+          {% if page.stops_for_display %}<span>{{ page.stops_for_display|length }} stops</span>{% endif %}
+        </div>
+      {% endif %}
+      {% if page.summary_short %}<p class="catalog-lede">{{ page.summary_short }}</p>{% endif %}
+      {% if page.official_url %}
+        <a class="catalog-saint-link" href="{{ page.official_url }}" target="_blank" rel="noopener">Official route website &nearr;</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="section-layout{% if page.section_nav|length > 1 %} section-layout--with-nav{% endif %}">
+    {% include "includes/_section_nav.html" with sections=page.section_nav %}
+    <div class="section-layout-main">
+
+      {% if page.show_quick_card %}
+        <div class="catalog-sections">
+          <div class="plan-quickcard trail-quickcard">
+            <h2 class="plan-quickcard-title">The Pilgrim&rsquo;s Quick Card</h2>
+            <dl class="plan-quickcard-grid">
+              {% for label, value in page.quick_card_cells %}
+                <div class="plan-qc-cell">
+                  <dt>{{ label }}</dt>
+                  <dd>{{ value }}</dd>
+                </div>
+              {% endfor %}
+            </dl>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if page.has_map %}
+        <section class="catalog-sections section-anchor trail-route" id="the-route">
+          <h2>The Route</h2>
+          <div id="trailMap"
+            class="trail-map"
+            data-trails-url="{% url 'pilgrimage_trails_json' %}?trail={{ page.slug }}"></div>
+          <p class="trail-map-hint">
+            Numbered markers are the stops, in order. Click one to read about it.
+            {% if map_page %}
+              <a class="catalog-map-link" href="{% pageurl map_page %}">See it beside every other sacred site &rarr;</a>
+            {% endif %}
+          </p>
+        </section>
+      {% endif %}
+
+      {% if page.featured_image %}
+        <div class="catalog-image container">
+          {% image page.featured_image width-900 %}
+        </div>
+      {% endif %}
+
+      <div class="catalog-sections">
+        {% for block in page.body_blocks %}
+          {% if block.kind == "narrative" %}
+            <section class="catalog-section section-anchor" id="{{ block.section.anchor }}">
+              <h2>{{ block.section.label }}</h2>
+              {{ block.section.body|richtext }}
+            </section>
+          {% else %}
+            <section class="catalog-section section-anchor trail-stops" id="stops">
+              <h2>Stops Along the Way</h2>
+              <ol class="trail-stop-list">
+                {% for stop in page.stops_for_display %}
+                  <li class="trail-stop{% if not stop.url %} trail-stop--waypoint{% endif %}">
+                    <span class="trail-stop-number" style="background:{{ page.line_hex }}" aria-hidden="true">{{ stop.stop_number }}</span>
+                    <div class="trail-stop-body">
+                      <p class="trail-stop-title">
+                        {% if stop.url %}
+                          <a href="{{ stop.url }}">{{ stop.display_title }}</a>
+                        {% else %}
+                          {{ stop.display_title }}
+                        {% endif %}
+                      </p>
+                      {% if stop.display_locality or stop.distance_display %}
+                        <p class="trail-stop-meta">
+                          {{ stop.display_locality }}{% if stop.display_locality and stop.distance_display %} &middot; {% endif %}{{ stop.distance_display }}
+                        </p>
+                      {% endif %}
+                      {% if stop.note %}<p class="trail-stop-note">{{ stop.note }}</p>{% endif %}
+                    </div>
+                  </li>
+                {% endfor %}
+              </ol>
+              {% if page.site_stops|length < page.stops_for_display|length %}
+                <p class="trail-stop-foot">
+                  Stops without a link are waypoints on the route &mdash; places that mark
+                  the way but do not yet have a page of their own.
+                </p>
+              {% endif %}
+            </section>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if page.topics.all %}
+        <div class="catalog-tags">
+          {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</article>
+{% endblock %}
+
+{% block extra_js %}
+{% if page.has_map %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static 'js/trails.js' %}"></script>
+<script>
+  (function () {
+    var el = document.getElementById('trailMap');
+    if (!el || !window.L || !window.SoGTrails) return;
+
+    var map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    window.SoGTrails.fetch(el.dataset.trailsUrl).then(function (trails) {
+      if (!trails.length) return;
+      var drawn = window.SoGTrails.draw(map, trails[0], { weight: 5 });
+      map.fitBounds(drawn.bounds, { padding: [34, 34] });
+    });
+  })();
+</script>
+{% endif %}
+{% endblock %}

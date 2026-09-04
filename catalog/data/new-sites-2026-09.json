@@ -1,0 +1,126 @@
+{
+  "sites": [
+    {
+      "slug": "loretto-chapel-santa-fe",
+      "title": "Loretto Chapel and the Miraculous Staircase",
+      "category": "Shrine & Basilica",
+      "canonical_status": "Not Applicable",
+      "locality": "Santa Fe, New Mexico",
+      "country": "United States",
+      "latitude": 35.685556,
+      "longitude": -105.937778,
+      "date_display": "Chapel built 1873-1878",
+      "feast_day": "March 19 (St. Joseph)",
+      "summary_short": "Loretto Chapel is a small Gothic Revival chapel in downtown Santa Fe, built by the Sisters of Loretto and finished in 1878. It is famous for a spiral wooden staircase to the choir loft that turns twice with no center post, and for a popular tradition that St. Joseph himself built it.",
+      "the_story": "The Sisters of Loretto came to Santa Fe in 1852 to open a girls' school. Twenty years later they commissioned a chapel of their own, and Archbishop Jean-Baptiste Lamy sent them the French builders Antoine and Projectus Mouly, who modeled it loosely on the Sainte-Chapelle in Paris. Built of local sandstone on a narrow lot, with stained glass ordered from workshops in Clermont-Ferrand and Paris, the chapel was completed in 1878.\n\nThe choir loft sits about twenty feet above the nave, and the chapel was finished without a stair to reach it. What was eventually built is a helix of thirty-three steps making two full turns, assembled with wooden pegs rather than nails, resting on its own stringers rather than a central pole. Visitors have been struck by it for nearly 150 years. The devotional tradition, told by the sisters themselves, is that they made a nine-day novena to St. Joseph, that an unknown gray-bearded carpenter arrived with a donkey and a few simple tools, worked quietly for months, and left without pay or a name.\n\nThat story is beloved, but it is a tradition rather than an established fact. The historian Mary Jean Straw Cook proposed that the builder was Francois-Jean Rochas, a French-born carpenter whose 1895 obituary in the Santa Fe New Mexican credited him with building the Loretto staircase and who appears in the sisters' ledgers. Structural engineers have explained the design as an inner stringer acting as a slender wooden column -- unusual craftsmanship rather than an impossibility. A claim that the wood matches no known species of spruce circulates widely but has never been independently confirmed.\n\nToday a visitor walks into a quiet, jewel-box interior, sees the staircase roped off at its base, and reads the story on the panels around it.",
+      "church_recognition": "The Catholic Church has never investigated or declared the Loretto staircase a miracle. There is no diocesan inquiry, no decree from the Archdiocese of Santa Fe, and no Vatican judgment attached to it. What exists is a devotional tradition preserved by the Sisters of Loretto and popularized in the twentieth century by books, magazine articles, and a 1998 television film. Catholics are free to find the story moving; no one is asked to believe it as a matter of faith.\n\nThe chapel's standing is also often misunderstood. Loretto Academy closed in 1968, the property was sold, and the chapel was deconsecrated. It is no longer a Catholic church. It is privately owned and operated as a museum and wedding venue beside the Inn and Spa at Loretto. Mass is not celebrated there as a parish church, the Blessed Sacrament is not reserved there, and admission is charged. Come expecting a historic building and a good story, not an active shrine.",
+      "catholic_teaching": "Loretto is a useful place to think about how the Church treats claims of the miraculous. Catholic teaching holds that God can and does act in the world, and it insists on careful investigation before anything is called a miracle -- precisely because devotion built on an unproven claim is fragile. The Church honors St. Joseph as the just man, the foster father of Jesus, patron of workers and of the universal Church, and a powerful intercessor, and none of that depends on whether he personally cut these stair treads. If the staircase was made by a skilled immigrant carpenter who answered a need and moved on, that is itself a picture of the hidden, patient labor the Church praises in St. Joseph.",
+      "go_deeper": "Mary Jean Straw Cook, Loretto: The Sisters and Their Santa Fe Chapel, is the standard documentary account and the source of the Rochas attribution.\n\nThe Cathedral Basilica of St. Francis of Assisi, an active Catholic church and the seat of the Archdiocese of Santa Fe, is a block away and worth pairing with a visit here. El Santuario de Chimayo, one of the most visited pilgrimage sites in the United States, is about thirty miles north.",
+      "location_link": "https://www.lorettochapel.com",
+      "notes_internal": "Researched September 2026. Hours, admission and phone deliberately left blank -- the official site would not render them and third-party listings are stale. Confirm before publishing any figures. The exact year of deconsecration (1968 vs 1971) and the current owner are disputed in sources; the text says only 'privately owned', which is well supported.",
+      "travel_sections": [
+        {
+          "kind": "getting-there",
+          "teaser": "A block south of the Plaza",
+          "body": "The chapel is in downtown Santa Fe, roughly one block south of the Plaza on Old Santa Fe Trail, on the grounds beside the Inn and Spa at Loretto. It is an easy walk from the Plaza, the Cathedral Basilica of St. Francis of Assisi, and most downtown hotels. Downtown parking is metered and limited; the nearby public garages are simpler. The nearest major airport is Albuquerque International Sunport, about an hour's drive south."
+        },
+        {
+          "kind": "best-time-to-visit",
+          "teaser": "Spring and fall mornings",
+          "body": "Spring and fall bring mild weather and lighter downtown crowds than midsummer, and mornings are generally quieter than afternoons. The chapel hosts private weddings and concerts, which can close it to visitors on short notice, so check the schedule the day you plan to go."
+        },
+        {
+          "kind": "accessibility",
+          "teaser": "Single level; the stair is not climbed",
+          "body": "The chapel is a single-level historic space and the nave floor is reached without stairs. The staircase itself is roped off and is not climbed by visitors, so seeing it does not require climbing. Confirm current entrance and restroom accessibility with the chapel before visiting."
+        },
+        {
+          "kind": "before-you-go",
+          "teaser": "It is a museum, not a parish",
+          "body": "Loretto Chapel is privately owned and is no longer a consecrated Catholic church. Admission is charged, Mass is not celebrated there as a parish, and the Blessed Sacrament is not reserved. For Mass in Santa Fe, the Cathedral Basilica of St. Francis of Assisi is a block away."
+        }
+      ]
+    },
+    {
+      "slug": "scala-santa-holy-stairs-rome",
+      "title": "The Scala Santa (Holy Stairs), Rome",
+      "category": "Shrine & Basilica",
+      "canonical_status": "Recognized Devotion",
+      "locality": "Rome",
+      "country": "Italy",
+      "latitude": 41.886389,
+      "longitude": 12.506111,
+      "date_display": "Brought to Rome by tradition c. AD 326; moved to this site 1589",
+      "summary_short": "The Scala Santa is a flight of twenty-eight marble steps in Rome that pilgrims climb on their knees while praying. Tradition says these are the stairs Jesus climbed in Pontius Pilate's palace during his Passion, brought from Jerusalem to Rome in the fourth century.",
+      "the_story": "Across the piazza from the Basilica of St. John Lateran stands a plain-fronted building that holds one of Rome's most physical devotions. Inside, twenty-eight marble steps rise straight ahead. Pilgrims do not walk up them. They kneel at the bottom and climb one step at a time, praying as they go, while four ordinary staircases on either side carry everyone else up and down.\n\nThe tradition, recorded from the medieval period onward, is that these are the steps of the praetorium in Jerusalem, climbed by Jesus on the day he was condemned, and that St. Helena, the mother of Constantine, had them brought to Rome around AD 326. That origin cannot be verified historically, and honest guides say so. What is certain is that the stairs have drawn pilgrims for roughly a thousand years. In 1589 Pope Sixtus V had them moved to their present position, with Domenico Fontana designing the building that frames them.\n\nAt the top is the Sancta Sanctorum, the private chapel of the medieval popes, rebuilt under Nicholas III with Cosmatesque floors and thirteenth-century frescoes. Its inscription reads that there is no holier place in all the world. It guards the Acheropita, an ancient image of Christ described as not made by human hands, and a celebrated collection of relics beneath its altar.\n\nSince 1723 the marble has been protected by a walnut casing, so most pilgrims kneel on wood rather than stone. Between April and July 2019 that casing was lifted for a restoration by Vatican Museums conservators, and for the first time in almost three hundred years visitors saw the bare marble -- worn into hollows by centuries of knees, with rosaries, holy cards and photographs found tucked underneath. The wood was then replaced to protect the stone.",
+      "church_recognition": "The Church has never issued a historical ruling that these are certainly the steps of Pilate's praetorium; the identification rests on ancient tradition rather than documentary proof, and Catholic sources generally present it that way. What the Church has done is give the devotion its full official support. The site is a Pontifical Sanctuary on extraterritorial property of the Holy See, and since 1854, at the direction of Pope Pius IX, it has been in the care of the Passionists, whose particular charism is keeping the memory of Christ's Passion alive.\n\nPopes have attached indulgences to the climb: Pius VII granted one in 1817, and a plenary indulgence is available to the faithful who ascend the stairs on their knees while meditating on the Passion, under the usual conditions of sacramental confession, Holy Communion, and prayer for the intentions of the Holy Father. A stair lift has been fitted to one of the side staircases so that people who cannot kneel or climb can still make the pilgrimage and receive the indulgence.",
+      "catholic_teaching": "The Scala Santa is a school in two Catholic doctrines at once. The first is the veneration of relics: the Church honors objects connected to Christ and the saints not as magic but as physical anchors of a real history, because the faith rests on things that happened in time and place to a God who took flesh. The second is the meaning of penance. Climbing on one's knees is a prayer made with the body, joining a small deliberate discomfort to the sufferings of Christ -- what St. Paul calls filling up in our flesh what is lacking in the afflictions of Christ for the sake of his Body, the Church. The indulgence attached to the climb expresses the Church's teaching on the communion of saints: the merits of Christ and the saints are a treasury the Church can apply to the healing of temporal punishment for sin already forgiven.",
+      "go_deeper": "The sanctuary is run by the Passionists, whose vocation is preaching the Passion of Christ; their site is scala-santa.com.\n\nThe Scala Santa sits within a few minutes' walk of the Archbasilica of St. John Lateran, the cathedral of Rome and the mother church of the world, and the Basilica of Santa Croce in Gerusalemme, which holds relics of the Passion brought to Rome by St. Helena. The three make a natural half-day of Passion devotion.",
+      "location_link": "https://www.scala-santa.com",
+      "notes_internal": "Researched September 2026. Hours (roughly 9:00-13:30 and 15:00-18:30 per Turismo Roma) and the Sancta Sanctorum admission fee are NOT published on the page because they could not be confirmed on the official site and vary seasonally and in Holy Years. Coordinates are a building-centroid estimate on Piazza di San Giovanni in Laterano; worth refining against a survey source.",
+      "travel_sections": [
+        {
+          "kind": "getting-there",
+          "teaser": "Metro A to San Giovanni",
+          "body": "The sanctuary is on Piazza di San Giovanni in Laterano, directly across from the Archbasilica of St. John Lateran. Take Metro Line A to San Giovanni and walk a few minutes to the piazza; several bus and tram lines also serve the Lateran area."
+        },
+        {
+          "kind": "best-time-to-visit",
+          "teaser": "Early morning; Fridays in Lent are busiest",
+          "body": "Fridays in Lent, and Good Friday above all, are the traditional days for the climb and draw the largest crowds. Early morning right at opening is the quietest time in any season, and the sanctuary closes for several hours at midday. Holy Years bring very heavy traffic."
+        },
+        {
+          "kind": "accessibility",
+          "teaser": "A stair lift serves one side staircase",
+          "body": "The Holy Stairs themselves are climbed only on the knees, but the four side staircases are open for ordinary walking, and a stair lift has been installed on one of them so that people with limited mobility can reach the top and receive the indulgence. The building is historic, so surfaces are hard and uneven in places."
+        },
+        {
+          "kind": "what-to-bring",
+          "teaser": "Something for your knees",
+          "body": "Twenty-eight steps on the knees is longer than it sounds. Kneepads or padded trousers are a practical help, and many pilgrims bring a written intention or a rosary to pray on the way up. Ordinary Roman church dress applies: shoulders and knees covered."
+        }
+      ]
+    },
+    {
+      "slug": "christ-cathedral-garden-grove",
+      "title": "Christ Cathedral, Garden Grove",
+      "category": "Shrine & Basilica",
+      "canonical_status": "Not Applicable",
+      "locality": "Garden Grove, California",
+      "country": "United States",
+      "latitude": 33.787778,
+      "longitude": -117.9525,
+      "date_display": "Built 1980; dedicated as Christ Cathedral July 17, 2019",
+      "feast_day": "July 17 (dedication of the cathedral)",
+      "summary_short": "Christ Cathedral is the cathedral church of the Catholic Diocese of Orange, a vast building of glass and steel in Garden Grove, California. It opened in 1980 as the Protestant Crystal Cathedral, was bought by the diocese out of bankruptcy in 2012, and was dedicated for Catholic worship in 2019.",
+      "the_story": "In 1955 a young minister named Robert H. Schuller began preaching from the roof of a snack bar at a drive-in theater in Orange County. His congregation grew, and in the late 1970s he commissioned Philip Johnson and John Burgee to design a sanctuary entirely of glass. When Schuller saw the model he called it a crystal cathedral, and the name stuck. The building opened in 1980, a four-pointed star more than 400 feet long sheathed in over ten thousand panes of glass, and became familiar to millions through the televised Hour of Power.\n\nThe ministry could not sustain itself. Crystal Cathedral Ministries filed for bankruptcy in 2010 with roughly $43 million in debt. In late 2011 a bankruptcy judge approved the sale of the 34-acre campus to the Roman Catholic Diocese of Orange for $57.5 million, and the sale closed in February 2012. The diocese, which had never had a cathedral built for the purpose, now had one of the most recognizable religious buildings in America and the problem of turning a preaching auditorium into a Catholic liturgical space.\n\nThe firm Johnson Fain led a multi-year renovation. Thousands of angled quatrefoil panels were hung inside the glass skin to soften the light and control heat; the floor was reshaped around a new altar, ambo, cathedra and a suspended ciborium; a baptistry and Blessed Sacrament chapel were added. Bishop Kevin Vann dedicated the building as Christ Cathedral on July 17, 2019.\n\nA visitor today walks into an enormous room full of filtered daylight, with the Hazel Wright Organ -- one of the largest pipe organs in the world, restored and returned to service in 2022 -- along the walls. The campus also holds the 1961 Arboretum, the Tower of Hope, the Crean Tower carillon, the Our Lady of La Vang shrine honoring the diocese's large Vietnamese Catholic community, and the memorial gardens where Robert Schuller is buried.",
+      "church_recognition": "Christ Cathedral's standing is straightforward: it is a Catholic cathedral in the full canonical sense, the seat of the bishop of the Diocese of Orange. It was not a disputed apparition or a contested miracle but an ordinary and very public act of the Church -- a purchase, a renovation, and a rite of dedication. Because the building had been a Protestant church, it was not simply reopened; it was dedicated for Catholic worship on July 17, 2019, with the anointing of the altar and walls with sacred chrism, the deposition of relics in the altar, and the installation of the bishop's cathedra, the chair that makes a church a cathedral. The anniversary of the dedication is observed as a feast in the diocese.\n\nThe transition was handled with unusual public goodwill on both sides. Robert Schuller and his wife Arvella publicly encouraged Catholics to take up stewardship of the campus, and Schuller family graves remain in the memorial gardens. Work continued after 2019, including the completion of the St. Callistus Chapel and crypts in October 2024. The cathedral is an active parish as well as the bishop's church, with Masses celebrated in English, Spanish and Vietnamese.",
+      "catholic_teaching": "A cathedral is not simply a large church; it is the church that holds the cathedra, the chair of the diocesan bishop, and so it is the visible center of the local Church's unity around him and, through him, with the Bishop of Rome. Everything in the renovated building is arranged to say that: the altar at the center, where the Eucharistic sacrifice makes present the one sacrifice of Christ; the ambo where the Word is proclaimed; the font where new Christians are born; the tabernacle where the Blessed Sacrament is reserved for adoration and for the sick. The rite of dedication, with its anointing and its relics sealed in the altar, teaches that a building becomes a church by being set apart for the Eucharist -- which is why a glass auditorium built for broadcasting could become, with that rite, a cathedral.",
+      "go_deeper": "The diocese publishes the cathedral's history, Mass schedule and tour information at christcathedralcalifornia.org.\n\nThe campus is about fifteen minutes from Anaheim, which makes it an easy addition to a family trip, and roughly an hour from Mission San Juan Capistrano and Mission San Gabriel Arcangel -- two stops on the California Mission Trail, and a striking contrast: an adobe church of 1776 and a glass cathedral of 1980, both of them the same Mass.",
+      "location_link": "https://www.christcathedralcalifornia.org",
+      "notes_internal": "Researched September 2026. Renovation cost figures vary widely by source and are deliberately not stated; only the documented $57.5 million purchase price is used. General visiting hours could not be verified and are not published here. Coordinates are a campus-centroid estimate.",
+      "travel_sections": [
+        {
+          "kind": "getting-there",
+          "teaser": "Chapman Avenue, off the 22",
+          "body": "The campus is on Chapman Avenue in Garden Grove, in the middle of Orange County and close to the 22 Freeway -- about fifteen minutes from Anaheim and Disneyland, and roughly forty minutes from Los Angeles International Airport in light traffic. John Wayne Airport in Santa Ana is much closer. There is free on-site parking across several lots; guided tours begin in the lobby of the Tower of Hope, the building with the large cross on its roof, and visitors are directed to lots P5 or P7."
+        },
+        {
+          "kind": "best-time-to-visit",
+          "teaser": "Weekday afternoons for the tour",
+          "body": "Free guided tours run on weekday afternoons and last about an hour to ninety minutes, so a weekday visit sees the most. Tours are not offered on major holidays or holy days of obligation, and groups should reserve ahead; tours in Spanish, Vietnamese, Chinese, Korean and Tagalog can be arranged with about two weeks' notice. Sunday Mass shows the cathedral in full use, and the glass interior is at its most striking in bright midday sun. Check the current tour schedule with the cathedral before you go."
+        },
+        {
+          "kind": "accessibility",
+          "teaser": "Level campus; tours are wheelchair accessible",
+          "body": "The diocese states that all guided tours are wheelchair accessible. The campus is modern, level, and served by large surface parking lots close to the cathedral entrance. Bus parking can be arranged in advance through the tours office."
+        },
+        {
+          "kind": "mass-confession-prayer",
+          "teaser": "English, Spanish and Vietnamese",
+          "body": "Christ Cathedral is an active parish as well as the bishop's church, with Masses celebrated in English, Spanish and Vietnamese. The Blessed Sacrament is reserved in its own chapel, and the campus includes the shrine of Our Lady of La Vang, honoring the diocese's large Vietnamese Catholic community. Check the current schedule on the cathedral's site."
+        }
+      ]
+    }
+  ]
+}
