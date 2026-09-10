@@ -151,44 +151,17 @@
     });
 
     // ---------- Pilgrimage trails ----------
-    // Lines only here, and each one gets its own legend row so a reader can
-    // put the Camino away and still see the pins underneath it. The trail
-    // legend is built after the fetch because, unlike the five categories,
-    // the list of trails is editorial and changes.
-    var trailLegendEl = document.createElement('div');
-    trailLegendEl.className = 'map-legend map-legend--trails';
-    el.parentElement.appendChild(trailLegendEl);
-
-    var trailLayers = {};
-
-    trailLegendEl.addEventListener('click', function (e) {
-      var item = e.target.closest('.map-legend-item');
-      if (!item) return;
-      var layer = trailLayers[item.dataset.trail];
-      if (!layer) return;
-      var showing = !map.hasLayer(layer.group);
-      item.classList.toggle('is-off', !showing);
-      if (showing) {
-        layer.group.addTo(map);
-      } else {
-        map.removeLayer(layer.group);
-      }
-    });
-
+    // Lines only here -- the category pins already mark every stop that has a
+    // page, so numbering them would stack two markers on one point.
+    //
+    // Deliberately NO legend. The five categories are a fixed set, so a legend
+    // for them stays the same size forever; trails are editorial and the list
+    // only grows, so a row-per-trail would have eaten the map by the tenth
+    // route. Each line carries its own popup with the route's name and a link,
+    // which is what a reader actually wants from a line they just noticed.
     window.SoGTrails.fetch(el.dataset.trailsUrl).then(function (trails) {
-      if (!trails.length) return;
-      trailLegendEl.innerHTML =
-        '<span class="map-legend-heading">Pilgrimage routes</span>' +
-        trails.map(function (trail) {
-          return (
-            '<button type="button" class="map-legend-item" data-trail="' + trail.slug + '">' +
-            '<span class="map-legend-line" style="background:' + trail.color + '"></span>' +
-            trail.title +
-            '</button>'
-          );
-        }).join('');
       trails.forEach(function (trail) {
-        trailLayers[trail.slug] = window.SoGTrails.draw(map, trail, { showStops: false });
+        window.SoGTrails.draw(map, trail, { showStops: false });
       });
     });
 

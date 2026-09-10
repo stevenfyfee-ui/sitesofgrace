@@ -25,20 +25,10 @@
   margin-bottom: 6px;
 }
 
-/* ---------- Trail legend on the interactive map ---------- */
-/* Bottom-left: the category legend owns the top-right corner, and the zoom
-   control owns the top-left. */
-.map-legend--trails {
-  top: auto; right: auto; bottom: 28px; left: 16px; max-width: 260px;
-}
-.map-legend-heading {
-  font-family: var(--sans); font-size: 11px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--stone);
-  margin-bottom: 2px;
-}
-/* The JS sets background to the trail's own color, so the swatch is a short
-   length of the line the reader is about to look for on the map. */
-.map-legend-line { width: 22px; height: 3px; border-radius: 2px; flex: none; }
+/* No trail legend on the interactive map, by choice. The five categories are
+   a fixed set, so their legend is a fixed size; trails are editorial and the
+   list only grows. A row per trail would have taken the map over. The lines
+   introduce themselves through their own popups instead. */
 
 /* ---------- Trail page ---------- */
 .trail-map {
@@ -107,7 +97,6 @@
 .trail-band-link a:hover { color: var(--gold); }
 
 @media (max-width: 720px) {
-  .map-legend--trails { position: static; max-width: none; margin-top: 12px; }
   .trail-stop { gap: 10px; }
   .trail-stop-title { font-size: 18px; }
 }
