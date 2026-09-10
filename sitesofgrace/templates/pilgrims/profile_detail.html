@@ -40,7 +40,7 @@
         {% if is_self %}
           <a href="{% url 'pilgrims:followers' %}"><strong>{{ follower_count }}</strong> Followers</a>
           <a href="{% url 'pilgrims:following' %}"><strong>{{ following_count }}</strong> Following</a>
-          {% if pending_request_count %}<a href="{% url 'pilgrims:requests' %}"><strong>{{ pending_request_count }}</strong> Requests</a>{% endif %}
+          <a href="{% url 'pilgrims:requests' %}"><strong>{{ pending_request_count }}</strong> Requests</a>
         {% else %}
           <span><strong>{{ follower_count }}</strong> Followers</span>
           <span><strong>{{ following_count }}</strong> Following</span>
@@ -50,6 +50,8 @@
 
     <div class="pilgrim-header-actions">
       {% if is_self %}
+        <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">My Photos</a>
+        <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
         <a class="btn btn-secondary" href="{% url 'pilgrims:settings' %}">Edit Profile</a>
       {% elif not request.user.is_authenticated %}
         <a class="btn btn-primary" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to follow</a>

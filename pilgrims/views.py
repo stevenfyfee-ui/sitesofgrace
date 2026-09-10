@@ -84,9 +84,7 @@ def _redirect_next(request, flag):
 
 def portal_home(request):
     if request.user.is_authenticated:
-        # No feed yet (phase 3) — the pilgrim's own profile is the interim
-        # landing spot.
-        return redirect("pilgrims:profile_detail", handle=request.user.pilgrim.handle)
+        return redirect("pilgrims:feed")
     return render(request, "pilgrims/marketing.html")
 
 

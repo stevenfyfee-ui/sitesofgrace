@@ -2,12 +2,32 @@ from django.contrib.auth.models import User
 from django.db import connection
 from django.test import Client, TestCase
 from django.test.utils import CaptureQueriesContext
+from django.urls import reverse
 
 from .. import imaging
 from ..models import Comment, Follow, PilgrimPhoto, Post, PostPhoto
 from ..permissions import visible_posts_for
 from .factories import make_uploaded_jpeg
 from .test_photos import _make_site, _PrivateStorageTestCase
+
+
+class PortalHomeRedirectTests(TestCase):
+    """/pilgrims/ lands a signed-in pilgrim on the feed — matches the
+    original phase-1 plan, which the profile-page redirect was always meant
+    to be an interim stand-in for until the feed existed (phase 3)."""
+
+    def test_authenticated_user_redirected_to_feed(self):
+        user = User.objects.create_user("portal_home_user", "portal_home_user@example.com", "pw")
+        client = Client()
+        client.force_login(user)
+        response = client.get(reverse("pilgrims:home"))
+        self.assertRedirects(response, reverse("pilgrims:feed"))
+
+    def test_anonymous_user_sees_marketing_page(self):
+        client = Client()
+        response = client.get(reverse("pilgrims:home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "pilgrims/marketing.html")
 
 
 class FeedQueryCountTests(_PrivateStorageTestCase):

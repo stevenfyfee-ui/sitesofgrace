@@ -38,6 +38,7 @@
       <div class="header-actions">
         {% if request.user.is_authenticated %}
           <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
+          <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">My Photos</a>
           {% unread_notification_count request.user as unread_count %}
           <a class="btn btn-secondary pilgrims-nav-bell" href="{% url 'pilgrims:notifications' %}">
             Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}
