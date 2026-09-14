@@ -175,6 +175,16 @@ class SacredSitePage(RoutablePageMixin, Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="sites",
+        help_text="The saint this site principally belongs to -- whose shrine or "
+                  "tomb it is, or Our Lady for an apparition site.",
+    )
+    related_saints = ParentalManyToManyField(
+        "catalog.SaintPage",
+        blank=True,
+        related_name="related_sites",
+        help_text="Other saints connected to this site: the visionary of an "
+                  "apparition, companions, or the figure a Holy Land place "
+                  "belongs to. The principal saint goes in the field above.",
     )
     featured_image = models.ForeignKey(
         "wagtailimages.Image",
@@ -221,6 +231,7 @@ class SacredSitePage(RoutablePageMixin, Page):
                 FieldPanel("date_display"),
                 FieldPanel("feast_day"),
                 FieldPanel("associated_saint"),
+                FieldPanel("related_saints"),
                 FieldPanel("topics"),
             ],
             heading="Identity",
