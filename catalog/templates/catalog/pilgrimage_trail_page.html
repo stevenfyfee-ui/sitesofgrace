@@ -146,6 +146,7 @@
 {% if page.has_map %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static 'js/basemap.js' %}"></script>
 <script src="{% static 'js/trails.js' %}"></script>
 <script>
   (function () {
@@ -153,10 +154,7 @@
     if (!el || !window.L || !window.SoGTrails) return;
 
     var map = L.map(el, { scrollWheelZoom: false });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+    window.SoGBasemap.add(map);
 
     window.SoGTrails.fetch(el.dataset.trailsUrl).then(function (trails) {
       if (!trails.length) return;

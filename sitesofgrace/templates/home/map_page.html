@@ -37,6 +37,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
   integrity="sha256-Hk4dIpcqOSb0hZjgyvFOP+cEmDXUKKNE/tT542ZbNQg=" crossorigin=""></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
+<script src="{% static 'js/basemap.js' %}"></script>
 <script src="{% static 'js/trails.js' %}"></script>
 <script>
   (function () {
@@ -109,10 +110,7 @@
     }
 
     var map = L.map(el).setView([20, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+    window.SoGBasemap.add(map);
 
     var clusterGroup = L.markerClusterGroup({ iconCreateFunction: clusterIcon, maxClusterRadius: 50 });
     map.addLayer(clusterGroup);
