@@ -45,3 +45,6 @@ sync-and-push.bat
 tools/pending/
 # Screenshots and scratch output dropped in by Claude - not part of the app
 Claude outputs/
+
+# Wikidata saints tooling - cached query results, never commit
+tools/saints_data/cache/
