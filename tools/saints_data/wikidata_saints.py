@@ -116,6 +116,12 @@ def http_json(url: str, key: str, retries: int = 5):
             req = Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
             with urlopen(req, timeout=120) as resp:
                 payload = json.load(resp)
+            # MediaWiki's API answers internal errors (e.g. DBConnectionError)
+            # with HTTP 200 and an {"error": ...} body, not a non-200 status --
+            # urlopen sees success. Treat that as a failure worth retrying
+            # instead of caching a transient error as a permanent "no data".
+            if isinstance(payload, dict) and "error" in payload:
+                raise RuntimeError(f"API error: {payload['error']}")
             with open(path, "w", encoding="utf8") as fh:
                 json.dump(payload, fh)
             time.sleep(2.0)
@@ -165,6 +171,20 @@ def year_from_iso(value: str) -> str:
         return ""
     year = int(m.group(1))
     return f"{abs(year)} BC" if year < 0 else str(year)
+
+
+def normalize_image_url(url: str) -> str:
+    """https, and a display width -- Special:FilePath with no width redirects
+    to the full-resolution original (often several MB), which Commons asks
+    bulk consumers not to do, and an http:// URL is mixed content on our
+    https:// site: browsers block it, so the portrait silently never loads.
+    500 matches the template's {% image page.portrait width-500 %}."""
+    if not url:
+        return url
+    url = re.sub(r"^http://", "https://", url)
+    if "width=" not in url:
+        url += ("&" if "?" in url else "?") + "width=500"
+    return url
 
 
 # ------------------------------------------------------- our existing saints
@@ -387,7 +407,7 @@ def flatten(m: dict, d: dict) -> dict:
             "order": "; ".join(sorted(d.get("order", []))),
             "patronage_wd": "; ".join(sorted(d.get("patronage", []))),
             "status": "; ".join(sorted(d.get("status", []))),
-            "image_url": d.get("image", ""), "commons": d.get("commons", ""),
+            "image_url": normalize_image_url(d.get("image", "")), "commons": d.get("commons", ""),
             "feast_day": d.get("feast", ""),
             "born": year_from_iso(d.get("birth", "")), "died": year_from_iso(d.get("death", "")),
             "source_url": f"https://www.wikidata.org/wiki/{m['qid']}" if m.get("qid") else ""}

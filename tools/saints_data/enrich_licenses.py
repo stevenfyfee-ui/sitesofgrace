@@ -27,7 +27,8 @@ COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 
 
 def filename_from(image_url: str) -> str:
-    return unquote(image_url.rsplit("/", 1)[-1])
+    path = image_url.split("?", 1)[0]
+    return unquote(path.rsplit("/", 1)[-1])
 
 
 def plain_text(value: str) -> str:
