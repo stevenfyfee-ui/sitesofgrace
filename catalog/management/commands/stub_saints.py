@@ -61,6 +61,9 @@ class Command(BaseCommand):
         queryset = stubs.filter(live=False)
         if options["ready"]:
             queryset = queryset.exclude(significance="")
+        eligible = queryset.count()
+        self.stdout.write(f"publishing: {eligible} eligible")
+        self.stdout.flush()
         n = 0
         for saint in queryset:
             saint.live = True
@@ -68,6 +71,9 @@ class Command(BaseCommand):
                 saint.data_status = ""
             saint.save(update_fields=["live", "data_status"])
             n += 1
+            if n % 50 == 0 or n == eligible:
+                self.stdout.write(f"  ...{n}/{eligible} published")
+                self.stdout.flush()
         self.stdout.write(self.style.SUCCESS(f"published {n} saint pages"))
         if options["ready"]:
             self.stdout.write("their data_status was cleared, so they are no longer stubs")

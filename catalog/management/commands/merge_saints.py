@@ -47,6 +47,9 @@ class Command(BaseCommand):
         report = []
         pair_results = []
 
+        self.stdout.write(f"merging: {len(PAIRS)} known duplicate pair(s)")
+        self.stdout.flush()
+
         with transaction.atomic():
             for pair in PAIRS:
                 try:

@@ -31,6 +31,7 @@ and stub_saints are no-ops once their target state is reached). See
 catalog/tests_sync_catalog.py.
 """
 import os
+import time
 
 from django.conf import settings
 from django.core.management import call_command
@@ -72,13 +73,21 @@ class Command(BaseCommand):
                              help="Abort unless stub_saints --publish --ready "
                                   "publishes exactly this many pages.")
 
+    def phase(self, label):
+        elapsed = time.monotonic() - self.start
+        self.stdout.write(self.style.SUCCESS(f"== [{elapsed:6.1f}s] {label} =="))
+        self.stdout.flush()
+
     def handle(self, *args, **options):
         dry_run = options["dry_run"]
+        self.start = time.monotonic()
 
         with transaction.atomic():
             saints_before = SaintPage.objects.count()
 
+            self.phase("1/5 import_catalog")
             import_cmd = ImportCatalogCommand()
+            import_cmd.stdout = self.stdout
             call_command(import_cmd, options["workbook"], only="saints")
             created = import_cmd.stats["saints"]["created"]
             updated = import_cmd.stats["saints"]["updated"]
@@ -89,7 +98,9 @@ class Command(BaseCommand):
                     "pass --allow-new-saints if that's actually intended this time."
                 )
 
+            self.phase("2/5 apply_enrichment -- dry-run check")
             enrich_check = ApplyEnrichmentCommand()
+            enrich_check.stdout = self.stdout
             call_command(enrich_check, options["enrichment_csv"], dry_run=True)
             projected = enrich_check.result["applied"]
             if projected < options["min_enriched"]:
@@ -99,16 +110,22 @@ class Command(BaseCommand):
                     "database is not in the state this run expected."
                 )
 
+            self.phase("3/5 apply_enrichment -- writing")
             enrich_cmd = ApplyEnrichmentCommand()
+            enrich_cmd.stdout = self.stdout
             call_command(enrich_cmd, options["enrichment_csv"])
             enriched = enrich_cmd.result["applied"]
             skipped_ambiguous = enrich_cmd.result["skipped_ambiguous"]
 
+            self.phase("4/5 merge_saints")
             merge_cmd = MergeSaintsCommand()
+            merge_cmd.stdout = self.stdout
             call_command(merge_cmd)
             merged = merge_cmd.result["newly_merged_count"]
 
+            self.phase("5/5 stub_saints --publish --ready")
             publish_cmd = StubSaintsCommand()
+            publish_cmd.stdout = self.stdout
             call_command(publish_cmd, publish=True, ready=True)
             published = publish_cmd.result["published"]
             if published != options["expect_published"]:
@@ -125,6 +142,7 @@ class Command(BaseCommand):
             if dry_run:
                 transaction.set_rollback(True)
 
+        self.phase("done")
         label = "DRY RUN (rolled back)" if dry_run else "APPLIED"
         summary = (
             f"sync_catalog: {label} | created={created} updated={updated} "

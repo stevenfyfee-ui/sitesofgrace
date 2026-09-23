@@ -168,7 +168,10 @@ class Command(BaseCommand):
 
     def import_saints(self, rows):
         parent = self.get_parent(SAINTS_PARENT_SLUG, "saint")
-        for row in rows:
+        total = len(rows)
+        self.stdout.write(f"importing saints: {total} rows")
+        self.stdout.flush()
+        for i, row in enumerate(rows, start=1):
             title = s(row.get("name"))
             if not title:
                 continue
@@ -250,6 +253,14 @@ class Command(BaseCommand):
             elif changed_fields:
                 saint.save(update_fields=changed_fields)
                 self.stats["saints"]["updated"] += 1
+
+            if i % 50 == 0 or i == total:
+                self.stdout.write(
+                    f"  ...{i}/{total} scanned, "
+                    f"{self.stats['saints']['created']} created, "
+                    f"{self.stats['saints']['updated']} updated so far"
+                )
+                self.stdout.flush()
 
     def wire_saint_topics(self, rows):
         for row in rows:
