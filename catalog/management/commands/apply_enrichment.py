@@ -153,3 +153,15 @@ class Command(BaseCommand):
         self.stdout.write(f"portraits given a credit line: {credits_added}")
         if options["dry_run"]:
             self.stdout.write(self.style.WARNING("dry run -- rolled back, nothing saved"))
+
+        # Structured result for callers that compose this command (e.g.
+        # sync_catalog) -- not returned from handle(), since Django's
+        # execute() would try to treat a non-string return value as stdout
+        # output. Read it off the Command instance after call_command(cmd, ...).
+        self.result = {
+            "applied": len(applied),
+            "skipped_ambiguous": len(skipped_ambiguous),
+            "missing": len(missing),
+            "field_counts": dict(field_counts),
+            "credits_added": credits_added,
+        }

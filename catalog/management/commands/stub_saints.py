@@ -40,6 +40,12 @@ class Command(BaseCommand):
             self.stdout.write(f"  hidden:          {stubs.filter(live=False).count()}")
             self.stdout.write(f"  have a summary:  {with_content}")
             self.stdout.write("\nNothing changed. Pass --unpublish or --publish.")
+            self.result = {
+                "total": total,
+                "live": stubs.filter(live=True).count(),
+                "hidden": stubs.filter(live=False).count(),
+                "with_content": with_content,
+            }
             return
 
         if options["unpublish"]:
@@ -49,6 +55,7 @@ class Command(BaseCommand):
                 saint.save(update_fields=["live"])
                 n += 1
             self.stdout.write(self.style.SUCCESS(f"hid {n} stub saint pages"))
+            self.result = {"hidden": n}
             return
 
         queryset = stubs.filter(live=False)
@@ -64,3 +71,4 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f"published {n} saint pages"))
         if options["ready"]:
             self.stdout.write("their data_status was cleared, so they are no longer stubs")
+        self.result = {"published": n}

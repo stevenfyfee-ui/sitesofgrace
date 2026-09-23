@@ -180,25 +180,76 @@ class Command(BaseCommand):
                 continue
             if is_new:
                 saint = SaintPage(title=title, slug=slug)
-            saint.title = title
-            saint.also_known_as = s(row.get("also_known_as"))
-            saint.honorific_type = s(row.get("honorific_type"))
-            saint.feast_day = s(row.get("feast_day"))
-            saint.born = s(row.get("born"))
-            saint.died = s(row.get("died"))
-            saint.canonized = s(row.get("canonized"))
-            saint.patronage = s(row.get("patronage"))
-            saint.significance = s(row.get("significance"))
-            saint.body = to_richtext(row.get("body_draft"))
-            saint.source_url = s(row.get("source_url"))
-            saint.source_note = s(row.get("source_note"))
-            saint.data_status = s(row.get("data_status"))
-            saint.editor_notes = s(row.get("editor_notes"))
+
+            # also_known_as and data_status are also written by merge_saints
+            # and stub_saints later in the sync_catalog pipeline. Treating
+            # them as a plain overwrite from the workbook would make a
+            # second full-pipeline run revert those writes and then redo
+            # them -- a silent oscillation that looks like real churn on
+            # every re-run. also_known_as is unioned rather than replaced
+            # (it's a set of aliases, not a single value); data_status is
+            # never regressed from "" (graduated) back to a stub-* prefix
+            # by a workbook that hasn't caught up with a publish decision.
+            incoming_aka = [a.strip() for a in s(row.get("also_known_as")).split(",") if a.strip()]
+            existing_aka = [] if is_new else [a.strip() for a in (saint.also_known_as or "").split(",") if a.strip()]
+            merged_aka = existing_aka + [a for a in incoming_aka if a not in existing_aka]
+
+            incoming_data_status = s(row.get("data_status"))
+            if not is_new and saint.data_status == "" and incoming_data_status.startswith("stub-"):
+                data_status = ""
+            else:
+                data_status = incoming_data_status
+
+            # feast_day/born/died are also filled by apply_enrichment from
+            # Wikidata (blank-only-fill there -- see its docstring). This
+            # workbook's own columns for the same three fields can be
+            # blank or stale for a saint that's already been enriched from
+            # the better source; overwriting unconditionally would erase
+            # correct data and rely on a re-run of apply_enrichment to
+            # restore it, which is a real loss if that CSV is ever missing
+            # the row. Existing non-blank data wins here too, for exactly
+            # the fields apply_enrichment also owns -- everything else
+            # (title, significance, body, etc.) has no other writer, so it
+            # stays a straight overwrite from the workbook.
+            def blank_only(field):
+                incoming = s(row.get(field))
+                current = "" if is_new else getattr(saint, field)
+                return incoming if not current else current
+
+            candidate = {
+                "title": title,
+                "also_known_as": ", ".join(merged_aka),
+                "honorific_type": s(row.get("honorific_type")),
+                "feast_day": blank_only("feast_day"),
+                "born": blank_only("born"),
+                "died": blank_only("died"),
+                "canonized": s(row.get("canonized")),
+                "patronage": s(row.get("patronage")),
+                "significance": s(row.get("significance")),
+                "body": to_richtext(row.get("body_draft")),
+                "source_url": s(row.get("source_url")),
+                "source_note": s(row.get("source_note")),
+                "data_status": data_status,
+                "editor_notes": s(row.get("editor_notes")),
+            }
+            # Only write fields that actually differ, and skip the save entirely
+            # when nothing does -- otherwise a re-run against an unchanged
+            # workbook reports every existing saint as "updated" every time,
+            # which makes this command (and anything composing it) impossible
+            # to prove idempotent.
+            changed_fields = [
+                field for field, value in candidate.items()
+                if is_new or getattr(saint, field) != value
+            ]
+            for field, value in candidate.items():
+                setattr(saint, field, value)
+
             if is_new:
                 parent.add_child(instance=saint)
-            else:
-                saint.save()
-            self.stats["saints"]["created" if is_new else "updated"] += 1
+                self.stats["saints"]["created"] += 1
+            elif changed_fields:
+                saint.save(update_fields=changed_fields)
+                self.stats["saints"]["updated"] += 1
 
     def wire_saint_topics(self, rows):
         for row in rows:
