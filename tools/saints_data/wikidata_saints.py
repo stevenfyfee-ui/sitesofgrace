@@ -149,6 +149,24 @@ def parse_point(wkt: str) -> tuple[str, str]:
     return (m.group(2), m.group(1)) if m else ("", "")
 
 
+def year_from_iso(value: str) -> str:
+    """'1181-01-01T00:00:00Z' -> '1181'; '-0017-01-01T...' -> '17 BC'.
+
+    Wikidata returns a full ISO timestamp regardless of how precisely the
+    date is actually known — day-precision and year-precision items both
+    come back with a "-01-01" filled in, so a month/day would often be
+    fabricated. Our own born/died fields are short strings (existing saints:
+    "c. 956, Bohemia"; the expansion batch: bare years like "1211"), so a
+    bare year is both honest about what Wikidata actually knows and
+    consistent with the plainer of our two existing conventions.
+    """
+    m = re.match(r"^(-?\d+)-\d{2}-\d{2}", value or "")
+    if not m:
+        return ""
+    year = int(m.group(1))
+    return f"{abs(year)} BC" if year < 0 else str(year)
+
+
 # ------------------------------------------------------- our existing saints
 
 def load_our_saints() -> list[dict]:
@@ -370,8 +388,8 @@ def flatten(m: dict, d: dict) -> dict:
             "patronage_wd": "; ".join(sorted(d.get("patronage", []))),
             "status": "; ".join(sorted(d.get("status", []))),
             "image_url": d.get("image", ""), "commons": d.get("commons", ""),
-            "feast_raw": d.get("feast", ""),
-            "birth_raw": d.get("birth", ""), "death_raw": d.get("death", ""),
+            "feast_day": d.get("feast", ""),
+            "born": year_from_iso(d.get("birth", "")), "died": year_from_iso(d.get("death", "")),
             "source_url": f"https://www.wikidata.org/wiki/{m['qid']}" if m.get("qid") else ""}
 
 
@@ -414,8 +432,8 @@ def run_enrich() -> None:
     rows = [flatten(m, details.get(m["qid"], {})) for m in matched]
     write_csv(os.path.join(HERE, "enrichment.csv"), rows,
               ["slug", "title", "wd_label", "confidence", "qid", "burial", "lat", "lon",
-               "order", "patronage_wd", "image_url", "commons", "feast_raw", "birth_raw",
-               "death_raw", "source_url"])
+               "order", "patronage_wd", "image_url", "commons", "feast_day", "born",
+               "died", "source_url"])
 
 
 # Catholic-only filter for --expand. P411 (canonization status) is used by

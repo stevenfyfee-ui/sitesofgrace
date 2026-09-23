@@ -21,7 +21,6 @@ Rules:
 """
 import csv
 import os
-import re
 from collections import Counter
 
 from django.conf import settings
@@ -32,22 +31,19 @@ from catalog.models import SaintPage
 
 CSV_PATH = os.path.join(settings.BASE_DIR, "tools", "saints_data", "enrichment.csv")
 
-# wikidata_id, religious_order, burial_place, portrait_url: filled straight
-# from the matching CSV column whenever the model field is currently blank.
+# Filled straight from the matching CSV column whenever the model field is
+# currently blank. born/died/feast_day are already display-ready strings by
+# the time they reach this CSV (wikidata_saints.py resolves the year out of
+# Wikidata's ISO timestamps and the feast label out of its entity URI) --
+# this command just copies them across, it doesn't reformat anything.
 DIRECT_FIELDS = [
     ("wikidata_id", "qid"),
     ("religious_order", "order"),
     ("burial_place", "burial"),
+    ("born", "born"),
+    ("died", "died"),
+    ("feast_day", "feast_day"),
 ]
-
-
-def year_from_iso(value: str) -> str:
-    """'1181-01-01T00:00:00Z' -> '1181'; '-0017-01-01T...' -> '17 BC'."""
-    m = re.match(r"^(-?\d+)-\d{2}-\d{2}", value or "")
-    if not m:
-        return ""
-    year = int(m.group(1))
-    return f"{abs(year)} BC" if year < 0 else str(year)
 
 
 class Command(BaseCommand):
@@ -105,24 +101,6 @@ class Command(BaseCommand):
                         update_fields.append("portrait_credit")
                         field_counts["portrait_credit"] += 1
                         credits_added += 1
-
-                born = year_from_iso(row.get("birth_raw", ""))
-                if born and not saint.born:
-                    saint.born = born
-                    update_fields.append("born")
-                    field_counts["born"] += 1
-
-                died = year_from_iso(row.get("death_raw", ""))
-                if died and not saint.died:
-                    saint.died = died
-                    update_fields.append("died")
-                    field_counts["died"] += 1
-
-                feast = (row.get("feast_raw") or "").strip()
-                if feast and not saint.feast_day:
-                    saint.feast_day = feast
-                    update_fields.append("feast_day")
-                    field_counts["feast_day"] += 1
 
                 if not update_fields:
                     continue
