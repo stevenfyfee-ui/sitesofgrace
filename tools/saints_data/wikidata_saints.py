@@ -76,6 +76,47 @@ def fold(name: str) -> str:
     return re.sub(r"\s+", " ", text).strip().lower()
 
 
+# Our title -> a name Wikidata actually carries as a label or alias, for
+# saints whose Wikidata entry uses a different form of their name than we
+# do (a native-language spelling, a birth name, a different honorific) and
+# so came back "no match" even though they're on Wikidata under a form we
+# never tried. Every value here was verified by fetching its label,
+# description, and P411 status before being added -- see the 2026-09-24
+# no-match triage. Two names from that triage (Bogumił of Dobrów, John
+# Baptist of the Conception) found no verifiable match and are deliberately
+# NOT here; they're still "no match" until someone finds the right QID.
+# Fixed here rather than by renaming our pages: our titles are what editors
+# and URLs already use.
+NAME_ALIASES = {
+    "Bernardine of Siena": "Bernardino of Siena",
+    "Birgitta - Bridget of Sweden": "Bridget of Sweden",
+    "Camillus of Lellis": "Camillus de Lellis",
+    "Christopher Magallanes": "Cristobal Magallanes Jara",
+    "Damien de Veuster of Moloka'i": "Father Damien",
+    "Elizabeth of Portugal": "Elizabeth of Aragon",
+    "Francis of Paula": "Francis of Paola",
+    "John Leonardi": "Giovanni Leonardi",
+    "Mary Magdalen of Pazzi": "Magdalena de Pazzi",
+    "Peter Cantius": "Peter Canisius",
+    "Peter Chantel": "Peter Chanel",
+    "Raymund of Pennafort": "Raymond of Penyafort",
+    "Andrew Kim Tae-gon": "Andrew Kim Taegon",
+    "Adelaide of Vilich": "Adelaide, Abbess of Vilich",
+    "Andrew Hubert Fournet": "Andrew Fournet",
+    "Dulce Lopes Pontes": "Irma Dulce",
+    "Francis Xavier Bianchi": "Francis Bianchi",
+    "Hannibal Mary Di Francia": "Annibale Maria di Francia",
+    "John Calabria": "Giovanni Calabria",
+    "John de Brebeuf": "Jean de Brebeuf",
+    "Joseph Manyanet i Vives": "Josep Manyanet i Vives",
+    "Margherita della Metola": "Margaret of Castello",
+    "Paulina of the Agonizing Heart of Jesus": "Pauline of the Agonizing Heart of Jesus",
+    "Rafaela Porras Ayllon": "Rafaela Porras y Ayllon",
+    "Solomon Leclercq": "Salomon Leclerc",
+}
+_ALIASES_BY_FOLD = {fold(k): v for k, v in NAME_ALIASES.items()}
+
+
 def search_names(title: str) -> list[str]:
     """Candidate Wikidata labels for one of our page titles.
 
@@ -95,6 +136,10 @@ def search_names(title: str) -> list[str]:
     trimmed = re.sub(r"\s+and\s+(his\s+)?(companions?|others)\s*$", "", base, flags=re.I)
     if trimmed != base:
         out.append(trimmed)
+    for name in list(out):
+        alias = _ALIASES_BY_FOLD.get(fold(name))
+        if alias:
+            out.append(alias)
     return [n for n in dict.fromkeys(out) if n]
 
 

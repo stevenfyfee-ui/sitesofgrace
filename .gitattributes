@@ -1,0 +1,9 @@
+# Normalize line endings so `git status` doesn't show spurious CRLF/LF diffs
+# on Windows checkouts (enrichment.csv, candidates.csv, and migration files
+# have all shown up "modified" with byte-identical content because of this).
+# Git stores LF internally regardless; eol=lf also checks files out with LF
+# on every platform, so nothing round-trips through CRLF at all.
+* text=auto eol=lf
+
+# Binary content -- never run line-ending normalization on these.
+*.xlsx binary
