@@ -124,6 +124,11 @@ class SaintPage(Page):
     source_note = models.CharField(max_length=255, blank=True)
     data_status = models.CharField(max_length=40, blank=True)
     editor_notes = models.TextField(blank=True)
+    religious_order = models.CharField(max_length=160, blank=True)
+    burial_place = models.CharField(max_length=200, blank=True)
+    wikidata_id = models.CharField(max_length=16, blank=True)
+    portrait_url = models.URLField(max_length=500, blank=True)
+    portrait_credit = models.CharField(max_length=255, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel("portrait"),
@@ -135,6 +140,8 @@ class SaintPage(Page):
                 FieldPanel("born"),
                 FieldPanel("died"),
                 FieldPanel("canonized"),
+                FieldPanel("religious_order"),
+                FieldPanel("burial_place"),
             ],
             heading="Identity",
         ),
@@ -148,6 +155,9 @@ class SaintPage(Page):
                 FieldPanel("source_note"),
                 FieldPanel("data_status"),
                 FieldPanel("editor_notes"),
+                FieldPanel("wikidata_id"),
+                FieldPanel("portrait_url"),
+                FieldPanel("portrait_credit"),
             ],
             heading="Editorial (internal)",
         ),

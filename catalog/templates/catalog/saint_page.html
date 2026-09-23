@@ -25,13 +25,20 @@
     <div class="catalog-image container">
       {% image page.portrait width-500 %}
     </div>
+  {% elif page.portrait_url %}
+    <div class="catalog-image container">
+      <img src="{{ page.portrait_url }}" alt="{{ page.title }}">
+      {% if page.portrait_credit %}<p class="catalog-image-credit">{{ page.portrait_credit }}</p>{% endif %}
+    </div>
   {% endif %}
 
-  {% if page.born or page.died or page.canonized or page.patronage %}
+  {% if page.born or page.died or page.canonized or page.patronage or page.religious_order or page.burial_place %}
     <dl class="catalog-facts">
       {% if page.born %}<div class="catalog-fact"><dt>Born</dt><dd>{{ page.born }}</dd></div>{% endif %}
       {% if page.died %}<div class="catalog-fact"><dt>Died</dt><dd>{{ page.died }}</dd></div>{% endif %}
       {% if page.canonized %}<div class="catalog-fact"><dt>Canonized</dt><dd>{{ page.canonized }}</dd></div>{% endif %}
+      {% if page.religious_order %}<div class="catalog-fact"><dt>Religious order</dt><dd>{{ page.religious_order }}</dd></div>{% endif %}
+      {% if page.burial_place %}<div class="catalog-fact"><dt>Burial place</dt><dd>{{ page.burial_place }}</dd></div>{% endif %}
       {% if page.patronage %}<div class="catalog-fact"><dt>Patronage</dt><dd>{{ page.patronage }}</dd></div>{% endif %}
     </dl>
   {% endif %}

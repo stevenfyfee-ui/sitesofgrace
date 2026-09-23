@@ -262,7 +262,7 @@ def search_fallback(name: str) -> list[tuple[str, str]]:
 # ------------------------------------------------------------------- details
 
 DETAIL_QUERY = """
-SELECT ?item ?feast ?birth ?death ?burialLabel ?coord ?orderLabel
+SELECT ?item ?feastLabel ?birth ?death ?burialLabel ?coord ?orderLabel
        ?patronageLabel ?image ?commons ?statusLabel
 WHERE {{
   VALUES ?item {{ {items} }}
@@ -278,6 +278,9 @@ WHERE {{
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
 }}
 """
+# ?feastLabel, not ?feast: P841 is an item reference (a calendar-day entity
+# like Q2929), not a literal date. The raw QID URI isn't usable as a display
+# string — need its label ("1 April") the same way burial/order/patronage do.
 
 
 def fetch_details(qids: list[str], batch: int = 40) -> dict[str, dict]:
@@ -295,7 +298,7 @@ def fetch_details(qids: list[str], batch: int = 40) -> dict[str, dict]:
             rec = out.setdefault(q, {"qid": q, "burial": "", "coord": "", "image": "",
                                      "commons": "", "feast": "", "birth": "", "death": "",
                                      "order": set(), "patronage": set(), "status": set()})
-            for field, key in (("feast", "feast"), ("birth", "birth"), ("death", "death"),
+            for field, key in (("feast", "feastLabel"), ("birth", "birth"), ("death", "death"),
                                ("image", "image"), ("commons", "commons"),
                                ("burial", "burialLabel"), ("coord", "coord")):
                 if not rec[field] and val(row, key):
@@ -368,6 +371,7 @@ def flatten(m: dict, d: dict) -> dict:
             "status": "; ".join(sorted(d.get("status", []))),
             "image_url": d.get("image", ""), "commons": d.get("commons", ""),
             "feast_raw": d.get("feast", ""),
+            "birth_raw": d.get("birth", ""), "death_raw": d.get("death", ""),
             "source_url": f"https://www.wikidata.org/wiki/{m['qid']}" if m.get("qid") else ""}
 
 
@@ -410,7 +414,8 @@ def run_enrich() -> None:
     rows = [flatten(m, details.get(m["qid"], {})) for m in matched]
     write_csv(os.path.join(HERE, "enrichment.csv"), rows,
               ["slug", "title", "wd_label", "confidence", "qid", "burial", "lat", "lon",
-               "order", "patronage_wd", "image_url", "commons", "feast_raw", "source_url"])
+               "order", "patronage_wd", "image_url", "commons", "feast_raw", "birth_raw",
+               "death_raw", "source_url"])
 
 
 # Catholic-only filter for --expand. P411 (canonization status) is used by
