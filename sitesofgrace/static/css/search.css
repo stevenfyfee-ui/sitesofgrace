@@ -1,0 +1,289 @@
+/* Site-wide search: the four ".sog-search" bar variants (header, hero,
+   inline, map) and the shared suggestion panel/rows they all render into.
+   Tokens only -- no new colors. See site.css for --navy/--gold/etc. */
+
+.sog-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.sog-search * { box-sizing: border-box; }
+
+.sog-search input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--navy);
+  font-family: var(--sans);
+}
+.sog-search input[type="search"]::-webkit-search-decoration,
+.sog-search input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.sog-search input[type="search"]::placeholder { color: var(--stone); opacity: .8; }
+
+.sog-search-submit {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+
+/* ---------- Header variant ---------- */
+.sog-search--header {
+  width: 220px;
+  background: var(--ivory);
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  padding: 5px 5px 5px 16px;
+  height: 38px;
+}
+.sog-search--header input[type="search"] { font-size: 14px; }
+.sog-search--header .sog-search-submit {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: transparent; color: var(--navy);
+}
+.sog-search--header .sog-search-submit:hover { background: var(--parchment); }
+
+/* ---------- Hero variant ---------- */
+.sog-search--hero {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto 28px;
+  height: 54px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 0 6px 0 24px;
+  box-shadow: 0 20px 44px -22px rgba(3, 37, 83, .45);
+}
+.sog-search--hero input[type="search"] { font-size: 16px; }
+.sog-search--hero .sog-search-submit {
+  background: var(--navy); color: var(--ivory);
+  border-radius: 999px; height: 42px; padding: 0 20px; font-size: 14px;
+}
+.sog-search--hero .sog-search-submit:hover { background: var(--blue); }
+
+/* ---------- Inline variant (explore hub / directory pages) ---------- */
+.sog-search--inline {
+  max-width: 520px;
+  width: 100%;
+  margin: 20px auto 0;
+  height: 48px;
+  background: var(--ivory);
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  padding: 0 5px 0 20px;
+}
+.sog-search--inline input[type="search"] { font-size: 15px; }
+.sog-search--inline .sog-search-submit {
+  background: var(--navy); color: var(--ivory);
+  border-radius: 999px; height: 38px; padding: 0 18px; font-size: 13px;
+}
+.sog-search--inline .sog-search-submit:hover { background: var(--blue); }
+
+/* ---------- Map variant ---------- */
+.sog-search--map {
+  width: 100%;
+  margin: 18px 0 0;
+  height: 48px;
+  background: var(--ivory);
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  padding: 0 5px 0 20px;
+}
+.sog-search--map input[type="search"] { font-size: 15px; }
+.sog-search--map .sog-search-submit {
+  background: var(--navy); color: var(--ivory);
+  border-radius: 999px; height: 38px; padding: 0 18px; font-size: 13px;
+}
+.sog-search--map .sog-search-submit:hover { background: var(--blue); }
+
+/* ---------- Suggestion panel ---------- */
+.sog-search-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--ivory);
+  border: 1px solid var(--gold-soft);
+  border-radius: 12px;
+  box-shadow: 0 26px 52px -22px rgba(3, 37, 83, .38);
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  z-index: 1200;
+  padding: 6px 0;
+}
+
+.sog-search-group-head {
+  font-family: var(--serif-titling);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--stone);
+  padding: 14px 16px 8px;
+  border-top: 1px solid var(--gold-soft);
+  margin-top: 4px;
+}
+.sog-search-group:first-child .sog-search-group-head { border-top: none; margin-top: 0; }
+
+.sog-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .12s ease;
+}
+.sog-search-row:hover,
+.sog-search-row.is-active {
+  background: var(--parchment);
+}
+.sog-search-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sog-search-row-title {
+  font-family: var(--serif-body);
+  font-size: 15px;
+  color: var(--navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sog-search-row-title mark {
+  background: transparent;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 2px;
+}
+.sog-search-row-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--stone);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sog-search-row-chip {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.sog-search-row--seeall {
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  border-top: 1px solid var(--gold-soft);
+  margin-top: 4px;
+}
+.sog-search-row--empty {
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--stone);
+  cursor: default;
+}
+.sog-search-row--empty:hover { background: transparent; }
+
+/* ---------- Responsive ---------- */
+/* .nav-toggle (site.css) switches the header nav for the hamburger at
+   max-width: 900px -- that is also exactly where .mobile-nav, and its own
+   copy of this search bar, becomes reachable. So the header copy just
+   disappears at that same breakpoint: there's no gap where neither copy is
+   on screen, and no in-between "icon-only" state that would submit an empty
+   search with nothing behind it.
+
+   The selector is scoped to .header-actions, not the bare .sog-search--header
+   class: base.html includes this same variant="header" bar a second time
+   inside .mobile-nav (id_suffix="-mobile", so the id differs), and that copy
+   carries the identical sog-search--header class. .mobile-nav is a sibling of
+   .header-actions, not a descendant of it, so this scoping hides only the
+   desktop instance and leaves the mobile-nav copy alone. */
+@media (max-width: 900px) {
+  .site-header .header-actions .sog-search--header { display: none; }
+}
+
+@media (max-width: 360px) {
+  .sog-search--hero,
+  .sog-search--inline,
+  .sog-search--map {
+    padding-left: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sog-search-row { transition: none; }
+}
+
+/* ---------- Results page: filter chips + grouped previews ----------
+   Reuses .directory-card/.badge/.tag/.directory-grid/.directory-empty from
+   catalog.css and .hub-header from home.css; these rules only cover what
+   those don't already: the chip row and the per-group preview heading. */
+.search-results { padding: 12px 0 70px; }
+
+.search-chip-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 8px 0 30px;
+}
+.search-chip {
+  display: inline-flex; align-items: center;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--navy); background: var(--ivory);
+  border: 1px solid var(--gold-soft); border-radius: 999px;
+  padding: 7px 16px; text-decoration: none;
+  transition: background-color .12s ease, color .12s ease;
+}
+.search-chip:hover { background: var(--parchment); }
+.search-chip.is-active { background: var(--navy); border-color: var(--navy); color: var(--ivory); }
+
+.search-group-preview { padding-bottom: 44px; }
+.search-group-preview-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  margin-bottom: 18px;
+}
+.search-group-preview-head h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: 24px; color: var(--navy); margin: 0;
+}
+.search-see-all {
+  font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--blue);
+  text-decoration: none; white-space: nowrap;
+}
+.search-see-all:hover { color: var(--navy); }
+
+.search-result-meta { font-size: 13px; color: var(--stone); margin: 0 0 6px; }
+
+.search-pagination {
+  display: flex; justify-content: space-between; gap: 16px; padding-top: 12px;
+}
+.search-pagination a {
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--navy); text-decoration: none;
+}
+.search-pagination a:hover { color: var(--blue); }
+
+@media (max-width: 360px) {
+  .search-chip-row { gap: 8px; }
+  .search-chip { padding: 6px 12px; font-size: 12px; }
+}

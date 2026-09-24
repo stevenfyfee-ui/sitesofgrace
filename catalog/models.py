@@ -6,6 +6,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
 from catalog.travel_sections import (
@@ -130,6 +131,21 @@ class SaintPage(Page):
     portrait_url = models.URLField(max_length=500, blank=True)
     portrait_credit = models.CharField(max_length=255, blank=True)
 
+    search_fields = Page.search_fields + [
+        index.SearchField("also_known_as", boost=3),
+        index.AutocompleteField("also_known_as"),
+        index.SearchField("honorific_type"),
+        index.SearchField("feast_day"),
+        index.SearchField("patronage", boost=2),
+        index.AutocompleteField("patronage"),
+        index.SearchField("significance"),
+        index.SearchField("body"),
+        index.SearchField("born"),
+        index.SearchField("died"),
+        index.SearchField("canonized"),
+        index.RelatedFields("topics", [index.SearchField("name")]),
+    ]
+
     content_panels = Page.content_panels + [
         FieldPanel("portrait"),
         MultiFieldPanel(
@@ -206,6 +222,27 @@ class SacredSitePage(RoutablePageMixin, Page):
     topics = ParentalManyToManyField("catalog.Topic", blank=True, related_name="sites")
     location_link = models.URLField(blank=True)
     notes_internal = models.TextField(blank=True)
+
+    search_fields = Page.search_fields + [
+        index.SearchField("locality", boost=3),
+        index.AutocompleteField("locality"),
+        index.SearchField("country", boost=2),
+        index.AutocompleteField("country"),
+        index.SearchField("category"),
+        index.SearchField("canonical_status"),
+        index.SearchField("date_display"),
+        index.SearchField("feast_day"),
+        index.SearchField("summary_short", boost=2),
+        index.AutocompleteField("summary_short"),
+        index.SearchField("the_story"),
+        index.SearchField("church_recognition"),
+        index.SearchField("catholic_teaching"),
+        index.SearchField("go_deeper"),
+        index.RelatedFields("associated_saint", [index.SearchField("title")]),
+        index.RelatedFields("related_saints", [index.SearchField("title")]),
+        index.RelatedFields("topics", [index.SearchField("name")]),
+        index.FilterField("category"),
+    ]
 
     # --- The Pilgrim's Quick Card ---------------------------------------
     # Six short facts above the collapsed travel panels. Most readers get
@@ -587,6 +624,24 @@ class PilgrimageTrailPage(Page):
     topics = ParentalManyToManyField("catalog.Topic", blank=True, related_name="trails")
     official_url = models.URLField(blank=True)
     notes_internal = models.TextField(blank=True)
+
+    search_fields = Page.search_fields + [
+        index.SearchField("trail_type"),
+        index.SearchField("region", boost=2),
+        index.AutocompleteField("region"),
+        index.SearchField("country", boost=2),
+        index.AutocompleteField("country"),
+        index.SearchField("start_point"),
+        index.SearchField("end_point"),
+        index.SearchField("summary_short", boost=2),
+        index.AutocompleteField("summary_short"),
+        index.SearchField("the_story"),
+        index.SearchField("church_recognition"),
+        index.SearchField("catholic_teaching"),
+        index.SearchField("walking_the_route"),
+        index.SearchField("go_deeper"),
+        index.RelatedFields("topics", [index.SearchField("name")]),
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel("featured_image"),

@@ -1,38 +1,93 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static %}
 
 {% block body_class %}template-searchresults{% endblock %}
-
 {% block title %}Search{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Search</h1>
+<header class="hub-header">
+  <div class="container">
+    <h1>Search</h1>
+    {% if search_query %}
+      <p class="lead">{{ total_count }} result{{ total_count|pluralize }} for &ldquo;{{ search_query }}&rdquo;</p>
+    {% endif %}
+    {% include "includes/_search_bar.html" with variant="hero" %}
+  </div>
+</header>
 
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
-</form>
+{% if search_query %}
+<section class="container search-results">
 
-{% if search_results %}
-<ul>
-    {% for result in search_results %}
-    <li>
-        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-        {% if result.search_description %}
-        {{ result.search_description }}
-        {% endif %}
-    </li>
+  <div class="search-chip-row">
+    <a class="search-chip{% if not active_category %} is-active{% endif %}"
+       href="?query={{ search_query|urlencode }}">All ({{ total_count }})</a>
+    {% for group in groups %}
+      <a class="search-chip{% if group.active %} is-active{% endif %}"
+         href="?query={{ search_query|urlencode }}&amp;category={{ group.key }}">{{ group.label }} ({{ group.total }})</a>
     {% endfor %}
-</ul>
+    {% for cat in site_categories %}
+      <a class="search-chip{% if cat.active %} is-active{% endif %}"
+         href="?query={{ search_query|urlencode }}&amp;category={{ cat.value|urlencode }}">{{ cat.label }} ({{ cat.count }})</a>
+    {% endfor %}
+  </div>
 
-{% if search_results.has_previous %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-{% endif %}
+  {% if active_group_key %}
+    {# ---------- One group, paginated ---------- #}
+    {% if active_results %}
+      <div class="directory-grid search-results-grid">
+        {% for result in active_results %}
+          {% include "search/_result_card.html" with group_key=active_group_key result=result %}
+        {% endfor %}
+      </div>
 
-{% if search_results.has_next %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-{% endif %}
-{% elif search_query %}
-No results found
+      <div class="search-pagination">
+        {% if active_results.has_previous %}
+          <a href="?query={{ search_query|urlencode }}&amp;category={{ active_category|urlencode }}&amp;page={{ active_results.previous_page_number }}">&larr; Previous</a>
+        {% endif %}
+        {% if active_results.has_next %}
+          <a href="?query={{ search_query|urlencode }}&amp;category={{ active_category|urlencode }}&amp;page={{ active_results.next_page_number }}">Next &rarr;</a>
+        {% endif %}
+      </div>
+    {% else %}
+      <p class="directory-empty">
+        No results for &ldquo;{{ search_query }}&rdquo; in this category.
+        Try the <a href="{% url 'sacred_sites_json' %}">map</a> or the <a href="/explore/">explore hub</a> instead.
+      </p>
+    {% endif %}
+
+  {% else %}
+    {# ---------- Overview: every group, capped, with a "see all" link ---------- #}
+    {% if groups_preview %}
+      {% for group in groups_preview %}
+        {% if group.total %}
+          <div class="search-group-preview">
+            <div class="search-group-preview-head">
+              <h2>{{ group.label }}</h2>
+              {% if group.total > group.results|length %}
+                <a class="search-see-all" href="?query={{ search_query|urlencode }}&amp;category={{ group.key }}">See all {{ group.total }} &rsaquo;</a>
+              {% endif %}
+            </div>
+            <div class="directory-grid search-results-grid">
+              {% for result in group.results %}
+                {% include "search/_result_card.html" with group_key=group.key result=result %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if not total_count %}
+      <p class="directory-empty">
+        No results for &ldquo;{{ search_query }}&rdquo;.
+        Try the <a href="/interactive-map/">map</a> or the <a href="/explore/">explore hub</a> instead.
+      </p>
+    {% endif %}
+  {% endif %}
+
+</section>
 {% endif %}
 {% endblock %}

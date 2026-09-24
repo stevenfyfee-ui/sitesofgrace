@@ -12,6 +12,7 @@
   <div class="container hero-inner">
     <h1>{{ page.hero_heading }}</h1>
     <p class="hero-intro">{{ page.hero_intro }}</p>
+    {% include "includes/_search_bar.html" with variant="hero" placeholder="Search shrines, saints, miracles…" %}
     <div class="hero-ctas">
       {% if page.primary_cta_text %}<a class="btn btn-primary" href="{{ page.primary_cta_link }}">{{ page.primary_cta_text }}</a>{% endif %}
       {% if page.secondary_cta_text %}<a class="btn btn-secondary" href="{{ page.secondary_cta_link }}">{{ page.secondary_cta_text }}</a>{% endif %}

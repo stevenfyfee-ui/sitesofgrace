@@ -1,0 +1,52 @@
+{% comment %}
+  One partial, four variants: header, hero, inline, map. Pass `variant`
+  (required), plus optional `placeholder` and `types` (comma-separated
+  suggest group keys, e.g. "sites,trails").
+
+  Every instance needs a unique id, because the header bar and the hero bar
+  are both on the home page. Ids are built from the variant
+  (sog-search-VARIANT) -- safe only because no single page ever includes the
+  same variant twice, EXCEPT the header bar, which base.html also includes
+  inside .mobile-nav for small screens. That second instance passes
+  id_suffix="-mobile" so the two never collide -- but it still carries the
+  same sog-search--header CLASS as the desktop one, since class is built from
+  variant alone. Anything that needs to target ONE of the two copies (the
+  900px responsive hide in search.css, for instance) has to scope past
+  .header-actions or .mobile-nav, not just the class.
+{% endcomment %}
+<form
+  id="sog-search-{{ variant }}{{ id_suffix|default:"" }}"
+  class="sog-search sog-search--{{ variant }}"
+  role="search"
+  action="{% url 'search' %}"
+  method="get"
+  data-suggest-url="{% url 'search_suggest' %}"
+  {% if types %}data-types="{{ types }}"{% endif %}
+  {% if variant == "map" %}data-mode="map"{% endif %}
+>
+  <label class="sr-only" for="sog-search-{{ variant }}{{ id_suffix|default:"" }}-input">Search</label>
+  <input
+    id="sog-search-{{ variant }}{{ id_suffix|default:"" }}-input"
+    name="query"
+    type="search"
+    value="{{ search_query|default:"" }}"
+    placeholder="{{ placeholder|default:"Search" }}"
+    autocomplete="off"
+    autocapitalize="off"
+    spellcheck="false"
+    role="combobox"
+    aria-expanded="false"
+    aria-autocomplete="list"
+    aria-controls="sog-search-{{ variant }}{{ id_suffix|default:"" }}-panel"
+  >
+  <button type="submit" class="sog-search-submit" aria-label="Search">
+    {% if variant == "header" %}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    {% else %}
+      <svg class="sog-search-submit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+      <span>Search</span>
+    {% endif %}
+  </button>
+  <div class="sog-search-panel" id="sog-search-{{ variant }}{{ id_suffix|default:"" }}-panel" role="listbox" hidden></div>
+  <div class="sog-search-status sr-only" aria-live="polite"></div>
+</form>
