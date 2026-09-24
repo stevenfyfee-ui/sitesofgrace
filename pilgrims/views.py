@@ -390,7 +390,25 @@ def photo_site_search(request):
 @login_required
 def photo_upload(request):
     if request.method != "POST":
-        return render(request, "pilgrims/photo_upload.html")
+        # A slug, not a pk: it's the id a pilgrim actually sees in a link
+        # they might share or bookmark, and it doesn't leak an internal row
+        # number the way a pk would. Anything that doesn't resolve to a
+        # live site -- unknown slug, malformed value, draft page -- just
+        # falls back to the normal empty picker; .filter().first() never
+        # raises, so there's no 404/500 path to guard against here.
+        site_slug = (request.GET.get("site") or "").strip()
+        preselected_site = None
+        preselected_already_visited = False
+        if site_slug:
+            preselected_site = SacredSitePage.objects.live().filter(slug=site_slug).first()
+            if preselected_site:
+                preselected_already_visited = SiteVisit.objects.filter(
+                    owner=request.user, site=preselected_site, status=SiteVisit.STATUS_VISITED
+                ).exists()
+        return render(request, "pilgrims/photo_upload.html", {
+            "preselected_site": preselected_site,
+            "preselected_already_visited": preselected_already_visited,
+        })
 
     since = timezone.now() - timedelta(hours=1)
     uploaded_this_hour = PilgrimPhoto.objects.filter(
@@ -434,7 +452,32 @@ def photo_upload(request):
     if request.POST.get("mark_visited") == "on":
         _mark_visited(request.user, site)
 
-    return JsonResponse({"success": True, "photo": _photo_thumb_context(photo)})
+    # A shortcut through the UI, not through the rules: this is exactly the
+    # same permission check, rate limit, and sharing.py call the standalone
+    # pilgrims:photo_share view uses -- no second code path, no bypass of
+    # the private-to-public copy.
+    shared = False
+    share_error = None
+    if request.POST.get("share_publicly") == "on":
+        if not can_share_photo(request.user, photo):
+            share_error = "You can't share photos publicly right now."
+        else:
+            since_share = timezone.now() - timedelta(hours=24)
+            shared_today = PilgrimPhoto.objects.filter(
+                owner=request.user, public_shared_at__gte=since_share
+            ).count()
+            if shared_today >= PUBLIC_SHARES_PER_DAY:
+                share_error = "You've shared a lot today — try again tomorrow."
+            else:
+                sharing.share_photo(photo, credit=request.user.pilgrim.public_credit_default)
+                shared = True
+
+    return JsonResponse({
+        "success": True,
+        "photo": _photo_thumb_context(photo),
+        "shared": shared,
+        "share_error": share_error,
+    })
 
 
 @login_required

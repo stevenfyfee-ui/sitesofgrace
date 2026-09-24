@@ -1,3 +1,5 @@
+from math import asin, cos, radians, sin, sqrt
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.functional import cached_property
@@ -39,6 +41,25 @@ CATEGORY_STYLES = {
 DEFAULT_CATEGORY_STYLE = {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F2"}
 
 MAP_PAGE_SLUG = "interactive-map"
+
+# "In the Area" — the band of nearby sites at the foot of a sacred site page.
+# 40 miles is a same-day detour: close enough that a pilgrim already standing
+# here can reasonably add it to the trip, far enough to catch the clusters
+# (Rome, the Holy Land, the Mission corridor) that make a second stop obvious.
+NEARBY_RADIUS_MILES = 40
+NEARBY_MAX_RESULTS = 8
+EARTH_RADIUS_MILES = 3958.8
+
+
+def miles_between(lat1, lon1, lat2, lon2):
+    """Great-circle distance in statute miles (haversine).
+
+    Good to a fraction of a percent at these distances, and it needs no
+    geospatial database extension -- the site runs on plain Postgres.
+    """
+    lat1, lon1, lat2, lon2 = map(radians, (float(lat1), float(lon1), float(lat2), float(lon2)))
+    a = sin((lat2 - lat1) / 2) ** 2 + cos(lat1) * cos(lat2) * sin((lon2 - lon1) / 2) ** 2
+    return 2 * EARTH_RADIUS_MILES * asin(sqrt(a))
 
 # Where pilgrimage trails are filed in the page tree. The Explore hub already
 # carries a "Pilgrimage Routes" card; it stays unclickable until this page has
@@ -470,6 +491,53 @@ class SacredSitePage(RoutablePageMixin, Page):
             })
         positions.sort(key=lambda entry: entry["trail"].title)
         return positions
+
+    @cached_property
+    def nearby_sites(self):
+        """Live sacred sites within NEARBY_RADIUS_MILES, nearest first.
+
+        A cheap bounding box does the work in the database, then haversine
+        trims the corners of that box down to a true circle. Sites with no
+        coordinates simply never appear -- there is nothing to measure them
+        against, and a "nearby" claim we cannot stand behind is worse than
+        an absent one.
+        """
+        if self.latitude is None or self.longitude is None:
+            return []
+
+        lat = float(self.latitude)
+        lon = float(self.longitude)
+        lat_span = NEARBY_RADIUS_MILES / 69.0
+        # Degrees of longitude shrink toward the poles; the floor keeps the box
+        # from exploding near them (and from dividing by zero at 90 degrees).
+        lon_span = NEARBY_RADIUS_MILES / max(69.0 * cos(radians(lat)), 1.0)
+
+        candidates = (
+            SacredSitePage.objects.live()
+            .exclude(pk=self.pk)
+            .filter(
+                latitude__gte=lat - lat_span,
+                latitude__lte=lat + lat_span,
+                longitude__gte=lon - lon_span,
+                longitude__lte=lon + lon_span,
+            )
+        )
+
+        found = []
+        for site in candidates:
+            if site.latitude is None or site.longitude is None:
+                continue
+            distance = miles_between(lat, lon, site.latitude, site.longitude)
+            if distance > NEARBY_RADIUS_MILES:
+                continue
+            found.append({
+                "page": site,
+                "miles": distance,
+                "miles_display": "<1" if distance < 1 else str(int(round(distance))),
+                "style": CATEGORY_STYLES.get(site.category, DEFAULT_CATEGORY_STYLE),
+            })
+        found.sort(key=lambda entry: entry["miles"])
+        return found[:NEARBY_MAX_RESULTS]
 
     def public_photos_queryset(self):
         """is_public_on_site=True, hidden_by_staff=False, newest share

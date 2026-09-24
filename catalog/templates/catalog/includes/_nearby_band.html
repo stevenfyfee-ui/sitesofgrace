@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  "In the Area" — every live sacred site within 40 miles of this one, as chips
+  that match the category badge at the top of the page.
+
+  The dot on each chip carries the map pin's color for that category, so a
+  pilgrim reads the chip and the map the same way. Distance is rounded to whole
+  miles: it is a "worth the detour?" number, not a route.
+
+  Renders nothing when the site has no coordinates or nothing is close by.
+{% endcomment %}
+{% if page.nearby_sites %}
+  <section class="catalog-nearby" aria-labelledby="in-the-area-heading">
+    <h2 class="catalog-nearby-heading" id="in-the-area-heading">In the Area</h2>
+    <p class="catalog-nearby-sub">Other sacred sites within 40 miles.</p>
+    <ul class="nearby-chips">
+      {% for entry in page.nearby_sites %}
+        <li>
+          <a class="nearby-chip" href="{% pageurl entry.page %}">
+            <span class="nearby-chip-dot"
+                  style="background:{{ entry.style.fill }};border-color:{{ entry.style.stroke }}"
+                  aria-hidden="true"></span>
+            <span class="nearby-chip-title">{{ entry.page.title }}</span>
+            <span class="nearby-chip-miles">{{ entry.miles_display }} mi</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}

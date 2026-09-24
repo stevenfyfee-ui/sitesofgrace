@@ -84,7 +84,11 @@
   border-radius: 90px 90px 12px 12px; border: 1px solid var(--gold-soft);
   background: linear-gradient(155deg, var(--blue), var(--navy));
 }
-.pilgrim-feature-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Absolutely positioned so the image's own intrinsic size (the {% image %}
+   tag's width/height attributes) can never inflate this flex item beyond
+   min-height -- an in-flow img still contributes to flex/grid content
+   sizing even with flex:1 and an explicit min-height. */
+.pilgrim-feature-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .pilgrim-feature-chip {
   position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%);
   font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: .1em;
@@ -119,10 +123,15 @@
 .pilgrim-journey-text strong { font-family: var(--sans); font-size: 14px; color: var(--navy); }
 .pilgrim-journey-text span { font-size: 12.5px; color: var(--stone); line-height: 1.4; }
 .pilgrim-journey-photo {
+  position: relative;
   border-radius: 90px 90px 12px 12px; overflow: hidden; border: 1px solid var(--gold-soft);
-  flex: 1; min-height: 150px; background: linear-gradient(160deg, var(--navy), var(--gold));
+  /* flex:1 fills whatever the column has left over, not min-height -- with
+     the band at full size it was rendering at 416px at 1440px wide, so
+     max-height is the actual ceiling for the ~10% trim, not min-height. */
+  flex: 1; min-height: 150px; max-height: 374px;
+  background: linear-gradient(160deg, var(--navy), var(--gold));
 }
-.pilgrim-journey-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pilgrim-journey-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .pilgrim-journey .btn { align-self: flex-start; }
 
 /* ---- Subscription column (Pilgrimage From Home) ---- */
@@ -156,10 +165,11 @@
 .pilgrim-sub-success { font-size: 13px; color: var(--navy); margin: 0; font-weight: 600; }
 .pilgrim-sub-error { font-size: 12.5px; color: #a3242b; margin: 0; }
 .pilgrim-sub-photo {
+  position: relative;
   border-radius: 90px 90px 12px 12px; overflow: hidden; border: 1px solid var(--gold-soft);
   flex: 1; min-height: 150px; background: linear-gradient(160deg, var(--navy), var(--gold));
 }
-.pilgrim-sub-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pilgrim-sub-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ---------- Featured strip (Featured Saints) ---------- */
 .feature-strip { padding: 54px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }

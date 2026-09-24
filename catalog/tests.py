@@ -220,3 +220,62 @@ class PanelRenderingTests(SacredSitePageTestCase):
         self.assertIn("Stay inside the ten-minute ring.", html)
         self.assertIn("Inside the ten-minute ring", html)
         self.assertNotIn("<details class=\"plan-panel\" open", html)
+
+
+class NearbySitesTests(SacredSitePageTestCase):
+    """"In the Area" — the 40-mile band at the foot of a sacred site page."""
+
+    def test_only_sites_inside_the_radius_appear_and_nearest_comes_first(self):
+        # Lourdes, with two real neighbours and one site a country away.
+        lourdes = self.make_site(
+            slug="lourdes", title="Lourdes", latitude="43.096800", longitude="-0.048900"
+        )
+        betharram = self.make_site(
+            slug="betharram", title="Betharram", latitude="43.124700", longitude="-0.223100"
+        )  # ~9 mi
+        garaison = self.make_site(
+            slug="garaison", title="Garaison", latitude="43.161000", longitude="0.383000"
+        )  # ~22 mi
+        self.make_site(
+            slug="fatima", title="Fatima", latitude="39.631700", longitude="-8.672200"
+        )  # ~450 mi — must not appear
+
+        nearby = SacredSitePage.objects.get(pk=lourdes.pk).nearby_sites
+        self.assertEqual(
+            [entry["page"].pk for entry in nearby], [betharram.pk, garaison.pk]
+        )
+        self.assertNotIn(lourdes.pk, [entry["page"].pk for entry in nearby])
+        self.assertEqual(nearby[0]["miles_display"], "9")
+
+    def test_a_site_without_coordinates_has_no_band(self):
+        self.make_site(
+            slug="neighbour", title="Neighbour", latitude="43.124700", longitude="-0.223100"
+        )
+        page = self.make_site(slug="no-coords", title="No Coords")
+        self.assertEqual(SacredSitePage.objects.get(pk=page.pk).nearby_sites, [])
+
+    def test_draft_neighbours_are_excluded(self):
+        lourdes = self.make_site(
+            slug="lourdes-2", title="Lourdes", latitude="43.096800", longitude="-0.048900"
+        )
+        draft = self.make_site(
+            slug="draft-neighbour", title="Draft", latitude="43.124700", longitude="-0.223100"
+        )
+        draft.live = False
+        draft.save()
+
+        self.assertEqual(SacredSitePage.objects.get(pk=lourdes.pk).nearby_sites, [])
+
+    def test_band_renders_the_chips_on_the_page(self):
+        lourdes = self.make_site(
+            slug="lourdes-3", title="Lourdes", latitude="43.096800", longitude="-0.048900",
+            the_story="<p>Story.</p>",
+        )
+        self.make_site(
+            slug="betharram-3", title="Betharram", latitude="43.124700", longitude="-0.223100"
+        )
+
+        html = self.client.get(lourdes.url).content.decode()
+        self.assertIn("In the Area", html)
+        self.assertIn("nearby-chip", html)
+        self.assertIn("Betharram", html)
