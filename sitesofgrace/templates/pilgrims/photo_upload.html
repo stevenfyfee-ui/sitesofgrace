@@ -9,15 +9,16 @@
 <div class="container">
   <div class="pilgrims-head"><h1>Upload Photos</h1></div>
 
-  <form id="photoUploadForm" action="{% url 'pilgrims:photo_upload' %}" method="post" enctype="multipart/form-data" class="photo-upload-form">
+  <form id="photoUploadForm" action="{% url 'pilgrims:photo_upload' %}" method="post" enctype="multipart/form-data"
+    class="photo-upload-form" data-return-url="{{ preselected_site.url|default:"" }}">
     {% csrf_token %}
 
     <div class="auth-field">
       <label for="siteSearch">Sacred site</label>
       <input type="text" id="siteSearch" autocomplete="off" placeholder="Search sacred sites…">
       <div id="siteResults" class="pilgrims-site-results"></div>
-      <p class="auth-help">Selected: <strong id="selectedSiteLabel">none yet</strong></p>
-      <input type="hidden" id="siteIdInput" name="site_id">
+      <p class="auth-help">Selected: <strong id="selectedSiteLabel">{{ preselected_site.title|default:"none yet" }}</strong></p>
+      <input type="hidden" id="siteIdInput" name="site_id" value="{{ preselected_site.pk|default:"" }}">
     </div>
 
     <div class="auth-field">
@@ -37,7 +38,12 @@
     </div>
 
     <div class="auth-field">
-      <label><input type="checkbox" id="markVisited" checked> Mark this site as visited</label>
+      <label><input type="checkbox" id="markVisited" {% if not preselected_already_visited %}checked{% endif %}> Mark this site as visited</label>
+    </div>
+
+    <div class="auth-field">
+      <label><input type="checkbox" id="sharePublicly" {% if preselected_site %}checked{% endif %}> Also show this on the site's public page</label>
+      <p class="auth-help">When this is on, anyone on the internet will be able to see this photo on the site's page.</p>
     </div>
 
     <button type="submit" class="btn btn-primary auth-submit">Upload</button>
@@ -62,6 +68,8 @@
   var captionInput = document.getElementById('sharedCaption');
   var dateInput = document.getElementById('sharedDate');
   var markVisitedInput = document.getElementById('markVisited');
+  var sharePubliclyInput = document.getElementById('sharePublicly');
+  var returnUrl = form.dataset.returnUrl || '';
 
   function getCookie(name) {
     var value = '; ' + document.cookie;
@@ -90,6 +98,10 @@
               siteResults.innerHTML = '';
               siteSearchInput.value = '';
               markVisitedInput.checked = !site.already_visited;
+              // Picking a different site by hand breaks the "came from
+              // that site's page" assumption the preselect and the
+              // eventual redirect were both built on.
+              returnUrl = '';
             });
             siteResults.appendChild(btn);
           });
@@ -97,7 +109,51 @@
     }, 250);
   });
 
+  // Tracks the whole batch (one XHR per file), not each file individually --
+  // the return-to-site-page redirect only makes sense once nothing is left
+  // uploading. It's gated on sharedCount, not on how many uploads merely
+  // succeeded: ?photos_added= has to mean "photos now on this page", or a
+  // pilgrim whose share got refused arrives back at the site page to find
+  // nothing there and no idea why.
+  var pendingCount = 0;
+  var sharedCount = 0;
+  var shareAttemptedCount = 0;
+
+  function showReturnLink() {
+    if (document.getElementById('returnToSiteLink')) return;
+    var p = document.createElement('p');
+    p.id = 'returnToSiteLink';
+    p.className = 'auth-switch';
+    var a = document.createElement('a');
+    a.href = returnUrl;
+    a.textContent = 'Back to the site page';
+    p.appendChild(a);
+    queueEl.insertAdjacentElement('afterend', p);
+  }
+
+  function maybeReturnToSite() {
+    if (pendingCount > 0) return;
+    if (returnUrl && sharedCount > 0) {
+      var separator = returnUrl.indexOf('?') === -1 ? '?' : '&';
+      window.location.href = returnUrl + separator + 'photos_added=' + sharedCount;
+      return;
+    }
+    if (returnUrl && shareAttemptedCount > 0 && sharedCount === 0) {
+      // Every share was refused. The uploads themselves may be fine -- the
+      // per-row messages already say so -- but nothing made it onto the
+      // site's public page, and that has to be visible here, not
+      // discovered by its absence after a redirect.
+      showReturnLink();
+    }
+  }
+
   function uploadOne(file) {
+    pendingCount++;
+    // Captured once per file, not read live from the checkbox in onload --
+    // the checkbox reflects whatever it's set to when the NEXT file starts,
+    // not necessarily what this file's own request actually asked for.
+    var wantedShare = sharePubliclyInput.checked;
+
     var row = document.createElement('li');
     row.className = 'upload-row';
     row.innerHTML =
@@ -122,16 +178,36 @@
       var data = null;
       try { data = JSON.parse(xhr.responseText); } catch (err) { /* leave null */ }
       if (data && data.success) {
-        statusEl.textContent = 'Done';
-        row.classList.add('is-success');
+        if (wantedShare) {
+          shareAttemptedCount++;
+          if (data.shared) {
+            sharedCount++;
+            statusEl.textContent = 'Done — shared publicly';
+            row.classList.add('is-success');
+          } else {
+            // The FILE uploaded fine -- it's in their library. Only the
+            // public share failed, and that distinction has to be in the
+            // wording, not just implied by a color.
+            statusEl.textContent = 'Uploaded to your library — not shown on the site’s page: ' +
+              (data.share_error || 'sharing failed.');
+            row.classList.add('is-warning');
+          }
+        } else {
+          statusEl.textContent = 'Done';
+          row.classList.add('is-success');
+        }
       } else {
         statusEl.textContent = (data && data.message) || 'Failed';
         row.classList.add('is-error');
       }
+      pendingCount--;
+      maybeReturnToSite();
     };
     xhr.onerror = function () {
       statusEl.textContent = 'Network error';
       row.classList.add('is-error');
+      pendingCount--;
+      maybeReturnToSite();
     };
 
     var formData = new FormData();
@@ -140,6 +216,7 @@
     if (captionInput.value) formData.append('caption', captionInput.value);
     if (dateInput.value) formData.append('taken_on', dateInput.value);
     formData.append('mark_visited', markVisitedInput.checked ? 'on' : 'off');
+    formData.append('share_publicly', wantedShare ? 'on' : 'off');
     xhr.send(formData);
   }
 
@@ -149,6 +226,10 @@
     var files = Array.prototype.slice.call(fileInput.files);
     if (!files.length) { window.alert('Choose at least one photo.'); return; }
     queueEl.innerHTML = '';
+    var staleLink = document.getElementById('returnToSiteLink');
+    if (staleLink) staleLink.remove();
+    sharedCount = 0;
+    shareAttemptedCount = 0;
     files.forEach(uploadOne);
   });
 })();

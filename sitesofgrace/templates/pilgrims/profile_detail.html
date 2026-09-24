@@ -156,10 +156,11 @@
 {% if is_self and has_map_sites %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static 'js/basemap.js' %}"></script>
 <script>
   (function () {
     var el = document.getElementById('passportMap');
-    if (!el || !window.L) return;
+    if (!el || !window.L || !window.SoGBasemap) return;
     var RED = { fill: '#D96B5F', stroke: '#032553' };
     var WHITE = { fill: '#FDF9F2', stroke: '#032553' };
     function pinIcon(status) {
@@ -176,9 +177,7 @@
       return '<div class="map-popup"><span class="badge badge-status">' + statusLabel + '</span><h3>' + site.name + '</h3><a class="map-popup-link" href="' + site.url + '">View site &rarr;</a></div>';
     }
     var map = L.map(el).setView([20, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18, attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+    window.SoGBasemap.add(map);
     fetch(el.dataset.journeyUrl)
       .then(function (response) { return response.json(); })
       .then(function (data) {

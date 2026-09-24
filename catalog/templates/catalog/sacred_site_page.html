@@ -4,11 +4,20 @@
 {% block body_class %}catalog catalog-site{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">
 {% if page.trail_positions %}<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">{% endif %}
 {% endblock %}
 
 {% block content %}
 <article class="catalog-page">
+
+  {% if request.GET.photos_added %}
+    <div class="container">
+      <p class="pilgrims-flash">
+        {{ request.GET.photos_added }} photo{{ request.GET.photos_added|pluralize }} added — thank you for sharing your journey.
+      </p>
+    </div>
+  {% endif %}
 
   {# ---------- Hero ---------- #}
   <header class="catalog-hero">
@@ -81,9 +90,14 @@
         </section>
       {% endif %}
 
-      {% if gallery_preview_photos %}
-        <section class="catalog-gallery-preview section-anchor" id="pilgrim-photos">
-          <h2>Pilgrim Photos</h2>
+      {% comment %}
+        Renders even with zero photos -- that's exactly the site that most
+        needs the entry point below, so this section can't be gated on
+        gallery_preview_photos the way it used to be.
+      {% endcomment %}
+      <section class="catalog-gallery-preview section-anchor" id="pilgrim-photos">
+        <h2>Pilgrim Photos</h2>
+        {% if gallery_preview_photos %}
           <div class="gallery-preview-grid">
             {% for photo in gallery_preview_photos %}
               <a class="gallery-preview-tile" href="{% routablepageurl page 'gallery_view' %}">
@@ -91,11 +105,24 @@
               </a>
             {% endfor %}
           </div>
-          <a class="catalog-map-link" href="{% routablepageurl page 'gallery_view' %}">
-            See all {{ gallery_total_count }} pilgrim photo{{ gallery_total_count|pluralize }} →
-          </a>
-        </section>
-      {% endif %}
+        {% else %}
+          <p class="catalog-gallery-empty">No pilgrim photos yet — be the first to share one from {{ page.title }}.</p>
+        {% endif %}
+        <div class="catalog-gallery-actions">
+          {% if gallery_preview_photos %}
+            <a class="catalog-map-link" href="{% routablepageurl page 'gallery_view' %}">
+              See all {{ gallery_total_count }} pilgrim photo{{ gallery_total_count|pluralize }} →
+            </a>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+            <a class="btn btn-secondary" href="{% url 'pilgrims:photo_upload' %}?site={{ page.slug }}">Add your photos</a>
+          {% else %}
+            <a class="btn btn-secondary" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to add your photos</a>
+          {% endif %}
+        </div>
+      </section>
+
+      {% include "catalog/includes/_nearby_band.html" %}
 
     </div>
   </div>

@@ -37,6 +37,13 @@
   <header class="hub-header">
     <h1>Pilgrim Photos</h1>
     <p class="lead">{{ site_page.title }} · {{ total_count }} photo{{ total_count|pluralize }}</p>
+    <div class="catalog-gallery-actions">
+      {% if request.user.is_authenticated %}
+        <a class="btn btn-secondary" href="{% url 'pilgrims:photo_upload' %}?site={{ site_page.slug }}">Add your photos</a>
+      {% else %}
+        <a class="btn btn-secondary" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to add your photos</a>
+      {% endif %}
+    </div>
   </header>
 
   {% if photos_page %}

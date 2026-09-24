@@ -18,6 +18,7 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path("search/suggest.json", search_views.suggest, name="search_suggest"),
     path("search/", search_views.search, name="search"),
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
     path("pilgrimage-trails.json", catalog_views.trails_json, name="pilgrimage_trails_json"),

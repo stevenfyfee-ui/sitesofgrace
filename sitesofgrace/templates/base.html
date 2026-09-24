@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
   {% block extra_css %}{% endblock %}
   {% block extra_head %}{% endblock %}
 </head>
@@ -36,6 +37,7 @@
       </nav>
 
       <div class="header-actions">
+        {% include "includes/_search_bar.html" with variant="header" %}
         {% if request.user.is_authenticated %}
           <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
           <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">My Photos</a>
@@ -52,6 +54,7 @@
     </div>
     {# Mobile menu mirrors the same main menu #}
     <div class="mobile-nav" id="mobileNav" hidden>
+      {% include "includes/_search_bar.html" with variant="header" id_suffix="-mobile" %}
       {% main_menu max_levels=2 template="menus/mobile_menu.html" sub_menu_template="menus/mobile_sub_menu.html" %}
     </div>
   </header>
@@ -131,6 +134,7 @@
       });
     })();
   </script>
+  <script src="{% static 'js/search.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

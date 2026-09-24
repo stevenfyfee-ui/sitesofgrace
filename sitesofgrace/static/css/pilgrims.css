@@ -166,6 +166,10 @@
 .upload-row.is-success .upload-status { color: var(--navy); font-weight: 600; }
 .upload-row.is-error { border-color: var(--red); }
 .upload-row.is-error .upload-status { color: var(--red); font-weight: 600; }
+/* Uploaded fine, just not shared publicly -- distinct from is-error (the
+   file itself failed) and is-success (nothing left unexplained). */
+.upload-row.is-warning { border-color: var(--gold); }
+.upload-row.is-warning .upload-status { color: var(--gold); font-weight: 600; white-space: normal; }
 
 /* ---------- Photos: library (grouped by site) ---------- */
 .photo-album-list { display: grid; gap: 16px; margin: 24px 0; }
@@ -195,7 +199,7 @@
   border: 1px solid var(--gold-soft); border-radius: 16px; padding: 10px;
 }
 .photo-tile-img {
-  display: block; border-radius: 90px 90px 10px 10px; overflow: hidden;
+  display: block; border-radius: 12px; overflow: hidden;
   aspect-ratio: 1 / 1; border: 1px solid var(--gold-soft);
   background: linear-gradient(155deg, var(--blue), var(--navy));
 }
@@ -213,7 +217,7 @@
 /* ---------- Photos: detail ---------- */
 .photo-detail { display: flex; gap: 28px; align-items: flex-start; margin: 24px 0; }
 .photo-detail-img {
-  flex: 1; max-width: 640px; width: 100%; border-radius: 90px 90px 14px 14px;
+  flex: 1; max-width: 640px; width: 100%; border-radius: 14px;
   border: 1px solid var(--gold-soft); object-fit: cover;
 }
 .photo-detail-info { flex: none; width: 240px; display: flex; flex-direction: column; gap: 14px; }
@@ -255,7 +259,7 @@
 .feed-card-photos { position: relative; }
 .feed-card-photo-main {
   display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden;
-  border-radius: 90px 90px 0 0; border-top: 1px solid var(--gold-soft);
+  border-radius: 14px 14px 0 0; border-top: 1px solid var(--gold-soft);
   background: linear-gradient(155deg, var(--blue), var(--navy));
 }
 .feed-card-photo-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -291,7 +295,7 @@
 
 /* ---------- Post permalink ---------- */
 .post-photos-lightbox-main {
-  border-radius: 90px 90px 14px 14px; overflow: hidden; border: 1px solid var(--gold-soft);
+  border-radius: 14px; overflow: hidden; border: 1px solid var(--gold-soft);
   max-width: 640px;
 }
 .post-photos-lightbox-main img { width: 100%; display: block; }

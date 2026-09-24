@@ -16,6 +16,7 @@
 <section class="container prose">
   <h1>{{ page.title }}</h1>
   {% if page.intro %}<p class="lead">{{ page.intro }}</p>{% endif %}
+  {% include "includes/_search_bar.html" with variant="map" types="sites,trails" placeholder="Find a shrine or trail…" %}
 </section>
 
 <section class="container">
@@ -129,24 +130,112 @@
     }).join('');
     el.parentElement.appendChild(legendEl);
 
+    // A small "N of M" line, appended into the legend box itself so it always
+    // reads as "near the legend" without any extra positioning. Only shown
+    // while a text filter is narrowing the map.
+    var countEl = document.createElement('div');
+    countEl.className = 'map-filter-count';
+    countEl.hidden = true;
+    legendEl.appendChild(countEl);
+
+    var markers = {};          // slug -> marker, filled once the sites load
+    var allMarkers = [];       // [{ marker, site }, ...] -- the single source
+                                // of truth applyFilters() reads. Both the
+                                // legend and the search bar only ever mutate
+                                // categoryVisible/textQuery below and then
+                                // call applyFilters(); neither one touches
+                                // the cluster group directly, so they can
+                                // never fight over the same marker.
     var markersByCategory = {};
     var categoryVisible = {};
     Object.keys(CATEGORY_STYLES).forEach(function (category) { categoryVisible[category] = true; });
+    var textQuery = '';
+    var fullBounds = null;
+    var lastFitKey = null; // what applyFilters() last called fitBounds() for
+
+    function matchesText(site, query) {
+      if (!query) return true;
+      var haystacks = [site.title, site.locality, site.country, site.category];
+      for (var i = 0; i < haystacks.length; i++) {
+        if (haystacks[i] && String(haystacks[i]).toLowerCase().indexOf(query) !== -1) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function applyFilters() {
+      var visible = [];
+      var matchedBounds = [];
+      var matchedSlugs = [];
+
+      allMarkers.forEach(function (entry) {
+        var categoryOk = categoryVisible[entry.site.category];
+        var textOk = matchesText(entry.site, textQuery);
+        if (categoryOk && textOk) {
+          visible.push(entry.marker);
+          if (textQuery) {
+            matchedBounds.push([entry.site.latitude, entry.site.longitude]);
+            matchedSlugs.push(entry.site.slug);
+          }
+        }
+      });
+
+      clusterGroup.clearLayers();
+      clusterGroup.addLayers(visible);
+
+      if (textQuery) {
+        countEl.hidden = false;
+        countEl.textContent = 'Showing ' + visible.length + ' of ' + allMarkers.length + ' sites';
+      } else {
+        countEl.hidden = true;
+      }
+
+      // Refit only when what matched actually changed -- not on every
+      // keystroke, and not on a legend toggle that doesn't touch textQuery.
+      var fitKey = null;
+      if (!textQuery) {
+        fitKey = 'full';
+      } else if (matchedSlugs.length >= 1 && matchedSlugs.length <= 40) {
+        fitKey = 'text:' + matchedSlugs.slice().sort().join(',');
+      }
+      if (fitKey && fitKey !== lastFitKey) {
+        if (textQuery) {
+          map.fitBounds(matchedBounds, { padding: [30, 30] });
+        } else if (fullBounds && fullBounds.length) {
+          map.fitBounds(fullBounds, { padding: [30, 30] });
+        }
+      }
+      lastFitKey = fitKey;
+    }
 
     legendEl.addEventListener('click', function (e) {
       var item = e.target.closest('.map-legend-item');
       if (!item) return;
       var category = item.dataset.category;
-      var list = markersByCategory[category] || [];
       var showing = !categoryVisible[category];
       categoryVisible[category] = showing;
       item.classList.toggle('is-off', !showing);
-      if (showing) {
-        clusterGroup.addLayers(list);
-      } else {
-        clusterGroup.removeLayers(list);
-      }
+      applyFilters();
     });
+
+    // ---------- Search bar: live text filter + "choose a pin" ----------
+    var searchForm = document.querySelector('.sog-search--map');
+    if (searchForm) {
+      searchForm.addEventListener('sog:search-query', function (e) {
+        textQuery = (e.detail.query || '').toLowerCase();
+        applyFilters();
+      });
+      searchForm.addEventListener('sog:search-choose', function (e) {
+        var r = e.detail.result;
+        if (!r || r.lat == null) return;   // a trail, or a site with no coordinates -- let it navigate
+        e.preventDefault();                // we're handling it; don't follow the link
+        textQuery = '';
+        applyFilters();
+        var m = markers[r.slug];
+        if (m) { clusterGroup.zoomToShowLayer(m, function () { m.openPopup(); }); }
+      });
+    }
 
     // ---------- Pilgrimage trails ----------
     // Lines only here -- the category pins already mark every stop that has a
@@ -169,25 +258,31 @@
     fetch(el.dataset.sitesUrl)
       .then(function (response) { return response.json(); })
       .then(function (data) {
-        var markers = {};
         var bounds = [];
 
         data.sites.forEach(function (site) {
           var marker = L.marker([site.latitude, site.longitude], { icon: pinIcon(site.category) });
           marker.bindPopup(popupHtml(site));
-          clusterGroup.addLayer(marker);
 
           markers[site.slug] = marker;
+          allMarkers.push({ marker: marker, site: site });
           bounds.push([site.latitude, site.longitude]);
           (markersByCategory[site.category] = markersByCategory[site.category] || []).push(marker);
         });
 
+        fullBounds = bounds;
+
         if (focusSlug && markers[focusSlug]) {
+          // Suppress applyFilters()'s own initial full-bounds fit -- we're
+          // about to zoom straight to the focused marker instead, and doing
+          // both back to back is just a redundant extra animation.
+          lastFitKey = 'full';
+          applyFilters();
           clusterGroup.zoomToShowLayer(markers[focusSlug], function () {
             markers[focusSlug].openPopup();
           });
-        } else if (bounds.length) {
-          map.fitBounds(bounds, { padding: [30, 30] });
+        } else {
+          applyFilters();
         }
       });
   })();

@@ -1,0 +1,39 @@
+{% comment %}
+  Expects `group_key` ("sites"/"saints"/"trails") and `result` (the page
+  instance). Each branch only ever references fields that actually exist on
+  that page type -- SaintPage has no summary_short, SacredSitePage/
+  PilgrimageTrailPage have no significance, and Django does not silently
+  swallow a missing attribute used as a filter argument (only as the direct
+  output of a VariableNode), so crossing those wires raises instead of just
+  rendering blank.
+{% endcomment %}
+<a class="directory-card" href="{{ result.url }}">
+  {% if group_key == "sites" %}
+    <span class="badge badge-category">{{ result.category }}</span>
+    <strong>{{ result.title }}</strong>
+    {% if result.locality or result.country %}
+      <p class="search-result-meta">{{ result.locality }}{% if result.locality and result.country %}, {% endif %}{{ result.country }}</p>
+    {% endif %}
+    {% with blurb=result.summary_short|default:result.search_description %}
+      {% if blurb %}<p>{{ blurb|truncatechars:200 }}</p>{% endif %}
+    {% endwith %}
+  {% elif group_key == "saints" %}
+    <span class="tag">Saint</span>
+    <strong>{{ result.title }}</strong>
+    {% with meta=result.feast_day|default:result.honorific_type %}
+      {% if meta %}<p class="search-result-meta">{{ meta }}</p>{% endif %}
+    {% endwith %}
+    {% with blurb=result.significance|default:result.search_description %}
+      {% if blurb %}<p>{{ blurb|truncatechars:200 }}</p>{% endif %}
+    {% endwith %}
+  {% else %}
+    <span class="tag">Pilgrimage Trail</span>
+    <strong>{{ result.title }}</strong>
+    {% with meta=result.region|default:result.country %}
+      {% if meta %}<p class="search-result-meta">{{ meta }}</p>{% endif %}
+    {% endwith %}
+    {% with blurb=result.summary_short|default:result.search_description %}
+      {% if blurb %}<p>{{ blurb|truncatechars:200 }}</p>{% endif %}
+    {% endwith %}
+  {% endif %}
+</a>
