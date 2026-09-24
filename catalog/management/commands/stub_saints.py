@@ -65,16 +65,18 @@ class Command(BaseCommand):
         self.stdout.write(f"publishing: {eligible} eligible")
         self.stdout.flush()
         n = 0
+        published_titles = []
         for saint in queryset:
             saint.live = True
             if options["ready"]:
                 saint.data_status = ""
             saint.save(update_fields=["live", "data_status"])
             n += 1
+            published_titles.append(saint.title)
             if n % 50 == 0 or n == eligible:
                 self.stdout.write(f"  ...{n}/{eligible} published")
                 self.stdout.flush()
         self.stdout.write(self.style.SUCCESS(f"published {n} saint pages"))
         if options["ready"]:
             self.stdout.write("their data_status was cleared, so they are no longer stubs")
-        self.result = {"published": n}
+        self.result = {"published": n, "published_titles": published_titles}

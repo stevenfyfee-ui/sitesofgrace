@@ -10,6 +10,18 @@ database -- and exits non-zero.
     python manage.py sync_catalog --dry-run
     python manage.py sync_catalog
 
+--dry-run does NOT mean read-only for the whole pipeline -- only
+apply_enrichment's own --dry-run pass is (see its docstring: no writes at
+all, not even inside a transaction). import_catalog, merge_saints and
+stub_saints still do their real writes here; --dry-run's only effect on
+them is that sync_catalog's outer transaction gets rolled back at the
+very end instead of committed. That's why a --dry-run's own output shows
+pages actually being published and data_status actually being cleared --
+it happened, inside the transaction, and then got undone. Don't reason
+about cost or side effects from "--dry-run doesn't write"; it's "--dry-run
+writes then throws it away," except for step 2, which never writes at
+all.
+
 Stop conditions (abort, roll back everything, exit non-zero):
   - import_catalog would create a saint page. Production is expected to
     already have every saint in the workbook; a create means the workbook
@@ -78,6 +90,44 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f"== [{elapsed:6.1f}s] {label} =="))
         self.stdout.flush()
 
+    def diagnose_publish_gap(self, publish_candidates, published_titles):
+        """Called with the transaction still open (nothing rolled back yet),
+        so this sees exactly the state the run produced. Names the specific
+        pages, not just a count, so a future mismatch is diagnosable from
+        the error message alone instead of sending someone to go hunting."""
+        published_this_run = set(published_titles)
+        already_live, not_live = [], []
+        for candidate in publish_candidates:
+            if candidate["title"] in published_this_run:
+                continue
+            saint = SaintPage.objects.filter(slug=candidate["slug"]).first()
+            if saint is None:
+                not_live.append(f"  {candidate['title']} ({candidate['slug']}) -- NOT FOUND in the database")
+            elif saint.live:
+                already_live.append(
+                    f"  {saint.title} ({saint.slug}) -- live=True, data_status={saint.data_status!r} -- "
+                    "already live BEFORE this run; import_catalog updated its content but stub_saints "
+                    "only publishes pages that are currently hidden (live=False), so it was never counted"
+                )
+            else:
+                not_live.append(
+                    f"  {saint.title} ({saint.slug}) -- live=False, data_status={saint.data_status!r}, "
+                    f"significance {'present' if saint.significance else 'BLANK'} "
+                    f"({len(saint.significance)} chars)"
+                )
+        lines = [
+            f"{len(publish_candidates)} workbook row(s) are stub-tagged with real significance "
+            "(the publish candidates):",
+            f"  published this run: {', '.join(published_titles) if published_titles else '(none)'}",
+        ]
+        if already_live:
+            lines.append("  already live before this run (not counted as a publish):")
+            lines.extend(already_live)
+        if not_live:
+            lines.append("  NOT live -- unexplained gap:")
+            lines.extend(not_live)
+        return "\n".join(lines)
+
     def handle(self, *args, **options):
         dry_run = options["dry_run"]
         self.start = time.monotonic()
@@ -129,11 +179,14 @@ class Command(BaseCommand):
             call_command(publish_cmd, publish=True, ready=True)
             published = publish_cmd.result["published"]
             if published != options["expect_published"]:
+                diagnosis = self.diagnose_publish_gap(
+                    import_cmd.publish_candidates, publish_cmd.result["published_titles"]
+                )
                 raise CommandError(
                     f"ABORTED, nothing saved: stub_saints --publish --ready published "
                     f"{published} page(s), expected exactly {options['expect_published']}. "
                     "Enrichment never writes significance, so this count should not move on "
-                    "its own -- something wrote a summary nobody reviewed."
+                    f"its own -- something wrote a summary nobody reviewed.\n{diagnosis}"
                 )
 
             saints_after = SaintPage.objects.count()

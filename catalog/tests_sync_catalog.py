@@ -85,17 +85,38 @@ class SyncCatalogTestCase(WagtailPageTestCase):
         )
         self.saints_index.add_child(instance=self.loser2)
 
+        # Already live and NOT a stub -- e.g. a saint that predates this
+        # workbook under the same title. The workbook still marks its row
+        # stub-* with real significance (it doesn't know this page already
+        # graduated), so import_catalog updates its content but stub_saints
+        # never counts it, since it was never hidden. This is the exact
+        # shape of the real "7 eligible, expected 8" production mismatch.
+        self.already_live = SaintPage(
+            title="St. Already Live",
+            slug="st-already-live",
+            significance="Original significance, already published.",
+            data_status="",
+            live=True,
+        )
+        self.saints_index.add_child(instance=self.already_live)
+
         self.workbook_path = os.path.join(self.tmpdir, "catalog.xlsx")
         self.enrichment_csv_path = os.path.join(self.tmpdir, "enrichment.csv")
         self._write_workbook_matching_current_state()
         self._write_enrichment_csv()
 
     def _write_workbook_matching_current_state(self):
-        """Every row here matches what's already in the database -- the
-        workbook is not the thing changing anything in this test. That's
-        deliberate: it isolates the import step's own idempotency (a
-        second run finding nothing to update) from the enrichment/merge/
-        publish steps, which is the actual new work sync_catalog does."""
+        """Every row for winner1/winner2/loser1/loser2 matches what's
+        already in the database -- the workbook is not the thing changing
+        anything for them in this test. That's deliberate: it isolates the
+        import step's own idempotency (a second run finding nothing to
+        update) from the enrichment/merge/publish steps, which is the
+        actual new work sync_catalog does.
+
+        already_live is the one exception, on purpose: its workbook row
+        carries new significance and a stub-* data_status even though the
+        page is already live and not a stub -- exactly the mismatch behind
+        the real "7 eligible, expected 8" production incident."""
         rows = [
             {
                 "name": p.title, "slug": p.slug, "also_known_as": p.also_known_as,
@@ -106,6 +127,14 @@ class SyncCatalogTestCase(WagtailPageTestCase):
             }
             for p in (self.winner1, self.winner2, self.loser1, self.loser2)
         ]
+        rows.append({
+            "name": self.already_live.title, "slug": self.already_live.slug, "also_known_as": "",
+            "honorific_type": "", "feast_day": "", "born": "", "died": "",
+            "canonized": "", "patronage": "",
+            "significance": "Updated significance from the workbook.",
+            "body_draft": "", "source_url": "", "source_note": "",
+            "data_status": "stub-import", "editor_notes": "",
+        })
         wb = openpyxl.Workbook()
         ws = wb.active
         ws.title = "Saints"
@@ -231,3 +260,23 @@ class SyncCatalogTestCase(WagtailPageTestCase):
 
         self.winner1.refresh_from_db()
         self.assertFalse(self.winner1.live, "a stop condition must roll back the WHOLE transaction")
+
+    def test_publish_mismatch_error_names_the_already_live_page(self):
+        """The real incident this reproduces: a workbook row is stub-tagged
+        with real content, but the page is already live, so stub_saints
+        never counts it. The error must name it and say why, not just
+        report a bare count that sends someone hunting."""
+        with self.assertRaises(CommandError) as ctx:
+            self.run_sync(expect_published=3)
+
+        message = str(ctx.exception)
+        self.assertIn("St. Already Live", message)
+        self.assertIn("already live BEFORE this run", message)
+        self.assertIn("St. Birgitta - Bridget of Sweden", message, "must also name what WAS published")
+        self.assertIn("St. John Leonardi", message)
+
+        self.already_live.refresh_from_db()
+        self.assertEqual(
+            self.already_live.significance, "Original significance, already published.",
+            "a stop condition must roll back the WHOLE transaction, including this content update",
+        )

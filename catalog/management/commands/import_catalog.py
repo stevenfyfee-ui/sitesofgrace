@@ -121,6 +121,12 @@ class Command(BaseCommand):
         self.warnings = []
         self._saint_rows = []
         self._site_rows = []
+        # Every row the workbook itself marks as a stub with real content --
+        # independent of whatever a blank-only guard decided to actually
+        # write. sync_catalog uses this to name names when stub_saints
+        # publishes a different count than expected, instead of leaving a
+        # bare number for someone to go hunting from.
+        self.publish_candidates = []
         with transaction.atomic():
             if "topics" in only:
                 self.import_topics(read_sheet(workbook, "Topics"))
@@ -198,6 +204,8 @@ class Command(BaseCommand):
             merged_aka = existing_aka + [a for a in incoming_aka if a not in existing_aka]
 
             incoming_data_status = s(row.get("data_status"))
+            if incoming_data_status.startswith("stub-") and s(row.get("significance")):
+                self.publish_candidates.append({"slug": slug, "title": title})
             if not is_new and saint.data_status == "" and incoming_data_status.startswith("stub-"):
                 data_status = ""
             else:
