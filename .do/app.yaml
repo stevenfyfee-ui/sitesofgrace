@@ -1,3 +1,22 @@
+# ===========================================================================
+# !!! NOT AUTHORITATIVE -- DO NOT APPLY THIS FILE !!!
+#
+# This is a stale template, kept only for its structure (service/job names,
+# which env vars exist) as reference for DEPLOY.md and for rebuilding the app
+# spec from scratch if it's ever lost. It is NOT what's running.
+#
+# The live app's spec, in the DigitalOcean console, carries real encrypted
+# secrets (SECRET_KEY, SPACES_KEY/SECRET, SPACES_PRIVATE_KEY/SECRET,
+# SITE_PRIVATE_USER/PASSWORD, etc.) where this file below still reads
+# REPLACE_ME. Running `doctl apps update` (or pasting this into the App
+# Platform UI) against the live app would overwrite every one of those real
+# secrets with the literal string "REPLACE_ME" and take production down.
+#
+# The DigitalOcean console (App Platform → sitesofgrace → Settings → App
+# Spec) is the source of truth. If you need the real spec, read it there --
+# don't reconstruct it from this file.
+# ===========================================================================
+
 # ---------------------------------------------------------------------------
 # DigitalOcean App Platform spec for sitesofgrace.
 #

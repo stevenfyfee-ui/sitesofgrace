@@ -2,6 +2,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
 
+from wagtail.contrib.search_promotions.models import Query
+
 from catalog.models import (
     CATEGORY_CHOICES,
     CATEGORY_STYLES,
@@ -10,13 +12,6 @@ from catalog.models import (
     SacredSitePage,
     SaintPage,
 )
-
-# To enable logging of search queries for use with the "Promoted search results" module
-# <https://docs.wagtail.org/en/stable/reference/contrib/searchpromotions.html>
-# uncomment the following line and the lines indicated in the search function
-# (after adding wagtail.contrib.search_promotions to INSTALLED_APPS):
-
-# from wagtail.contrib.search_promotions.models import Query
 
 
 # Single place a search group is declared -- suggest() and search() both read
@@ -133,6 +128,12 @@ def search(request):
     search_query = (request.GET.get("query") or "").strip()
     category_param = (request.GET.get("category") or "").strip()
     page_number = request.GET.get("page", 1)
+
+    if search_query:
+        # Logged here only -- never in suggest(). That endpoint fires on
+        # every keystroke, so "l", "lo", "lou", "lour" would each count as a
+        # separate search and the terms report would be noise, not data.
+        Query.get(search_query).add_hit()
 
     group_keys = {group["key"] for group in SEARCH_GROUPS}
     category_labels = dict(CATEGORY_CHOICES)

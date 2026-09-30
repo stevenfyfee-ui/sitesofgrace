@@ -4,6 +4,7 @@ from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
 from catalog import views as catalog_views
@@ -15,6 +16,7 @@ from store import views as store_views
 urlpatterns = [
     path(settings.HEALTH_CHECK_PATH.lstrip("/"), core_views.health, name="health"),
     path("robots.txt", core_views.robots_txt, name="robots_txt"),
+    path("sitemap.xml", sitemap, name="sitemap"),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
