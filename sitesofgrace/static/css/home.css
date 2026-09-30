@@ -23,10 +23,7 @@
 .hero--image h1, .hero--image .hero-intro { color: var(--ivory); }
 .hero-intro { font-size: clamp(16px, 2vw, 20px); line-height: 1.6; margin: 0 auto 28px; max-width: 620px; color: var(--blue); }
 .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.btn-secondary {
-  background: var(--ivory); color: var(--navy); border: 1px solid var(--gold);
-}
-.btn-secondary:hover { background: var(--parchment); }
+/* .btn-secondary moved to site.css -- it's a shared button variant, not homepage-only. */
 
 /* ---------- Feature cards ---------- */
 .feature-cards { padding: 60px 0; }

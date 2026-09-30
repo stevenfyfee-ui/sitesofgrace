@@ -1,6 +1,20 @@
-{% load menu_tags %}
+{% load menu_tags about_tags %}
 <ul class="footer-links">
   {% for item in menu_items %}
-    <li class="{{ item.active_class }}"><a href="{{ item.href }}">{{ item.text }}</a></li>
+    {% if item.text == "About" %}
+      {% comment %}
+        The "About & Trust" column's "About" item is repointed here at the
+        live Our Story page rather than in the admin, since a wagtailmenus
+        MenuItem can't be wired up to a page that doesn't exist yet -- see
+        home/templatetags/about_tags.py. Hidden (not left on its old
+        target) until that page is published.
+      {% endcomment %}
+      {% our_story_url as our_story_link %}
+      {% if our_story_link %}
+        <li class="{{ item.active_class }}"><a href="{{ our_story_link }}">Our Story</a></li>
+      {% endif %}
+    {% else %}
+      <li class="{{ item.active_class }}"><a href="{{ item.href }}">{{ item.text }}</a></li>
+    {% endif %}
   {% endfor %}
 </ul>

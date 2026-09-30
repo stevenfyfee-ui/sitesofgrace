@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}about{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/about.css' %}">{% endblock %}
+{% block extra_head %}
+{% if page.hero_image %}
+  {% image page.hero_image fill-1200x630 format-webp as og_img %}
+  <meta property="og:image" content="{{ og_img.url }}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% comment %}
+Every image slot below degrades the same way: an editor-set image renders
+via {% image %}; an empty one renders the brand gradient panel
+(.about-photo / --dusk / --day / --night, in about.css) instead -- no
+silhouette illustration, no "Photo:" chip. The page has to look finished
+with zero images uploaded, since that's how it first goes live.
+{% endcomment %}
+
+{# ---------- 1. Hero ---------- #}
+<section class="about-hero{% if page.hero_image %} about-hero--image{% endif %}">
+  <div class="about-hero-media" aria-hidden="true">
+    {% if page.hero_image %}
+      {% image page.hero_image fill-1800x900 format-webp as hero_img %}
+      <img src="{{ hero_img.url }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" alt="{{ page.hero_image.default_alt_text }}">
+    {% else %}
+      <div class="about-photo about-photo--dusk"></div>
+    {% endif %}
+  </div>
+  <div class="container about-hero-inner">
+    <div class="about-hero-copy">
+      {% if page.hero_eyebrow %}<p class="about-eyebrow">{{ page.hero_eyebrow }}</p>{% endif %}
+      <h1>{{ page.hero_title }}</h1>
+      {% if page.hero_intro %}<p class="about-hero-intro">{{ page.hero_intro }}</p>{% endif %}
+      {% if page.hero_cta_label and page.hero_cta_url %}
+        <a class="btn btn-gold" href="{{ page.hero_cta_url }}">{{ page.hero_cta_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{# ---------- 2. Why Sites of Grace Exists ---------- #}
+<section class="about-why">
+  <div class="container about-why-grid">
+    <div class="about-why-copy">
+      {% if page.why_eyebrow %}<p class="about-eyebrow">{{ page.why_eyebrow }}</p>{% endif %}
+      <h2 class="about-h2">{{ page.why_title }}</h2>
+      <div class="about-prose">{{ page.why_body|richtext }}</div>
+    </div>
+    {% if page.pillars %}
+      <div class="about-pillars">
+        {% for block in page.pillars %}
+          <div class="about-pillar">
+            {% include "includes/_line_icon.html" with icon=block.value.icon %}
+            <h3>{{ block.value.title }}</h3>
+            <p>{{ block.value.text }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{# ---------- 3. How It Began ---------- #}
+<section class="about-began">
+  <div class="about-began-media">
+    {% if page.began_image %}
+      {% image page.began_image fill-1000x940 format-webp as began_img %}
+      <img src="{{ began_img.url }}" width="{{ began_img.width }}" height="{{ began_img.height }}" alt="{{ page.began_image.default_alt_text }}">
+    {% else %}
+      <div class="about-photo about-photo--dusk"></div>
+    {% endif %}
+  </div>
+  <div class="about-began-copy">
+    {% if page.began_eyebrow %}<p class="about-eyebrow">{{ page.began_eyebrow }}</p>{% endif %}
+    <h2 class="about-h2">{{ page.began_title }}</h2>
+    <div class="about-prose">{{ page.began_body|richtext }}</div>
+  </div>
+</section>
+
+{# ---------- 4. About the Founder ---------- #}
+<section class="about-founder">
+  <div class="container about-founder-grid">
+    <div class="about-founder-media">
+      {% if page.founder_photo %}
+        {% image page.founder_photo fill-600x720 format-webp as founder_img %}
+        <img src="{{ founder_img.url }}" width="{{ founder_img.width }}" height="{{ founder_img.height }}" alt="{{ page.founder_photo.default_alt_text }}">
+      {% else %}
+        <div class="about-photo about-photo--day"></div>
+      {% endif %}
+    </div>
+    <div class="about-founder-copy">
+      {% if page.founder_eyebrow %}<p class="about-eyebrow">{{ page.founder_eyebrow }}</p>{% endif %}
+      <h2>{{ page.founder_name }}</h2>
+      {% if page.founder_role %}<p class="about-founder-role">{{ page.founder_role }}</p>{% endif %}
+      <div class="about-prose">{{ page.founder_bio|richtext }}</div>
+    </div>
+  </div>
+</section>
+
+{# ---------- 5. What We Believe ---------- #}
+<section class="about-believe">
+  <div class="about-believe-media" aria-hidden="true">
+    {% if page.believe_image %}
+      {% image page.believe_image fill-700x1000 format-webp as believe_img %}
+      <img src="{{ believe_img.url }}" width="{{ believe_img.width }}" height="{{ believe_img.height }}" alt="">
+    {% else %}
+      <div class="about-photo about-photo--night"></div>
+    {% endif %}
+  </div>
+  {# Copied from the mockup verbatim -- a faint compass-rose "M" emblem. #}
+  <svg class="about-believe-emblem" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+    <circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="74"/><circle cx="100" cy="100" r="40"/>
+    <path d="M100 4 L108 92 L196 100 L108 108 L100 196 L92 108 L4 100 L92 92Z"/>
+    <path d="M100 30 L104 96 L170 100 L104 104 L100 170 L96 104 L30 100 L96 96Z" opacity=".6"/>
+    <text x="100" y="114" text-anchor="middle" font-family="Cinzel, serif" font-size="40" fill="currentColor" stroke="none">M</text>
+  </svg>
+  <div class="container about-believe-copy">
+    {% if page.believe_eyebrow %}<p class="about-eyebrow">{{ page.believe_eyebrow }}</p>{% endif %}
+    <h2>{{ page.believe_heading|linebreaksbr }}</h2>
+    {{ page.believe_body_parts.first|richtext }}
+    {% if page.believe_emphasis %}<p class="about-believe-strong">{{ page.believe_emphasis }}</p>{% endif %}
+    {{ page.believe_body_parts.rest|richtext }}
+  </div>
+</section>
+
+{# ---------- 6. What Sites of Grace Is Becoming ---------- #}
+<section class="about-becoming">
+  <div class="container">
+    {% if page.becoming_eyebrow %}<p class="about-eyebrow about-eyebrow--center">{{ page.becoming_eyebrow }}</p>{% endif %}
+    {% if page.becoming_cards %}
+      <div class="about-cards">
+        {% for card in page.becoming_cards %}
+          {% with value=card.value %}
+            {% if value.resolved_url %}<a class="about-card" href="{{ value.resolved_url }}">{% else %}<div class="about-card">{% endif %}
+              <div class="about-card-media">
+                {% if value.image %}
+                  {% image value.image fill-360x300 format-webp as card_img %}
+                  <img src="{{ card_img.url }}" width="{{ card_img.width }}" height="{{ card_img.height }}" alt="{{ value.image.default_alt_text }}">
+                {% else %}
+                  <div class="about-photo about-photo--{% cycle 'day' 'dusk' 'night' %}"></div>
+                {% endif %}
+              </div>
+              <div class="about-card-body">
+                <h3>{{ value.title }}</h3>
+                <p>{{ value.text }}</p>
+                {% if value.resolved_url %}
+                  <span class="about-card-more">{{ value.link_label }} →</span>
+                {% elif value.link_label %}
+                  <span class="about-card-more about-card-more--static">{{ value.link_label }}</span>
+                {% endif %}
+              </div>
+            {% if value.resolved_url %}</a>{% else %}</div>{% endif %}
+          {% endwith %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{# ---------- 7. Closing Call to Action ---------- #}
+<section class="about-closing">
+  <div class="about-closing-media" aria-hidden="true">
+    {% if page.closing_image %}
+      {% image page.closing_image fill-1800x760 format-webp as closing_img %}
+      <img src="{{ closing_img.url }}" width="{{ closing_img.width }}" height="{{ closing_img.height }}" alt="">
+    {% else %}
+      <div class="about-photo about-photo--dusk"></div>
+    {% endif %}
+  </div>
+  <div class="container about-closing-copy">
+    <h2>{{ page.closing_title }}</h2>
+    {% if page.closing_text %}<p>{{ page.closing_text }}</p>{% endif %}
+    <div class="about-closing-ctas">
+      {% if page.closing_primary_label and page.closing_primary_url %}
+        <a class="btn btn-gold" href="{{ page.closing_primary_url }}">{{ page.closing_primary_label }}</a>
+      {% endif %}
+      {% if page.closing_secondary_label and page.closing_secondary_url %}
+        <a class="btn btn-secondary" href="{{ page.closing_secondary_url }}">{{ page.closing_secondary_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,162 @@
+/* ============================================================
+   Sites of Grace — "Our Story" (About) page
+   Uses the brand tokens defined in site.css (:root). Matches the mockup at
+   sites-of-grace-our-story-mockup.html section for section; class names are
+   renamed/prefixed (about-*) so nothing here collides with home.css.
+   ============================================================ */
+
+/* ---------- Shared type ---------- */
+.about-eyebrow {
+  font-family: var(--serif-titling); font-size: 12px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 12px;
+}
+.about-eyebrow--center { text-align: center; }
+.about-h2 { font-size: clamp(32px, 4vw, 46px); color: var(--navy); margin: 0 0 18px; }
+.about-prose p { font-size: 15.5px; line-height: 1.75; color: #3a4458; margin: 0 0 14px; }
+.about-prose p:last-child { margin-bottom: 0; }
+
+/* ---------- Photo slots ----------
+   Falls back to a branded gradient panel when no image is set -- no
+   silhouette illustration, no "Photo:" chip. Each variant mirrors the
+   mockup's stand-in gradients (dusk/day/night) so an unpublished page still
+   looks finished. */
+.about-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, #f3c98a 0%, #e0a56a 34%, #9d6a58 62%, #3b3f55 100%);
+}
+.about-photo--dusk { background: linear-gradient(180deg, #f6d49a 0%, #e9ac72 40%, #b87460 70%, #4b4458 100%); }
+.about-photo--day { background: linear-gradient(180deg, #c9dcea 0%, #e8e3d6 55%, #b9a88a 100%); }
+.about-photo--night { background: linear-gradient(160deg, #20426b 0%, #0b2b55 55%, #032553 100%); }
+
+/* ---------- 1. Hero ---------- */
+.about-hero { position: relative; min-height: 520px; display: flex; align-items: center; color: var(--ivory); overflow: hidden; }
+.about-hero-media { position: absolute; inset: 0; }
+.about-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(3,20,45,.86) 0%, rgba(3,25,55,.62) 38%, rgba(3,25,55,.12) 64%, transparent 80%);
+}
+.about-hero-inner { position: relative; z-index: 2; width: 100%; }
+.about-hero-copy { max-width: 590px; padding: 70px 0; }
+.about-hero h1 { font-family: var(--serif-display); font-weight: 500; line-height: 1.08; margin: 0 0 22px; font-size: clamp(38px, 5.2vw, 60px); }
+.about-hero-intro { font-size: 16px; line-height: 1.75; color: rgba(253,249,242,.88); margin: 0 0 28px; }
+
+/* ---------- 2. Why ---------- */
+.about-why { padding: 80px 0 76px; }
+.about-why-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
+.about-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.about-pillar {
+  position: relative; text-align: center; padding: 30px 14px 44px;
+  border: 1px solid var(--gold); border-radius: 999px 999px 6px 6px;
+  background: rgba(255,255,255,.55);
+}
+.about-pillar svg { width: 36px; height: 36px; color: var(--navy); margin-bottom: 14px; }
+.about-pillar h3 { font-family: var(--serif-display); font-size: 22px; font-weight: 600; margin: 0 0 8px; color: var(--navy); }
+.about-pillar p { font-size: 12.5px; line-height: 1.6; color: var(--stone); margin: 0; }
+.about-pillar::after {
+  content: "✥"; position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  color: var(--gold); font-size: 13px;
+}
+
+/* ---------- 3. How it began ---------- */
+.about-began {
+  display: grid; grid-template-columns: 1.1fr 1fr; align-items: stretch;
+  background: var(--ivory); border-top: 1px solid var(--gold-soft);
+}
+.about-began-media { position: relative; min-height: 470px; overflow: hidden; }
+.about-began-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-began-copy { padding: 64px 56px 64px 60px; max-width: 600px; align-self: center; }
+
+/* ---------- 4. Founder ---------- */
+.about-founder { background: var(--parchment); border-block: 1px solid var(--gold-soft); padding: 64px 0; }
+.about-founder-grid { display: grid; grid-template-columns: 300px 1fr; gap: 60px; align-items: center; max-width: 980px; margin: 0 auto; }
+.about-founder-media {
+  position: relative; height: 360px; overflow: hidden;
+  border-radius: 150px 150px 10px 10px; border: 1px solid var(--gold);
+  box-shadow: 0 20px 44px -26px rgba(3,37,83,.55);
+}
+.about-founder-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-founder-role {
+  font-family: var(--serif-titling); font-size: 12px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold); margin: 6px 0 18px;
+}
+.about-founder-copy h2 { font-size: clamp(34px, 4vw, 44px); color: var(--navy); }
+
+/* ---------- 5. What we believe ---------- */
+.about-believe { position: relative; background: var(--navy); color: var(--ivory); overflow: hidden; padding: 84px 0; }
+.about-believe-media { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
+.about-believe-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-believe-media::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, transparent 30%, var(--navy) 100%);
+}
+.about-believe-emblem {
+  position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+  width: 260px; height: 260px; color: var(--gold); opacity: .32;
+}
+.about-believe-copy { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; text-align: center; }
+.about-believe-copy h2 {
+  font-family: var(--serif-display); font-weight: 500; line-height: 1.18;
+  font-size: clamp(30px, 3.6vw, 42px); margin: 0 0 26px;
+}
+.about-believe-copy > p { font-size: 15.5px; line-height: 1.8; color: rgba(253,249,242,.84); margin: 0 0 12px; }
+.about-believe-strong {
+  font-family: var(--serif-display); font-size: 22px; color: #e9d8b0;
+  font-style: italic; margin: 18px 0;
+}
+
+/* ---------- 6. Becoming ---------- */
+.about-becoming { padding: 70px 0 74px; }
+.about-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+.about-card {
+  display: grid; grid-template-columns: 128px 1fr; gap: 18px; padding: 14px;
+  border: 1px solid var(--gold-soft); background: #fff; border-radius: 6px;
+  text-decoration: none; transition: .2s ease;
+}
+a.about-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 16px 34px -22px rgba(3,37,83,.5); }
+.about-card-media { position: relative; overflow: hidden; border-radius: 4px; min-height: 150px; }
+.about-card-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-card-body h3 { font-family: var(--serif-display); font-size: 24px; font-weight: 600; color: var(--navy); margin: 6px 0 8px; }
+.about-card-body p { font-size: 13px; line-height: 1.6; color: var(--stone); margin: 0 0 10px; }
+.about-card-more { font-family: var(--sans); font-size: 12px; color: var(--gold); letter-spacing: .04em; }
+.about-card-more--static { color: var(--stone); }
+
+/* ---------- 7. Closing CTA ---------- */
+.about-closing { position: relative; min-height: 300px; display: grid; place-items: center; text-align: center; overflow: hidden; }
+.about-closing-media { position: absolute; inset: 0; }
+.about-closing-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-closing::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 46% 70% at 50% 50%, rgba(253,249,242,.9) 0%, rgba(253,249,242,.62) 55%, rgba(253,249,242,0) 100%);
+}
+.about-closing-copy { position: relative; z-index: 2; padding: 60px 22px; }
+.about-closing-copy h2 { font-size: clamp(32px, 4vw, 46px); color: var(--navy); margin: 0 0 12px; }
+.about-closing-copy p { font-size: 15.5px; line-height: 1.7; color: #3a4458; margin: 0 auto 26px; max-width: 460px; }
+.about-closing-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ---------- Responsive ----------
+   The header's own nav collapses at 900px (site.css); breakpoints here are
+   independent of that and must not assume a different value for anything
+   that shares the viewport with the header. */
+@media (max-width: 1080px) {
+  .about-why-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-cards { grid-template-columns: 1fr; max-width: 620px; margin: 28px auto 0; }
+  .about-believe-emblem { display: none; }
+}
+@media (max-width: 900px) {
+  .about-began { grid-template-columns: 1fr; }
+  .about-began-media { min-height: 300px; }
+  .about-began-copy { padding: 44px 22px; max-width: none; }
+  .about-founder-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+  .about-founder-media { width: 260px; height: 310px; margin: 0 auto; }
+  .about-believe-media { width: 100%; opacity: .25; }
+  .about-believe-media::after { background: linear-gradient(180deg, transparent, var(--navy)); }
+}
+@media (max-width: 640px) {
+  .about-hero { min-height: 560px; align-items: flex-end; }
+  .about-hero::after { background: linear-gradient(180deg, rgba(3,25,55,.1) 0%, rgba(3,20,45,.88) 58%); }
+  .about-hero-copy { padding: 40px 0 48px; }
+  .about-pillars { grid-template-columns: repeat(2, 1fr); }
+  .about-card { grid-template-columns: 1fr; }
+  .about-card-media { min-height: 170px; }
+}
