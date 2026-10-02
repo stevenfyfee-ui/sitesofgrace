@@ -1,0 +1,14 @@
+{% comment %}
+  Category labels for a post. Pass `categories` -- either BlogCategory objects
+  (on cards, where the whole card is already a link, so these are plain text)
+  or the post page's `category_links` dicts with a `url` (in the post hero,
+  where each label links to its category page). `linked=True` picks the
+  second form.
+{% endcomment %}
+{% if categories %}
+  <ul class="blog-cats">
+    {% for cat in categories %}
+      <li>{% if linked %}<a class="blog-cat" href="{{ cat.url }}">{{ cat.name }}</a>{% else %}<span class="blog-cat">{{ cat.name }}</span>{% endif %}</li>
+    {% endfor %}
+  </ul>
+{% endif %}

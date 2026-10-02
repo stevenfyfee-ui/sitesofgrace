@@ -1,0 +1,22 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% comment %}
+  One post as a grid card. Used by the index grid and the post page's
+  "More in ..." row. The whole card is the link, so nothing inside it may be
+  another <a>.
+{% endcomment %}
+<a class="blog-card" href="{% pageurl post %}">
+  <div class="blog-card-media">
+    {% if post.feature_image %}
+      {% image post.feature_image fill-800x500 format-webp as card_img %}
+      <img src="{{ card_img.url }}" width="{{ card_img.width }}" height="{{ card_img.height }}" alt="" loading="lazy">
+    {% else %}
+      {% include "blog/_photo_fallback.html" %}
+    {% endif %}
+  </div>
+  <div class="blog-card-body">
+    {% include "blog/_category_labels.html" with categories=post.sorted_categories linked=False %}
+    <p class="blog-meta"><time datetime="{{ post.date|date:'Y-m-d' }}">{{ post.date|date:"F j, Y" }}</time> · {{ post.reading_time }} min read</p>
+    <h3 class="blog-card-title">{{ post.title }}</h3>
+    <p class="blog-card-excerpt">{{ post.excerpt }}</p>
+  </div>
+</a>

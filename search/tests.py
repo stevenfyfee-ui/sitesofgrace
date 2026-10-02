@@ -201,7 +201,7 @@ class ResultsPageGroupingTests(SearchTestCase):
 class SuggestQueryCostTests(SearchTestCase):
     """Pins the worst case per keystroke: a query that matches nothing runs
     all three resolution tiers (autocomplete, search, icontains) against all
-    three groups, since none of them short-circuits early. If this number
+    four groups, since none of them short-circuits early. If this number
     ever creeps up, something added an extra query per group per tier --
     exactly the cost that matters most, since it's paid on every keystroke
     a visitor types with no hits yet (the common case while typing)."""
@@ -223,15 +223,16 @@ class SuggestQueryCostTests(SearchTestCase):
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content)
         self.assertEqual(data["groups"], [])
-        # 3 groups x (1 PageViewRestriction + 3 fallback tiers) = 12.
+        # 4 groups (sites, saints, trails, blog) x (1 PageViewRestriction +
+        # 3 fallback tiers) = 16.
         # ContentType lookups don't add a query here because setUpTestData's
         # own page creation already warmed Django's process-wide ContentType
         # cache -- which is also the realistic steady state: a live worker
         # process serves this endpoint many times, so the *first* request
-        # after startup pays one extra query per group for that cache (15
-        # total, measured against a cold process), but every keystroke after
+        # after startup pays one extra query per group for that cache, but
+        # every keystroke after
         # that -- the actual "per keystroke" cost -- pays this number.
         self.assertEqual(
-            len(ctx.captured_queries), 12,
+            len(ctx.captured_queries), 16,
             "suggest query count changed - see the comment above before adjusting",
         )

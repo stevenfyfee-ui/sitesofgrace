@@ -1,5 +1,5 @@
 {% comment %}
-  Expects `group_key` ("sites"/"saints"/"trails") and `result` (the page
+  Expects `group_key` ("sites"/"saints"/"trails"/"blog") and `result` (the page
   instance). Each branch only ever references fields that actually exist on
   that page type -- SaintPage has no summary_short, SacredSitePage/
   PilgrimageTrailPage have no significance, and Django does not silently
@@ -24,6 +24,13 @@
       {% if meta %}<p class="search-result-meta">{{ meta }}</p>{% endif %}
     {% endwith %}
     {% with blurb=result.significance|default:result.search_description %}
+      {% if blurb %}<p>{{ blurb|truncatechars:200 }}</p>{% endif %}
+    {% endwith %}
+  {% elif group_key == "blog" %}
+    <span class="tag">Blog</span>
+    <strong>{{ result.title }}</strong>
+    <p class="search-result-meta">{{ result.date|date:"F j, Y" }}</p>
+    {% with blurb=result.search_description|default:result.excerpt %}
       {% if blurb %}<p>{{ blurb|truncatechars:200 }}</p>{% endif %}
     {% endwith %}
   {% else %}

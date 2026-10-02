@@ -21,6 +21,7 @@
   <a class="skip-link" href="#content">Skip to content</a>
 
   {% with s=settings.core.SiteSettings %}
+  {% if request.user.is_authenticated %}{% unread_notification_count request.user as unread_count %}{% endif %}
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Sites of Grace — home">
@@ -39,13 +40,8 @@
       <div class="header-actions">
         {% include "includes/_search_bar.html" with variant="header" %}
         {% if request.user.is_authenticated %}
-          <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
-          <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">My Photos</a>
-          {% unread_notification_count request.user as unread_count %}
-          <a class="btn btn-secondary pilgrims-nav-bell" href="{% url 'pilgrims:notifications' %}">
-            Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}
-          </a>
-          <a class="btn btn-primary" aria-label="Pilgrim Portal" href="{% url 'pilgrims:profile_detail' handle=request.user.pilgrim.handle %}">{{ request.user.pilgrim.display_name|default:request.user.get_username }}</a>
+          {# Feed, My Photos, Notifications, profile, Passport, Sign out -- all under the name #}
+          {% include "includes/_account_menu.html" %}
         {% else %}
           <a class="btn btn-primary" aria-label="Pilgrim Portal" href="{% url 'account_login' %}?next={% url 'pilgrims:home' %}">Sign in</a>
         {% endif %}
@@ -55,7 +51,9 @@
     {# Mobile menu mirrors the same main menu #}
     <div class="mobile-nav" id="mobileNav" hidden>
       {% include "includes/_search_bar.html" with variant="header" id_suffix="-mobile" %}
+      {% if request.user.is_authenticated %}{% include "includes/_account_menu.html" with variant="mobile" %}{% endif %}
       {% main_menu max_levels=2 template="menus/mobile_menu.html" sub_menu_template="menus/mobile_sub_menu.html" %}
+      {% if request.user.is_authenticated %}{% include "includes/_account_menu.html" with variant="mobile-signout" %}{% endif %}
     </div>
   </header>
 
@@ -135,6 +133,7 @@
     })();
   </script>
   <script src="{% static 'js/search.js' %}"></script>
+  {% if request.user.is_authenticated %}<script src="{% static 'js/account-menu.js' %}" defer></script>{% endif %}
   {% block extra_js %}{% endblock %}
 </body>
 </html>

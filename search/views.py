@@ -1,9 +1,11 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
+from django.utils.dateformat import format as date_format
 
 from wagtail.contrib.search_promotions.models import Query
 
+from blog.models import BlogPostPage
 from catalog.models import (
     CATEGORY_CHOICES,
     CATEGORY_STYLES,
@@ -21,6 +23,7 @@ SEARCH_GROUPS = [
     {"key": "sites", "label": "Sacred Sites", "model": SacredSitePage},
     {"key": "saints", "label": "Saints", "model": SaintPage},
     {"key": "trails", "label": "Pilgrimage Trails", "model": PilgrimageTrailPage},
+    {"key": "blog", "label": "Blog", "model": BlogPostPage},
 ]
 
 SUGGEST_PER_GROUP = 5
@@ -59,7 +62,11 @@ def _trail_meta(trail):
     return trail.region or trail.country
 
 
-_META_FNS = {"sites": _site_meta, "saints": _saint_meta, "trails": _trail_meta}
+def _blog_meta(post):
+    return date_format(post.date, "F j, Y")
+
+
+_META_FNS = {"sites": _site_meta, "saints": _saint_meta, "trails": _trail_meta, "blog": _blog_meta}
 
 
 def _serialize_suggestion(group_key, obj):

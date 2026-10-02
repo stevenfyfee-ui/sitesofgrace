@@ -1,0 +1,10 @@
+{% load wagtailimages_tags %}
+<figure class="blog-figure{% if value.width == 'wide' %} blog-figure--wide{% endif %}">
+  {% if value.width == "wide" %}
+    {% image value.image width-1600 format-webp as img %}
+  {% else %}
+    {% image value.image width-1000 format-webp as img %}
+  {% endif %}
+  <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ value.image.default_alt_text }}" loading="lazy">
+  {% if value.caption %}<figcaption>{{ value.caption }}</figcaption>{% endif %}
+</figure>

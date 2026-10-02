@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags blog_tags %}
+
+{% block body_class %}blog blog-post{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/blog.css' %}">{% endblock %}
+{% block extra_head %}
+<link rel="alternate" type="application/rss+xml" title="Sites of Grace Blog" href="{{ index_page.feed_url }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ page.seo_title|default:page.title }}">
+<meta property="og:description" content="{{ page.meta_description }}">
+<meta property="og:url" content="{{ page.full_url }}">
+<meta property="article:published_time" content="{{ page.date|date:'Y-m-d' }}">
+{% if page.feature_image %}
+  {% image page.feature_image fill-1200x630 format-webp as og_img %}
+  {% absolute_url og_img.url as og_img_url %}
+  <meta property="og:image" content="{{ og_img_url }}">
+{% endif %}
+{% comment %}
+  BlogPosting structured data. The site is noindex for now; this is here so
+  it's already correct when that lifts. Every value goes through escapejs so
+  a quote in a title can't break out of the JSON string.
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title|escapejs }}",
+  "datePublished": "{{ page.date|date:'Y-m-d' }}",
+  "dateModified": "{{ page.last_published_at|default:page.latest_revision_created_at|date:'c' }}",
+  "author": {"@type": "Person", "name": "{{ page.author_name|escapejs }}"},
+  {% if page.feature_image %}"image": "{{ og_img_url|escapejs }}",{% endif %}
+  "description": "{{ page.meta_description|escapejs }}",
+  "mainEntityOfPage": "{{ page.full_url|escapejs }}"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="blog-article">
+
+  <header class="blog-post-hero">
+    <div class="blog-measure">
+      {% include "blog/_category_labels.html" with categories=category_links linked=True %}
+      <h1>{{ page.title }}</h1>
+      <p class="blog-byline">By {{ page.author_name }} · <time datetime="{{ page.date|date:'Y-m-d' }}">{{ page.date|date:"F j, Y" }}</time> · {{ page.reading_time }} min read</p>
+    </div>
+    {% if page.feature_image %}
+      <figure class="blog-post-feature">
+        {% image page.feature_image fill-1400x700 format-webp as feat_img %}
+        <img src="{{ feat_img.url }}" width="{{ feat_img.width }}" height="{{ feat_img.height }}" alt="{{ page.feature_image.default_alt_text }}">
+      </figure>
+    {% endif %}
+  </header>
+
+  <div class="blog-body">
+    {% for block in page.body %}
+      {% include_block block %}
+    {% endfor %}
+  </div>
+
+  {% if related %}
+    <section class="blog-after blog-related" aria-labelledby="related-heading">
+      <h2 class="blog-after-title" id="related-heading">Related places &amp; saints</h2>
+      <ul class="blog-related-list">
+        {% for item in related %}
+          <li><a class="blog-related-item" href="{% pageurl item %}">{{ item.title }} <span aria-hidden="true">→</span></a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if more_posts %}
+    <section class="blog-after blog-more" aria-labelledby="more-heading">
+      <h2 class="blog-after-title" id="more-heading">More in {{ first_category.name }}</h2>
+      <div class="blog-grid">
+        {% for post in more_posts %}
+          {% include "blog/_post_card.html" %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <nav class="blog-after blog-prevnext" aria-label="More posts">
+    {% if older_post %}
+      <a class="blog-prevnext-link blog-prevnext-older" href="{% pageurl older_post %}" rel="prev">
+        <span class="blog-prevnext-label">Previous post</span>
+        <span class="blog-prevnext-title">{{ older_post.title }}</span>
+      </a>
+    {% endif %}
+    {% if newer_post %}
+      <a class="blog-prevnext-link blog-prevnext-newer" href="{% pageurl newer_post %}" rel="next">
+        <span class="blog-prevnext-label">Next post</span>
+        <span class="blog-prevnext-title">{{ newer_post.title }}</span>
+      </a>
+    {% endif %}
+  </nav>
+
+  <p class="blog-after blog-back"><a href="{% pageurl index_page %}">← Back to the blog</a></p>
+
+</article>
+{% endblock %}

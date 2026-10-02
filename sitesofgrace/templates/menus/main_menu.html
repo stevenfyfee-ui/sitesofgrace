@@ -1,4 +1,4 @@
-{% load menu_tags about_tags %}
+{% load menu_tags about_tags blog_tags %}
 <ul class="nav-list">
   {% for item in menu_items %}
     <li class="nav-item {{ item.active_class }}{% if item.has_children_in_menu %} has-submenu{% endif %}">
@@ -10,6 +10,13 @@
       {% endif %}
     </li>
   {% endfor %}
+  {# "Blog" isn't a wagtailmenus item either -- see blog/templatetags/blog_tags.py #}
+  {% blog_url as blog_link %}
+  {% if blog_link %}
+    <li class="nav-item{% if request.path|startswith:blog_link %} active{% endif %}">
+      <a href="{{ blog_link }}"{% if request.path|startswith:blog_link %} aria-current="page"{% endif %}>Blog</a>
+    </li>
+  {% endif %}
   {# "Our Story" isn't a wagtailmenus item -- see home/templatetags/about_tags.py #}
   {% our_story_url as our_story_link %}
   {% if our_story_link %}

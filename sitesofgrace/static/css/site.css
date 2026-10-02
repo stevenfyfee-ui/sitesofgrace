@@ -63,7 +63,10 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Header ---------- */
 .site-header {
-  position: sticky; top: 0; z-index: 1000;
+  /* 1100, not 1000: Leaflet's controls sit at z-index 1000 in the root
+     stacking context, and the account menu panel (a child of this header)
+     has to open over them on the map page. */
+  position: sticky; top: 0; z-index: 1100;
   background: rgba(253,249,242,.94); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gold-soft);
 }
@@ -109,10 +112,98 @@ a { color: inherit; text-decoration: none; }
 }
 .subnav .nav-item > a:hover { background: var(--parchment); color: var(--navy); }
 
-.header-actions { display: flex; align-items: center; gap: 12px; }
+.header-actions { display: flex; align-items: center; gap: 12px; min-width: 0; }
+/* The header search box gives up width before anything else does: 220px
+   when there's room, down to 130px as the bar fills (search.css sets the
+   fixed 220px; this lets it flex instead). The nav text never shrinks. */
+.header-actions .sog-search--header { width: auto; flex: 0 1 220px; min-width: 130px; }
+.header-actions .sog-search--header input[type="search"] { min-width: 0; }
 .nav-toggle {
   display: none; background: transparent; border: 0; font-size: 24px;
   color: var(--navy); cursor: pointer; line-height: 1;
+}
+
+/* ---------- Account menu (signed in) ----------
+   includes/_account_menu.html: a <details> disclosure under the pilgrim's
+   name. The trigger takes the nav items' "current" treatment on any of the
+   pilgrim's own pages. */
+.account-menu { position: relative; }
+.account-trigger {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  list-style: none; padding: 6px 2px; border-bottom: 2px solid transparent;
+  font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--navy);
+  transition: color .15s ease, border-color .15s ease;
+}
+.account-trigger::-webkit-details-marker { display: none; }
+.account-trigger:hover,
+.account-menu.is-current > .account-trigger { color: var(--gold); border-color: var(--gold); }
+.account-trigger:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
+.account-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center;
+  background: var(--gold-soft); color: var(--navy);
+  font-family: var(--serif-display); font-size: 17px; font-weight: 600; line-height: 1;
+}
+.account-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.account-trigger-name {
+  max-width: 14ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* 900-1179px: the nav and search need the room, so the trigger is the
+   avatar alone (the full name stays in its title and aria-label), the nav
+   gaps tighten, and the search box may go down to 116px -- the signed-out
+   "Sign in" button is wider than the avatar and needs the extra 14px just
+   above 900px. At 1180px and up the name shows beside the avatar. */
+@media (min-width: 901px) and (max-width: 1179.98px) {
+  .account-trigger-name { display: none; }
+  .nav-list { gap: 12px; }
+  .header-inner { gap: 18px; }
+  .header-actions .sog-search--header { min-width: 116px; }
+}
+.account-trigger-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex: none; }
+.account-chevron { width: 12px; height: 12px; flex: none; color: var(--gold); transition: transform .16s ease; }
+.account-menu[open] .account-chevron { transform: rotate(180deg); }
+
+.account-panel {
+  position: absolute; right: 0; top: calc(100% + 10px); z-index: 10;
+  width: 240px; padding: 8px;
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 12px;
+  box-shadow: 0 18px 40px -18px rgba(3,37,83,.35);
+  font-family: var(--sans);
+}
+.account-panel-head {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 10px 12px; margin-bottom: 6px; border-bottom: 1px solid var(--gold-soft);
+}
+.account-panel-name {
+  font-family: var(--serif-display); font-size: 19px; font-weight: 600; color: var(--navy);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.account-panel-profile { font-size: 12.5px; font-weight: 600; color: var(--blue); }
+.account-panel-profile:hover,
+.account-panel-profile[aria-current="page"] { color: var(--gold); }
+.account-panel-list { list-style: none; margin: 0; padding: 0; }
+.account-panel-list a {
+  display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: var(--navy);
+}
+.account-panel-list a:hover { background: var(--parchment); }
+.account-panel-list a[aria-current="page"] { color: var(--gold); font-weight: 600; }
+.account-icon { flex: none; width: 18px; height: 18px; color: var(--gold); }
+.account-icon svg { width: 18px; height: 18px; display: block; }
+.account-panel-signout { margin: 6px 0 0; padding-top: 6px; border-top: 1px solid var(--gold-soft); }
+.account-panel-signout button,
+.mobile-signout button {
+  width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--stone);
+  padding: 9px 10px; border-radius: 8px;
+}
+.account-panel-signout button:hover { background: var(--parchment); color: var(--navy); }
+.account-panel-list .pilgrims-nav-badge,
+.mobile-account-list .pilgrims-nav-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; padding: 0 5px; margin-left: auto;
+  border-radius: 999px; background: var(--gold); color: #fff;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
 }
 
 /* ---------- Mobile nav ---------- */
@@ -123,6 +214,19 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid var(--parchment);
 }
 .mobile-sublist > li > a { display: block; padding: 10px 20px 10px 36px; color: var(--stone); }
+
+/* "My account" group (signed in): heading with avatar + name, then the
+   pilgrim's own links, above the site links. Sign out comes last. */
+.mobile-account { background: var(--parchment); border-bottom: 1px solid var(--gold-soft); }
+.mobile-account-head {
+  display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px 6px;
+  font-family: var(--sans); font-weight: 600; color: var(--navy);
+}
+.mobile-account-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mobile-account-list > li > a { display: flex; align-items: center; padding: 12px 20px 12px 62px; font-size: 15px; border-bottom: 0; }
+.mobile-account-list a[aria-current="page"] { color: var(--gold); }
+.mobile-signout { border-top: 1px solid var(--gold-soft); }
+.mobile-signout button { padding: 14px 20px; font-size: 16px; border-radius: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--navy); color: rgba(253,249,242,.82); margin-top: 64px; }
@@ -174,6 +278,7 @@ a { color: inherit; text-decoration: none; }
   .primary-nav { display: none; }
   .nav-toggle { display: block; }
   .header-actions .btn-primary { display: none; }
+  .header-actions .account-menu { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand, .footer-newsletter { grid-column: 1 / -1; }
   .footer-base-inner { flex-direction: column; align-items: flex-start; }

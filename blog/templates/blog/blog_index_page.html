@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}blog{% endblock %}
+{% block title %}{% if active_category %}{{ active_category.name }} · {{ page.title }}{% elif page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}
+{% block meta_description %}{% if active_category %}{{ active_category.description }}{% else %}{{ page.search_description|default:page.intro }}{% endif %}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/blog.css' %}">{% endblock %}
+{% block extra_head %}
+<link rel="alternate" type="application/rss+xml" title="Sites of Grace Blog" href="{{ feed_url }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="blog-hero">
+  <div class="container blog-hero-inner">
+    {% if page.eyebrow %}<p class="blog-eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1>{% if active_category %}{{ active_category.name }}{% else %}{{ page.title }}{% endif %}</h1>
+    {% if active_category %}
+      {% if active_category.description %}<p class="blog-hero-intro">{{ active_category.description }}</p>{% endif %}
+    {% elif page.intro %}
+      <p class="blog-hero-intro">{{ page.intro }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="container blog-index">
+
+  {% if has_any_posts or active_category %}
+    <nav class="blog-chips" aria-label="Blog categories">
+      <a class="blog-chip{% if not active_category %} is-active{% endif %}" href="{% pageurl page %}"{% if not active_category %} aria-current="page"{% endif %}>All</a>
+      {% for cat in categories %}
+        {% if cat.has_posts or cat.is_active %}
+          <a class="blog-chip{% if cat.is_active %} is-active{% endif %}" href="{{ cat.url }}"{% if cat.is_active %} aria-current="page"{% endif %}>{{ cat.name }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  {% endif %}
+
+  {% if featured_post %}
+    {% with post=featured_post %}
+      <a class="blog-featured" href="{% pageurl post %}">
+        <div class="blog-featured-media">
+          {% if post.feature_image %}
+            {% image post.feature_image fill-1200x800 format-webp as feat_img %}
+            <img src="{{ feat_img.url }}" width="{{ feat_img.width }}" height="{{ feat_img.height }}" alt="">
+          {% else %}
+            {% include "blog/_photo_fallback.html" %}
+          {% endif %}
+        </div>
+        <div class="blog-featured-body">
+          {% include "blog/_category_labels.html" with categories=post.sorted_categories linked=False %}
+          <p class="blog-meta"><time datetime="{{ post.date|date:'Y-m-d' }}">{{ post.date|date:"F j, Y" }}</time> · {{ post.reading_time }} min read</p>
+          <h2 class="blog-featured-title">{{ post.title }}</h2>
+          <p class="blog-featured-excerpt">{{ post.excerpt }}</p>
+          <span class="btn btn-primary">Read the story</span>
+        </div>
+      </a>
+    {% endwith %}
+  {% endif %}
+
+  {% if posts %}
+    <div class="blog-grid">
+      {% for post in posts %}
+        {% include "blog/_post_card.html" %}
+      {% endfor %}
+    </div>
+  {% elif not featured_post %}
+    <div class="blog-empty">
+      {% if active_category %}
+        <p>No posts in {{ active_category.name }} yet. Check back soon.</p>
+        <a class="btn btn-secondary" href="{% pageurl page %}">See all posts</a>
+      {% else %}
+        <p class="blog-empty-title">The first stories are on their way.</p>
+        <p>We're writing about the sacred places on the map, the saints who made them holy, and how to plan a visit. Check back soon.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="blog-pager" aria-label="Blog pages">
+      <span class="blog-pager-prev">{% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}" rel="prev">← Newer posts</a>{% endif %}</span>
+      <span class="blog-pager-count">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      <span class="blog-pager-next">{% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}" rel="next">Older posts →</a>{% endif %}</span>
+    </nav>
+  {% endif %}
+
+</div>
+{% endblock %}

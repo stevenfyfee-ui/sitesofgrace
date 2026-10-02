@@ -1,4 +1,4 @@
-{% load menu_tags about_tags %}
+{% load menu_tags about_tags blog_tags %}
 <ul class="footer-links">
   {% for item in menu_items %}
     {% if item.text == "About" %}
@@ -7,8 +7,13 @@
         live Our Story page rather than in the admin, since a wagtailmenus
         MenuItem can't be wired up to a page that doesn't exist yet -- see
         home/templatetags/about_tags.py. Hidden (not left on its old
-        target) until that page is published.
+        target) until that page is published. "Blog" sits just before it,
+        on the same terms (blog/templatetags/blog_tags.py).
       {% endcomment %}
+      {% blog_url as blog_link %}
+      {% if blog_link %}
+        <li><a href="{{ blog_link }}">Blog</a></li>
+      {% endif %}
       {% our_story_url as our_story_link %}
       {% if our_story_link %}
         <li class="{{ item.active_class }}"><a href="{{ our_story_link }}">Our Story</a></li>

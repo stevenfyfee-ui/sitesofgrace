@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% comment %}
+  A compact card linking a post to one sacred site or saint. `target` and
+  `is_saint` come from SiteLinkBlock.get_context(); `target` is None when the
+  chosen page has since been unpublished or deleted, and then this renders
+  nothing rather than a link to a 404.
+{% endcomment %}
+{% if target %}
+  <a class="blog-sitelink" href="{% pageurl target %}">
+    <span class="blog-sitelink-media">
+      {% if is_saint and target.portrait %}
+        {% image target.portrait fill-240x240 format-webp as sl_img %}
+        <img src="{{ sl_img.url }}" width="120" height="120" alt="" loading="lazy">
+      {% elif is_saint and target.portrait_url %}
+        <img src="{{ target.portrait_url }}" width="120" height="120" alt="" loading="lazy">
+      {% elif not is_saint and target.featured_image %}
+        {% image target.featured_image fill-240x240 format-webp as sl_img %}
+        <img src="{{ sl_img.url }}" width="120" height="120" alt="" loading="lazy">
+      {% else %}
+        {% include "blog/_photo_fallback.html" %}
+      {% endif %}
+    </span>
+    <span class="blog-sitelink-body">
+      <span class="blog-sitelink-title">{{ target.title }}</span>
+      {% if value.note %}<span class="blog-sitelink-note">{{ value.note }}</span>{% endif %}
+      <span class="blog-sitelink-cta">{% if is_saint %}Meet this saint{% else %}Visit this site{% endif %} →</span>
+    </span>
+  </a>
+{% endif %}

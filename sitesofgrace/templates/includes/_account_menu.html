@@ -1,0 +1,78 @@
+{% comment %}
+  The signed-in pilgrim's own links, gathered under their name.
+
+  Usage (signed-in users only -- base.html guards it):
+    {% include "includes/_account_menu.html" %}                  desktop trigger + panel
+    {% include "includes/_account_menu.html" with variant="mobile" %}  "My account" group, top of .mobile-nav
+    {% include "includes/_account_menu.html" with variant="mobile-signout" %}  Sign out, last in .mobile-nav
+
+  Desktop is a <details>/<summary> disclosure, so it opens and closes with no
+  JavaScript at all; static/js/account-menu.js only adds Escape / outside
+  click / focus-out closing and keeps aria-expanded in sync. Both variants
+  render the same links from the same URLs, so they can't drift apart.
+
+  "Current" is a substring test against request.path: every URL here is a
+  distinct /-delimited prefix, so "/pilgrims/my/photos/" in
+  "/pilgrims/my/photos/<site>/" is the match we want and nothing else on the
+  site contains these paths. There's no separate Passport item: /passport/
+  only redirects to the pilgrim's own profile, which is "My Passport &
+  Profile" here.
+
+  `unread_count` comes from base.html, which counts once for both variants
+  (the same single query the old header Notifications button ran).
+
+  Sign out stays a POST form with the CSRF token -- allauth refuses a GET
+  logout, and a GET link would let any page sign a pilgrim out.
+{% endcomment %}
+{% with pilgrim=request.user.pilgrim %}
+{% with name=pilgrim.display_name|default:request.user.get_username %}
+{% url 'pilgrims:photo_library' as photos_url %}
+{% url 'pilgrims:feed' as feed_url %}
+{% url 'pilgrims:notifications' as notifications_url %}
+{% if pilgrim.handle %}{% url 'pilgrims:profile_detail' handle=pilgrim.handle as profile_url %}{% endif %}
+
+{% if variant == "mobile-signout" %}
+  <form class="mobile-signout" method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <button type="submit">Sign out</button>
+  </form>
+{% elif variant == "mobile" %}
+  <div class="mobile-account">
+    <p class="mobile-account-head">
+      <span class="account-avatar" aria-hidden="true">{% if pilgrim.avatar %}<img src="{{ pilgrim.avatar.url }}" alt="">{% else %}{{ name|first|upper }}{% endif %}</span>
+      <span class="mobile-account-name">{{ name }}</span>
+    </p>
+    <ul class="mobile-list mobile-account-list" aria-label="My account">
+      {% if profile_url %}<li{% if request.path == profile_url %} class="active"{% endif %}><a href="{{ profile_url }}"{% if request.path == profile_url %} aria-current="page"{% endif %}>My Passport &amp; Profile</a></li>{% endif %}
+      <li{% if photos_url in request.path %} class="active"{% endif %}><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}>My Photos</a></li>
+      <li{% if feed_url in request.path %} class="active"{% endif %}><a href="{{ feed_url }}"{% if feed_url in request.path %} aria-current="page"{% endif %}>Feed</a></li>
+      <li{% if notifications_url in request.path %} class="active"{% endif %}><a href="{{ notifications_url }}"{% if notifications_url in request.path %} aria-current="page"{% endif %}>Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}</a></li>
+    </ul>
+  </div>
+{% else %}
+  <details class="account-menu{% if photos_url in request.path or feed_url in request.path or notifications_url in request.path or request.path == profile_url %} is-current{% endif %}" data-account-menu>
+    <summary class="account-trigger" aria-haspopup="true" aria-expanded="false" title="{{ name }}" aria-label="{{ name }}: account menu">
+      <span class="account-avatar" aria-hidden="true">{% if pilgrim.avatar %}<img src="{{ pilgrim.avatar.url }}" alt="">{% else %}{{ name|first|upper }}{% endif %}</span>
+      <span class="account-trigger-name">{{ name }}</span>
+      {% if unread_count %}<span class="account-trigger-dot" aria-label="{{ unread_count }} unread notification{{ unread_count|pluralize }}"></span>{% endif %}
+      <svg class="account-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </summary>
+    <div class="account-panel">
+      <div class="account-panel-head">
+        <span class="account-panel-name">{{ name }}</span>
+        {% if profile_url %}<a class="account-panel-profile" href="{{ profile_url }}"{% if request.path == profile_url %} aria-current="page"{% endif %}>My Passport &amp; Profile</a>{% endif %}
+      </div>
+      <ul class="account-panel-list">
+        <li><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}><span class="account-icon">{% include "includes/_line_icon.html" with icon="camera" %}</span>My Photos</a></li>
+        <li><a href="{{ feed_url }}"{% if feed_url in request.path %} aria-current="page"{% endif %}><span class="account-icon"></span>Feed</a></li>
+        <li><a href="{{ notifications_url }}"{% if notifications_url in request.path %} aria-current="page"{% endif %}><span class="account-icon"></span>Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}</a></li>
+      </ul>
+      <form class="account-panel-signout" method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        <button type="submit">Sign out</button>
+      </form>
+    </div>
+  </details>
+{% endif %}
+{% endwith %}
+{% endwith %}

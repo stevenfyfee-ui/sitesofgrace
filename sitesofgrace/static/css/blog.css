@@ -1,0 +1,240 @@
+/* ============================================================
+   Sites of Grace — Blog (index, category pages, posts)
+   Uses the brand tokens defined in site.css (:root). The header's
+   own nav collapses at 900px (site.css); nothing here assumes a
+   different value for anything that shares the viewport with it.
+   ============================================================ */
+
+/* ---------- Image fallback ----------
+   A post with no feature image gets the brand gradient panel from the
+   Our Story page (about.css .about-photo--night, copied here rather than
+   moved, so about.css stays self-contained) with a faint gold mark. */
+.blog-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background: linear-gradient(160deg, #20426b 0%, #0b2b55 55%, #032553 100%);
+}
+.blog-photo-mark { color: var(--gold); opacity: .38; font-size: 44px; line-height: 1; }
+
+/* ---------- Shared bits ---------- */
+.blog-cats { display: flex; flex-wrap: wrap; gap: 6px 12px; list-style: none; margin: 0 0 8px; padding: 0; }
+.blog-cat {
+  font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--gold);
+}
+a.blog-cat:hover { color: var(--navy); }
+.blog-meta { font-family: var(--sans); font-size: 12.5px; color: var(--stone); margin: 0 0 10px; }
+
+/* ---------- Index hero ---------- */
+.blog-hero {
+  background: linear-gradient(155deg, var(--blue), var(--navy));
+  color: var(--ivory); padding: 64px 0 56px; text-align: center;
+}
+.blog-eyebrow {
+  font-family: var(--serif-titling); font-size: 12px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 12px;
+}
+.blog-hero h1 {
+  font-family: var(--serif-display); font-weight: 500; line-height: 1.08;
+  font-size: clamp(38px, 5.2vw, 60px); margin: 0 0 16px;
+}
+.blog-hero-intro {
+  font-size: 16px; line-height: 1.75; color: rgba(253,249,242,.88);
+  max-width: 60ch; margin: 0 auto;
+}
+
+.blog-index { padding-top: 26px; }
+
+/* ---------- Category chips ----------
+   One row that scrolls sideways when it runs out of room, never a wrapped
+   block. Same pill as the store and news chips; the active one is gold. */
+.blog-chips {
+  display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none;
+  padding: 4px 2px 22px; margin: 0 -2px;
+  scroll-snap-type: x proximity;
+}
+.blog-chips::-webkit-scrollbar { display: none; }
+.blog-chip {
+  flex: none; scroll-snap-align: start; white-space: nowrap;
+  font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: .02em;
+  color: var(--blue); background: var(--ivory); border: 1px solid var(--gold-soft);
+  border-radius: 999px; padding: 8px 18px; transition: color .15s ease, border-color .15s ease;
+}
+.blog-chip:hover { color: var(--navy); border-color: var(--gold); }
+.blog-chip.is-active { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+/* ---------- Featured post ---------- */
+.blog-featured {
+  display: grid; grid-template-columns: 55fr 45fr;
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 18px;
+  overflow: hidden; margin-bottom: 34px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.blog-featured:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -20px rgba(3,37,83,.4); }
+.blog-featured-media { position: relative; min-height: 360px; overflow: hidden; }
+.blog-featured-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.blog-featured-body { padding: 38px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.blog-featured-title {
+  font-family: var(--serif-display); font-weight: 600; line-height: 1.12;
+  font-size: clamp(28px, 3.2vw, 40px); color: var(--navy); margin: 0 0 14px;
+}
+.blog-featured-excerpt { font-size: 15.5px; line-height: 1.7; color: #33405a; margin: 0 0 22px; }
+
+/* ---------- Grid + cards ----------
+   Card radius, border, and hover lift match the home page's cards. */
+.blog-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.blog-card {
+  display: flex; flex-direction: column; min-width: 0;
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 18px;
+  overflow: hidden; transition: transform .18s ease, box-shadow .18s ease;
+}
+.blog-card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -20px rgba(3,37,83,.4); }
+.blog-card-media { position: relative; aspect-ratio: 8 / 5; overflow: hidden; }
+.blog-card-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.blog-card-body { padding: 18px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+.blog-card-title {
+  font-family: var(--serif-display); font-weight: 600; font-size: 23px; line-height: 1.2;
+  color: var(--navy); margin: 0 0 8px;
+}
+.blog-card-excerpt {
+  font-size: 14px; line-height: 1.6; color: #33405a; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* ---------- Pager + empty state ---------- */
+.blog-pager {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin: 38px 0 10px; font-family: var(--sans); font-size: 14px;
+}
+.blog-pager a { color: var(--blue); font-weight: 600; }
+.blog-pager a:hover { color: var(--gold); }
+.blog-pager-count { color: var(--stone); }
+.blog-pager-next { text-align: right; }
+
+.blog-empty {
+  text-align: center; padding: 48px 24px; color: var(--stone);
+  background: var(--parchment); border: 1px solid var(--gold-soft); border-radius: 18px;
+}
+.blog-empty p { margin: 0 0 16px; font-size: 15.5px; line-height: 1.7; }
+.blog-empty-title { font-family: var(--serif-display); font-size: 28px; color: var(--navy); }
+
+/* ---------- Post ---------- */
+.blog-measure { width: min(720px, calc(100% - 40px)); margin-inline: auto; }
+.blog-post-hero { padding: 54px 0 10px; }
+.blog-post-hero h1 {
+  font-family: var(--serif-display); font-weight: 500; line-height: 1.1;
+  font-size: clamp(36px, 5vw, 56px); color: var(--navy); margin: 6px 0 14px;
+}
+.blog-byline { font-family: var(--sans); font-size: 13.5px; color: var(--stone); margin: 0; }
+.blog-post-feature { width: min(1080px, calc(100% - 40px)); margin: 30px auto 0; }
+.blog-post-feature img {
+  width: 100%; height: auto; display: block;
+  border-radius: 18px; border: 1px solid var(--gold-soft);
+}
+
+.blog-body { width: min(720px, calc(100% - 40px)); margin: 30px auto 0; }
+.blog-body > * { margin-block: 0 22px; }
+.blog-rich { font-size: 17px; line-height: 1.8; color: #2b3650; }
+.blog-rich p { margin: 0 0 18px; }
+.blog-rich p:last-child { margin-bottom: 0; }
+.blog-rich a { color: var(--blue); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+.blog-rich h3 { font-family: var(--serif-display); font-weight: 600; font-size: 25px; color: var(--navy); margin: 28px 0 10px; }
+.blog-rich blockquote { margin: 22px 0; padding-left: 18px; border-left: 2px solid var(--gold-soft); font-style: italic; }
+.blog-h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: clamp(28px, 3vw, 34px);
+  line-height: 1.2; color: var(--navy); margin-top: 40px !important; scroll-margin-top: 100px;
+}
+
+.blog-figure { margin-inline: 0; }
+.blog-figure img { width: 100%; height: auto; display: block; border-radius: 12px; }
+.blog-figure figcaption { font-family: var(--sans); font-size: 13px; color: var(--stone); margin-top: 8px; text-align: center; }
+/* "Wide" breaks out of the 720px measure to about 1080px, centred on the
+   column, and never past the viewport's 20px gutters. */
+.blog-figure--wide {
+  width: min(1080px, calc(100vw - 40px));
+  margin-left: 50%; transform: translateX(-50%);
+}
+
+.blog-quote {
+  margin-inline: 0; padding: 6px 0 6px 24px; border-left: 3px solid var(--gold);
+}
+.blog-quote p {
+  font-family: var(--serif-display); font-style: italic; font-size: 26px; line-height: 1.4;
+  color: var(--navy); margin: 0;
+}
+.blog-quote footer { font-family: var(--sans); font-size: 13px; color: var(--stone); margin-top: 10px; }
+
+.blog-embed { position: relative; }
+.blog-embed iframe { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; }
+
+.blog-callout {
+  background: var(--parchment); border: 1px solid var(--gold-soft); border-left: 4px solid var(--gold);
+  border-radius: 10px; padding: 20px 24px;
+}
+.blog-callout-title { font-family: var(--serif-display); font-weight: 600; font-size: 22px; color: var(--navy); margin: 0 0 6px; }
+.blog-callout .rich-text { font-size: 15.5px; line-height: 1.7; color: #33405a; }
+.blog-callout .rich-text p { margin: 0 0 10px; }
+.blog-callout .rich-text > :last-child { margin-bottom: 0; }
+
+.blog-sitelink {
+  display: flex; align-items: center; gap: 18px; padding: 12px;
+  background: var(--ivory); border: 1px solid var(--gold-soft); border-radius: 14px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.blog-sitelink:hover { border-color: var(--gold); box-shadow: 0 12px 28px -20px rgba(3,37,83,.45); }
+.blog-sitelink-media { position: relative; flex: none; width: 88px; height: 88px; border-radius: 10px; overflow: hidden; }
+.blog-sitelink-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.blog-sitelink-media .blog-photo-mark { font-size: 26px; }
+.blog-sitelink-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.blog-sitelink-title { font-family: var(--serif-display); font-weight: 600; font-size: 21px; color: var(--navy); line-height: 1.2; }
+.blog-sitelink-note { font-size: 14px; color: var(--stone); line-height: 1.5; }
+.blog-sitelink-cta { font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--gold); }
+
+/* ---------- After the body ---------- */
+.blog-after { width: min(1080px, calc(100% - 40px)); margin: 48px auto 0; }
+.blog-after-title {
+  font-family: var(--serif-titling); font-weight: 500; font-size: 14px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--navy);
+  padding-bottom: 12px; margin: 0 0 20px; border-bottom: 1px solid var(--gold-soft);
+}
+.blog-related-list { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.blog-related-item {
+  display: inline-block; padding: 9px 16px; border: 1px solid var(--gold-soft); border-radius: 999px;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--blue);
+}
+.blog-related-item:hover { border-color: var(--gold); color: var(--navy); }
+
+.blog-prevnext { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.blog-prevnext:not(:has(a)) { display: none; }
+.blog-prevnext-link {
+  display: flex; flex-direction: column; gap: 4px; padding: 16px 20px;
+  border: 1px solid var(--gold-soft); border-radius: 14px; background: var(--ivory);
+}
+.blog-prevnext-link:hover { border-color: var(--gold); }
+.blog-prevnext-newer { grid-column: 2; text-align: right; }
+.blog-prevnext-label { font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.blog-prevnext-title { font-family: var(--serif-display); font-size: 20px; font-weight: 600; color: var(--navy); }
+.blog-back { font-family: var(--sans); font-size: 14px; font-weight: 600; }
+.blog-back a { color: var(--blue); }
+.blog-back a:hover { color: var(--gold); }
+
+/* ---------- Responsive ---------- */
+@media (min-width: 640px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1080px) {
+  .blog-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .blog-featured { grid-template-columns: 1fr; }
+  .blog-featured-media { min-height: 0; aspect-ratio: 8 / 5; }
+  .blog-featured-body { padding: 24px 22px 28px; }
+}
+@media (max-width: 640px) {
+  .blog-hero { padding: 48px 0 40px; }
+  .blog-prevnext { grid-template-columns: 1fr; }
+  .blog-prevnext-newer { grid-column: auto; }
+  .blog-quote p { font-size: 22px; }
+  .blog-pager { grid-template-columns: 1fr 1fr; }
+  .blog-pager-count { grid-column: 1 / -1; grid-row: 1; text-align: center; }
+}
