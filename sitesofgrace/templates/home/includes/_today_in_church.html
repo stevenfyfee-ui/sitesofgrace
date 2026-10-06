@@ -1,0 +1,82 @@
+{% comment %}
+  Today in the Church -- right-hand bucket of the pilgrim band.
+
+  All three days are rendered here, today first. js/today-in-church.js turns
+  the (initially hidden) switcher into tabs and hides the other two days.
+  Without JS, yesterday and tomorrow show as two compact lines under today.
+  Built by liturgy.today.liturgical_today(); if that failed, `liturgical` is
+  None and the card shows a single quiet link instead.
+{% endcomment %}
+<div class="pilgrim-card pilgrim-today" data-today-card>
+  <div class="pilgrim-card-head pilgrim-card-head-solo">
+    <h2>{{ page.calendar_heading|default:"Today in the Church" }}</h2>
+  </div>
+
+  {% if liturgical %}
+    <div class="today-panels">
+      {% for panel in liturgical_panels %}{% with day=panel.day %}
+        <section class="today-panel{% if not forloop.first %} today-panel--other{% endif %}"
+          id="today-panel-{{ panel.key }}" data-day="{{ panel.key }}"
+          aria-label="{{ panel.name }}, {{ day.label }}">
+          {% if not forloop.first %}
+            <p class="today-compact">
+              <span class="today-compact-when">{{ panel.name }} &middot; {{ day.short_label }}</span>
+              {% if day.celebrations %}<span class="today-compact-what">{{ day.celebrations.0.name }}</span>{% endif %}
+            </p>
+          {% endif %}
+          <div class="today-full">
+            <h3 class="today-date">{{ day.label }}</h3>
+            {% if day.season %}
+              <p class="today-season">
+                {% if day.color %}<span class="lit-dot lit-dot--{{ day.color }}" aria-hidden="true"></span><span class="sr-only">Liturgical color {{ day.color }}.</span>{% endif %}
+                {{ day.season }}
+              </p>
+            {% endif %}
+
+            {% if day.celebrations %}
+              <ul class="today-cels">
+                {% for cel in day.celebrations %}
+                  <li class="today-cel">
+                    {% if cel.page_url %}<a class="today-cel-name" href="{{ cel.page_url }}">{{ cel.name }}</a>{% else %}<span class="today-cel-name">{{ cel.name }}</span>{% endif %}
+                    {% if cel.rank_label %}<span class="today-rank">{{ cel.rank_label }}</span>{% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if day.items %}
+              <ul class="today-items">
+                {% for item in day.visible_items %}
+                  <li>{% include "home/includes/_today_item.html" %}</li>
+                {% endfor %}
+              </ul>
+              {% if day.more_count %}
+                <a class="today-more" href="{{ calendar_footer_url }}">+{{ day.more_count }} more</a>
+              {% endif %}
+            {% elif day.upcoming %}
+              <p class="today-upcoming-label">Coming up {{ day.upcoming.label }}</p>
+              <ul class="today-items">
+                <li>{% include "home/includes/_today_item.html" with item=day.upcoming.item %}</li>
+              </ul>
+            {% endif %}
+          </div>
+        </section>
+      {% endwith %}{% endfor %}
+    </div>
+
+    <div class="today-switch" role="tablist" aria-label="Choose a day" hidden data-today-tabs>
+      <button type="button" class="today-tab" role="tab" id="today-tab-yesterday" aria-controls="today-panel-yesterday" aria-selected="false" tabindex="-1" data-day="yesterday">Yesterday</button>
+      <button type="button" class="today-tab" role="tab" id="today-tab-today" aria-controls="today-panel-today" aria-selected="true" tabindex="0" data-day="today">Today</button>
+      <button type="button" class="today-tab" role="tab" id="today-tab-tomorrow" aria-controls="today-panel-tomorrow" aria-selected="false" tabindex="-1" data-day="tomorrow">Tomorrow</button>
+    </div>
+
+    <div class="today-foot">
+      {% if page.calendar_footer_link_text %}
+        <a class="pilgrim-view-all" href="{{ calendar_footer_url }}">{{ page.calendar_footer_link_text }} &rsaquo;</a>
+      {% endif %}
+      <p class="today-credit">Liturgical calendar: <a href="https://litcal.johnromanodorazio.com" rel="noopener">Liturgical Calendar API</a> (US)</p>
+    </div>
+  {% else %}
+    <p class="pilgrim-empty"><a class="tertiary" href="{{ calendar_footer_url }}">Explore the saints &rsaquo;</a></p>
+  {% endif %}
+</div>

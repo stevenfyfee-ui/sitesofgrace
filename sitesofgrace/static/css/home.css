@@ -45,7 +45,7 @@
 .tertiary { font-family: var(--sans); font-weight: 600; font-size: 13.5px; color: var(--blue); }
 .tertiary:hover { color: var(--gold); }
 
-/* ---------- Pilgrim band (Destinations / Journey / Store) ---------- */
+/* ---------- Pilgrim band (Destinations / Journey / Today in the Church) ---------- */
 .pilgrim-band { padding: 8px 0 60px; }
 .pilgrim-band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
 
@@ -131,42 +131,107 @@
 .pilgrim-journey-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .pilgrim-journey .btn { align-self: flex-start; }
 
-/* ---- Subscription column (Pilgrimage From Home) ---- */
-.pilgrim-sub-inner { display: flex; flex-direction: column; gap: 18px; flex: 1; }
-.pilgrim-sub-copy { display: flex; flex-direction: column; gap: 10px; }
-.pilgrim-sub-title {
-  font-family: var(--serif-display); font-weight: 600; font-size: 20px;
-  color: var(--navy); margin: 0; line-height: 1.2;
+/* ---- Today in the Church column ---- */
+/* Without the card (calendar_enabled off) the band is two columns. */
+.pilgrim-band-grid--two { grid-template-columns: repeat(2, 1fr); }
+
+/* flex:1 pushes the switcher and footer to the bottom, so the card ends
+   level with the other two buckets. */
+.today-panels { flex: 1; display: flex; flex-direction: column; }
+.today-panel[hidden] { display: none; }
+/* Without JS, yesterday and tomorrow are compact lines under today; once
+   today-in-church.js has run (.is-tabbed) each day shows in full on its tab. */
+.today-panel--other .today-full { display: none; }
+.is-tabbed .today-panel--other .today-full { display: block; }
+.is-tabbed .today-compact { display: none; }
+.today-compact {
+  margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--gold-soft);
+  font-size: 12.5px; line-height: 1.45; color: var(--stone);
 }
-.pilgrim-sub-intro { font-size: 13px; line-height: 1.55; color: var(--stone); margin: 0; }
-.pilgrim-sub-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-.pilgrim-sub-list li {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 12.5px; line-height: 1.4; color: #33405a;
+.today-compact-when {
+  display: block; font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--blue);
 }
-.pilgrim-sub-list svg { color: var(--gold); flex: none; margin-top: 2px; }
-.pilgrim-sub-price {
-  font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--gold); margin: 0;
+.today-compact-what { font-family: var(--serif-display); font-size: 15px; font-weight: 600; color: var(--navy); }
+
+.today-date {
+  font-family: var(--serif-display); font-weight: 600; font-size: 25px; line-height: 1.15;
+  color: var(--navy); margin: 0 0 6px;
 }
-.pilgrim-sub-form { display: flex; flex-direction: column; gap: 8px; }
-.pilgrim-sub-form input[type="email"] {
-  width: 100%; padding: 10px 12px; border-radius: 8px; font-size: 13.5px;
-  border: 1px solid var(--gold-soft); background: #fff; color: var(--navy);
-  font-family: var(--sans);
+.today-season {
+  display: flex; align-items: center; gap: 7px; margin: 0 0 16px;
+  font-family: var(--sans); font-size: 12px; color: var(--stone);
 }
-.pilgrim-sub-form input[type="email"]:focus {
-  outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold);
+.lit-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex: none;
+  background: var(--lit-white); box-shadow: inset 0 0 0 1px var(--gold);
 }
-.pilgrim-sub-form .btn { width: 100%; text-align: center; }
-.pilgrim-sub-cta { align-self: flex-start; }
-.pilgrim-sub-success { font-size: 13px; color: var(--navy); margin: 0; font-weight: 600; }
-.pilgrim-sub-error { font-size: 12.5px; color: #a3242b; margin: 0; }
-.pilgrim-sub-photo {
-  position: relative;
-  border-radius: 90px 90px 12px 12px; overflow: hidden; border: 1px solid var(--gold-soft);
-  flex: 1; min-height: 150px; background: linear-gradient(160deg, var(--navy), var(--gold));
+.lit-dot--red    { background: var(--lit-red);    box-shadow: none; }
+.lit-dot--green  { background: var(--lit-green);  box-shadow: none; }
+.lit-dot--violet { background: var(--lit-violet); box-shadow: none; }
+.lit-dot--rose   { background: var(--lit-rose);   box-shadow: none; }
+.lit-dot--gold   { background: var(--gold);       box-shadow: none; }
+
+.today-cels { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.today-cel { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; }
+.today-cel-name {
+  font-family: var(--serif-display); font-weight: 600; font-size: 17px; line-height: 1.25; color: var(--navy);
 }
-.pilgrim-sub-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+a.today-cel-name { text-decoration: underline; text-decoration-color: var(--gold-soft); text-underline-offset: 3px; }
+a.today-cel-name:hover { text-decoration-color: var(--gold); }
+.today-rank {
+  font-family: var(--sans); font-size: 9.5px; font-weight: 600; letter-spacing: .09em;
+  text-transform: uppercase; white-space: nowrap; color: var(--blue);
+  border: 1px solid var(--gold-soft); border-radius: 999px; padding: 1px 7px;
+}
+
+.today-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.today-item { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.today-thumb {
+  width: 44px; height: 52px; flex: none; overflow: hidden;
+  border-radius: 22px 22px 6px 6px; border: 1px solid var(--gold-soft);
+  background: linear-gradient(155deg, var(--blue), var(--navy));
+}
+.today-thumb--site { background: linear-gradient(160deg, var(--navy), var(--gold)); }
+.today-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.today-item:hover .today-thumb { border-color: var(--gold); }
+.today-item-text { display: flex; flex-direction: column; min-width: 0; }
+.today-item-title {
+  font-family: var(--serif-display); font-weight: 600; font-size: 15px; line-height: 1.25; color: var(--navy);
+}
+.today-item:hover .today-item-title { color: var(--blue); }
+.today-item-meta {
+  font-size: 12px; color: var(--stone); margin-top: 1px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.today-more {
+  display: inline-block; margin-top: 10px;
+  font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--blue);
+}
+.today-more:hover { color: var(--gold); }
+.today-upcoming-label {
+  margin: 0 0 8px; font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--stone);
+}
+
+.today-switch {
+  display: flex; gap: 4px; margin-top: 20px; padding: 4px;
+  border: 1px solid var(--gold-soft); border-radius: 999px; background: var(--parchment);
+}
+.today-switch[hidden] { display: none; }
+.today-tab {
+  flex: 1; padding: 7px 8px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--blue);
+}
+.today-tab:hover { color: var(--navy); background: var(--ivory); }
+.today-tab[aria-selected="true"] { background: var(--navy); color: var(--ivory); }
+
+.today-foot {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gold-soft);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.today-credit { margin: 0; font-family: var(--sans); font-size: 10.5px; line-height: 1.4; color: var(--stone); }
+.today-credit a { text-decoration: underline; text-decoration-color: var(--gold-soft); }
 
 /* ---------- Featured strip (Featured Saints) ---------- */
 .feature-strip { padding: 54px 0; background: var(--parchment); border-block: 1px solid var(--gold-soft); }
@@ -318,8 +383,7 @@
   .feature-grid, .strip-grid, .hub-grid { grid-template-columns: repeat(2, 1fr); }
   .pilgrim-band-grid { grid-template-columns: 1fr; }
   .pilgrim-journey-inner { flex-direction: column-reverse; }
-  .pilgrim-sub-inner { flex-direction: column-reverse; }
-  .pilgrim-journey-photo, .pilgrim-sub-photo { min-height: 260px; }
+  .pilgrim-journey-photo { min-height: 260px; }
   .pilgrim-feature-img { min-height: 190px; }
   .news-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -333,5 +397,5 @@
   .feature-grid, .strip-grid, .hub-grid { grid-template-columns: 1fr; }
   .pilgrim-feature-grid { gap: 14px 12px; }
   .pilgrim-feature-img { min-height: 150px; }
-  .pilgrim-journey-photo, .pilgrim-sub-photo { min-height: 220px; }
+  .pilgrim-journey-photo { min-height: 220px; }
 }

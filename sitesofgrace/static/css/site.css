@@ -14,6 +14,15 @@
   --stone:     #5F6470;  /* Stone Gray       */
   --gold-soft: rgba(199,154,66,.35);
 
+  /* Liturgical colors -- only for the day dots on the home page's
+     "Today in the Church" card. White is an ivory fill drawn with a gold
+     ring (.lit-dot); gold vestments use --gold itself. */
+  --lit-white:  var(--ivory);
+  --lit-red:    var(--red);
+  --lit-green:  #3F7D58;
+  --lit-violet: #5B3F8C;
+  --lit-rose:   #D98BA6;
+
   --serif-titling: "Cinzel", Georgia, serif;
   --serif-display: "Cormorant Garamond", Georgia, serif;
   --serif-body:    "Lora", Georgia, serif;

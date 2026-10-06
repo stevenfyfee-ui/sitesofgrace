@@ -1,0 +1,6502 @@
+{
+ "events": [
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-01",
+   "event_key": "MaryMotherOfGod",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Mary, Mother of God",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-02",
+   "event_key": "StsBasilGreg",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saints Basil the Great and Gregory Nazianzen, Bishops and Doctors of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-03",
+   "event_key": "ChristmasWeekdayJan3",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saturday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-03",
+   "event_key": "NameJesus",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "The Most Holy Name of Jesus",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-04",
+   "event_key": "Epiphany",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Epiphany",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-05",
+   "event_key": "DayAfterEpiphanyMonday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Monday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-05",
+   "event_key": "StJohnNeumann",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "[ US ] Saint John Neumann, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-06",
+   "event_key": "DayAfterEpiphanyTuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Tuesday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-06",
+   "event_key": "StAndreBessette",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "[ US ] Saint André Bessette, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-07",
+   "event_key": "DayAfterEpiphanyWednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Wednesday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-07",
+   "event_key": "StRayPenyafort",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saint Raymond of Penyafort, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-08",
+   "event_key": "DayAfterEpiphanyThursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Thursday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-09",
+   "event_key": "DayAfterEpiphanyFriday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Friday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-10",
+   "event_key": "DayAfterEpiphanySaturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saturday - Christmas Weekday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-11",
+   "event_key": "BaptismLord",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Baptism of the Lord",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-12",
+   "event_key": "OrdWeekday1Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 1st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-13",
+   "event_key": "OrdWeekday1Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 1st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-13",
+   "event_key": "StHilaryPoitiers",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Hilary, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-14",
+   "event_key": "OrdWeekday1Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 1st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-15",
+   "event_key": "OrdWeekday1Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 1st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-16",
+   "event_key": "OrdWeekday1Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 1st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-17",
+   "event_key": "StAnthonyEgypt",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Anthony, Abbot",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-18",
+   "event_key": "OrdSunday2",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "2nd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-19",
+   "event_key": "OrdWeekday2Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 2nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-20",
+   "event_key": "OrdWeekday2Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 2nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-01-20",
+   "event_key": "StFabianPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Fabian, Pope and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-01-20",
+   "event_key": "StSebastian",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Sebastian, Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-01-21",
+   "event_key": "StAgnes",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Agnes, Virgin and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-22",
+   "event_key": "OrdWeekday2Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 2nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-01-22",
+   "event_key": "StVincentDeacon",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Vincent, Deacon and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple",
+    "white"
+   ],
+   "date": "2026-01-22",
+   "event_key": "PrayerUnborn",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ USA ] Day of Prayer for the Legal Protection of Unborn Children",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-23",
+   "event_key": "OrdWeekday2Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 2nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-24",
+   "event_key": "StFrancisDeSales",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Francis de Sales, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-25",
+   "event_key": "OrdSunday3",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "3rd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-26",
+   "event_key": "StsTimothyTitus",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Timothy and Titus, Bishops",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-27",
+   "event_key": "OrdWeekday3Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 3rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-27",
+   "event_key": "StAngelaMerici",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Angela Merici, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-28",
+   "event_key": "StThomasAquinas",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Thomas Aquinas, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-29",
+   "event_key": "OrdWeekday3Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 3rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-01-30",
+   "event_key": "OrdWeekday3Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 3rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-01-31",
+   "event_key": "StJohnBosco",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John Bosco, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-01",
+   "event_key": "OrdSunday4",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "4th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-02",
+   "event_key": "Presentation",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Presentation of the Lord",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-03",
+   "event_key": "OrdWeekday4Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 4th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-02-03",
+   "event_key": "StBlase",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Blase, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-03",
+   "event_key": "StAnsgar",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Ansgar, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-04",
+   "event_key": "OrdWeekday4Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 4th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-02-05",
+   "event_key": "StAgatha",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Agatha, Virgin and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-02-06",
+   "event_key": "StsPaulMiki",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Paul Miki and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-07",
+   "event_key": "OrdWeekday4Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 4th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-07",
+   "event_key": "SatMemBVM1",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-08",
+   "event_key": "OrdSunday5",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "5th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-09",
+   "event_key": "OrdWeekday5Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 5th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-10",
+   "event_key": "StScholastica",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Scholastica, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-11",
+   "event_key": "OrdWeekday5Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 5th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-11",
+   "event_key": "OurLadyOfLourdes",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Our Lady of Lourdes",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-12",
+   "event_key": "OrdWeekday5Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 5th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-13",
+   "event_key": "OrdWeekday5Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 5th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-14",
+   "event_key": "StsCyrilMethodius",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Cyril, Monk, and Methodius, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-15",
+   "event_key": "OrdSunday6",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "6th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-16",
+   "event_key": "OrdWeekday6Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 6th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-02-17",
+   "event_key": "OrdWeekday6Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 6th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-17",
+   "event_key": "SevenHolyFounders",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Seven Holy Founders of the Servite Order",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-18",
+   "event_key": "AshWednesday",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Ash Wednesday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-19",
+   "event_key": "ThursdayAfterAshWednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Thursday after Ash Wednesday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-20",
+   "event_key": "FridayAfterAshWednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday after Ash Wednesday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-21",
+   "event_key": "SaturdayAfterAshWednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday after Ash Wednesday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-21",
+   "event_key": "StPeterDamian",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Peter Damian, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-22",
+   "event_key": "Lent1",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "First Sunday of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-23",
+   "event_key": "LentWeekday1Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-02-23",
+   "event_key": "StPolycarp",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Polycarp, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-24",
+   "event_key": "LentWeekday1Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-25",
+   "event_key": "LentWeekday1Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Wednesday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-26",
+   "event_key": "LentWeekday1Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Thursday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-27",
+   "event_key": "LentWeekday1Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-02-27",
+   "event_key": "StGregoryNarek",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Gregory of Narek, Abbot and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-02-28",
+   "event_key": "LentWeekday1Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday of the 1st Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-01",
+   "event_key": "Lent2",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Second Sunday of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-02",
+   "event_key": "LentWeekday2Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-03",
+   "event_key": "LentWeekday2Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-03",
+   "event_key": "StKatharineDrexel",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "[ US ] Saint Katharine Drexel, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-04",
+   "event_key": "LentWeekday2Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Wednesday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-04",
+   "event_key": "StCasimir",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Casimir",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-05",
+   "event_key": "LentWeekday2Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Thursday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-06",
+   "event_key": "LentWeekday2Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-07",
+   "event_key": "LentWeekday2Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday of the 2nd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-03-07",
+   "event_key": "StsPerpetuaFelicity",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saints Perpetua and Felicity, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-08",
+   "event_key": "Lent3",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Third Sunday of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-09",
+   "event_key": "LentWeekday3Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-09",
+   "event_key": "StFrancesRome",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Frances of Rome, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-10",
+   "event_key": "LentWeekday3Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-11",
+   "event_key": "LentWeekday3Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Wednesday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-12",
+   "event_key": "LentWeekday3Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Thursday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-13",
+   "event_key": "LentWeekday3Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-14",
+   "event_key": "LentWeekday3Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday of the 3rd Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "rose",
+    "purple"
+   ],
+   "date": "2026-03-15",
+   "event_key": "Lent4",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Fourth Sunday of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-16",
+   "event_key": "LentWeekday4Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of the 4th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-17",
+   "event_key": "LentWeekday4Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of the 4th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-17",
+   "event_key": "StPatrick",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Patrick, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-18",
+   "event_key": "LentWeekday4Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Wednesday of the 4th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-18",
+   "event_key": "StCyrilJerusalem",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Cyril of Jerusalem, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-19",
+   "event_key": "StJoseph",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Joseph Husband of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-20",
+   "event_key": "LentWeekday4Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday of the 4th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-21",
+   "event_key": "LentWeekday4Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday of the 4th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-22",
+   "event_key": "Lent5",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Fifth Sunday of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-23",
+   "event_key": "LentWeekday5Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of the 5th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-23",
+   "event_key": "StTuribius",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saint Turibius of Mogrovejo, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-24",
+   "event_key": "LentWeekday5Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of the 5th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-03-25",
+   "event_key": "Annunciation",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Annunciation of the Lord",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-26",
+   "event_key": "LentWeekday5Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Thursday of the 5th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-27",
+   "event_key": "LentWeekday5Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Friday of the 5th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-28",
+   "event_key": "LentWeekday5Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Saturday of the 5th Week of Lent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-03-29",
+   "event_key": "PalmSun",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Palm Sunday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-30",
+   "event_key": "MonHolyWeek",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Monday of Holy Week",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-03-31",
+   "event_key": "TueHolyWeek",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Tuesday of Holy Week",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-04-01",
+   "event_key": "WedHolyWeek",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "LENT",
+   "liturgical_season_lcl": "Lent",
+   "name": "Wednesday of Holy Week",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-02",
+   "event_key": "HolyThurs",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER_TRIDUUM",
+   "liturgical_season_lcl": "Easter Triduum",
+   "name": "Holy Thursday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-04-03",
+   "event_key": "GoodFri",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER_TRIDUUM",
+   "liturgical_season_lcl": "Easter Triduum",
+   "name": "Good Friday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-04",
+   "event_key": "EasterVigil",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER_TRIDUUM",
+   "liturgical_season_lcl": "Easter Triduum",
+   "name": "Easter Vigil",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-05",
+   "event_key": "Easter",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Easter Sunday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-06",
+   "event_key": "MonOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-07",
+   "event_key": "TueOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-08",
+   "event_key": "WedOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-09",
+   "event_key": "ThuOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-10",
+   "event_key": "FriOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-11",
+   "event_key": "SatOctaveEaster",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saturday of the Octave of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-12",
+   "event_key": "Easter2",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Second Sunday of Easter or Divine Mercy Sunday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-13",
+   "event_key": "EasterWeekday2Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-04-13",
+   "event_key": "StMartinPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Martin I, Pope and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-14",
+   "event_key": "EasterWeekday2Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-15",
+   "event_key": "EasterWeekday2Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-16",
+   "event_key": "EasterWeekday2Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-17",
+   "event_key": "EasterWeekday2Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-18",
+   "event_key": "EasterWeekday2Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saturday of the 2nd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-19",
+   "event_key": "Easter3",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Third Sunday of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-20",
+   "event_key": "EasterWeekday3Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 3rd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-21",
+   "event_key": "EasterWeekday3Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 3rd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-21",
+   "event_key": "StAnselm",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Anselm, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-22",
+   "event_key": "EasterWeekday3Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the 3rd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-23",
+   "event_key": "EasterWeekday3Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the 3rd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-04-23",
+   "event_key": "StGeorge",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint George, Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-04-23",
+   "event_key": "StAdalbert",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Adalbert, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-24",
+   "event_key": "EasterWeekday3Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 3rd Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-04-24",
+   "event_key": "StFidelisSigmaringen",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Fidelis of Sigmaringen, Priest and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-04-25",
+   "event_key": "StMarkEvangelist",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Mark the Evangelist",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-26",
+   "event_key": "Easter4",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Fourth Sunday of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-27",
+   "event_key": "EasterWeekday4Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 4th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-28",
+   "event_key": "EasterWeekday4Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 4th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-04-28",
+   "event_key": "StPeterChanel",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Peter Chanel, Priest and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-28",
+   "event_key": "StLouisGrignionMontfort",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Louis Grignion de Montfort, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-29",
+   "event_key": "StCatherineSiena",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Catherine of Siena, Virgin and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-30",
+   "event_key": "EasterWeekday4Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the 4th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-04-30",
+   "event_key": "StPiusV",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Pius V, Pope",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-01",
+   "event_key": "EasterWeekday4Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 4th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-01",
+   "event_key": "StJosephWorker",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Joseph the Worker",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-02",
+   "event_key": "StAthanasius",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Athanasius, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-03",
+   "event_key": "Easter5",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Fifth Sunday of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-04",
+   "event_key": "EasterWeekday5Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-05",
+   "event_key": "EasterWeekday5Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-06",
+   "event_key": "EasterWeekday5Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-07",
+   "event_key": "EasterWeekday5Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-08",
+   "event_key": "EasterWeekday5Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-09",
+   "event_key": "EasterWeekday5Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saturday of the 5th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-10",
+   "event_key": "Easter6",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Sixth Sunday of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-11",
+   "event_key": "EasterWeekday6Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 6th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-12",
+   "event_key": "EasterWeekday6Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 6th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-05-12",
+   "event_key": "StsNereusAchilleus",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saints Nereus and Achilleus, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-05-12",
+   "event_key": "StPancras",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Pancras, Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-13",
+   "event_key": "EasterWeekday6Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the 6th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-13",
+   "event_key": "OurLadyOfFatima",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Our Lady of Fatima",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-05-14",
+   "event_key": "StMatthiasAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Matthias the Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-15",
+   "event_key": "EasterWeekday6Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 6th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-15",
+   "event_key": "StIsidore",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "[ US ] Saint Isidore",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-16",
+   "event_key": "EasterWeekday6Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saturday of the 6th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-17",
+   "event_key": "Ascension",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Ascension",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-18",
+   "event_key": "EasterWeekday7Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Monday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-05-18",
+   "event_key": "StJohnIPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint John I, Pope and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-19",
+   "event_key": "EasterWeekday7Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Tuesday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-20",
+   "event_key": "EasterWeekday7Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Wednesday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-20",
+   "event_key": "StBernardineSiena",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Bernardine of Siena, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-21",
+   "event_key": "EasterWeekday7Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Thursday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-05-21",
+   "event_key": "StChristopherMagallanes",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Christopher Magallanes, Priest, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-22",
+   "event_key": "EasterWeekday7Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Friday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-22",
+   "event_key": "StRitaCascia",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saint Rita of Cascia, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-23",
+   "event_key": "EasterWeekday7Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Saturday of the 7th Week of Easter",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-05-24",
+   "event_key": "Pentecost",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "EASTER",
+   "liturgical_season_lcl": "Easter",
+   "name": "Pentecost",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-25",
+   "event_key": "MaryMotherChurch",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Blessed Virgin Mary, Mother of the Church",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-26",
+   "event_key": "StPhilipNeri",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Philip Neri, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-05-27",
+   "event_key": "OrdWeekday8Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 8th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-27",
+   "event_key": "StAugustineCanterbury",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Augustine of Canterbury, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-05-28",
+   "event_key": "OrdWeekday8Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 8th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-05-29",
+   "event_key": "OrdWeekday8Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 8th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-29",
+   "event_key": "StPaulVI",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Paul VI, Pope",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-05-30",
+   "event_key": "OrdWeekday8Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 8th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-30",
+   "event_key": "SatMemBVM2",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-05-31",
+   "event_key": "Trinity",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Holy Trinity Sunday",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-01",
+   "event_key": "StJustinMartyr",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Justin Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-02",
+   "event_key": "OrdWeekday9Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 9th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-02",
+   "event_key": "StsMarcellinusPeter",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Marcellinus and Peter, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-03",
+   "event_key": "StsCharlesLwanga",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Charles Lwanga and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-04",
+   "event_key": "OrdWeekday9Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 9th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-06-05",
+   "event_key": "StBoniface",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Boniface, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-06",
+   "event_key": "OrdWeekday9Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 9th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-06",
+   "event_key": "StNorbert",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Norbert, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-06",
+   "event_key": "SatMemBVM3",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-07",
+   "event_key": "CorpusChristi",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Corpus Christi",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-08",
+   "event_key": "OrdWeekday10Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 10th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-09",
+   "event_key": "OrdWeekday10Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 10th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-09",
+   "event_key": "StEphrem",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Ephrem, Deacon and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-10",
+   "event_key": "OrdWeekday10Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 10th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-11",
+   "event_key": "StBarnabasAp",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Barnabas the Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-12",
+   "event_key": "SacredHeart",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Most Sacred Heart of Jesus",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-13",
+   "event_key": "ImmaculateHeart",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Immaculate Heart of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-13",
+   "event_key": "StAnthonyPadua",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Anthony of Padua, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-14",
+   "event_key": "OrdSunday11",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "11th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-15",
+   "event_key": "OrdWeekday11Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-16",
+   "event_key": "OrdWeekday11Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-17",
+   "event_key": "OrdWeekday11Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-18",
+   "event_key": "OrdWeekday11Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-19",
+   "event_key": "OrdWeekday11Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-19",
+   "event_key": "StRomuald",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Romuald, Abbot",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-20",
+   "event_key": "OrdWeekday11Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 11th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-20",
+   "event_key": "SatMemBVM4",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-21",
+   "event_key": "OrdSunday12",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "12th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-22",
+   "event_key": "OrdWeekday12Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 12th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-22",
+   "event_key": "StPaulinusNola",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Paulinus of Nola, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-22",
+   "event_key": "StsJohnFisherThomasMore",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints John Fisher, Bishop, and Thomas More, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-23",
+   "event_key": "OrdWeekday12Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 12th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-24",
+   "event_key": "NativityJohnBaptist",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Nativity of Saint John the Baptist",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-25",
+   "event_key": "OrdWeekday12Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 12th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-26",
+   "event_key": "OrdWeekday12Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 12th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-27",
+   "event_key": "OrdWeekday12Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 12th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-27",
+   "event_key": "StCyrilAlexandria",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-06-27",
+   "event_key": "SatMemBVM5",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-28",
+   "event_key": "OrdSunday13",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "13th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-29",
+   "event_key": "StsPeterPaulAp",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Peter and Paul, Apostles",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-06-30",
+   "event_key": "OrdWeekday13Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 13th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-06-30",
+   "event_key": "FirstMartyrsRome",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The First Martyrs of the Holy Roman Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-01",
+   "event_key": "OrdWeekday13Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 13th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-01",
+   "event_key": "JuniperoSerra",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Blessed Junípero Serra, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-02",
+   "event_key": "OrdWeekday13Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 13th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-07-03",
+   "event_key": "StThomasAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Thomas the Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-04",
+   "event_key": "OrdWeekday13Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 13th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-04",
+   "event_key": "IndependenceDay",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Independence Day",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-05",
+   "event_key": "OrdSunday14",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "14th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-06",
+   "event_key": "OrdWeekday14Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 14th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-07-06",
+   "event_key": "StMariaGoretti",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Maria Goretti, Virgin and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-07",
+   "event_key": "OrdWeekday14Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 14th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-08",
+   "event_key": "OrdWeekday14Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 14th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-09",
+   "event_key": "OrdWeekday14Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 14th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-07-09",
+   "event_key": "StAugustineZhaoRong",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Augustine Zhao Rong, Priest, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-10",
+   "event_key": "OrdWeekday14Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 14th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-11",
+   "event_key": "StBenedict",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Benedict, Abbot",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-12",
+   "event_key": "OrdSunday15",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "15th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-13",
+   "event_key": "OrdWeekday15Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 15th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-13",
+   "event_key": "StHenry",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Henry",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-14",
+   "event_key": "OrdWeekday15Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 15th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-14",
+   "event_key": "StCamillusDeLellis",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Camillus de Lellis, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-14",
+   "event_key": "KateriTekakwitha",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Blessed Kateri Tekakwitha, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-15",
+   "event_key": "StBonaventure",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Bonaventure, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-16",
+   "event_key": "OrdWeekday15Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 15th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-16",
+   "event_key": "OurLadyOfMountCarmel",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Our Lady of Mount Carmel",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-17",
+   "event_key": "OrdWeekday15Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 15th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-18",
+   "event_key": "OrdWeekday15Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 15th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-18",
+   "event_key": "SatMemBVM6",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-19",
+   "event_key": "OrdSunday16",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "16th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-20",
+   "event_key": "OrdWeekday16Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 16th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-07-20",
+   "event_key": "StApollinaris",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Apollinaris, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-21",
+   "event_key": "OrdWeekday16Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 16th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-21",
+   "event_key": "StLawrenceBrindisi",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Lawrence of Brindisi, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-22",
+   "event_key": "StMaryMagdalene",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Mary Magdalene",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-23",
+   "event_key": "OrdWeekday16Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 16th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-23",
+   "event_key": "StBridget",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Bridget, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-24",
+   "event_key": "OrdWeekday16Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 16th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-24",
+   "event_key": "StSharbelMakhluf",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Sharbel Makhluf, Hermit",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-07-25",
+   "event_key": "StJamesAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint James, Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-26",
+   "event_key": "OrdSunday17",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "17th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-27",
+   "event_key": "OrdWeekday17Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 17th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-28",
+   "event_key": "OrdWeekday17Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 17th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-29",
+   "event_key": "StMartha",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Martha",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-07-30",
+   "event_key": "OrdWeekday17Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 17th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-30",
+   "event_key": "StPeterChrysologus",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Peter Chrysologus, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-07-31",
+   "event_key": "StIgnatiusLoyola",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Ignatius of Loyola, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-01",
+   "event_key": "StAlphonsusMariaDeLiguori",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Alphonsus Mary Liguori, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-02",
+   "event_key": "OrdSunday18",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "18th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-03",
+   "event_key": "OrdWeekday18Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 18th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-04",
+   "event_key": "StJeanVianney",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John Mary Vianney, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-05",
+   "event_key": "OrdWeekday18Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 18th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-05",
+   "event_key": "DedicationStMaryMajor",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Dedication of the Basilica of Saint Mary Major",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-06",
+   "event_key": "Transfiguration",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Transfiguration of the Lord",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-07",
+   "event_key": "OrdWeekday18Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 18th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-08-07",
+   "event_key": "StSixtusIIPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Sixtus II, Pope, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-07",
+   "event_key": "StCajetan",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Cajetan, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-08",
+   "event_key": "StDominic",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Dominic, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-09",
+   "event_key": "OrdSunday19",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "19th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-08-10",
+   "event_key": "StLawrenceDeacon",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Lawrence, Deacon and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-11",
+   "event_key": "StClare",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Clare, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-12",
+   "event_key": "OrdWeekday19Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 19th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-12",
+   "event_key": "StJaneFrancesDeChantal",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Jane Frances de Chantal, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-13",
+   "event_key": "OrdWeekday19Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 19th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-08-13",
+   "event_key": "StsPontianHippolytus",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Pontian, Pope, and Hippolytus, Priest, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-08-14",
+   "event_key": "StMaximilianKolbe",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Maximilian Mary Kolbe, Priest and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-15",
+   "event_key": "Assumption",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Assumption of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-16",
+   "event_key": "OrdSunday20",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "20th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-17",
+   "event_key": "OrdWeekday20Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 20th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-18",
+   "event_key": "OrdWeekday20Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 20th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-19",
+   "event_key": "OrdWeekday20Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 20th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-19",
+   "event_key": "StJohnEudes",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John Eudes, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-20",
+   "event_key": "StBernardClairvaux",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Bernard, Abbot and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-21",
+   "event_key": "StPiusX",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Pius X, Pope",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-22",
+   "event_key": "QueenshipMary",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Queenship of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-23",
+   "event_key": "OrdSunday21",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "21st Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-08-24",
+   "event_key": "StBartholomewAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Bartholomew, Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-25",
+   "event_key": "OrdWeekday21Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 21st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-25",
+   "event_key": "StLouis",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Louis",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-25",
+   "event_key": "StJosephCalasanz",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Joseph Calasanz, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-26",
+   "event_key": "OrdWeekday21Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 21st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-27",
+   "event_key": "StMonica",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Monica",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-08-28",
+   "event_key": "StAugustineHippo",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Augustine, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-08-29",
+   "event_key": "BeheadingJohnBaptist",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Beheading of Saint John the Baptist, Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-30",
+   "event_key": "OrdSunday22",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "22nd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-08-31",
+   "event_key": "OrdWeekday22Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 22nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-01",
+   "event_key": "OrdWeekday22Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 22nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-02",
+   "event_key": "OrdWeekday22Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 22nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-03",
+   "event_key": "StGregoryGreat",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Gregory the Great, Pope and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-04",
+   "event_key": "OrdWeekday22Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 22nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-05",
+   "event_key": "OrdWeekday22Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 22nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-05",
+   "event_key": "StMotherTeresa",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Teresa of Calcutta, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-05",
+   "event_key": "SatMemBVM7",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-06",
+   "event_key": "OrdSunday23",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "23rd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-07",
+   "event_key": "OrdWeekday23Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 23rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-08",
+   "event_key": "NativityVirginMary",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Nativity of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-09",
+   "event_key": "OrdWeekday23Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 23rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-09",
+   "event_key": "StPeterClaver",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Saint Peter Claver, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-10",
+   "event_key": "OrdWeekday23Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 23rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-11",
+   "event_key": "OrdWeekday23Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 23rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-12",
+   "event_key": "OrdWeekday23Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 23rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-12",
+   "event_key": "HolyNameMary",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Holy Name of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-12",
+   "event_key": "SatMemBVM8",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-13",
+   "event_key": "OrdSunday24",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "24th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-09-14",
+   "event_key": "ExaltationCross",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Exaltation of the Holy Cross",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-15",
+   "event_key": "OurLadyOfSorrows",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Our Lady of Sorrows",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-09-16",
+   "event_key": "StsCorneliusCyprian",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Cornelius, Pope, and Cyprian, Bishop, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-17",
+   "event_key": "OrdWeekday24Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 24th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-17",
+   "event_key": "StRobertBellarmine",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Robert Bellarmine, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-17",
+   "event_key": "StHildegardBingen",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Hildegard of Bingen, Virgin and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-18",
+   "event_key": "OrdWeekday24Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 24th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-19",
+   "event_key": "OrdWeekday24Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 24th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-09-19",
+   "event_key": "StJanuarius",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Januarius, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-19",
+   "event_key": "SatMemBVM9",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-20",
+   "event_key": "OrdSunday25",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "25th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-09-21",
+   "event_key": "StMatthewEvangelist",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Matthew, Apostle and Evangelist",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-22",
+   "event_key": "OrdWeekday25Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 25th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-23",
+   "event_key": "StPioPietrelcina",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Pius of Pietrelcina, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-24",
+   "event_key": "OrdWeekday25Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 25th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-25",
+   "event_key": "OrdWeekday25Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 25th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-26",
+   "event_key": "OrdWeekday25Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 25th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-09-26",
+   "event_key": "StsCosmasDamian",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Cosmas and Damian, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-26",
+   "event_key": "SatMemBVM10",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-27",
+   "event_key": "OrdSunday26",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "26th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-09-28",
+   "event_key": "OrdWeekday26Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 26th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-09-28",
+   "event_key": "StWenceslaus",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Wenceslaus, Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-09-28",
+   "event_key": "StsLawrenceRuiz",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Lawrence Ruiz and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-29",
+   "event_key": "StsArchangels",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Michael, Gabriel and Raphael, Archangels",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-09-30",
+   "event_key": "StJerome",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Jerome, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-01",
+   "event_key": "StThereseChildJesus",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Thérèse of the Child Jesus, Virgin and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-02",
+   "event_key": "GuardianAngels",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Holy Guardian Angels",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-03",
+   "event_key": "OrdWeekday26Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 26th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-03",
+   "event_key": "SatMemBVM11",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-04",
+   "event_key": "OrdSunday27",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "27th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-05",
+   "event_key": "OrdWeekday27Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 27th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-05",
+   "event_key": "StFaustinaKowalska",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Faustina Kowalska",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-06",
+   "event_key": "OrdWeekday27Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 27th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-06",
+   "event_key": "StBruno",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Bruno, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-06",
+   "event_key": "MarieDurocher",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Blessed Marie Rose Durocher, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-07",
+   "event_key": "OurLadyOfTheRosary",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Our Lady of the Rosary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-08",
+   "event_key": "OrdWeekday27Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 27th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-09",
+   "event_key": "OrdWeekday27Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 27th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-10-09",
+   "event_key": "StDenis",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Denis, Bishop, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-09",
+   "event_key": "StJohnLeonardi",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John Leonardi, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-10",
+   "event_key": "OrdWeekday27Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 27th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-10",
+   "event_key": "SatMemBVM12",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-11",
+   "event_key": "OrdSunday28",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "28th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-12",
+   "event_key": "OrdWeekday28Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 28th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-13",
+   "event_key": "OrdWeekday28Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 28th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-14",
+   "event_key": "OrdWeekday28Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 28th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-10-14",
+   "event_key": "StCallistusIPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Callistus I, Pope and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-15",
+   "event_key": "StTeresaJesus",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Teresa of Jesus, Virgin and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-16",
+   "event_key": "OrdWeekday28Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 28th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-16",
+   "event_key": "StHedwig",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Hedwig, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-16",
+   "event_key": "StMargaretAlacoque",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Margaret Mary Alacoque, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-10-17",
+   "event_key": "StIgnatiusAntioch",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Ignatius of Antioch, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-18",
+   "event_key": "OrdSunday29",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "29th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-19",
+   "event_key": "OrdWeekday29Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-19",
+   "event_key": "StPaulCross",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Paul of the Cross, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-10-19",
+   "event_key": "StsJeanBrebeuf",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints John de Brébeuf and Isaac Jogues, Priests, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-20",
+   "event_key": "OrdWeekday29Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-21",
+   "event_key": "OrdWeekday29Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-22",
+   "event_key": "OrdWeekday29Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-22",
+   "event_key": "StJohnPaulII",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John Paul II, Pope",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-23",
+   "event_key": "OrdWeekday29Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-23",
+   "event_key": "StJohnCapistrano",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint John of Capestrano, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-24",
+   "event_key": "OrdWeekday29Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 29th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-24",
+   "event_key": "StAnthonyMaryClaret",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Anthony Mary Claret, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-24",
+   "event_key": "SatMemBVM13",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-25",
+   "event_key": "OrdSunday30",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "30th Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-26",
+   "event_key": "OrdWeekday30Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 30th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-27",
+   "event_key": "OrdWeekday30Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 30th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-10-28",
+   "event_key": "StSimonStJudeAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saints Simon and Jude, Apostles",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-29",
+   "event_key": "OrdWeekday30Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 30th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-30",
+   "event_key": "OrdWeekday30Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 30th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-10-31",
+   "event_key": "OrdWeekday30Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 30th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-10-31",
+   "event_key": "SatMemBVM14",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-01",
+   "event_key": "AllSaints",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "All Saints",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-11-02",
+   "event_key": "AllSouls",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Commemoration of all the Faithful Departed (All Souls' Day)",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-03",
+   "event_key": "OrdWeekday31Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Tuesday of the 31st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-03",
+   "event_key": "StMartinPorres",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Martin de Porres, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-04",
+   "event_key": "StCharlesBorromeo",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Charles Borromeo, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-05",
+   "event_key": "OrdWeekday31Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 31st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-06",
+   "event_key": "OrdWeekday31Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 31st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-07",
+   "event_key": "OrdWeekday31Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 31st Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-07",
+   "event_key": "SatMemBVM15",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-08",
+   "event_key": "OrdSunday32",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "32nd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-09",
+   "event_key": "DedicationLateran",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Dedication of the Lateran Basilica",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-10",
+   "event_key": "StLeoGreat",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Leo the Great, Pope and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-11",
+   "event_key": "StMartinTours",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Martin of Tours, Bishop",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-11-12",
+   "event_key": "StJosaphat",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Josaphat, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-13",
+   "event_key": "OrdWeekday32Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 32nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-13",
+   "event_key": "StFrancesXCabrini",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Saint Frances Xavier Cabrini, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-14",
+   "event_key": "OrdWeekday32Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 32nd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-14",
+   "event_key": "SatMemBVM16",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-15",
+   "event_key": "OrdSunday33",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "33rd Sunday of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-16",
+   "event_key": "OrdWeekday33Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 33rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-16",
+   "event_key": "StMargaretScotland",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Margaret of Scotland",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-16",
+   "event_key": "StGertrudeGreat",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Gertrude the Great, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-17",
+   "event_key": "StElizabethHungary",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Elizabeth of Hungary, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-18",
+   "event_key": "OrdWeekday33Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 33rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-18",
+   "event_key": "DedicationStsPeterPaul",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Dedication of the Basilicas of Saints Peter and Paul, Apostles",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-18",
+   "event_key": "StRoseDuchesne",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Saint Rose Philippine Duchesne, Virgin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-19",
+   "event_key": "OrdWeekday33Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 33rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-20",
+   "event_key": "OrdWeekday33Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 33rd Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-21",
+   "event_key": "PresentationMary",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "The Presentation of the Blessed Virgin Mary",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-22",
+   "event_key": "ChristKing",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Christ the King",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-23",
+   "event_key": "OrdWeekday34Monday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Monday of the 34th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-11-23",
+   "event_key": "StClementIPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Clement I, Pope and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-23",
+   "event_key": "StColumban",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Columban, Religious",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-11-23",
+   "event_key": "MiguelPro",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ US ] Blessed Miguel Agustín Pro, Priest and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-11-24",
+   "event_key": "StAndrewDungLac",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Andrew Dũng-Lạc, Priest, and Companions, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-25",
+   "event_key": "OrdWeekday34Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Wednesday of the 34th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-11-25",
+   "event_key": "StCatherineAlexandria",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saint Catherine of Alexandria, Virgin and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-26",
+   "event_key": "OrdWeekday34Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Thursday of the 34th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-26",
+   "event_key": "ThanksgivingDay",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "[ USA ] Thanksgiving",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-27",
+   "event_key": "OrdWeekday34Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Friday of the 34th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "green"
+   ],
+   "date": "2026-11-28",
+   "event_key": "OrdWeekday34Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday of the 34th Week of Ordinary Time",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-11-28",
+   "event_key": "SatMemBVM17",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ORDINARY_TIME",
+   "liturgical_season_lcl": "Ordinary Time",
+   "name": "Saturday Memorial of the Blessed Virgin Mary",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-11-29",
+   "event_key": "Advent1",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "First Sunday of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-11-30",
+   "event_key": "StAndrewAp",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Andrew, Apostle",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-01",
+   "event_key": "AdventWeekday1Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Tuesday of the 1st Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-02",
+   "event_key": "AdventWeekday1Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Wednesday of the 1st Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-03",
+   "event_key": "StFrancisXavier",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Francis Xavier, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-04",
+   "event_key": "AdventWeekday1Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Friday of the 1st Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-04",
+   "event_key": "StJohnDamascene",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint John Damascene, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-05",
+   "event_key": "AdventWeekday1Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saturday of the 1st Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-06",
+   "event_key": "Advent2",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Second Sunday of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-07",
+   "event_key": "StAmbrose",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Ambrose, Bishop and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-08",
+   "event_key": "ImmaculateConception",
+   "grade": 6,
+   "grade_lcl": "SOLEMNITY",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "The Immaculate Conception of the Blessed Virgin Mary, Patronal feastday of the United States of America",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-09",
+   "event_key": "AdventWeekday2Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Wednesday of the 2nd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-09",
+   "event_key": "JuanDiego",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Juan Diego Cuauhtlatoatzin",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-10",
+   "event_key": "AdventWeekday2Thursday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Thursday of the 2nd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-10",
+   "event_key": "OurLadyOfLoreto",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Blessed Virgin Mary of Loreto",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-11",
+   "event_key": "AdventWeekday2Friday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Friday of the 2nd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-11",
+   "event_key": "StDamasusIPope",
+   "grade": 2,
+   "grade_lcl": "optional memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Damasus I, Pope",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-12",
+   "event_key": "AdventWeekday2Saturday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saturday of the 2nd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-12",
+   "event_key": "OurLadyOfGuadalupe",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "[ USA ] Our Lady of Guadalupe",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "rose",
+    "purple"
+   ],
+   "date": "2026-12-13",
+   "event_key": "Advent3",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Third Sunday of Advent (Gaudete)",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-14",
+   "event_key": "StJohnCross",
+   "grade": 3,
+   "grade_lcl": "Memorial",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint John of the Cross, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-15",
+   "event_key": "AdventWeekday3Tuesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Tuesday of the 3rd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-16",
+   "event_key": "AdventWeekday3Wednesday",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Wednesday of the 3rd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-17",
+   "event_key": "AdventWeekdayDec17",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Thursday of the 3rd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-18",
+   "event_key": "AdventWeekdayDec18",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Friday of the 3rd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-19",
+   "event_key": "AdventWeekdayDec19",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saturday of the 3rd Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-20",
+   "event_key": "Advent4",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Fourth Sunday of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-21",
+   "event_key": "AdventWeekdayDec21",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Monday of the 4th Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-21",
+   "event_key": "StPeterCanisius",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint Peter Canisius, Priest and Doctor of the Church",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-22",
+   "event_key": "AdventWeekdayDec22",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Tuesday of the 4th Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-23",
+   "event_key": "AdventWeekdayDec23",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Wednesday of the 4th Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-23",
+   "event_key": "StJohnKanty",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Saint John of Kanty, Priest",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "purple"
+   ],
+   "date": "2026-12-24",
+   "event_key": "AdventWeekdayDec24",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "ADVENT",
+   "liturgical_season_lcl": "Advent",
+   "name": "Thursday of the 4th Week of Advent",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-25",
+   "event_key": "Christmas",
+   "grade": 7,
+   "grade_lcl": "celebration with precedence over solemnities",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Christmas",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-12-26",
+   "event_key": "StStephenProtomartyr",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saint Stephen, The First Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-27",
+   "event_key": "HolyFamily",
+   "grade": 5,
+   "grade_lcl": "FEAST OF THE LORD",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Holy Family of Jesus, Mary and Joseph",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "red"
+   ],
+   "date": "2026-12-28",
+   "event_key": "HolyInnocents",
+   "grade": 4,
+   "grade_lcl": "FEAST",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "The Holy Innocents, Martyrs",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-29",
+   "event_key": "ChristmasWeekdayDec29",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "5th Day of the Octave of Christmas",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white",
+    "red"
+   ],
+   "date": "2026-12-29",
+   "event_key": "StThomasBecket",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saint Thomas Becket, Bishop and Martyr",
+   "type": "fixed"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-30",
+   "event_key": "ChristmasWeekdayDec30",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "6th Day of the Octave of Christmas",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-31",
+   "event_key": "ChristmasWeekdayDec31",
+   "grade": 0,
+   "grade_lcl": "weekday",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "7th Day of the Octave of Christmas",
+   "type": "mobile"
+  },
+  {
+   "color": [
+    "white"
+   ],
+   "date": "2026-12-31",
+   "event_key": "StSylvesterIPope",
+   "grade": 1,
+   "grade_lcl": "commemoration",
+   "liturgical_season": "CHRISTMAS",
+   "liturgical_season_lcl": "Christmas",
+   "name": "Saint Sylvester I, Pope",
+   "type": "fixed"
+  }
+ ],
+ "source": {
+  "attribution": "Liturgical calendar: Liturgical Calendar API (US), https://litcal.johnromanodorazio.com, Apache License 2.0",
+  "fetched_at": "2026-10-06T19:39:13+00:00",
+  "license": "Apache-2.0",
+  "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+  "name": "Liturgical Calendar API",
+  "project": "https://github.com/Liturgical-Calendar/LiturgicalCalendarAPI",
+  "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/US/2026?year_type=CIVIL"
+ }
+}

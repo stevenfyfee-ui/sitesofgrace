@@ -12,6 +12,10 @@ images, use the optional image/title override on each row (or leave the strip
 empty); once those models land we switch the template to auto-pull image + title
 from the linked page and the overrides become unnecessary.
 """
+import logging
+from datetime import date
+
+from django.conf import settings
 from django.db import models
 from django.urls import NoReverseMatch, reverse
 from modelcluster.fields import ParentalKey
@@ -30,6 +34,9 @@ from catalog.models import (
     SacredSitePage,
     SaintPage,
 )
+from liturgy.today import date_at_noon, liturgical_today
+
+logger = logging.getLogger(__name__)
 
 # RichTextField feature sets are restricted (no headings/images/lists) so the
 # editor can only produce what the "Our Story" typography already handles --
@@ -107,7 +114,8 @@ class HomePage(Page):
     community_cta_link = models.CharField(max_length=255, blank=True, default="/accounts/signup/")
 
     # --- Subscription bucket ("Pilgrimage From Home") ---
-    # Replaces the old store bucket on the right of the pilgrim band.
+    # Retained so existing content isn't dropped; the bucket no longer renders
+    # on the homepage (the Today in the Church card replaced it).
     subscription_heading = models.CharField(
         max_length=80, blank=True, default="Pilgrimage From Home",
         help_text="Small heading across the top of the bucket.",
@@ -144,6 +152,21 @@ class HomePage(Page):
     subscription_cta_link = models.CharField(
         max_length=255, blank=True, default="/store/",
         help_text="Where the button goes when no product is chosen above.",
+    )
+
+    # --- Today in the Church (right of the pilgrim band) ---
+    calendar_enabled = models.BooleanField(
+        default=True,
+        help_text="Show today's liturgical calendar card in the pilgrim band.",
+    )
+    calendar_heading = models.CharField(max_length=60, blank=True, default="Today in the Church")
+    calendar_footer_link_text = models.CharField(
+        max_length=60, blank=True, default="Browse saints by feast day",
+    )
+    calendar_footer_link = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Falls back to the saints directory.",
     )
 
     # --- Partners ---
@@ -198,17 +221,12 @@ class HomePage(Page):
         ),
         MultiFieldPanel(
             [
-                FieldPanel("subscription_heading"),
-                FieldPanel("subscription_title"),
-                FieldPanel("subscription_intro"),
-                FieldPanel("subscription_image"),
-                InlinePanel("subscription_bullets", label="Bullet", max_num=4),
-                FieldPanel("subscription_price_line"),
-                FieldPanel("subscription_product"),
-                FieldPanel("subscription_cta_text"),
-                FieldPanel("subscription_cta_link"),
+                FieldPanel("calendar_enabled"),
+                FieldPanel("calendar_heading"),
+                FieldPanel("calendar_footer_link_text"),
+                PageChooserPanel("calendar_footer_link"),
             ],
-            heading="Subscription bucket",
+            heading="Today in the Church",
         ),
         MultiFieldPanel(
             [
@@ -255,7 +273,41 @@ class HomePage(Page):
             context["news_topics"] = []
             context["news_last_updated"] = None
 
+        context["calendar_footer_url"] = self._calendar_footer_url()
+        context["liturgical"] = None
+        if self.calendar_enabled:
+            try:
+                liturgical = liturgical_today(self._calendar_now(request))
+                context["liturgical"] = liturgical
+                # Today first, so without JS the other two days read as
+                # compact lines underneath it.
+                context["liturgical_panels"] = [
+                    {"key": key, "name": name, "day": liturgical[key]}
+                    for key, name in (("today", "Today"), ("yesterday", "Yesterday"), ("tomorrow", "Tomorrow"))
+                ]
+            except Exception:
+                # The card falls back to a plain "Explore the saints" link;
+                # the home page itself must never fail because of it.
+                logger.exception("Today in the Church card failed to build")
+
         return context
+
+    @staticmethod
+    def _calendar_now(request):
+        """DEBUG-only ?_date=YYYY-MM-DD, for screenshots of other days."""
+        if not settings.DEBUG:
+            return None
+        raw = request.GET.get("_date", "")
+        try:
+            return date_at_noon(date.fromisoformat(raw)) if raw else None
+        except ValueError:
+            return None
+
+    def _calendar_footer_url(self):
+        if self.calendar_footer_link_id and self.calendar_footer_link.live:
+            return self.calendar_footer_link.url
+        saints = StandardPage.objects.live().public().filter(layout="saints_directory").first()
+        return saints.url if saints else "/explore/"
 
 
 class FeatureCard(Orderable):

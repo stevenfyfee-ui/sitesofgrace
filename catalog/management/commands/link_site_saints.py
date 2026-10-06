@@ -16,39 +16,14 @@ editor wins and the proposal is demoted into related_saints instead.
     python manage.py link_site_saints <workbook>
     python manage.py link_site_saints <workbook> --publish
 """
-import re
-import unicodedata
-
 import openpyxl
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from catalog.models import SacredSitePage, SaintPage
+from catalog.text import fold, s
 
 SHEET = "Site_Saint_Links"
-LIGATURES = {"æ": "ae", "Æ": "AE", "œ": "oe", "Œ": "OE", "ø": "o", "ł": "l"}
-HONORIFIC = re.compile(r"\b(sts?|saints?|blessed|bl|pope)\b", re.I)
-
-
-def s(value):
-    return "" if value is None else str(value).strip()
-
-
-def fold(name):
-    """Normalise a saint name for matching.
-
-    The Site_Saint_Links tab was written with plain-ASCII names, while the
-    imported pages carry restored diacritics ("St. Catherine Labouré"), so
-    both sides have to be folded before they will compare equal.
-    """
-    text = s(name)
-    for a, b in LIGATURES.items():
-        text = text.replace(a, b)
-    text = unicodedata.normalize("NFKD", text)
-    text = "".join(c for c in text if not unicodedata.combining(c))
-    text = re.sub(r"[^A-Za-z0-9 ]", " ", text)
-    text = HONORIFIC.sub(" ", text)
-    return re.sub(r"\s+", " ", text).strip().lower()
 
 
 class Command(BaseCommand):

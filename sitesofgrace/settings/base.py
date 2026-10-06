@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "learning",
     "search",
     "catalog",
+    "liturgy",
     "pilgrims",
     "planner",
     "store",
@@ -218,6 +219,10 @@ TRUSTED_PROXY_COUNT = int(os.environ.get("TRUSTED_PROXY_COUNT", "1"))
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
+
+# The home page's "Today in the Church" card turns over at midnight here,
+# not at the server clock's midnight (TIME_ZONE stays UTC for storage).
+LITURGICAL_TIME_ZONE = os.environ.get("LITURGICAL_TIME_ZONE", "America/Los_Angeles")
 
 USE_I18N = True
 

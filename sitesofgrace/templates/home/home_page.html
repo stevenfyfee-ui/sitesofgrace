@@ -40,9 +40,9 @@
 </section>
 {% endif %}
 
-{# ---------- Pilgrim band: Sites & Saints / Journey / Subscription ---------- #}
+{# ---------- Pilgrim band: Sites & Saints / Journey / Today in the Church ---------- #}
 <section class="pilgrim-band">
-  <div class="container pilgrim-band-grid">
+  <div class="container pilgrim-band-grid{% if not page.calendar_enabled %} pilgrim-band-grid--two{% endif %}">
 
     {# -- Featured Sites and Saints -- #}
     <div class="pilgrim-card pilgrim-destinations">
@@ -134,57 +134,10 @@
       </div>
     </div>
 
-    {# -- Pilgrimage From Home (quarterly subscription) -- #}
-    <div class="pilgrim-card pilgrim-subscription">
-      <div class="pilgrim-card-head">
-        <h2>{{ page.subscription_heading }}</h2>
-        <a class="pilgrim-view-all" href="{{ page.subscription_cta_link|default:'/store/' }}">Learn more &rsaquo;</a>
-      </div>
-      <div class="pilgrim-sub-inner">
-        <div class="pilgrim-sub-copy">
-          {% if page.subscription_title %}<p class="pilgrim-sub-title">{{ page.subscription_title }}</p>{% endif %}
-          {% if page.subscription_intro %}<p class="pilgrim-sub-intro">{{ page.subscription_intro }}</p>{% endif %}
-          {% if page.subscription_bullets.all %}
-            <ul class="pilgrim-sub-list">
-              {% for b in page.subscription_bullets.all %}
-                <li>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-                  <span>{{ b.text }}</span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-          {% if page.subscription_price_line %}
-            <p class="pilgrim-sub-price">{{ page.subscription_price_line }}</p>
-          {% endif %}
-
-          {% with product=page.subscription_product %}
-            {% if product and product.cta_mode == "waitlist" %}
-              {% if request.GET.waitlisted and request.GET.product_id == product.id|stringformat:"s" %}
-                <p class="pilgrim-sub-success">You&rsquo;re on the list &mdash; we&rsquo;ll email you when it opens.</p>
-              {% else %}
-                <form method="post" action="{% url 'waitlist_signup' %}" class="pilgrim-sub-form">
-                  {% csrf_token %}
-                  <input type="hidden" name="product_id" value="{{ product.id }}">
-                  <input type="hidden" name="next" value="{{ page.url }}">
-                  <label class="sr-only" for="sub-waitlist-email">Your email</label>
-                  <input id="sub-waitlist-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
-                  <button class="btn btn-primary" type="submit">{{ page.subscription_cta_text|default:"Join the Waitlist" }}</button>
-                </form>
-                {% if request.GET.waitlist_error and request.GET.product_id == product.id|stringformat:"s" %}
-                  <p class="pilgrim-sub-error">Please enter a valid email address.</p>
-                {% endif %}
-              {% endif %}
-            {% elif page.subscription_cta_text %}
-              <a class="btn btn-primary pilgrim-sub-cta" href="{{ page.subscription_cta_link|default:'/store/' }}">{{ page.subscription_cta_text }}</a>
-            {% endif %}
-          {% endwith %}
-        </div>
-        <div class="pilgrim-sub-photo">
-          {% if page.subscription_image %}{% image page.subscription_image fill-360x480 %}{% endif %}
-        </div>
-      </div>
-    </div>
+    {# -- Today in the Church (liturgical calendar) -- #}
+    {% if page.calendar_enabled %}
+      {% include "home/includes/_today_in_church.html" %}
+    {% endif %}
 
   </div>
 </section>
@@ -215,4 +168,8 @@
 </section>
 {% endif %}
 
+{% endblock %}
+
+{% block extra_js %}
+{% if liturgical %}<script src="{% static 'js/today-in-church.js' %}" defer></script>{% endif %}
 {% endblock %}

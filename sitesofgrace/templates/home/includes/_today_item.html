@@ -1,0 +1,8 @@
+{# One saint or site row in the Today in the Church card. #}
+<a class="today-item" href="{{ item.url }}">
+  <span class="today-thumb today-thumb--{{ item.kind }}">{% if item.thumbnail %}<img src="{{ item.thumbnail }}" alt="" width="44" height="52" loading="lazy">{% endif %}</span>
+  <span class="today-item-text">
+    <span class="today-item-title">{{ item.title }}</span>
+    {% if item.meta %}<span class="today-item-meta">{{ item.meta }}</span>{% endif %}
+  </span>
+</a>
