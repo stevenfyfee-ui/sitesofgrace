@@ -1,7 +1,10 @@
 {% comment %}
-Line icon set for the "Our Story" pillars/features. Pass icon="globe|book|map|
-camera|church|cross|heart" -- these seven match home.models.ICON_CHOICES
-exactly; a new choice there needs a matching branch here too. No icon font --
+Line icon set for the "Our Story" pillars and the Support page. Pass
+icon="globe|book|map|camera|church|cross|heart" (home.models.ICON_CHOICES) or
+one of the Support page's additions, "server|document|pin|share|pencil|
+bookmark|candle" (home.models.SUPPORT_ICON_CHOICES); a new choice in either
+needs a matching branch here too. The Support additions are copied from its
+mockup. No icon font --
 each is a small inline SVG, viewBox 0 0 24 24, stroke-width 1.2, sized and
 colored by the including element (width/height/color come from CSS).
 {% endcomment %}
@@ -19,4 +22,18 @@ colored by the including element (width/height/color come from CSS).
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 2v20"/><path d="M6 8h12"/></svg>
 {% elif icon == "heart" %}
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 20.5C7 17 3 13 3 8.8 3 6.1 5.1 4 7.7 4 9.4 4 10.9 4.9 12 6.3 13.1 4.9 14.6 4 16.3 4 18.9 4 21 6.1 21 8.8 21 13 17 17 12 20.5Z"/></svg>
+{% elif icon == "server" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M7.5 7h.01M7.5 17h.01"/></svg>
+{% elif icon == "document" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8 12h8M8 15.5h8M8 19h5"/></svg>
+{% elif icon == "pin" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><path d="M12 7.5v5M9.5 10h5"/></svg>
+{% elif icon == "share" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>
+{% elif icon == "pencil" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>
+{% elif icon == "bookmark" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4z"/></svg>
+{% elif icon == "candle" %}
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 3v3M10.5 4.5h3"/><path d="M9 21v-6.5c0-2.5 1.3-5 3-6.5 1.7 1.5 3 4 3 6.5V21"/><path d="M6 21h12"/></svg>
 {% endif %}

@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags %}
+{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags support_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,6 +90,17 @@
       <div class="footer-col">
         <h3>About &amp; Trust</h3>
         {% flat_menu "footer-about" show_menu_heading=False template="menus/footer_menu.html" %}
+        {% comment %}
+          The last footer link, in gold -- shown only once the Support page
+          is live (home/templatetags/support_tags.py). Footer only: never in
+          the header, main menu, or mobile menu.
+        {% endcomment %}
+        {% support_page as support_link_page %}
+        {% if support_link_page %}
+          <ul class="footer-links footer-links--support">
+            <li><a class="footer-support" href="{{ support_link_page.url }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Support</a></li>
+          </ul>
+        {% endif %}
       </div>
 
       <div class="footer-newsletter">

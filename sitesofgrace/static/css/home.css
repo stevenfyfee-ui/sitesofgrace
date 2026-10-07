@@ -399,3 +399,22 @@ a.today-cel-name:hover { text-decoration-color: var(--gold); }
   .pilgrim-feature-img { min-height: 150px; }
   .pilgrim-journey-photo { min-height: 220px; }
 }
+
+/* ---------- Support band (just above the footer) ----------
+   A quiet link to the Support page; see home_page.html. It sits flush on
+   the footer, so the footer's usual top gap is dropped when it's there. */
+.support-band { background: var(--parchment); border-top: 1px solid var(--gold-soft); padding: 34px 0 36px; }
+main:has(> .support-band:last-child) + .site-footer { margin-top: 0; }
+.support-band-inner { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; text-align: left; }
+.support-band-orn { width: 36px; height: 36px; color: var(--gold); flex: none; }
+.support-band p {
+  margin: 0; max-width: 560px; font-family: var(--serif-display);
+  font-size: 20px; line-height: 1.45; color: var(--blue);
+}
+.support-band p em { font-style: italic; color: var(--navy); }
+.support-band .btn { gap: 8px; }
+.support-band .btn svg { width: 14px; height: 14px; flex: none; }
+@media (max-width: 640px) {
+  .support-band-inner { flex-direction: column; text-align: center; gap: 16px; }
+  .support-band p { font-size: 18px; }
+}

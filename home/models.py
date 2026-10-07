@@ -15,15 +15,28 @@ from the linked page and the overrides become unnecessary.
 import logging
 from datetime import date
 
+import stripe
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
+from django.http import HttpResponseRedirect
 from django.urls import NoReverseMatch, reverse
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
-from wagtail.blocks import CharBlock, ChoiceBlock, PageChooserBlock, StructBlock, StructValue, TextBlock
+from wagtail.blocks import (
+    BooleanBlock,
+    CharBlock,
+    ChoiceBlock,
+    PageChooserBlock,
+    RichTextBlock,
+    StructBlock,
+    StructValue,
+    TextBlock,
+)
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.models import Orderable, Page
+from wagtail.models import Orderable, Page, Site
 
 from catalog.models import (
     CATEGORY_STYLES,
@@ -34,7 +47,10 @@ from catalog.models import (
     SacredSitePage,
     SaintPage,
 )
+from core import ratelimit
+from home import support
 from liturgy.today import date_at_noon, liturgical_today
+from pilgrims.views import _ip_hash
 
 logger = logging.getLogger(__name__)
 
@@ -249,7 +265,7 @@ class HomePage(Page):
     ]
 
     max_count = 1
-    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "blog.BlogIndexPage"]
+    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "blog.BlogIndexPage"]
 
     class Meta:
         verbose_name = "Home page"
@@ -1050,3 +1066,582 @@ class AboutPage(Page):
         if idx == -1:
             return {"first": html, "rest": ""}
         return {"first": html[: idx + len(marker)], "rest": html[idx + len(marker):]}
+
+
+# --- Support ------------------------------------------------------------
+
+# The Support page's "helps" cards and "other ways" list: the shared line
+# set plus the mockup's own icons. A separate list (not an addition to
+# ICON_CHOICES) so AboutPage's pillar choices -- and its migrations -- are
+# untouched. includes/_line_icon.html has a branch for every value here.
+SUPPORT_ICON_CHOICES = ICON_CHOICES + [
+    ("server", "Server"),
+    ("document", "Document"),
+    ("pin", "Map pin"),
+    ("share", "Share"),
+    ("pencil", "Pencil"),
+    ("bookmark", "Bookmark"),
+    ("candle", "Candle"),
+]
+
+SUPPORT_DISCLAIMER_PHRASE = "not tax-deductible"
+
+
+class SupportHelpBlock(StructBlock):
+    icon = ChoiceBlock(choices=SUPPORT_ICON_CHOICES)
+    title = CharBlock(max_length=60)
+    blurb = TextBlock()
+
+    class Meta:
+        icon = "pick"
+        label = "What support helps with"
+
+
+class SupportWayBlock(StructBlock):
+    icon = ChoiceBlock(choices=SUPPORT_ICON_CHOICES)
+    title = CharBlock(max_length=60)
+    text = RichTextBlock(features=PROSE_FEATURES)
+
+    class Meta:
+        icon = "list-ul"
+        label = "Other way to help"
+
+
+class SupportFaqBlock(StructBlock):
+    question = CharBlock(max_length=160)
+    answer = RichTextBlock(features=PROSE_FEATURES)
+    show_manage_link = BooleanBlock(
+        required=False,
+        help_text=(
+            'Adds a "Manage your monthly support" link under the answer, '
+            "only while the page's manage URL is set."
+        ),
+    )
+
+    class Meta:
+        icon = "help"
+        label = "Question"
+
+
+def _live_page_at(path):
+    """The live, public page served at `path` ("/contact/") on the default
+    site, or None."""
+    site = Site.objects.filter(is_default_site=True).select_related("root_page").first()
+    if not site:
+        return None
+    url_path = site.root_page.url_path + path.strip("/") + "/"
+    return Page.objects.live().public().filter(url_path=url_path).first()
+
+
+def default_support_ways():
+    """The "Other Ways to Help" launch copy.
+
+    A callable, so the two links resolve when an editor opens Add child page
+    -> Support page, not when the migration was written: "Tell us" links to
+    the Contact page (?topic=suggest) and "How this works" to the Affiliate
+    Disclosure page -- or the Store page, which carries the disclosure --
+    only if a live page exists there. Otherwise that text renders unlinked.
+    """
+    contact = _live_page_at("/contact/")
+    tell_us = (
+        f'<a href="{contact.url}?topic=suggest">Tell us</a>' if contact else "Tell us"
+    )
+    disclosure = _live_page_at("/affiliate-disclosure/") or _live_page_at("/store/")
+    how_it_works = (
+        f' <a linktype="page" id="{disclosure.pk}">How this works</a>' if disclosure else ""
+    )
+    return [
+        {"type": "way", "value": {
+            "icon": "share", "title": "Share a site",
+            "text": (
+                "<p>Send a page to someone planning a trip, or share it with your "
+                "parish.</p>"
+            ),
+        }},
+        {"type": "way", "value": {
+            "icon": "pencil", "title": "Suggest or correct",
+            "text": (
+                f"<p>{tell_us} about a place we're missing, or something we got "
+                "wrong.</p>"
+            ),
+        }},
+        {"type": "way", "value": {
+            "icon": "bookmark", "title": "Shop through our links",
+            "text": (
+                "<p>Some book and travel links earn us a small commission at no cost "
+                f"to you.{how_it_works}</p>"
+            ),
+        }},
+        {"type": "way", "value": {
+            "icon": "candle", "title": "Keep us in prayer",
+            "text": "<p>For the work, and for every pilgrim who uses it.</p>",
+        }},
+    ]
+
+
+class SupportPage(Page):
+    """ "Support Sites of Grace" -- optional one-time or monthly support
+    through Stripe-hosted Checkout.
+
+    Every copy field is prefilled with the launch copy as its default= so
+    Add child page -> Support page opens already written. serve() handles
+    the whole flow at the page's own URL: GET renders, POST validates and
+    redirects to Stripe, GET ?thanks=1&session_id=... shows the thank-you
+    panel for a completed session. Until settings.SUPPORT_ENABLED (both
+    Stripe settings present), the give card shows the "opens soon" panel.
+    """
+
+    # --- Hero ---
+    hero_eyebrow = models.CharField(max_length=60, blank=True, default="Support Sites of Grace")
+    hero_title = models.CharField(max_length=120, blank=True, default="Help Keep the Way Open")
+    hero_intro = models.TextField(
+        blank=True,
+        default=(
+            "Sites of Grace helps Catholics discover the holy places of our faith, learn "
+            "their stories, and plan meaningful pilgrimages. It is free to use, and it "
+            "always will be."
+        ),
+    )
+    hero_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Without one, the hero uses the brand gradient panel.",
+    )
+
+    # --- Why We Ask ---
+    why_eyebrow = models.CharField(max_length=60, blank=True, default="Why We Ask")
+    why_heading = models.CharField(
+        max_length=120, blank=True, default="Independently Built, Freely Shared",
+    )
+    why_body = RichTextField(
+        blank=True,
+        features=PROSE_FEATURES,
+        default=(
+            "<p>Sites of Grace is built and maintained independently. Every map, saint's "
+            "story, and pilgrimage guide is offered free of charge, and nothing on the site "
+            "is locked behind a payment.</p>"
+            "<p>If Sites of Grace has helped you find a new pilgrimage site, plan a journey, "
+            "or simply learn more about the faith, you're welcome to help support its "
+            "continued growth. There's no obligation, and every pilgrim is welcome here "
+            "either way.</p>"
+        ),
+    )
+    pull_quote = models.CharField(
+        max_length=200, blank=True, default="“Freely you have received; freely give.”",
+    )
+    pull_quote_cite = models.CharField(max_length=80, blank=True, default="Matthew 10:8")
+
+    # --- What Your Support Helps With ---
+    helps_eyebrow = models.CharField(
+        max_length=60, blank=True, default="What Your Support Helps With",
+    )
+    helps = StreamField(
+        [("help", SupportHelpBlock())],
+        max_num=6,
+        blank=True,
+        default=[
+            {"type": "help", "value": {
+                "icon": "server", "title": "Hosting & Upkeep",
+                "blurb": "Keeping the site fast, secure, and available to pilgrims around the world.",
+            }},
+            {"type": "help", "value": {
+                "icon": "document", "title": "Research",
+                "blurb": "Checking every site and saint against Church and shrine sources.",
+            }},
+            {"type": "help", "value": {
+                "icon": "map", "title": "Maps & Photography",
+                "blurb": "Better maps, original photos, and more places on the map.",
+            }},
+            {"type": "help", "value": {
+                "icon": "pin", "title": "New Pilgrimage Guides",
+                "blurb": "Plan Your Visit guides and trails for more sacred sites.",
+            }},
+        ],
+    )
+
+    # --- The give card ---
+    give_heading = models.CharField(max_length=120, blank=True, default="Support Sites of Grace")
+    give_lede = models.CharField(
+        max_length=200, blank=True,
+        default="Choose an amount. You'll finish on Stripe's secure checkout page.",
+    )
+    preset_amounts = models.CharField(
+        max_length=60, default="5,10,25,50",
+        help_text='1 to 6 whole-dollar amounts, separated by commas. An "Other" tile is always added.',
+    )
+    min_amount = models.IntegerField(
+        default=3, validators=[MinValueValidator(1)],
+        help_text="Smallest amount accepted, in whole dollars.",
+    )
+    max_amount = models.IntegerField(
+        default=1000, validators=[MinValueValidator(1)],
+        help_text="Largest amount accepted, in whole dollars.",
+    )
+    default_amount_once = models.IntegerField(
+        default=10, help_text="Preselected for one-time support. Must be one of the amounts above.",
+    )
+    default_amount_monthly = models.IntegerField(
+        default=5, help_text="Preselected for monthly support. Must be one of the amounts above.",
+    )
+    allow_monthly = models.BooleanField(default=True)
+    disclaimer = models.TextField(
+        default=(
+            "Sites of Grace is independently owned and is not a 501(c)(3) charitable "
+            "organization. Contributions are voluntary, support the operation of the "
+            "website, and are not tax-deductible. Nothing is given in exchange, and all "
+            "content stays free. Monthly support can be cancelled anytime."
+        ),
+        help_text='Required. Must say contributions are "not tax-deductible".',
+    )
+    soon_heading = models.CharField(max_length=120, blank=True, default="Online Support Opens Soon")
+    soon_text = models.TextField(
+        blank=True,
+        help_text="Shown instead of the form until Stripe is configured. A blank line starts a new paragraph.",
+        default=(
+            "We're setting up secure online support now. Thank you for thinking of us.\n\n"
+            "In the meantime, the ways to help on this page cost nothing at all."
+        ),
+    )
+    thanks_heading = models.CharField(max_length=120, blank=True, default="Thank You")
+    thanks_text = models.TextField(
+        blank=True,
+        default=(
+            "Your support helps more people discover the extraordinary places of our faith. "
+            "May the saints keep you on your journey."
+        ),
+    )
+    manage_url = models.URLField(
+        blank=True,
+        help_text=(
+            'Stripe customer portal login link. The "Manage monthly support" links '
+            "appear only when this is set."
+        ),
+    )
+
+    # --- Other Ways to Help (sidebar) ---
+    ways_heading = models.CharField(max_length=120, blank=True, default="Other Ways to Help")
+    ways_intro = models.CharField(
+        max_length=200, blank=True,
+        default="Some of the most helpful support doesn't cost anything.",
+    )
+    ways = StreamField(
+        [("way", SupportWayBlock())],
+        max_num=6,
+        blank=True,
+        default=default_support_ways,
+    )
+    free_card_heading = models.CharField(max_length=120, blank=True, default="Always Free")
+    free_card_text = models.TextField(
+        blank=True,
+        default=(
+            "Support never unlocks anything extra. Every map, guide, and story stays open "
+            "to every pilgrim, whether they give or not."
+        ),
+    )
+
+    # --- FAQ ---
+    faq_eyebrow = models.CharField(max_length=60, blank=True, default="Good to Know")
+    faq_heading = models.CharField(max_length=120, blank=True, default="Common Questions")
+    faqs = StreamField(
+        [("faq", SupportFaqBlock())],
+        blank=True,
+        default=[
+            {"type": "faq", "value": {
+                "question": "Is my contribution tax-deductible?",
+                "answer": (
+                    "<p>No. Sites of Grace is independently owned and is not a 501(c)(3) "
+                    "charitable organization, so contributions are not tax-deductible. If "
+                    "you'd like to make a tax-deductible gift, please consider your parish "
+                    "or a shrine you love.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "What does my support pay for?",
+                "answer": (
+                    "<p>The costs of running the site: hosting, research, maps and "
+                    "photography, and new pilgrimage guides. It helps Sites of Grace keep "
+                    "growing while everything stays free to use.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "Do supporters get anything extra?",
+                "answer": (
+                    "<p>No. Support is a gift toward the work, not a purchase. Every page, "
+                    "map, and guide is open to everyone.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "How do I change or cancel monthly support?",
+                "answer": (
+                    "<p>You can update your card or cancel anytime. Stripe handles it "
+                    "securely: enter the email you used, and Stripe sends you a link where "
+                    "you can make changes.</p>"
+                ),
+                "show_manage_link": True,
+            }},
+            {"type": "faq", "value": {
+                "question": "Is my payment information safe?",
+                "answer": (
+                    "<p>Payments are handled entirely by Stripe, a widely used payment "
+                    "processor. Your card details go straight to Stripe and never pass "
+                    "through or get stored on Sites of Grace.</p>"
+                ),
+            }},
+        ],
+    )
+
+    # --- Home page band ---
+    home_band_text = models.CharField(
+        max_length=200, blank=True,
+        default="Sites of Grace is independently built and free for every pilgrim.",
+    )
+    home_band_emphasis = models.CharField(
+        max_length=200, blank=True,
+        default="If it has helped you along the way, you can help it grow.",
+    )
+    show_home_band = models.BooleanField(
+        default=True,
+        help_text="A quiet band at the bottom of the home page, linking here.",
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("hero_eyebrow"),
+                FieldPanel("hero_title"),
+                FieldPanel("hero_intro"),
+                FieldPanel("hero_image"),
+            ],
+            heading="Hero",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("why_eyebrow"),
+                FieldPanel("why_heading"),
+                FieldPanel("why_body"),
+                FieldPanel("pull_quote"),
+                FieldPanel("pull_quote_cite"),
+                FieldPanel("helps_eyebrow"),
+                FieldPanel("helps"),
+            ],
+            heading="Why We Ask",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("give_heading"),
+                FieldPanel("give_lede"),
+                FieldPanel("preset_amounts"),
+                FieldPanel("min_amount"),
+                FieldPanel("max_amount"),
+                FieldPanel("default_amount_once"),
+                FieldPanel("default_amount_monthly"),
+                FieldPanel("allow_monthly"),
+                FieldPanel("disclaimer"),
+                FieldPanel("manage_url"),
+            ],
+            heading="Support Form",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("soon_heading"),
+                FieldPanel("soon_text"),
+                FieldPanel("thanks_heading"),
+                FieldPanel("thanks_text"),
+            ],
+            heading="Before Stripe / After Checkout",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("ways_heading"),
+                FieldPanel("ways_intro"),
+                FieldPanel("ways"),
+                FieldPanel("free_card_heading"),
+                FieldPanel("free_card_text"),
+            ],
+            heading="Sidebar",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("faq_eyebrow"),
+                FieldPanel("faq_heading"),
+                FieldPanel("faqs"),
+            ],
+            heading="Common Questions",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("show_home_band"),
+                FieldPanel("home_band_text"),
+                FieldPanel("home_band_emphasis"),
+            ],
+            heading="Home Page Band",
+        ),
+    ]
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    max_count = 1
+    template = "home/support_page.html"
+
+    # Session creations allowed per ip_hash per window, before Stripe is
+    # even asked (core.ratelimit).
+    CHECKOUT_LIMIT = 8
+    CHECKOUT_WINDOW_SECONDS = 10 * 60
+
+    class Meta:
+        verbose_name = "Support page"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only for a brand-new, unsaved instance (the blank Add child page
+        # form), so an existing page's own values are never touched.
+        if not self.pk:
+            if not self.slug:
+                self.slug = "support"
+            if not self.search_description:
+                self.search_description = (
+                    "Sites of Grace is free for every pilgrim. If it has helped you, you "
+                    "can help support its continued growth."
+                )
+
+    # --- Validation ---
+
+    def clean(self):
+        super().clean()
+        errors = {}
+
+        disclaimer = (self.disclaimer or "").strip()
+        if not disclaimer:
+            errors["disclaimer"] = "The disclaimer is required."
+        elif SUPPORT_DISCLAIMER_PHRASE not in disclaimer.lower():
+            errors["disclaimer"] = (
+                f'The disclaimer must say that contributions are "{SUPPORT_DISCLAIMER_PHRASE}".'
+            )
+
+        min_amount, max_amount = self.min_amount or 0, self.max_amount or 0
+        if min_amount < 1:
+            errors["min_amount"] = "The minimum must be at least $1."
+        elif max_amount < min_amount:
+            errors["max_amount"] = "The maximum can't be less than the minimum."
+
+        try:
+            presets = support.parse_presets(self.preset_amounts)
+        except ValueError as exc:
+            errors["preset_amounts"] = str(exc)
+            presets = None
+        if presets is not None and "min_amount" not in errors and "max_amount" not in errors:
+            if not 1 <= len(presets) <= 6:
+                errors["preset_amounts"] = "Enter between 1 and 6 amounts."
+            elif any(not min_amount <= amount <= max_amount for amount in presets):
+                errors["preset_amounts"] = (
+                    f"Every amount must be between ${min_amount:,} and ${max_amount:,}."
+                )
+            else:
+                if self.default_amount_once not in presets:
+                    errors["default_amount_once"] = "Choose one of the preset amounts."
+                if self.allow_monthly and self.default_amount_monthly not in presets:
+                    errors["default_amount_monthly"] = "Choose one of the preset amounts."
+
+        if errors:
+            raise ValidationError(errors)
+
+    @property
+    def preset_list(self):
+        try:
+            return support.parse_presets(self.preset_amounts)
+        except ValueError:
+            return []
+
+    @property
+    def frequencies(self):
+        if self.allow_monthly:
+            return (support.FREQUENCY_ONCE, support.FREQUENCY_MONTHLY)
+        return (support.FREQUENCY_ONCE,)
+
+    # --- Rendering ---
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        submitted = kwargs.get("support_form") or {}
+
+        frequency = submitted.get("frequency")
+        if frequency not in self.frequencies:
+            frequency = support.FREQUENCY_ONCE
+        custom = submitted.get("custom", "")
+        amount = submitted.get("amount") or ""
+        if custom:
+            amount = "other"
+        elif amount != "other" and not (amount.isdigit() and int(amount) in self.preset_list):
+            default = (
+                self.default_amount_monthly
+                if frequency == support.FREQUENCY_MONTHLY
+                else self.default_amount_once
+            )
+            amount = str(default)
+
+        thanks = kwargs.get("support_thanks")
+        context.update({
+            "support_enabled": settings.SUPPORT_ENABLED,
+            "support_frequency": frequency,
+            "support_amount": amount,
+            "support_custom": custom,
+            "support_error": kwargs.get("support_error", ""),
+            "support_thanks": thanks,
+            "support_range": f"${self.min_amount:,} to ${self.max_amount:,}",
+            "support_continue_url": _map_or_explore_url() if thanks else "",
+        })
+        return context
+
+    def serve(self, request, *args, **kwargs):
+        if request.method == "POST":
+            response = self._serve_checkout(request, *args, **kwargs)
+        else:
+            thanks = None
+            if request.GET.get("thanks") == "1" and settings.SUPPORT_ENABLED:
+                thanks = support.completed_session_summary(request.GET.get("session_id", ""))
+            response = super().serve(request, *args, support_thanks=thanks, **kwargs)
+        # Every render here is per-visitor (a thank-you, an error, the
+        # visitor's own choice), so Cloudflare must never cache one.
+        response["Cache-Control"] = "private, no-store"
+        return response
+
+    def _serve_checkout(self, request, *args, **kwargs):
+        frequency = request.POST.get("frequency", "")
+        choice = request.POST.get("amount", "")
+        custom = request.POST.get("custom_amount", "").strip()[:20]
+        submitted = {"frequency": frequency, "amount": choice, "custom": custom}
+
+        def rerender(error=""):
+            return Page.serve(
+                self, request, *args, support_form=submitted, support_error=error, **kwargs
+            )
+
+        if not settings.SUPPORT_ENABLED:
+            return rerender()
+
+        if frequency not in self.frequencies:
+            return rerender("Please choose how often you'd like to give.")
+        try:
+            cents = support.amount_to_cents(self, choice, custom)
+        except support.AmountError as exc:
+            return rerender(str(exc))
+
+        if ratelimit.hit(
+            "support-checkout", _ip_hash(request),
+            self.CHECKOUT_LIMIT, self.CHECKOUT_WINDOW_SECONDS,
+        ):
+            return rerender("Please wait a few minutes and try again.")
+
+        try:
+            checkout_url = support.create_checkout_session(
+                self.get_full_url(request), frequency, cents,
+            )
+        except stripe.StripeError as exc:
+            support.log_stripe_error("Couldn't create a Stripe Checkout Session", exc)
+            return rerender(
+                "We couldn't reach our payment provider. Please try again in a moment."
+            )
+
+        redirect = HttpResponseRedirect(checkout_url)
+        redirect.status_code = 303
+        return redirect

@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}support{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/support.css' %}">{% endblock %}
+{% block extra_head %}
+{% if support_thanks %}<meta name="robots" content="noindex">{% endif %}
+{% if page.hero_image %}
+  {% image page.hero_image fill-1200x630 format-webp as og_img %}
+  <meta property="og:image" content="{{ og_img.url }}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% comment %}
+Matches sites-of-grace-support-mockup.html section for section. Every copy
+field is optional: an empty one renders nothing, and a section whose fields
+are all empty leaves no wrapper behind. The give card shows exactly one of
+three panels -- the thank-you (a completed Stripe session), the "opens
+soon" panel (settings.SUPPORT_ENABLED off), or the form. The form works
+with JavaScript off: the pickers are real radios inside labels, and the
+"Other" box is always visible until support.js takes over.
+{% endcomment %}
+
+{# ---------- 1. Hero ---------- #}
+<section class="support-hero">
+  <div class="support-hero-media" aria-hidden="true">
+    {% if page.hero_image %}
+      {% image page.hero_image fill-1800x700 format-webp as hero_img %}
+      <img src="{{ hero_img.url }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" alt="">
+    {% else %}
+      <div class="support-photo"></div>
+    {% endif %}
+  </div>
+  <div class="container support-hero-inner">
+    <div class="support-hero-copy">
+      {% if page.hero_eyebrow %}<p class="support-eyebrow">{{ page.hero_eyebrow }}</p>{% endif %}
+      <h1>{{ page.hero_title|default:page.title }}</h1>
+      {% if page.hero_intro %}<p class="support-hero-intro">{{ page.hero_intro }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+{# ---------- 2. Why we ask + what support helps with ---------- #}
+{% if page.why_eyebrow or page.why_heading or page.why_body or page.pull_quote or page.helps_eyebrow or page.helps %}
+<section class="support-why">
+  <div class="container support-why-grid">
+    {% if page.why_eyebrow or page.why_heading or page.why_body or page.pull_quote %}
+      <div class="support-why-copy">
+        {% if page.why_eyebrow %}<p class="support-eyebrow">{{ page.why_eyebrow }}</p>{% endif %}
+        {% if page.why_heading %}<h2 class="support-h2">{{ page.why_heading }}</h2>{% endif %}
+        {% if page.why_body %}<div class="support-prose">{{ page.why_body|richtext }}</div>{% endif %}
+        {% if page.pull_quote %}
+          <blockquote class="support-pull">
+            <p>{{ page.pull_quote }}{% if page.pull_quote_cite %} <cite>{{ page.pull_quote_cite }}</cite>{% endif %}</p>
+          </blockquote>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if page.helps_eyebrow or page.helps %}
+      <div class="support-helps-wrap">
+        {% if page.helps_eyebrow %}<p class="support-eyebrow">{{ page.helps_eyebrow }}</p>{% endif %}
+        {% if page.helps %}
+          <div class="support-helps">
+            {% for block in page.helps %}
+              <div class="support-help">
+                {% include "includes/_line_icon.html" with icon=block.value.icon %}
+                <h3>{{ block.value.title }}</h3>
+                {% if block.value.blurb %}<p>{{ block.value.blurb }}</p>{% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+{# ---------- 3. The give card + sidebar ---------- #}
+<section class="support-give" id="give">
+  <div class="container support-give-grid">
+    <div class="support-card">
+
+      {% if support_thanks %}
+        {# tabindex so support.js can move focus here when Stripe sends the visitor back. #}
+        <div class="support-thanks" role="status" tabindex="-1" data-support-thanks>
+          <svg class="support-seal" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="40" cy="40" r="36"/><circle cx="40" cy="40" r="29" opacity=".5"/><path d="M27 41l9 9 17-19"/></svg>
+          {% if page.thanks_heading %}<h2>{{ page.thanks_heading }}</h2>{% endif %}
+          {% if page.thanks_text %}<p>{{ page.thanks_text }}</p>{% endif %}
+          <p class="support-meta">{{ support_thanks.amount }} · {{ support_thanks.frequency }} · A receipt is on its way to your email.</p>
+          {% if support_continue_url %}
+            <p class="support-meta support-meta--link"><a href="{{ support_continue_url }}">Continue exploring the map →</a></p>
+          {% endif %}
+        </div>
+
+      {% elif not support_enabled %}
+        <div class="support-soon">
+          <svg class="support-seal support-seal--soon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="40" cy="40" r="36"/><path d="M40 22v36M28 34h24"/></svg>
+          {% if page.soon_heading %}<h2>{{ page.soon_heading }}</h2>{% endif %}
+          {% if page.soon_text %}{{ page.soon_text|linebreaks }}{% endif %}
+        </div>
+
+      {% else %}
+        <form class="support-form" method="post" action="{{ page.url }}#give"
+              data-support-form data-default-once="{{ page.default_amount_once }}" data-default-monthly="{{ page.default_amount_monthly }}">
+          {% csrf_token %}
+          {% if page.give_heading %}<h2>{{ page.give_heading }}</h2>{% endif %}
+          {% if page.give_lede %}<p class="support-lede">{{ page.give_lede }}</p>{% endif %}
+
+          {% if page.allow_monthly %}
+            <fieldset class="support-freq">
+              <legend class="sr-only">How often</legend>
+              <label><input type="radio" name="frequency" value="once"{% if support_frequency == "once" %} checked{% endif %}><span>One Time</span></label>
+              <label><input type="radio" name="frequency" value="monthly"{% if support_frequency == "monthly" %} checked{% endif %}><span>Monthly</span></label>
+            </fieldset>
+          {% else %}
+            <input type="hidden" name="frequency" value="once">
+          {% endif %}
+
+          <fieldset class="support-amounts" style="--support-cols: {{ page.preset_list|length|add:1 }}">
+            <legend class="sr-only">Amount</legend>
+            {% for amount in page.preset_list %}
+              {% with value=amount|stringformat:"d" %}
+                <label class="support-amt"><input type="radio" name="amount" value="{{ value }}"{% if support_amount == value %} checked{% endif %}><span>${{ value }}<small class="support-per" data-support-per>{% if support_frequency == "monthly" %}/mo{% endif %}</small></span></label>
+              {% endwith %}
+            {% endfor %}
+            <label class="support-amt support-amt--other"><input type="radio" name="amount" value="other"{% if support_amount == "other" %} checked{% endif %}><span>Other</span></label>
+          </fieldset>
+
+          <div class="support-custom" data-support-custom>
+            <div class="support-money">
+              <b aria-hidden="true">$</b>
+              <input id="supportCustom" name="custom_amount" type="text" inputmode="decimal" autocomplete="off"
+                     value="{{ support_custom }}" placeholder="Amount" aria-label="Other amount in US dollars" aria-describedby="supportRange">
+            </div>
+            <span class="support-hint" id="supportRange">{{ support_range }}</span>
+          </div>
+
+          {% if support_error %}<p class="support-error" role="alert">{{ support_error }}</p>{% endif %}
+
+          {# Neutral until support.js names the amount, so a JS-off label never shows a stale one. #}
+          <button class="btn btn-gold support-submit" type="submit"><span data-support-label>Continue to Secure Checkout</span> <span class="support-arr" aria-hidden="true">→</span></button>
+          <p class="support-secure">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Secure payment by Stripe. We never see or store your card details.
+          </p>
+          {% if page.manage_url and page.allow_monthly %}
+            <p class="support-manage"><a href="{{ page.manage_url }}" rel="noopener">Manage monthly support</a></p>
+          {% endif %}
+
+          <p class="support-fine">{{ page.disclaimer }}</p>
+        </form>
+      {% endif %}
+    </div>
+
+    {% if page.ways_heading or page.ways_intro or page.ways or page.free_card_heading or page.free_card_text %}
+      <aside class="support-side">
+        {% if page.ways_heading or page.ways_intro or page.ways %}
+          <div class="support-side-card">
+            {% if page.ways_heading %}<h3>{{ page.ways_heading }}</h3>{% endif %}
+            {% if page.ways_intro %}<p class="support-side-intro">{{ page.ways_intro }}</p>{% endif %}
+            {% if page.ways %}
+              <ul class="support-ways">
+                {% for block in page.ways %}
+                  <li>
+                    <span class="support-way-icon">{% include "includes/_line_icon.html" with icon=block.value.icon %}</span>
+                    <div>
+                      <p class="support-way-title">{{ block.value.title }}</p>
+                      <div class="support-way-text">{{ block.value.text }}</div>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if page.free_card_heading or page.free_card_text %}
+          <div class="support-side-card support-side-card--navy">
+            <svg class="support-emblem" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="60"/><path d="M100 4 L108 92 L196 100 L108 108 L100 196 L92 108 L4 100 L92 92Z"/></svg>
+            {% if page.free_card_heading %}<h3>{{ page.free_card_heading }}</h3>{% endif %}
+            {% if page.free_card_text %}<p>{{ page.free_card_text }}</p>{% endif %}
+          </div>
+        {% endif %}
+      </aside>
+    {% endif %}
+  </div>
+</section>
+
+{# ---------- 4. Common questions ---------- #}
+{% if page.faqs %}
+<section class="support-faq">
+  <div class="container support-faq-inner">
+    {% if page.faq_eyebrow %}<p class="support-eyebrow support-eyebrow--center">{{ page.faq_eyebrow }}</p>{% endif %}
+    {% if page.faq_heading %}<h2 class="support-h2">{{ page.faq_heading }}</h2>{% endif %}
+    {% for block in page.faqs %}
+      <details>
+        <summary>{{ block.value.question }}</summary>
+        <div class="support-faq-answer">
+          {{ block.value.answer }}
+          {% if block.value.show_manage_link and page.manage_url %}
+            <p><a href="{{ page.manage_url }}" rel="noopener">Manage your monthly support →</a></p>
+          {% endif %}
+        </div>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}<script src="{% static 'js/support.js' %}" defer></script>{% endblock %}

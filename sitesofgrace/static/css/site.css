@@ -69,6 +69,9 @@ a { color: inherit; text-decoration: none; }
 .btn-secondary:hover { background: var(--parchment); }
 .btn-gold { background: var(--gold); color: #fff; border-color: var(--gold); }
 .btn-gold:hover { filter: brightness(1.05); }
+/* Quiet outline button (the home page's support band). */
+.btn-outline-gold { background: transparent; color: var(--navy); border-color: var(--gold); }
+.btn-outline-gold:hover { background: var(--navy); color: var(--ivory); border-color: var(--navy); }
 
 /* ---------- Header ---------- */
 .site-header {
@@ -265,6 +268,10 @@ a { color: inherit; text-decoration: none; }
 .footer-links li { margin: 0 0 9px; }
 .footer-links a { color: rgba(253,249,242,.82); transition: color .15s ease; }
 .footer-links a:hover { color: var(--gold); }
+/* "Support" -- the one gold footer link, with a small heart. */
+.footer-links a.footer-support { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); }
+.footer-links a.footer-support:hover { color: var(--ivory); }
+.footer-support svg { width: 12px; height: 12px; flex: none; }
 
 .footer-newsletter p { font-size: 14px; line-height: 1.55; margin: 0 0 14px; }
 .newsletter-form { display: flex; background: #fff; border-radius: 999px; padding: 4px; max-width: 340px; }

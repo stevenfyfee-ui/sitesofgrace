@@ -65,6 +65,15 @@ CSRF_TRUSTED_ORIGINS = [
 
 WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAILADMIN_BASE_URL", "")
 
+# A test-mode Stripe key in production is a mistake worth noticing, not a
+# crash: the Support page would take test cards and no real payments. The
+# key itself is never logged.
+if STRIPE_SECRET_KEY.startswith("sk_test_") and not DEBUG:  # noqa: F405
+    logger.warning(
+        "STRIPE_SECRET_KEY is a test-mode key while DEBUG is False. The "
+        "Support page will use Stripe test mode."
+    )
+
 
 # --- Database -------------------------------------------------------------
 # DATABASE_URL is not present during the App Platform build (see module

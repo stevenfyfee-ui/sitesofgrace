@@ -212,6 +212,18 @@ MODERATION_EMAIL = os.environ.get("MODERATION_EMAIL") or DEFAULT_FROM_EMAIL
 # REMOTE_ADDR regardless of this value.
 TRUSTED_PROXY_COUNT = int(os.environ.get("TRUSTED_PROXY_COUNT", "1"))
 
+# --- Support page (Stripe Checkout) -----------------------------------------
+# home.SupportPage sends visitors to Stripe-hosted Checkout; no card data
+# ever touches this app. Production values are set only in the DigitalOcean
+# console; locally, put sk_test_ values in the gitignored local.py (dev.py
+# recomputes SUPPORT_ENABLED after importing it). Never log, print, or render
+# either value. STRIPE_SUPPORT_PRODUCT_ID is the one Product created once in
+# the Stripe dashboard ("Support for Sites of Grace"). With either unset the
+# page still renders, showing its "opens soon" panel instead of the form.
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_SUPPORT_PRODUCT_ID = os.environ.get("STRIPE_SUPPORT_PRODUCT_ID", "")
+SUPPORT_ENABLED = bool(STRIPE_SECRET_KEY and STRIPE_SUPPORT_PRODUCT_ID)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags support_tags %}
 
 {% block body_class %}home{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
@@ -164,6 +164,25 @@
         {% if page.partners_quote_source %}<cite>— {{ page.partners_quote_source }}</cite>{% endif %}
       </blockquote>
     {% endif %}
+  </div>
+</section>
+{% endif %}
+
+{# ---------- Support band ---------- #}
+{% comment %}
+  A quiet link to the Support page, just above the footer -- only while that
+  page is live and its "Show home band" box is ticked. Never a form, never
+  an amount; its copy comes from the Support page itself.
+{% endcomment %}
+{% support_page as support %}
+{% if support and support.show_home_band %}
+<section class="support-band" aria-label="Support Sites of Grace">
+  <div class="container support-band-inner">
+    <svg class="support-band-orn" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="20" cy="20" r="17"/><path d="M20 9v22M13 16h14"/></svg>
+    {% if support.home_band_text or support.home_band_emphasis %}
+      <p>{{ support.home_band_text }}{% if support.home_band_text and support.home_band_emphasis %} {% endif %}{% if support.home_band_emphasis %}<em>{{ support.home_band_emphasis }}</em>{% endif %}</p>
+    {% endif %}
+    <a class="btn btn-outline-gold" href="{{ support.url }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Support Sites of Grace</a>
   </div>
 </section>
 {% endif %}

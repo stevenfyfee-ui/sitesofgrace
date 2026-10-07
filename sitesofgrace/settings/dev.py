@@ -16,3 +16,6 @@ try:
     from .local import *
 except ImportError:
     pass
+
+# base.py computed this before local.py could set test-mode Stripe keys.
+SUPPORT_ENABLED = bool(STRIPE_SECRET_KEY and STRIPE_SUPPORT_PRODUCT_ID)

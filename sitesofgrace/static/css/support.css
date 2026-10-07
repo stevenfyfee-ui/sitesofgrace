@@ -1,0 +1,209 @@
+/* ============================================================
+   Sites of Grace — "Support Sites of Grace" page
+   Uses the brand tokens defined in site.css (:root). Matches
+   sites-of-grace-support-mockup.html section for section; class names are
+   prefixed (support-*) so nothing here collides with other page CSS.
+   Buttons are the site's own .btn/.btn-gold, as on "Our Story".
+   ============================================================ */
+
+/* ---------- Shared type ---------- */
+.support-eyebrow {
+  font-family: var(--serif-titling); font-size: 12px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 12px;
+}
+.support-eyebrow--center { text-align: center; }
+.support h1, .support h2, .support h3 {
+  font-family: var(--serif-display); font-weight: 500; line-height: 1.08; margin: 0; color: var(--navy);
+}
+.support-h2 { font-size: clamp(30px, 3.6vw, 40px); margin-bottom: 18px !important; }
+.support-prose p { font-size: 15.5px; line-height: 1.8; color: #3a4458; margin: 0 0 14px; }
+.support-prose a, .support-way-text a, .support-faq-answer a, .support-meta a, .support-manage a { color: var(--blue); text-decoration: underline; }
+
+/* ---------- Photo slot ----------
+   No image -> the same "dusk" brand gradient as the Our Story page
+   (.about-photo--dusk in about.css), so the page looks finished with
+   nothing uploaded. */
+.support-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, #f6d49a 0%, #e9ac72 40%, #b87460 70%, #4b4458 100%);
+}
+
+/* ---------- 1. Hero ---------- */
+.support-hero { position: relative; min-height: 320px; display: flex; align-items: center; overflow: hidden; }
+.support-hero-media { position: absolute; inset: 0; }
+.support-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.support-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(3,20,45,.88) 0%, rgba(3,25,55,.66) 42%, rgba(3,25,55,.15) 70%, transparent 86%);
+}
+.support-hero-inner { position: relative; z-index: 2; }
+.support-hero-copy { max-width: 580px; padding: 56px 0; }
+.support .support-hero h1 { color: var(--ivory); font-size: clamp(38px, 5vw, 56px); margin-bottom: 18px; }
+.support-hero-intro { font-size: 16px; line-height: 1.75; color: rgba(253,249,242,.88); margin: 0; }
+
+/* ---------- 2. Why + helps ---------- */
+.support-why { padding: 64px 0 24px; }
+.support-why-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+.support-pull { margin: 22px 0 0; padding: 4px 0 4px 20px; border-left: 2px solid var(--gold); }
+.support-pull p {
+  margin: 0; font-family: var(--serif-display); font-style: italic;
+  font-size: 22px; line-height: 1.45; color: var(--navy);
+}
+.support-pull cite { font-size: 15px; font-style: normal; color: var(--stone); }
+.support-helps { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.support-help { border: 1px solid var(--gold-soft); border-radius: 8px; padding: 20px 20px 18px; background: rgba(255,255,255,.6); }
+.support-help svg { display: block; width: 28px; height: 28px; color: var(--gold); margin-bottom: 10px; }
+.support .support-help h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.support-help p { font-size: 13px; line-height: 1.6; color: var(--stone); margin: 0; }
+
+/* ---------- 3. Give card ---------- */
+.support-give { padding: 40px 0 70px; scroll-margin-top: 80px; }
+.support-give-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px; align-items: start; }
+.support-card {
+  background: #fff; border: 1px solid var(--gold-soft); border-radius: 8px;
+  padding: 34px 36px 30px; box-shadow: 0 24px 50px -40px rgba(3,37,83,.6);
+}
+.support .support-form h2 { font-size: 32px; margin-bottom: 6px; }
+.support-lede { font-size: 14px; color: var(--stone); margin: 0 0 22px; line-height: 1.6; }
+.support-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+/* Frequency: a pill toggle made of two real radios. */
+.support-freq.support-freq {
+  display: inline-grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--gold); border-radius: 999px; padding: 3px; margin-bottom: 20px;
+}
+.support-freq label { position: relative; }
+.support-freq input, .support-amt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.support-freq span {
+  display: block; padding: 9px 22px; border-radius: 999px;
+  font-family: var(--serif-titling); font-size: 11.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--blue); text-align: center;
+}
+.support-freq input:checked + span { background: var(--navy); color: var(--ivory); }
+.support-freq input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Amount tiles: one column per preset, plus "Other". */
+.support-amounts.support-amounts {
+  display: grid; grid-template-columns: repeat(var(--support-cols, 5), 1fr);
+  gap: 10px; margin-bottom: 14px;
+}
+.support-amt { position: relative; }
+.support-amt span {
+  display: flex; align-items: center; justify-content: center; height: 54px;
+  border: 1px solid rgba(95,100,112,.3); border-radius: 6px; background: var(--ivory);
+  font-family: var(--serif-display); font-size: 24px; font-weight: 600; color: var(--navy);
+  transition: border-color .15s ease, background .15s ease;
+}
+.support-amt span small { font-family: var(--sans); font-size: 11px; font-weight: 400; color: var(--stone); margin-left: 2px; }
+.support-amt input:hover + span { border-color: var(--gold); }
+.support-amt input:checked + span { border-color: var(--gold); background: var(--parchment); box-shadow: inset 0 0 0 1px var(--gold); }
+.support-amt input:checked + span small { color: var(--blue); }
+.support-amt input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+.support-amt--other span { font-family: var(--sans); font-size: 14px; font-weight: 600; }
+
+/* "Other" amount: always visible without JS; support.js hides it until
+   "Other" is chosen (.is-enhanced on the form). */
+.support-custom { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.is-enhanced .support-custom { display: none; }
+.is-enhanced .support-custom.is-on { display: flex; }
+.support-money { position: relative; flex: 1; max-width: 220px; }
+.support-money b {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  font-family: var(--sans); color: var(--stone); font-weight: 500;
+}
+.support-money input {
+  font-family: var(--sans); font-size: 16px; color: var(--navy); background: var(--ivory);
+  border: 1px solid rgba(95,100,112,.3); border-radius: 4px; padding: 12px 13px 12px 26px; width: 100%;
+}
+.support-money input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(199,154,66,.2); background: #fff; }
+.support-hint { font-family: var(--sans); font-size: 12px; color: var(--stone); }
+
+.support-error {
+  font-family: var(--sans); font-size: 13.5px; line-height: 1.5; color: var(--navy);
+  background: var(--parchment); border-left: 3px solid var(--red); border-radius: 4px;
+  padding: 10px 14px; margin: 0 0 14px;
+}
+
+.support-submit { width: 100%; margin-top: 6px; padding: 15px 24px; font-size: 15px; gap: 10px; }
+.support-arr { font-family: var(--serif-body); font-size: 16px; line-height: 1; }
+.support-secure {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--sans); font-size: 12px; color: var(--stone); margin: 12px 0 0;
+}
+.support-secure svg { width: 14px; height: 14px; flex: none; }
+.support-manage { font-family: var(--sans); font-size: 12.5px; text-align: center; margin: 8px 0 0; }
+.support-fine {
+  font-family: var(--sans); font-size: 12px; line-height: 1.6; color: var(--stone);
+  border-top: 1px solid var(--gold-soft); padding-top: 16px; margin: 20px 0 0;
+}
+
+/* "Opens soon" (Stripe not configured) and thank-you panels. */
+.support-soon { text-align: center; padding: 16px 8px 6px; }
+.support .support-soon h2 { font-size: 30px; margin-bottom: 10px; }
+.support-soon p { font-size: 14.5px; line-height: 1.7; color: #3a4458; margin: 0 auto 6px; max-width: 420px; }
+.support-thanks { text-align: center; padding: 24px 10px 10px; }
+.support-thanks:focus { outline: none; }
+.support .support-thanks h2 { font-size: 36px; margin-bottom: 10px; }
+.support-thanks p { font-size: 15px; line-height: 1.7; color: #3a4458; max-width: 440px; margin: 0 auto 10px; }
+.support-thanks .support-meta { font-family: var(--sans); font-size: 13px; color: var(--stone); }
+.support-meta--link { margin-top: 14px !important; }
+.support-seal { display: block; width: 74px; height: 74px; margin: 0 auto 18px; color: var(--gold); }
+.support-seal--soon { width: 60px; height: 60px; margin-bottom: 14px; }
+
+/* Sidebar */
+.support-side { display: flex; flex-direction: column; gap: 18px; }
+.support-side-card { border: 1px solid var(--gold-soft); border-radius: 8px; padding: 24px 24px 22px; background: rgba(255,255,255,.55); }
+.support .support-side-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+.support-side-intro { font-size: 13.5px; line-height: 1.6; color: var(--stone); margin: 0 0 14px; }
+.support-ways { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.support-ways li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+.support-way-icon {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--gold);
+  display: grid; place-items: center; color: var(--navy);
+}
+.support-way-icon svg { width: 16px; height: 16px; stroke-width: 1.5; }
+.support-way-title { font-size: 15px; font-weight: 600; margin: 0 0 2px; color: var(--navy); }
+.support-way-text p { font-size: 13px; line-height: 1.55; color: var(--stone); margin: 0; }
+.support-side-card--navy { background: var(--navy); border-color: var(--navy); position: relative; overflow: hidden; }
+.support .support-side-card--navy h3 { color: var(--ivory); margin-bottom: 12px; }
+.support-side-card--navy p { position: relative; font-size: 14px; line-height: 1.7; color: rgba(253,249,242,.82); margin: 0; }
+.support-emblem { position: absolute; right: -40px; bottom: -40px; width: 170px; height: 170px; color: var(--gold); opacity: .18; }
+
+/* ---------- 4. FAQ ---------- */
+.support-faq { background: var(--parchment); border-top: 1px solid var(--gold-soft); padding: 64px 0 70px; }
+.support-faq-inner { max-width: 820px; }
+.support-faq .support-h2 { text-align: center; margin-bottom: 28px !important; }
+.support-faq details { border-bottom: 1px solid var(--gold-soft); }
+.support-faq details:first-of-type { border-top: 1px solid var(--gold-soft); }
+.support-faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  padding: 18px 4px; font-family: var(--serif-display); font-size: 22px; font-weight: 600; color: var(--navy);
+}
+.support-faq summary::-webkit-details-marker { display: none; }
+.support-faq summary::after {
+  content: "+"; font-family: var(--serif-body); font-size: 22px; color: var(--gold);
+  transition: transform .2s ease; flex: none;
+}
+.support-faq details[open] summary::after { transform: rotate(45deg); }
+.support-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.support-faq-answer p { font-size: 15px; line-height: 1.75; color: #3a4458; margin: 0 4px 20px; }
+
+/* The FAQ's parchment runs straight into the footer, as in the mockup. */
+.support .site-footer { margin-top: 0; }
+
+/* ---------- Responsive ----------
+   The header's own nav collapses at 900px (site.css). */
+@media (max-width: 1080px) {
+  .support-why-grid { grid-template-columns: 1fr; gap: 34px; }
+  .support-give-grid { grid-template-columns: 1fr; }
+  .support-side { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .support-hero { min-height: 360px; align-items: flex-end; }
+  .support-hero::after { background: linear-gradient(180deg, rgba(3,25,55,.15) 0%, rgba(3,20,45,.9) 60%); }
+  .support-hero-copy { padding: 36px 0 40px; }
+  .support-helps { grid-template-columns: 1fr; }
+  .support-card { padding: 26px 20px 24px; }
+  .support-amounts.support-amounts { grid-template-columns: repeat(3, 1fr); }
+  .support-side { grid-template-columns: 1fr; }
+}
