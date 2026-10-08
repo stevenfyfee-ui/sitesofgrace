@@ -64,12 +64,19 @@ def _strip_gps(image):
     return exif
 
 
-def _resize_within(image, max_edge):
-    width, height = image.size
+def size_within(width, height, max_edge):
+    """The (width, height) _resize_within produces — also used to state a
+    stored derivative's real width (srcset w descriptors) without opening it."""
     if max(width, height) <= max_edge:
-        return image.copy()
+        return width, height
     ratio = max_edge / float(max(width, height))
-    new_size = (max(1, round(width * ratio)), max(1, round(height * ratio)))
+    return max(1, round(width * ratio)), max(1, round(height * ratio))
+
+
+def _resize_within(image, max_edge):
+    new_size = size_within(*image.size, max_edge)
+    if new_size == image.size:
+        return image.copy()
     return image.resize(new_size, Image.LANCZOS)
 
 

@@ -270,6 +270,14 @@ class PilgrimPhoto(models.Model):
         return f"{self.owner} — {self.site} ({self.uuid})"
 
     @property
+    def large_width(self):
+        """Pixel width of `large` (and `public_large`, the same image
+        re-encoded) — width/height are the oriented original's."""
+        from .imaging import LARGE_MAX_EDGE, size_within
+
+        return size_within(self.width, self.height, LARGE_MAX_EDGE)[0]
+
+    @property
     def public_credit_label(self):
         """How to credit this photo on the public gallery, per whichever
         choice was in effect at share time (public_credit) — never the

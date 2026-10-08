@@ -9,14 +9,16 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.db import transaction
-from django.db.models import F, Max, Q
+from django.db.models import F, Max, OuterRef, Prefetch, Q, Subquery
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
+from wagtail.images import get_image_model
 
 from catalog.models import SacredSitePage
 
@@ -29,7 +31,7 @@ from .models import (
 from .moderation import apply_auto_hide_policy
 from .permissions import (
     can_comment, can_interact, can_share_photo, can_view_photo, can_view_post,
-    can_view_profile_detail, is_following, visible_posts_for,
+    can_view_profile_detail, is_following, profile_photos_for, visible_posts_for,
 )
 
 User = get_user_model()
@@ -41,6 +43,8 @@ COMMENTS_PER_HOUR = 30
 FEED_PAGE_SIZE = 20
 PUBLIC_SHARES_PER_DAY = 10
 REPORTS_PER_HOUR_PER_IP = 10
+PROFILE_SHARED_PHOTOS_PAGE_SIZE = 18  # three full rows at six across
+PROFILE_SITE_TILE_RENDITION = "fill-640x480"  # 4:3, matches the tile's aspect-ratio
 
 
 def _client_ip(request):
@@ -88,6 +92,30 @@ def portal_home(request):
     return render(request, "pilgrims/marketing.html")
 
 
+def _profile_site_visits(owner, visible_photos):
+    """The owner's SiteVisits, each annotated with tile_photo_id: the pk of
+    the newest photo of that site that `visible_photos` (already narrowed to
+    what the viewer may see — see permissions.profile_photos_for) allows,
+    or None. One query regardless of how many sites, plus one to prefetch
+    the featured images' tile renditions — the old {% image %} loop did a
+    rendition lookup per site."""
+    tile_photo = (
+        visible_photos.filter(site=OuterRef("site"))
+        .order_by(F("taken_on").desc(nulls_last=True), "-created_at", "-pk")
+        .values("pk")[:1]
+    )
+    return (
+        SiteVisit.objects.filter(owner=owner)
+        .select_related("site")
+        .prefetch_related(Prefetch(
+            "site__featured_image",
+            queryset=get_image_model().objects.prefetch_renditions(PROFILE_SITE_TILE_RENDITION),
+        ))
+        .annotate(tile_photo_id=Subquery(tile_photo))
+        .order_by("-created_at", "-pk")
+    )
+
+
 def profile_detail(request, handle):
     profile = get_object_or_404(PilgrimProfile.objects.select_related("user"), handle=handle)
     owner = profile.user
@@ -126,12 +154,27 @@ def profile_detail(request, handle):
     }
 
     if can_view:
-        visits = SiteVisit.objects.filter(owner=owner).select_related("site")
+        visible_photos = profile_photos_for(viewer, owner)
+        visits = list(_profile_site_visits(owner, visible_photos))
+        tile_photos = PilgrimPhoto.objects.in_bulk(
+            [v.tile_photo_id for v in visits if v.tile_photo_id]
+        )
+        for visit in visits:
+            visit.tile_photo = tile_photos.get(visit.tile_photo_id)
         context["visited"] = [v for v in visits if v.status == SiteVisit.STATUS_VISITED]
         context["want_to_go"] = [v for v in visits if v.status == SiteVisit.STATUS_WANT_TO_GO]
         context["has_map_sites"] = any(
             v.site.latitude is not None and v.site.longitude is not None for v in visits
         )
+
+        shared_photos = (
+            visible_photos.filter(is_public_on_site=True, hidden_by_staff=False, site__live=True)
+            .select_related("site")
+            .order_by("-public_shared_at", "-pk")
+        )
+        context["shared_photos_page"] = Paginator(
+            shared_photos, PROFILE_SHARED_PHOTOS_PAGE_SIZE
+        ).get_page(request.GET.get("shared"))
 
     return render(request, "pilgrims/profile_detail.html", context)
 

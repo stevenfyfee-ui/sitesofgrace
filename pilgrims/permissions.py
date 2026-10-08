@@ -59,6 +59,28 @@ def can_view_photo(viewer, photo) -> bool:
     return getattr(viewer, "is_authenticated", False) and viewer.pk == photo.owner_id
 
 
+def profile_photos_for(viewer, owner):
+    """The owner's photos that may appear ON THE OWNER'S PROFILE PAGE as
+    seen by `viewer` (Visited/Want-to-Go tile images, the shared-photos
+    grid). Assumes the caller already passed can_view_profile_detail —
+    this narrows WHICH photos, not WHETHER the profile is visible.
+
+    The owner sees all of their own photos, private ones included. Anyone
+    else — follower, stranger, anonymous — sees only photos currently
+    shared to a public site gallery and not hidden by staff, minus any the
+    owner shared with an anonymous credit: the gallery promises those
+    aren't attributed to anyone, and putting them on the owner's profile
+    would attribute them."""
+    from .models import PilgrimPhoto, PilgrimProfile
+
+    photos = PilgrimPhoto.objects.filter(owner=owner)
+    if getattr(viewer, "is_authenticated", False) and viewer.pk == owner.pk:
+        return photos
+    return photos.filter(is_public_on_site=True, hidden_by_staff=False).exclude(
+        public_credit=PilgrimProfile.CREDIT_ANONYMOUS
+    )
+
+
 def can_view_post(viewer, post) -> bool:
     """Owner, or an accepted follower, and not blocked. No other audience —
     see pilgrims/models.py:Post for why there's no visibility field to

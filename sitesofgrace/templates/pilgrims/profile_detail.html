@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}pilgrims{% endblock %}
 {% block title %}{{ profile.display_name|default:profile.handle }}{% endblock %}
@@ -120,14 +120,7 @@
     <div class="pilgrims-section">
       <div class="pilgrims-head"><h2>Visited <span class="passport-count">({{ visited|length }})</span></h2></div>
       {% if visited %}
-        <div class="strip-grid">
-          {% for visit in visited %}
-            <a class="strip-card" href="{{ visit.site.url }}">
-              <div class="strip-img">{% if visit.site.featured_image %}{% image visit.site.featured_image fill-320x200 %}{% endif %}</div>
-              <div class="strip-label">{{ visit.site.title }}</div>
-            </a>
-          {% endfor %}
-        </div>
+        {% include "pilgrims/_site_tile_grid.html" with visits=visited %}
       {% else %}
         <div class="directory-empty">No visited sites yet.</div>
       {% endif %}
@@ -136,18 +129,45 @@
     <div class="pilgrims-section">
       <div class="pilgrims-head"><h2>Want to Go <span class="passport-count">({{ want_to_go|length }})</span></h2></div>
       {% if want_to_go %}
-        <div class="strip-grid">
-          {% for visit in want_to_go %}
-            <a class="strip-card" href="{{ visit.site.url }}">
-              <div class="strip-img">{% if visit.site.featured_image %}{% image visit.site.featured_image fill-320x200 %}{% endif %}</div>
-              <div class="strip-label">{{ visit.site.title }}</div>
-            </a>
-          {% endfor %}
-        </div>
+        {% include "pilgrims/_site_tile_grid.html" with visits=want_to_go %}
       {% else %}
         <div class="directory-empty">Nothing on the want-to-go list yet.</div>
       {% endif %}
     </div>
+
+    {% comment %}
+      Owner always gets this section (the empty state is the invitation that
+      seeds galleries). Everyone else only when there's something to show —
+      gate on is_self OR count, never on the count alone.
+    {% endcomment %}
+    {% with shared_count=shared_photos_page.paginator.count %}
+    {% if is_self or shared_count %}
+    <div class="pilgrims-section" id="shared-photos">
+      <div class="pilgrims-head"><h2>Shared Photos <span class="passport-count">({{ shared_count }})</span></h2></div>
+      {% if shared_count %}
+        <div class="pilgrim-shared-grid">
+          {% for photo in shared_photos_page %}
+            <a class="pilgrim-shared-tile" href="{% pageurl photo.site %}gallery/" title="{{ photo.site.title }}">
+              <img src="{{ photo.public_thumb.url }}" alt="Photo at {{ photo.site.title }}" loading="lazy">
+            </a>
+          {% endfor %}
+        </div>
+        {% if shared_photos_page.has_other_pages %}
+          <nav class="pilgrim-shared-pager" aria-label="Shared photos pages">
+            {% if shared_photos_page.has_previous %}<a href="?shared={{ shared_photos_page.previous_page_number }}#shared-photos">&larr; Newer</a>{% else %}<span></span>{% endif %}
+            <span>Page {{ shared_photos_page.number }} of {{ shared_photos_page.paginator.num_pages }}</span>
+            {% if shared_photos_page.has_next %}<a href="?shared={{ shared_photos_page.next_page_number }}#shared-photos">Older &rarr;</a>{% else %}<span></span>{% endif %}
+          </nav>
+        {% endif %}
+      {% else %}
+        <div class="pilgrim-shared-empty">
+          <p>Photos you share to a sacred site's public gallery will appear here, helping other pilgrims see these places through your eyes.</p>
+          <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">Open my photo library</a>
+        </div>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endwith %}
   {% endif %}
 </div>
 {% endblock %}

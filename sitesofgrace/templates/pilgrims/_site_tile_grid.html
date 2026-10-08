@@ -1,0 +1,44 @@
+{% load wagtailcore_tags wagtailimages_tags pilgrim_tags %}
+{% comment %}
+  One Visited / Want-to-Go grid. `visits` come from views._profile_site_visits
+  with .tile_photo already resolved for THIS viewer (permissions.profile_photos_for):
+  the owner may get a private photo (presigned), anyone else only a publicly
+  shared one, served from its public derivative. Then the site's own image,
+  then the branded fallback.
+{% endcomment %}
+<div class="pilgrim-site-grid">
+  {% for visit in visits %}
+    <a class="pilgrim-site-tile" href="{% pageurl visit.site %}">
+      {% if visit.tile_photo %}
+        {% if is_self %}
+          {% pilgrim_photo_url visit.tile_photo "thumb" as thumb_url %}
+          {% pilgrim_photo_url visit.tile_photo "large" as large_url %}
+        {% else %}
+          {% firstof visit.tile_photo.public_thumb.url as thumb_url %}
+          {% firstof visit.tile_photo.public_large.url as large_url %}
+        {% endif %}
+        <div class="pilgrim-site-tile-img">
+          {% comment %}
+            Phones (<=640px) only ever get the 400px thumb. Above that, the
+            browser picks thumb or large against `sizes`, which mirrors
+            .pilgrim-site-grid: 2 across at <=1000px, 3 across up to the
+            1180px container, then fixed.
+          {% endcomment %}
+          <picture>
+            <source media="(min-width: 641px)"
+              srcset="{{ thumb_url }} 400w, {{ large_url }} {{ visit.tile_photo.large_width }}w"
+              sizes="(max-width: 1000px) calc((100vw - 60px) / 2), (max-width: 1220px) calc((100vw - 80px) / 3), 380px">
+            <img src="{{ thumb_url }}" alt="" loading="lazy">
+          </picture>
+        </div>
+      {% elif visit.site.featured_image %}
+        <div class="pilgrim-site-tile-img">{% image visit.site.featured_image fill-640x480 alt="" loading="lazy" %}</div>
+      {% else %}
+        <div class="pilgrim-site-tile-img pilgrim-site-tile-img--fallback" aria-hidden="true">
+          <span class="pilgrim-site-tile-fallback-title">{{ visit.site.title }}</span>
+        </div>
+      {% endif %}
+      <span class="pilgrim-site-tile-caption">{{ visit.site.title }}</span>
+    </a>
+  {% endfor %}
+</div>
