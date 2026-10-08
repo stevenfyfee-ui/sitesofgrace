@@ -36,7 +36,7 @@
   content: ""; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(90deg, rgba(3,20,45,.86) 0%, rgba(3,25,55,.62) 38%, rgba(3,25,55,.12) 64%, transparent 80%);
 }
-.about-hero-inner { position: relative; z-index: 2; width: 100%; }
+.about-hero-inner { position: relative; z-index: 2; }
 .about-hero-copy { max-width: 590px; padding: 70px 0; }
 .about-hero h1 { font-family: var(--serif-display); font-weight: 500; line-height: 1.08; margin: 0 0 22px; font-size: clamp(38px, 5.2vw, 60px); }
 .about-hero-intro { font-size: 16px; line-height: 1.75; color: rgba(253,249,242,.88); margin: 0 0 28px; }
