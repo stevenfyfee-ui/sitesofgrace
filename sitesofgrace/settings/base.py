@@ -54,6 +54,11 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django_filters",
+    # Registers Anymail's own system checks (e.g. for deprecated/insecure
+    # ANYMAIL settings) via manage.py check. Installed unconditionally --
+    # which backend is actually active (SMTP, console, or Anymail's Resend
+    # backend) is decided per-environment in dev.py/production.py.
+    "anymail",
     "wagtailmenus",
     "allauth",
     "allauth.account",

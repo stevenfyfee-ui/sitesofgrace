@@ -75,6 +75,40 @@ if STRIPE_SECRET_KEY.startswith("sk_test_") and not DEBUG:  # noqa: F405
     )
 
 
+# --- Email (Resend via Anymail) --------------------------------------------
+# No hardcoded real addresses here, or anywhere else in the repo -- every
+# address below comes from the environment, falling back only to "" or to
+# another of these same env-sourced values, never to a literal mailbox.
+# base.py's own DEFAULT_FROM_EMAIL fallback (a literal address, used only by
+# dev.py's console backend) is untouched; these take over for the process
+# the moment production.py is imported.
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "")
+SERVER_EMAIL = os.environ.get("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
+# Same shape as MODERATION_EMAIL in base.py: fall back to DEFAULT_FROM_EMAIL
+# rather than failing silently or hardcoding an address.
+MODERATION_EMAIL = os.environ.get("MODERATION_EMAIL") or DEFAULT_FROM_EMAIL
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL") or DEFAULT_FROM_EMAIL
+
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+if RESEND_API_KEY:
+    EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+    ANYMAIL = {"RESEND_API_KEY": RESEND_API_KEY}
+elif not _RUNNING_COLLECTSTATIC:
+    # Not a crash: health checks, admin logins, and page publishing all work
+    # with no email configured at all. Only outbound mail silently goes
+    # nowhere until RESEND_API_KEY is set -- EMAIL_BACKEND stays whatever
+    # base.py set (plain SMTP, with no host configured either), so sending
+    # fails loudly instead of pretending to succeed. Skipped during
+    # collectstatic for the same reason as the SPACES_BUCKET warning below:
+    # this is a runtime gap, not a build-time one.
+    logger.warning(
+        "RESEND_API_KEY is not set. Production email is not configured -- "
+        "verification emails, moderation alerts, and any other outbound "
+        "mail will not be delivered."
+    )
+
+
 # --- Database -------------------------------------------------------------
 # DATABASE_URL is not present during the App Platform build (see module
 # docstring), so the dummy, connection-free fallback below is scoped strictly
