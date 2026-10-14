@@ -1,3 +1,11 @@
+import json
+import os
+import shutil
+import tempfile
+from io import StringIO
+
+from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.db import IntegrityError, transaction
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
@@ -279,3 +287,156 @@ class NearbySitesTests(SacredSitePageTestCase):
         self.assertIn("In the Area", html)
         self.assertIn("nearby-chip", html)
         self.assertIn("Betharram", html)
+
+
+class ImportTravelSectionsTests(SacredSitePageTestCase):
+    """import_travel_sections: ids only, all-or-nothing per page, drafts left
+    alone, and a publish whose revision carries the sections."""
+
+    BODY = "<h3>Near the Sanctuary</h3><ul><li>Hotel A</li></ul>"
+    LANGUAGE = "French · Euro (€)"
+
+    def setUp(self):
+        self.tmpdir = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.tmpdir, ignore_errors=True)
+
+    def write_file(self, pages):
+        path = os.path.join(self.tmpdir, "travel_import_test.json")
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump({"pages": pages}, fh)
+        return path
+
+    def run_import(self, path, *flags):
+        out = StringIO()
+        call_command("import_travel_sections", path, *flags, stdout=out)
+        return out.getvalue()
+
+    def entry(self, page, **extra):
+        data = {
+            "id": page.pk,
+            "title": page.title,
+            "url": page.url,
+            "quick": {"quick_language": self.LANGUAGE},
+            "sections": [{
+                "kind": "where-to-stay",
+                "action": "create",
+                "teaser": "Hotels near the Sanctuary",
+                "body_html": self.BODY,
+            }],
+        }
+        data.update(extra)
+        return data
+
+    def test_create_applies(self):
+        page = self.make_site(slug="imp-create")
+        out = self.run_import(self.write_file([self.entry(page)]))
+        page.refresh_from_db()
+        section = page.travel_sections.get(kind="where-to-stay")
+        self.assertEqual((section.body, section.teaser), (self.BODY, "Hotels near the Sanctuary"))
+        self.assertEqual(page.quick_language, self.LANGUAGE)
+        self.assertIn("Pages changed:  1", out)
+        self.assertIn("Sections created:     1", out)
+
+    def test_second_run_reports_zero_changed(self):
+        page = self.make_site(slug="imp-twice")
+        path = self.write_file([self.entry(page)])
+        self.run_import(path)
+        revisions = page.revisions.count()
+        out = self.run_import(path)
+        self.assertIn("Pages changed:  0", out)
+        self.assertIn("Pages unchanged:      1", out)
+        self.assertIn("Already correct:      1", out)
+        self.assertEqual(page.revisions.count(), revisions)
+
+    def test_page_with_unpublished_changes_is_skipped(self):
+        page = self.make_site(slug="imp-draft")
+        page.save_revision()
+        page = SacredSitePage.objects.get(pk=page.pk)
+        self.assertTrue(page.has_unpublished_changes)
+        out = self.run_import(self.write_file([self.entry(page)]))
+        self.assertIn("unpublished changes", out)
+        self.assertIn("Skipped:              1", out)
+        self.assertFalse(page.travel_sections.exists())
+        self.assertEqual(SacredSitePage.objects.get(pk=page.pk).quick_language, "")
+
+    def test_title_mismatch_is_skipped(self):
+        page = self.make_site(slug="imp-title")
+        out = self.run_import(self.write_file([self.entry(page, title="Some Other Shrine")]))
+        self.assertIn("title mismatch", out)
+        self.assertIn("Skipped:              1", out)
+        self.assertFalse(page.travel_sections.exists())
+
+    def test_over_length_value_skips_the_whole_page(self):
+        page = self.make_site(slug="imp-long")
+        limit = SacredSitePage._meta.get_field("quick_airport").max_length
+        entry = self.entry(page)
+        entry["quick"]["quick_airport"] = "x" * (limit + 1)
+        out = self.run_import(self.write_file([entry]))
+        self.assertIn(f"quick_airport is {limit + 1} chars (max {limit})", out)
+        page.refresh_from_db()
+        # Nothing from the page is written -- not the valid section, not the
+        # valid quick_language beside the bad value.
+        self.assertFalse(page.travel_sections.exists())
+        self.assertEqual(page.quick_language, "")
+
+    def test_create_against_a_different_body_is_a_conflict(self):
+        page = self.make_site(slug="imp-conflict")
+        self.add_travel(page, "where-to-stay", body="<p>Editor's own text.</p>")
+        out = self.run_import(self.write_file([self.entry(page)]))
+        self.assertIn("Conflicts:            1", out)
+        self.assertIn("Pages changed:  0", out)
+        self.assertEqual(
+            page.travel_sections.get(kind="where-to-stay").body, "<p>Editor's own text.</p>"
+        )
+
+    def test_change_publishes_a_revision_containing_the_sections(self):
+        page = self.make_site(slug="imp-revision")
+        self.run_import(self.write_file([self.entry(page)]))
+        page = SacredSitePage.objects.get(pk=page.pk)
+        self.assertFalse(page.has_unpublished_changes)
+        self.assertIsNotNone(page.live_revision_id)
+        self.assertEqual(page.live_revision_id, page.latest_revision_id)
+        from_revision = page.live_revision.as_object()
+        self.assertEqual(
+            [(s.kind, s.body) for s in from_revision.travel_sections.all()],
+            [("where-to-stay", self.BODY)],
+        )
+        self.assertEqual(from_revision.quick_language, self.LANGUAGE)
+
+    def test_update_sets_only_present_differing_values(self):
+        page = self.make_site(slug="imp-update")
+        self.add_travel(page, "getting-there", body="<p>Old.</p>", teaser="Keep me")
+        entry = self.entry(page, sections=[
+            {"kind": "getting-there", "action": "update", "body_html": "<p>New.</p>"},
+        ])
+        out = self.run_import(self.write_file([entry]))
+        section = page.travel_sections.get(kind="getting-there")
+        self.assertEqual((section.body, section.teaser), ("<p>New.</p>", "Keep me"))
+        self.assertIn("Bodies updated:       1", out)
+        self.assertIn("Teasers updated:      0", out)
+
+    def test_verify_reports_a_mismatch(self):
+        page = self.make_site(slug="imp-verify")
+        path = self.write_file([self.entry(page)])
+        self.run_import(path)
+        self.assertIn("Pages matching the file:       1", self.run_import(path, "--verify"))
+
+        SacredSitePage.objects.filter(pk=page.pk).update(quick_language="Changed")
+        out = StringIO()
+        with self.assertRaises(CommandError):
+            call_command("import_travel_sections", path, "--verify", stdout=out)
+        self.assertIn("Pages NOT matching:            1", out.getvalue())
+        self.assertIn("quick_language", out.getvalue())
+
+    def test_dry_run_writes_nothing(self):
+        page = self.make_site(slug="imp-dry")
+        out = self.run_import(self.write_file([self.entry(page)]), "--dry-run")
+        self.assertIn("Would change:  1", out)
+        self.assertFalse(page.travel_sections.exists())
+        self.assertEqual(page.revisions.count(), 0)
+
+    def test_path_must_match_exactly_one_file(self):
+        with self.assertRaises(CommandError):
+            self.run_import(os.path.join(self.tmpdir, "nothing-*.json"))
