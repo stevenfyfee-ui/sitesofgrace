@@ -183,15 +183,10 @@
     if (!el || !window.L || !window.SoGBasemap) return;
     var RED = { fill: '#D96B5F', stroke: '#032553' };
     var WHITE = { fill: '#FDF9F2', stroke: '#032553' };
-    function pinIcon(status) {
-      var s = status === 'visited' ? RED : WHITE;
-      var html =
-        '<svg class="site-pin" width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
-        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.5"/>' +
-        '<circle cx="13" cy="13" r="5" fill="' + s.stroke + '"/>' +
-        '</svg>';
-      return L.divIcon({ html: html, className: 'site-pin-icon', iconSize: [26, 34], iconAnchor: [13, 34], popupAnchor: [0, -30] });
-    }
+    // Same dots and zoom growth as the interactive map (home/map_page.html),
+    // but a higher floor and cap: a handful of markers, no crowding, and
+    // visited (red) vs in-my-journey (white) has to read at a glance.
+    function radiusFor(z) { return Math.max(5, Math.min(9, 5 + (z - 2) * 0.62)); }
     function popupHtml(site) {
       var statusLabel = site.status === 'visited' ? 'Visited' : 'In my journey';
       return '<div class="map-popup"><span class="badge badge-status">' + statusLabel + '</span><h3>' + site.name + '</h3><a class="map-popup-link" href="' + site.url + '">View site &rarr;</a></div>';
@@ -202,10 +197,21 @@
       .then(function (response) { return response.json(); })
       .then(function (data) {
         var bounds = [];
+        var dots = [];
         data.sites.forEach(function (site) {
-          var marker = L.marker([site.lat, site.lng], { icon: pinIcon(site.status) }).addTo(map);
+          var s = site.status === 'visited' ? RED : WHITE;
+          var marker = L.circleMarker([site.lat, site.lng], {
+            radius: radiusFor(map.getZoom()),
+            fillColor: s.fill, color: s.stroke,
+            weight: 1.1, opacity: 1, fillOpacity: 0.85
+          }).addTo(map);
           marker.bindPopup(popupHtml(site));
+          dots.push(marker);
           bounds.push([site.lat, site.lng]);
+        });
+        map.on('zoomend', function () {
+          var r = radiusFor(map.getZoom());
+          dots.forEach(function (m) { m.setRadius(r); });
         });
         if (bounds.length) { map.fitBounds(bounds, { padding: [30, 30] }); }
       });

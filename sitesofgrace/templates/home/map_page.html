@@ -4,8 +4,6 @@
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
-  integrity="sha256-YU3qCpj/P06tdPBJGPax0bm6Q1wltfwjsho5TR4+TYc=" crossorigin="">
 <link rel="stylesheet" href="{% static 'community/css/journey_buttons.css' %}">
 <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
 <link rel="stylesheet" href="{% static 'css/map.css' %}">
@@ -35,8 +33,6 @@
 {% block extra_js %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
-  integrity="sha256-Hk4dIpcqOSb0hZjgyvFOP+cEmDXUKKNE/tT542ZbNQg=" crossorigin=""></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
 <script src="{% static 'js/basemap.js' %}"></script>
 <script src="{% static 'js/trails.js' %}"></script>
@@ -49,47 +45,25 @@
     var loginUrl = el.dataset.loginUrl;
     var journeySetUrl = el.dataset.journeySetUrl;
 
-    // Single source of truth for category colors -- used for pins and the
+    // Single source of truth for category colors -- used for the dots and the
     // legend swatches. The popup's category label reuses the site page's
     // own .badge.badge-category style instead of a per-category color.
     var CATEGORY_STYLES = {
-      'Marian Apparition':   { fill: '#FDF9F2', stroke: '#032553', dot: '#032553' },
-      'Eucharistic Miracle': { fill: '#C79A42', stroke: '#C79A42', dot: '#FDF9F2' },
-      'Saints & Tombs':      { fill: '#032553', stroke: '#032553', dot: '#C79A42' },
-      'Holy Land':           { fill: '#F9F1E8', stroke: '#C79A42', dot: '#C79A42' },
-      'Shrine & Basilica':   { fill: '#173A61', stroke: '#173A61', dot: '#FDF9F2' },
+      'Marian Apparition':   { fill: '#FFFFFF', stroke: '#032553' },
+      'Eucharistic Miracle': { fill: '#C79A42', stroke: '#8A6A24' },
+      'Saints & Tombs':      { fill: '#032553', stroke: '#021A3B' },
+      'Holy Land':           { fill: '#F3E4CE', stroke: '#C79A42' },
+      'Shrine & Basilica':   { fill: '#173A61', stroke: '#0D2440' },
     };
-    var DEFAULT_STYLE = { fill: '#173A61', stroke: '#173A61', dot: '#FDF9F2' };
+    var DEFAULT_STYLE = { fill: '#173A61', stroke: '#0D2440' };
 
     function styleFor(category) {
       return CATEGORY_STYLES[category] || DEFAULT_STYLE;
     }
 
-    function pinIcon(category) {
-      var s = styleFor(category);
-      var html =
-        '<svg class="site-pin" width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">' +
-        '<path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.5"/>' +
-        '<circle cx="13" cy="13" r="5" fill="' + s.dot + '"/>' +
-        '</svg>';
-      return L.divIcon({
-        html: html,
-        className: 'site-pin-icon',
-        iconSize: [26, 34],
-        iconAnchor: [13, 34],
-        popupAnchor: [0, -30],
-      });
-    }
-
-    function clusterIcon(cluster) {
-      var count = cluster.getChildCount();
-      var size = count < 10 ? 34 : count < 50 ? 42 : 52;
-      return L.divIcon({
-        html: '<div class="cluster-inner">' + count + '</div>',
-        className: 'site-cluster-icon',
-        iconSize: L.point(size, size),
-      });
-    }
+    // Capped at 7: any bigger and the ~28 sites inside Rome merge into one
+    // blob at exactly the zoom where you need to pick one.
+    function radiusFor(z) { return Math.max(2.4, Math.min(7, 2.4 + (z - 2) * 0.62)); }
 
     function popupHtml(site) {
       var locationLine = [site.locality, site.country].filter(Boolean).join(', ');
@@ -113,26 +87,58 @@
     var map = L.map(el).setView([20, 0], 2);
     window.SoGBasemap.add(map);
 
-    var clusterGroup = L.markerClusterGroup({ iconCreateFunction: clusterIcon, maxClusterRadius: 50 });
-    map.addLayer(clusterGroup);
+    // Site dots get their own pane above overlayPane, where the trail lines
+    // live -- otherwise whichever fetch finished last would draw on top, and
+    // a click on a dot under a line would open the trail's popup instead.
+    map.createPane('sitesPane').style.zIndex = 450;
+    var markerLayer = L.layerGroup().addTo(map);
 
     // ---------- Legend / category filter ----------
     var legendEl = document.createElement('div');
     legendEl.className = 'map-legend';
-    legendEl.innerHTML = Object.keys(CATEGORY_STYLES).map(function (category) {
-      var s = CATEGORY_STYLES[category];
-      return (
-        '<button type="button" class="map-legend-item" data-category="' + category + '">' +
-        '<span class="map-legend-swatch" style="background:' + s.fill + ';border-color:' + s.stroke + '"></span>' +
-        category +
-        '</button>'
-      );
-    }).join('');
+    legendEl.innerHTML =
+      '<button type="button" class="map-legend-toggle" aria-controls="mapLegendBody">' +
+      'Legend<span class="map-legend-chevron" aria-hidden="true"></span></button>' +
+      '<div class="map-legend-body" id="mapLegendBody">' +
+      Object.keys(CATEGORY_STYLES).map(function (category) {
+        var s = CATEGORY_STYLES[category];
+        return (
+          '<button type="button" class="map-legend-item" data-category="' + category + '">' +
+          '<span class="map-legend-swatch" style="background:' + s.fill + ';border-color:' + s.stroke + '"></span>' +
+          category +
+          '</button>'
+        );
+      }).join('') +
+      '</div>';
     el.parentElement.appendChild(legendEl);
+
+    // Collapsed by default on phones, where the panel covers a real share of
+    // the map; remembered per viewer. Storage throws in private windows, so
+    // any failure just falls back to the width default.
+    var LEGEND_KEY = 'sog-map-legend-collapsed';
+    var legendToggle = legendEl.querySelector('.map-legend-toggle');
+    var legendBody = legendEl.querySelector('.map-legend-body');
+    function setLegendCollapsed(collapsed) {
+      legendEl.classList.toggle('is-collapsed', collapsed);
+      legendToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      legendBody.setAttribute('aria-hidden', collapsed ? 'true' : 'false');
+    }
+    var legendCollapsed = window.innerWidth <= 640;
+    try {
+      var savedLegend = window.localStorage.getItem(LEGEND_KEY);
+      if (savedLegend === '1' || savedLegend === '0') legendCollapsed = savedLegend === '1';
+    } catch (err) { /* keep the width default */ }
+    setLegendCollapsed(legendCollapsed);
+    legendToggle.addEventListener('click', function () {
+      var collapsed = !legendEl.classList.contains('is-collapsed');
+      setLegendCollapsed(collapsed);
+      try { window.localStorage.setItem(LEGEND_KEY, collapsed ? '1' : '0'); } catch (err) { /* not remembered */ }
+    });
 
     // A small "N of M" line, appended into the legend box itself so it always
     // reads as "near the legend" without any extra positioning. Only shown
-    // while a text filter is narrowing the map.
+    // while a text filter is narrowing the map. It sits outside the
+    // collapsible body, so a search still gets feedback with the legend shut.
     var countEl = document.createElement('div');
     countEl.className = 'map-filter-count';
     countEl.hidden = true;
@@ -144,7 +150,7 @@
                                 // legend and the search bar only ever mutate
                                 // categoryVisible/textQuery below and then
                                 // call applyFilters(); neither one touches
-                                // the cluster group directly, so they can
+                                // the marker layer directly, so they can
                                 // never fight over the same marker.
     var markersByCategory = {};
     var categoryVisible = {};
@@ -181,8 +187,8 @@
         }
       });
 
-      clusterGroup.clearLayers();
-      clusterGroup.addLayers(visible);
+      markerLayer.clearLayers();
+      visible.forEach(function (m) { markerLayer.addLayer(m); });
 
       if (textQuery) {
         countEl.hidden = false;
@@ -233,7 +239,7 @@
         textQuery = '';
         applyFilters();
         var m = markers[r.slug];
-        if (m) { clusterGroup.zoomToShowLayer(m, function () { m.openPopup(); }); }
+        if (m) { map.setView(m.getLatLng(), Math.max(map.getZoom(), 13)); m.openPopup(); }
       });
     }
 
@@ -252,6 +258,13 @@
       });
     });
 
+    // Resize every dot, filtered-out ones included, so they come back at
+    // the right size.
+    map.on('zoomend', function () {
+      var r = radiusFor(map.getZoom());
+      allMarkers.forEach(function (entry) { entry.marker.setRadius(r); });
+    });
+
     var params = new URLSearchParams(window.location.search);
     var focusSlug = params.get('site');
 
@@ -261,7 +274,13 @@
         var bounds = [];
 
         data.sites.forEach(function (site) {
-          var marker = L.marker([site.latitude, site.longitude], { icon: pinIcon(site.category) });
+          var s = styleFor(site.category);
+          var marker = L.circleMarker([site.latitude, site.longitude], {
+            pane: 'sitesPane',
+            radius: radiusFor(map.getZoom()),
+            fillColor: s.fill, color: s.stroke,
+            weight: 1.1, opacity: 1, fillOpacity: 0.85
+          });
           marker.bindPopup(popupHtml(site));
 
           markers[site.slug] = marker;
@@ -278,9 +297,8 @@
           // both back to back is just a redundant extra animation.
           lastFitKey = 'full';
           applyFilters();
-          clusterGroup.zoomToShowLayer(markers[focusSlug], function () {
-            markers[focusSlug].openPopup();
-          });
+          map.setView(markers[focusSlug].getLatLng(), Math.max(map.getZoom(), 13));
+          markers[focusSlug].openPopup();
         } else {
           applyFilters();
         }
