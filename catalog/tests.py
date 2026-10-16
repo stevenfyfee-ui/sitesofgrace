@@ -440,3 +440,158 @@ class ImportTravelSectionsTests(SacredSitePageTestCase):
     def test_path_must_match_exactly_one_file(self):
         with self.assertRaises(CommandError):
             self.run_import(os.path.join(self.tmpdir, "nothing-*.json"))
+
+
+class ImportSaintsTests(SacredSitePageTestCase):
+    """import_saints: slug + title under the saints index, baselines guard
+    against post-export edits, live pages publish, hidden pages get the row
+    and a draft revision but stay hidden."""
+
+    OLD_BODY = "<p>Old life.</p>"
+    NEW_BODY = "<h3><b>Life</b></h3><p>New life &amp; times.</p>"
+
+    def setUp(self):
+        self.tmpdir = tempfile.mkdtemp()
+        self.index = Page(title="Saints", slug="saints")
+        self.site_root().add_child(instance=self.index)
+
+    def tearDown(self):
+        shutil.rmtree(self.tmpdir, ignore_errors=True)
+
+    def make_saint(self, slug, live=True, **fields):
+        fields.setdefault("body", self.OLD_BODY)
+        saint = SaintPage(title=fields.pop("title", "Saint Test"), slug=slug, live=live, **fields)
+        self.index.add_child(instance=saint)
+        return SaintPage.objects.get(pk=saint.pk)
+
+    def entry(self, page, **extra):
+        data = {
+            "slug": page.slug,
+            "title": page.title,
+            "published": page.live,
+            "body_html": self.NEW_BODY,
+            "baseline_significance": page.significance,
+            "baseline_patronage": page.patronage,
+            "baseline_body": "Old life.",
+        }
+        data.update(extra)
+        return data
+
+    def write_file(self, pages):
+        path = os.path.join(self.tmpdir, "saints_import_test.json")
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump({"pages": pages}, fh)
+        return path
+
+    def run_import(self, path, *flags):
+        out = StringIO()
+        call_command("import_saints", path, *flags, stdout=out)
+        return out.getvalue()
+
+    def test_published_saint_gets_a_new_published_revision(self):
+        page = self.make_saint("pub", significance="Old summary.")
+        out = self.run_import(self.write_file([self.entry(page, significance="New summary.")]))
+        page = SaintPage.objects.get(pk=page.pk)
+        self.assertEqual((page.body, page.significance), (self.NEW_BODY, "New summary."))
+        self.assertFalse(page.has_unpublished_changes)
+        self.assertIsNotNone(page.live_revision_id)
+        self.assertEqual(page.live_revision_id, page.latest_revision_id)
+        self.assertEqual(page.live_revision.as_object().body, self.NEW_BODY)
+        self.assertIn("Pages changed:          1", out)
+        self.assertIn("Published bodies updated:  1", out)
+        self.assertIn("Summaries set:             1", out)
+
+    def test_second_run_reports_zero_changed(self):
+        live = self.make_saint("twice-live")
+        hidden = self.make_saint("twice-hidden", live=False, title="Saint Hidden")
+        path = self.write_file([
+            self.entry(live), self.entry(hidden, significance="Now ready."),
+        ])
+        self.run_import(path)
+        revisions = (live.revisions.count(), hidden.revisions.count())
+        out = self.run_import(path)
+        self.assertIn("Pages changed:          0", out)
+        self.assertIn("Already correct:           2", out)
+        self.assertIn("Conflicts:                 0", out)
+        self.assertEqual((live.revisions.count(), hidden.revisions.count()), revisions)
+
+    def test_published_saint_with_unpublished_changes_is_skipped(self):
+        page = self.make_saint("draft")
+        page.save_revision()
+        page = SaintPage.objects.get(pk=page.pk)
+        self.assertTrue(page.has_unpublished_changes)
+        out = self.run_import(self.write_file([self.entry(page)]))
+        self.assertIn("unpublished changes", out)
+        self.assertIn("Skipped:                   1", out)
+        self.assertEqual(SaintPage.objects.get(pk=page.pk).body, self.OLD_BODY)
+
+    def test_baseline_mismatch_is_a_conflict_and_writes_nothing(self):
+        page = self.make_saint("conflict", body="<p>An editor rewrote this.</p>")
+        out = self.run_import(self.write_file([self.entry(page, significance="New.")]))
+        self.assertIn("Conflicts:                 1", out)
+        self.assertIn("edited since export: body", out)
+        page = SaintPage.objects.get(pk=page.pk)
+        self.assertEqual((page.body, page.significance), ("<p>An editor rewrote this.</p>", ""))
+        self.assertEqual(page.revisions.count(), 0)
+
+    def test_title_mismatch_is_skipped(self):
+        page = self.make_saint("title")
+        out = self.run_import(self.write_file([self.entry(page, title="Saint Someone Else")]))
+        self.assertIn("title mismatch", out)
+        self.assertIn("Skipped:                   1", out)
+        self.assertEqual(SaintPage.objects.get(pk=page.pk).body, self.OLD_BODY)
+
+    def test_hidden_saint_gets_content_stays_hidden_and_is_ready(self):
+        from catalog.management.commands.stub_saints import Command as StubSaints
+
+        page = self.make_saint("hidden", live=False, data_status="stub-auto")
+        out = self.run_import(self.write_file([
+            self.entry(page, significance="A summary.", patronage="Travelers"),
+        ]))
+        self.assertIn("Hidden bodies updated:     1", out)
+        page = SaintPage.objects.get(pk=page.pk)
+        self.assertFalse(page.live)
+        self.assertIsNone(page.live_revision_id)
+        # The row: what stub_saints filters on and what goes public when it flips live.
+        self.assertEqual((page.body, page.significance, page.patronage),
+                         (self.NEW_BODY, "A summary.", "Travelers"))
+        # The draft: what the admin editor opens.
+        draft = page.get_latest_revision_as_object()
+        self.assertEqual((draft.body, draft.significance), (self.NEW_BODY, "A summary."))
+
+        stub = StubSaints()
+        call_command(stub, stdout=StringIO())
+        self.assertEqual(stub.result["with_content"], 1)
+        self.assertEqual(stub.result["hidden"], 1)
+
+    def test_empty_patronage_clears_the_field(self):
+        page = self.make_saint("clear", patronage="Old patronage")
+        out = self.run_import(self.write_file([self.entry(page, patronage="")]))
+        self.assertEqual(SaintPage.objects.get(pk=page.pk).patronage, "")
+        self.assertIn("Patronages set:            1", out)
+
+    def test_verify_reports_a_mismatch(self):
+        page = self.make_saint("verify")
+        path = self.write_file([self.entry(page)])
+        self.run_import(path)
+        self.assertIn("Pages matching the file:       1", self.run_import(path, "--verify"))
+
+        SaintPage.objects.filter(pk=page.pk).update(body="<p>Changed.</p>")
+        out = StringIO()
+        with self.assertRaises(CommandError):
+            call_command("import_saints", path, "--verify", stdout=out)
+        self.assertIn("Pages NOT matching:            1", out.getvalue())
+        self.assertIn("verify Saint Test: body", out.getvalue())
+
+    def test_dry_run_writes_nothing(self):
+        page = self.make_saint("dry")
+        out = self.run_import(self.write_file([self.entry(page)]), "--dry-run")
+        self.assertIn("Would change:          1", out)
+        self.assertEqual(SaintPage.objects.get(pk=page.pk).body, self.OLD_BODY)
+        self.assertEqual(page.revisions.count(), 0)
+
+    def test_unbalanced_body_is_skipped(self):
+        page = self.make_saint("bad-html")
+        out = self.run_import(self.write_file([self.entry(page, body_html="<p>Open <b>bold</p>")]))
+        self.assertIn("body_html: unexpected </p>", out)
+        self.assertEqual(SaintPage.objects.get(pk=page.pk).body, self.OLD_BODY)
