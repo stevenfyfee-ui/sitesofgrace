@@ -68,7 +68,7 @@ class ClientIpSpoofingTests(_PublicAndPrivateStorageTestCase):
         site = _make_site(slug="xff-site")
         photos = [_make_photo(owner, site, width=50 + i, height=50 + i) for i in range(10)]
         for p in photos:
-            sharing.share_photo(p, credit="display_name")
+            sharing.share_photo(p, credit="display_name", rights_confirmed_at=None)
 
         client = Client()
         real_hop = "198.51.100.55"
@@ -83,7 +83,7 @@ class ClientIpSpoofingTests(_PublicAndPrivateStorageTestCase):
             )
 
         one_more = _make_photo(owner, site, width=999, height=999)
-        sharing.share_photo(one_more, credit="display_name")
+        sharing.share_photo(one_more, credit="display_name", rights_confirmed_at=None)
         response = client.post(
             reverse("pilgrims:report_photo", args=[one_more.uuid]),
             {"reason": PhotoReport.REASON_COPYRIGHT},
@@ -100,7 +100,7 @@ class AutoHideTests(_PublicAndPrivateStorageTestCase):
         self.owner = User.objects.create_user("hide_owner", "hide_owner@example.com", "pw")
         self.site = _make_site(slug="hide-site")
         self.photo = _make_photo(self.owner, self.site)
-        sharing.share_photo(self.photo, credit="display_name")
+        sharing.share_photo(self.photo, credit="display_name", rights_confirmed_at=None)
         self.client = Client()
 
     def _report(self, reason, reporter_ip_hash="hash-a", note=""):
@@ -123,7 +123,7 @@ class AutoHideTests(_PublicAndPrivateStorageTestCase):
     def test_minor_safety_and_violence_also_hide_immediately(self):
         for reason in (PhotoReport.REASON_MINOR_SAFETY, PhotoReport.REASON_VIOLENCE):
             photo = _make_photo(self.owner, self.site, width=100, height=100)
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
             self.client.post(reverse("pilgrims:report_photo", args=[photo.uuid]), {"reason": reason})
             photo.refresh_from_db()
             self.assertTrue(photo.hidden_by_staff, f"{reason} should auto-hide on first report")
@@ -179,7 +179,7 @@ class ReportEmailAndRateLimitTests(_PublicAndPrivateStorageTestCase):
         self.owner = User.objects.create_user("email_owner", "email_owner@example.com", "pw")
         self.site = _make_site(slug="email-site")
         self.photo = _make_photo(self.owner, self.site)
-        sharing.share_photo(self.photo, credit="display_name")
+        sharing.share_photo(self.photo, credit="display_name", rights_confirmed_at=None)
         self.client = Client()
 
     def test_report_sends_moderation_email(self):
@@ -196,14 +196,14 @@ class ReportEmailAndRateLimitTests(_PublicAndPrivateStorageTestCase):
 
         photos = [_make_photo(self.owner, self.site, width=50 + i, height=50 + i) for i in range(REPORTS_PER_HOUR_PER_IP)]
         for photo in photos:
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
             self.client.post(
                 reverse("pilgrims:report_photo", args=[photo.uuid]),
                 {"reason": PhotoReport.REASON_COPYRIGHT}, REMOTE_ADDR="10.2.2.2",
             )
 
         one_more = _make_photo(self.owner, self.site, width=999, height=999)
-        sharing.share_photo(one_more, credit="display_name")
+        sharing.share_photo(one_more, credit="display_name", rights_confirmed_at=None)
         response = self.client.post(
             reverse("pilgrims:report_photo", args=[one_more.uuid]),
             {"reason": PhotoReport.REASON_COPYRIGHT}, REMOTE_ADDR="10.2.2.2",
@@ -217,7 +217,7 @@ class ReportEmailAndRateLimitTests(_PublicAndPrivateStorageTestCase):
 
         photos = [_make_photo(self.owner, self.site, width=50 + i, height=50 + i) for i in range(REPORTS_PER_HOUR_PER_IP)]
         for photo in photos:
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
             self.client.post(
                 reverse("pilgrims:report_photo", args=[photo.uuid]),
                 {"reason": PhotoReport.REASON_COPYRIGHT}, REMOTE_ADDR="10.3.3.3",
@@ -225,7 +225,7 @@ class ReportEmailAndRateLimitTests(_PublicAndPrivateStorageTestCase):
 
         # A different IP should be unaffected by the first IP's cap.
         one_more = _make_photo(self.owner, self.site, width=999, height=999)
-        sharing.share_photo(one_more, credit="display_name")
+        sharing.share_photo(one_more, credit="display_name", rights_confirmed_at=None)
         response = self.client.post(
             reverse("pilgrims:report_photo", args=[one_more.uuid]),
             {"reason": PhotoReport.REASON_COPYRIGHT}, REMOTE_ADDR="10.3.3.4",
@@ -241,8 +241,8 @@ class StaffModerationPermissionTests(_PublicAndPrivateStorageTestCase):
         self.site = _make_site(slug="mod-site")
         self.reported_photo = _make_photo(self.owner, self.site, width=101, height=101)
         self.unreported_photo = _make_photo(self.owner, self.site, width=102, height=102)
-        sharing.share_photo(self.reported_photo, credit="display_name")
-        sharing.share_photo(self.unreported_photo, credit="display_name")
+        sharing.share_photo(self.reported_photo, credit="display_name", rights_confirmed_at=None)
+        sharing.share_photo(self.unreported_photo, credit="display_name", rights_confirmed_at=None)
         PhotoReport.objects.create(
             photo=self.reported_photo, reporter_ip_hash="x", reason=PhotoReport.REASON_COPYRIGHT,
         )

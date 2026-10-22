@@ -16,6 +16,9 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
+# Stripe's limit on custom_text.submit.message.
+STRIPE_SUBMIT_MESSAGE_MAX = 1200
+
 # Shown on Stripe's checkout page, right above the pay button.
 CHECKOUT_SUBMIT_MESSAGE = (
     "Sites of Grace is not a 501(c)(3) charitable organization. "
@@ -30,6 +33,11 @@ STRIPE_TIMEOUT_SECONDS = 10
 # Retries are off per call so one request is bounded by the timeout above,
 # well inside gunicorn's worker timeout.
 stripe.default_http_client = stripe.RequestsClient(timeout=STRIPE_TIMEOUT_SECONDS)
+
+# Hard limits, whatever a SupportPage's own min/max say: the page fields are
+# validated to stay inside these too, and amount_to_cents enforces them again.
+ABSOLUTE_MIN_DOLLARS = 1
+ABSOLUTE_MAX_DOLLARS = 1000
 
 FREQUENCY_ONCE = "once"
 FREQUENCY_MONTHLY = "monthly"
@@ -75,6 +83,14 @@ def parse_presets(raw):
     return [int(part) for part in parts]
 
 
+def amount_bounds(page):
+    """(min, max) whole dollars accepted: the page's range, clamped to the
+    absolute $1-$1,000 limits."""
+    low = max(int(page.min_amount or 0), ABSOLUTE_MIN_DOLLARS)
+    high = min(int(page.max_amount or 0), ABSOLUTE_MAX_DOLLARS)
+    return low, high
+
+
 def amount_to_cents(page, choice, custom):
     """The visitor's choice as integer cents, validated against the page.
 
@@ -99,10 +115,9 @@ def amount_to_cents(page, choice, custom):
             raise AmountError("Please choose an amount.")
         dollars = Decimal(int(choice))
 
-    if not (Decimal(page.min_amount) <= dollars <= Decimal(page.max_amount)):
-        raise AmountError(
-            f"Please choose an amount from ${page.min_amount:,} to ${page.max_amount:,}."
-        )
+    low, high = amount_bounds(page)
+    if not (Decimal(low) <= dollars <= Decimal(high)):
+        raise AmountError(f"Please choose an amount from ${low:,} to ${high:,}.")
     return int(dollars * 100)
 
 
@@ -111,12 +126,31 @@ def format_cents(cents):
     return f"${Decimal(int(cents)) / 100:,.2f}"
 
 
+def monthly_submit_message(cents):
+    """The not-tax-deductible sentence, then the "Legal notices"
+    stripe_monthly_submit text as plain text with the real monthly amount
+    filled in -- trimmed to Stripe's limit if an edit ever makes it longer."""
+    from home.models import LegalDetails, LegalNotices
+
+    from . import legal
+
+    authorization = legal.notice_plain(
+        LegalNotices.load().stripe_monthly_submit, LegalDetails.load(), amount=format_cents(cents),
+    )
+    message = f"{CHECKOUT_SUBMIT_MESSAGE} {authorization}".strip()
+    if len(message) > STRIPE_SUBMIT_MESSAGE_MAX:
+        logger.warning("Monthly checkout text is %s characters; trimmed to Stripe's limit.", len(message))
+        message = message[: STRIPE_SUBMIT_MESSAGE_MAX - 1].rstrip() + "…"
+    return message
+
+
 def create_checkout_session(page_url, frequency, cents):
     """A Stripe Checkout Session for one contribution; returns its URL.
 
     Raises stripe.StripeError (including timeouts) on any failure.
     """
     monthly = frequency == FREQUENCY_MONTHLY
+    submit_message = monthly_submit_message(cents) if monthly else CHECKOUT_SUBMIT_MESSAGE
     price_data = {
         "currency": "usd",
         "product": settings.STRIPE_SUPPORT_PRODUCT_ID,
@@ -130,7 +164,7 @@ def create_checkout_session(page_url, frequency, cents):
         "line_items": [{"price_data": price_data, "quantity": 1}],
         "success_url": page_url + "?thanks=1&session_id={CHECKOUT_SESSION_ID}",
         "cancel_url": page_url + "#give",
-        "custom_text": {"submit": {"message": CHECKOUT_SUBMIT_MESSAGE}},
+        "custom_text": {"submit": {"message": submit_message}},
         # Nothing personal here, ever -- and no customer_email, even for a
         # signed-in pilgrim: Stripe collects it on its own page.
         "metadata": {"source": "support_page", "frequency": frequency},

@@ -3,8 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
+from pilgrims.views import _ip_hash
+
+from . import ratelimit
 from .forms import NewsletterSignupForm
 from .models import NewsletterSignup
+
+# Per hashed IP, same limiter as Support checkout (core/ratelimit.py).
+NEWSLETTER_LIMIT = 5
+NEWSLETTER_WINDOW_SECONDS = 10 * 60
 
 
 def health(request):
@@ -34,6 +41,9 @@ def newsletter_signup(request):
         next_url = "/"
 
     form = NewsletterSignupForm(request.POST)
+    if ratelimit.hit("newsletter", _ip_hash(request), NEWSLETTER_LIMIT, NEWSLETTER_WINDOW_SECONDS):
+        separator = "&" if "?" in next_url else "?"
+        return HttpResponseRedirect(f"{next_url}{separator}newsletter_error=rate")
     if form.is_valid():
         NewsletterSignup.objects.get_or_create(email=form.cleaned_data["email"])
         flag = "subscribed"

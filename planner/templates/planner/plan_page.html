@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static legal_tags %}
 
 {% block extra_css %}<link rel="stylesheet" href="{% static 'planner/css/plan.css' %}">{% endblock %}
 
@@ -55,6 +55,11 @@
         </div>
         <div class="plan-perperson"><span id="pc-perperson"></span> per person</div>
         <p class="plan-basis" id="pc-basis"></p>
+        {% comment %}
+          The "Legal notices" plan_estimate text. It replaces the page's own
+          "Please note" disclaimer, which said the same thing further down.
+        {% endcomment %}
+        <p class="plan-estimate-note">{% notice "plan_estimate" %}</p>
       </div>
     </div>
 
@@ -76,9 +81,4 @@
   </div>
 </section>
 
-{% if page.disclaimer %}
-<section class="plan-disclaimer">
-  <div class="container"><p class="plan-disclaimer-label">Please note</p>{{ page.disclaimer|richtext }}</div>
-</section>
-{% endif %}
 {% endblock %}

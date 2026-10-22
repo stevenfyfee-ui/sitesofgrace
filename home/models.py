@@ -18,12 +18,13 @@ from datetime import date
 import stripe
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import NoReverseMatch, reverse
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.blocks import (
     BooleanBlock,
     CharBlock,
@@ -37,6 +38,7 @@ from wagtail.blocks import (
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Orderable, Page, Site
+from wagtail.rich_text import expand_db_html
 
 from catalog.models import (
     CATEGORY_STYLES,
@@ -48,7 +50,7 @@ from catalog.models import (
     SaintPage,
 )
 from core import ratelimit
-from home import support
+from home import legal, support
 from liturgy.today import date_at_noon, liturgical_today
 from pilgrims.views import _ip_hash
 
@@ -1084,8 +1086,6 @@ SUPPORT_ICON_CHOICES = ICON_CHOICES + [
     ("candle", "Candle"),
 ]
 
-SUPPORT_DISCLAIMER_PHRASE = "not tax-deductible"
-
 
 class SupportHelpBlock(StructBlock):
     icon = ChoiceBlock(choices=SUPPORT_ICON_CHOICES)
@@ -1270,12 +1270,20 @@ class SupportPage(Page):
         help_text='1 to 6 whole-dollar amounts, separated by commas. An "Other" tile is always added.',
     )
     min_amount = models.IntegerField(
-        default=3, validators=[MinValueValidator(1)],
-        help_text="Smallest amount accepted, in whole dollars.",
+        default=3,
+        validators=[
+            MinValueValidator(support.ABSOLUTE_MIN_DOLLARS),
+            MaxValueValidator(support.ABSOLUTE_MAX_DOLLARS),
+        ],
+        help_text="Smallest amount accepted, in whole dollars ($1 or more).",
     )
     max_amount = models.IntegerField(
-        default=1000, validators=[MinValueValidator(1)],
-        help_text="Largest amount accepted, in whole dollars.",
+        default=1000,
+        validators=[
+            MinValueValidator(support.ABSOLUTE_MIN_DOLLARS),
+            MaxValueValidator(support.ABSOLUTE_MAX_DOLLARS),
+        ],
+        help_text="Largest amount accepted, in whole dollars ($1,000 at most).",
     )
     default_amount_once = models.IntegerField(
         default=10, help_text="Preselected for one-time support. Must be one of the amounts above.",
@@ -1291,7 +1299,11 @@ class SupportPage(Page):
             "website, and are not tax-deductible. Nothing is given in exchange, and all "
             "content stays free. Monthly support can be cancelled anytime."
         ),
-        help_text='Required. Must say contributions are "not tax-deductible".',
+        blank=True,
+        help_text=(
+            "No longer shown on the site. The Support page now shows the support_intro "
+            "text from Settings > Legal notices."
+        ),
     )
     soon_heading = models.CharField(max_length=120, blank=True, default="Online Support Opens Soon")
     soon_text = models.TextField(
@@ -1510,19 +1522,13 @@ class SupportPage(Page):
         super().clean()
         errors = {}
 
-        disclaimer = (self.disclaimer or "").strip()
-        if not disclaimer:
-            errors["disclaimer"] = "The disclaimer is required."
-        elif SUPPORT_DISCLAIMER_PHRASE not in disclaimer.lower():
-            errors["disclaimer"] = (
-                f'The disclaimer must say that contributions are "{SUPPORT_DISCLAIMER_PHRASE}".'
-            )
-
         min_amount, max_amount = self.min_amount or 0, self.max_amount or 0
-        if min_amount < 1:
+        if min_amount < support.ABSOLUTE_MIN_DOLLARS:
             errors["min_amount"] = "The minimum must be at least $1."
-        elif max_amount < min_amount:
-            errors["max_amount"] = "The maximum can't be less than the minimum."
+        elif max_amount > support.ABSOLUTE_MAX_DOLLARS:
+            errors["max_amount"] = "The maximum can't be more than $1,000."
+        elif max_amount <= min_amount:
+            errors["max_amount"] = "The maximum must be more than the minimum."
 
         try:
             presets = support.parse_presets(self.preset_amounts)
@@ -1579,15 +1585,18 @@ class SupportPage(Page):
             )
             amount = str(default)
 
+        shown = custom.lstrip("$") if amount == "other" else amount
         thanks = kwargs.get("support_thanks")
         context.update({
+            # Fills {amount} in the monthly notice; support.js keeps it current.
+            "support_amount_label": f"${shown}" if shown else "the amount you choose",
             "support_enabled": settings.SUPPORT_ENABLED,
             "support_frequency": frequency,
             "support_amount": amount,
             "support_custom": custom,
             "support_error": kwargs.get("support_error", ""),
             "support_thanks": thanks,
-            "support_range": f"${self.min_amount:,} to ${self.max_amount:,}",
+            "support_range": "${:,} to ${:,}".format(*support.amount_bounds(self)),
             "support_continue_url": _map_or_explore_url() if thanks else "",
         })
         return context
@@ -1645,3 +1654,258 @@ class SupportPage(Page):
         redirect = HttpResponseRedirect(checkout_url)
         redirect.status_code = 303
         return redirect
+
+
+# --- Legal pages ---------------------------------------------------------------
+
+
+@register_setting(icon="doc-full")
+class LegalDetails(BaseGenericSetting):
+    """Who runs the site and the DMCA agent: the values behind the {{TOKENS}}
+    in the legal pages and notices (see home/legal.py). Blank by default --
+    a LegalPage can't be published while a value it uses is blank."""
+
+    operator_name = models.CharField("Operator name", max_length=200, blank=True)
+    contact_email = models.EmailField("Contact email", blank=True)
+    mailing_address = models.TextField("Mailing address", blank=True)
+    dmca_agent_name = models.CharField("DMCA agent name", max_length=200, blank=True)
+    dmca_agent_address = models.TextField("DMCA agent address", blank=True)
+    dmca_agent_phone = models.CharField("DMCA agent phone", max_length=40, blank=True)
+    dmca_agent_email = models.EmailField("DMCA agent email", blank=True)
+
+    panels = [
+        MultiFieldPanel(
+            [FieldPanel("operator_name"), FieldPanel("contact_email"), FieldPanel("mailing_address")],
+            heading="Operator",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("dmca_agent_name"),
+                FieldPanel("dmca_agent_address"),
+                FieldPanel("dmca_agent_phone"),
+                FieldPanel("dmca_agent_email"),
+            ],
+            heading="Designated copyright (DMCA) agent",
+        ),
+    ]
+
+    class Meta:
+        verbose_name = "Legal details"
+
+
+@register_setting(icon="info-circle")
+class LegalNotices(BaseGenericSetting):
+    """The short legal notices shown next to the features they describe.
+    **bold** and [text](url) are the only formatting; {{TOKENS}} are filled
+    from Legal details, and a link to a legal page appears only once that
+    page is live (home/legal.py: render_notice)."""
+
+    footer_independence = models.TextField(
+        default=(
+            "Sites of Grace is an independent Catholic educational and pilgrimage "
+            "resource. Unless expressly stated, it is not affiliated with or endorsed by "
+            "the Holy See, a diocese, parish, shrine, or religious community. Church "
+            "status information should be checked against official sources. [Catholic "
+            "Content Notice](/catholic-content-notice/)"
+        ),
+        help_text="Footer, bottom row, above the copyright line.",
+    )
+    footer_newsletter = models.TextField(
+        default="Unsubscribe anytime. See our [Privacy Policy](/privacy-policy/).",
+        help_text="Footer, small text under the newsletter Sign Up button.",
+    )
+    signup = models.TextField(
+        default=(
+            "By creating an account, you agree to the [Terms of Use](/terms-of-use/) and "
+            "acknowledge the [Privacy Policy](/privacy-policy/). If you are under 18, "
+            "please get permission from a parent or guardian first."
+        ),
+        help_text="Sign-up form, directly above the Sign Up button.",
+    )
+    site_travel = models.TextField(
+        default=(
+            "**Pilgrim travel note:** Mass times, opening hours, costs, accessibility, "
+            "and local conditions can change. Please confirm important details directly "
+            "with the shrine and your providers before you travel. [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Sacred site pages, right after the Plan Your Visit section.",
+    )
+    plan_estimate = models.TextField(
+        default=(
+            "**Planning estimate only:** These figures are illustrative and are not a "
+            "live price quote. Rates, availability, fees, exchange rates, and conditions "
+            "can change. Confirm final costs with each provider before booking. [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Trip calculator (/plan/), under the estimated total.",
+    )
+    tour_links = models.TextField(
+        default=(
+            "**Affiliate disclosure:** Some pilgrimage-tour links on this page may earn "
+            "Sites of Grace a commission if you book through them, at no extra cost to "
+            "you. Tours are run by independent providers. Review their itineraries, "
+            "payment terms, and cancellation policies before booking. [Affiliate "
+            "Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text="Above tour-operator links. Not shown anywhere yet: no page renders tour-operator links.",
+    )
+    travel_links = models.TextField(
+        default=(
+            "**Travel referral notice:** Some travel links on this page may earn Sites of"
+            " Grace a commission, at no extra cost to you. Map distances and routes are "
+            "approximate; confirm location, accessibility, availability, rates, and "
+            "booking terms with the provider. [Affiliate "
+            "Disclosure](/affiliate-disclosure/) · [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Above travel and hotel booking links. Not shown anywhere yet: the site has no booking links.",
+    )
+    blog_affiliate = models.TextField(
+        default=(
+            "**Affiliate disclosure:** This article contains links that may earn Sites of"
+            " Grace a commission on qualifying purchases, at no extra cost to you. "
+            "[Affiliate Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text='Blog posts with "Has affiliate links" turned on, above the article.',
+    )
+    store_amazon = models.TextField(
+        default=(
+            "**As an Amazon Associate I earn from qualifying purchases.** Prices, "
+            "availability, shipping, and returns are set by the seller. [Affiliate "
+            "Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text="Store page, under the intro.",
+    )
+    store_waitlist = models.TextField(
+        default=(
+            "Joining the waitlist doesn't place an order or charge you, and it doesn't "
+            "sign you up for our newsletter. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Store, just before each waitlist button.",
+    )
+    share_rights_checkbox = models.TextField(
+        default=(
+            "I took this photo or have permission to share it, and anyone recognizable in"
+            " it has agreed to be shown. I'm not sharing private information about "
+            "children or anyone else. ([Community Policy](/community-policy/))"
+        ),
+        help_text="Label of the checkbox a pilgrim must tick every time they share a photo publicly.",
+    )
+    share_adult_checkbox = models.TextField(
+        default="I am 18 or older.",
+        help_text="Label of the one-time 18+ checkbox for sharing photos publicly or making a profile public.",
+    )
+    share_public_warning = models.TextField(
+        default=(
+            "**Public post:** Once shared, your photo, display name, and caption can be "
+            "seen by anyone. Leave out private details and locations you don't want "
+            "others to see. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Next to the public-sharing controls on the photo upload and photo pages.",
+    )
+    profile_public_warning = models.TextField(
+        default=(
+            "**Public profile:** anyone will be able to see your whole profile, including"
+            " your badges and your Visited and Want-to-Go lists, and anyone can follow "
+            "you without your approval. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Profile settings, next to the private profile setting.",
+    )
+    testimony = models.TextField(
+        default=(
+            "Personal stories of favors and healing reflect the contributor's own "
+            "account. They are not independently verified medical findings or a guarantee"
+            " of results, and spiritual practices are not a substitute for medical care. "
+            "[Catholic Content Notice](/catholic-content-notice/)"
+        ),
+        help_text="Under a story or testimony composer. Not shown anywhere yet: the site has none.",
+    )
+    support_intro = models.TextField(
+        default=(
+            "**Support is optional.** Sites of Grace is independently operated and is not"
+            " a 501(c)(3) charity. Payments are not tax-deductible and do not unlock paid"
+            " features. If you choose monthly support, your selected amount is charged "
+            "each month until you cancel. [Support & Billing "
+            "Notice](/support-and-billing/)"
+        ),
+        help_text="Support page, above the checkout button.",
+    )
+    support_monthly = models.TextField(
+        default=(
+            "You'll be charged {amount} every month until you cancel. Cancel anytime from"
+            " Manage monthly support."
+        ),
+        help_text="Support page, under the frequency choice while Monthly is selected. {amount} is filled in.",
+    )
+    stripe_monthly_submit = models.TextField(
+        default=(
+            "By confirming, you authorize Sites of Grace to charge {amount} every month "
+            "until you cancel. Cancel anytime from the Manage monthly support link on "
+            "sitesofgrace.com/support/."
+        ),
+        help_text="Stripe's checkout page, above the pay button, for monthly support only. {amount} is filled in. Plain text: bold and links are dropped.",
+    )
+
+    class Meta:
+        verbose_name = "Legal notices"
+
+
+LEGAL_BODY_FEATURES = ["h2", "h3", "bold", "italic", "link", "ol", "ul"]
+
+
+class LegalPage(Page):
+    """One legal page (Privacy Policy, Terms of Use, ...). Made as drafts by
+    `manage.py create_legal_pages` from legal/content/*.md.
+
+    The body's {{TOKENS}} are filled from Legal details at render time.
+    Publishing is blocked while a value the body uses is blank -- see
+    home/wagtail_hooks.py -- and if one is cleared later, it renders as
+    nothing (with a warning logged), never as "{{...}}".
+    """
+
+    effective_date = models.DateField()
+    body = RichTextField(features=LEGAL_BODY_FEATURES)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("effective_date"),
+        FieldPanel("body"),
+    ]
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    template = "home/legal_page.html"
+
+    class Meta:
+        verbose_name = "Legal page"
+
+    def publish_problem(self, details=None):
+        """Why this page can't be published yet, or "" if it can."""
+        try:
+            missing = legal.missing_fields(self.body, details or LegalDetails.load())
+        except legal.UnknownTokenError as exc:
+            return f"{exc}. Fix the page text before publishing."
+        if missing:
+            return (
+                "This page can't be published until these are filled in under "
+                f"Settings > Legal details: {', '.join(missing)}. "
+                "Your changes were saved as a draft."
+            )
+        return ""
+
+    def rendered_body(self, details=None):
+        """(html, toc): the body with tokens filled and <h2> ids added."""
+        html = expand_db_html(self.body)
+        try:
+            html = legal.fill_tokens(html, details or LegalDetails.load())
+        except legal.UnknownTokenError:
+            logger.error("LegalPage %s uses an unknown token; rendering without it.", self.pk)
+            html = legal.TOKEN_RE.sub("", html)
+        return legal.add_heading_ids(html)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["legal_body"], context["legal_toc"] = self.rendered_body(
+            LegalDetails.load(request_or_site=request)
+        )
+        return context

@@ -89,11 +89,30 @@ class PilgrimProfile(models.Model):
     # public internet. See ModerationAction "suspend_sharing".
     can_share_publicly = models.BooleanField(default=True)
     age_confirmed_at = models.DateTimeField(null=True, blank=True)
+    # Ticked "I am 18 or older" once (pilgrims/consent.py): needed before a
+    # photo can be shared publicly or the profile made public.
+    adult_confirmed_at = models.DateTimeField(null=True, blank=True)
+    # Sign-up agreement: when, and the live Terms of Use page's effective
+    # date at the time ("" if no Terms page was live).
+    terms_accepted_at = models.DateTimeField(null=True, blank=True)
+    terms_version = models.CharField(max_length=10, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Pilgrim profile"
+
+    def save(self, *args, **kwargs):
+        # A newly uploaded avatar is re-encoded with no EXIF at all (camera,
+        # GPS, timestamps) before it reaches the public bucket -- the same
+        # function public gallery copies go through.
+        if self.avatar and not getattr(self.avatar, "_committed", True):
+            from . import imaging
+
+            self.avatar.file.seek(0)
+            cleaned = imaging.strip_all_exif_jpeg(self.avatar.file.read())
+            self.avatar.save(f"{uuid.uuid4().hex}.jpg", ContentFile(cleaned), save=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.display_name or self.handle
@@ -251,6 +270,10 @@ class PilgrimPhoto(models.Model):
     hidden_by_staff = models.BooleanField(default=False)
     hidden_reason = models.CharField(max_length=255, blank=True)
     hidden_at = models.DateTimeField(null=True, blank=True)
+    # When the owner ticked "I took this photo or have permission to share
+    # it" for the current public share. Blank for shares made before that
+    # checkbox existed.
+    rights_confirmed_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ["-taken_on", "-created_at"]

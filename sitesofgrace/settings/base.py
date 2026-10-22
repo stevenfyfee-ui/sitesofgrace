@@ -344,6 +344,11 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 WAGTAIL_SITE_NAME = "sitesofgrace"
 
+# The admin makes no calls to outside services: no Gravatar avatars for
+# editors, and no check against releases.wagtail.org for new versions.
+WAGTAIL_GRAVATAR_PROVIDER_URL = None
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {

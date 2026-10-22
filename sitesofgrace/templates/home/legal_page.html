@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}legal{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/legal.css' %}">{% endblock %}
+
+{% block content %}
+{% comment %}
+  legal_body is the page body with its {{TOKENS}} already filled from
+  Settings > Legal details and an id on every <h2> (LegalPage.get_context);
+  legal_toc lists those h2s for "On this page".
+{% endcomment %}
+<article class="legal-page">
+  <header class="legal-head">
+    <h1>{{ page.title }}</h1>
+    <p class="legal-effective">Effective {{ page.effective_date|date:"F j, Y" }}</p>
+  </header>
+
+  {% if legal_toc %}
+    <nav class="legal-toc" aria-labelledby="legal-toc-heading">
+      <h2 id="legal-toc-heading">On this page</h2>
+      <ul>
+        {% for anchor, text in legal_toc %}
+          <li><a href="#{{ anchor }}">{{ text }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
+  <div class="legal-body">
+    {{ legal_body|safe }}
+  </div>
+</article>
+{% endblock %}

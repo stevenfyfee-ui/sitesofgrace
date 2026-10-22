@@ -71,4 +71,9 @@ RUN python manage.py collectstatic --noinput
 # Migrations run separately as a PRE_DEPLOY job (see .do/app.yaml) — not
 # here, so they don't race a scaled-out set of these containers starting
 # concurrently.
-CMD ["gunicorn", "sitesofgrace.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "60", "--access-logfile", "-", "--error-logfile", "-"]
+#
+# The access log format is gunicorn's default minus anything that can carry
+# a query string: the path without its query (%(U)s, not the full request
+# line %(r)s) and no Referer (%(f)s). Query strings can hold a Stripe
+# Checkout session id or a search term; client IPs (%(h)s) stay.
+CMD ["gunicorn", "sitesofgrace.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "60", "--access-logfile", "-", "--access-logformat", "%(h)s %(l)s %(u)s %(t)s \"%(m)s %(U)s %(H)s\" %(s)s %(b)s \"%(a)s\"", "--error-logfile", "-"]

@@ -29,9 +29,10 @@ class UploadPreselectTests(_PublicAndPrivateStorageTestCase):
         html = response.content.decode()
         self.assertIn(f'value="{self.site.pk}"', html)
         self.assertIn("Preselect Shrine", html)
-        # Arriving from a site page is what flips the share checkbox's
-        # default -- confirm the checked attribute is actually there.
-        self.assertIn('id="sharePublicly" checked', html.replace("  ", " "))
+        # Arriving from a site page no longer pre-ticks public sharing:
+        # the box always starts off.
+        self.assertIn('id="sharePublicly">', html)
+        self.assertNotIn('id="sharePublicly" checked', html.replace("  ", " "))
 
     def test_unknown_slug_falls_back_to_the_empty_page(self):
         response = self.client.get(reverse("pilgrims:photo_upload"), {"site": "no-such-slug"})
@@ -97,6 +98,8 @@ class ShareOnUploadTests(_PublicAndPrivateStorageTestCase):
             "site_id": self.site.pk,
             "photo": make_uploaded_jpeg(),
             "share_publicly": "on",
+            "share_rights": "on",
+            "share_adult": "on",
         })
         data = response.json()
         self.assertTrue(data["success"])
@@ -132,6 +135,8 @@ class ShareOnUploadTests(_PublicAndPrivateStorageTestCase):
             "site_id": self.site.pk,
             "photo": make_uploaded_jpeg(),
             "share_publicly": "on",
+            "share_rights": "on",
+            "share_adult": "on",
         })
         data = response.json()
         self.assertTrue(data["success"], "the private upload itself must still succeed")
@@ -151,12 +156,14 @@ class ShareOnUploadTests(_PublicAndPrivateStorageTestCase):
         ]
         for photo in existing:
             from .. import sharing
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
 
         response = self.client.post(reverse("pilgrims:photo_upload"), {
             "site_id": self.site.pk,
             "photo": make_uploaded_jpeg(width=999, height=999),
             "share_publicly": "on",
+            "share_rights": "on",
+            "share_adult": "on",
         })
         data = response.json()
         self.assertTrue(data["success"], "the private upload itself must still succeed")
@@ -177,6 +184,8 @@ class ShareOnUploadTests(_PublicAndPrivateStorageTestCase):
             "site_id": self.site.pk,
             "photo": make_uploaded_jpeg(width=999, height=999),
             "share_publicly": "on",
+            "share_rights": "on",
+            "share_adult": "on",
         })
         data = response.json()
         self.assertFalse(data["success"])

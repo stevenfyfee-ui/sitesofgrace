@@ -49,12 +49,22 @@ class SiteSettings(BaseSiteSetting):
 
     # --- Newsletter ---
     newsletter_heading = models.CharField(
-        max_length=120, blank=True, default="Stay inspired on your journey."
+        max_length=120, blank=True, default="Stay inspired on your journey.",
+        help_text=(
+            "No longer shown on the site: the footer's Stay Inspired heading and text are "
+            "fixed in the template. The note under its Sign Up button is footer_newsletter "
+            "in Settings > Legal notices."
+        ),
     )
     newsletter_text = models.CharField(
         max_length=240,
         blank=True,
         default="Receive sacred site spotlights, Catholic teaching, pilgrimage ideas, and prayers each week.",
+        help_text=(
+            "No longer shown on the site: the footer's Stay Inspired heading and text are "
+            "fixed in the template. The note under its Sign Up button is footer_newsletter "
+            "in Settings > Legal notices."
+        ),
     )
 
     # --- Trust / legal ---
@@ -65,6 +75,10 @@ class SiteSettings(BaseSiteSetting):
             "not speak officially on behalf of the Catholic Church, any diocese, "
             "shrine, or religious community. Church status information should be "
             "verified through official diocesan or Vatican sources whenever possible."
+        ),
+        help_text=(
+            "No longer shown on the site. The footer now shows footer_independence from "
+            "Settings > Legal notices."
         ),
     )
 

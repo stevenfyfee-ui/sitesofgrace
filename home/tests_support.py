@@ -118,11 +118,10 @@ class SupportPageCleanTests(SupportTestCase):
     def test_defaults_are_valid(self):
         self.page.clean()
 
-    def test_blank_disclaimer_rejected(self):
-        self.assertCleanError("disclaimer", disclaimer="   ")
-
-    def test_disclaimer_without_phrase_rejected(self):
-        self.assertCleanError("disclaimer", disclaimer="Contributions are voluntary.")
+    def test_disclaimer_is_optional(self):
+        # No longer shown: the "Legal notices" support_intro replaced it.
+        self.page.disclaimer = ""
+        self.page.full_clean()
 
     def test_presets_validated(self):
         self.assertCleanError("preset_amounts", preset_amounts="5,ten")
@@ -178,13 +177,15 @@ class SupportPageRenderTests(SupportTestCase):
 
     def test_manage_links_only_when_set(self):
         content = self.client.get(self.page.url).content.decode()
-        self.assertNotIn("Manage monthly support", content)
+        # The monthly notice names "Manage monthly support" as plain text;
+        # it becomes a link only once a manage URL is set.
+        self.assertNotIn("Manage monthly support</a>", content)
         self.assertNotIn("Manage your monthly support", content)
 
         self.page.manage_url = "https://billing.stripe.com/p/login/test_example"
         self.page.save_revision().publish()
         content = self.client.get(self.page.url).content.decode()
-        self.assertIn("Manage monthly support", content)
+        self.assertIn("Manage monthly support</a>", content)
         self.assertIn("Manage your monthly support", content)
 
 
@@ -413,12 +414,12 @@ class SupportLinksTests(SupportTestCase):
     def test_absent_while_draft(self):
         self.page.unpublish()
         html = self.home_html()
-        self.assertNotIn("footer-support", html)
+        self.assertNotIn("Support Sites of Grace</a>", html)
         self.assertNotIn("support-band", html)
 
     def test_present_once_live_even_before_stripe(self):
         html = self.home_html()
-        self.assertIn(f'class="footer-support" href="{self.page.url}"', html)
+        self.assertIn(f'<a href="{self.page.url}">Support Sites of Grace</a>', html)
         self.assertIn('class="support-band"', html)
         self.assertIn("independently built and free for every pilgrim", html)
         band = html[html.index('class="support-band"'):html.index("</section>", html.index('class="support-band"'))]
@@ -430,12 +431,12 @@ class SupportLinksTests(SupportTestCase):
         self.page.save_revision().publish()
         html = self.home_html()
         self.assertNotIn("support-band", html)
-        self.assertIn("footer-support", html)
+        self.assertIn("Support Sites of Grace</a>", html)
 
     def test_band_only_on_home_page(self):
         html = self.client.get(self.page.url).content.decode()
         self.assertNotIn('class="support-band"', html)
-        self.assertIn("footer-support", html)
+        self.assertIn("Support Sites of Grace</a>", html)
 
     def test_never_in_header_or_menus(self):
         html = self.home_html()
@@ -449,6 +450,10 @@ class SupportWordingTests(SupportTestCase):
     only in the disclaimer and the FAQ."""
 
     def assertClean(self, html):
+        # The "Legal notices" support_intro is the disclaimer now, and says
+        # what support is NOT ("not a 501(c)(3) charity", "not
+        # tax-deductible"), so it's exempt here the way support-fine was.
+        html = re.sub(r'<p class="support-intro-note">.*?</p>', "", html, flags=re.S)
         lowered = html.lower()
         for word in BANNED:
             self.assertNotIn(word, lowered)

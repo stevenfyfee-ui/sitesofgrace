@@ -354,6 +354,9 @@ class BlogPostPage(Page):
     )
     categories = ParentalManyToManyField(BlogCategory, blank=False, related_name="posts")
     body = StreamField(BODY_BLOCKS, blank=True)
+    has_affiliate_links = models.BooleanField(
+        default=False, help_text="Show the affiliate disclosure above the article",
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),
@@ -362,6 +365,7 @@ class BlogPostPage(Page):
         FieldPanel("excerpt"),
         FieldPanel("feature_image"),
         FieldPanel("body"),
+        FieldPanel("has_affiliate_links"),
         InlinePanel("related_pages", label="Related places & saints", max_num=3),
     ]
 
