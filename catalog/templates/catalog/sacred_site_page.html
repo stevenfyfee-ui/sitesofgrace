@@ -1,14 +1,19 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags v2_tags %}
 
 {% block body_class %}catalog catalog-site{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
 <link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">
 {% if page.trail_positions %}<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">{% endif %}
+{% v2_enabled as v2 %}{% if v2 %}<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}">{% endif %}
 {% endblock %}
 
 {% block content %}
+{% v2_enabled as v2 %}
+{% if v2 %}
+{% include "catalog/v2/site_page_body.html" %}
+{% else %}
 <article class="catalog-page">
 
   {% if request.GET.photos_added %}
@@ -25,7 +30,7 @@
       <h1>{{ page.title }}</h1>
       <div class="catalog-badges">
         {% if page.category %}<span class="badge badge-category">{{ page.category }}</span>{% endif %}
-        {% if page.canonical_status %}<span class="badge badge-status">{{ page.canonical_status }}</span>{% endif %}
+        {% if page.status_applies %}<span class="badge badge-status">{{ page.canonical_status }}</span>{% endif %}
       </div>
       {% if page.locality or page.country or page.date_display or page.feast_day %}
         <div class="catalog-meta">
@@ -128,4 +133,5 @@
   </div>
 
 </article>
+{% endif %}
 {% endblock %}

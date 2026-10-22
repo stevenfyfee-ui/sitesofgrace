@@ -28,17 +28,19 @@ CATEGORY_CHOICES = [
     ("Shrine & Basilica", "Shrine & Basilica"),
 ]
 
-# Single source of truth for per-category colors, mirrored in the interactive
-# map's CATEGORY_STYLES JS object (home/templates/home/map_page.html) so pins,
-# legend swatches, and category chips/tiles elsewhere on the site all agree.
+# Single source of truth for per-category colors. fill/stroke are the
+# interactive map's pin colors; the map JS, its legend, the nearby cards and
+# every other map read this dict through the {% category_styles_json %} tag
+# (catalog/templatetags/category_styles.py) -- never a hard-coded copy. `dot`
+# is the contrasting ink used on chips and hub tiles drawn in the fill color.
 CATEGORY_STYLES = {
-    "Marian Apparition":   {"fill": "#FDF9F2", "stroke": "#032553", "dot": "#032553"},
-    "Eucharistic Miracle": {"fill": "#C79A42", "stroke": "#C79A42", "dot": "#FDF9F2"},
-    "Saints & Tombs":      {"fill": "#032553", "stroke": "#032553", "dot": "#C79A42"},
-    "Holy Land":           {"fill": "#F9F1E8", "stroke": "#C79A42", "dot": "#C79A42"},
-    "Shrine & Basilica":   {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F2"},
+    "Marian Apparition":   {"fill": "#FFFFFF", "stroke": "#032553", "dot": "#032553"},
+    "Eucharistic Miracle": {"fill": "#C79A42", "stroke": "#8A6A24", "dot": "#FDF9F2"},
+    "Saints & Tombs":      {"fill": "#032553", "stroke": "#021A3B", "dot": "#C79A42"},
+    "Holy Land":           {"fill": "#F3E4CE", "stroke": "#C79A42", "dot": "#C79A42"},
+    "Shrine & Basilica":   {"fill": "#173A61", "stroke": "#0D2440", "dot": "#FDF9F2"},
 }
-DEFAULT_CATEGORY_STYLE = {"fill": "#173A61", "stroke": "#173A61", "dot": "#FDF9F2"}
+DEFAULT_CATEGORY_STYLE = {"fill": "#173A61", "stroke": "#0D2440", "dot": "#FDF9F2"}
 
 MAP_PAGE_SLUG = "interactive-map"
 
@@ -49,6 +51,22 @@ MAP_PAGE_SLUG = "interactive-map"
 NEARBY_RADIUS_MILES = 40
 NEARBY_MAX_RESULTS = 8
 EARTH_RADIUS_MILES = 3958.8
+
+
+def live_contact_page():
+    """The live home.ContactPage (the real contact form), or None.
+
+    The "Report something that's wrong" button renders only when this exists,
+    so it stays hidden until that form is live. Looked up by model name so
+    this works before and after ContactPage is added to the home app.
+    """
+    from django.apps import apps
+
+    try:
+        model = apps.get_model("home", "ContactPage")
+    except LookupError:
+        return None
+    return model.objects.live().public().first()
 
 
 def miles_between(lat1, lon1, lat2, lon2):
@@ -106,6 +124,69 @@ CANONICAL_STATUS_CHOICES = [
     ("Recognized Devotion", "Recognized Devotion"),
     ("Constat de supernaturalitate (legacy)", "Constat de supernaturalitate (legacy)"),
 ]
+
+# Plain-English badge text for each canonical_status. The stored (Latin)
+# term is only ever shown as the badge's tooltip. A value missing from this
+# map is shown as stored rather than guessed at.
+CANONICAL_STATUS_LABELS = {
+    "Constat de supernaturalitate (legacy)": "Church approved",
+    "Recognized Devotion": "Church-recognized devotion",
+    "Nihil obstat": "Devotion permitted",
+    "Prae oculis habeatur": "Permitted, under observation",
+    "Curatur": "Under the bishop's review",
+    "Sub mandato": "Under Church supervision",
+    "Prohibetur": "Not permitted",
+    "Declaratio de non supernaturalitate": "Declared not supernatural",
+}
+# Values that mean "no judgment applies to this place" -- never a badge, chip or row.
+STATUS_NOT_SHOWN = {"", "Not Applicable"}
+APPROVED_STATUS = "Constat de supernaturalitate (legacy)"
+
+# --- v2 site page choice fields (all optional; blank is always allowed) ---
+EUCHARISTIC_KIND_CHOICES = [
+    ("miracle", "Eucharistic miracle"),
+    ("precious-blood", "Relic of the Precious Blood"),
+    ("tradition", "Eucharistic tradition"),
+]
+VISIT_LENGTH_CHOICES = [
+    ("half-day", "Half day"),
+    ("one-day", "One day"),
+    ("weekend", "Weekend (2–3 days)"),
+    ("extended", "Extended (4+ days)"),
+]
+RESERVATION_CHOICES = [
+    ("no", "No reservation needed"),
+    ("yes", "Reservation required"),
+    ("some", "Reservations for some activities"),
+]
+ACCESSIBILITY_LEVEL_CHOICES = [
+    ("step-free", "Step-free main areas"),
+    ("partly", "Partly accessible"),
+    ("difficult", "Difficult access"),
+    ("unknown", "Unknown"),
+]
+WORSHIP_STATUS_CHOICES = [
+    ("active", "Active church with regular Mass"),
+    ("occasional", "Mass occasionally"),
+    ("no-regular", "No regular Mass"),
+    ("not-catholic", "Not a Catholic church"),
+]
+GUIDE_LEVEL_CHOICES = [
+    ("full", "Fully researched guide"),
+    ("essential", "Essential visit guide"),
+]
+
+ACCOUNT_FEATURES = ["bold", "italic", "link"]
+REFERENCE_FEATURES = ["link", "bold", "italic"]
+READING_LIST_FEATURES = ["ul", "ol", "bold", "italic", "link"]
+
+# Learn articles that explain how the Church judges these claims, by
+# category; linked from "Information & sources" only while a live page has
+# the slug. Other categories get no link.
+CHURCH_JUDGMENT_LEARN = {
+    "Marian Apparition": ("learn-mary-apparitions", "How the Church judges apparitions"),
+    "Eucharistic Miracle": ("the-eucharist-and-eucharistic-miracles", "How the Church judges Eucharistic miracles"),
+}
 
 
 @register_snippet
@@ -280,12 +361,53 @@ class SacredSitePage(RoutablePageMixin, Page):
     quick_accessibility = models.CharField(max_length=40, blank=True)
     quick_accessibility_note = models.CharField(max_length=60, blank=True)
 
+    # --- Pilgrimage Platform v2 (rendered only behind SOG_V2_ENABLED) -----
+    # Every field is optional and nullable; nothing here replaces an
+    # existing field. The official website stays in location_link.
+    recognition_year = models.PositiveSmallIntegerField(
+        null=True, blank=True,
+        help_text='Year of the Church\'s judgment. Shown as "Church approved · <year>".',
+    )
+    eucharistic_kind = models.CharField(
+        max_length=20, null=True, blank=True, choices=EUCHARISTIC_KIND_CHOICES,
+        help_text="Eucharistic pages only; shown as a chip beside the category.",
+    )
+    address = models.CharField(max_length=200, null=True, blank=True)
+    time_needed = models.CharField(max_length=80, null=True, blank=True)
+    visit_length = models.CharField(max_length=20, null=True, blank=True, choices=VISIT_LENGTH_CHOICES)
+    admission = models.CharField(max_length=120, null=True, blank=True)
+    reservation_required = models.CharField(
+        max_length=10, null=True, blank=True, choices=RESERVATION_CHOICES,
+    )
+    accessibility_summary = models.CharField(max_length=160, null=True, blank=True)
+    accessibility_level = models.CharField(
+        max_length=20, null=True, blank=True, choices=ACCESSIBILITY_LEVEL_CHOICES,
+    )
+    worship_status = models.CharField(max_length=20, null=True, blank=True, choices=WORSHIP_STATUS_CHOICES)
+    worship_note = models.CharField(max_length=160, null=True, blank=True)
+    worship_schedule_url = models.URLField(null=True, blank=True)
+    account_tradition = RichTextField(null=True, blank=True, features=ACCOUNT_FEATURES)
+    account_church_judgment = RichTextField(null=True, blank=True, features=ACCOUNT_FEATURES)
+    account_findings = RichTextField(null=True, blank=True, features=ACCOUNT_FEATURES)
+    account_teaching = RichTextField(null=True, blank=True, features=ACCOUNT_FEATURES)
+    guide_level = models.CharField(max_length=20, null=True, blank=True, choices=GUIDE_LEVEL_CHOICES)
+    prep_prayer = RichTextField(null=True, blank=True, features=ACCOUNT_FEATURES)
+    prep_readings = RichTextField(null=True, blank=True, features=READING_LIST_FEATURES)
+    primary_references = RichTextField(null=True, blank=True, features=REFERENCE_FEATURES)
+    # Internal only -- never rendered on the public page.
+    reviewed_history_on = models.DateField(null=True, blank=True)
+    reviewed_status_on = models.DateField(null=True, blank=True)
+    reviewed_travel_on = models.DateField(null=True, blank=True)
+    reviewed_contacts_on = models.DateField(null=True, blank=True)
+
     content_panels = Page.content_panels + [
         FieldPanel("featured_image"),
         MultiFieldPanel(
             [
                 FieldPanel("category"),
+                FieldPanel("eucharistic_kind"),
                 FieldPanel("canonical_status"),
+                FieldPanel("recognition_year"),
                 FieldPanel("locality"),
                 FieldPanel("country"),
                 FieldPanel("latitude"),
@@ -307,7 +429,33 @@ class SacredSitePage(RoutablePageMixin, Page):
         FieldPanel("summary_short"),
         FieldPanel("the_story"),
         FieldPanel("church_recognition"),
+        MultiFieldPanel(
+            [
+                FieldPanel("account_tradition"),
+                FieldPanel("account_church_judgment"),
+                FieldPanel("account_findings"),
+                FieldPanel("account_teaching"),
+            ],
+            heading="How to read this account (shown when two or more are filled)",
+            classname="collapsed",
+        ),
         FieldPanel("catholic_teaching"),
+        MultiFieldPanel(
+            [
+                FieldPanel("address"),
+                FieldPanel("time_needed"),
+                FieldPanel("visit_length"),
+                FieldPanel("admission"),
+                FieldPanel("reservation_required"),
+                FieldPanel("accessibility_summary"),
+                FieldPanel("accessibility_level"),
+                FieldPanel("worship_status"),
+                FieldPanel("worship_note"),
+                FieldPanel("worship_schedule_url"),
+            ],
+            heading="At a Glance",
+            classname="collapsed",
+        ),
         MultiFieldPanel(
             [
                 FieldPanel("quick_ideal_stay"),
@@ -324,8 +472,25 @@ class SacredSitePage(RoutablePageMixin, Page):
             heading="The Pilgrim's Quick Card",
             classname="collapsed",
         ),
+        FieldPanel("guide_level"),
         InlinePanel("travel_sections", label="Plan Your Visit section"),
         FieldPanel("go_deeper"),
+        MultiFieldPanel(
+            [FieldPanel("prep_prayer"), FieldPanel("prep_readings")],
+            heading="Prepare spiritually",
+            classname="collapsed",
+        ),
+        FieldPanel("primary_references"),
+        MultiFieldPanel(
+            [
+                FieldPanel("reviewed_history_on"),
+                FieldPanel("reviewed_status_on"),
+                FieldPanel("reviewed_travel_on"),
+                FieldPanel("reviewed_contacts_on"),
+            ],
+            heading="Verification (internal -- never shown publicly)",
+            classname="collapsed",
+        ),
         FieldPanel("notes_internal"),
         MultiFieldPanel(
             [FieldPanel("pilgrimage_info")],
@@ -412,6 +577,187 @@ class SacredSitePage(RoutablePageMixin, Page):
     def show_quick_card(self):
         """One fact is worse than none -- a half-empty card reads as broken."""
         return len(self.quick_card_cells) >= 2
+
+    # --- Church status (ALWAYS ON: both page versions use these) ---------
+
+    @property
+    def status_applies(self):
+        """A status badge, chip or row renders only for a real judgment --
+        never for blank or "Not Applicable". Gated on the value, not the
+        category, so a Saints & Tombs page with an approved apparition keeps it."""
+        return (self.canonical_status or "") not in STATUS_NOT_SHOWN
+
+    @property
+    def status_label(self):
+        """Plain-English badge text; the stored term goes in the tooltip."""
+        if not self.status_applies:
+            return ""
+        label = CANONICAL_STATUS_LABELS.get(self.canonical_status, self.canonical_status)
+        if self.canonical_status == APPROVED_STATUS and self.recognition_year:
+            label = f"{label} · {self.recognition_year}"
+        return label
+
+    # --- Pilgrimage Platform v2 page (only rendered behind the switch) ---
+
+    @property
+    def eucharistic_kind_label(self):
+        if self.category != "Eucharistic Miracle" or not self.eucharistic_kind:
+            return ""
+        return self.get_eucharistic_kind_display()
+
+    @cached_property
+    def breadcrumbs(self):
+        """Ancestors below the site's root page: Explore › Category."""
+        site = self.get_site()
+        root_depth = site.root_page.depth if site else 2
+        return list(self.get_ancestors().live().filter(depth__gt=root_depth))
+
+    @property
+    def location_line(self):
+        return ", ".join(part for part in (self.locality, self.country) if part)
+
+    @property
+    def feast_line(self):
+        if not self.feast_day:
+            return ""
+        return self.feast_day if self.feast_day.lower().startswith("feast") else f"Feast, {self.feast_day}"
+
+    @property
+    def directions_url(self):
+        """Outbound Google Maps directions by coordinates -- a plain link, no API."""
+        if self.latitude is None or self.longitude is None:
+            return ""
+        return f"https://www.google.com/maps/dir/?api=1&destination={self.latitude},{self.longitude}"
+
+    @cached_property
+    def at_a_glance_rows(self):
+        """[{key, label, text, links: [(text, url, external)]}] for filled rows.
+
+        Existing fields are reused before the v2 ones exist: Time needed
+        falls back to the Quick Card's ideal stay, Accessibility to its
+        accessibility cell. Review dates are never part of this.
+        """
+        rows = []
+
+        def add(key, label, text, links=()):
+            links = [link for link in links if link[1]]
+            if text or links:
+                rows.append({"key": key, "label": label, "text": text, "links": links})
+
+        if self.address:
+            add("address", "Address", self.address, [("Directions", self.directions_url, True)])
+        if self.location_link:
+            host = self.location_link.split("//", 1)[-1].split("/", 1)[0].removeprefix("www.")
+            add("website", "Official website", "", [(host, self.location_link, True)])
+        time_text = self.time_needed or self.get_visit_length_display() or self.quick_ideal_stay
+        add("time", "Time needed", time_text)
+        admission = " · ".join(
+            part for part in (self.admission, self.get_reservation_required_display() if self.reservation_required else "") if part
+        )
+        add("admission", "Admission", admission)
+        access = self.accessibility_summary or self.quick_accessibility
+        if not access and self.accessibility_level and self.accessibility_level != "unknown":
+            access = self.get_accessibility_level_display()
+        add("accessibility", "Accessibility", access)
+        if self.worship_status or self.worship_note:
+            worship = " · ".join(
+                part for part in (self.get_worship_status_display() if self.worship_status else "", self.worship_note) if part
+            )
+            add("worship", "Active place of worship", worship, [("Official schedule", self.worship_schedule_url, True)])
+        if self.status_applies:
+            add("recognition", "Church recognition", self.status_label)
+        add("feast", "Feast day", self.feast_day)
+        return rows
+
+    @property
+    def show_at_a_glance(self):
+        return len(self.at_a_glance_rows) >= 2
+
+    @cached_property
+    def account_box_cells(self):
+        """[(label, body)] for "How to read this account"; Marian apparition
+        pages call the findings "Reported healings"."""
+        findings = "Reported healings" if self.category == "Marian Apparition" else "Reported findings"
+        cells = [
+            ("The tradition", self.account_tradition),
+            ("Church judgment", self.account_church_judgment),
+            (findings, self.account_findings),
+            ("Catholic teaching", self.account_teaching),
+        ]
+        return [(label, body) for label, body in cells if body]
+
+    @property
+    def show_account_box(self):
+        return len(self.account_box_cells) >= 2
+
+    @property
+    def has_church_recognition_section(self):
+        return bool(self.church_recognition) or self.show_account_box
+
+    @property
+    def v2_other_narrative(self):
+        """Narrative sections the v2 layout doesn't name (Catholic Teaching,
+        Go Deeper) -- kept, between Church Recognition and Plan Your Visit."""
+        return [s for s in self.narrative_sections if s["anchor"] not in ("the-story", "church-recognition")]
+
+    @property
+    def has_prep_section(self):
+        return bool(self.prep_prayer or self.prep_readings)
+
+    @property
+    def trip_readiness_country(self):
+        """Country for the travel-advisory line, without import qualifiers
+        like "Italy (tomb)" -- Phase 4 replaces this with country codes."""
+        return (self.country or "").split(" (", 1)[0].strip()
+
+    @property
+    def overview_plan_target(self):
+        """Where "Plan your own visit" goes: the plan section, else the planner."""
+        return "#plan-your-visit" if self.has_plan_section else f"/plan/?site={self.slug}"
+
+    @cached_property
+    def connected_sites(self):
+        """Up to 3 other live sites with the same principal saint that aren't
+        already in nearby_sites, nearest first where both have coordinates."""
+        if not self.associated_saint_id:
+            return []
+        listed = {entry["page"].pk for entry in self.nearby_sites}
+        candidates = (
+            SacredSitePage.objects.live()
+            .filter(associated_saint_id=self.associated_saint_id)
+            .exclude(pk=self.pk)
+            .exclude(pk__in=listed)
+        )
+        found = []
+        for site in candidates:
+            miles = None
+            if None not in (self.latitude, self.longitude, site.latitude, site.longitude):
+                miles = miles_between(self.latitude, self.longitude, site.latitude, site.longitude)
+            found.append({
+                "page": site,
+                "miles": miles,
+                "miles_display": None if miles is None else ("<1" if miles < 1 else f"{int(round(miles)):,}"),
+                "style": CATEGORY_STYLES.get(site.category, DEFAULT_CATEGORY_STYLE),
+            })
+        found.sort(key=lambda entry: (entry["miles"] is None, entry["miles"] or 0, entry["page"].title))
+        return found[:3]
+
+    @property
+    def v2_section_bar(self):
+        """The sticky section bar: only sections that have content, in page order."""
+        items = [{"id": "overview", "label": "Overview"}]
+        if self.the_story:
+            items.append({"id": "the-story", "label": "The Story"})
+        if self.has_church_recognition_section:
+            items.append({"id": "church-recognition", "label": "Church Recognition"})
+        if self.has_plan_section:
+            items.append({"id": "plan-your-visit", "label": "Plan Your Visit"})
+        if self.nearby_sites or self.connected_sites:
+            items.append({"id": "nearby", "label": "Nearby Sacred Sites"})
+        if self.has_prep_section:
+            items.append({"id": "prepare", "label": "Prepare Spiritually"})
+        items.append({"id": "pilgrim-photos", "label": "Pilgrim Photos"})
+        return items
 
     @cached_property
     def body_blocks(self):
@@ -557,6 +903,14 @@ class SacredSitePage(RoutablePageMixin, Page):
         public_photos = self.public_photos_queryset()
         context["gallery_preview_photos"] = list(public_photos[:GALLERY_PREVIEW_COUNT])
         context["gallery_total_count"] = public_photos.count()
+        from core.v2 import v2_enabled
+
+        if v2_enabled(request):
+            context["contact_page"] = live_contact_page()
+            learn = CHURCH_JUDGMENT_LEARN.get(self.category)
+            if learn and self.status_applies:
+                context["church_judgment_learn_page"] = Page.objects.live().public().filter(slug=learn[0]).first()
+                context["church_judgment_learn_text"] = learn[1]
         return context
 
     @route(r"^gallery/$")
@@ -615,11 +969,16 @@ class SiteTravelSection(Orderable):
         help_text="One line under the heading, readable while the panel is closed.",
     )
     body = RichTextField()
+    needs_confirmation = models.BooleanField(
+        default=False,
+        help_text='Shows a "Needs confirmation" pill on this panel (v2 page).',
+    )
 
     panels = [
         FieldPanel("kind"),
         FieldPanel("teaser"),
         FieldPanel("body"),
+        FieldPanel("needs_confirmation"),
     ]
 
     class Meta(Orderable.Meta):

@@ -241,6 +241,11 @@ TIME_ZONE = "UTC"
 # not at the server clock's midnight (TIME_ZONE stays UTC for storage).
 LITURGICAL_TIME_ZONE = os.environ.get("LITURGICAL_TIME_ZONE", "America/Los_Angeles")
 
+# Pilgrimage Platform v2 feature switch: "off" (default), "staff" (only
+# request.user.is_staff sees v2), or "on". Anything else reads as "off".
+# Always check it through core.v2.v2_enabled(request) / {% v2_enabled %}.
+SOG_V2_ENABLED = os.environ.get("SOG_V2_ENABLED", "off").strip().lower()
+
 USE_I18N = True
 
 USE_TZ = True

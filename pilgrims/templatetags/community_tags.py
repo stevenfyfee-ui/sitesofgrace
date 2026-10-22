@@ -14,7 +14,8 @@ register = template.Library()
 
 
 @register.inclusion_tag("community/_journey_buttons.html", takes_context=True)
-def journey_buttons(context, site):
+def journey_buttons(context, site, only=""):
+    """only="visited" (or "want_to_go") renders just that one button."""
     request = context["request"]
     current_status = None
     if request.user.is_authenticated:
@@ -25,4 +26,5 @@ def journey_buttons(context, site):
         "current_status": current_status,
         "is_authenticated": request.user.is_authenticated,
         "request": request,
+        "only": only,
     }

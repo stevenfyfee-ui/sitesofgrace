@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static category_styles %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -31,6 +31,7 @@
 {% endblock %}
 
 {% block extra_js %}
+{% category_styles_json %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
@@ -45,17 +46,13 @@
     var loginUrl = el.dataset.loginUrl;
     var journeySetUrl = el.dataset.journeySetUrl;
 
-    // Single source of truth for category colors -- used for the dots and the
+    // Category colors come from catalog.models.CATEGORY_STYLES via the
+    // #category-styles JSON block above -- used for the dots and the
     // legend swatches. The popup's category label reuses the site page's
     // own .badge.badge-category style instead of a per-category color.
-    var CATEGORY_STYLES = {
-      'Marian Apparition':   { fill: '#FFFFFF', stroke: '#032553' },
-      'Eucharistic Miracle': { fill: '#C79A42', stroke: '#8A6A24' },
-      'Saints & Tombs':      { fill: '#032553', stroke: '#021A3B' },
-      'Holy Land':           { fill: '#F3E4CE', stroke: '#C79A42' },
-      'Shrine & Basilica':   { fill: '#173A61', stroke: '#0D2440' },
-    };
-    var DEFAULT_STYLE = { fill: '#173A61', stroke: '#0D2440' };
+    var categoryData = JSON.parse(document.getElementById('category-styles').textContent);
+    var CATEGORY_STYLES = categoryData.styles;
+    var DEFAULT_STYLE = categoryData.default;
 
     function styleFor(category) {
       return CATEGORY_STYLES[category] || DEFAULT_STYLE;

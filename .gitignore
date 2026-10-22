@@ -48,3 +48,6 @@ Claude outputs/
 
 # Wikidata saints tooling - cached query results, never commit
 tools/saints_data/cache/
+
+# Local TLS-inspection root CA for the dev Docker image (Dockerfile.dev)
+docker/dev-certs/

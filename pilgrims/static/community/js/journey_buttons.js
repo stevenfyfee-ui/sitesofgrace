@@ -39,7 +39,13 @@
       body: new URLSearchParams({ site_id: wrap.dataset.siteId, status: btn.dataset.status }),
     })
       .then(function (response) { return response.json(); })
-      .then(function (data) { applyState(wrap, data.status); });
+      .then(function (data) {
+        // A page can show the same site's buttons twice (the v2 site page's
+        // hero and its At a Glance panel); keep every copy in step.
+        var id = wrap.dataset.siteId;
+        var wraps = id ? document.querySelectorAll('.journey-buttons[data-site-id="' + id + '"]') : [wrap];
+        Array.prototype.forEach.call(wraps, function (w) { applyState(w, data.status); });
+      });
   });
 
   // Client-side markup builder mirroring pilgrims/templates/community/_journey_buttons.html,
