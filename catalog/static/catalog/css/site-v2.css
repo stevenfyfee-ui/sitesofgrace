@@ -214,3 +214,51 @@ a.v2-card:hover { border-color: var(--gold); }
 @media (prefers-reduced-motion: reduce) {
   .v2-site * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* ---------- Phase 2: guided pilgrimages ---------- */
+.v2-choice-grid { display: grid; gap: 14px; }
+@media (min-width: 640px) { .v2-choice-grid { grid-template-columns: 1fr 1fr; } }
+.v2-choice { display: grid; gap: 6px; align-content: start; }
+.v2-choice-icon { font-size: 20px; color: var(--v2-gold-deep); }
+
+.v2-tour { margin-bottom: 14px; }
+.v2-tour-head { display: flex; flex-wrap: wrap; gap: 10px 16px; justify-content: space-between; align-items: flex-start; }
+.v2-tour-op { margin: 2px 0 0; font-family: var(--sans); font-size: 13.5px; color: var(--stone); }
+.v2-tour-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.v2-tour-pill {
+  display: inline-block; padding: 4px 11px; border-radius: 999px;
+  font-family: var(--sans); font-size: 12px; font-weight: 600; border: 1px solid var(--gold-soft);
+}
+.v2-tour-pill--solid { background: var(--navy); color: var(--ivory); border-color: var(--navy); }
+.v2-tour-pill--sample { border-style: dashed; color: var(--stone); }
+.v2-tour-stops { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.v2-tour-stops li {
+  font-family: var(--sans); font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--parchment);
+}
+.v2-tour-stops a { color: var(--blue); }
+.v2-tour-facts { display: grid; gap: 10px 18px; margin: 16px 0 0; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .v2-tour-facts { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .v2-tour-facts { grid-template-columns: repeat(4, 1fr); } }
+.v2-tour-facts dt { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.v2-tour-facts dd { margin: 2px 0 0; font-size: 14.5px; line-height: 1.45; }
+.v2-tour-foot {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--v2-hairline);
+}
+.v2-tour-foot small { font-size: 13px; color: var(--stone); }
+.v2-disclose { font-size: 13.5px; color: var(--stone); margin: 4px 0 0; }
+.v2-disclose a { color: var(--blue); }
+
+.v2-group-empty { display: flex; gap: 16px; align-items: flex-start; }
+.v2-group-icon { font-size: 24px; color: var(--v2-gold-deep); line-height: 1.2; }
+.v2-group-empty p { margin: 6px 0 0; font-size: 15px; line-height: 1.55; }
+.v2-group-acts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 14px; }
+.v2-group-acts form { margin: 0; }
+.v2-group-note { font-size: 13px; color: var(--stone); }
+.v2-interest-done {
+  margin: 0 !important; padding: 8px 14px; border-radius: 999px; font-family: var(--sans); font-size: 14px; font-weight: 600;
+  color: var(--v2-green); background: rgba(62, 122, 90, .08); border: 1px solid rgba(62, 122, 90, .45);
+}
+.v2-group-tier { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--v2-hairline); }
+.v2-group-tier ul { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
+.v2-group-tier-note { font-size: 13.5px !important; color: var(--stone); }

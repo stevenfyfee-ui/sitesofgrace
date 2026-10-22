@@ -37,6 +37,8 @@ urlpatterns = [
     path("passport/journey.json", pilgrims_views.passport_journey_json, name="passport_journey_json"),
     path("passport/profile/", pilgrims_views.passport_profile_edit, name="passport_profile_edit"),
     path("pilgrims/", include("pilgrims.urls")),
+    # v2 guided pilgrimages: /go/tour/<id>/ and /tours/interest/ (404 unless v2 is on).
+    path("", include("tours.urls")),
 ]
 
 

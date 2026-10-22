@@ -611,3 +611,12 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     pair scored 0.53, so nothing was flagged). Run it from the DigitalOcean console:
     `python manage.py travel_content_report --out /tmp/travel_report.csv --all && cat /tmp/travel_report.csv`
     (the console has no file download, so copy the printed CSV).
+13. **Privacy Policy wording on server logs.** Rule 10 covers what the app stores, and v2 stores no
+    visitor IPs (tour clicks are daily counts; interest is user + site). The platform's own request
+    logs are separate: gunicorn's access log (`--access-logfile -` in the Dockerfile) and App
+    Platform's log retention record the IP of every request, `/go/tour/` included. Leave that logging
+    as it is, but check that the Privacy Policy's wording about server logs matches it.
+14. **Affiliate Disclosure page before affiliate tours.** A live Affiliate Disclosure page (slug
+    `affiliate-disclosure`) must exist in production before any `GuidedPilgrimage` with
+    `is_affiliate_link=True` is set live. Tours with ordinary operator links can launch without one;
+    affiliate links can't. (The disclosure line links to the page automatically once it's live.)

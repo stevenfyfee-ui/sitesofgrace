@@ -1,0 +1,95 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  Guided pilgrimages on a v2 sacred site page. Included by
+  catalog/v2/site_page_body.html, which is only rendered behind the v2 switch.
+
+  With tours: up to three cards, soonest departure first, then the disclosure.
+  Without: a compact "Prefer to travel with a group?" card in the same place,
+  up to two tours elsewhere in the same country (labeled as NOT including this
+  site), and the interest button. Outbound links go through /go/tour/<id>/ so
+  clicks are counted without recording who clicked.
+{% endcomment %}
+<section class="v2-block section-anchor" id="guided-pilgrimages">
+  <p class="v2-eyebrow">Travel with a group</p>
+  {% if page.guided_pilgrimages %}
+    <h2 class="v2-h2">Guided pilgrimages that include {{ page.title }}</h2>
+    {% for tour in page.guided_pilgrimages %}
+      <article class="v2-card v2-tour">
+        <div class="v2-tour-head">
+          <div>
+            <h3 class="v2-h3">{{ tour.title }}</h3>
+            <p class="v2-tour-op">{{ tour.operator.name }}</p>
+          </div>
+          <div class="v2-tour-pills">
+            {% if tour.travel_style %}<span class="v2-tour-pill v2-tour-pill--solid">{% if tour.travel_style == "pilgrimage" %}<span aria-hidden="true">✠</span> {% endif %}{{ tour.get_travel_style_display }}</span>{% endif %}
+            {% if tour.is_sample %}<span class="v2-tour-pill v2-tour-pill--sample">Sample</span>{% endif %}
+          </div>
+        </div>
+        {% if tour.stops.all %}
+          <ul class="v2-tour-stops" aria-label="Stops">
+            {% for stop in tour.stops.all %}
+              <li>{% if stop.link %}<a href="{{ stop.link }}">{{ stop.label }}</a>{% else %}{{ stop.label }}{% endif %}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <dl class="v2-tour-facts">
+          {% for label, value in tour.facts %}
+            <div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+          {% endfor %}
+        </dl>
+        <div class="v2-tour-foot">
+          <small>Cancellation terms set by the operator</small>
+          {% if tour.booking_url %}
+            <a class="btn btn-primary" href="{% url 'tours:go' tour.pk %}?from={{ page.pk }}" target="_blank" rel="{{ tour.link_rel }}">View on operator site <span aria-hidden="true">↗</span></a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+    <p class="v2-disclose">
+      Tour details, availability, payment and cancellation are handled by the tour operator, not by Sites of Grace.
+      Some links may earn us a commission{% if affiliate_disclosure_page %} (<a href="{% pageurl affiliate_disclosure_page %}">how we choose and disclose</a>){% endif %}.
+    </p>
+  {% else %}
+    <div class="v2-card v2-group-empty">
+      <span class="v2-group-icon" aria-hidden="true">✠</span>
+      <div>
+        <h2 class="v2-h3">Prefer to travel with a group?</h2>
+        <p>No guided pilgrimages that include {{ page.title }} are listed yet. Many parishes and dioceses organize their own trips, so ask at yours.</p>
+        <div class="v2-group-acts">
+          {% if tour_interested %}
+            <p class="v2-interest-done" role="status">You&rsquo;ve told us you&rsquo;re interested</p>
+          {% else %}
+            {% comment %}
+              A POST form for everyone: signed-out visitors are sent to sign in
+              and the interest is registered when they do (tours.signals).
+            {% endcomment %}
+            <form method="post" action="{% url 'tours:interest' %}">
+              {% csrf_token %}
+              <input type="hidden" name="site" value="{{ page.pk }}">
+              <button type="submit" class="btn btn-primary">I&rsquo;m interested in a group pilgrimage here</button>
+            </form>
+          {% endif %}
+          <span class="v2-group-note">We use this to ask Catholic tour operators to add trips.</span>
+        </div>
+        {% if tours_elsewhere %}
+          <div class="v2-group-tier">
+            <p><strong>Guided pilgrimages elsewhere in {{ tours_elsewhere_label }}</strong></p>
+            <p class="v2-group-tier-note">These trips don&rsquo;t include {{ page.title }}.</p>
+            <ul>
+              {% for tour in tours_elsewhere %}
+                <li>
+                  {% if tour.booking_url %}
+                    <a class="v2-arrow-link" href="{% url 'tours:go' tour.pk %}?from={{ page.pk }}" target="_blank" rel="{{ tour.link_rel }}">{{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}</a>
+                  {% else %}
+                    {{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+            <p class="v2-disclose">Booked with the tour operator, not Sites of Grace. Some links may earn us a commission{% if affiliate_disclosure_page %} (<a href="{% pageurl affiliate_disclosure_page %}">how we choose and disclose</a>){% endif %}.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</section>

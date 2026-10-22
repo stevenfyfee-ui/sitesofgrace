@@ -14,10 +14,18 @@ convent where their principal saint is blank), two sample shrines within
 40 miles for the Nearby cards, and three sample Plan Your Visit panels.
 Safe to run repeatedly: a second run changes nothing.
 
+Phase 2: a sample operator with the mockup's "Lourdes & Fátima" tour (stops:
+Lourdes, Fátima, and Lisbon as a place name; one past departure that must
+not render, one upcoming) and a "Paris & Lisieux" tour that does not include
+Lourdes -- so a French site with no tours (e.g. La Salette) shows the "None"
+state with "Guided pilgrimages elsewhere in France". Booking links point at
+example.com, a domain reserved for documentation.
+
 If Lourdes has an unpublished draft (real editorial work), the draft is left
 exactly as it is: the blank sample fields are written to the page row only
 -- what the public page renders -- and no revision is created or published.
 """
+from datetime import date, timedelta
 from decimal import Decimal
 
 from django.conf import settings
@@ -76,6 +84,34 @@ NEARBY = [
 ]
 NEARBY_PARENT_SLUG = "shrines-and-basilicas"
 
+TOURS = [
+    {
+        "title": "Lourdes & Fátima Pilgrimage (sample)",
+        "stops": [("lourdes", "Lourdes"), ("fatima", "Fátima"), (None, "Lisbon")],
+        "fields": {
+            "travel_style": "pilgrimage", "duration_days": 10, "departure_city": "New York (JFK)",
+            "departure_months": [5, 9], "price_note": "See operator", "priest_or_director": "priest",
+            "mass": "daily", "confession_offered": "yes", "hotels_meals": "4-star, breakfast and dinner",
+            "activity_level": "moderate", "group_size_max": 40,
+            "cancellation_summary": "Set by the operator (sample).",
+            "booking_url": "https://example.com/sample-tour-a", "is_affiliate_link": True, "is_live": True,
+        },
+        # One departure already past (must never render) and one upcoming.
+        "departures": [(-60, {"status": "open"}), (200, {"status": "open", "airfare_included": True})],
+    },
+    {
+        "title": "Paris & Lisieux Pilgrimage (sample)",
+        "stops": [("rue-du-bac", "Rue du Bac"), ("sacre-coeur", "Sacré-Cœur"), ("lisieux", "Lisieux")],
+        "fields": {
+            "travel_style": "pilgrimage-sightseeing", "duration_days": 8, "departure_city": "Boston (BOS)",
+            "departure_months": [6, 10], "price_note": "See operator", "priest_or_director": "director",
+            "mass": "most-days", "confession_offered": "not-stated", "activity_level": "easy",
+            "booking_url": "https://example.com/sample-tour-b", "is_affiliate_link": False, "is_live": True,
+        },
+        "departures": [],
+    },
+]
+
 TRAVEL = [
     ("how-long-should-i-stay", "Two nights is the honest minimum (sample)",
      "<p>Sample text: one day covers the grotto and the basilicas; two nights add the torchlight "
@@ -113,9 +149,11 @@ class Command(BaseCommand):
             filled = self._fill_lourdes(lourdes, saint)
             linked = self._link_nevers(saint)
             created_sites = self._nearby()
+            created_tours = self._tours()
         self.stdout.write(
             f"v2_dev_sample: Lourdes fields filled: {filled or 'none'}; "
-            f"Nevers linked: {linked}; sample sites created: {created_sites or 'none'}"
+            f"Nevers linked: {linked}; sample sites created: {created_sites or 'none'}; "
+            f"sample tours created: {created_tours or 'none'}"
         )
 
     def _saint(self):
@@ -178,5 +216,30 @@ class Command(BaseCommand):
             site = SacredSitePage(category="Shrine & Basilica", country="France", **spec)
             parent.add_child(instance=site)
             publish(site)
+            created.append(spec["title"])
+        return created
+
+    def _tours(self):
+        from tours.models import GuidedPilgrimage, TourDeparture, TourOperator, TourStop
+
+        operator, _ = TourOperator.objects.get_or_create(
+            name="Sample Catholic tour operator A (sample)",
+            defaults={"website": "https://example.com/", "catholic_focused": True, "is_active": True},
+        )
+        created = []
+        for spec in TOURS:
+            if GuidedPilgrimage.objects.filter(title=spec["title"]).exists():
+                continue
+            tour = GuidedPilgrimage(operator=operator, **spec["fields"], title=spec["title"])
+            stops = []
+            for slug, place in spec["stops"]:
+                site = SacredSitePage.objects.filter(slug=slug).first() if slug else None
+                stops.append(TourStop(site=site, place_name=None if site else place))
+            tour.stops = stops
+            tour.departures = [
+                TourDeparture(depart_date=date.today() + timedelta(days=offset), **extra)
+                for offset, extra in spec["departures"]
+            ]
+            tour.save()
             created.append(spec["title"])
         return created

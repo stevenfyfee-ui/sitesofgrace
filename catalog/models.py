@@ -742,6 +742,13 @@ class SacredSitePage(RoutablePageMixin, Page):
         found.sort(key=lambda entry: (entry["miles"] is None, entry["miles"] or 0, entry["page"].title))
         return found[:3]
 
+    @cached_property
+    def guided_pilgrimages(self):
+        """Live tours that stop here, soonest departure first (max 3)."""
+        from tours.models import tours_for_site
+
+        return tours_for_site(self)
+
     @property
     def v2_section_bar(self):
         """The sticky section bar: only sections that have content, in page order."""
@@ -752,6 +759,8 @@ class SacredSitePage(RoutablePageMixin, Page):
             items.append({"id": "church-recognition", "label": "Church Recognition"})
         if self.has_plan_section:
             items.append({"id": "plan-your-visit", "label": "Plan Your Visit"})
+        if self.guided_pilgrimages:
+            items.append({"id": "guided-pilgrimages", "label": "Guided Pilgrimages"})
         if self.nearby_sites or self.connected_sites:
             items.append({"id": "nearby", "label": "Nearby Sacred Sites"})
         if self.has_prep_section:
@@ -907,6 +916,18 @@ class SacredSitePage(RoutablePageMixin, Page):
 
         if v2_enabled(request):
             context["contact_page"] = live_contact_page()
+            context["affiliate_disclosure_page"] = (
+                Page.objects.live().public().filter(slug="affiliate-disclosure").first()
+            )
+            if not self.guided_pilgrimages:
+                from tours.models import TourInterest, tours_elsewhere
+
+                context["tours_elsewhere_label"] = self.trip_readiness_country
+                context["tours_elsewhere"] = tours_elsewhere(self, self.trip_readiness_country)
+                context["tour_interested"] = bool(
+                    request.user.is_authenticated
+                    and TourInterest.objects.filter(user=request.user, site=self).exists()
+                )
             learn = CHURCH_JUDGMENT_LEARN.get(self.category)
             if learn and self.status_applies:
                 context["church_judgment_learn_page"] = Page.objects.live().public().filter(slug=learn[0]).first()

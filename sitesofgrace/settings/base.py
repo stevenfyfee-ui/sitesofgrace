@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "store",
     "news",
     "blog",
+    "tours",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",

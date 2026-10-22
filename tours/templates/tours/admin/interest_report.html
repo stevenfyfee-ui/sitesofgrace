@@ -1,0 +1,25 @@
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}Group trip interest{% endblock %}
+{% block content %}
+  {% include "wagtailadmin/shared/header.html" with title="Group trip interest" icon="group" %}
+  <div class="nice-padding">
+    <p>Signed-in pilgrims who asked for group trips to a site, by site, newest interest first.
+       {{ total }} in total. Counts only: no names or emails are shown or collected for outreach.</p>
+    {% if rows %}
+      <table class="listing">
+        <thead><tr><th>Site</th><th>Interested pilgrims</th><th>Latest</th></tr></thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <td><a href="{% url 'wagtailadmin_pages:edit' row.site_id %}">{{ row.site__title }}</a></td>
+              <td>{{ row.count }}</td>
+              <td>{{ row.latest|date:"M j, Y" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No interest registered yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}

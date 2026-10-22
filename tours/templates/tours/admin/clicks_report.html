@@ -1,0 +1,30 @@
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}Tour operator clicks{% endblock %}
+{% block content %}
+  {% include "wagtailadmin/shared/header.html" with title="Tour operator clicks" icon="link-external" %}
+  <div class="nice-padding">
+    <p>"View on operator site" clicks since {{ since|date:"M j, Y" }}, by tour and the page it was clicked on.
+       Daily counts only: no IP address, user or cookie is recorded.</p>
+    <p>
+      {% if days == 30 %}<strong>Last 30 days</strong>{% else %}<a href="?days=30">Last 30 days</a>{% endif %}
+      &middot;
+      {% if days == 90 %}<strong>Last 90 days</strong>{% else %}<a href="?days=90">Last 90 days</a>{% endif %}
+    </p>
+    {% if rows %}
+      <table class="listing">
+        <thead><tr><th>Guided pilgrimage</th><th>Page</th><th>Clicks</th></tr></thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <td>{{ row.pilgrimage__title }}</td>
+              <td>{% if row.page_id %}{{ row.page__title }}{% else %}(unknown page){% endif %}</td>
+              <td>{{ row.clicks }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No clicks in this period.</p>
+    {% endif %}
+  </div>
+{% endblock %}

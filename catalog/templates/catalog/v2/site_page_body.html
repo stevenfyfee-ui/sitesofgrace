@@ -104,17 +104,30 @@
       <section class="v2-block section-anchor" id="overview">
         <p class="v2-eyebrow">Visit this holy place</p>
         <h2 class="v2-h2">How would you like to make this pilgrimage?</h2>
-        {% comment %}
-          Phase 2 adds the "Join a guided pilgrimage" card beside this one for
-          sites with tours. Until then every site shows the single wide card.
-        {% endcomment %}
-        <a class="v2-card v2-choice v2-choice--wide" href="{{ page.overview_plan_target }}">
-          <span class="v2-choice-text">
-            <span class="v2-h3">Plan your own visit</span>
-            <span class="v2-choice-copy">How long to stay, how to get there, what to see, and what to bring.</span>
-          </span>
-          <span class="v2-arrow-link">{% if page.has_plan_section %}Travel guide{% else %}Plan a trip here{% endif %}</span>
-        </a>
+        {% if page.guided_pilgrimages %}
+          <div class="v2-choice-grid">
+            <a class="v2-card v2-choice" href="#guided-pilgrimages">
+              <span class="v2-choice-icon" aria-hidden="true">✠</span>
+              <span class="v2-h3">Join a guided pilgrimage</span>
+              <span class="v2-choice-copy">Travel with a Catholic group, a priest or spiritual director, daily Mass, and the logistics handled for you.</span>
+              <span class="v2-arrow-link">See guided pilgrimages</span>
+            </a>
+            <a class="v2-card v2-choice" href="{{ page.overview_plan_target }}">
+              <span class="v2-choice-icon" aria-hidden="true">⌖</span>
+              <span class="v2-h3">Plan your own visit</span>
+              <span class="v2-choice-copy">How long to stay, how to get there, what to see, and what to bring.</span>
+              <span class="v2-arrow-link">{% if page.has_plan_section %}Travel guide{% else %}Plan a trip here{% endif %}</span>
+            </a>
+          </div>
+        {% else %}
+          <a class="v2-card v2-choice v2-choice--wide" href="{{ page.overview_plan_target }}">
+            <span class="v2-choice-text">
+              <span class="v2-h3">Plan your own visit</span>
+              <span class="v2-choice-copy">How long to stay, how to get there, what to see, and what to bring.</span>
+            </span>
+            <span class="v2-arrow-link">{% if page.has_plan_section %}Travel guide{% else %}Plan a trip here{% endif %}</span>
+          </a>
+        {% endif %}
       </section>
 
       {% if page.the_story %}
@@ -161,6 +174,9 @@
       {% if page.has_plan_section %}
         <div class="v2-block">{% include "catalog/includes/_plan_your_visit.html" %}</div>
       {% endif %}
+
+      {% comment %}Phase 3's Where to Stay & Map goes here, between Plan Your Visit and Guided Pilgrimages.{% endcomment %}
+      {% include "tours/_site_section.html" %}
 
       {% if page.nearby_sites or page.connected_sites %}
         <section class="v2-block section-anchor" id="nearby">
