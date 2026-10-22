@@ -71,6 +71,8 @@ _META_FNS = {"sites": _site_meta, "saints": _saint_meta, "trails": _trail_meta, 
 
 def _serialize_suggestion(group_key, obj):
     result = {
+        # The Contact form's related-page picker submits this id.
+        "id": obj.pk,
         "title": obj.title,
         "url": obj.url,
         "meta": _META_FNS[group_key](obj),

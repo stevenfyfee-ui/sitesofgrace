@@ -57,3 +57,6 @@ You'll be charged {amount} every month until you cancel. Cancel anytime from Man
 
 ## stripe_monthly_submit
 By confirming, you authorize Sites of Grace to charge {amount} every month until you cancel. Cancel anytime from the Manage monthly support link on sitesofgrace.com/support/.
+
+## contact_legal
+We use your name and email only to reply to you. We never add you to a mailing list without asking. See our [Privacy Policy](/privacy-policy/).

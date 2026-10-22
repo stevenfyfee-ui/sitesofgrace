@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "store",
     "news",
     "blog",
+    "contact",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
@@ -205,6 +206,19 @@ SERVER_EMAIL = os.environ.get("SERVER_EMAIL", DEFAULT_FROM_EMAIL)
 # moderation queue. Falls back to DEFAULT_FROM_EMAIL rather than failing
 # silently or hardcoding an address.
 MODERATION_EMAIL = os.environ.get("MODERATION_EMAIL") or DEFAULT_FROM_EMAIL
+
+# Contact page (home.ContactPage) staff alerts go to CONTACT_EMAIL, falling
+# back to MODERATION_EMAIL, then ADMINS (contact/notify.py). Billing-topic
+# messages go to SUPPORT_EMAIL when it's set. production.py gives
+# CONTACT_EMAIL its own DEFAULT_FROM_EMAIL fallback.
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "")
+SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL", "")
+
+# Cloudflare Turnstile on the contact form: on only when BOTH are set. With
+# either blank, no widget renders and no request is made to Cloudflare.
+# If you enable this, add Cloudflare to the Privacy Policy's list of services first.
+TURNSTILE_SITE_KEY = os.environ.get("TURNSTILE_SITE_KEY", "")
+TURNSTILE_SECRET_KEY = os.environ.get("TURNSTILE_SECRET_KEY", "")
 
 # Number of trusted reverse-proxy hops in front of the app — DigitalOcean
 # App Platform's single edge load balancer, by default. Used by

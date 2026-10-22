@@ -13,7 +13,7 @@ empty); once those models land we switch the template to auto-pull image + title
 from the linked page and the overrides become unnecessary.
 """
 import logging
-from datetime import date
+from datetime import date, timedelta
 
 import stripe
 from django.conf import settings
@@ -22,6 +22,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import NoReverseMatch, reverse
+from django.utils import timezone
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
@@ -49,6 +50,10 @@ from catalog.models import (
     SacredSitePage,
     SaintPage,
 )
+from contact import forms as contact_forms
+from contact import models as contact_models
+from contact import notify as contact_notify
+from contact import turnstile as contact_turnstile
 from core import ratelimit
 from home import legal, support
 from liturgy.today import date_at_noon, liturgical_today
@@ -267,7 +272,7 @@ class HomePage(Page):
     ]
 
     max_count = 1
-    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "blog.BlogIndexPage"]
+    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage"]
 
     class Meta:
         verbose_name = "Home page"
@@ -1656,6 +1661,467 @@ class SupportPage(Page):
         return redirect
 
 
+# --- Contact ------------------------------------------------------------
+
+# The topic cards' icons: the Support set plus the three the Contact mockup
+# adds. includes/_line_icon.html has a branch for every value here.
+CONTACT_ICON_CHOICES = SUPPORT_ICON_CHOICES + [
+    ("question", "Question"),
+    ("edit", "Edit"),
+    ("partners", "Partners"),
+]
+
+
+class ContactTopicCardBlock(StructBlock):
+    topic = ChoiceBlock(choices=contact_models.TOPIC_CHOICES)
+    title = CharBlock(max_length=60)
+    blurb = TextBlock(required=False)
+    icon = ChoiceBlock(choices=CONTACT_ICON_CHOICES)
+
+    class Meta:
+        icon = "pick"
+        label = "Topic card"
+
+
+class ContactFaqBlock(StructBlock):
+    question = CharBlock(max_length=160)
+    answer = RichTextBlock(features=PROSE_FEATURES)
+
+    class Meta:
+        icon = "help"
+        label = "Question"
+
+
+class ContactPage(Page):
+    """ "Contact Us" -- a real contact form. Messages are saved as
+    contact.ContactMessage, read in the admin "Messages" inbox, and alert
+    staff by email (contact/notify.py). Nothing is ever emailed to the
+    sender.
+
+    Every copy field is prefilled with the mockup's copy as its default= so
+    Add child page -> Contact page opens already written. serve() handles
+    the form at the page's own URL: POST validates, saves, and redirects to
+    ?sent=1, which shows the thank-you once. The contact email isn't a page
+    field: the sidebar shows Settings > Legal details' contact email.
+    """
+
+    # --- Hero ---
+    hero_eyebrow = models.CharField(max_length=60, blank=True, default="Contact Us")
+    hero_title = models.CharField(max_length=120, blank=True, default="We'd Love to Hear From You")
+    hero_intro = models.TextField(
+        blank=True,
+        default=(
+            "Whether you have a question about a sacred site, a place we should add, a "
+            "correction to share, or a prayer you'd like us to carry, every message is read "
+            "by a real person."
+        ),
+    )
+    hero_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Without one, the hero uses the brand gradient panel.",
+    )
+
+    # --- Topic cards ---
+    topics_eyebrow = models.CharField(max_length=60, blank=True, default="How Can We Help?")
+    topics_heading = models.CharField(max_length=120, blank=True, default="Choose a Topic to Get Started")
+    topic_cards = StreamField(
+        [("card", ContactTopicCardBlock())],
+        max_num=8,
+        blank=True,
+        help_text="Shortcuts into the form. The form's topic list always offers all eight topics.",
+        default=[
+            {"type": "card", "value": {
+                "topic": "question", "title": "Ask a Question", "icon": "question",
+                "blurb": "About a site, a saint, or the Church's teaching.",
+            }},
+            {"type": "card", "value": {
+                "topic": "suggest", "title": "Suggest a Site", "icon": "pin",
+                "blurb": "A shrine, miracle, or holy place we're missing.",
+            }},
+            {"type": "card", "value": {
+                "topic": "correction", "title": "Submit a Correction", "icon": "edit",
+                "blurb": "Help us keep every page accurate.",
+            }},
+            {"type": "card", "value": {
+                "topic": "pilgrimage", "title": "Plan a Pilgrimage", "icon": "map",
+                "blurb": "Group trips, parishes, and travel questions.",
+            }},
+            {"type": "card", "value": {
+                "topic": "partner", "title": "Partnerships & Press", "icon": "partners",
+                "blurb": "Shrines, tour operators, media, and collaborations.",
+            }},
+            {"type": "card", "value": {
+                "topic": "prayer", "title": "Prayer Request", "icon": "candle",
+                "blurb": "Share an intention. We'll hold it in prayer.",
+            }},
+        ],
+    )
+
+    # --- The form ---
+    form_heading = models.CharField(max_length=120, blank=True, default="Send Us a Message")
+    form_lede = models.CharField(
+        max_length=200, blank=True,
+        default="We read every message and usually reply within two or three business days.",
+    )
+    prayer_note = models.CharField(
+        max_length=300, blank=True,
+        help_text="Shown above the message box while Prayer request is the topic.",
+        default=(
+            "Your intention stays private. It is never published, and it is deleted after "
+            "90 days. We will remember it in prayer."
+        ),
+    )
+    thank_you_heading = models.CharField(
+        max_length=120, blank=True, default="Thank You",
+        help_text='The sender\'s first name is added after it: "Thank You, John".',
+    )
+    thank_you_text = models.TextField(
+        blank=True,
+        default=(
+            "Your message is on its way. We'll reply to the email address you gave us, "
+            "usually within two or three business days."
+        ),
+    )
+    prayer_thank_you_text = models.TextField(
+        blank=True,
+        default=(
+            "Your intention has been received, and we will remember it in prayer. It stays "
+            "private and is never published."
+        ),
+    )
+
+    # --- Sidebar ---
+    reach_heading = models.CharField(max_length=120, blank=True, default="Other Ways to Reach Us")
+    response_time = models.CharField(max_length=120, blank=True, default="Two to three business days")
+    based_in = models.CharField(max_length=120, blank=True, default="Southern California")
+    visit_card_heading = models.CharField(max_length=120, blank=True, default="Planning a Visit?")
+    visit_card_text = models.TextField(
+        blank=True,
+        default=(
+            "For Mass times, confession schedules, or access on a particular day, the shrine "
+            "itself is the best source. You'll find its official website and contact details "
+            "on each site's page."
+        ),
+    )
+    visit_card_link_label = models.CharField(max_length=60, blank=True, default="Find a sacred site")
+    visit_card_link = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Falls back to the interactive map / Explore hub if left blank.",
+    )
+    independence_note = RichTextField(
+        blank=True,
+        features=PROSE_FEATURES,
+        default=(
+            "<p><b>A note on who we are.</b> Sites of Grace is an independent Catholic "
+            "resource. We don't speak on behalf of the Church, any diocese, or any "
+            "shrine.</p>"
+            "<p>For questions about the sacraments or a personal pastoral matter, please "
+            "reach out to your parish priest.</p>"
+        ),
+    )
+
+    # --- FAQ ---
+    faq_eyebrow = models.CharField(max_length=60, blank=True, default="Before You Write")
+    faq_heading = models.CharField(max_length=120, blank=True, default="Common Questions")
+    faqs = StreamField(
+        [("faq", ContactFaqBlock())],
+        blank=True,
+        default=[
+            {"type": "faq", "value": {
+                "question": "Can I book a pilgrimage through Sites of Grace?",
+                "answer": (
+                    "<p>We don't run tours ourselves. Each site page links to trusted "
+                    "pilgrimage operators and travel resources, and the Plan Your Visit "
+                    "guides cover getting there, where to stay, and what to expect. If "
+                    "you're organizing a parish or group trip, send us a message and we'll "
+                    "point you in the right direction.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "I found an error on a page. What should I do?",
+                "answer": (
+                    "<p>Thank you for helping. Choose \"Submit a Correction\" above and link "
+                    "the page. Every site and saint page also has a \"Spot an error?\" link "
+                    "that fills this in for you. We check every correction against Church "
+                    "and shrine sources before we change anything.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "How do you decide which sites to include?",
+                "answer": (
+                    "<p>We include places of genuine Catholic significance, and we're careful "
+                    "to show each one's status as the Church describes it: approved, "
+                    "recognized as a devotion, or still under study. Suggestions are always "
+                    "welcome.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "Can I share my own photos from a pilgrimage?",
+                "answer": (
+                    "<p>Yes. Create a free pilgrim account, mark the sites you've visited, "
+                    "and add your photos. You choose whether each photo is private or shared "
+                    "with other pilgrims.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "What happens to my prayer request?",
+                "answer": (
+                    "<p>It's read only by the Sites of Grace team and is never published or "
+                    "shared. We keep it for 90 days so it can be remembered in prayer, and "
+                    "then it's deleted.</p>"
+                ),
+            }},
+        ],
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("hero_eyebrow"),
+                FieldPanel("hero_title"),
+                FieldPanel("hero_intro"),
+                FieldPanel("hero_image"),
+            ],
+            heading="Hero",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("topics_eyebrow"),
+                FieldPanel("topics_heading"),
+                FieldPanel("topic_cards"),
+            ],
+            heading="Topic Cards",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("form_heading"),
+                FieldPanel("form_lede"),
+                FieldPanel("prayer_note"),
+                FieldPanel("thank_you_heading"),
+                FieldPanel("thank_you_text"),
+                FieldPanel("prayer_thank_you_text"),
+            ],
+            heading="Form and Thank-You",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("reach_heading"),
+                FieldPanel("response_time"),
+                FieldPanel("based_in"),
+                FieldPanel("visit_card_heading"),
+                FieldPanel("visit_card_text"),
+                FieldPanel("visit_card_link_label"),
+                PageChooserPanel("visit_card_link"),
+                FieldPanel("independence_note"),
+            ],
+            heading="Sidebar",
+            help_text=(
+                "The email address comes from Settings > Legal details, and the social "
+                "links from Settings > Site settings."
+            ),
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("faq_eyebrow"),
+                FieldPanel("faq_heading"),
+                FieldPanel("faqs"),
+            ],
+            heading="Common Questions",
+        ),
+    ]
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    max_count = 1
+    template = "home/contact_page.html"
+
+    # A coarse, per-process flood guard checked before anything else
+    # (core.ratelimit). The real limit is RATE_LIMIT below, counted from
+    # the ContactMessage table so it holds across gunicorn workers.
+    FLOOD_LIMIT = 20
+    RATE_LIMIT = 5
+    RATE_WINDOW_SECONDS = 60 * 60
+    RATE_LIMIT_MESSAGE = (
+        "You've sent several messages in a short time. Please try again in a little while."
+    )
+    SESSION_KEY = "contact_sent"
+
+    class Meta:
+        verbose_name = "Contact page"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only for a brand-new, unsaved instance (the blank Add child page
+        # form), so an existing page's own values are never touched.
+        if not self.pk:
+            if not self.slug:
+                self.slug = "contact"
+            if not self.search_description:
+                self.search_description = (
+                    "Questions, corrections, site suggestions, and prayer requests. Every "
+                    "message to Sites of Grace is read by a real person."
+                )
+
+    @property
+    def visit_card_url(self):
+        if self.visit_card_link_id and self.visit_card_link.live:
+            return self.visit_card_link.url
+        return _map_or_explore_url()
+
+    # --- Rendering ---
+
+    def _initial(self, request):
+        initial = {"topic": contact_models.DEFAULT_TOPIC, "ts": contact_forms.issue_ts()}
+        topic = request.GET.get("topic", "")
+        if topic in contact_models.TOPIC_KEYS:
+            initial["topic"] = topic
+        related = contact_forms.allowed_related_page(request.GET.get("page"))
+        if related:
+            initial["related_page"] = str(related.pk)
+        user = request.user
+        if user.is_authenticated:
+            profile = getattr(user, "pilgrim_profile", None)
+            initial["name"] = user.get_full_name() or (profile.display_name if profile else "")
+            initial["email"] = user.email
+        return initial
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        form = kwargs.get("contact_form") or contact_forms.ContactForm(initial=self._initial(request))
+
+        values = form.data if form.is_bound else form.initial
+        topic = values.get("topic", "")
+        if topic not in contact_models.TOPIC_KEYS:
+            topic = contact_models.DEFAULT_TOPIC
+        related = contact_forms.allowed_related_page(values.get("related_page"))
+
+        # (field id, first error) for the summary above the form.
+        error_summary = [
+            (form[name].id_for_label, errors[0])
+            for name, errors in form.errors.items()
+            if name in form.fields and not form.fields[name].widget.is_hidden
+        ] if form.is_bound else []
+
+        details = LegalDetails.load(request_or_site=request)
+        context.update({
+            # Root-relative on this request's own site.
+            "contact_page_url": self.get_url(request),
+            "contact_form": form,
+            "contact_topic": topic,
+            "contact_topic_copy": contact_models.TOPIC_COPY[topic],
+            # contact.js swaps the message label, placeholder, and picker per
+            # topic from this (rendered with json_script).
+            "contact_copy": {
+                key: dict(copy, related=key in contact_models.RELATED_TOPICS)
+                for key, copy in contact_models.TOPIC_COPY.items()
+            },
+            "contact_shows_related": topic in contact_models.RELATED_TOPICS,
+            "contact_related": related,
+            "contact_error": kwargs.get("contact_error", ""),
+            "contact_error_summary": error_summary,
+            "contact_thanks": kwargs.get("contact_thanks"),
+            "contact_email": details.contact_email,
+            "turnstile_site_key": settings.TURNSTILE_SITE_KEY if contact_turnstile.enabled() else "",
+        })
+        return context
+
+    def serve(self, request, *args, **kwargs):
+        if request.method == "POST":
+            response = self._serve_post(request, *args, **kwargs)
+        else:
+            thanks = None
+            if request.GET.get("sent") == "1":
+                # Shown once: the first name and topic come from the
+                # session, never the URL, and are popped on this render.
+                thanks = request.session.pop(self.SESSION_KEY, None) or {}
+            response = super().serve(request, *args, contact_thanks=thanks, **kwargs)
+        # Every render here is per-visitor (a prefilled name, a thank-you,
+        # an error), so Cloudflare must never cache one.
+        response["Cache-Control"] = "private, no-store"
+        return response
+
+    def _serve_post(self, request, *args, **kwargs):
+        form = contact_forms.ContactForm(request.POST)
+        ip_hash = _ip_hash(request)
+
+        def rerender(error=""):
+            return Page.serve(self, request, *args, contact_form=form, contact_error=error, **kwargs)
+
+        if ratelimit.hit("contact-form", ip_hash, self.FLOOD_LIMIT, self.RATE_WINDOW_SECONDS):
+            return rerender(self.RATE_LIMIT_MESSAGE)
+
+        # Spam is saved as spam and answered with the normal thank-you, and
+        # no email goes out. A bot is never told why.
+        if self._looks_like_spam(request.POST):
+            message = self._save_spam(request, ip_hash)
+            return self._thank_you_redirect(request, message)
+
+        # The real rate limit, counted from saved, non-spam messages.
+        recent = contact_models.ContactMessage.objects.filter(
+            ip_hash=ip_hash,
+            created_at__gte=timezone.now() - timedelta(seconds=self.RATE_WINDOW_SECONDS),
+        ).exclude(status=contact_models.ContactMessage.STATUS_SPAM)
+        if recent.count() >= self.RATE_LIMIT:
+            return rerender(self.RATE_LIMIT_MESSAGE)
+
+        if contact_turnstile.enabled() and not contact_turnstile.verify(
+            request.POST.get(contact_forms.TURNSTILE_FIELD, "")
+        ):
+            return rerender("We couldn't confirm you're not a robot. Please try the check again.")
+
+        if not form.is_valid():
+            return rerender()
+
+        data = form.cleaned_data
+        message = contact_models.ContactMessage.objects.create(
+            topic=data["topic"],
+            name=data["name"],
+            email=data["email"],
+            related_page=data["related_page"],
+            message=data["message"],
+            user=request.user if request.user.is_authenticated else None,
+            ip_hash=ip_hash,
+        )
+        contact_models.ContactMessage.purge_expired()
+        contact_notify.send_staff_alert(message)
+        return self._thank_you_redirect(request, message)
+
+    @staticmethod
+    def _looks_like_spam(post):
+        return (
+            bool(post.get(contact_forms.HONEYPOT_FIELD, "").strip())
+            or contact_forms.ts_is_suspicious(post.get("ts", ""))
+            or contact_forms.too_many_urls(post.get("message", ""))
+        )
+
+    @staticmethod
+    def _save_spam(request, ip_hash):
+        post = request.POST
+        topic = post.get("topic", "")
+        return contact_models.ContactMessage.objects.create(
+            topic=topic if topic in contact_models.TOPIC_KEYS else "other",
+            name=" ".join(post.get("name", "").split())[:120],
+            email=post.get("email", "").strip()[:254],
+            related_page=contact_forms.allowed_related_page(post.get("related_page")),
+            message=post.get("message", "")[: contact_models.MESSAGE_MAX_LENGTH],
+            status=contact_models.ContactMessage.STATUS_SPAM,
+            user=request.user if request.user.is_authenticated else None,
+            ip_hash=ip_hash,
+        )
+
+    def _thank_you_redirect(self, request, message):
+        names = message.name.split()
+        request.session[self.SESSION_KEY] = {
+            "first_name": names[0] if names else "",
+            "prayer": message.is_prayer,
+        }
+        redirect = HttpResponseRedirect(f"{self.get_url(request)}?sent=1#contact-form")
+        redirect.status_code = 303
+        return redirect
+
+
 # --- Legal pages ---------------------------------------------------------------
 
 
@@ -1845,6 +2311,13 @@ class LegalNotices(BaseGenericSetting):
             "sitesofgrace.com/support/."
         ),
         help_text="Stripe's checkout page, above the pay button, for monthly support only. {amount} is filled in. Plain text: bold and links are dropped.",
+    )
+    contact_legal = models.TextField(
+        default=(
+            "We use your name and email only to reply to you. We never add you to a "
+            "mailing list without asking. See our [Privacy Policy](/privacy-policy/)."
+        ),
+        help_text="Contact page, under the form next to the Send button.",
     )
 
     class Meta:

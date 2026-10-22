@@ -15,6 +15,7 @@ Depending on how you use the site, we may collect the following:
 - **Account information:** your email address, your password (stored only in scrambled, hashed form), and your confirmation that you are at least 13. We create a username for you automatically. If you choose, you can add a profile photo, a short bio, and your home city and country. We never ask for your street address.
 - **Pilgrimage and community information:** places you save or mark as visited, photos, captions, stories, corrections, and other content you submit. Saved religious destinations may indirectly reveal your religious interests, so please share only what you are comfortable providing.
 - **Communications:** what you send us by email, and the email address you give when you sign up for our newsletter or join a product waitlist.
+- **Prayer requests:** if you send us a prayer request, it may include religious or health information about you or someone else. We read it only so we can pray for the intention. We never publish or share it, and we delete it automatically after 90 days.
 - **Payment information:** support payments are made on Stripe's secure checkout page. Your card details go directly to Stripe; our website never receives or stores them. Stripe shares with us the amount, date, payment status, and the name and email address you give at checkout.
 - **Technical information:** like most websites, our hosting provider records basic request information, such as IP address, browser type, and the pages requested, to run and protect the site. We also use IP addresses briefly to limit abuse, such as repeated sign-in attempts or form spam. We do not use analytics or advertising tools on our own pages.
 - **Information from other companies:** we do not buy personal information or receive it from other companies, apart from the payment details Stripe shares with us. We do not offer sign-in through other services.
@@ -58,7 +59,8 @@ If you sign up for our newsletter, we use your email address to send it. Joining
 - **Account information, saved places, and your photo library:** while your account is open. When you ask us to delete your account, we delete it and its content within 30 days.
 - **Photos and stories you share publicly:** until you remove them, delete your account, or we remove them under our [Community Policy](/community-policy/).
 - **Newsletter signup:** until you unsubscribe. After that we keep only your email address on a do-not-send list, so we do not email you again by mistake.
-- **Messages you send us:** as long as needed to respond and keep a reasonable record of the conversation.
+- **Messages sent through our Contact page:** up to 18 months, then deleted automatically. Prayer requests: 90 days. The scrambled record of your IP address that we use to stop form spam: 7 days.
+- **Emails you send directly to us:** as long as needed to respond and keep a reasonable record of the conversation.
 - **Payment records:** Stripe holds your payment records. We keep the records we need for tax and accounting.
 - **Backups:** deleted information can remain in backup copies for up to 30 days before it is overwritten.
 

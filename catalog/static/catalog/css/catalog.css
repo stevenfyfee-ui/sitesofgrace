@@ -92,6 +92,14 @@
 .catalog-section p { font-size: 16.5px; line-height: 1.75; color: #2f3a52; margin: 0 0 14px; }
 .catalog-section ul, .catalog-section ol { font-size: 16.5px; line-height: 1.75; color: #2f3a52; padding-left: 22px; }
 
+/* ---------- "Spot an error? Let us know" (includes/_correction_link.html) ---------- */
+.catalog-correction {
+  max-width: 900px; margin: 0 auto; padding: 26px 20px 0;
+  font-family: var(--sans); font-size: 13px; color: var(--stone);
+}
+.catalog-correction a { color: var(--blue); text-decoration: underline; }
+.catalog-correction a:hover { color: var(--gold); }
+
 /* ---------- Topic tags ---------- */
 .catalog-tags {
   max-width: 900px; margin: 0 auto; padding: 0 20px 8px;
