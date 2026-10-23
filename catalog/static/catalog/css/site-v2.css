@@ -320,3 +320,8 @@ a.v2-card:hover { border-color: var(--gold); }
 .v2-lodge-pill--warn { color: var(--v2-amber); background: rgba(183, 121, 31, .08); border-color: rgba(183, 121, 31, .5); }
 .v2-lodge-note { font-size: 13.5px; line-height: 1.45; }
 .v2-lodge-book { justify-self: start; margin-left: 32px; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--blue); }
+
+/* "More in <hub>" beside the breadcrumb (phase 4) */
+.v2-crumb { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.v2-crumb-hub { margin: 0 0 16px; font-family: var(--sans); font-size: 13px; color: rgba(253, 249, 242, .85); }
+.v2-crumb-hub a { color: #F0DCAE; text-decoration: underline; text-underline-offset: 3px; }

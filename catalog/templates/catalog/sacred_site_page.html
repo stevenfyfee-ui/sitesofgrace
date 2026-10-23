@@ -5,16 +5,12 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
 <link rel="stylesheet" href="{% static 'css/pilgrims.css' %}">
-{% if page.trail_positions %}<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">{% endif %}
-{% v2_enabled as v2 %}{% if v2 %}<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}">{% endif %}
+{% if page.trail_positions %}<link rel="stylesheet" href="{% static 'catalog/css/trails.css' %}">{% endif %}{% v2_enabled as v2 %}{% if v2 %}
+<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}">{% endif %}
 {% endblock %}
 
 {% block content %}
-{% v2_enabled as v2 %}
-{% if v2 %}
-{% include "catalog/v2/site_page_body.html" %}
-{% else %}
-<article class="catalog-page">
+{% v2_enabled as v2 %}{% if v2 %}{% include "catalog/v2/site_page_body.html" %}{% else %}<article class="catalog-page">
 
   {% if request.GET.photos_added %}
     <div class="container">
@@ -134,6 +130,5 @@
     </div>
   </div>
 
-</article>
-{% endif %}
+</article>{% endif %}
 {% endblock %}

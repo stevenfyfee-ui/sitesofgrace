@@ -343,6 +343,22 @@ def tours_for_site(site, limit=SITE_PAGE_MAX_TOURS):
     )
 
 
+def tours_elsewhere_in_sites(site, site_ids, limit=ELSEWHERE_MAX_TOURS):
+    """Live tours visiting any of site_ids (the other sites of this site's
+    destination hub) that do NOT stop at this site."""
+    if not site_ids:
+        return []
+    return list(
+        GuidedPilgrimage.objects.public()
+        .filter(stops__site_id__in=site_ids)
+        .exclude(stops__site=site)
+        .distinct()
+        .with_next_departure()
+        .soonest_first()
+        .select_related("operator")[:limit]
+    )
+
+
 def tours_elsewhere(site, country, limit=ELSEWHERE_MAX_TOURS):
     """Live tours visiting other sites in the same country that do NOT stop
     at this site. Phase 4 swaps country for the destination hub."""

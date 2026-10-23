@@ -12,9 +12,8 @@
   /explore/.../lourdes/#where-to-stay a stable deep link.
 {% endcomment %}
 <section class="catalog-section section-anchor plan-visit" id="plan-your-visit">
-  {% if v2 %}<p class="v2-eyebrow">Useful before you go</p>{% endif %}
-  <h2>Plan Your Visit</h2>
-  {% if v2 and page.guide_level %}<p class="v2-guide-pill v2-guide-pill--{{ page.guide_level }}">{{ page.get_guide_level_display }}</p>{% endif %}
+  {% if v2 %}<p class="v2-eyebrow">Useful before you go</p>{% endif %}<h2>Plan Your Visit</h2>{% if v2 and page.guide_level %}
+  <p class="v2-guide-pill v2-guide-pill--{{ page.guide_level }}">{{ page.get_guide_level_display }}</p>{% endif %}
 
   {% if page.show_quick_card %}
     <div class="plan-quickcard">
@@ -51,8 +50,8 @@
           <summary class="plan-summary">
             <span class="plan-summary-icon" aria-hidden="true">{{ section.display_number }}</span>
             <span class="plan-summary-text">
-              {{ section.label }}
-              {% if v2 and section.needs_confirmation %}<span class="v2-confirm-pill">Needs confirmation</span>{% endif %}
+              {{ section.label }}{% if v2 and section.needs_confirmation %}
+              <span class="v2-confirm-pill">Needs confirmation</span>{% endif %}
               {% if section.teaser %}<span class="plan-teaser">{{ section.teaser }}</span>{% endif %}
             </span>
             <span class="plan-chevron" aria-hidden="true">&#9662;</span>

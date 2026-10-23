@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}catalog destinations-index{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}">
+<link rel="stylesheet" href="{% static 'destinations/css/destinations.css' %}">
+{% endblock %}
+
+{% block content %}
+<article class="catalog-page v2-site v2-hub">
+  <header class="v2-hero">
+    <div class="v2-wrap">
+      <p class="v2-eyebrow v2-hub-eyebrow">Explore by destination</p>
+      <h1 class="v2-title">{{ page.title }}</h1>
+      {% if page.intro %}<p class="v2-lede">{{ page.intro }}</p>{% endif %}
+    </div>
+  </header>
+  <div class="v2-wrap v2-hub-body">
+    {% if hubs %}
+      <ul class="v2-hub-tiles">
+        {% for hub in hubs %}
+          <li>
+            <a class="v2-card v2-hub-tile" href="{% pageurl hub %}">
+              {% if hub.hero_image %}{% image hub.hero_image fill-600x400 class="v2-hub-tile-img" alt="" %}{% else %}<span class="v2-hub-tile-img v2-hub-tile-img--blank" aria-hidden="true"></span>{% endif %}
+              <span class="v2-near-title">{{ hub.title }}</span>
+              {% if hub.tile_caption %}<span class="v2-near-sig">{{ hub.tile_caption }}</span>{% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No destinations are published yet.</p>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

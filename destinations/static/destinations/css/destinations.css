@@ -1,0 +1,53 @@
+/* Destination hubs and the destinations index. Builds on catalog/css/site-v2.css. */
+
+.v2-hub-eyebrow { color: #F0DCAE; }
+.v2-site .v2-hero .v2-hub-eyebrow { color: #F0DCAE; }
+.v2-hub-ghost { background: transparent; color: var(--ivory); border-color: rgba(253, 249, 242, .5); }
+.v2-hub-ghost:hover { background: rgba(253, 249, 242, .12); }
+
+/* Map band: full width directly under the hero, legend underneath. */
+.v2-hub-mapband { border-bottom: 1px solid var(--gold-soft); background: var(--ivory); }
+.v2-hub-map { height: 340px; background: #E9E9E6; }
+@media (min-width: 720px) { .v2-hub-map { height: 460px; } }
+.v2-hub-map .leaflet-container { font-family: var(--serif-body); }
+.v2-hub-legend { list-style: none; margin: 0; padding: 12px 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.v2-hub-legend li { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: 13px; color: var(--navy); }
+.v2-hub-legend .v2-dot { margin-top: 0; }
+
+.v2-hub-body { padding-top: 26px; padding-bottom: 48px; }
+.v2-hub-stays { display: grid; gap: 12px; }
+@media (min-width: 720px) { .v2-hub-stays { grid-template-columns: repeat(3, 1fr); } }
+.v2-hub-stay p { margin: 0; font-size: 15px; line-height: 1.55; }
+.v2-hub-stay .v2-hub-stay-label { font-family: var(--serif-display); font-weight: 600; font-size: 22px; color: var(--navy); margin-bottom: 4px; }
+
+.v2-hub-sites { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 640px) { .v2-hub-sites { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .v2-hub-sites { grid-template-columns: repeat(3, 1fr); } }
+.v2-hub-site { display: grid; gap: 4px; height: 100%; }
+.v2-hub-site-cat { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: 12px; color: var(--stone); }
+.v2-hub-site-cat .v2-dot { margin-top: 0; }
+
+.v2-hub-two { display: grid; gap: 28px; }
+@media (min-width: 900px) { .v2-hub-two { grid-template-columns: 1fr 1fr; gap: 44px; } }
+.v2-hub-trips { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.v2-hub-trips li { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 10px; border-bottom: 1px solid var(--v2-hairline); }
+.v2-hub-trip-text { flex: 1; display: grid; gap: 2px; }
+.v2-hub-trip-name { font-family: var(--serif-display); font-weight: 600; font-size: 18px; color: var(--navy); }
+.v2-hub-trip-name a { color: inherit; }
+.v2-hub-trip-reason { font-size: 14px; line-height: 1.45; }
+.v2-hub-trip-time { font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--stone); white-space: nowrap; }
+.v2-dot--place { background: var(--parchment); border-color: var(--stone); }
+
+.v2-hub-deeper { display: grid; gap: 12px; margin-bottom: 18px; }
+@media (min-width: 640px) { .v2-hub-deeper { grid-template-columns: 1fr 1fr; } }
+.v2-hub-links { margin: 0; line-height: 1.7; }
+.v2-hub-links a { color: var(--blue); }
+.v2-hub-tours-h { margin: 6px 0 12px; }
+
+.v2-hub-tiles { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+@media (min-width: 640px) { .v2-hub-tiles { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .v2-hub-tiles { grid-template-columns: repeat(4, 1fr); } }
+.v2-hub-tile { display: grid; gap: 6px; padding: 0 0 14px; overflow: hidden; }
+.v2-hub-tile > span { padding: 0 14px; }
+.v2-hub-tile-img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+.v2-hub-tile-img--blank { background: linear-gradient(160deg, var(--parchment), var(--gold-soft)); }

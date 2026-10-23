@@ -15,6 +15,7 @@ from wagtail.models import Orderable, Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from catalog.countries import COUNTRY_CHOICES, country_name
 from catalog.travel_sections import (
     TRAVEL_CLUSTERS,
     TRAVEL_LABELS,
@@ -352,6 +353,10 @@ class SacredSitePage(RoutablePageMixin, Page):
     # --- Pilgrimage Platform v2 (rendered only behind SOG_V2_ENABLED) -----
     # Every field is optional and nullable; nothing here replaces an
     # existing field. The official website stays in location_link.
+    country_code = models.CharField(
+        max_length=2, null=True, blank=True, choices=COUNTRY_CHOICES,
+        help_text="ISO 3166-1 code, set from propose_country_codes. The country text above is never changed.",
+    )
     recognition_year = models.PositiveSmallIntegerField(
         null=True, blank=True,
         help_text='Year of the Church\'s judgment. Shown as "Church approved · <year>".',
@@ -398,6 +403,7 @@ class SacredSitePage(RoutablePageMixin, Page):
                 FieldPanel("recognition_year"),
                 FieldPanel("locality"),
                 FieldPanel("country"),
+                FieldPanel("country_code"),
                 FieldPanel("latitude"),
                 FieldPanel("longitude"),
                 FieldPanel("location_link"),
@@ -611,6 +617,15 @@ class SacredSitePage(RoutablePageMixin, Page):
         site = self.get_site()
         root_depth = site.root_page.depth if site else 2
         return list(self.get_ancestors().live().filter(depth__gt=root_depth))
+
+    @property
+    def category_style(self):
+        return CATEGORY_STYLES.get(self.category, DEFAULT_CATEGORY_STYLE)
+
+    @property
+    def country_display(self):
+        """The approved code's name ("United Kingdom" for GB), else the text."""
+        return country_name(self.country_code) or self.trip_readiness_country
 
     @property
     def location_line(self):
@@ -980,8 +995,17 @@ class SacredSitePage(RoutablePageMixin, Page):
             if not self.guided_pilgrimages:
                 from tours.models import TourInterest, tours_elsewhere
 
-                context["tours_elsewhere_label"] = self.trip_readiness_country
-                context["tours_elsewhere"] = tours_elsewhere(self, self.trip_readiness_country)
+                from destinations.models import live_hubs_for_site
+                from tours.models import tours_elsewhere_in_sites
+
+                hubs = live_hubs_for_site(self)
+                if hubs:
+                    context["tours_elsewhere_label"] = hubs[0].title
+                    context["tours_elsewhere"] = tours_elsewhere_in_sites(
+                        self, [s.pk for s in hubs[0].sites if s.pk != self.pk])
+                else:
+                    context["tours_elsewhere_label"] = self.trip_readiness_country
+                    context["tours_elsewhere"] = tours_elsewhere(self, self.trip_readiness_country)
                 context["tour_interested"] = bool(
                     request.user.is_authenticated
                     and TourInterest.objects.filter(user=request.user, site=self).exists()

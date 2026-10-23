@@ -272,7 +272,7 @@ class HomePage(Page):
     ]
 
     max_count = 1
-    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage"]
+    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage", "destinations.DestinationIndexPage"]
 
     class Meta:
         verbose_name = "Home page"

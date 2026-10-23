@@ -21,6 +21,10 @@ Lourdes -- so a French site with no tours (e.g. La Salette) shows the "None"
 state with "Guided pilgrimages elsewhere in France". Booking links point at
 example.com, a domain reserved for documentation.
 
+Phase 4: runs create_destination_hubs (four unpublished drafts), then fills
+the Assisi & Umbria draft with the mockup's hub text, retitles it "Assisi &
+Umbria (sample)", and publishes it and the Destinations index -- locally only.
+
 Phase 3: the mockup's Lourdes map points (two entrances, sacred places,
 transit) and its five places to stay, all "(sample)"; three have walking
 routes, two don't, so both info-bar states can be seen.
@@ -88,6 +92,41 @@ NEARBY = [
 ]
 NEARBY_PARENT_SLUG = "shrines-and-basilicas"
 
+# Phase 4: the mockup's Assisi & Umbria hub. Only blank fields are filled;
+# the local copy publishes it (and the index) so it can be previewed.
+HUB_SLUG = "assisi-umbria"
+HUB_TITLE = "Assisi & Umbria (sample)"
+HUB_FIELDS = {
+    "intro": "The hill town of St. Francis and St. Clare, the tomb of St. Carlo Acutis, and Eucharistic "
+             "and saints' shrines within an easy day's drive.",
+    "tile_caption": "Francis, Clare, Carlo Acutis",
+    "country_codes": ["IT"],
+    "localities": "Assisi\nCascia\nOrvieto\nNorcia",
+    "include_auto": True,
+    "getting_around": "<ul><li>Assisi's train station is in Santa Maria degli Angeli, below the old town. "
+                      "A local bus climbs to the gates.</li><li>The old town is steep and partly cobbled. "
+                      "Allow extra time with anyone who walks slowly.</li><li>Perugia airport (PEG) is about "
+                      "20 minutes away; most U.S. travelers arrive via Rome.</li><li>A car makes Cascia and "
+                      "Norcia practical; Orvieto is also reachable by train.</li></ul>",
+    "travel_advisory_url": "https://travel.state.gov/content/travel/en/international-travel/"
+                           "International-Travel-Country-Information-Pages/Italy.html",
+}
+HUB_SITE_SLUGS = ["basilica-of-st-francis-of-assisi", "tomb-of-st-clare-assisi", "carlo-acutis-assisi",
+                  "porziuncola"]
+HUB_STAYS = [
+    ("1 day", "The Basilica of St. Francis, Santa Chiara, and the Sanctuary of the Renunciation. "
+              "Possible from Rome, but rushed."),
+    ("2–3 days", "Adds San Damiano, the Carceri hermitage and the Portiuncula, with time for Mass and quiet."),
+    ("5 days", "Adds day trips to Orvieto, Cascia and Norcia. Pairs naturally with Rome."),
+]
+HUB_TRIPS = [
+    ("eucharistic-miracle-of-bolsena-orvieto", "Orvieto", "Corporal of the Eucharistic Miracle of Bolsena",
+     "1 h 30", "drive"),
+    ("tomb-of-st-rita-cascia", "Cascia", "Basilica and tomb of St. Rita", "1 h 30", "drive"),
+    (None, "Norcia", "Birthplace of St. Benedict and St. Scholastica", "1 h 40", "drive"),
+    (None, "Rome", "The four papal basilicas and the tombs of Peter and Paul", "2 h", "train"),
+]
+
 # Phase 3: the mockup's Lourdes map (entrances, sacred places, transit) and
 # its five places to stay. (lat, lng); routes are [lat, lng] lists here and
 # stored as GeoJSON LineStrings ([lng, lat]).
@@ -153,6 +192,18 @@ TOURS = [
         },
         "departures": [],
     },
+    {
+        "title": "Rome, Assisi & Orvieto Pilgrimage (sample)",
+        "stops": [(None, "Rome"), ("basilica-of-st-francis-of-assisi", "Assisi"),
+                  ("eucharistic-miracle-of-bolsena-orvieto", "Orvieto")],
+        "fields": {
+            "travel_style": "pilgrimage", "duration_days": 9, "departure_city": "Chicago (ORD)",
+            "departure_months": [4, 10], "price_note": "See operator", "priest_or_director": "priest",
+            "mass": "daily", "confession_offered": "yes", "activity_level": "moderate", "group_size_max": 30,
+            "booking_url": "https://example.com/sample-tour-c", "is_affiliate_link": False, "is_live": True,
+        },
+        "departures": [(150, {"status": "open"})],
+    },
 ]
 
 TRAVEL = [
@@ -194,10 +245,12 @@ class Command(BaseCommand):
             created_sites = self._nearby()
             created_tours = self._tours()
             stay_rows = self._stay_map(SacredSitePage.objects.get(pk=lourdes.pk))
+            hub_filled = self._hub()
         self.stdout.write(
             f"v2_dev_sample: Lourdes fields filled: {filled or 'none'}; "
             f"Nevers linked: {linked}; sample sites created: {created_sites or 'none'}; "
-            f"sample tours created: {created_tours or 'none'}; map & lodging rows created: {stay_rows}"
+            f"sample tours created: {created_tours or 'none'}; map & lodging rows created: {stay_rows}; "
+            f"Assisi & Umbria hub: {hub_filled}"
         )
 
     def _saint(self):
@@ -322,3 +375,43 @@ class Command(BaseCommand):
             )
             created += 1
         return created
+
+    def _hub(self):
+        """Fill the Assisi & Umbria draft with the mockup's text (blank fields
+        only), mark it "(sample)" and publish it and the index locally."""
+        from django.core.management import call_command
+
+        from destinations.models import CombineWith, DestinationHubPage, DestinationIndexPage, HubSite, StayOption
+
+        call_command("create_destination_hubs", stdout=self.stdout)
+        hub = DestinationHubPage.objects.filter(slug=HUB_SLUG).first()
+        if hub is None:
+            return "no assisi-umbria hub"
+        hub = hub.get_latest_revision_as_object() if not hub.live else hub
+        filled = [name for name, value in HUB_FIELDS.items() if not getattr(hub, name)]
+        for name in filled:
+            setattr(hub, name, HUB_FIELDS[name])
+        if "(sample)" not in hub.title:
+            hub.title = HUB_TITLE
+            filled.append("title")
+        if not hub.hub_sites.all():
+            sites = [SacredSitePage.objects.filter(slug=s).first() for s in HUB_SITE_SLUGS]
+            hub.hub_sites = [HubSite(site=s, sort_order=i) for i, s in enumerate(x for x in sites if x)]
+            filled.append("hub_sites")
+        if not hub.stay_options.all():
+            hub.stay_options = [StayOption(label=a, text=b, sort_order=i) for i, (a, b) in enumerate(HUB_STAYS)]
+            filled.append("stay_options")
+        if not hub.combine_with.all():
+            rows = []
+            for i, (slug, name, reason, time, mode) in enumerate(HUB_TRIPS):
+                site = SacredSitePage.objects.filter(slug=slug).first() if slug else None
+                rows.append(CombineWith(site=site, name=name, reason=reason, travel_time=time, mode=mode,
+                                        sort_order=i))
+            hub.combine_with = rows
+            filled.append("combine_with")
+        if filled or not hub.live:
+            hub.save_revision(log_action=True).publish()
+        index = DestinationIndexPage.objects.first()
+        if index and not index.live:
+            index.save_revision(log_action=True).publish()
+        return filled or "none"

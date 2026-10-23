@@ -469,3 +469,8 @@ a { color: inherit; text-decoration: none; }
   .richtext-image.left,
   .richtext-image.right { float: none; width: 100%; margin: 22px 0; }
 }
+
+/* ---------- v2: links into destination hubs (only rendered with SOG_V2_ENABLED) ---------- */
+.nav-group-label { padding: 10px 16px 4px; font-family: var(--serif-titling); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.mobile-group-label { padding: 10px 0 2px; font-family: var(--serif-titling); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.catalog-hub-links { margin: 14px 0 0; font-family: var(--sans); font-size: 14px; }

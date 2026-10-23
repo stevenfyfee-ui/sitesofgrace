@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags legal_tags contact_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags legal_tags contact_tags destination_tags %}
 {% comment %}
   Pilgrimage Platform v2 sacred site page body. Rendered by
   catalog/sacred_site_page.html only when {% v2_enabled %} is true; with the
@@ -26,14 +26,18 @@
 
   <header class="v2-hero">
     <div class="v2-wrap">
-      {% if page.breadcrumbs %}
+      {% hubs_for_site page as site_hubs %}
+      {% if page.breadcrumbs or site_hubs %}
         <nav class="v2-crumb" aria-label="Breadcrumb">
+          {% if page.breadcrumbs %}
           <ol>
             {% for crumb in page.breadcrumbs %}
               <li><a href="{% pageurl crumb %}">{{ crumb.title }}</a></li>
             {% endfor %}
             <li><span aria-current="page">{{ page.title }}</span></li>
           </ol>
+          {% endif %}
+          {% if site_hubs %}<span class="v2-crumb-hub">More in <a href="{% pageurl site_hubs.0 %}">{{ site_hubs.0.title }}</a></span>{% endif %}
         </nav>
       {% endif %}
       <div class="v2-badges">
@@ -240,7 +244,11 @@
           </div>
           <div class="v2-card v2-readiness">
             <p class="v2-eyebrow">Trip readiness</p>
-            <p>Check <a href="https://travel.state.gov/" target="_blank" rel="noopener">U.S. State Department travel information{% if page.trip_readiness_country %} for {{ page.trip_readiness_country }}{% endif %}</a> for entry requirements and advisories before you book, and again before you fly.</p>
+            {% if site_hubs.0.travel_advisory_url %}
+              <p>Check <a href="{{ site_hubs.0.travel_advisory_url }}" target="_blank" rel="noopener">travel information for {{ site_hubs.0.title }}</a> for entry requirements and advisories before you book, and again before you fly.</p>
+            {% else %}
+              <p>Check <a href="https://travel.state.gov/" target="_blank" rel="noopener">U.S. State Department travel information{% if page.trip_readiness_country %} for {{ page.trip_readiness_country }}{% endif %}</a> for entry requirements and advisories before you book, and again before you fly.</p>
+            {% endif %}
           </div>
         </section>
       {% endif %}

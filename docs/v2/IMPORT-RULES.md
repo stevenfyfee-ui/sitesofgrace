@@ -49,3 +49,11 @@ from code). `import_site_details` is the first command written against this file
     error if any page does not match. It is the proof an import ran, not just that it was quiet.
 14. The report prints one line per changed page, then totals: changed, unchanged / already correct,
     fields set, conflicts and skipped — each skipped or conflicting page with its reason.
+
+## Pages that aren't live yet (destination hubs)
+
+15. Rule 9 skips non-live pages because publishing would make them public. Destination hubs start
+    as unpublished drafts and are filled before anyone publishes them, so `import_hubs` treats a hub
+    that isn't live differently: it compares the file against the hub's **latest draft revision** and
+    saves the new values as **another draft revision**, never publishing and never touching `live`.
+    Rules 3–8 and 11–13 apply unchanged; a live hub follows rules 9–10 like any other page.

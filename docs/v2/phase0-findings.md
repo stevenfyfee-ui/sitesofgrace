@@ -608,3 +608,9 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     `affiliate-disclosure`) must exist in production before any `GuidedPilgrimage` with
     `is_affiliate_link=True` is set live. Tours with ordinary operator links can launch without one;
     affiliate links can't. (The disclosure line links to the page automatically once it's live.)
+15. **Test isolation (pre-existing on main).** `manage.py test home pilgrims.tests.test_profile_page` fails
+    2 tests on `origin/main` too (`SiteTileImageTests`, `SharedPhotosGridTests`): `home` tests create
+    extra Wagtail Sites, the cached site root paths survive into the pilgrims tests, and `page.url`
+    there renders absolute (`http://localhost/...`) while the template renders relative. The full suite
+    passes because of its order. Fix later by clearing the site-root-paths cache in those tests' setUp
+    (or asserting on `page.get_url()` with the request).
