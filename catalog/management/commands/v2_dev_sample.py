@@ -21,6 +21,10 @@ Lourdes -- so a French site with no tours (e.g. La Salette) shows the "None"
 state with "Guided pilgrimages elsewhere in France". Booking links point at
 example.com, a domain reserved for documentation.
 
+Phase 3: the mockup's Lourdes map points (two entrances, sacred places,
+transit) and its five places to stay, all "(sample)"; three have walking
+routes, two don't, so both info-bar states can be seen.
+
 If Lourdes has an unpublished draft (real editorial work), the draft is left
 exactly as it is: the blank sample fields are written to the page row only
 -- what the public page renders -- and no revision is created or published.
@@ -83,6 +87,45 @@ NEARBY = [
      "summary_short": "A sixteenth-century apparition shrine in the Gascony hills (sample)."},
 ]
 NEARBY_PARENT_SLUG = "shrines-and-basilicas"
+
+# Phase 3: the mockup's Lourdes map (entrances, sacred places, transit) and
+# its five places to stay. (lat, lng); routes are [lat, lng] lists here and
+# stored as GeoJSON LineStrings ([lng, lat]).
+MAP_POINTS = [
+    ("main-entrance", "Saint-Michel Gate (sample)", "43.095700", "-0.053100", "Main entrance (sample)"),
+    ("accessible-entrance", "Saint-Joseph Gate (sample)", "43.094600", "-0.054900", "Step-free entrance (sample)"),
+    ("sacred-place", "Basilica of the Immaculate Conception (sample)", "43.097800", "-0.057000", ""),
+    ("sacred-place", "The Cachot (sample)", "43.096100", "-0.047600", "Where the Soubirous family lived (sample)"),
+    ("sacred-place", "Boly Mill, Bernadette's birthplace (sample)", "43.095400", "-0.046700", ""),
+    ("prayer-location", "Parish church, baptismal font (sample)", "43.095000", "-0.045000", ""),
+    ("train-station", "Lourdes train station (sample)", "43.100300", "-0.041600", ""),
+    ("bus-stop", "Airport shuttle stop (sample)", "43.094200", "-0.046000", ""),
+    ("parking", "Parking (sample)", "43.093500", "-0.054500", ""),
+]
+LODGINGS = [
+    {"name": "Hotel by the Saint-Michel Gate (sample)", "kind": "hotel", "ll": ("43.096200", "-0.051200"),
+     "to": "Saint-Michel Gate (sample)", "walk_minutes": 4, "walk_miles": "0.2", "slope": "level", "step_free": "yes",
+     "note": "Lift to all floors. The easiest choice for wheelchair users.",
+     "booking_url": "https://example.com/sample-hotel-1", "is_affiliate_link": True,
+     "route": [[43.0962, -0.0512], [43.0959, -0.0522], [43.0957, -0.0531]]},
+    {"name": "Pilgrim guesthouse with chapel (sample)", "kind": "religious-house", "ll": ("43.093800", "-0.052600"),
+     "to": "Saint-Joseph Gate (sample)", "walk_minutes": 8, "walk_miles": "0.4", "slope": "level", "step_free": "yes",
+     "note": "Level, along the river. Daily Mass in the house. Simple rooms, early curfew.",
+     "website": "https://example.com/sample-guesthouse",
+     "route": [[43.0938, -0.0526], [43.0942, -0.0537], [43.0946, -0.0549]]},
+    {"name": "Hotel on Rue de la Grotte (sample)", "kind": "hotel", "ll": ("43.096800", "-0.048800"),
+     "to": "Saint-Michel Gate (sample)", "walk_minutes": 7, "walk_miles": "0.3", "slope": "steep", "step_free": "no",
+     "note": "Steep: downhill there, uphill back. The return climb is hard for older pilgrims.",
+     "booking_url": "https://example.com/sample-hotel-3"},
+    {"name": "Hotel near the train station (sample)", "kind": "hotel", "ll": ("43.099500", "-0.043000"),
+     "to": "Saint-Michel Gate (sample)", "walk_minutes": 22, "walk_miles": "1.1", "slope": "gentle", "step_free": "yes",
+     "note": "Busy crossings. Good for an early train out; too far for repeated visits in one day.",
+     "booking_url": "https://example.com/sample-hotel-4"},
+    {"name": "Accueil Notre-Dame (sample)", "kind": "pilgrim", "ll": ("43.095800", "-0.058500"),
+     "to": "Saint-Joseph Gate (sample)", "walk_minutes": 6, "walk_miles": "0.3", "slope": "level", "step_free": "yes",
+     "note": "For sick pilgrims, inside the Sanctuary. Booked through a diocesan pilgrimage or the Sanctuary, not online.",
+     "route": [[43.0958, -0.0585], [43.0966, -0.0588], [43.0974, -0.0582]]},
+]
 
 TOURS = [
     {
@@ -150,10 +193,11 @@ class Command(BaseCommand):
             linked = self._link_nevers(saint)
             created_sites = self._nearby()
             created_tours = self._tours()
+            stay_rows = self._stay_map(SacredSitePage.objects.get(pk=lourdes.pk))
         self.stdout.write(
             f"v2_dev_sample: Lourdes fields filled: {filled or 'none'}; "
             f"Nevers linked: {linked}; sample sites created: {created_sites or 'none'}; "
-            f"sample tours created: {created_tours or 'none'}"
+            f"sample tours created: {created_tours or 'none'}; map & lodging rows created: {stay_rows}"
         )
 
     def _saint(self):
@@ -242,4 +286,39 @@ class Command(BaseCommand):
             ]
             tour.save()
             created.append(spec["title"])
+        return created
+
+    def _stay_map(self, lourdes):
+        """Rows are written directly (the local Lourdes has a draft we never
+        publish over); matched by name, so a rerun adds nothing."""
+        import json as _json
+
+        from catalog.models import SiteLodging, SiteMapPoint
+
+        created = 0
+        points = {p.name: p for p in lourdes.map_points.all()}
+        for order, (kind, name, lat, lng, note) in enumerate(MAP_POINTS):
+            if name in points:
+                continue
+            points[name] = SiteMapPoint.objects.create(
+                page=lourdes, sort_order=order, kind=kind, name=name, latitude=Decimal(lat),
+                longitude=Decimal(lng), note=note or None, verified=False,
+            )
+            created += 1
+        existing = set(lourdes.lodgings.values_list("name", flat=True))
+        for order, spec in enumerate(LODGINGS):
+            if spec["name"] in existing:
+                continue
+            route = spec.get("route")
+            SiteLodging.objects.create(
+                page=lourdes, sort_order=order, name=spec["name"], kind=spec["kind"],
+                latitude=Decimal(spec["ll"][0]), longitude=Decimal(spec["ll"][1]),
+                website=spec.get("website"), booking_url=spec.get("booking_url"),
+                is_affiliate_link=spec.get("is_affiliate_link", False), nearest_point=points[spec["to"]],
+                walk_minutes=spec["walk_minutes"], walk_miles=Decimal(spec["walk_miles"]),
+                slope=spec["slope"], step_free=spec["step_free"], note=spec["note"],
+                route_geojson=_json.dumps({"type": "LineString", "coordinates": [[lng, lat] for lat, lng in route]})
+                if route else None,
+            )
+            created += 1
         return created

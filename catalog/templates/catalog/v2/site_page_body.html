@@ -175,7 +175,7 @@
         <div class="v2-block">{% include "catalog/includes/_plan_your_visit.html" %}</div>
       {% endif %}
 
-      {% comment %}Phase 3's Where to Stay & Map goes here, between Plan Your Visit and Guided Pilgrimages.{% endcomment %}
+      {% if page.has_stay_map_section %}{% include "catalog/v2/_stay_map.html" %}{% endif %}
       {% include "tours/_site_section.html" %}
 
       {% if page.nearby_sites or page.connected_sites %}

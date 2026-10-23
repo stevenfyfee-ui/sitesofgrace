@@ -1,10 +1,14 @@
+import json
+from datetime import date
 from math import asin, cos, radians, sin, sqrt
 
+from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import IntegrityError, models, transaction
 from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, ObjectList, TabbedInterface
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
@@ -499,6 +503,18 @@ class SacredSitePage(RoutablePageMixin, Page):
         ),
     ]
 
+    # The default Content / Promote / Settings tabs, plus "Map & lodging"
+    # for the v2 Where to Stay & Map section.
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading="Content"),
+        ObjectList(
+            [InlinePanel("map_points", label="Map point"), InlinePanel("lodgings", label="Place to stay")],
+            heading="Map & lodging",
+        ),
+        ObjectList(Page.promote_panels, heading="Promote"),
+        ObjectList(Page.settings_panels, heading="Settings"),
+    ])
+
     # (anchor id, rail label, field name) -- the narrative body of a site page,
     # in the order it is rendered. Adding a field here adds it to the rail.
     NARRATIVE_SECTIONS = [
@@ -712,8 +728,68 @@ class SacredSitePage(RoutablePageMixin, Page):
 
     @property
     def overview_plan_target(self):
-        """Where "Plan your own visit" goes: the plan section, else the planner."""
+        """Where "Plan your own visit" goes: Where to Stay & Map, else the plan
+        section, else the planner."""
+        if self.has_stay_map_section:
+            return "#stay-map"
         return "#plan-your-visit" if self.has_plan_section else f"/plan/?site={self.slug}"
+
+    @cached_property
+    def stay_map_points(self):
+        return list(self.map_points.all())
+
+    @cached_property
+    def stay_lodgings(self):
+        return list(self.lodgings.select_related("nearest_point"))
+
+    @property
+    def has_stay_map_section(self):
+        """Shown with at least one place to stay or two map points."""
+        return len(self.stay_lodgings) >= 1 or len(self.stay_map_points) >= 2
+
+    @property
+    def stay_has_affiliate(self):
+        return any(lodging.is_affiliate_link for lodging in self.stay_lodgings)
+
+    @property
+    def stay_layers_present(self):
+        """Layer keys with at least one item, so toggles for empty layers are left out."""
+        layers = {point.layer for point in self.stay_map_points}
+        if self.latitude is not None and self.longitude is not None:
+            layers.add("shrine")
+        if self.stay_lodgings:
+            layers.add("lodging")
+        return layers
+
+    def stay_map_payload(self):
+        """Everything site-map.js draws, for json_script. Coordinates as floats."""
+        from django.urls import reverse
+
+        def latlng(obj):
+            return [float(obj.latitude), float(obj.longitude)]
+
+        site = None
+        if self.latitude is not None and self.longitude is not None:
+            site = {"title": self.title, "latlng": latlng(self)}
+        points = [
+            {
+                "name": p.name, "kind": p.kind, "kind_label": p.get_kind_display(), "layer": p.layer,
+                "latlng": latlng(p), "note": p.note or "",
+                "url": p.linked_page.url if p.linked_page_id and p.linked_page.live else "",
+            }
+            for p in self.stay_map_points
+        ]
+        lodgings = [
+            {
+                "id": lodging.pk, "n": index, "name": lodging.name, "latlng": latlng(lodging),
+                "route": lodging.route_points, "summary": lodging.walk_summary,
+                "book_url": (f"{reverse('go_lodging', args=[lodging.pk])}?from={self.pk}"
+                             if lodging.outbound_url else ""),
+                "rel": lodging.link_rel,
+            }
+            for index, lodging in enumerate(self.stay_lodgings, start=1)
+        ]
+        return {"site": site, "points": points, "lodgings": lodgings}
 
     @cached_property
     def connected_sites(self):
@@ -759,6 +835,8 @@ class SacredSitePage(RoutablePageMixin, Page):
             items.append({"id": "church-recognition", "label": "Church Recognition"})
         if self.has_plan_section:
             items.append({"id": "plan-your-visit", "label": "Plan Your Visit"})
+        if self.has_stay_map_section:
+            items.append({"id": "stay-map", "label": "Where to Stay & Map"})
         if self.guided_pilgrimages:
             items.append({"id": "guided-pilgrimages", "label": "Guided Pilgrimages"})
         if self.nearby_sites or self.connected_sites:
@@ -1016,6 +1094,224 @@ class SiteTravelSection(Orderable):
 
     def __str__(self):
         return f"{self.page.title} - {self.label}"
+
+
+# --- Map & lodging (v2 phase 3) --------------------------------------------
+
+MAP_POINT_KIND_CHOICES = [
+    ("main-entrance", "Main entrance"),
+    ("accessible-entrance", "Accessible entrance"),
+    ("sacred-place", "Sacred place"),
+    ("prayer-location", "Prayer location"),
+    ("train-station", "Train station"),
+    ("bus-stop", "Bus / shuttle stop"),
+    ("parking", "Parking"),
+    ("other", "Other"),
+]
+ENTRANCE_KINDS = ("main-entrance", "accessible-entrance")
+# Which map layer (toggle) each point kind belongs to.
+MAP_POINT_LAYERS = {
+    "main-entrance": "shrine", "accessible-entrance": "shrine",
+    "sacred-place": "sacred", "prayer-location": "sacred", "other": "sacred",
+    "train-station": "transit", "bus-stop": "transit", "parking": "transit",
+}
+LODGING_KIND_CHOICES = [
+    ("hotel", "Hotel"),
+    ("religious-house", "Religious house / guesthouse"),
+    ("pilgrim", "Pilgrim accommodation"),
+    ("hostel", "Hostel"),
+]
+SLOPE_CHOICES = [("level", "Level"), ("gentle", "Gentle slope"), ("steep", "Steep")]
+STEP_FREE_CHOICES = [("yes", "Step-free route"), ("no", "Steps or steep sections"), ("unknown", "Step-free: unknown")]
+
+LATITUDE_VALIDATORS = [MinValueValidator(-90), MaxValueValidator(90)]
+LONGITUDE_VALIDATORS = [MinValueValidator(-180), MaxValueValidator(180)]
+
+
+def parse_route_geojson(value):
+    """[[lat, lng], ...] from a GeoJSON LineString (a geometry, or a Feature
+    wrapping one), or raise ValidationError. GeoJSON order is [lng, lat]."""
+    try:
+        data = json.loads(value) if isinstance(value, str) else value
+    except (TypeError, ValueError):
+        raise ValidationError("Route must be valid JSON (a GeoJSON LineString).")
+    if isinstance(data, dict) and data.get("type") == "Feature":
+        data = data.get("geometry")
+    if not isinstance(data, dict) or data.get("type") != "LineString":
+        raise ValidationError('Route must be a GeoJSON LineString: {"type": "LineString", "coordinates": [...]}.')
+    coords = data.get("coordinates")
+    if not isinstance(coords, list) or len(coords) < 2:
+        raise ValidationError("A LineString needs at least two [longitude, latitude] positions.")
+    points = []
+    for position in coords:
+        if (not isinstance(position, list) or len(position) < 2
+                or not all(isinstance(n, (int, float)) and not isinstance(n, bool) for n in position[:2])):
+            raise ValidationError("Every position must be [longitude, latitude] numbers.")
+        lng, lat = position[0], position[1]
+        if not (-180 <= lng <= 180 and -90 <= lat <= 90):
+            raise ValidationError(f"Position {position} is outside valid longitude/latitude ranges.")
+        points.append([lat, lng])
+    return points
+
+
+class SiteMapPoint(Orderable):
+    """A point on a site page's "Where to Stay & Map": entrances, sacred
+    places, prayer locations and transit."""
+
+    page = ParentalKey("catalog.SacredSitePage", on_delete=models.CASCADE, related_name="map_points")
+    kind = models.CharField(max_length=30, choices=MAP_POINT_KIND_CHOICES)
+    name = models.CharField(max_length=160)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, validators=LATITUDE_VALIDATORS)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, validators=LONGITUDE_VALIDATORS)
+    note = models.CharField(max_length=160, null=True, blank=True)
+    linked_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+    verified = models.BooleanField(default=False)
+
+    panels = [
+        FieldPanel("kind"), FieldPanel("name"), FieldPanel("latitude"), FieldPanel("longitude"),
+        FieldPanel("note"), FieldPanel("linked_page"), FieldPanel("verified"),
+    ]
+
+    @property
+    def layer(self):
+        return MAP_POINT_LAYERS.get(self.kind, "sacred")
+
+    def __str__(self):
+        return f"{self.page.title} – {self.name}" if self.page_id else self.name
+
+
+class SiteLodging(Orderable):
+    """A place to stay, with the hand-measured walk to the nearest entrance.
+    No nightly prices: they go stale and imply a booking we don't make."""
+
+    page = ParentalKey("catalog.SacredSitePage", on_delete=models.CASCADE, related_name="lodgings")
+    name = models.CharField(max_length=200)
+    kind = models.CharField(max_length=30, choices=LODGING_KIND_CHOICES)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, validators=LATITUDE_VALIDATORS)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, validators=LONGITUDE_VALIDATORS)
+    website = models.URLField(max_length=500, null=True, blank=True)
+    booking_url = models.URLField(max_length=500, null=True, blank=True)
+    is_affiliate_link = models.BooleanField(default=False)
+    nearest_point = models.ForeignKey(
+        SiteMapPoint, null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        limit_choices_to={"kind__in": ENTRANCE_KINDS},
+        help_text="The entrance the walk below is measured to (this page's entrances only).",
+    )
+    walk_minutes = models.PositiveSmallIntegerField(null=True, blank=True)
+    walk_miles = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
+    slope = models.CharField(max_length=10, null=True, blank=True, choices=SLOPE_CHOICES)
+    step_free = models.CharField(max_length=10, null=True, blank=True, choices=STEP_FREE_CHOICES)
+    note = models.CharField(max_length=200, null=True, blank=True)
+    route_geojson = models.TextField(
+        null=True, blank=True,
+        help_text="Verified walking route as a GeoJSON LineString ([longitude, latitude] pairs). "
+                  "Leave blank until the route has been checked on foot.",
+    )
+    verified_on = models.DateField(null=True, blank=True, help_text="Admin only; never shown publicly.")
+
+    panels = [
+        FieldPanel("name"), FieldPanel("kind"), FieldPanel("latitude"), FieldPanel("longitude"),
+        FieldPanel("website"), FieldPanel("booking_url"), FieldPanel("is_affiliate_link"),
+        FieldPanel("nearest_point"), FieldPanel("walk_minutes"), FieldPanel("walk_miles"),
+        FieldPanel("slope"), FieldPanel("step_free"), FieldPanel("note"),
+        FieldPanel("route_geojson"), FieldPanel("verified_on"),
+    ]
+
+    def clean(self):
+        super().clean()
+        errors = {}
+        if self.route_geojson and self.route_geojson.strip():
+            try:
+                parse_route_geojson(self.route_geojson)
+            except ValidationError as exc:
+                errors["route_geojson"] = exc.messages
+        if self.nearest_point_id:
+            point = self.nearest_point
+            if point.kind not in ENTRANCE_KINDS:
+                errors["nearest_point"] = ["Choose an entrance."]
+            elif self.page_id and point.page_id != self.page_id:
+                errors["nearest_point"] = ["Choose an entrance on this page."]
+        if errors:
+            raise ValidationError(errors)
+
+    @property
+    def route_points(self):
+        """[[lat, lng], ...] or None. Only a route that parses is drawn."""
+        if not self.route_geojson or not self.route_geojson.strip():
+            return None
+        try:
+            return parse_route_geojson(self.route_geojson)
+        except ValidationError:
+            return None
+
+    @property
+    def outbound_url(self):
+        return self.booking_url or self.website or ""
+
+    @property
+    def link_rel(self):
+        return "sponsored nofollow noopener" if self.is_affiliate_link else "nofollow noopener"
+
+    @property
+    def walk_line(self):
+        """'N min walk · X mi', or empty."""
+        parts = []
+        if self.walk_minutes:
+            parts.append(f"{self.walk_minutes} min walk")
+        if self.walk_miles is not None:
+            parts.append(f"{self.walk_miles:f} mi")
+        return " · ".join(parts)
+
+    @property
+    def walk_summary(self):
+        """The info bar's sentence: 'Hotel A to Saint-Michel Gate: about 4
+        minutes on foot, 0.2 mi. Level.'"""
+        target = self.nearest_point.name if self.nearest_point_id else "the entrance"
+        bits = []
+        if self.walk_minutes:
+            bits.append(f"about {self.walk_minutes} minutes on foot")
+        if self.walk_miles is not None:
+            bits.append(f"{self.walk_miles:f} mi")
+        text = f"{self.name} to {target}" + (": " + ", ".join(bits) if bits else "") + "."
+        if self.slope:
+            text += f" {self.get_slope_display()}."
+        return text
+
+    def __str__(self):
+        return self.name
+
+
+class LodgingClickDaily(models.Model):
+    """Outbound "Check availability" clicks per lodging, page and day -- the
+    same pattern as tours.TourClickDaily: no IP, no user, no cookie."""
+
+    lodging = models.ForeignKey(SiteLodging, on_delete=models.CASCADE, related_name="click_days")
+    page = models.ForeignKey("wagtailcore.Page", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+    date = models.DateField()
+    count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["lodging", "page", "date"], name="unique_lodging_click_day"),
+            models.UniqueConstraint(
+                fields=["lodging", "date"], condition=models.Q(page__isnull=True),
+                name="unique_lodging_click_day_no_page",
+            ),
+        ]
+
+    @classmethod
+    def record(cls, lodging, page=None, day=None):
+        day = day or date.today()
+        lookup = {"lodging": lodging, "page": page, "date": day}
+        if cls.objects.filter(**lookup).update(count=models.F("count") + 1):
+            return
+        try:
+            with transaction.atomic():
+                cls.objects.create(count=1, **lookup)
+        except IntegrityError:
+            cls.objects.filter(**lookup).update(count=models.F("count") + 1)
 
 
 class PilgrimageTrailPage(Page):

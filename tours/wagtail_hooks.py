@@ -1,7 +1,8 @@
 """Admin for guided pilgrimages: two snippet viewsets and two reports.
 
-Reports are staff-only (the tours.view_* permissions) and show counts only:
-interest per site, and outbound clicks per tour and page.
+Reports are staff-only (view permissions) and show counts only: interest
+per site, and "Outbound clicks" -- tours by tour and page, lodging by place
+to stay and page -- over the last 30 or 90 days.
 """
 from datetime import date, timedelta
 
@@ -58,35 +59,56 @@ def interest_report(request):
     return render(request, "tours/admin/interest_report.html", {"rows": rows, "total": TourInterest.objects.count()})
 
 
-def clicks_report(request):
-    if not request.user.has_perm("tours.view_tourclickdaily"):
+TOUR_CLICKS_PERM = "tours.view_tourclickdaily"
+LODGING_CLICKS_PERM = "catalog.view_lodgingclickdaily"
+
+
+def outbound_clicks_report(request):
+    can_tours = request.user.has_perm(TOUR_CLICKS_PERM)
+    can_lodging = request.user.has_perm(LODGING_CLICKS_PERM)
+    if not (can_tours or can_lodging):
         raise PermissionDenied
+    from catalog.models import LodgingClickDaily
+
     days = 90 if request.GET.get("days") == "90" else 30
     since = date.today() - timedelta(days=days - 1)
-    rows = (
-        TourClickDaily.objects.filter(date__gte=since)
-        .values("pilgrimage_id", "pilgrimage__title", "page_id", "page__title")
-        .annotate(clicks=Sum("count"))
-        .order_by("-clicks", "pilgrimage__title")
-    )
-    return render(request, "tours/admin/clicks_report.html", {"rows": rows, "days": days, "since": since})
+    tour_rows = lodging_rows = None
+    if can_tours:
+        tour_rows = (
+            TourClickDaily.objects.filter(date__gte=since)
+            .values("pilgrimage_id", "pilgrimage__title", "page_id", "page__title")
+            .annotate(clicks=Sum("count"))
+            .order_by("-clicks", "pilgrimage__title")
+        )
+    if can_lodging:
+        lodging_rows = (
+            LodgingClickDaily.objects.filter(date__gte=since)
+            .values("lodging_id", "lodging__name", "lodging__page__title", "page_id", "page__title")
+            .annotate(clicks=Sum("count"))
+            .order_by("-clicks", "lodging__name")
+        )
+    return render(request, "tours/admin/clicks_report.html", {
+        "tour_rows": tour_rows, "lodging_rows": lodging_rows, "days": days, "since": since,
+    })
 
 
 @hooks.register("register_admin_urls")
 def register_report_urls():
     return [
         path("reports/tour-interest/", interest_report, name="tours_interest_report"),
-        path("reports/tour-clicks/", clicks_report, name="tours_clicks_report"),
+        path("reports/outbound-clicks/", outbound_clicks_report, name="outbound_clicks_report"),
     ]
 
 
 class PermissionMenuItem(MenuItem):
+    """Shown to users holding any one of `permission` (a name or a tuple)."""
+
     def __init__(self, *args, permission, **kwargs):
         super().__init__(*args, **kwargs)
-        self.permission = permission
+        self.permissions = (permission,) if isinstance(permission, str) else tuple(permission)
 
     def is_shown(self, request):
-        return request.user.has_perm(self.permission)
+        return any(request.user.has_perm(p) for p in self.permissions)
 
 
 @hooks.register("register_reports_menu_item")
@@ -100,6 +122,6 @@ def register_interest_report_menu_item():
 @hooks.register("register_reports_menu_item")
 def register_clicks_report_menu_item():
     return PermissionMenuItem(
-        "Tour operator clicks", reverse("tours_clicks_report"), icon_name="link-external", order=901,
-        permission="tours.view_tourclickdaily",
+        "Outbound clicks", reverse("outbound_clicks_report"), icon_name="link-external", order=901,
+        permission=(TOUR_CLICKS_PERM, LODGING_CLICKS_PERM),
     )

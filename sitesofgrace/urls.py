@@ -24,6 +24,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
     path("pilgrimage-trails.json", catalog_views.trails_json, name="pilgrimage_trails_json"),
+    path("go/lodging/<int:pk>/", catalog_views.go_lodging, name="go_lodging"),
     path("newsletter/signup/", core_views.newsletter_signup, name="newsletter_signup"),
     path("store/waitlist/", store_views.waitlist_signup, name="waitlist_signup"),
     path("accounts/", include("allauth.urls")),

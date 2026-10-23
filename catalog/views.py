@@ -1,7 +1,32 @@
-from django.http import JsonResponse
+from django.http import Http404, HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_GET
+from wagtail.models import Page
 
-from catalog.models import PilgrimageTrailPage, SacredSitePage
+from catalog.models import LodgingClickDaily, PilgrimageTrailPage, SacredSitePage, SiteLodging
+from core.v2 import v2_enabled
 from pilgrims.models import SiteVisit
+
+
+@require_GET
+def go_lodging(request, pk):
+    """/go/lodging/<id>/?from=<page id>: count the "Check availability" click,
+    then 302 to the booking link (or the website). v2 only; same privacy as
+    /go/tour/: only (lodging, page, date, count) is stored -- no IP, user or
+    cookie."""
+    if not v2_enabled(request):
+        raise Http404
+    lodging = get_object_or_404(SiteLodging.objects.select_related("page"), pk=pk)
+    if not lodging.page.live or not lodging.outbound_url:
+        raise Http404
+    page = None
+    source = request.GET.get("from", "")
+    if source.isdigit():
+        page = Page.objects.filter(pk=int(source)).first()
+    LodgingClickDaily.record(lodging, page)
+    response = HttpResponseRedirect(lodging.outbound_url)
+    response["Cache-Control"] = "no-store"
+    return response
 
 
 def sites_json(request):

@@ -262,3 +262,61 @@ a.v2-card:hover { border-color: var(--gold); }
 .v2-group-tier { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--v2-hairline); }
 .v2-group-tier ul { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
 .v2-group-tier-note { font-size: 13.5px !important; color: var(--stone); }
+
+/* ---------- Phase 3: Where to Stay & Map ---------- */
+.v2-stay-lede { margin: 0 0 14px; font-size: 15.5px; line-height: 1.55; }
+.v2-stay-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.v2-stay-tools[hidden] { display: none; }
+.v2-stay-tools-label { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.v2-layer {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--stone);
+  background: #fff; border: 1px solid var(--gold-soft);
+}
+.v2-layer[aria-pressed="true"] { color: var(--navy); border-color: var(--navy); background: var(--parchment); }
+.v2-layer-swatch { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--navy); }
+.v2-layer-swatch--shrine { background: var(--gold); }
+.v2-layer-swatch--lodging { background: var(--navy); }
+.v2-layer-swatch--sacred { background: #fff; }
+.v2-layer-swatch--transit { background: #8FB9DD; }
+.v2-stay-map { height: 420px; border: 1px solid var(--gold-soft); border-radius: 16px; overflow: hidden; background: #E9E9E6; }
+.v2-stay-map .leaflet-container { font-family: var(--serif-body); }
+.v2-stay-info {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;
+  margin: 10px 0 14px; padding: 12px 14px; border-radius: 12px; background: var(--parchment);
+  border: 1px solid var(--gold-soft); font-size: 14.5px;
+}
+.v2-stay-info[hidden] { display: none; }
+.v2-stay-info em { color: var(--v2-amber); font-style: normal; font-weight: 600; }
+
+.v2-lodge-marker { background: none; border: 0; }
+.v2-lodge-icon {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--navy); color: var(--ivory); border: 2px solid var(--ivory);
+  font-family: var(--sans); font-size: 11px; font-weight: 700; box-shadow: 0 1px 4px rgba(3, 37, 83, .35);
+}
+.v2-lodge-marker.is-selected .v2-lodge-icon { background: var(--v2-gold-deep); }
+.leaflet-marker-icon.v2-lodge-marker:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 50%; }
+
+.v2-lodging-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+@media (min-width: 720px) { .v2-lodging-list { grid-template-columns: 1fr 1fr; } }
+.v2-lodging-list li { display: grid; gap: 6px; padding: 12px 14px; background: #fff; border: 1px solid var(--gold-soft); border-radius: 12px; }
+.v2-lodge { display: flex; gap: 10px; align-items: flex-start; border-radius: 8px; }
+.v2-lodge[role="button"] { cursor: pointer; }
+.v2-lodge[aria-pressed="true"] .v2-lodge-num { background: var(--v2-gold-deep); }
+.v2-lodging-list li:has(.v2-lodge[aria-pressed="true"]) { border-color: var(--v2-gold-deep); box-shadow: 0 0 0 1px var(--v2-gold-deep); }
+.v2-lodge-num {
+  flex: 0 0 auto; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--navy); color: var(--ivory); font-family: var(--sans); font-size: 11px; font-weight: 700;
+}
+.v2-lodge-body { display: grid; gap: 4px; }
+.v2-lodge-name { font-family: var(--serif-display); font-weight: 600; font-size: 18px; color: var(--navy); }
+.v2-lodge-kind { font-family: var(--sans); font-size: 12.5px; color: var(--stone); }
+.v2-lodge-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.v2-lodge-pill {
+  font-family: var(--sans); font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  color: var(--blue); background: var(--parchment); border: 1px solid var(--gold-soft);
+}
+.v2-lodge-pill--warn { color: var(--v2-amber); background: rgba(183, 121, 31, .08); border-color: rgba(183, 121, 31, .5); }
+.v2-lodge-note { font-size: 13.5px; line-height: 1.45; }
+.v2-lodge-book { justify-self: start; margin-left: 32px; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--blue); }

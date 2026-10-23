@@ -246,9 +246,23 @@ class AdminReportTests(ToursTestCase):
         self.client.force_login(admin)
         interest = self.client.get("/admin/reports/tour-interest/").content.decode()
         self.assertIn("Report Site", interest)
-        clicks = self.client.get("/admin/reports/tour-clicks/?days=90").content.decode()
+        from catalog.models import LodgingClickDaily, SiteLodging
+
+        lodging = SiteLodging.objects.create(page=site, name="Report hotel", kind="hotel",
+                                             latitude=Decimal("1"), longitude=Decimal("1"))
+        LodgingClickDaily.objects.create(lodging=lodging, page=site, date=date.today(), count=6)
+        LodgingClickDaily.objects.create(lodging=lodging, page=site, date=date.today() - timedelta(days=60), count=50)
+        clicks = self.client.get("/admin/reports/outbound-clicks/?days=90").content.decode()
+        self.assertIn("Outbound clicks", clicks)
+        self.assertIn("<h2>Tours</h2>", clicks)
+        self.assertIn("<h2>Lodging</h2>", clicks)
         self.assertIn("Report tour", clicks)
+        self.assertIn("Report hotel", clicks)
         self.assertIn("<td>4</td>", clicks)
+        self.assertIn("<td>56</td>", clicks)
+        last_30 = self.client.get("/admin/reports/outbound-clicks/").content.decode()
+        self.assertIn("<td>6</td>", last_30)
+        self.assertNotIn("<td>56</td>", last_30)
         self.assertNotIn("u@example.com", interest)
 
     def test_snippet_admin_lists_and_forms_render(self):
