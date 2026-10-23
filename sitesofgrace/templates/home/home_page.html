@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags support_tags %}
+{% load static wagtailcore_tags wagtailimages_tags support_tags v2_tags %}
 
 {% block body_class %}home{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
@@ -40,7 +40,7 @@
 </section>
 {% endif %}
 
-{# ---------- Pilgrim band: Sites & Saints / Journey / Today in the Church ---------- #}
+{% v2_enabled as v2 %}{% if v2 %}{% include "home/v2/_bands.html" %}{% else %}{# ---------- Pilgrim band: Sites & Saints / Journey / Today in the Church ---------- #}
 <section class="pilgrim-band">
   <div class="container pilgrim-band-grid{% if not page.calendar_enabled %} pilgrim-band-grid--two{% endif %}">
 
@@ -145,7 +145,7 @@
 {# ---------- News feed ---------- #}
 {% if page.news_enabled and news_items %}
   {% include "home/includes/_news_feed.html" %}
-{% endif %}
+{% endif %}{% endif %}
 
 {# ---------- Partners ---------- #}
 {% if page.partners.all or page.partners_quote %}

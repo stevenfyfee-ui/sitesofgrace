@@ -418,3 +418,48 @@ main:has(> .support-band:last-child) + .site-footer { margin-top: 0; }
   .support-band-inner { flex-direction: column; text-align: center; gap: 16px; }
   .support-band p { font-size: 18px; }
 }
+
+/* ---------- v2 homepage bands (only rendered with SOG_V2_ENABLED) ---------- */
+.v2-home-band { padding: 56px 0; border-top: 1px solid var(--gold-soft); }
+.v2-home-eyebrow {
+  margin: 0 0 6px; font-family: var(--serif-titling); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: #8A6420;
+}
+.v2-home-band h2 { margin: 0 0 22px; font-family: var(--serif-display); font-weight: 600; font-size: clamp(28px, 3.2vw, 36px); color: var(--navy); }
+.v2-home-head { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; justify-content: space-between; }
+.v2-home-more { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--blue); }
+
+.v2-home-tiles { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .v2-home-tiles { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .v2-home-tiles { grid-template-columns: repeat(4, 1fr); } }
+.v2-home-tile {
+  display: grid; gap: 4px; height: 100%; padding-bottom: 14px; overflow: hidden; text-decoration: none; color: inherit;
+  background: #fff; border: 1px solid var(--gold-soft); border-radius: 16px;
+}
+.v2-home-tile:hover { border-color: var(--gold); }
+.v2-home-tile-img { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; display: block; }
+.v2-home-tile-img--blank { background: linear-gradient(160deg, var(--parchment), var(--gold-soft)); }
+.v2-home-tile-title { padding: 8px 16px 0; font-family: var(--serif-display); font-weight: 600; font-size: 21px; color: var(--navy); }
+.v2-home-tile-caption { padding: 0 16px; font-size: 14px; color: var(--stone); }
+
+.v2-home-feasts { background: var(--parchment); }
+.v2-home-feast-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .v2-home-feast-list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .v2-home-feast-list { grid-template-columns: repeat(4, 1fr); } }
+.v2-home-feast {
+  display: flex; gap: 14px; align-items: flex-start; height: 100%; padding: 16px; text-decoration: none; color: inherit;
+  background: #fff; border: 1px solid var(--gold-soft); border-radius: 14px;
+}
+.v2-home-feast:hover { border-color: var(--gold); }
+.v2-home-feast-date {
+  flex: 0 0 auto; display: grid; place-items: center; width: 58px; padding: 6px 0; border-radius: 10px;
+  background: var(--navy); color: var(--ivory); text-align: center;
+}
+.v2-home-feast-month { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.v2-home-feast-day { font-family: var(--serif-display); font-size: 26px; font-weight: 600; line-height: 1; }
+.v2-home-feast-text { display: grid; gap: 3px; }
+.v2-home-feast-rank { font-family: var(--sans); font-size: 12px; color: var(--stone); }
+.v2-home-feast-rank strong { color: #8A6420; }
+.v2-home-feast-name { font-family: var(--serif-display); font-weight: 600; font-size: 19px; line-height: 1.2; color: var(--navy); }
+.v2-home-feast-place { font-size: 14px; color: var(--blue); }
+.v2-home-tile:focus-visible, .v2-home-feast:focus-visible, .v2-home-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
