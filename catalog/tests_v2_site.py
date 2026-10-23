@@ -20,6 +20,8 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import override_settings
 
+from wagtail.models import Site
+
 from catalog.models import CATEGORY_STYLES, SacredSitePage, SaintPage, SiteTravelSection
 from catalog.tests import SacredSitePageTestCase
 from core.v2 import v2_enabled
@@ -28,6 +30,13 @@ V2_ON = override_settings(SOG_V2_ENABLED="on")
 
 
 class V2SiteTestCase(SacredSitePageTestCase):
+    def setUp(self):
+        # Other apps' tests create extra Sites; Wagtail caches site root paths
+        # process-wide, and a stale cache turns page.url into None here.
+        Site.clear_site_root_paths_cache()
+        self.addCleanup(Site.clear_site_root_paths_cache)
+        super().setUp()
+
     def make_site(self, slug="test-site", **kwargs):
         """Like the shared helper, but the category can be chosen."""
         page = SacredSitePage(
@@ -340,6 +349,7 @@ class CategoryStylesTests(V2SiteTestCase):
 
 class ReportCommandTests(V2SiteTestCase):
     def setUp(self):
+        super().setUp()
         self.tmpdir = tempfile.mkdtemp()
 
     def tearDown(self):
@@ -414,6 +424,7 @@ class ReportToConsoleTests(V2SiteTestCase):
 
 class ImportSiteDetailsTests(V2SiteTestCase):
     def setUp(self):
+        super().setUp()
         self.tmpdir = tempfile.mkdtemp()
 
     def tearDown(self):

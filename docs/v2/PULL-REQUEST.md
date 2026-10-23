@@ -63,6 +63,15 @@ is byte-identical to main, except for two always-on fixes. All migrations are ad
   `--apply` for approved rows.
 - **Setup:**
   - `create_destination_hubs` creates the index and four hubs as unpublished, title-only drafts.
+  - `swap_contact_page` unpublishes the old `/contact/` StandardPage (slug `contact-old`) and publishes
+    a ContactPage; it does nothing if one is already live.
+  - `publish_legal_pages` publishes all ten legal pages together, or none and lists why (the same rule
+    as the admin's publish guard).
+  - `set_legal_details` fills Settings → Legal details from the console prompt; values are never
+    passed as arguments or echoed.
+  - `publish_hubs [--slug …]` publishes hubs whose draft has an intro, plus the index; empty hubs are
+    skipped and listed.
+  - All four have `--dry-run` and are safe to rerun.
   - `v2_dev_sample` loads local sample data only; it refuses to run unless DEBUG is on and the
     database is local.
 
@@ -77,7 +86,7 @@ is byte-identical to main, except for two always-on fixes. All migrations are ad
 
 ## Testing
 
-- **Suite:** 629 tests pass in the dev container (Rule 11: `check`, `makemigrations --check`, phase
+- **Suite:** 639 tests pass in the dev container (Rule 11: `check`, `makemigrations --check`, phase
   apps, full suite).
 - **Switch off:** diffed byte for byte against main's HTML on 20+ pages.
 - **Screenshots:** each phase at 1440 and 390, with the switch on and off.

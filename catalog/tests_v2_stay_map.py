@@ -206,6 +206,7 @@ class SwitchOffTests(StayMapTestCase):
 
 class ImportSiteMapTests(StayMapTestCase):
     def setUp(self):
+        super().setUp()
         self.tmpdir = tempfile.mkdtemp()
 
     def tearDown(self):

@@ -27,12 +27,18 @@ OCT_21 = timezone.make_aware(datetime(2026, 10, 21, 12, 0))
 
 class V2HomeTestCase(WagtailPageTestCase):
     def setUp(self):
+        Site.clear_site_root_paths_cache()
         cache.clear()
         litcal._events_by_date.cache_clear()
         root = Page.get_first_root_node()
         self.home = HomePage(title="Home", slug="v2-home")
         root.add_child(instance=self.home)
         Site.objects.filter(is_default_site=True).update(root_page=self.home)
+        # .update() skips the signal that clears Wagtail's cached site root
+        # paths, so clear it now and again afterwards -- otherwise the next
+        # app's tests see this test's (rolled-back) home page.
+        Site.clear_site_root_paths_cache()
+        self.addCleanup(Site.clear_site_root_paths_cache)
         FeatureCard.objects.create(page=self.home, title="Mary, Our Mother", blurb="Apparitions", link_url="/explore/")
         Partner.objects.create(page=self.home, name="Partner Parish (sample)")
         self.home = HomePage.objects.get(pk=self.home.pk)

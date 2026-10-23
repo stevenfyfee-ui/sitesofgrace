@@ -25,6 +25,7 @@ V2_ON = override_settings(SOG_V2_ENABLED="on")
 
 class ToursTestCase(V2SiteTestCase):
     def setUp(self):
+        super().setUp()
         self.operator = TourOperator.objects.create(name="Operator A (sample)")
 
     def make_tour(self, title, sites, place_names=(), departures=(), **fields):

@@ -62,17 +62,33 @@ python manage.py eucharistic_kind_worksheet --out -
 
 **Contact page** (the "Report something that's wrong" button stays hidden until this is live):
 
-1. In the admin, open the existing `/contact/` page (a StandardPage), change its slug to
-   `contact-old`, and **unpublish** it.
-2. Under Home, add a **Contact page**, slug `contact`, fill it in, and **publish** it.
-3. Check `/contact/?topic=correction&page=<any site id>` opens the form with "Submit a correction".
+```
+python manage.py swap_contact_page --dry-run
+python manage.py swap_contact_page
+```
+
+It unpublishes the existing `/contact/` StandardPage, changes its slug to `contact-old`, then creates
+a **Contact page** at `/contact/` with its defaults and publishes it. With a live ContactPage
+already there, it does nothing. Then edit the Contact page's text in the admin if needed, and check
+that `/contact/?topic=correction&page=<any site id>` opens the form with "Submit a correction".
 
 **Legal pages:**
 
 1. If they don't exist yet: console `python manage.py create_legal_pages` (creates ten drafts).
-2. Fill in **Settings → Legal details** (operator name, contact email, mailing address, DMCA agent…).
-   Publishing is blocked while a value a page uses is blank.
-3. Review the ten drafts and **publish all ten together**.
+2. Fill in **Settings → Legal details** at the console prompt (the values are typed, never passed as
+   arguments, and never echoed back). The pages use seven values: operator name, contact email,
+   mailing address, and the four DMCA agent fields. Enter keeps a value.
+
+   ```
+   python manage.py set_legal_details
+   ```
+3. Review the ten drafts in the admin, then **publish all ten together** (or none, if any value
+   they use is still blank):
+
+   ```
+   python manage.py publish_legal_pages --dry-run
+   python manage.py publish_legal_pages
+   ```
 4. **The Affiliate Disclosure page must be live before any tour or lodging with an affiliate link
    is set live.** Tours and lodging with ordinary links can go live without it; affiliate ones can't.
 
@@ -146,8 +162,15 @@ The hubs are still unpublished, so the importer saves a new **draft revision**. 
 ## 6. Publish the hubs
 
 1. Preview each hub draft in the admin, at desktop and phone width.
-2. Publish the **Destinations** index, then each finished hub. Leave unfinished hubs as drafts. Only
-   live hubs appear in the Explore dropdown, the homepage tiles, "More in…" and "Visit in…".
+2. Publish the hubs that have text (and the Destinations index with the first one). Hubs without an
+   intro are skipped and listed:
+
+   ```
+   python manage.py publish_hubs --dry-run
+   python manage.py publish_hubs                 # or: --slug assisi-umbria --slug portugal
+   ```
+
+   Only live hubs appear in the Explore dropdown, the homepage tiles, "More in…" and "Visit in…".
 
 ## 7. Switch on for staff
 

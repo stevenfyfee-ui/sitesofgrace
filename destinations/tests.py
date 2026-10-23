@@ -32,6 +32,7 @@ V2_ON = override_settings(SOG_V2_ENABLED="on")
 
 class HubTestCase(V2SiteTestCase):
     def setUp(self):
+        super().setUp()
         self.tmpdir = tempfile.mkdtemp()
         self.index = DestinationIndexPage(title="Destinations", slug="destinations")
         self.site_root().add_child(instance=self.index)
