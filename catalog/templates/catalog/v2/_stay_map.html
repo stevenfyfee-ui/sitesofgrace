@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags category_styles %}
+{% load static wagtailcore_tags category_styles legal_tags %}
 {% comment %}
   "Where to Stay & Map" on a v2 sacred site page. Renders when the site has
   at least one place to stay or two map points (has_stay_map_section).
@@ -52,18 +52,28 @@
         </li>
       {% endfor %}
     </ol>
-    <p class="v2-disclose">
-      Places to stay are chosen by Sites of Grace.{% if page.stay_has_affiliate %} Some booking links may earn us a commission at no extra cost to you{% if affiliate_disclosure_page %} (<a href="{% pageurl affiliate_disclosure_page %}">how we choose and disclose</a>){% endif %}.{% endif %}
-      Walk times are measured by hand; routes are drawn only once they have been checked.
-    </p>
+    {% comment %}
+      The "travel_links" legal notice next to the booking links (Standing Rule 9);
+      its [Affiliate Disclosure] link only renders once that LegalPage is live.
+      If the notice is blank, the earlier sentence is shown instead.
+    {% endcomment %}
+    {% notice "travel_links" as travel_notice %}
+    {% if travel_notice %}
+      <p class="v2-disclose">{{ travel_notice }}</p>
+    {% else %}
+      {% legal_url "affiliate-disclosure" as disclosure_url %}
+      <p class="v2-disclose">
+        Places to stay are chosen by Sites of Grace.{% if page.stay_has_affiliate %} Some booking links may earn us a commission at no extra cost to you{% if disclosure_url %} (<a href="{{ disclosure_url }}">how we choose and disclose</a>){% endif %}.{% endif %}
+        Walk times are measured by hand; routes are drawn only once they have been checked.
+      </p>
+    {% endif %}
   {% endif %}
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  {# Leaflet 1.9.4, served from our own static files (sitesofgrace/static/vendor/), like the Interactive Map. #}
+  <link rel="stylesheet" href="{% static 'vendor/leaflet-1.9.4/leaflet.css' %}">
   {% category_styles_json %}
   {{ page.stay_map_payload|json_script:"site-map-data" }}
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <script src="{% static 'vendor/leaflet-1.9.4/leaflet.js' %}" defer></script>
   <script src="{% static 'js/basemap.js' %}" defer></script>
   <script src="{% static 'js/sog-maps.js' %}" defer></script>
   <script src="{% static 'catalog/js/site-map.js' %}" defer></script>

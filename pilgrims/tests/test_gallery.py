@@ -11,7 +11,7 @@ class GalleryRenderingTests(_PublicAndPrivateStorageTestCase):
         self.owner = User.objects.create_user("gal_owner", "gal_owner@example.com", "pw")
         self.site = _make_site(slug="render-gallery-site", title="Render Gallery Shrine")
         self.photo = _make_photo(self.owner, self.site)
-        sharing.share_photo(self.photo, credit="anonymous")
+        sharing.share_photo(self.photo, credit="anonymous", rights_confirmed_at=None)
         self.gallery_url = self.site.url + "gallery/"
 
     def test_gallery_renders_for_anonymous_visitor(self):
@@ -83,7 +83,7 @@ class GalleryRenderingTests(_PublicAndPrivateStorageTestCase):
     def test_pagination_present_with_many_photos(self):
         for i in range(30):
             photo = _make_photo(self.owner, self.site, width=60 + i, height=60 + i)
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
         client = Client()
         response = client.get(self.gallery_url)
         self.assertContains(response, "Page 1 of 2")

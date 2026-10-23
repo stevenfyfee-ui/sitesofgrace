@@ -95,6 +95,8 @@
 .store-price-option.is-active .store-price-note { color: #e8c98a; }
 
 .store-feature-ctas { margin-bottom: 14px; }
+.store-waitlist-note { font-size: 12.5px; color: #6b6355; line-height: 1.5; margin: 0 0 8px; max-width: 380px; }
+.store-waitlist-note a, .store-disclosure a { text-decoration: underline; text-underline-offset: 2px; }
 .store-waitlist-form { display: flex; gap: 10px; max-width: 380px; }
 .store-waitlist-form input[type="email"] {
   flex: 1; padding: 10px 14px; border: 1px solid var(--gold-soft); border-radius: 999px;

@@ -45,7 +45,9 @@ RUN update-ca-certificates
 
 RUN useradd wagtail
 
-EXPOSE 8000
+# Same port and gunicorn command as production; docker-compose.dev.yml
+# overrides the command with runserver on 8000 for local work.
+EXPOSE 8080
 
 ENV PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=sitesofgrace.settings.docker_dev \
@@ -62,4 +64,9 @@ USER wagtail
 
 # The repo is mounted over /app at run time (docker-compose.dev.yml), so the
 # source isn't copied in and collectstatic runs against the mount instead.
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#
+# The access log format is gunicorn's default minus anything that can carry
+# a query string: the path without its query (%(U)s, not the full request
+# line %(r)s) and no Referer (%(f)s). Query strings can hold a Stripe
+# Checkout session id or a search term; client IPs (%(h)s) stay.
+CMD ["gunicorn", "sitesofgrace.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "60", "--access-logfile", "-", "--access-logformat", "%(h)s %(l)s %(u)s %(t)s \"%(m)s %(U)s %(H)s\" %(s)s %(b)s \"%(a)s\"", "--error-logfile", "-"]

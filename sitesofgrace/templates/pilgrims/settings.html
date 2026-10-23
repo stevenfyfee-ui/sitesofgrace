@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static legal_tags %}
 
 {% block body_class %}pilgrims{% endblock %}
 {% block title %}Profile Settings{% endblock %}
@@ -24,12 +24,24 @@
     <form method="post" enctype="multipart/form-data" class="auth-form">
       {% csrf_token %}
       {% for field in form %}
-        <div class="auth-field">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.help_text %}<p class="auth-help">{{ field.help_text }}</p>{% endif %}
-          {% for error in field.errors %}<p class="auth-field-error">{{ error }}</p>{% endfor %}
-        </div>
+        {% if field.name == "share_adult" %}
+          {% comment %}
+            Only until the pilgrim has confirmed once; needed to turn
+            "Is private" off (pilgrims/forms.py).
+          {% endcomment %}
+          <div class="auth-field">
+            <label class="share-consent-box">{{ field }} <span>{% notice "share_adult_checkbox" %}</span></label>
+            {% for error in field.errors %}<p class="auth-field-error">{{ error }}</p>{% endfor %}
+          </div>
+        {% else %}
+          <div class="auth-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="auth-help">{{ field.help_text }}</p>{% endif %}
+            {% if field.name == "is_private" %}<p class="share-consent-warning">{% notice "profile_public_warning" %}</p>{% endif %}
+            {% for error in field.errors %}<p class="auth-field-error">{{ error }}</p>{% endfor %}
+          </div>
+        {% endif %}
       {% endfor %}
       <button type="submit" class="btn btn-primary auth-submit">Save Changes</button>
     </form>

@@ -586,26 +586,14 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
 9. LocMem cache: liturgy index invalidation only reaches one worker. Consider a shared cache if
    more workers are added.
 10. Stale comments: `catalog/models.py:31–33` path; `PilgrimPhoto` "unused until phase 4" docstring.
-11. **Contact form (reported 2026-10-21, nothing changed).**
-    - `home.ContactPage` is **not on main** — nor on any local or remote branch, in any stash, or in
-      any commit message. There is also no `contact_url` template tag and no "Spot an error? Let us
-      know" link anywhere in the repository, so the "contact page build" referred to lives outside
-      this repo (unpushed work elsewhere?). Production deploys main (`e3dc64d`), so none of it is live.
-    - Local `/contact/` is page 9, a `home.StandardPage` (layout `default`, a 7-character intro, empty
-      body). The newsletter signup seen on production's /contact/ is the site-wide footer block
-      (`base.html:106`), not part of that page.
-    - The v2 "Report something that's wrong" button therefore looks up `home.ContactPage` by name and
-      renders only when a live one exists, linking `?topic=correction&page=<page id>`. Today it renders
-      nowhere, which is the intended state until the form is live.
-    - To make the live /contact/ the real form: (a) land the ContactPage model and its `contact_url` tag
-      on main (a page type with the form, topic choices including `correction`, and a hidden page-id
-      field read from `?page=`); (b) decide where submissions go — stored in the DB and/or emailed via
-      Resend to `SiteSettings.contact_email` — with spam protection that doesn't store IPs (the existing
-      `core/ratelimit.py` hashes them); (c) because Wagtail can't change a page's type in place, create
-      the ContactPage, then in the production admin rename the old StandardPage's slug, unpublish it, and
-      publish the ContactPage at `contact`; (d) then point the v2 button at `contact_url` in one line.
-      Submissions will hold names and emails, so they need a retention rule and staff-only access
-      (SOC 2 confidentiality).
+11. **Contact form — resolved by main's `f01f83ce` (merged 2026-10-22).** When this was written,
+    `home.ContactPage`, the `contact_url` tag and the "Spot an error? Let us know" link were on no
+    branch. Main has since added them (`home/templatetags/contact_tags.py`,
+    `includes/_correction_link.html`, the `contact` app). The v2 "Report something that's wrong" button
+    now uses `{% correction_url page %}` (`?topic=correction&page=<id>`), renders only while a ContactPage
+    is live, and replaces the "Spot an error?" link when v2 is on; with v2 off the link shows as on main.
+    What's left is a content step in production: publish the ContactPage at /contact/ (the old
+    StandardPage there must be renamed and unpublished first, since Wagtail can't change a page's type).
 12. **Run `travel_content_report` against production after merge.** The local copy predates the October
     travel import (its 226 sections are mostly the legacy "Additional Information" panel; the closest
     pair scored 0.53, so nothing was flagged). Run it from the DigitalOcean console:

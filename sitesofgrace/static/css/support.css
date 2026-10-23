@@ -132,6 +132,13 @@
 }
 .support-secure svg { width: 14px; height: 14px; flex: none; }
 .support-manage { font-family: var(--sans); font-size: 12.5px; text-align: center; margin: 8px 0 0; }
+.support-monthly-note, .support-intro-note {
+  font-family: var(--sans); font-size: 12.5px; line-height: 1.6; color: var(--stone); margin: 0 0 16px;
+}
+.support-monthly-note[hidden] { display: none; }
+.support-intro-note { border-top: 1px solid var(--gold-soft); padding-top: 14px; }
+.support-monthly-note a, .support-intro-note a { color: var(--blue); text-decoration: underline; }
+.support-intro-note strong, .support-monthly-note [data-notice-amount] { color: var(--navy); font-weight: 600; }
 .support-fine {
   font-family: var(--sans); font-size: 12px; line-height: 1.6; color: var(--stone);
   border-top: 1px solid var(--gold-soft); padding-top: 16px; margin: 20px 0 0;

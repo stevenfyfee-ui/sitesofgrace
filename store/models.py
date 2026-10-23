@@ -289,6 +289,10 @@ class StoreSettings(BaseGenericSetting):
     affiliate_disclosure = RichTextField(
         blank=True,
         default="<p>As an Amazon Associate, we earn from qualifying purchases.</p>",
+        help_text=(
+            "No longer shown on the site. The store now shows store_amazon from "
+            "Settings > Legal notices."
+        ),
     )
     store_intro = RichTextField(blank=True)
 

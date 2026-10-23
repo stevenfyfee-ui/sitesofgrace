@@ -285,14 +285,36 @@ class PhotosAndPrivacyTests(V2SiteTestCase):
         self.assertNotIn("How the Church judges", self.html(shrine))
 
     def test_report_button_waits_for_a_live_contact_form(self):
-        # A plain page at /contact/ (what production has today) is not the form.
+        # A plain page at /contact/ is not the form: no button, no link.
         from wagtail.models import Page
 
-        self.site_root().add_child(instance=Page(title="Contact", slug="contact"))
+        self.site_root().add_child(instance=Page(title="Contact", slug="contact-plain"))
         page = self.make_site(slug="report-hidden")
         html = self.html(page)
         self.assertNotIn("Report something", html)
         self.assertNotIn("topic=correction", html)
+
+    def test_report_button_replaces_the_spot_an_error_link(self):
+        from home.models import ContactPage
+
+        self.site_root().add_child(instance=ContactPage(title="Contact", slug="contact"))
+        page = self.make_site(slug="report-live")
+        html = self.html(page)
+        self.assertIn(f'href="/contact/?topic=correction&amp;page={page.pk}">Report something that&rsquo;s wrong</a>',
+                      html)
+        self.assertNotIn("Spot an error?", html, "v2 shows the button instead of the link, not both")
+        with override_settings(SOG_V2_ENABLED="off"):
+            off = self.html(page)
+        self.assertIn("Spot an error?", off)
+        self.assertNotIn("Report something", off)
+
+    def test_travel_notice_renders_with_v2_on_and_off(self):
+        page = self.make_site(slug="travel-notice")
+        self.add_travel(page, "getting-there")
+        for mode in ("on", "off"):
+            with override_settings(SOG_V2_ENABLED=mode):
+                html = self.html(page)
+            self.assertIn('<p class="plan-travel-note"><strong>Pilgrim travel note:</strong>', html, mode)
 
     def test_plan_pills_render_only_in_v2(self):
         page = self.make_site(slug="pills", guide_level="full")

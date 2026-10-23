@@ -1,0 +1,9 @@
+{% load contact_tags %}
+{% comment %}
+"Spot an error? Let us know" at the foot of a sacred site or saint page.
+Links to the Contact form preset to "Submit a correction" about this page;
+renders nothing while no Contact page is live. Include it with
+{% include "includes/_correction_link.html" %} -- it reads `page`.
+{% endcomment %}
+{% correction_url page as correction_href %}
+{% if correction_href %}<p class="catalog-correction">Spot an error? <a href="{{ correction_href }}">Let us know</a></p>{% endif %}

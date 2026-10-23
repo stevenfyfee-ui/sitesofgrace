@@ -116,6 +116,10 @@ class PlanPage(Page):
             "you're traveling from. Use this as a starting point, then confirm "
             "prices before you book.</p>"
         ),
+        help_text=(
+            "No longer shown on the site. The trip calculator now shows plan_estimate "
+            "from Settings > Legal notices."
+        ),
     )
 
     content_panels = Page.content_panels + [

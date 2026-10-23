@@ -88,14 +88,14 @@ class SiteTileImageTests(_ProfilePageTestCase):
         self.assertIn(self.site_image_marker, content)
 
     def test_follower_sees_a_shared_photo_via_its_public_derivative(self):
-        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
         content = self._get(self.follower)
         self.assertIn(self.private_photo.public_thumb.url, content)
         # Never the presigned private URL, even for a photo that's public.
         self.assertNotIn(self.private_photo.thumb.url, content)
 
     def test_shared_then_hidden_by_staff_stops_appearing_immediately(self):
-        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
         self.assertIn(str(self.private_photo.uuid), self._get(self.follower))
 
         sharing.hide_photo(self.private_photo, reason="test")
@@ -104,7 +104,7 @@ class SiteTileImageTests(_ProfilePageTestCase):
         self.assertIn(self.site_image_marker, content)
 
     def test_anonymously_credited_share_is_not_attributed_on_the_profile(self):
-        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_ANONYMOUS)
+        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_ANONYMOUS, rights_confirmed_at=None)
         content = self._get(self.follower)
         self.assertNotIn(str(self.private_photo.uuid), content)
         self.assertIn(self.site_image_marker, content)
@@ -120,7 +120,7 @@ class SiteTileImageTests(_ProfilePageTestCase):
         self.assertIn(f'<img src="{photo.thumb.url}" alt="" loading="lazy">', content)
 
     def test_shared_tile_srcset_uses_public_derivatives_only(self):
-        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(self.private_photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
         photo = self.private_photo
         content = self._get(self.follower)
         self.assertIn(
@@ -171,10 +171,10 @@ class SharedPhotosGridTests(_ProfilePageTestCase):
 
     def test_only_shared_unhidden_photos_appear_linked_to_the_gallery(self):
         shared = _make_photo(self.owner, self.site)
-        sharing.share_photo(shared, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(shared, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
         private = _make_photo(self.owner, self.site, color=(10, 200, 10))
         hidden = _make_photo(self.owner, self.site, color=(10, 10, 200))
-        sharing.share_photo(hidden, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(hidden, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
         sharing.hide_photo(hidden, reason="test")
 
         content = self._get(self.follower)
@@ -186,7 +186,7 @@ class SharedPhotosGridTests(_ProfilePageTestCase):
 
     def test_anonymous_credit_shown_to_owner_only(self):
         anon = _make_photo(self.owner, self.site)
-        sharing.share_photo(anon, credit=PilgrimProfile.CREDIT_ANONYMOUS)
+        sharing.share_photo(anon, credit=PilgrimProfile.CREDIT_ANONYMOUS, rights_confirmed_at=None)
         self.assertIn(anon.public_thumb.url, self._get(self.owner))
         self.assertNotIn(str(anon.uuid), self._get(self.follower))
 
@@ -194,7 +194,7 @@ class SharedPhotosGridTests(_ProfilePageTestCase):
         from ..views import PROFILE_SHARED_PHOTOS_PAGE_SIZE
 
         for i in range(PROFILE_SHARED_PHOTOS_PAGE_SIZE + 1):
-            sharing.share_photo(_make_photo(self.owner, self.site, color=(i, i, i)), credit="display_name")
+            sharing.share_photo(_make_photo(self.owner, self.site, color=(i, i, i)), credit="display_name", rights_confirmed_at=None)
         content = self._get(self.follower)
         self.assertEqual(content.count('class="pilgrim-shared-tile"'), PROFILE_SHARED_PHOTOS_PAGE_SIZE)
         self.assertIn("?shared=2#shared-photos", content)
@@ -207,7 +207,7 @@ class StubProfileTests(_ProfilePageTestCase):
         site = _make_site_with_image("stub-shrine", "Stub Shrine")
         SiteVisit.objects.create(owner=self.owner, site=site, status=SiteVisit.STATUS_VISITED)
         photo = _make_photo(self.owner, site)
-        sharing.share_photo(photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME)
+        sharing.share_photo(photo, credit=PilgrimProfile.CREDIT_DISPLAY_NAME, rights_confirmed_at=None)
 
         for user in (self.stranger, None):
             content = self._get(user)
@@ -229,7 +229,7 @@ class ProfileQueryCountTests(_ProfilePageTestCase):
             if i % 2:
                 photo = _make_photo(self.owner, site, color=(i, 0, 0))
                 if i % 4 == 1:
-                    sharing.share_photo(photo, credit="display_name")
+                    sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
 
     def _steady_state_queries(self, user):
         client = Client()

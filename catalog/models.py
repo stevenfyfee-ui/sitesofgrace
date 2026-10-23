@@ -57,22 +57,6 @@ NEARBY_MAX_RESULTS = 8
 EARTH_RADIUS_MILES = 3958.8
 
 
-def live_contact_page():
-    """The live home.ContactPage (the real contact form), or None.
-
-    The "Report something that's wrong" button renders only when this exists,
-    so it stays hidden until that form is live. Looked up by model name so
-    this works before and after ContactPage is added to the home app.
-    """
-    from django.apps import apps
-
-    try:
-        model = apps.get_model("home", "ContactPage")
-    except LookupError:
-        return None
-    return model.objects.live().public().first()
-
-
 def miles_between(lat1, lon1, lat2, lon2):
     """Great-circle distance in statute miles (haversine).
 
@@ -993,10 +977,6 @@ class SacredSitePage(RoutablePageMixin, Page):
         from core.v2 import v2_enabled
 
         if v2_enabled(request):
-            context["contact_page"] = live_contact_page()
-            context["affiliate_disclosure_page"] = (
-                Page.objects.live().public().filter(slug="affiliate-disclosure").first()
-            )
             if not self.guided_pilgrimages:
                 from tours.models import TourInterest, tours_elsewhere
 

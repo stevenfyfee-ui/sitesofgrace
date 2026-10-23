@@ -64,7 +64,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
 
     def test_share_creates_public_objects(self):
         response = self.client.post(
-            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name"}
+            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name", "share_rights": "on", "share_adult": "on"}
         )
         self.assertTrue(response.json()["success"])
         self.photo.refresh_from_db()
@@ -76,7 +76,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         self.assertIn(f"pilgrim-gallery/{self.photo.uuid}/", self.photo.public_large.name)
 
     def test_unshare_deletes_public_objects_and_clears_flags(self):
-        sharing.share_photo(self.photo, credit="anonymous")
+        sharing.share_photo(self.photo, credit="anonymous", rights_confirmed_at=None)
         large_path, thumb_path = self.photo.public_large.name, self.photo.public_thumb.name
         storage = self.photo.public_large.storage
 
@@ -94,7 +94,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         storage = self.photo.public_large.storage
         self.assertFalse(bool(self.photo.public_large))
 
-        sharing.share_photo(self.photo, credit="display_name")
+        sharing.share_photo(self.photo, credit="display_name", rights_confirmed_at=None)
         self.photo.refresh_from_db()
         self.assertTrue(storage.exists(self.photo.public_large.name))
 
@@ -111,7 +111,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         from .factories import GPS_IFD_TAG, ORIENTATION_TAG
 
         photo = _make_photo(self.owner, self.site, with_gps=True, orientation=6)
-        sharing.share_photo(photo, credit="display_name")
+        sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
         photo.refresh_from_db()
 
         with photo.public_large.open("rb") as f:
@@ -127,7 +127,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         photo = _make_photo(unverified, self.site)
         client = Client()
         client.force_login(unverified)
-        response = client.post(reverse("pilgrims:photo_share", args=[photo.uuid]), {"credit": "display_name"})
+        response = client.post(reverse("pilgrims:photo_share", args=[photo.uuid]), {"credit": "display_name", "share_rights": "on", "share_adult": "on"})
         data = response.json()
         self.assertFalse(data["success"])
         photo.refresh_from_db()
@@ -137,7 +137,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         self.owner.pilgrim.can_share_publicly = False
         self.owner.pilgrim.save(update_fields=["can_share_publicly"])
         response = self.client.post(
-            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name"}
+            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name", "share_rights": "on", "share_adult": "on"}
         )
         self.assertFalse(response.json()["success"])
 
@@ -147,7 +147,7 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
         client = Client()
         client.force_login(stranger)
         response = client.post(
-            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name"}
+            reverse("pilgrims:photo_share", args=[self.photo.uuid]), {"credit": "display_name", "share_rights": "on", "share_adult": "on"}
         )
         self.assertFalse(response.json()["success"])
         self.photo.refresh_from_db()
@@ -158,11 +158,11 @@ class ShareUnshareTests(_PublicAndPrivateStorageTestCase):
 
         photos = [_make_photo(self.owner, self.site, width=50 + i, height=50 + i) for i in range(PUBLIC_SHARES_PER_DAY)]
         for photo in photos:
-            sharing.share_photo(photo, credit="display_name")
+            sharing.share_photo(photo, credit="display_name", rights_confirmed_at=None)
 
         one_more = _make_photo(self.owner, self.site, width=999, height=999)
         response = self.client.post(
-            reverse("pilgrims:photo_share", args=[one_more.uuid]), {"credit": "display_name"}
+            reverse("pilgrims:photo_share", args=[one_more.uuid]), {"credit": "display_name", "share_rights": "on", "share_adult": "on"}
         )
         data = response.json()
         self.assertFalse(data["success"])

@@ -97,9 +97,19 @@ def strip_all_exif_jpeg(data, *, quality=90):
     rely on that: it decodes to raw pixels and re-saves with nothing
     exif-shaped ever touched, so "all EXIF stripped" holds even if that
     upstream behavior ever changed.
+
+    Also used for avatars (PilgrimProfile.save), which arrive straight from
+    a phone: the Orientation tag is baked into the pixels first, since it's
+    dropped with the rest of the EXIF, and any transparency is flattened
+    onto white rather than black.
     """
     image = Image.open(io.BytesIO(data))
     image.load()
+    image = ImageOps.exif_transpose(image)
+    if image.mode in ("RGBA", "LA", "PA") or (image.mode == "P" and "transparency" in image.info):
+        rgba = image.convert("RGBA")
+        image = Image.new("RGB", rgba.size, (255, 255, 255))
+        image.paste(rgba, mask=rgba.getchannel("A"))
     rgb = image.convert("RGB") if image.mode not in ("RGB", "L") else image
     buf = io.BytesIO()
     rgb.save(buf, format="JPEG", quality=quality, optimize=True, progressive=True)

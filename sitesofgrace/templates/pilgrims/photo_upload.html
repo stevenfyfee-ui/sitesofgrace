@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static legal_tags %}
 
 {% block body_class %}pilgrims{% endblock %}
 {% block title %}Upload Photos{% endblock %}
@@ -41,9 +41,21 @@
       <label><input type="checkbox" id="markVisited" {% if not preselected_already_visited %}checked{% endif %}> Mark this site as visited</label>
     </div>
 
+    {% comment %}
+      Never pre-ticked, whatever page sent the pilgrim here. The consent
+      boxes are checked again on the server for every share
+      (pilgrims/consent.py); the 18+ box disappears once confirmed.
+    {% endcomment %}
     <div class="auth-field">
-      <label><input type="checkbox" id="sharePublicly" {% if preselected_site %}checked{% endif %}> Also show this on the site's public page</label>
+      <label><input type="checkbox" id="sharePublicly"> Also show this on the site's public page</label>
       <p class="auth-help">When this is on, anyone on the internet will be able to see this photo on the site's page.</p>
+    </div>
+    <div class="share-consent" id="shareConsent" hidden>
+      <p class="share-consent-warning">{% notice "share_public_warning" %}</p>
+      <label class="share-consent-box"><input type="checkbox" id="shareRights"> <span>{% notice "share_rights_checkbox" %}</span></label>
+      {% if not request.user.pilgrim.adult_confirmed_at %}
+        <label class="share-consent-box"><input type="checkbox" id="shareAdult"> <span>{% notice "share_adult_checkbox" %}</span></label>
+      {% endif %}
     </div>
 
     <button type="submit" class="btn btn-primary auth-submit">Upload</button>
@@ -69,6 +81,12 @@
   var dateInput = document.getElementById('sharedDate');
   var markVisitedInput = document.getElementById('markVisited');
   var sharePubliclyInput = document.getElementById('sharePublicly');
+  var shareConsentEl = document.getElementById('shareConsent');
+  var shareRightsInput = document.getElementById('shareRights');
+  var shareAdultInput = document.getElementById('shareAdult');
+  sharePubliclyInput.addEventListener('change', function () {
+    shareConsentEl.hidden = !sharePubliclyInput.checked;
+  });
   var returnUrl = form.dataset.returnUrl || '';
 
   function getCookie(name) {
@@ -153,6 +171,8 @@
     // the checkbox reflects whatever it's set to when the NEXT file starts,
     // not necessarily what this file's own request actually asked for.
     var wantedShare = sharePubliclyInput.checked;
+    var rightsConfirmed = shareRightsInput.checked;
+    var adultConfirmed = shareAdultInput ? shareAdultInput.checked : false;
 
     var row = document.createElement('li');
     row.className = 'upload-row';
@@ -217,6 +237,8 @@
     if (dateInput.value) formData.append('taken_on', dateInput.value);
     formData.append('mark_visited', markVisitedInput.checked ? 'on' : 'off');
     formData.append('share_publicly', wantedShare ? 'on' : 'off');
+    formData.append('share_rights', rightsConfirmed ? 'on' : 'off');
+    formData.append('share_adult', adultConfirmed ? 'on' : 'off');
     xhr.send(formData);
   }
 

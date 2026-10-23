@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags legal_tags %}
+
+{% block body_class %}contact{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/contact.css' %}">{% endblock %}
+{% block extra_head %}
+{% if contact_thanks is not None %}<meta name="robots" content="noindex">{% endif %}
+{% if page.hero_image %}
+  {% image page.hero_image fill-1200x630 format-webp as og_img %}
+  <meta property="og:image" content="{{ og_img.url }}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% comment %}
+Matches sites-of-grace-contact-mockup.html section for section. Every copy
+field is optional: an empty one renders nothing, and a section whose fields
+are all empty leaves no wrapper behind. The form card shows either the
+thank-you (?sent=1) or the form. Without JavaScript the form still works:
+topic cards are plain links to ?topic=<key>#contact-form, the select and
+the message label follow the chosen topic server-side, and the site/saint
+picker stays hidden (a ?page=<id> link still fills it in). contact.js adds
+the card toggles, the label swaps, and the picker.
+{% endcomment %}
+
+{# ---------- 1. Hero ---------- #}
+<section class="contact-hero">
+  <div class="contact-hero-media" aria-hidden="true">
+    {% if page.hero_image %}
+      {% image page.hero_image fill-1800x700 format-webp as hero_img %}
+      <img src="{{ hero_img.url }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" alt="">
+    {% else %}
+      <div class="contact-photo"></div>
+    {% endif %}
+  </div>
+  <div class="container contact-hero-inner">
+    <div class="contact-hero-copy">
+      {% if page.hero_eyebrow %}<p class="contact-eyebrow">{{ page.hero_eyebrow }}</p>{% endif %}
+      <h1>{{ page.hero_title|default:page.title }}</h1>
+      {% if page.hero_intro %}<p class="contact-hero-intro">{{ page.hero_intro }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+{# ---------- 2. Topic cards ---------- #}
+{% if page.topics_eyebrow or page.topics_heading or page.topic_cards %}
+<section class="contact-topics">
+  <div class="container">
+    {% if page.topics_eyebrow or page.topics_heading %}
+      <div class="contact-topics-head">
+        {% if page.topics_eyebrow %}<p class="contact-eyebrow">{{ page.topics_eyebrow }}</p>{% endif %}
+        {% if page.topics_heading %}<h2 class="contact-h2">{{ page.topics_heading }}</h2>{% endif %}
+      </div>
+    {% endif %}
+    {% if page.topic_cards %}
+      <div class="contact-topic-grid" role="group" aria-label="Message topic">
+        {% for block in page.topic_cards %}
+          <a class="contact-topic{% if block.value.topic == contact_topic and contact_thanks is None %} is-selected{% endif %}"
+             href="{{ contact_page_url }}?topic={{ block.value.topic }}#contact-form" data-topic="{{ block.value.topic }}">
+            {% include "includes/_line_icon.html" with icon=block.value.icon %}
+            <h3>{{ block.value.title }}</h3>
+            {% if block.value.blurb %}<p>{{ block.value.blurb }}</p>{% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+{# ---------- 3. The form card + sidebar ---------- #}
+<section class="contact-main" id="contact-form">
+  <div class="container contact-main-grid">
+    <div class="contact-card">
+
+      {% if contact_thanks is not None %}
+        {# tabindex so contact.js can move focus here after the redirect. #}
+        <div class="contact-thanks" role="status" tabindex="-1" data-contact-thanks>
+          <svg class="contact-seal" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="40" cy="40" r="36"/><circle cx="40" cy="40" r="29" opacity=".5"/><path d="M27 41l9 9 17-19"/></svg>
+          {% if page.thank_you_heading %}<h2>{{ page.thank_you_heading }}{% if contact_thanks.first_name %}, {{ contact_thanks.first_name }}{% endif %}</h2>{% endif %}
+          {% if contact_thanks.prayer %}
+            {% if page.prayer_thank_you_text %}<p>{{ page.prayer_thank_you_text }}</p>{% endif %}
+          {% elif page.thank_you_text %}
+            <p>{{ page.thank_you_text }}</p>
+          {% endif %}
+          <p><a class="contact-again" href="{{ contact_page_url }}#contact-form">Send another message</a></p>
+        </div>
+
+      {% else %}
+        {% with form=contact_form %}
+        <form class="contact-form" method="post" action="{{ contact_page_url }}#contact-form" novalidate
+              data-contact-form data-suggest-url="{% url 'search_suggest' %}">
+          {% csrf_token %}
+          {% if page.form_heading %}<h2>{{ page.form_heading }}</h2>{% endif %}
+          {% if page.form_lede %}<p class="contact-lede">{{ page.form_lede }}</p>{% endif %}
+
+          {% if contact_error %}
+            <p class="contact-alert" role="alert">{{ contact_error }}</p>
+          {% endif %}
+          {% if contact_error_summary %}
+            <div class="contact-alert contact-errors" role="alert" tabindex="-1" data-contact-errors>
+              <p>Please check the form:</p>
+              <ul>
+                {% for field_id, error in contact_error_summary %}
+                  <li><a href="#{{ field_id }}">{{ error }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="contact-row">
+            <div class="contact-field{% if form.name.errors %} has-error{% endif %}">
+              <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+              <input id="{{ form.name.id_for_label }}" name="name" type="text" maxlength="120" required
+                     autocomplete="name" placeholder="John Doe" value="{{ form.name.value|default:'' }}"
+                     {% if form.name.errors %}aria-invalid="true" aria-describedby="nameError"{% endif %}>
+              {% if form.name.errors %}<span class="contact-err" id="nameError">{{ form.name.errors.0 }}</span>{% endif %}
+            </div>
+            <div class="contact-field{% if form.email.errors %} has-error{% endif %}">
+              <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+              <input id="{{ form.email.id_for_label }}" name="email" type="email" maxlength="254" required
+                     autocomplete="email" placeholder="john.doe@example.com" value="{{ form.email.value|default:'' }}"
+                     {% if form.email.errors %}aria-invalid="true" aria-describedby="emailError"{% endif %}>
+              {% if form.email.errors %}<span class="contact-err" id="emailError">{{ form.email.errors.0 }}</span>{% endif %}
+            </div>
+          </div>
+
+          <div class="contact-field{% if form.topic.errors %} has-error{% endif %}">
+            <label for="{{ form.topic.id_for_label }}">{{ form.topic.label }}</label>
+            <select id="{{ form.topic.id_for_label }}" name="topic" data-contact-topic>
+              {% for key, label in form.fields.topic.choices %}
+                <option value="{{ key }}"{% if key == contact_topic %} selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          {% comment %}
+            The site/saint picker. Hidden without JavaScript unless a
+            ?page=<id> link already chose the page; contact.js shows it for
+            the question, suggest, correction, and pilgrimage topics.
+          {% endcomment %}
+          <div class="contact-field contact-related" data-contact-related
+               {% if not contact_shows_related or not contact_related %}hidden{% endif %}>
+            <label for="contactRelatedInput">Which site or saint? <span class="contact-opt">(optional)</span></label>
+            <input id="contactRelatedInput" type="text" autocomplete="off" placeholder="Start typing, e.g. Lourdes"
+                   role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="contactSuggest"
+                   aria-describedby="contactRelatedHelp" hidden data-contact-related-input>
+            <span class="contact-chip" data-contact-chip{% if not contact_related %} hidden{% endif %}>
+              <span data-contact-chip-name>{{ contact_related.title }}</span>
+              <button type="button" hidden data-contact-chip-remove aria-label="Remove {{ contact_related.title|default:'this page' }}">×</button>
+            </span>
+            <div class="contact-suggest" id="contactSuggest" role="listbox" aria-label="Sites and saints" hidden data-contact-suggest></div>
+            <span class="contact-help" id="contactRelatedHelp" data-contact-related-help>{{ contact_topic_copy.help|default:"Linking the page helps us find it quickly." }}</span>
+            <input type="hidden" name="related_page" value="{{ contact_related.pk|default:'' }}" data-contact-related-id>
+          </div>
+
+          {% if page.prayer_note %}
+            <p class="contact-note" data-contact-prayer{% if contact_topic != "prayer" %} hidden{% endif %}>{{ page.prayer_note }}</p>
+          {% endif %}
+          <p class="contact-note" data-contact-billing{% if contact_topic != "billing" %} hidden{% endif %}>
+            {% legal_url "support-and-billing" as billing_url %}
+            {% if billing_url %}Questions about a gift or a monthly charge? See our <a href="{{ billing_url }}">Support &amp; Billing Notice</a>. {% endif %}Please don't include card numbers.
+          </p>
+
+          <div class="contact-field{% if form.message.errors %} has-error{% endif %}">
+            <label for="{{ form.message.id_for_label }}" data-contact-message-label>{{ contact_topic_copy.label }}</label>
+            <textarea id="{{ form.message.id_for_label }}" name="message" rows="7" maxlength="5000" required
+                      placeholder="{{ contact_topic_copy.placeholder }}" data-contact-message
+                      {% if form.message.errors %}aria-invalid="true" aria-describedby="messageError"{% endif %}>{{ form.message.value|default:'' }}</textarea>
+            {% if form.message.errors %}<span class="contact-err" id="messageError">{{ form.message.errors.0 }}</span>{% endif %}
+          </div>
+
+          {# Honeypot: off-screen and skipped by keyboard and screen readers, so only a bot fills it in. #}
+          <div class="contact-hp" aria-hidden="true">
+            <label for="contactWebsite">Leave this field empty</label>
+            <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off" value="">
+          </div>
+          <input type="hidden" name="ts" value="{{ form.ts.value|default:'' }}">
+
+          {% if turnstile_site_key %}
+            <div class="cf-turnstile contact-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>
+          {% endif %}
+
+          <div class="contact-form-foot">
+            <p class="contact-privacy">{% notice "contact_legal" %}</p>
+            <button class="btn btn-gold contact-submit" type="submit">Send Message <span class="contact-arr" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+        {{ contact_copy|json_script:"contactTopicCopy" }}
+        {% endwith %}
+      {% endif %}
+    </div>
+
+    <aside class="contact-side">
+      {% with s=settings.core.SiteSettings %}
+      {% if page.reach_heading or contact_email or page.response_time or page.based_in or s.instagram_url or s.facebook_url or s.youtube_url %}
+        <div class="contact-side-card">
+          {% if page.reach_heading %}<h3>{{ page.reach_heading }}</h3>{% endif %}
+          {% if contact_email or page.response_time or page.based_in %}
+            <ul class="contact-reach">
+              {% if contact_email %}
+                <li>
+                  <span class="contact-reach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+                  <div><b>Email</b><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></div>
+                </li>
+              {% endif %}
+              {% if page.response_time %}
+                <li>
+                  <span class="contact-reach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                  <div><b>Response time</b><span>{{ page.response_time }}</span></div>
+                </li>
+              {% endif %}
+              {% if page.based_in %}
+                <li>
+                  <span class="contact-reach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span>
+                  <div><b>Based in</b><span>{{ page.based_in }}</span></div>
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+          {% if s.instagram_url or s.facebook_url or s.youtube_url %}
+            <div class="contact-follow">
+              <b>Follow the journey</b>
+              <div class="contact-socials">
+                {% if s.instagram_url %}<a href="{{ s.instagram_url }}" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>{% endif %}
+                {% if s.facebook_url %}<a href="{{ s.facebook_url }}" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>{% endif %}
+                {% if s.youtube_url %}<a href="{{ s.youtube_url }}" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></a>{% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% endwith %}
+
+      {% with visit_url=page.visit_card_url %}
+      {% if page.visit_card_heading or page.visit_card_text or page.visit_card_link_label and visit_url %}
+        <div class="contact-side-card contact-side-card--navy">
+          <svg class="contact-emblem" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="60"/><path d="M100 4 L108 92 L196 100 L108 108 L100 196 L92 108 L4 100 L92 92Z"/></svg>
+          {% if page.visit_card_heading %}<h3>{{ page.visit_card_heading }}</h3>{% endif %}
+          {% if page.visit_card_text %}<p>{{ page.visit_card_text }}</p>{% endif %}
+          {% if page.visit_card_link_label and visit_url %}<p><a class="contact-visit-link" href="{{ visit_url }}">{{ page.visit_card_link_label }} →</a></p>{% endif %}
+        </div>
+      {% endif %}
+      {% endwith %}
+
+      {% legal_url "privacy-policy" as privacy_url %}
+      {% legal_url "copyright-policy" as copyright_url %}
+      {% legal_url "accessibility" as accessibility_url %}
+      {% if page.independence_note or privacy_url or copyright_url or accessibility_url %}
+        <div class="contact-side-card contact-side-card--note">
+          {% if page.independence_note %}<div class="contact-note-text">{{ page.independence_note|richtext }}</div>{% endif %}
+          {% if privacy_url or copyright_url or accessibility_url %}
+            <p class="contact-policy-links">
+              {% if privacy_url %}<span><a href="{{ privacy_url }}">Privacy Policy</a></span>{% endif %}
+              {% if copyright_url %}<span><a href="{{ copyright_url }}">Copyright &amp; Content Policy</a></span>{% endif %}
+              {% if accessibility_url %}<span><a href="{{ accessibility_url }}">Accessibility</a></span>{% endif %}
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </aside>
+  </div>
+</section>
+
+{# ---------- 4. Common questions ---------- #}
+{% if page.faqs %}
+<section class="contact-faq">
+  <div class="container contact-faq-inner">
+    {% if page.faq_eyebrow %}<p class="contact-eyebrow contact-eyebrow--center">{{ page.faq_eyebrow }}</p>{% endif %}
+    {% if page.faq_heading %}<h2 class="contact-h2">{{ page.faq_heading }}</h2>{% endif %}
+    {% for block in page.faqs %}
+      <details>
+        <summary>{{ block.value.question }}</summary>
+        <div class="contact-faq-answer">{{ block.value.answer }}</div>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/contact.js' %}" defer></script>
+{% if turnstile_site_key %}<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>{% endif %}
+{% endblock %}

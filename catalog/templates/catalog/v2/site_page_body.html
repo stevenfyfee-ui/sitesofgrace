@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags legal_tags contact_tags %}
 {% comment %}
   Pilgrimage Platform v2 sacred site page body. Rendered by
   catalog/sacred_site_page.html only when {% v2_enabled %} is true; with the
@@ -172,7 +172,10 @@
       {% endfor %}
 
       {% if page.has_plan_section %}
-        <div class="v2-block">{% include "catalog/includes/_plan_your_visit.html" %}</div>
+        <div class="v2-block">
+          {% include "catalog/includes/_plan_your_visit.html" %}
+          <p class="plan-travel-note">{% notice "site_travel" %}</p>
+        </div>
       {% endif %}
 
       {% if page.has_stay_map_section %}{% include "catalog/v2/_stay_map.html" %}{% endif %}
@@ -263,11 +266,13 @@
         </dl>
         <p class="v2-sources-note">Mass times, admission and travel requirements change. Confirm them with the official source before you visit.</p>
         {% comment %}
-          Only once a live home.ContactPage (the real form) exists; until then
-          the button stays hidden rather than pointing at a page with no form.
+          The same Contact-form link as includes/_correction_link.html ("Spot an
+          error? Let us know"), which this button replaces on the v2 page.
+          correction_url is "" while no ContactPage is live, so nothing renders.
         {% endcomment %}
-        {% if contact_page %}
-          <a class="btn btn-outline-gold" href="{% pageurl contact_page %}?topic=correction&amp;page={{ page.pk }}">Report something that&rsquo;s wrong</a>
+        {% correction_url page as correction_href %}
+        {% if correction_href %}
+          <a class="btn btn-outline-gold" href="{{ correction_href }}">Report something that&rsquo;s wrong</a>
         {% endif %}
         {% if page.topics.all %}
           <div class="catalog-tags">

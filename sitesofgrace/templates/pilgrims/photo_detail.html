@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static pilgrim_tags %}
+{% load static pilgrim_tags legal_tags %}
 
 {% block body_class %}pilgrims{% endblock %}
 {% block title %}Photo — {{ photo.site.title }}{% endblock %}
@@ -34,6 +34,12 @@
               {% endfor %}
             </select>
           </div>
+          {# Checked again on the server for every share (pilgrims/consent.py). #}
+          <p class="share-consent-warning">{% notice "share_public_warning" %}</p>
+          <label class="share-consent-box"><input type="checkbox" name="share_rights" required> <span>{% notice "share_rights_checkbox" %}</span></label>
+          {% if not request.user.pilgrim.adult_confirmed_at %}
+            <label class="share-consent-box"><input type="checkbox" name="share_adult" required> <span>{% notice "share_adult_checkbox" %}</span></label>
+          {% endif %}
           <button type="submit" class="btn btn-gold">Share to {{ photo.site.title }}'s Gallery</button>
         </form>
       {% endif %}

@@ -134,6 +134,11 @@ a.blog-cat:hover { color: var(--navy); }
 
 .blog-body { width: min(720px, calc(100% - 40px)); margin: 30px auto 0; }
 .blog-body > * { margin-block: 0 22px; }
+.blog-affiliate-note {
+  font-size: 13.5px; line-height: 1.6; color: var(--stone);
+  background: var(--parchment); border-left: 3px solid var(--gold); padding: 12px 16px; border-radius: 4px;
+}
+.blog-affiliate-note a { text-decoration: underline; text-underline-offset: 2px; }
 .blog-rich { font-size: 17px; line-height: 1.8; color: #2b3650; }
 .blog-rich p { margin: 0 0 18px; }
 .blog-rich p:last-child { margin-bottom: 0; }

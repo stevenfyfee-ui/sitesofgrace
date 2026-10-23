@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags blog_tags %}
+{% load static wagtailcore_tags wagtailimages_tags blog_tags legal_tags %}
 
 {% block body_class %}blog blog-post{% endblock %}
 {% block meta_description %}{{ page.meta_description }}{% endblock %}
@@ -54,6 +54,9 @@
   </header>
 
   <div class="blog-body">
+    {% if page.has_affiliate_links %}
+      <p class="blog-affiliate-note">{% notice "blog_affiliate" %}</p>
+    {% endif %}
     {% for block in page.body %}
       {% include_block block %}
     {% endfor %}

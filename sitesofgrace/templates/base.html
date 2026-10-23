@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags support_tags %}
+{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags support_tags legal_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,34 +78,48 @@
         </div>
       </div>
 
-      {# Each footer column is a "flat menu" managed in admin by its handle. #}
-      <div class="footer-col">
+      {% comment %}
+        Explore and Learn & About are "flat menus" managed in admin by their
+        handles. Explore + Legal & Policies stack in the middle column, Learn
+        & About + Stay Inspired in the right one (site.css).
+      {% endcomment %}
+      <div class="footer-col footer-col--explore">
         <h3>Explore</h3>
         {% flat_menu "footer-explore" show_menu_heading=False template="menus/footer_menu.html" %}
       </div>
-      <div class="footer-col">
-        <h3>Learn</h3>
+      <div class="footer-col footer-col--learn">
+        <h3>Learn &amp; About</h3>
         {% flat_menu "footer-learn" show_menu_heading=False template="menus/footer_menu.html" %}
-      </div>
-      <div class="footer-col">
-        <h3>About &amp; Trust</h3>
         {% flat_menu "footer-about" show_menu_heading=False template="menus/footer_menu.html" %}
         {% comment %}
-          The last footer link, in gold -- shown only once the Support page
-          is live (home/templatetags/support_tags.py). Footer only: never in
-          the header, main menu, or mobile menu.
+          The last link in the column -- shown only once the Support page is
+          live (home/templatetags/support_tags.py). Footer only: never in the
+          header, main menu, or mobile menu.
         {% endcomment %}
         {% support_page as support_link_page %}
         {% if support_link_page %}
-          <ul class="footer-links footer-links--support">
-            <li><a class="footer-support" href="{{ support_link_page.url }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Support</a></li>
+          <ul class="footer-links">
+            <li><a href="{{ support_link_page.url }}">Support Sites of Grace</a></li>
           </ul>
         {% endif %}
       </div>
+      {% comment %}
+        Each legal link shows only once its page is live; the heading only
+        when at least one is (home/templatetags/legal_tags.py).
+      {% endcomment %}
+      {% footer_legal_links as legal_links %}
+      {% if legal_links %}
+        <div class="footer-col footer-col--legal">
+          <h3>Legal &amp; Policies</h3>
+          <ul class="footer-links">
+            {% for label, url in legal_links %}<li><a href="{{ url }}">{{ label }}</a></li>{% endfor %}
+          </ul>
+        </div>
+      {% endif %}
 
       <div class="footer-newsletter">
-        <h3>{{ s.newsletter_heading }}</h3>
-        <p>{{ s.newsletter_text }}</p>
+        <h3>Stay Inspired</h3>
+        <p>Receive sacred site highlights, pilgrimage inspiration, and Catholic resources.</p>
         {% if request.GET.subscribed %}
           <p class="newsletter-success">Thank you for subscribing!</p>
         {% else %}
@@ -114,17 +128,19 @@
             <input type="hidden" name="next" value="{{ request.path }}">
             <label class="sr-only" for="nl-email">Your email</label>
             <input id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
-            <button class="btn btn-gold" type="submit">Sign up</button>
+            <button class="btn btn-gold" type="submit">Sign Up</button>
           </form>
-          {% if request.GET.newsletter_error %}<p class="newsletter-error">Please enter a valid email address.</p>{% endif %}
+          {% if request.GET.newsletter_error %}<p class="newsletter-error">{% if request.GET.newsletter_error == "rate" %}Please wait a few minutes and try again.{% else %}Please enter a valid email address.{% endif %}</p>{% endif %}
+          <p class="footer-newsletter-note">{% notice "footer_newsletter" %}</p>
         {% endif %}
       </div>
     </div>
 
     <div class="footer-base">
       <div class="container footer-base-inner">
-        <p class="disclaimer">{{ s.disclaimer }}</p>
-        <p class="copyright">© {% now "Y" %} Sites of Grace. All rights reserved.</p>
+        <p class="disclaimer">{% notice "footer_independence" %}</p>
+        {% legal_url "accessibility" as accessibility_url %}
+        <p class="copyright">© {% now "Y" %} Sites of Grace. All rights reserved.{% if accessibility_url %} · <a href="{{ accessibility_url }}">Accessibility</a>{% endif %}</p>
       </div>
     </div>
   </footer>

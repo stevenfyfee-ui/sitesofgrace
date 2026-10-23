@@ -22,7 +22,7 @@ from wagtail.images import get_image_model
 
 from catalog.models import SacredSitePage
 
-from . import imaging, sharing
+from . import consent, imaging, sharing
 from .forms import ProfileSettingsForm
 from .models import (
     Block, Comment, Follow, Notification, PhotoReport, PilgrimPhoto, PilgrimProfile, Post,
@@ -145,15 +145,23 @@ def profile_detail(request, handle):
         "viewer_blocked_owner": viewer_blocked_owner,
         "owner_blocked_viewer": owner_blocked_viewer,
         "follow_state": follow_state,
-        "follower_count": Follow.objects.filter(following=owner, status=Follow.STATUS_ACCEPTED).count(),
-        "following_count": Follow.objects.filter(follower=owner, status=Follow.STATUS_ACCEPTED).count(),
         "pending_request_count": Follow.objects.filter(
             following=owner, status=Follow.STATUS_PENDING
         ).count() if is_self else 0,
-        "badges": owner.awarded_badges.select_related("badge").order_by("badge__sort_order"),
     }
 
     if can_view:
+        # Counts and badges are part of the full profile: on a private one,
+        # a stranger or pending follower sees only the avatar, name, handle,
+        # and follow button.
+        context["follower_count"] = Follow.objects.filter(
+            following=owner, status=Follow.STATUS_ACCEPTED
+        ).count()
+        context["following_count"] = Follow.objects.filter(
+            follower=owner, status=Follow.STATUS_ACCEPTED
+        ).count()
+        context["badges"] = owner.awarded_badges.select_related("badge").order_by("badge__sort_order")
+
         visible_photos = profile_photos_for(viewer, owner)
         visits = list(_profile_site_visits(owner, visible_photos))
         tile_photos = PilgrimPhoto.objects.in_bulk(
@@ -502,8 +510,11 @@ def photo_upload(request):
     shared = False
     share_error = None
     if request.POST.get("share_publicly") == "on":
+        refusal = consent.share_refusal(request.POST, request.user.pilgrim)
         if not can_share_photo(request.user, photo):
             share_error = "You can't share photos publicly right now."
+        elif refusal:
+            share_error = refusal
         else:
             since_share = timezone.now() - timedelta(hours=24)
             shared_today = PilgrimPhoto.objects.filter(
@@ -512,7 +523,11 @@ def photo_upload(request):
             if shared_today >= PUBLIC_SHARES_PER_DAY:
                 share_error = "You've shared a lot today — try again tomorrow."
             else:
-                sharing.share_photo(photo, credit=request.user.pilgrim.public_credit_default)
+                consent.record_adult_confirmation(request.user.pilgrim)
+                sharing.share_photo(
+                    photo, credit=request.user.pilgrim.public_credit_default,
+                    rights_confirmed_at=timezone.now(),
+                )
                 shared = True
 
     return JsonResponse({
@@ -883,6 +898,13 @@ def photo_share(request, photo_uuid):
             status=200,
         )
 
+    refusal = consent.share_refusal(request.POST, request.user.pilgrim)
+    if refusal:
+        return JsonResponse(
+            {"success": False, "error": "consent", "message": f"Not shared: {refusal}"},
+            status=200,
+        )
+
     since = timezone.now() - timedelta(hours=24)
     shared_today = PilgrimPhoto.objects.filter(owner=request.user, public_shared_at__gte=since).count()
     if shared_today >= PUBLIC_SHARES_PER_DAY:
@@ -896,7 +918,8 @@ def photo_share(request, photo_uuid):
     if credit not in dict(PilgrimProfile.CREDIT_CHOICES):
         credit = request.user.pilgrim.public_credit_default
 
-    sharing.share_photo(photo, credit=credit)
+    consent.record_adult_confirmation(request.user.pilgrim)
+    sharing.share_photo(photo, credit=credit, rights_confirmed_at=timezone.now())
     return JsonResponse({"success": True})
 
 

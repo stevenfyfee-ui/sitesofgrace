@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags legal_tags %}
 <section class="store-listing">
   <div class="container">
     {% if categories %}
@@ -68,6 +68,7 @@
                   {% if request.GET.waitlisted and request.GET.product_id == p.id|stringformat:"s" %}
                     <p class="store-waitlist-success">You're on the list — we'll email you when it's ready.</p>
                   {% else %}
+                    <p class="store-waitlist-note">{% notice "store_waitlist" %}</p>
                     <form method="post" action="{% url 'waitlist_signup' %}" class="store-waitlist-form">
                       {% csrf_token %}
                       <input type="hidden" name="product_id" value="{{ p.id }}">
@@ -77,7 +78,7 @@
                       <button class="btn btn-gold" type="submit">{{ p.cta_label }}</button>
                     </form>
                     {% if request.GET.waitlist_error and request.GET.product_id == p.id|stringformat:"s" %}
-                      <p class="store-waitlist-error">Please enter a valid email address.</p>
+                      <p class="store-waitlist-error">{% if request.GET.waitlist_error == "rate" %}Please wait a few minutes and try again.{% else %}Please enter a valid email address.{% endif %}</p>
                     {% endif %}
                   {% endif %}
                 {% else %}

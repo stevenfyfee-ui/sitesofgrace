@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags legal_tags %}
 {% comment %}
   Guided pilgrimages on a v2 sacred site page. Included by
   catalog/v2/site_page_body.html, which is only rendered behind the v2 switch.
@@ -45,10 +45,7 @@
         </div>
       </article>
     {% endfor %}
-    <p class="v2-disclose">
-      Tour details, availability, payment and cancellation are handled by the tour operator, not by Sites of Grace.
-      Some links may earn us a commission{% if affiliate_disclosure_page %} (<a href="{% pageurl affiliate_disclosure_page %}">how we choose and disclose</a>){% endif %}.
-    </p>
+    {% include "tours/_tour_links_notice.html" with fallback="Tour details, availability, payment and cancellation are handled by the tour operator, not by Sites of Grace. Some links may earn us a commission" %}
   {% else %}
     <div class="v2-card v2-group-empty">
       <span class="v2-group-icon" aria-hidden="true">✠</span>
@@ -86,7 +83,7 @@
                 </li>
               {% endfor %}
             </ul>
-            <p class="v2-disclose">Booked with the tour operator, not Sites of Grace. Some links may earn us a commission{% if affiliate_disclosure_page %} (<a href="{% pageurl affiliate_disclosure_page %}">how we choose and disclose</a>){% endif %}.</p>
+            {% include "tours/_tour_links_notice.html" with fallback="Booked with the tour operator, not Sites of Grace. Some links may earn us a commission" %}
           </div>
         {% endif %}
       </div>

@@ -1,14 +1,13 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags static legal_tags %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'store/css/store.css' %}">{% endblock %}
 {% block content %}
 <section class="store-hero">
   <div class="container">
     <h1 class="store-title">{{ page.heading|default:page.title }}</h1>
     {% if page.intro %}<div class="store-intro">{{ page.intro|richtext }}</div>{% endif %}
-    {% if store_settings.affiliate_disclosure %}
-      <div class="store-disclosure">{{ store_settings.affiliate_disclosure|richtext }}</div>
-    {% endif %}
+    {# The "Legal notices" store_amazon text (Settings > Legal notices). #}
+    <div class="store-disclosure"><p>{% notice "store_amazon" %}</p></div>
   </div>
 </section>
 {% include "store/includes/_store_listing.html" %}

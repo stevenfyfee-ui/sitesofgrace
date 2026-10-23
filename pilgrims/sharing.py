@@ -38,14 +38,18 @@ def _delete_public_copies(photo):
         photo.public_thumb.delete(save=False)
 
 
-def share_photo(photo, *, credit):
-    """Owner-initiated: publish to the site gallery."""
+def share_photo(photo, *, credit, rights_confirmed_at):
+    """Owner-initiated: publish to the site gallery. Callers must have
+    passed consent.share_refusal() first; rights_confirmed_at is when the
+    owner ticked the rights checkbox for this share."""
     _write_public_copies(photo)
     photo.is_public_on_site = True
     photo.public_shared_at = timezone.now()
     photo.public_credit = credit
+    photo.rights_confirmed_at = rights_confirmed_at
     photo.save(update_fields=[
         "public_large", "public_thumb", "is_public_on_site", "public_shared_at", "public_credit",
+        "rights_confirmed_at",
     ])
 
 

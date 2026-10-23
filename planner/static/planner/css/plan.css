@@ -28,6 +28,12 @@
 .plan-total-val { font-family: var(--serif-display); font-size: 30px; font-weight: 600; }
 .plan-perperson { font-size: 13px; color: rgba(253,249,242,.75); margin-top: 4px; }
 .plan-basis { font-size: 12px; color: rgba(253,249,242,.65); margin: 14px 0 0; line-height: 1.5; }
+.plan-estimate-note {
+  font-size: 12.5px; color: rgba(253,249,242,.82); line-height: 1.55;
+  margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--gold-soft);
+}
+.plan-estimate-note strong { color: var(--gold); font-weight: 600; }
+.plan-estimate-note a { text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 800px) { .plan-calc { grid-template-columns: 1fr; } }
 
 .plan-journey-picks { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }

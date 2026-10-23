@@ -130,9 +130,28 @@ class RenderTests(StayMapTestCase):
         lodging = SiteLodging.objects.get(page=page)
         self.assertIn(f'/go/lodging/{lodging.pk}/?from={page.pk}" target="_blank" rel="sponsored nofollow noopener"',
                       section)
-        self.assertIn("Some booking links may earn us a commission", section)
+        self.assertIn("<strong>Travel referral notice:</strong> Some travel links on this page", section)
         self.assertIn("js/sog-maps.js", section)
         self.assertNotIn("per night", section.lower())
+
+    def test_blank_travel_notice_falls_back(self):
+        from home.models import LegalNotices
+
+        notices = LegalNotices.load()
+        notices.travel_links = ""
+        notices.save()
+        page = self.site("notice-blank")
+        self.lodging(page, booking_url="https://example.com/b", is_affiliate_link=True)
+        section = self.section(self.html(page))
+        self.assertIn("Places to stay are chosen by Sites of Grace. Some booking links may earn us a commission", section)
+
+    def test_leaflet_is_self_hosted(self):
+        page = self.site("self-hosted")
+        self.lodging(page)
+        section = self.section(self.html(page))
+        self.assertIn("/static/vendor/leaflet-1.9.4/leaflet.js", section)
+        self.assertIn("/static/vendor/leaflet-1.9.4/leaflet.css", section)
+        self.assertNotIn("unpkg.com", section)
 
     def test_empty_layers_get_no_toggle(self):
         page = self.site("no-transit")

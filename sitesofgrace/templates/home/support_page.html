@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags legal_tags %}
 
 {% block body_class %}support{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/support.css' %}">{% endblock %}
@@ -115,6 +115,13 @@ with JavaScript off: the pickers are real radios inside labels, and the
               <label><input type="radio" name="frequency" value="once"{% if support_frequency == "once" %} checked{% endif %}><span>One Time</span></label>
               <label><input type="radio" name="frequency" value="monthly"{% if support_frequency == "monthly" %} checked{% endif %}><span>Monthly</span></label>
             </fieldset>
+            {% comment %}
+              The "Legal notices" support_monthly text, shown while Monthly is
+              selected. support.js keeps its amount in step with the choice.
+            {% endcomment %}
+            <p class="support-monthly-note" data-support-monthly{% if support_frequency != "monthly" %} hidden{% endif %}>
+              {% notice "support_monthly" amount=support_amount_label link_text="Manage monthly support" link_url=page.manage_url %}
+            </p>
           {% else %}
             <input type="hidden" name="frequency" value="once">
           {% endif %}
@@ -140,6 +147,12 @@ with JavaScript off: the pickers are real radios inside labels, and the
 
           {% if support_error %}<p class="support-error" role="alert">{{ support_error }}</p>{% endif %}
 
+          {% comment %}
+            The "Legal notices" support_intro text. It replaces the page's own
+            disclaimer line under the button, which said the same thing.
+          {% endcomment %}
+          <p class="support-intro-note">{% notice "support_intro" %}</p>
+
           {# Neutral until support.js names the amount, so a JS-off label never shows a stale one. #}
           <button class="btn btn-gold support-submit" type="submit"><span data-support-label>Continue to Secure Checkout</span> <span class="support-arr" aria-hidden="true">→</span></button>
           <p class="support-secure">
@@ -150,7 +163,6 @@ with JavaScript off: the pickers are real radios inside labels, and the
             <p class="support-manage"><a href="{{ page.manage_url }}" rel="noopener">Manage monthly support</a></p>
           {% endif %}
 
-          <p class="support-fine">{{ page.disclaimer }}</p>
         </form>
       {% endif %}
     </div>
@@ -168,7 +180,8 @@ with JavaScript off: the pickers are real radios inside labels, and the
                     <span class="support-way-icon">{% include "includes/_line_icon.html" with icon=block.value.icon %}</span>
                     <div>
                       <p class="support-way-title">{{ block.value.title }}</p>
-                      <div class="support-way-text">{{ block.value.text }}</div>
+                      {% how_it_works_source block.value.text.source as way_source %}
+                      <div class="support-way-text">{{ way_source|richtext }}</div>
                     </div>
                   </li>
                 {% endfor %}

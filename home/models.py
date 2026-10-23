@@ -13,17 +13,19 @@ empty); once those models land we switch the template to auto-pull image + title
 from the linked page and the overrides become unnecessary.
 """
 import logging
-from datetime import date
+from datetime import date, timedelta
 
 import stripe
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import NoReverseMatch, reverse
+from django.utils import timezone
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.blocks import (
     BooleanBlock,
     CharBlock,
@@ -37,6 +39,7 @@ from wagtail.blocks import (
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Orderable, Page, Site
+from wagtail.rich_text import expand_db_html
 
 from catalog.models import (
     CATEGORY_STYLES,
@@ -47,8 +50,12 @@ from catalog.models import (
     SacredSitePage,
     SaintPage,
 )
+from contact import forms as contact_forms
+from contact import models as contact_models
+from contact import notify as contact_notify
+from contact import turnstile as contact_turnstile
 from core import ratelimit
-from home import support
+from home import legal, support
 from liturgy.today import date_at_noon, liturgical_today
 from pilgrims.views import _ip_hash
 
@@ -265,7 +272,7 @@ class HomePage(Page):
     ]
 
     max_count = 1
-    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "blog.BlogIndexPage"]
+    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage"]
 
     class Meta:
         verbose_name = "Home page"
@@ -1084,8 +1091,6 @@ SUPPORT_ICON_CHOICES = ICON_CHOICES + [
     ("candle", "Candle"),
 ]
 
-SUPPORT_DISCLAIMER_PHRASE = "not tax-deductible"
-
 
 class SupportHelpBlock(StructBlock):
     icon = ChoiceBlock(choices=SUPPORT_ICON_CHOICES)
@@ -1270,12 +1275,20 @@ class SupportPage(Page):
         help_text='1 to 6 whole-dollar amounts, separated by commas. An "Other" tile is always added.',
     )
     min_amount = models.IntegerField(
-        default=3, validators=[MinValueValidator(1)],
-        help_text="Smallest amount accepted, in whole dollars.",
+        default=3,
+        validators=[
+            MinValueValidator(support.ABSOLUTE_MIN_DOLLARS),
+            MaxValueValidator(support.ABSOLUTE_MAX_DOLLARS),
+        ],
+        help_text="Smallest amount accepted, in whole dollars ($1 or more).",
     )
     max_amount = models.IntegerField(
-        default=1000, validators=[MinValueValidator(1)],
-        help_text="Largest amount accepted, in whole dollars.",
+        default=1000,
+        validators=[
+            MinValueValidator(support.ABSOLUTE_MIN_DOLLARS),
+            MaxValueValidator(support.ABSOLUTE_MAX_DOLLARS),
+        ],
+        help_text="Largest amount accepted, in whole dollars ($1,000 at most).",
     )
     default_amount_once = models.IntegerField(
         default=10, help_text="Preselected for one-time support. Must be one of the amounts above.",
@@ -1291,7 +1304,11 @@ class SupportPage(Page):
             "website, and are not tax-deductible. Nothing is given in exchange, and all "
             "content stays free. Monthly support can be cancelled anytime."
         ),
-        help_text='Required. Must say contributions are "not tax-deductible".',
+        blank=True,
+        help_text=(
+            "No longer shown on the site. The Support page now shows the support_intro "
+            "text from Settings > Legal notices."
+        ),
     )
     soon_heading = models.CharField(max_length=120, blank=True, default="Online Support Opens Soon")
     soon_text = models.TextField(
@@ -1510,19 +1527,13 @@ class SupportPage(Page):
         super().clean()
         errors = {}
 
-        disclaimer = (self.disclaimer or "").strip()
-        if not disclaimer:
-            errors["disclaimer"] = "The disclaimer is required."
-        elif SUPPORT_DISCLAIMER_PHRASE not in disclaimer.lower():
-            errors["disclaimer"] = (
-                f'The disclaimer must say that contributions are "{SUPPORT_DISCLAIMER_PHRASE}".'
-            )
-
         min_amount, max_amount = self.min_amount or 0, self.max_amount or 0
-        if min_amount < 1:
+        if min_amount < support.ABSOLUTE_MIN_DOLLARS:
             errors["min_amount"] = "The minimum must be at least $1."
-        elif max_amount < min_amount:
-            errors["max_amount"] = "The maximum can't be less than the minimum."
+        elif max_amount > support.ABSOLUTE_MAX_DOLLARS:
+            errors["max_amount"] = "The maximum can't be more than $1,000."
+        elif max_amount <= min_amount:
+            errors["max_amount"] = "The maximum must be more than the minimum."
 
         try:
             presets = support.parse_presets(self.preset_amounts)
@@ -1579,15 +1590,18 @@ class SupportPage(Page):
             )
             amount = str(default)
 
+        shown = custom.lstrip("$") if amount == "other" else amount
         thanks = kwargs.get("support_thanks")
         context.update({
+            # Fills {amount} in the monthly notice; support.js keeps it current.
+            "support_amount_label": f"${shown}" if shown else "the amount you choose",
             "support_enabled": settings.SUPPORT_ENABLED,
             "support_frequency": frequency,
             "support_amount": amount,
             "support_custom": custom,
             "support_error": kwargs.get("support_error", ""),
             "support_thanks": thanks,
-            "support_range": f"${self.min_amount:,} to ${self.max_amount:,}",
+            "support_range": "${:,} to ${:,}".format(*support.amount_bounds(self)),
             "support_continue_url": _map_or_explore_url() if thanks else "",
         })
         return context
@@ -1645,3 +1659,726 @@ class SupportPage(Page):
         redirect = HttpResponseRedirect(checkout_url)
         redirect.status_code = 303
         return redirect
+
+
+# --- Contact ------------------------------------------------------------
+
+# The topic cards' icons: the Support set plus the three the Contact mockup
+# adds. includes/_line_icon.html has a branch for every value here.
+CONTACT_ICON_CHOICES = SUPPORT_ICON_CHOICES + [
+    ("question", "Question"),
+    ("edit", "Edit"),
+    ("partners", "Partners"),
+]
+
+
+class ContactTopicCardBlock(StructBlock):
+    topic = ChoiceBlock(choices=contact_models.TOPIC_CHOICES)
+    title = CharBlock(max_length=60)
+    blurb = TextBlock(required=False)
+    icon = ChoiceBlock(choices=CONTACT_ICON_CHOICES)
+
+    class Meta:
+        icon = "pick"
+        label = "Topic card"
+
+
+class ContactFaqBlock(StructBlock):
+    question = CharBlock(max_length=160)
+    answer = RichTextBlock(features=PROSE_FEATURES)
+
+    class Meta:
+        icon = "help"
+        label = "Question"
+
+
+class ContactPage(Page):
+    """ "Contact Us" -- a real contact form. Messages are saved as
+    contact.ContactMessage, read in the admin "Messages" inbox, and alert
+    staff by email (contact/notify.py). Nothing is ever emailed to the
+    sender.
+
+    Every copy field is prefilled with the mockup's copy as its default= so
+    Add child page -> Contact page opens already written. serve() handles
+    the form at the page's own URL: POST validates, saves, and redirects to
+    ?sent=1, which shows the thank-you once. The contact email isn't a page
+    field: the sidebar shows Settings > Legal details' contact email.
+    """
+
+    # --- Hero ---
+    hero_eyebrow = models.CharField(max_length=60, blank=True, default="Contact Us")
+    hero_title = models.CharField(max_length=120, blank=True, default="We'd Love to Hear From You")
+    hero_intro = models.TextField(
+        blank=True,
+        default=(
+            "Whether you have a question about a sacred site, a place we should add, a "
+            "correction to share, or a prayer you'd like us to carry, every message is read "
+            "by a real person."
+        ),
+    )
+    hero_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Without one, the hero uses the brand gradient panel.",
+    )
+
+    # --- Topic cards ---
+    topics_eyebrow = models.CharField(max_length=60, blank=True, default="How Can We Help?")
+    topics_heading = models.CharField(max_length=120, blank=True, default="Choose a Topic to Get Started")
+    topic_cards = StreamField(
+        [("card", ContactTopicCardBlock())],
+        max_num=8,
+        blank=True,
+        help_text="Shortcuts into the form. The form's topic list always offers all eight topics.",
+        default=[
+            {"type": "card", "value": {
+                "topic": "question", "title": "Ask a Question", "icon": "question",
+                "blurb": "About a site, a saint, or the Church's teaching.",
+            }},
+            {"type": "card", "value": {
+                "topic": "suggest", "title": "Suggest a Site", "icon": "pin",
+                "blurb": "A shrine, miracle, or holy place we're missing.",
+            }},
+            {"type": "card", "value": {
+                "topic": "correction", "title": "Submit a Correction", "icon": "edit",
+                "blurb": "Help us keep every page accurate.",
+            }},
+            {"type": "card", "value": {
+                "topic": "pilgrimage", "title": "Plan a Pilgrimage", "icon": "map",
+                "blurb": "Group trips, parishes, and travel questions.",
+            }},
+            {"type": "card", "value": {
+                "topic": "partner", "title": "Partnerships & Press", "icon": "partners",
+                "blurb": "Shrines, tour operators, media, and collaborations.",
+            }},
+            {"type": "card", "value": {
+                "topic": "prayer", "title": "Prayer Request", "icon": "candle",
+                "blurb": "Share an intention. We'll hold it in prayer.",
+            }},
+        ],
+    )
+
+    # --- The form ---
+    form_heading = models.CharField(max_length=120, blank=True, default="Send Us a Message")
+    form_lede = models.CharField(
+        max_length=200, blank=True,
+        default="We read every message and usually reply within two or three business days.",
+    )
+    prayer_note = models.CharField(
+        max_length=300, blank=True,
+        help_text="Shown above the message box while Prayer request is the topic.",
+        default=(
+            "Your intention stays private. It is never published, and it is deleted after "
+            "90 days. We will remember it in prayer."
+        ),
+    )
+    thank_you_heading = models.CharField(
+        max_length=120, blank=True, default="Thank You",
+        help_text='The sender\'s first name is added after it: "Thank You, John".',
+    )
+    thank_you_text = models.TextField(
+        blank=True,
+        default=(
+            "Your message is on its way. We'll reply to the email address you gave us, "
+            "usually within two or three business days."
+        ),
+    )
+    prayer_thank_you_text = models.TextField(
+        blank=True,
+        default=(
+            "Your intention has been received, and we will remember it in prayer. It stays "
+            "private and is never published."
+        ),
+    )
+
+    # --- Sidebar ---
+    reach_heading = models.CharField(max_length=120, blank=True, default="Other Ways to Reach Us")
+    response_time = models.CharField(max_length=120, blank=True, default="Two to three business days")
+    based_in = models.CharField(max_length=120, blank=True, default="Southern California")
+    visit_card_heading = models.CharField(max_length=120, blank=True, default="Planning a Visit?")
+    visit_card_text = models.TextField(
+        blank=True,
+        default=(
+            "For Mass times, confession schedules, or access on a particular day, the shrine "
+            "itself is the best source. You'll find its official website and contact details "
+            "on each site's page."
+        ),
+    )
+    visit_card_link_label = models.CharField(max_length=60, blank=True, default="Find a sacred site")
+    visit_card_link = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Falls back to the interactive map / Explore hub if left blank.",
+    )
+    independence_note = RichTextField(
+        blank=True,
+        features=PROSE_FEATURES,
+        default=(
+            "<p><b>A note on who we are.</b> Sites of Grace is an independent Catholic "
+            "resource. We don't speak on behalf of the Church, any diocese, or any "
+            "shrine.</p>"
+            "<p>For questions about the sacraments or a personal pastoral matter, please "
+            "reach out to your parish priest.</p>"
+        ),
+    )
+
+    # --- FAQ ---
+    faq_eyebrow = models.CharField(max_length=60, blank=True, default="Before You Write")
+    faq_heading = models.CharField(max_length=120, blank=True, default="Common Questions")
+    faqs = StreamField(
+        [("faq", ContactFaqBlock())],
+        blank=True,
+        default=[
+            {"type": "faq", "value": {
+                "question": "Can I book a pilgrimage through Sites of Grace?",
+                "answer": (
+                    "<p>We don't run tours ourselves. Each site page links to trusted "
+                    "pilgrimage operators and travel resources, and the Plan Your Visit "
+                    "guides cover getting there, where to stay, and what to expect. If "
+                    "you're organizing a parish or group trip, send us a message and we'll "
+                    "point you in the right direction.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "I found an error on a page. What should I do?",
+                "answer": (
+                    "<p>Thank you for helping. Choose \"Submit a Correction\" above and link "
+                    "the page. Every site and saint page also has a \"Spot an error?\" link "
+                    "that fills this in for you. We check every correction against Church "
+                    "and shrine sources before we change anything.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "How do you decide which sites to include?",
+                "answer": (
+                    "<p>We include places of genuine Catholic significance, and we're careful "
+                    "to show each one's status as the Church describes it: approved, "
+                    "recognized as a devotion, or still under study. Suggestions are always "
+                    "welcome.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "Can I share my own photos from a pilgrimage?",
+                "answer": (
+                    "<p>Yes. Create a free pilgrim account, mark the sites you've visited, "
+                    "and add your photos. You choose whether each photo is private or shared "
+                    "with other pilgrims.</p>"
+                ),
+            }},
+            {"type": "faq", "value": {
+                "question": "What happens to my prayer request?",
+                "answer": (
+                    "<p>It's read only by the Sites of Grace team and is never published or "
+                    "shared. We keep it for 90 days so it can be remembered in prayer, and "
+                    "then it's deleted.</p>"
+                ),
+            }},
+        ],
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("hero_eyebrow"),
+                FieldPanel("hero_title"),
+                FieldPanel("hero_intro"),
+                FieldPanel("hero_image"),
+            ],
+            heading="Hero",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("topics_eyebrow"),
+                FieldPanel("topics_heading"),
+                FieldPanel("topic_cards"),
+            ],
+            heading="Topic Cards",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("form_heading"),
+                FieldPanel("form_lede"),
+                FieldPanel("prayer_note"),
+                FieldPanel("thank_you_heading"),
+                FieldPanel("thank_you_text"),
+                FieldPanel("prayer_thank_you_text"),
+            ],
+            heading="Form and Thank-You",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("reach_heading"),
+                FieldPanel("response_time"),
+                FieldPanel("based_in"),
+                FieldPanel("visit_card_heading"),
+                FieldPanel("visit_card_text"),
+                FieldPanel("visit_card_link_label"),
+                PageChooserPanel("visit_card_link"),
+                FieldPanel("independence_note"),
+            ],
+            heading="Sidebar",
+            help_text=(
+                "The email address comes from Settings > Legal details, and the social "
+                "links from Settings > Site settings."
+            ),
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("faq_eyebrow"),
+                FieldPanel("faq_heading"),
+                FieldPanel("faqs"),
+            ],
+            heading="Common Questions",
+        ),
+    ]
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    max_count = 1
+    template = "home/contact_page.html"
+
+    # A coarse, per-process flood guard checked before anything else
+    # (core.ratelimit). The real limit is RATE_LIMIT below, counted from
+    # the ContactMessage table so it holds across gunicorn workers.
+    FLOOD_LIMIT = 20
+    RATE_LIMIT = 5
+    RATE_WINDOW_SECONDS = 60 * 60
+    RATE_LIMIT_MESSAGE = (
+        "You've sent several messages in a short time. Please try again in a little while."
+    )
+    SESSION_KEY = "contact_sent"
+
+    class Meta:
+        verbose_name = "Contact page"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only for a brand-new, unsaved instance (the blank Add child page
+        # form), so an existing page's own values are never touched.
+        if not self.pk:
+            if not self.slug:
+                self.slug = "contact"
+            if not self.search_description:
+                self.search_description = (
+                    "Questions, corrections, site suggestions, and prayer requests. Every "
+                    "message to Sites of Grace is read by a real person."
+                )
+
+    @property
+    def visit_card_url(self):
+        if self.visit_card_link_id and self.visit_card_link.live:
+            return self.visit_card_link.url
+        return _map_or_explore_url()
+
+    # --- Rendering ---
+
+    def _initial(self, request):
+        initial = {"topic": contact_models.DEFAULT_TOPIC, "ts": contact_forms.issue_ts()}
+        topic = request.GET.get("topic", "")
+        if topic in contact_models.TOPIC_KEYS:
+            initial["topic"] = topic
+        related = contact_forms.allowed_related_page(request.GET.get("page"))
+        if related:
+            initial["related_page"] = str(related.pk)
+        user = request.user
+        if user.is_authenticated:
+            profile = getattr(user, "pilgrim_profile", None)
+            initial["name"] = user.get_full_name() or (profile.display_name if profile else "")
+            initial["email"] = user.email
+        return initial
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        form = kwargs.get("contact_form") or contact_forms.ContactForm(initial=self._initial(request))
+
+        values = form.data if form.is_bound else form.initial
+        topic = values.get("topic", "")
+        if topic not in contact_models.TOPIC_KEYS:
+            topic = contact_models.DEFAULT_TOPIC
+        related = contact_forms.allowed_related_page(values.get("related_page"))
+
+        # (field id, first error) for the summary above the form.
+        error_summary = [
+            (form[name].id_for_label, errors[0])
+            for name, errors in form.errors.items()
+            if name in form.fields and not form.fields[name].widget.is_hidden
+        ] if form.is_bound else []
+
+        details = LegalDetails.load(request_or_site=request)
+        context.update({
+            # Root-relative on this request's own site.
+            "contact_page_url": self.get_url(request),
+            "contact_form": form,
+            "contact_topic": topic,
+            "contact_topic_copy": contact_models.TOPIC_COPY[topic],
+            # contact.js swaps the message label, placeholder, and picker per
+            # topic from this (rendered with json_script).
+            "contact_copy": {
+                key: dict(copy, related=key in contact_models.RELATED_TOPICS)
+                for key, copy in contact_models.TOPIC_COPY.items()
+            },
+            "contact_shows_related": topic in contact_models.RELATED_TOPICS,
+            "contact_related": related,
+            "contact_error": kwargs.get("contact_error", ""),
+            "contact_error_summary": error_summary,
+            "contact_thanks": kwargs.get("contact_thanks"),
+            "contact_email": details.contact_email,
+            "turnstile_site_key": settings.TURNSTILE_SITE_KEY if contact_turnstile.enabled() else "",
+        })
+        return context
+
+    def serve(self, request, *args, **kwargs):
+        if request.method == "POST":
+            response = self._serve_post(request, *args, **kwargs)
+        else:
+            thanks = None
+            if request.GET.get("sent") == "1":
+                # Shown once: the first name and topic come from the
+                # session, never the URL, and are popped on this render.
+                thanks = request.session.pop(self.SESSION_KEY, None) or {}
+            response = super().serve(request, *args, contact_thanks=thanks, **kwargs)
+        # Every render here is per-visitor (a prefilled name, a thank-you,
+        # an error), so Cloudflare must never cache one.
+        response["Cache-Control"] = "private, no-store"
+        return response
+
+    def _serve_post(self, request, *args, **kwargs):
+        form = contact_forms.ContactForm(request.POST)
+        ip_hash = _ip_hash(request)
+
+        def rerender(error=""):
+            return Page.serve(self, request, *args, contact_form=form, contact_error=error, **kwargs)
+
+        if ratelimit.hit("contact-form", ip_hash, self.FLOOD_LIMIT, self.RATE_WINDOW_SECONDS):
+            return rerender(self.RATE_LIMIT_MESSAGE)
+
+        # Spam is saved as spam and answered with the normal thank-you, and
+        # no email goes out. A bot is never told why.
+        if self._looks_like_spam(request.POST):
+            message = self._save_spam(request, ip_hash)
+            return self._thank_you_redirect(request, message)
+
+        # The real rate limit, counted from saved, non-spam messages.
+        recent = contact_models.ContactMessage.objects.filter(
+            ip_hash=ip_hash,
+            created_at__gte=timezone.now() - timedelta(seconds=self.RATE_WINDOW_SECONDS),
+        ).exclude(status=contact_models.ContactMessage.STATUS_SPAM)
+        if recent.count() >= self.RATE_LIMIT:
+            return rerender(self.RATE_LIMIT_MESSAGE)
+
+        if contact_turnstile.enabled() and not contact_turnstile.verify(
+            request.POST.get(contact_forms.TURNSTILE_FIELD, "")
+        ):
+            return rerender("We couldn't confirm you're not a robot. Please try the check again.")
+
+        if not form.is_valid():
+            return rerender()
+
+        data = form.cleaned_data
+        message = contact_models.ContactMessage.objects.create(
+            topic=data["topic"],
+            name=data["name"],
+            email=data["email"],
+            related_page=data["related_page"],
+            message=data["message"],
+            user=request.user if request.user.is_authenticated else None,
+            ip_hash=ip_hash,
+        )
+        contact_models.ContactMessage.purge_expired()
+        contact_notify.send_staff_alert(message)
+        return self._thank_you_redirect(request, message)
+
+    @staticmethod
+    def _looks_like_spam(post):
+        return (
+            bool(post.get(contact_forms.HONEYPOT_FIELD, "").strip())
+            or contact_forms.ts_is_suspicious(post.get("ts", ""))
+            or contact_forms.too_many_urls(post.get("message", ""))
+        )
+
+    @staticmethod
+    def _save_spam(request, ip_hash):
+        post = request.POST
+        topic = post.get("topic", "")
+        return contact_models.ContactMessage.objects.create(
+            topic=topic if topic in contact_models.TOPIC_KEYS else "other",
+            name=" ".join(post.get("name", "").split())[:120],
+            email=post.get("email", "").strip()[:254],
+            related_page=contact_forms.allowed_related_page(post.get("related_page")),
+            message=post.get("message", "")[: contact_models.MESSAGE_MAX_LENGTH],
+            status=contact_models.ContactMessage.STATUS_SPAM,
+            user=request.user if request.user.is_authenticated else None,
+            ip_hash=ip_hash,
+        )
+
+    def _thank_you_redirect(self, request, message):
+        names = message.name.split()
+        request.session[self.SESSION_KEY] = {
+            "first_name": names[0] if names else "",
+            "prayer": message.is_prayer,
+        }
+        redirect = HttpResponseRedirect(f"{self.get_url(request)}?sent=1#contact-form")
+        redirect.status_code = 303
+        return redirect
+
+
+# --- Legal pages ---------------------------------------------------------------
+
+
+@register_setting(icon="doc-full")
+class LegalDetails(BaseGenericSetting):
+    """Who runs the site and the DMCA agent: the values behind the {{TOKENS}}
+    in the legal pages and notices (see home/legal.py). Blank by default --
+    a LegalPage can't be published while a value it uses is blank."""
+
+    operator_name = models.CharField("Operator name", max_length=200, blank=True)
+    contact_email = models.EmailField("Contact email", blank=True)
+    mailing_address = models.TextField("Mailing address", blank=True)
+    dmca_agent_name = models.CharField("DMCA agent name", max_length=200, blank=True)
+    dmca_agent_address = models.TextField("DMCA agent address", blank=True)
+    dmca_agent_phone = models.CharField("DMCA agent phone", max_length=40, blank=True)
+    dmca_agent_email = models.EmailField("DMCA agent email", blank=True)
+
+    panels = [
+        MultiFieldPanel(
+            [FieldPanel("operator_name"), FieldPanel("contact_email"), FieldPanel("mailing_address")],
+            heading="Operator",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("dmca_agent_name"),
+                FieldPanel("dmca_agent_address"),
+                FieldPanel("dmca_agent_phone"),
+                FieldPanel("dmca_agent_email"),
+            ],
+            heading="Designated copyright (DMCA) agent",
+        ),
+    ]
+
+    class Meta:
+        verbose_name = "Legal details"
+
+
+@register_setting(icon="info-circle")
+class LegalNotices(BaseGenericSetting):
+    """The short legal notices shown next to the features they describe.
+    **bold** and [text](url) are the only formatting; {{TOKENS}} are filled
+    from Legal details, and a link to a legal page appears only once that
+    page is live (home/legal.py: render_notice)."""
+
+    footer_independence = models.TextField(
+        default=(
+            "Sites of Grace is an independent Catholic educational and pilgrimage "
+            "resource. Unless expressly stated, it is not affiliated with or endorsed by "
+            "the Holy See, a diocese, parish, shrine, or religious community. Church "
+            "status information should be checked against official sources. [Catholic "
+            "Content Notice](/catholic-content-notice/)"
+        ),
+        help_text="Footer, bottom row, above the copyright line.",
+    )
+    footer_newsletter = models.TextField(
+        default="Unsubscribe anytime. See our [Privacy Policy](/privacy-policy/).",
+        help_text="Footer, small text under the newsletter Sign Up button.",
+    )
+    signup = models.TextField(
+        default=(
+            "By creating an account, you agree to the [Terms of Use](/terms-of-use/) and "
+            "acknowledge the [Privacy Policy](/privacy-policy/). If you are under 18, "
+            "please get permission from a parent or guardian first."
+        ),
+        help_text="Sign-up form, directly above the Sign Up button.",
+    )
+    site_travel = models.TextField(
+        default=(
+            "**Pilgrim travel note:** Mass times, opening hours, costs, accessibility, "
+            "and local conditions can change. Please confirm important details directly "
+            "with the shrine and your providers before you travel. [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Sacred site pages, right after the Plan Your Visit section.",
+    )
+    plan_estimate = models.TextField(
+        default=(
+            "**Planning estimate only:** These figures are illustrative and are not a "
+            "live price quote. Rates, availability, fees, exchange rates, and conditions "
+            "can change. Confirm final costs with each provider before booking. [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Trip calculator (/plan/), under the estimated total.",
+    )
+    tour_links = models.TextField(
+        default=(
+            "**Affiliate disclosure:** Some pilgrimage-tour links on this page may earn "
+            "Sites of Grace a commission if you book through them, at no extra cost to "
+            "you. Tours are run by independent providers. Review their itineraries, "
+            "payment terms, and cancellation policies before booking. [Affiliate "
+            "Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text="Above tour-operator links. Not shown anywhere yet: no page renders tour-operator links.",
+    )
+    travel_links = models.TextField(
+        default=(
+            "**Travel referral notice:** Some travel links on this page may earn Sites of"
+            " Grace a commission, at no extra cost to you. Map distances and routes are "
+            "approximate; confirm location, accessibility, availability, rates, and "
+            "booking terms with the provider. [Affiliate "
+            "Disclosure](/affiliate-disclosure/) · [Travel "
+            "Disclaimer](/travel-disclaimer/)"
+        ),
+        help_text="Above travel and hotel booking links. Not shown anywhere yet: the site has no booking links.",
+    )
+    blog_affiliate = models.TextField(
+        default=(
+            "**Affiliate disclosure:** This article contains links that may earn Sites of"
+            " Grace a commission on qualifying purchases, at no extra cost to you. "
+            "[Affiliate Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text='Blog posts with "Has affiliate links" turned on, above the article.',
+    )
+    store_amazon = models.TextField(
+        default=(
+            "**As an Amazon Associate I earn from qualifying purchases.** Prices, "
+            "availability, shipping, and returns are set by the seller. [Affiliate "
+            "Disclosure](/affiliate-disclosure/)"
+        ),
+        help_text="Store page, under the intro.",
+    )
+    store_waitlist = models.TextField(
+        default=(
+            "Joining the waitlist doesn't place an order or charge you, and it doesn't "
+            "sign you up for our newsletter. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Store, just before each waitlist button.",
+    )
+    share_rights_checkbox = models.TextField(
+        default=(
+            "I took this photo or have permission to share it, and anyone recognizable in"
+            " it has agreed to be shown. I'm not sharing private information about "
+            "children or anyone else. ([Community Policy](/community-policy/))"
+        ),
+        help_text="Label of the checkbox a pilgrim must tick every time they share a photo publicly.",
+    )
+    share_adult_checkbox = models.TextField(
+        default="I am 18 or older.",
+        help_text="Label of the one-time 18+ checkbox for sharing photos publicly or making a profile public.",
+    )
+    share_public_warning = models.TextField(
+        default=(
+            "**Public post:** Once shared, your photo, display name, and caption can be "
+            "seen by anyone. Leave out private details and locations you don't want "
+            "others to see. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Next to the public-sharing controls on the photo upload and photo pages.",
+    )
+    profile_public_warning = models.TextField(
+        default=(
+            "**Public profile:** anyone will be able to see your whole profile, including"
+            " your badges and your Visited and Want-to-Go lists, and anyone can follow "
+            "you without your approval. [Privacy Policy](/privacy-policy/)"
+        ),
+        help_text="Profile settings, next to the private profile setting.",
+    )
+    testimony = models.TextField(
+        default=(
+            "Personal stories of favors and healing reflect the contributor's own "
+            "account. They are not independently verified medical findings or a guarantee"
+            " of results, and spiritual practices are not a substitute for medical care. "
+            "[Catholic Content Notice](/catholic-content-notice/)"
+        ),
+        help_text="Under a story or testimony composer. Not shown anywhere yet: the site has none.",
+    )
+    support_intro = models.TextField(
+        default=(
+            "**Support is optional.** Sites of Grace is independently operated and is not"
+            " a 501(c)(3) charity. Payments are not tax-deductible and do not unlock paid"
+            " features. If you choose monthly support, your selected amount is charged "
+            "each month until you cancel. [Support & Billing "
+            "Notice](/support-and-billing/)"
+        ),
+        help_text="Support page, above the checkout button.",
+    )
+    support_monthly = models.TextField(
+        default=(
+            "You'll be charged {amount} every month until you cancel. Cancel anytime from"
+            " Manage monthly support."
+        ),
+        help_text="Support page, under the frequency choice while Monthly is selected. {amount} is filled in.",
+    )
+    stripe_monthly_submit = models.TextField(
+        default=(
+            "By confirming, you authorize Sites of Grace to charge {amount} every month "
+            "until you cancel. Cancel anytime from the Manage monthly support link on "
+            "sitesofgrace.com/support/."
+        ),
+        help_text="Stripe's checkout page, above the pay button, for monthly support only. {amount} is filled in. Plain text: bold and links are dropped.",
+    )
+    contact_legal = models.TextField(
+        default=(
+            "We use your name and email only to reply to you. We never add you to a "
+            "mailing list without asking. See our [Privacy Policy](/privacy-policy/)."
+        ),
+        help_text="Contact page, under the form next to the Send button.",
+    )
+
+    class Meta:
+        verbose_name = "Legal notices"
+
+
+LEGAL_BODY_FEATURES = ["h2", "h3", "bold", "italic", "link", "ol", "ul"]
+
+
+class LegalPage(Page):
+    """One legal page (Privacy Policy, Terms of Use, ...). Made as drafts by
+    `manage.py create_legal_pages` from legal/content/*.md.
+
+    The body's {{TOKENS}} are filled from Legal details at render time.
+    Publishing is blocked while a value the body uses is blank -- see
+    home/wagtail_hooks.py -- and if one is cleared later, it renders as
+    nothing (with a warning logged), never as "{{...}}".
+    """
+
+    effective_date = models.DateField()
+    body = RichTextField(features=LEGAL_BODY_FEATURES)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("effective_date"),
+        FieldPanel("body"),
+    ]
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    template = "home/legal_page.html"
+
+    class Meta:
+        verbose_name = "Legal page"
+
+    def publish_problem(self, details=None):
+        """Why this page can't be published yet, or "" if it can."""
+        try:
+            missing = legal.missing_fields(self.body, details or LegalDetails.load())
+        except legal.UnknownTokenError as exc:
+            return f"{exc}. Fix the page text before publishing."
+        if missing:
+            return (
+                "This page can't be published until these are filled in under "
+                f"Settings > Legal details: {', '.join(missing)}. "
+                "Your changes were saved as a draft."
+            )
+        return ""
+
+    def rendered_body(self, details=None):
+        """(html, toc): the body with tokens filled and <h2> ids added."""
+        html = expand_db_html(self.body)
+        try:
+            html = legal.fill_tokens(html, details or LegalDetails.load())
+        except legal.UnknownTokenError:
+            logger.error("LegalPage %s uses an unknown token; rendering without it.", self.pk)
+            html = legal.TOKEN_RE.sub("", html)
+        return legal.add_heading_ids(html)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["legal_body"], context["legal_toc"] = self.rendered_body(
+            LegalDetails.load(request_or_site=request)
+        )
+        return context

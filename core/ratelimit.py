@@ -1,6 +1,6 @@
 """
 A small fixed-window rate limiter on Django's cache, shared by any view that
-needs one (the Support page now; the Contact page later).
+needs one: Support checkout, and the newsletter and store waitlist sign-ups.
 
 Callers pass an ip_hash (pilgrims.views._ip_hash), never a raw IP, so no
 address is ever written to the cache.

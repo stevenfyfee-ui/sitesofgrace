@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags v2_tags %}
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags legal_tags v2_tags %}
 
 {% block body_class %}catalog catalog-site{% endblock %}
 {% block extra_css %}
@@ -72,6 +72,7 @@
               </section>
             {% else %}
               {% include "catalog/includes/_plan_your_visit.html" %}
+              <p class="plan-travel-note">{% notice "site_travel" %}</p>
             {% endif %}
           {% endfor %}
         </div>
@@ -128,6 +129,7 @@
       </section>
 
       {% include "catalog/includes/_nearby_band.html" %}
+      {% include "includes/_correction_link.html" %}
 
     </div>
   </div>

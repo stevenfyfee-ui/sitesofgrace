@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static legal_tags %}
 
 {% block body_class %}auth{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
@@ -27,6 +27,7 @@
         </div>
       {% endfor %}
       {{ redirect_field }}
+      <p class="auth-help auth-legal">{% notice "signup" %}</p>
       <button type="submit" class="btn btn-primary auth-submit">Sign Up</button>
     </form>
 

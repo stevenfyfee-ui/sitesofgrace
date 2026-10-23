@@ -91,7 +91,21 @@ class TourCardTests(ToursTestCase):
         self.assertIn(f'/go/tour/{affiliate.pk}/?from={site.pk}" target="_blank" rel="sponsored nofollow noopener"',
                       section)
         self.assertIn(f'/go/tour/{plain.pk}/?from={site.pk}" target="_blank" rel="nofollow noopener"', section)
-        self.assertIn("Some links may earn us a commission", section)
+        # The "tour_links" legal notice; its Affiliate Disclosure link waits for that page to be live.
+        self.assertIn("<strong>Affiliate disclosure:</strong> Some pilgrimage-tour links on this page", section)
+        self.assertNotIn('href="/affiliate-disclosure/"', section)
+
+    def test_blank_tour_notice_falls_back_to_the_earlier_sentence(self):
+        from home.models import LegalNotices
+
+        site = self.make_site(slug="t-notice-blank")
+        self.make_tour("Notice tour", [site])
+        notices = LegalNotices.load()
+        notices.tour_links = ""
+        notices.save()
+        section = self.section(self.html(site))
+        self.assertIn("handled by the tour operator, not by Sites of Grace. Some links may earn us a commission.",
+                      section)
 
 
 @V2_ON

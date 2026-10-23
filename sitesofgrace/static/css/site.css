@@ -244,8 +244,12 @@ a { color: inherit; text-decoration: none; }
 .site-footer { background: var(--navy); color: rgba(253,249,242,.82); margin-top: 64px; }
 .footer-grid {
   display: grid; gap: 34px; padding: 52px 0 40px;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.4fr;
+  grid-template-columns: 1.5fr 1fr 1.4fr;
 }
+/* Desktop: Explore over Legal & Policies, Learn & About over Stay Inspired. */
+.footer-brand { grid-row: span 2; }
+.footer-col--explore, .footer-col--legal { grid-column: 2; }
+.footer-col--learn, .footer-newsletter { grid-column: 3; }
 .site-footer h3 {
   font-family: var(--serif-titling); font-weight: 500; font-size: 13px;
   letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
@@ -268,12 +272,11 @@ a { color: inherit; text-decoration: none; }
 .footer-links li { margin: 0 0 9px; }
 .footer-links a { color: rgba(253,249,242,.82); transition: color .15s ease; }
 .footer-links a:hover { color: var(--gold); }
-/* "Support" -- the one gold footer link, with a small heart. */
-.footer-links a.footer-support { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); }
-.footer-links a.footer-support:hover { color: var(--ivory); }
-.footer-support svg { width: 12px; height: 12px; flex: none; }
 
 .footer-newsletter p { font-size: 14px; line-height: 1.55; margin: 0 0 14px; }
+.footer-newsletter .footer-newsletter-note { font-size: 12.5px; margin: 10px 0 0; color: rgba(253,249,242,.6); }
+.footer-newsletter-note a, .footer-base a { text-decoration: underline; text-underline-offset: 2px; }
+.footer-newsletter-note a:hover, .footer-base a:hover { color: var(--gold); }
 .newsletter-form { display: flex; background: #fff; border-radius: 999px; padding: 4px; max-width: 340px; }
 .newsletter-form input {
   flex: 1; border: 0; background: transparent; padding: 0 16px;
@@ -296,11 +299,14 @@ a { color: inherit; text-decoration: none; }
   .header-actions .btn-primary { display: none; }
   .header-actions .account-menu { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .footer-brand, .footer-newsletter { grid-column: 1 / -1; }
+  .footer-brand, .footer-newsletter { grid-column: 1 / -1; grid-row: auto; }
+  .footer-col--explore, .footer-col--legal { grid-column: 1; }
+  .footer-col--learn { grid-column: 2; }
   .footer-base-inner { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 560px) {
   .footer-grid { grid-template-columns: 1fr; }
+  .footer-col--explore, .footer-col--legal, .footer-col--learn { grid-column: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -411,3 +411,17 @@
   .pilgrim-site-tile-fallback-title { font-size: 18px; }
   .pilgrim-shared-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 }
+
+/* ---------- Public sharing consent (pilgrims/consent.py) ---------- */
+.share-consent { margin: -4px 0 18px; }
+.share-consent-warning {
+  font-family: var(--sans); font-size: 13px; line-height: 1.55; color: var(--navy);
+  background: rgba(199,154,66,.12); border: 1px solid var(--gold-soft);
+  border-radius: 10px; padding: 10px 14px; margin: 8px 0 12px;
+}
+.share-consent-warning a, .share-consent-box a { color: var(--blue); text-decoration: underline; }
+.share-consent-box {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-family: var(--sans); font-size: 13.5px; line-height: 1.5; color: var(--navy); margin: 0 0 10px;
+}
+.share-consent-box input { margin-top: 3px; flex: none; }

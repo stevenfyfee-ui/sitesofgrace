@@ -15,6 +15,8 @@
   var custom = form.querySelector('[data-support-custom]');
   var customInput = custom ? custom.querySelector('input') : null;
   var label = form.querySelector('[data-support-label]');
+  var monthlyNote = form.querySelector('[data-support-monthly]');
+  var monthlyAmount = monthlyNote ? monthlyNote.querySelector('[data-notice-amount]') : null;
   var pers = form.querySelectorAll('[data-support-per]');
   // Once the visitor picks an amount themselves, switching frequency
   // leaves it alone; until then it follows that frequency's default.
@@ -50,6 +52,8 @@
     }
 
     var shown = other ? customInput.value.replace(/[^0-9.]/g, '') : amount;
+    if (monthlyNote) monthlyNote.hidden = !monthly;
+    if (monthlyAmount) monthlyAmount.textContent = shown ? '$' + shown : 'the amount you choose';
     if (label) {
       label.textContent = shown
         ? 'Support with $' + shown + (monthly ? ' a month' : '')
