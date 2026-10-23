@@ -1,6 +1,7 @@
 """Map the free-text `country` strings on SacredSitePages to ISO codes.
 
     python manage.py propose_country_codes --out country_codes.csv
+    python manage.py propose_country_codes --out -        # print the CSV to the console
     python manage.py propose_country_codes --apply country_codes.csv --dry-run
     python manage.py propose_country_codes --apply country_codes.csv
 
@@ -24,6 +25,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from catalog.countries import COUNTRY_NAMES, country_name, propose
+from catalog.management.csv_output import csv_destination, describe, summary
 from catalog.models import SacredSitePage
 
 APPROVED = {"yes", "y", "true", "1", "approved"}
@@ -35,7 +37,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         mode = parser.add_mutually_exclusive_group(required=True)
-        mode.add_argument("--out", help="Write the proposal CSV here (read-only).")
+        mode.add_argument("--out", help='Write the proposal CSV here (read-only); "-" prints it to the console.')
         mode.add_argument("--apply", help="Apply the approved rows of this CSV.")
         parser.add_argument("--dry-run", action="store_true", help="With --apply: report only.")
 
@@ -51,11 +53,11 @@ class Command(BaseCommand):
             code, confidence, note = propose(country)
             unsure += not code
             rows.append([country or "", n, code, country_name(code), confidence, note, ""])
-        with open(out, "w", newline="", encoding="utf-8") as fh:
+        with csv_destination(out, self) as fh:
             writer = csv.writer(fh)
             writer.writerow(COLUMNS)
             writer.writerows(rows)
-        self.stdout.write(f"wrote {len(rows)} distinct country strings to {out}; {unsure} left blank (unsure)")
+        summary(self, out, f"wrote {len(rows)} distinct country strings to {describe(out)}; {unsure} left blank (unsure)")
 
     def _apply(self, path, dry_run):
         try:

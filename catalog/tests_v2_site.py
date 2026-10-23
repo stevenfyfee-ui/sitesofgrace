@@ -382,6 +382,36 @@ class ReportCommandTests(V2SiteTestCase):
         self.assertEqual(self.snapshot(), before)
 
 
+class ReportToConsoleTests(V2SiteTestCase):
+    """--out - prints only the CSV on stdout (the DO console can't download
+    files); the summary goes to stderr so the copied CSV stays clean."""
+
+    def run_report(self, *args):
+        out, err = StringIO(), StringIO()
+        call_command(*args, "--out", "-", stdout=out, stderr=err)
+        return out.getvalue(), err.getvalue()
+
+    def test_all_three_reports_print_csv_to_the_console(self):
+        self.make_site(slug="console-euch", title="Console Miracle", category="Eucharistic Miracle",
+                       country="Italy", the_story="<p>Story.</p>")
+        page = self.make_site(slug="console-a", title="Console A", country="Italy")
+        other = self.make_site(slug="console-b", title="Console B")
+        self.add_travel(page, "where-to-stay", body="<p>Same words for every site here.</p>")
+        self.add_travel(other, "where-to-stay", body="<p>Same words for every site here.</p>")
+        for command, header in (
+            ("eucharistic_kind_worksheet", "id,title,url,live,eucharistic_kind,story_first_200"),
+            ("travel_content_report", "page_id,title,url,kind,similarity,closest_match"),
+            ("propose_country_codes", "country,sites,proposed_code,country_name,confidence,note,approved"),
+        ):
+            out, err = self.run_report(command)
+            rows = list(csv.reader(StringIO(out)))
+            self.assertEqual(",".join(rows[0]), header, command)
+            self.assertGreater(len(rows), 1, command)
+            self.assertIn("the console", err, command)
+            self.assertNotIn("wrote", out, command)
+            self.assertNotIn("compared", out, command)
+
+
 class ImportSiteDetailsTests(V2SiteTestCase):
     def setUp(self):
         self.tmpdir = tempfile.mkdtemp()

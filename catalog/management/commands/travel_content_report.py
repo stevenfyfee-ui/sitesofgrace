@@ -3,6 +3,7 @@
     python manage.py travel_content_report --out travel_report.csv
     python manage.py travel_content_report --out travel_report.csv --threshold 0.7
     python manage.py travel_content_report --out travel_report.csv --all
+    python manage.py travel_content_report --out - --all     # print the CSV to the console
 
 Read-only: it reads SiteTravelSection bodies and writes a CSV; nothing in
 the database changes.
@@ -25,6 +26,7 @@ import re
 from django.core.management.base import BaseCommand
 from django.utils.html import strip_tags
 
+from catalog.management.csv_output import csv_destination, describe, summary
 from catalog.models import SiteTravelSection
 from catalog.travel_sections import TRAVEL_SECTION_CHOICES
 
@@ -68,7 +70,7 @@ class Command(BaseCommand):
     help = "CSV of travel sections whose text is near-identical to another site's (read-only)."
 
     def add_arguments(self, parser):
-        parser.add_argument("--out", required=True, help="Path of the CSV to write.")
+        parser.add_argument("--out", required=True, help='Path of the CSV to write; "-" prints it to the console.')
         parser.add_argument("--threshold", type=float, default=0.8,
                             help="Minimum similarity to report (default 0.8).")
         parser.add_argument("--all", action="store_true", help="Write every page, not only flagged ones.")
@@ -106,13 +108,14 @@ class Command(BaseCommand):
                     ])
 
         rows.sort(key=lambda r: (r[3], -float(r[4]), r[1]))
-        with open(options["out"], "w", newline="", encoding="utf-8") as fh:
+        with csv_destination(options["out"], self) as fh:
             writer = csv.writer(fh)
             writer.writerow(["page_id", "title", "url", "kind", "similarity", "closest_match"])
             writer.writerows(rows)
         total = sum(len(v) for v in by_kind.values())
-        self.stdout.write(
+        summary(
+            self, options["out"],
             f"compared {total} sections in {len(by_kind)} kinds; {flagged} at or above {threshold} "
             f"(word {SHINGLE}-gram Jaccard after masking names and numbers); wrote {len(rows)} rows "
-            f"to {options['out']}"
+            f"to {describe(options['out'])}"
         )
