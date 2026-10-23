@@ -51,3 +51,7 @@ tools/saints_data/cache/
 
 # Local TLS-inspection root CA for the dev Docker image (Dockerfile.dev)
 docker/dev-certs/
+
+# v2 go-live: production report output and the local run log (never committed)
+docs/v2/reports/
+docs/v2/GO-LIVE-LOG.md
