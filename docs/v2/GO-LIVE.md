@@ -7,8 +7,17 @@ apart from the two always-on fixes (category colors read from one place; no "Not
 Where a step says **console**, it means the DigitalOcean App Platform console for the web component
 (Apps → sitesofgrace → Console). The console can't upload or download files, so:
 
-- **Out:** every report command takes `--out -` and prints its CSV to the console. The one-line
-  summary goes to stderr, so what you copy is just the CSV. Paste it into a file on your laptop.
+- **Out:** every report command takes `--out -` and prints its CSV to the console, but the console
+  **silently drops output past about 16 KB**: a 543 KB travel report arrived as 83 of 2,881 rows with
+  no error. So `--out -` is only for small output you can check by eye. For anything larger, write
+  the CSV to `/tmp` in production and pull it to the laptop with **`tools/prod_fetch.sh`**, which
+  copies it in compressed slices and refuses to save it unless its MD5 matches production's:
+
+  ```
+  tools/prod_run.sh "python manage.py travel_content_report --out /tmp/tcr.csv --all"
+  tools/prod_fetch.sh /tmp/tcr.csv docs/v2/reports/travel_content_report.csv
+  tools/prod_run.sh "rm -f /tmp/tcr.csv"
+  ```
 - **In:** files you've reviewed (the approved country CSV, the import JSON files) come back
   **through git**, never committed or pushed to main directly. Each file goes under
   `tools/imports/` on a short branch named `content/<name>`, a pull request is opened with `gh`,
@@ -45,13 +54,21 @@ Where a step says **console**, it means the DigitalOcean App Platform console fo
 
 ## 2. Console: create drafts and pull the reports
 
-Run each in the console, then copy what it prints:
+Create the hub drafts, then write the three reports to `/tmp` in production and fetch them with
+`tools/prod_fetch.sh` (checksum-verified; don't rely on `--out -` for these, see above):
 
 ```
 python manage.py create_destination_hubs
-python manage.py propose_country_codes --out -
-python manage.py travel_content_report --out - --all
-python manage.py eucharistic_kind_worksheet --out -
+python manage.py propose_country_codes --out /tmp/country_codes.csv
+python manage.py travel_content_report --out /tmp/tcr.csv --all
+python manage.py eucharistic_kind_worksheet --out /tmp/euch.csv
+```
+
+```
+tools/prod_fetch.sh /tmp/country_codes.csv docs/v2/reports/country_codes.csv
+tools/prod_fetch.sh /tmp/tcr.csv docs/v2/reports/travel_content_report.csv
+tools/prod_fetch.sh /tmp/euch.csv docs/v2/reports/eucharistic_kind_worksheet.csv
+tools/prod_run.sh "rm -f /tmp/country_codes.csv /tmp/tcr.csv /tmp/euch.csv"
 ```
 
 - `create_destination_hubs` creates the Destinations index and four hubs (Rome & Vatican City,
