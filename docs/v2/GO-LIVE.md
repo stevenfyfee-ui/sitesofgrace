@@ -10,9 +10,16 @@ Where a step says **console**, it means the DigitalOcean App Platform console fo
 - **Out:** every report command takes `--out -` and prints its CSV to the console. The one-line
   summary goes to stderr, so what you copy is just the CSV. Paste it into a file on your laptop.
 - **In:** files you've reviewed (the approved country CSV, the import JSON files) come back
-  **through git**. Commit them under `tools/`, merge to main, let the deploy finish, then run the
-  command against `tools/...` in the console. Run **`--dry-run` before every real run**, and
-  `--verify` after.
+  **through git**, never committed or pushed to main directly. Each file goes under
+  `tools/imports/` on a short branch named `content/<name>`, a pull request is opened with `gh`,
+  and it's merged with a **merge commit** (never squash or rebase) after an explicit "yes". When the
+  deploy shows Active, run the command against `tools/imports/...` in the console (or with
+  `tools/prod_run.sh`). Run **`--dry-run` before every real run**, and `--verify` after.
+- **Timing:** no production import or publish command runs **between 08:30 and 10:30 UTC on a
+  Tuesday**, around the database maintenance window (Tuesdays 09:11 UTC, an update is pending). If
+  one falls due then, wait.
+- **Console from a laptop:** `tools/prod_run.sh "<command>"` runs one command in the production web
+  component and prints its output with secrets masked (see the script for how it works).
 
 ---
 
@@ -50,7 +57,7 @@ python manage.py eucharistic_kind_worksheet --out -
 - `create_destination_hubs` creates the Destinations index and four hubs (Rome & Vatican City,
   Assisi & Umbria, Paris & Northern France, Portugal) as **unpublished drafts, titles only**.
   Running it again changes nothing.
-- **Country codes:** save the CSV as `tools/country_codes_approved.csv`. Check each proposed code,
+- **Country codes:** save the CSV as `tools/imports/country_codes_approved.csv`. Check each proposed code,
   fix any that are wrong, and put `yes` in the `approved` column for the rows you accept. Blank
   codes are the ones the command wasn't sure about. Decide them or leave them unapproved.
 - **Travel content report:** your rewrite worklist for near-identical Plan Your Visit text. It changes
@@ -94,14 +101,15 @@ that `/contact/?topic=correction&page=<any site id>` opens the form with "Submit
 
 ## 4. First content round-trip through git
 
-Commit the reviewed files to the repo under `tools/` and get them into main the usual way (branch,
-pull request, merge). Wait for **Active**. Then, in the console, in this order:
+Put the reviewed file under `tools/imports/` on a `content/<name>` branch, open a pull request
+with `gh`, and merge it with a merge commit after an explicit "yes". Wait for **Active**. Then, in
+the console, in this order:
 
 ### 4a. Country codes (hubs match sites on them)
 
 ```
-python manage.py propose_country_codes --apply tools/country_codes_approved.csv --dry-run
-python manage.py propose_country_codes --apply tools/country_codes_approved.csv
+python manage.py propose_country_codes --apply tools/imports/country_codes_approved.csv --dry-run
+python manage.py propose_country_codes --apply tools/imports/country_codes_approved.csv
 ```
 
 Only rows marked approved are applied. Pages with drafts are skipped and reported, a code that's
@@ -117,15 +125,16 @@ Each follows `docs/v2/IMPORT-RULES.md`:
 - **Skipped pages:** pages with drafts are skipped.
 - **Reruns:** a second run reports 0 changed.
 
-Prepare the JSON files on the laptop, commit them under `tools/`, merge, wait for **Active**, then:
+Prepare the JSON files on the laptop and bring each in the same way (`tools/imports/` on a
+`content/<name>` branch, a PR, a merge commit after "yes"); wait for **Active**, then:
 
 **5a. Site details**: At a Glance, the "How to read this account" box, eucharistic_kind, guide_level,
 prep fields, primary references, recognition_year.
 
 ```
-python manage.py import_site_details tools/*site_details*.json --dry-run
-python manage.py import_site_details tools/*site_details*.json
-python manage.py import_site_details tools/*site_details*.json --verify
+python manage.py import_site_details tools/imports/*site_details*.json --dry-run
+python manage.py import_site_details tools/imports/*site_details*.json
+python manage.py import_site_details tools/imports/*site_details*.json --verify
 ```
 
 **5b. Map & lodging**: entrances, sacred places, transit, places to stay
@@ -133,13 +142,13 @@ python manage.py import_site_details tools/*site_details*.json --verify
 Affiliate Disclosure page is live.
 
 ```
-python manage.py import_site_map tools/*site_map_*.json --dry-run
-python manage.py import_site_map tools/*site_map_*.json
-python manage.py import_site_map tools/*site_map_*.json --verify
+python manage.py import_site_map tools/imports/*site_map_*.json --dry-run
+python manage.py import_site_map tools/imports/*site_map_*.json
+python manage.py import_site_map tools/imports/*site_map_*.json --verify
 ```
 
-(Keep `site_map_example.json` out of the pattern, or name real files `site_map_2026-11.json` and
-use `tools/site_map_2026*.json`. The pattern must match exactly one file.)
+(`tools/site_map_example.json` sits outside `tools/imports/`, so it never matches; if there's more
+than one map file, name them by date, e.g. `site_map_2026-11.json`, and use `tools/imports/site_map_2026*.json`. The pattern must match exactly one file.)
 
 **5c. Guided pilgrimages**: in the admin (Snippets → Guided pilgrimages): operators first, then
 tours with their stops and departures. Set `is_live` only when a tour is checked. **No tour with
@@ -149,9 +158,9 @@ tours with their stops and departures. Set `is_live` only when a tour is checked
 hub's automatic site list matches on country codes.
 
 ```
-python manage.py import_hubs tools/*hubs*.json --dry-run
-python manage.py import_hubs tools/*hubs*.json
-python manage.py import_hubs tools/*hubs*.json --verify
+python manage.py import_hubs tools/imports/*hubs*.json --dry-run
+python manage.py import_hubs tools/imports/*hubs*.json
+python manage.py import_hubs tools/imports/*hubs*.json --verify
 ```
 
 The hubs are still unpublished, so the importer saves a new **draft revision**. Nothing goes public.

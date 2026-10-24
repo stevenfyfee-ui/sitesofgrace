@@ -614,3 +614,9 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     there renders absolute (`http://localhost/...`) while the template renders relative. The full suite
     passes because of its order. Fix later by clearing the site-root-paths cache in those tests' setUp
     (or asserting on `page.get_url()` with the request).
+16. **`SPACES_PRIVATE_KEY` is stored unencrypted.** In the live App Platform spec it's an app-level
+    GENERAL variable with RUN_AND_BUILD_TIME scope, so it's readable in the spec and available at
+    build time. **Don't change it during go-live.** After v2 has been "on" for a week, make it an
+    encrypted (SECRET), run-time-only variable: read the live spec with `doctl apps spec get`, change
+    that one entry, show the masked diff, get an explicit "yes", then `doctl apps update --spec`.
+    The change triggers a redeploy, so it must not share a deploy with anything else.

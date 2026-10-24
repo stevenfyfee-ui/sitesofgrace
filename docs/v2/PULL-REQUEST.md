@@ -72,6 +72,9 @@ is byte-identical to main, except for two always-on fixes. All migrations are ad
   - `publish_hubs [--slug …]` publishes hubs whose draft has an intro, plus the index; empty hubs are
     skipped and listed.
   - All four have `--dry-run` and are safe to rerun.
+- **`tools/prod_run.sh "<command>"`:** runs one command in the production web component from a
+  laptop (doctl's console under a pseudo-terminal in a local container) and prints the output with
+  secrets masked. Local tooling; not part of the deployed app.
   - `v2_dev_sample` loads local sample data only; it refuses to run unless DEBUG is on and the
     database is local.
 
@@ -101,3 +104,5 @@ is byte-identical to main, except for two always-on fixes. All migrations are ad
 - The Affiliate Disclosure page must be live before any affiliate tour or lodging.
 - The home/pilgrims test isolation.
 - Moving the three pre-v2 maps onto `sog-maps.js`.
+- A week after v2 is on: make `SPACES_PRIVATE_KEY` an encrypted, run-time-only variable, in a
+  deploy of its own.
