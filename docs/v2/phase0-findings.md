@@ -626,3 +626,8 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     padding (`planner/static/planner/css/plan.css`). Every v2 page passes. Fix it after go-live in its
     own small PR (columns as `minmax(0, 1fr)`, controls `width: 100%`, one column under ~480 px), then
     re-run `tools/check_overflow.py` over the whole sitemap.
+18. **GO-LIVE.md: exact filenames for imports, not patterns.** Its import steps use globs such as
+    `tools/imports/*site_details*.json`. Since the pilot PR, `tools/imports/` holds each source file
+    beside its `_converted.json`, so every pattern matches two files and the importers refuse it
+    ("must match exactly one file"). Change the steps to name the exact file (for example
+    `tools/imports/site_details_pilot_2026-10_converted.json`), as was done for the pilot import.
