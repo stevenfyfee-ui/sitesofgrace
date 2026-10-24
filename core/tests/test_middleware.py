@@ -1,4 +1,5 @@
 import base64
+from unittest import mock
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -244,6 +245,12 @@ class NoindexMiddlewareTests(SimpleTestCase):
 class RobotsTxtViewTests(SimpleTestCase):
     def setUp(self):
         self.factory = RequestFactory()
+        # The view reads the Wagtail Site's root URL; stand one in so these
+        # stay database-free (a DB test here reorders the suite).
+        site = type("FakeSite", (), {"root_url": "https://sitesofgrace.com"})()
+        patcher = mock.patch("core.views.Site.find_for_request", return_value=site)
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     @override_settings(SITE_NOINDEX=True)
     def test_noindex_true_disallows_all(self):
@@ -256,3 +263,16 @@ class RobotsTxtViewTests(SimpleTestCase):
         self.assertIn(b"Allow: /", response.content)
         self.assertIn(b"Sitemap:", response.content)
         self.assertNotIn(b"Disallow:", response.content)
+
+    @override_settings(SITE_NOINDEX=False, ALLOWED_HOSTS=["*"])
+    def test_sitemap_line_uses_the_wagtail_site_not_the_request_host(self):
+        request = self.factory.get("/robots.txt", HTTP_HOST="sitesofgrace-vs8f9.ondigitalocean.app", secure=True)
+        response = robots_txt(request)
+        self.assertIn(b"Sitemap: https://sitesofgrace.com/sitemap.xml\n", response.content)
+        self.assertNotIn(b"ondigitalocean.app", response.content)
+
+    @override_settings(SITE_NOINDEX=False, ALLOWED_HOSTS=["*"])
+    def test_without_a_matching_site_it_falls_back_to_the_request_host(self):
+        with mock.patch("core.views.Site.find_for_request", return_value=None):
+            response = robots_txt(self.factory.get("/robots.txt", HTTP_HOST="example.org"))
+        self.assertIn(b"Sitemap: http://example.org/sitemap.xml\n", response.content)
