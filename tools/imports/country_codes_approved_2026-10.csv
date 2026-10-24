@@ -1,0 +1,49 @@
+country,sites,proposed_code,country_name,confidence,note,approved
+Italy,67,IT,Italy,high,,yes
+United States,39,US,United States,high,,yes
+France,20,FR,France,high,,yes
+Israel,16,IL,Israel,high,,yes
+Spain,13,ES,Spain,high,,yes
+Germany,8,DE,Germany,high,,yes
+Poland,8,PL,Poland,high,,yes
+Belgium,5,BE,Belgium,high,,yes
+India,5,IN,India,high,,yes
+Argentina,3,AR,Argentina,high,,yes
+Canada,3,CA,Canada,high,,yes
+England,3,GB,United Kingdom,medium,constituent country of the United Kingdom,yes
+Netherlands,3,NL,Netherlands,high,,yes
+Vatican City,3,VA,Vatican City,high,,yes
+Venezuela,3,VE,Venezuela,high,,yes
+Austria,2,AT,Austria,high,,yes
+Colombia,2,CO,Colombia,high,,yes
+Czech Republic,2,CZ,Czech Republic,high,,yes
+Egypt,2,EG,Egypt,high,,yes
+Lithuania,2,LT,Lithuania,high,,yes
+Mexico,2,MX,Mexico,high,,yes
+Palestinian Territories,2,PS,Palestine,high,,yes
+Peru,2,PE,Peru,high,,yes
+Portugal,2,PT,Portugal,high,,yes
+Bosnia and Herzegovina,1,BA,Bosnia and Herzegovina,high,,yes
+Brazil,1,BR,Brazil,high,,yes
+Croatia,1,HR,Croatia,high,,yes
+Cyprus,1,CY,Cyprus,high,,yes
+Ecuador,1,EC,Ecuador,high,,yes
+France (from Clairvaux),1,FR,France,medium,"qualifier ""(from Clairvaux)"" dropped",yes
+Ireland,1,IE,Ireland,high,,yes
+Italy (St. Columban),1,IT,Italy,medium,"qualifier ""(St. Columban)"" dropped",yes
+Italy (blood relic),1,IT,Italy,medium,"qualifier ""(blood relic)"" dropped",yes
+Italy (tomb),1,IT,Italy,medium,"qualifier ""(tomb)"" dropped",yes
+Japan,1,JP,Japan,high,,yes
+Japan (martyrdom),1,JP,Japan,medium,"qualifier ""(martyrdom)"" dropped",yes
+Lebanon,1,LB,Lebanon,high,,yes
+Nicaragua,1,NI,Nicaragua,high,,yes
+Northern Ireland,1,GB,United Kingdom,medium,part of the United Kingdom,yes
+Rwanda,1,RW,Rwanda,high,,yes
+Spain (Camino pilgrimage),1,ES,Spain,medium,"qualifier ""(Camino pilgrimage)"" dropped",yes
+Sweden,1,SE,Sweden,high,,yes
+Switzerland,1,CH,Switzerland,high,,yes
+Switzerland (St. Peter Canisius),1,CH,Switzerland,medium,"qualifier ""(St. Peter Canisius)"" dropped",yes
+Turkey,1,TR,Turkey,high,,yes
+USA,1,US,United States,high,decision: USA -> US,yes
+Uganda (martyrdom),1,UG,Uganda,medium,"qualifier ""(martyrdom)"" dropped",yes
+United Kingdom,1,GB,United Kingdom,high,,yes
