@@ -318,6 +318,23 @@ class CommandTests(HubTestCase):
         call_command("import_hubs", self.write([entry]), stdout=out)
         self.assertIn("Conflicts:            1", out.getvalue())
 
+    def test_import_hubs_keeps_the_file_order(self):
+        a, b, c = self.site("o-a"), self.site("o-b"), self.site("o-c")
+        rows = {"hub_sites": [c.pk, a.pk, b.pk],
+                "stay_options": [{"label": "1 week", "text": "Long."}, {"label": "1 day", "text": "Short."},
+                                 {"label": "3 days", "text": "Middle."}],
+                "combine_with": [{"name": "Zeta"}, {"site": a.pk, "name": "Alpha"}, {"name": "Mid"}]}
+        for live in (False, True):
+            hub = self.hub(title=f"Order Hub {live}", live=live)
+            call_command("import_hubs", self.write([{"id": hub.pk, "title": hub.title, "status": "Ready to import",
+                                                     "fields": {"intro": "Hello."}, **rows}]), stdout=StringIO())
+            hub = DestinationHubPage.objects.get(pk=hub.pk)
+            for obj in (hub.get_latest_revision_as_object(), hub) if live else (hub.get_latest_revision_as_object(),):
+                self.assertEqual([r.site_id for r in obj.hub_sites.all()], [c.pk, a.pk, b.pk])
+                self.assertEqual([r.label for r in obj.stay_options.all()], ["1 week", "1 day", "3 days"])
+                self.assertEqual([r.name for r in obj.combine_with.all()], ["Zeta", "Alpha", "Mid"])
+                self.assertEqual([r.sort_order for r in obj.combine_with.all()], [0, 1, 2])
+
     def test_import_hubs_skips_a_live_hub_with_a_draft(self):
         hub = self.hub(title="Busy Hub")
         hub.save_revision()

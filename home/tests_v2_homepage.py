@@ -69,6 +69,9 @@ class V2HomeTestCase(WagtailPageTestCase):
 
 @V2_ON
 class BandOrderTests(V2HomeTestCase):
+    # ?_date= is honored only with DEBUG on; without it the feasts band follows
+    # the real date and this test stops finding it once October 22 has passed.
+    @override_settings(DEBUG=True)
     def test_order_with_v2_on(self):
         self.hub("Rome & Vatican City")
         self.saint("St. John Paul II", "October 22")

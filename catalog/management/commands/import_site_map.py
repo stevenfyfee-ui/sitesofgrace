@@ -17,7 +17,8 @@ Follows docs/v2/IMPORT-RULES.md. Format (see tools/site_map_example.json):
                              "verified_on"? (YYYY-MM-DD)}]}]}
 
 Rows are matched to existing ones by (page, name). A new name creates a row
-(kind, latitude and longitude required). On an existing row, a blank value
+(kind, latitude and longitude required), ordered by its position in the
+file; existing rows keep their order. On an existing row, a blank value
 changes nothing, an empty field is filled, the same value is already correct,
 and a different value is a conflict that skips the whole page (Standing
 Rule 4). A boolean can only be switched on from its default; switching one
@@ -189,7 +190,7 @@ class Command(BaseCommand):
         if not isinstance(rows, list):
             raise SkipPage("skipped", f"{label} is not a list")
         plan, counts, seen = [], Counter(), set()
-        for row in rows:
+        for position, row in enumerate(rows):
             if not isinstance(row, dict) or is_blank(row.get("name")):
                 raise SkipPage("skipped", f"{label}: every row needs a name")
             name = row["name"].strip()
@@ -209,7 +210,8 @@ class Command(BaseCommand):
                 missing = [f for f in REQUIRED_NEW if f not in values]
                 if missing:
                     raise SkipPage("skipped", f"{where}: a new row needs {', '.join(missing)}")
-                plan.append((None, name, values))
+                # A new row takes its place in the file; existing rows keep theirs.
+                plan.append((None, name, {**values, "sort_order": position}))
                 counts["created"] += 1
                 continue
             changes = {}

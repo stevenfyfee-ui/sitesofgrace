@@ -251,9 +251,12 @@ a.v2-card:hover { border-color: var(--gold); }
 
 .v2-group-empty { display: flex; gap: 16px; align-items: flex-start; }
 .v2-group-icon { font-size: 24px; color: var(--v2-gold-deep); line-height: 1.2; }
+.v2-group-empty > div { flex: 1; min-width: 0; }
 .v2-group-empty p { margin: 6px 0 0; font-size: 15px; line-height: 1.55; }
 .v2-group-acts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 14px; }
-.v2-group-acts form { margin: 0; }
+.v2-group-acts form { margin: 0; max-width: 100%; }
+/* The button's label is long; let it wrap on narrow phones instead of widening the page. */
+.v2-group-acts .btn { white-space: normal; max-width: 100%; }
 .v2-group-note { font-size: 13px; color: var(--stone); }
 .v2-interest-done {
   margin: 0 !important; padding: 8px 14px; border-radius: 999px; font-family: var(--sans); font-size: 14px; font-weight: 600;

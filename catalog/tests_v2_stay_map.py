@@ -306,6 +306,33 @@ class ImportSiteMapTests(StayMapTestCase):
         with self.assertRaises(CommandError):
             call_command("import_site_map", path, "--verify", stdout=StringIO())
 
+    def test_new_rows_keep_the_file_order(self):
+        page = self.site("imp-map-order")
+        entry = self.entry(page)
+        names = ["Zeta inn (sample)", "Alpha inn (sample)", "Mid inn (sample)"]
+        entry["lodging"] = [{"name": n, "kind": "hotel", "latitude": 43.0962, "longitude": -0.0512,
+                             "nearest_point": "Main gate (sample)"} for n in names]
+        entry["map_points"].reverse()  # Station first, then the gate
+        self.run_import(self.write_file([entry]))
+        page = SacredSitePage.objects.get(pk=page.pk)
+        self.assertEqual([lodging.name for lodging in page.lodgings.all()], names)
+        self.assertEqual([lodging.sort_order for lodging in page.lodgings.all()], [0, 1, 2])
+        self.assertEqual([p.name for p in page.map_points.all()], ["Station (sample)", "Main gate (sample)"])
+        self.assertEqual([lodging.name for lodging in page.live_revision.as_object().lodgings.all()], names)
+        with V2_ON:
+            section = self.section(self.html(page))
+        self.assertLess(section.index("Zeta inn"), section.index("Alpha inn"))
+        self.assertLess(section.index("Alpha inn"), section.index("Mid inn"))
+
+    def test_existing_rows_keep_their_order(self):
+        page = self.site("imp-map-keep")
+        gate = self.point(page, name="Main gate (sample)")
+        SiteMapPoint.objects.filter(pk=gate.pk).update(sort_order=7)
+        self.run_import(self.write_file([self.entry(page)]))
+        page = SacredSitePage.objects.get(pk=page.pk)
+        self.assertEqual(page.map_points.get(name="Main gate (sample)").sort_order, 7)
+        self.assertEqual(page.map_points.get(name="Station (sample)").sort_order, 1)
+
     def test_example_file_is_valid_and_matches_nothing(self):
         out = self.run_import(os.path.join(os.path.dirname(os.path.dirname(__file__)), "tools", "site_map_example.json"),
                               "--dry-run")
