@@ -2,6 +2,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
+from wagtail.models import Site
 
 from pilgrims.views import _ip_hash
 
@@ -25,9 +26,14 @@ def robots_txt(request):
     if getattr(settings, "SITE_NOINDEX", False):
         content = "User-agent: *\nDisallow: /\n"
     else:
+        # The Wagtail Site's root URL, as the sitemap's own links use, so a
+        # request on the app's ondigitalocean.app address still points
+        # crawlers at the canonical https://sitesofgrace.com/sitemap.xml.
+        site = Site.find_for_request(request)
+        root = site.root_url if site else request.build_absolute_uri("/").rstrip("/")
         content = (
             "User-agent: *\nAllow: /\n\n"
-            f"Sitemap: {request.build_absolute_uri('/sitemap.xml')}\n"
+            f"Sitemap: {root}/sitemap.xml\n"
         )
     return HttpResponse(content, content_type="text/plain")
 
