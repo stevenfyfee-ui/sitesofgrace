@@ -620,3 +620,9 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     encrypted (SECRET), run-time-only variable: read the live spec with `doctl apps spec get`, change
     that one entry, show the masked diff, get an explicit "yes", then `doctl apps update --spec`.
     The change triggers a redeploy, so it must not share a deploy with anything else.
+17. **Trip planner `/plan/` scrolls sideways on phones (pre-v2).** `tools/check_overflow.py` found the
+    planner form 528 px wide at 360, 390 and 430 px: `.plan-global-fields` is a two-column `1fr 1fr`
+    grid whose selects can't shrink, and `.plan-stop` adds a fixed 92 px column plus 42 px of right
+    padding (`planner/static/planner/css/plan.css`). Every v2 page passes. Fix it after go-live in its
+    own small PR (columns as `minmax(0, 1fr)`, controls `width: 100%`, one column under ~480 px), then
+    re-run `tools/check_overflow.py` over the whole sitemap.
