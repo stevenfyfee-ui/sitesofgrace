@@ -631,3 +631,11 @@ Switzerland 1 — spelled differently from the site values (`Bosnia and Herzegov
     beside its `_converted.json`, so every pattern matches two files and the importers refuse it
     ("must match exactly one file"). Change the steps to name the exact file (for example
     `tools/imports/site_details_pilot_2026-10_converted.json`), as was done for the pilot import.
+19. **Pins at the same spot should share one popup.** On hub maps (`destinations/js/hub-map.js`) and the
+    Interactive Map, sites with exactly the same coordinates draw stacked pins, and only the top one
+    can be clicked. On the Rome hub that hides two of three at St. Peter's (1136 St. Peter's Basilica,
+    1192 Tomb of St. John Paul II, 1307 Tomb of St. Gregory the Great, all 41.902200, 12.453900) and
+    one of two at St. Mary Major (1138, 1262 Relics of St. Jerome, 41.897600, 12.498600). Group
+    points by exact coordinates and draw one pin whose popup lists every site there, each with its
+    own link. Keep the category colors from `CATEGORY_STYLES` (a mixed group could use the first
+    site's color, or a neutral one). Shared code belongs in `sog-maps.js` so both maps use it.
