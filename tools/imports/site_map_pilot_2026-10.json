@@ -1,0 +1,1415 @@
+{
+  "_meta": {
+    "generated": "2026-10-22",
+    "source": "Researched in Cowork from official and public sources; see pilot-content-review-2026-10.md",
+    "choice_values": "human labels from the v2 brief; map to stored keys before import"
+  },
+  "pages": [
+    {
+      "id": 1091,
+      "title": "Our Lady of Lourdes",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "lat": 43.0968,
+          "lng": -0.05532,
+          "note": "Main entrance on Place Mgr Laurence, with the statue of St. Joseph. The tourist train and La Merlasse car park are beside it.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Grotto of Massabielle",
+          "lat": 43.09742,
+          "lng": -0.05829,
+          "note": "Where the 18 apparitions took place. The spring is inside, and the route past the Grotto is open to all.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of the Immaculate Conception",
+          "lat": 43.09744,
+          "lng": -0.05794,
+          "note": "The Upper Basilica, built on the rock above the Grotto. The 1862 declaration is engraved in its right aisle.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Rosary Basilica",
+          "lat": 43.09756,
+          "lng": -0.05731,
+          "note": "The lower basilica, entered from Rosary Square between the two curving ramps.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of St. Pius X (underground)",
+          "lat": 43.09719,
+          "lng": -0.05444,
+          "note": "Large underground basilica consecrated in 1958, used for the big international Masses.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "The Baths (Piscines)",
+          "lat": 43.09765,
+          "lng": -0.06036,
+          "note": "Immersion in spring water, helped by volunteers. Individuals don't book; groups book online. Arrive early.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Way of the Cross (Espélugues hill)",
+          "lat": 43.09663,
+          "lng": -0.06043,
+          "note": "About 1.5 km of stations with life-size figures on a steep hillside. A stone stair leads to the first station.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Le Cachot",
+          "lat": 43.096,
+          "lng": -0.04738,
+          "note": "The former jail cell at 15 rue des Petits Fossés where Bernadette's family lived in 1858.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Moulin de Boly (Bernadette's birthplace)",
+          "lat": 43.09831,
+          "lng": -0.04896,
+          "note": "The mill on rue Bernadette Soubirous where Bernadette was born in 1844.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Lourdes train station",
+          "lat": 43.1004,
+          "lng": -0.04251,
+          "note": "TGV, Intercités and regional trains. About 20 minutes on foot to the Sanctuary.",
+          "verified": false
+        },
+        {
+          "kind": "parking",
+          "name": "Parking du Boissarie",
+          "lat": 43.09892,
+          "lng": -0.05195,
+          "note": "Paid municipal car park near Pont Saint-Michel, a short walk from the Sanctuary.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Hôtel Eliseo",
+          "kind": "hotel",
+          "lat": 43.09537,
+          "lng": -0.05654,
+          "website": "http://www.hoteleliseolourdes.fr",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "walk_minutes": 2,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Large hotel on rue Reine Astrid, about 100 m from St. Joseph's Gate by its own account. Lift and rooms adapted for reduced mobility. Seasonal, April to October.",
+          "route_geojson": null,
+          "_straight_line_m": 187,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Grand Hôtel Gallia & Londres",
+          "kind": "hotel",
+          "lat": 43.09609,
+          "lng": -0.0536,
+          "website": "https://www.hotelgallialondres.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "walk_minutes": 3,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Hotel on avenue Bernadette Soubirous, facing the Sanctuary. Lifts and rooms adapted for reduced mobility. Seasonal.",
+          "route_geojson": null,
+          "_straight_line_m": 160,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Grand Hôtel Moderne",
+          "kind": "hotel",
+          "lat": 43.09493,
+          "lng": -0.05225,
+          "website": "http://www.grandhotelmoderne.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "walk_minutes": 6,
+          "walk_miles": 0.3,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Hotel on avenue Bernadette Soubirous with a lift and rooms for reduced mobility. Seasonal, late March to early November.",
+          "route_geojson": null,
+          "_straight_line_m": 325,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Cité Saint-Pierre (Secours Catholique)",
+          "kind": "pilgrim accommodation",
+          "lat": 43.09102,
+          "lng": -0.06233,
+          "website": "https://www.citesaintpierre.org",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "walk_minutes": 20,
+          "walk_miles": 0.9,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Run by Secours Catholique for pilgrims in hardship, families and church groups, and recommended by the Sanctuary. About 1.5 km away, in a wooded setting.",
+          "route_geojson": null,
+          "_straight_line_m": 859,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Centre Assomption Lourdes",
+          "kind": "religious house / guesthouse",
+          "lat": 43.10128,
+          "lng": -0.05964,
+          "website": "https://www.assomption-lourdes.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Porte Saint-Joseph (St. Joseph's Gate)",
+          "walk_minutes": 11,
+          "walk_miles": 0.5,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Religious house in the tradition of the Assumption Sisters, north of the river. About 170 guests, with a lift. Seasonal, April to November.",
+          "route_geojson": null,
+          "_straight_line_m": 609,
+          "_walk_is_estimate": true
+        }
+      ]
+    },
+    {
+      "id": 1101,
+      "title": "Our Lady of Medjugorje (Queen of Peace)",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "St. James Church",
+          "lat": 43.19056,
+          "lng": 17.6775,
+          "note": "The parish church, consecrated in 1969. The main doors face the square with the Queen of Peace statue.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Queen of Peace statue",
+          "lat": 43.19118,
+          "lng": 17.67806,
+          "note": "Marble statue in the square in front of the church.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Risen Christ statue",
+          "lat": 43.18913,
+          "lng": 17.67477,
+          "note": "Bronze statue southwest of the church, with level Stations of the Cross nearby for those who can't climb Cross Mountain.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Blue Cross",
+          "lat": 43.17967,
+          "lng": 17.68734,
+          "note": "At the foot of Apparition Hill, a common starting point for the climb.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Apparition Hill (Podbrdo)",
+          "lat": 43.17814,
+          "lng": 17.69066,
+          "note": "Site of the first reported apparitions in June 1981, marked by a statue of Our Lady. The path is steep and rocky.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Cross Mountain (Križevac), lower path",
+          "lat": 43.18146,
+          "lng": 17.66967,
+          "note": "Near the start of the Way of the Cross path up Križevac. Approximate.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Križevac summit cross",
+          "lat": 43.17532,
+          "lng": 17.6682,
+          "note": "Concrete cross raised in 1934. The rocky climb past 14 bronze Stations takes about 1 to 2 hours.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Hotel Grace",
+          "kind": "hotel",
+          "lat": 43.19185,
+          "lng": 17.67799,
+          "website": "https://hotel-grace.com/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "St. James Church",
+          "walk_minutes": 3,
+          "walk_miles": 0.1,
+          "slope": "level",
+          "step_free": "unknown",
+          "note": "About a 2-minute walk to St. James, on Pape Ivana Pavla II street.",
+          "route_geojson": null,
+          "_straight_line_m": 149,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Leone",
+          "kind": "hotel",
+          "lat": 43.1903,
+          "lng": 17.6789,
+          "website": "https://www.leone-medjugorje.com/en/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "St. James Church",
+          "walk_minutes": 2,
+          "walk_miles": 0.1,
+          "slope": "level",
+          "step_free": "unknown",
+          "note": "About 150 m from St. James by the hotel's own account.",
+          "route_geojson": null,
+          "_straight_line_m": 117,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Luna",
+          "kind": "hotel",
+          "lat": 43.19131,
+          "lng": 17.68296,
+          "website": "https://hotel-luna.net/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "St. James Church",
+          "walk_minutes": 8,
+          "walk_miles": 0.4,
+          "slope": "level",
+          "step_free": "yes",
+          "note": "Hotel on Fra Slavka Barbarića street, about 10 minutes east of the church. Lift and rooms for guests with disabilities.",
+          "route_geojson": null,
+          "_straight_line_m": 450,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Medjugorje Hotel & Spa",
+          "kind": "hotel",
+          "lat": 43.19044,
+          "lng": 17.68569,
+          "website": "https://www.medjugorjehotelspa.com/en/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "St. James Church",
+          "walk_minutes": 12,
+          "walk_miles": 0.5,
+          "slope": "level",
+          "step_free": "yes",
+          "note": "Hotel on Fra Slavka Barbarića street, under 1 km from the church. Lists accessible rooms and an elevator.",
+          "route_geojson": null,
+          "_straight_line_m": 664,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Ana & Stjepan Nikolić guesthouse",
+          "kind": "pilgrim accommodation",
+          "lat": 43.19663,
+          "lng": 17.67622,
+          "website": "https://pensionmedjugorje.com/en/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "St. James Church",
+          "walk_minutes": 10,
+          "walk_miles": 0.4,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Family guesthouse for pilgrims on Kardinala Stepinca street, about 700 m north of St. James. Cash only.",
+          "route_geojson": null,
+          "_straight_line_m": 683,
+          "_walk_is_estimate": true
+        }
+      ]
+    },
+    {
+      "id": 1115,
+      "title": "Basilica of St. Francis of Assisi",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Lower Church entrance (Piazza Inferiore)",
+          "lat": 43.074971,
+          "lng": 12.6054,
+          "note": "Entrance to the Lower Church, where daily Mass is celebrated. Stairs lead down to the tomb.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Tomb of St. Francis",
+          "lat": 43.074812,
+          "lng": 12.606188,
+          "note": "The plain stone tomb beneath the Lower Church high altar, with four early companions buried nearby. Approximate position.",
+          "verified": false
+        },
+        {
+          "kind": "other",
+          "name": "Porta San Francesco",
+          "lat": 43.073001,
+          "lng": 12.607165,
+          "note": "Old city gate on Viale Marconi, the usual walking approach from the car park.",
+          "verified": false
+        },
+        {
+          "kind": "parking",
+          "name": "Piazza Giovanni Paolo II car park",
+          "lat": 43.072603,
+          "lng": 12.607176,
+          "note": "Paid car park, open 24 hours, about 400 m from the Basilica.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Assisi train station (Santa Maria degli Angeli)",
+          "lat": 43.05917,
+          "lng": 12.58528,
+          "note": "On the plain about 3 km below the old town. Buses to the upper town leave from the station square.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of St. Clare",
+          "lat": 43.06889,
+          "lng": 12.61694,
+          "note": "Tomb of St. Clare and the San Damiano crucifix, at the other end of the old town.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Sanctuary of the Renunciation",
+          "lat": 43.069687,
+          "lng": 12.614187,
+          "note": "Where Francis gave up his possessions, and where St. Carlo Acutis is buried.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "San Damiano",
+          "lat": 43.061562,
+          "lng": 12.617938,
+          "note": "Church and convent below the town, reached by a downhill walk.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of St. Mary of the Angels (Porziuncola)",
+          "lat": 43.057812,
+          "lng": 12.579813,
+          "note": "In Santa Maria degli Angeli, a short walk from the train station.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Eremo delle Carceri",
+          "lat": 43.063187,
+          "lng": 12.651813,
+          "note": "Hermitage on Mount Subasio, about 4 km east of town, uphill.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Hotel Windsor Savoia",
+          "kind": "hotel",
+          "lat": 43.072974,
+          "lng": 12.606887,
+          "website": "http://www.hotelwindsorsavoia.it/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Lower Church entrance (Piazza Inferiore)",
+          "walk_minutes": 6,
+          "walk_miles": 0.2,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Hotel on Viale Marconi beside Porta San Francesco, a few minutes' walk from the Basilica. Lift and adapted rooms.",
+          "route_geojson": null,
+          "_straight_line_m": 253,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel San Francesco",
+          "kind": "hotel",
+          "lat": 43.07408,
+          "lng": 12.60727,
+          "website": "http://www.hotelsanfrancescoassisi.it",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Lower Church entrance (Piazza Inferiore)",
+          "walk_minutes": 4,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "On Via San Francesco, facing the Basilica in the pedestrian old town.",
+          "route_geojson": null,
+          "_straight_line_m": 181,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Giotto Hotel & Spa",
+          "kind": "hotel",
+          "lat": 43.072574,
+          "lng": 12.608326,
+          "website": "https://www.hotelgiottoassisi.it/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Lower Church entrance (Piazza Inferiore)",
+          "walk_minutes": 8,
+          "walk_miles": 0.3,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Hotel on Via Fontebella with views over the valley, about 200 m from the Basilica. Some suites are reached only by stairs.",
+          "route_geojson": null,
+          "_straight_line_m": 357,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Cittadella Ospitalità (Pro Civitate Christiana)",
+          "kind": "religious house / guesthouse",
+          "lat": 43.07157,
+          "lng": 12.61006,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Lower Church entrance (Piazza Inferiore)",
+          "walk_minutes": 12,
+          "walk_miles": 0.4,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Guest house of a Catholic lay association on Via degli Ancajani. Lift and adapted rooms in the main building; the annex is reached by stairs.",
+          "route_geojson": null,
+          "_straight_line_m": 535,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "St. Anthony's Guest House",
+          "kind": "religious house / guesthouse",
+          "lat": 43.069372,
+          "lng": 12.618097,
+          "website": "https://graymoor.org/italy",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Lower Church entrance (Piazza Inferiore)",
+          "walk_minutes": 27,
+          "walk_miles": 1.0,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Run by the Franciscan Sisters of the Atonement, between St. Clare and the Cathedral. Book by email. Closed mid-November to February.",
+          "route_geojson": null,
+          "_straight_line_m": 1205,
+          "_walk_is_estimate": true
+        }
+      ]
+    },
+    {
+      "id": 1092,
+      "title": "Our Lady of Guadalupe",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Plaza entrance (Atrio de las Américas)",
+          "lat": 19.48494,
+          "lng": -99.11763,
+          "note": "Pilgrims enter the large plaza from the south. Position approximate, shown at the New Basilica.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Old Basilica (Templo Expiatorio a Cristo Rey)",
+          "lat": 19.48503,
+          "lng": -99.11705,
+          "note": "Opened in 1709 and home to the tilma until 1976. Daily Masses.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Capuchinas parish church",
+          "lat": 19.48481,
+          "lng": -99.11644,
+          "note": "Former convent church of the Capuchin nuns, now the parish church.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Capilla de Indios",
+          "lat": 19.48506,
+          "lng": -99.11569,
+          "note": "Historic chapel at the foot of the hill, linked by tradition to where Juan Diego lived.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Capilla del Pocito",
+          "lat": 19.48556,
+          "lng": -99.1147,
+          "note": "Round 18th-century chapel over a spring that pilgrims believed had healing water.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Capilla del Cerrito (Tepeyac hilltop)",
+          "lat": 19.48606,
+          "lng": -99.11606,
+          "note": "Chapel on the hilltop where, by tradition, Juan Diego gathered the roses. Reached by stairs and paths.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Metro La Villa-Basílica (Line 6)",
+          "lat": 19.48152,
+          "lng": -99.11792,
+          "note": "Closest Metro station, about a 5-minute walk south. Service may be limited around December 11–12.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Metro Deportivo 18 de Marzo (Lines 3 and 6)",
+          "lat": 19.48375,
+          "lng": -99.12655,
+          "note": "Transfer station for travelers coming from the Zócalo on Line 3. About 1 km on foot.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Hotel Único La Villa",
+          "kind": "hotel",
+          "lat": 19.48049,
+          "lng": -99.11859,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Plaza entrance (Atrio de las Américas)",
+          "walk_minutes": 9,
+          "walk_miles": 0.4,
+          "slope": "unknown",
+          "step_free": "no",
+          "note": "On Calzada de Guadalupe, the closest hotel to the shrine. No elevator; upper floors by stairs only.",
+          "route_geojson": null,
+          "_straight_line_m": 505,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Via La Villa",
+          "kind": "hotel",
+          "lat": 19.46826,
+          "lng": -99.11679,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Plaza entrance (Atrio de las Américas)",
+          "walk_minutes": null,
+          "walk_miles": 1.5,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "On Avenida FC Hidalgo in Guadalupe Tepeyac, about 2 km away. Elevator, listed as easy to access by wheelchair.",
+          "route_geojson": null,
+          "_straight_line_m": 1857,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "City Express by Marriott Ciudad de México La Villa",
+          "kind": "hotel",
+          "lat": 19.46384,
+          "lng": -99.12557,
+          "website": "https://www.marriott.com/es/hotels/mexxv-city-express-cdmx-la-villa/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Plaza entrance (Atrio de las Américas)",
+          "walk_minutes": null,
+          "walk_miles": 1.6,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "On Calzada de Guadalupe. Elevators and accessible rooms with roll-in showers. A taxi or Metro ride rather than a walk.",
+          "route_geojson": null,
+          "_straight_line_m": 2489,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Holiday Inn Express Mexico Basilica",
+          "kind": "hotel",
+          "lat": null,
+          "lng": null,
+          "website": "https://www.ihg.com/holidayinnexpress/hotels/us/en/mexico-city/mexba/hoteldetail",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Plaza entrance (Atrio de las Américas)",
+          "walk_minutes": null,
+          "walk_miles": 2.2,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Calzada de Guadalupe 54, south of the shrine. Elevator and accessible rooms. A short taxi ride to the Basilica.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        }
+      ]
+    },
+    {
+      "id": 1093,
+      "title": "Our Lady of Fatima",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Sanctuary esplanade",
+          "lat": 39.63213,
+          "lng": -8.67179,
+          "note": "The Sanctuary has no single gate and is open day and night. Marked near the Basilica of the Rosary.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Chapel of the Apparitions (Capelinha)",
+          "lat": 39.63156,
+          "lng": -8.67319,
+          "note": "Site of five of the six 1917 apparitions. The statue's base marks where the small holm oak stood.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of Our Lady of the Rosary",
+          "lat": 39.63219,
+          "lng": -8.67194,
+          "note": "Tombs of St. Jacinta and Sister Lúcia in one transept, St. Francisco in the other.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of the Most Holy Trinity",
+          "lat": 39.62969,
+          "lng": -8.67531,
+          "note": "Large round church dedicated in 2007. Confession chapels and the Blessed Sacrament Chapel are on the lower level.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Loca do Cabeço",
+          "lat": 39.61615,
+          "lng": -8.67031,
+          "note": "Where the angel visited the children in 1916, marked by statues of the angel and the three children.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Hungarian Calvary (end of the Way of the Cross)",
+          "lat": 39.61853,
+          "lng": -8.671,
+          "note": "The 14 stations lead here; the Valinhos monument to the August 1917 apparition stands along the way.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Aljustrel (homes of the seers)",
+          "lat": 39.61586,
+          "lng": -8.66487,
+          "note": "Houses of Lúcia and of the Marto family. Free, open daily. About 30 minutes on foot from the Sanctuary.",
+          "verified": false
+        },
+        {
+          "kind": "bus/shuttle stop",
+          "name": "Fátima bus terminal",
+          "lat": 39.6314,
+          "lng": -8.68025,
+          "note": "Express buses from Lisbon. Position from the Shrine's 2017 map; check before relying on it.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Domus Pacis Fátima Hotel",
+          "kind": "hotel",
+          "lat": 39.63208,
+          "lng": -8.66851,
+          "website": "https://domuspacisfatimahotel.com/EN/hotel.html",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Sanctuary esplanade",
+          "walk_minutes": 2,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Founded as the international center of the Blue Army (World Apostolate of Fatima). Two chapels, a lift and a stair-free entrance.",
+          "route_geojson": null,
+          "_straight_line_m": 281,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Retreat House of Our Lady of Mount Carmel (Casa Carmo)",
+          "kind": "religious house / guesthouse",
+          "lat": null,
+          "lng": null,
+          "website": "https://booking.fatima.pt/en/retreat-house-of-our-lady-of-mount-carmel-casa-carmo",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Sanctuary esplanade",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Run by the Shrine, on the south side of the Prayer Area. 119 rooms, breakfast and a private chapel. Book at booking.fatima.pt.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        },
+        {
+          "name": "Retreat House of Our Lady of Sorrows (Casa Dores)",
+          "kind": "religious house / guesthouse",
+          "lat": null,
+          "lng": null,
+          "website": "https://booking.fatima.pt/en/retreat-house-of-our-lady-of-sorrows-casa-dores",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Sanctuary esplanade",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Run by the Shrine, on the north side of the Prayer Area. 83 rooms, 44 adapted for guests with disabilities.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        },
+        {
+          "name": "Paul VI Pastoral Centre",
+          "kind": "pilgrim accommodation",
+          "lat": null,
+          "lng": null,
+          "website": "https://booking.fatima.pt/en/pastoral-centre-of-paul-vi-centro-pastoral",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Sanctuary esplanade",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Run by the Shrine, west of the Basilica of the Most Holy Trinity. Aimed at groups and retreats, with a chapel and canteen.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        }
+      ]
+    },
+    {
+      "id": 1094,
+      "title": "Our Lady of Knock",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Visitor arrival point (North Car Park)",
+          "lat": 53.79391,
+          "lng": -8.91387,
+          "note": "The point the Shrine gives for drivers and coaches, on the Ballyhaunis Road. Free parking.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Apparition Chapel and gable wall",
+          "lat": 53.79231,
+          "lng": -8.91956,
+          "note": "Encloses the gable of the 1828 parish church where the 1879 apparition was seen. Open daily.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Knock Parish Church",
+          "lat": 53.79281,
+          "lng": -8.91944,
+          "note": "The 1828 church whose gable wall was the backdrop of the apparition. Many weekday Masses are here.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Basilica of Our Lady, Queen of Ireland",
+          "lat": 53.79206,
+          "lng": -8.91769,
+          "note": "Dedicated in 1976 and made a basilica in 1979. Main Sunday Masses in pilgrimage season.",
+          "verified": false
+        },
+        {
+          "kind": "other",
+          "name": "Knock Museum",
+          "lat": 53.79,
+          "lng": -8.91715,
+          "note": "The story of the 1879 apparition and rural life of the time. Free, open daily. A good place to start.",
+          "verified": false
+        },
+        {
+          "kind": "parking",
+          "name": "West Car Park",
+          "lat": 53.79337,
+          "lng": -8.92137,
+          "note": "Behind the stalls area, with electric-vehicle charging.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "St Mary's, Knock",
+          "kind": "pilgrim accommodation",
+          "lat": 53.79225,
+          "lng": -8.92042,
+          "website": "https://www.stmarysknock.com/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Visitor arrival point (North Car Park)",
+          "walk_minutes": 9,
+          "walk_miles": 0.4,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Run by Knock Shrine, beside the grounds on Main Street. 50 en-suite rooms and an oratory. Closed in winter.",
+          "route_geojson": null,
+          "_straight_line_m": 468,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Knock House Hotel",
+          "kind": "hotel",
+          "lat": 53.79104,
+          "lng": -8.91433,
+          "website": "http://www.knockhousehotel.ie",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Visitor arrival point (North Car Park)",
+          "walk_minutes": 6,
+          "walk_miles": 0.3,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "68 rooms, 6 of them wheelchair accessible. The hotel says it is under a 5-minute walk from the Shrine and Basilica.",
+          "route_geojson": null,
+          "_straight_line_m": 321,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "The Retreat Village at Knock Shrine",
+          "kind": "pilgrim accommodation",
+          "lat": null,
+          "lng": null,
+          "website": "https://www.knockshrine.ie/the-retreat-village-at-knock-shrine/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Visitor arrival point (North Car Park)",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Self-catering en-suite pods on the Shrine grounds, run by Knock Shrine for retreats. Book with the manager.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        },
+        {
+          "name": "Carramore House",
+          "kind": "hotel",
+          "lat": null,
+          "lng": null,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Visitor arrival point (North Car Park)",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Bed and breakfast approved by Fáilte Ireland, about 800 m from the Shrine. Private parking.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        }
+      ]
+    },
+    {
+      "id": 1136,
+      "title": "St. Peter's Basilica",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Security entrance, St. Peter's Square",
+          "lat": 41.9022,
+          "lng": 12.4572,
+          "note": "Security checks under the right-hand colonnade, with a reserved ramp entrance for people with disabilities. Position approximate.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Altar of the Confession and Tomb of St. Peter",
+          "lat": 41.90222,
+          "lng": 12.45333,
+          "note": "The papal altar under Bernini's canopy stands over Peter's traditional grave.",
+          "verified": false
+        },
+        {
+          "kind": "other",
+          "name": "Excavations Office (Scavi)",
+          "lat": 41.9023,
+          "lng": 12.45329,
+          "note": "Tours of the necropolis to Peter's tomb, booked well ahead on the official site.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Ottaviano (Metro Line A)",
+          "lat": 41.90944,
+          "lng": 12.45806,
+          "note": "Closest metro stop, about a 10 to 15 minute walk to the square.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Roma San Pietro station",
+          "lat": 41.89639,
+          "lng": 12.45444,
+          "note": "Regional rail station about 300 m from the basilica.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Domus Carmelitana",
+          "kind": "religious house / guesthouse",
+          "lat": 41.90475,
+          "lng": 12.46415,
+          "website": "http://www.domuscarmelitana.com/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Security entrance, St. Peter's Square",
+          "walk_minutes": 8,
+          "walk_miles": 0.4,
+          "slope": "level",
+          "step_free": "yes",
+          "note": "Guesthouse in a former Carmelite house on Via Alberico II, overseen by the Carmelite Order. Lift and an accessible route.",
+          "route_geojson": null,
+          "_straight_line_m": 641,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Casa per Ferie Santa Maria alle Fornaci",
+          "kind": "religious house / guesthouse",
+          "lat": 41.89767,
+          "lng": 12.45483,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Security entrance, St. Peter's Square",
+          "walk_minutes": 10,
+          "walk_miles": 0.4,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Guesthouse beside the Trinitarian church of Santa Maria alle Fornaci, near San Pietro station. Has a lift; ask about steps at the entrance.",
+          "route_geojson": null,
+          "_straight_line_m": 541,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Columbus",
+          "kind": "hotel",
+          "lat": 41.9021,
+          "lng": 12.461,
+          "website": "https://www.hotelcolumbusrome.it/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Security entrance, St. Peter's Square",
+          "walk_minutes": 6,
+          "walk_miles": 0.3,
+          "slope": "level",
+          "step_free": "unknown",
+          "note": "Hotel in a historic palace on Via della Conciliazione, the avenue that leads straight to St. Peter's Square.",
+          "route_geojson": null,
+          "_straight_line_m": 315,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Casa Tra Noi",
+          "kind": "pilgrim accommodation",
+          "lat": 41.89428,
+          "lng": 12.45234,
+          "website": "https://www.hotelcasatranoiroma.com/en/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Security entrance, St. Peter's Square",
+          "walk_minutes": 15,
+          "walk_miles": 0.7,
+          "slope": "steep",
+          "step_free": "yes",
+          "note": "Large house for pilgrims and groups, with two chapels. Uphill on Monte del Gallo, so the walk back is steep. Lift.",
+          "route_geojson": null,
+          "_straight_line_m": 968,
+          "_walk_is_estimate": true
+        }
+      ]
+    },
+    {
+      "id": 1137,
+      "title": "Basilica of St. John Lateran",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Main facade, Piazza di Porta San Giovanni",
+          "lat": 41.88591,
+          "lng": 12.50616,
+          "note": "The great east facade. Two ramps on the forecourt and lifts in the portico give step-free entry.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Scala Santa and Sancta Sanctorum",
+          "lat": 41.88732,
+          "lng": 12.50672,
+          "note": "Across the square. Tradition says these steps came from Pilate's palace; pilgrims climb them on their knees.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "Lateran Baptistery",
+          "lat": 41.88615,
+          "lng": 12.50429,
+          "note": "Rome's ancient eight-sided baptistery, from the 5th century. Free to enter.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "San Giovanni (Metro Lines A and C)",
+          "lat": 41.88528,
+          "lng": 12.50944,
+          "note": "Just outside Porta San Giovanni, a few minutes' walk to the facade.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Domus Sessoriana",
+          "kind": "religious house / guesthouse",
+          "lat": 41.8878,
+          "lng": 12.5164,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main facade, Piazza di Porta San Giovanni",
+          "walk_minutes": 15,
+          "walk_miles": 0.7,
+          "slope": "level",
+          "step_free": "unknown",
+          "note": "Guesthouse in the former monastery of the Basilica of the Holy Cross in Jerusalem. Pilgrims welcome. Position shown at the basilica.",
+          "route_geojson": null,
+          "_straight_line_m": 873,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Casa per Ferie Domus Helena",
+          "kind": "religious house / guesthouse",
+          "lat": 41.89311,
+          "lng": 12.50315,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main facade, Piazza di Porta San Giovanni",
+          "walk_minutes": 12,
+          "walk_miles": 0.6,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "36-room guesthouse on Via Ferruccio, with a lift and step-free route.",
+          "route_geojson": null,
+          "_straight_line_m": 838,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Saint John Hotel",
+          "kind": "hotel",
+          "lat": 41.88901,
+          "lng": 12.50501,
+          "website": "https://hotelsaintjohn.it/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main facade, Piazza di Porta San Giovanni",
+          "walk_minutes": 7,
+          "walk_miles": 0.3,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Hotel on Via Matteo Boiardo, a short walk north of the basilica.",
+          "route_geojson": null,
+          "_straight_line_m": 358,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Casa per Ferie Carmelite Teresian Sisters",
+          "kind": "religious house / guesthouse",
+          "lat": null,
+          "lng": null,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main facade, Piazza di Porta San Giovanni",
+          "walk_minutes": null,
+          "walk_miles": null,
+          "slope": "unknown",
+          "step_free": "no",
+          "note": "Run by Carmelite sisters at Via Tasso 157, near the metro. No accessible facilities listed. Book through ospitalitareligiosa.it.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        }
+      ]
+    },
+    {
+      "id": 1138,
+      "title": "Basilica of St. Mary Major",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Main entrance, Piazza di Santa Maria Maggiore",
+          "lat": 41.89724,
+          "lng": 12.49858,
+          "note": "Main doors under the portico, with a ramp to the right. Security check; large bags may be refused. Position approximate.",
+          "verified": false
+        },
+        {
+          "kind": "other",
+          "name": "Liberian Museum, Loggia and excavations",
+          "lat": 41.89763,
+          "lng": 12.49846,
+          "note": "One ticket covers the museum, the Loggia of Blessings, the Bernini staircase and the excavations.",
+          "verified": false
+        },
+        {
+          "kind": "prayer location",
+          "name": "Column of Peace (Marian column)",
+          "lat": 41.89695,
+          "lng": 12.49894,
+          "note": "Column topped by a statue of Mary in the square in front of the basilica.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Roma Termini",
+          "lat": 41.90083,
+          "lng": 12.50194,
+          "note": "Rome's main station, metro Lines A and B. About a 10-minute walk.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Vittorio Emanuele (Metro Line A)",
+          "lat": 41.89444,
+          "lng": 12.50417,
+          "note": "About 550 m southeast of the basilica.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Cavour (Metro Line B)",
+          "lat": 41.895,
+          "lng": 12.49361,
+          "note": "About 500 m west. Line B runs directly to Basilica San Paolo.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Casa per Ferie Suore di Santa Elisabetta",
+          "kind": "religious house / guesthouse",
+          "lat": 41.89638,
+          "lng": 12.49765,
+          "website": "http://www.csse-roma.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main entrance, Piazza di Santa Maria Maggiore",
+          "walk_minutes": 3,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Guesthouse run by sisters, about 125 m from the basilica. Lift, chapel, terrace and an 11 pm curfew. Pay on site only.",
+          "route_geojson": null,
+          "_straight_line_m": 123,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Mecenate Palace Hotel",
+          "kind": "hotel",
+          "lat": 41.89677,
+          "lng": 12.49991,
+          "website": "https://www.mecenatepalace.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main entrance, Piazza di Santa Maria Maggiore",
+          "walk_minutes": 3,
+          "walk_miles": 0.1,
+          "slope": "unknown",
+          "step_free": "yes",
+          "note": "Hotel on Via Carlo Alberto, about 120 m from the basilica. Listed as accessible, with a lift.",
+          "route_geojson": null,
+          "_straight_line_m": 122,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Hotel Montreal",
+          "kind": "hotel",
+          "lat": 41.89663,
+          "lng": 12.50088,
+          "website": "https://www.hotelmontrealrome.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main entrance, Piazza di Santa Maria Maggiore",
+          "walk_minutes": 4,
+          "walk_miles": 0.2,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Hotel on Via Carlo Alberto, about 200 m from the basilica toward Termini. Lift.",
+          "route_geojson": null,
+          "_straight_line_m": 202,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Suore Concezioniste Missionarie",
+          "kind": "religious house / guesthouse",
+          "lat": 41.89305,
+          "lng": 12.50797,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Main entrance, Piazza di Santa Maria Maggiore",
+          "walk_minutes": 16,
+          "walk_miles": 0.7,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Sisters' guesthouse on Via Bixio near Piazza Vittorio, about 900 m east of the basilica.",
+          "route_geojson": null,
+          "_straight_line_m": 906,
+          "_walk_is_estimate": true
+        }
+      ]
+    },
+    {
+      "id": 1139,
+      "title": "Basilica of St. Paul Outside the Walls",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "kind": "main entrance",
+          "name": "Quadriporticus entrance",
+          "lat": 41.859,
+          "lng": 12.4754,
+          "note": "The colonnaded forecourt before the west facade, facing the Tiber. Position approximate.",
+          "verified": false
+        },
+        {
+          "kind": "train station",
+          "name": "Basilica San Paolo (Metro Line B)",
+          "lat": 41.85611,
+          "lng": 12.47819,
+          "note": "Behind the basilica. Line B runs direct from Termini and Cavour.",
+          "verified": false
+        },
+        {
+          "kind": "sacred place",
+          "name": "San Paolo alle Tre Fontane",
+          "lat": 41.83541,
+          "lng": 12.48168,
+          "note": "About 2.7 km south: the church built where tradition says Paul was beheaded, part of the Trappist abbey.",
+          "verified": false
+        },
+        {
+          "kind": "other",
+          "name": "Porta San Paolo",
+          "lat": 41.87686,
+          "lng": 12.48196,
+          "note": "Ancient city gate on the Via Ostiense, about 2 km north. Pilgrims can walk the old road from here to Paul's tomb.",
+          "verified": false
+        }
+      ],
+      "lodging": [
+        {
+          "name": "San Paolo Guest House",
+          "kind": "hotel",
+          "lat": 41.85708,
+          "lng": 12.47817,
+          "website": "https://beb.it/sanpaologuesthouse/en/",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Quadriporticus entrance",
+          "walk_minutes": 6,
+          "walk_miles": 0.3,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Small private guesthouse near the Basilica San Paolo metro.",
+          "route_geojson": null,
+          "_straight_line_m": 313,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Palazzo Senesi",
+          "kind": "hotel",
+          "lat": 41.86418,
+          "lng": 12.47846,
+          "website": "",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Quadriporticus entrance",
+          "walk_minutes": 11,
+          "walk_miles": 0.5,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Registered guesthouse on Via Ostiense, about 600 m north of the basilica.",
+          "route_geojson": null,
+          "_straight_line_m": 629,
+          "_walk_is_estimate": true
+        },
+        {
+          "name": "Abitart Hotel",
+          "kind": "hotel",
+          "lat": null,
+          "lng": null,
+          "website": "https://www.abitarthotel.com",
+          "booking_url": "",
+          "is_affiliate_link": false,
+          "nearest_point": "Quadriporticus entrance",
+          "walk_minutes": null,
+          "walk_miles": 1.2,
+          "slope": "unknown",
+          "step_free": "unknown",
+          "note": "Hotel in the Ostiense district at Via Pellegrino Matteucci 10, near Piramide metro, two stops from Basilica San Paolo.",
+          "route_geojson": null,
+          "_straight_line_m": null,
+          "_walk_is_estimate": true,
+          "_needs_coordinates": true
+        }
+      ]
+    }
+  ]
+}
