@@ -74,6 +74,8 @@
 /* ---------- Layout ---------- */
 .v2-layout { display: grid; gap: 28px; padding-top: 28px; padding-bottom: 48px; }
 .v2-main { min-width: 0; }
+/* Long bare URLs in imported text and in At a Glance links wrap instead of widening the page. */
+.v2-main, .v2-glance { overflow-wrap: anywhere; }
 @media (min-width: 1060px) {
   .v2-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 44px; }
   .v2-main { grid-column: 1; grid-row: 1; }
