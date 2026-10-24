@@ -1,0 +1,274 @@
+{
+  "pages": [
+    {
+      "id": 2515,
+      "title": "Rome & Vatican City",
+      "status": "Ready to import",
+      "fields": {
+        "intro": "Rome holds the tomb of St. Peter, the four major basilicas, and the resting places of saints from every age of the Church. With a few days and comfortable shoes, you can pray at the heart of the Catholic world and walk where the early martyrs walked.",
+        "tile_caption": "The tomb of Peter and the four major basilicas",
+        "country_codes": [
+          "IT",
+          "VA"
+        ],
+        "localities": [
+          "Rome",
+          "Vatican City"
+        ],
+        "include_auto": true,
+        "getting_around": "<ul><li>From Fiumicino Airport, the Leonardo Express runs nonstop to Termini station in about 32 minutes.</li><li>Metro Line A stops at Ottaviano, a short walk from St. Peter&#x27;s. Lines A and C meet at San Giovanni, near St. John Lateran. Most churches in the historic center are easiest on foot.</li><li>Cover shoulders and knees for St. Peter&#x27;s and most Roman churches.</li><li>The Scavi tour to St. Peter&#x27;s tomb must be requested ahead through the Basilica&#x27;s official booking site, and only visitors age 10 and up are admitted. Request early and give flexible dates.</li><li>Wednesday papal audiences are free but need tickets, requested from the Prefecture of the Papal Household at least two weeks ahead. Audiences usually pause in July.</li></ul>",
+        "travel_advisory_url": "https://travel.state.gov/en/international-travel/travel-advisories/italy.html"
+      },
+      "hub_sites": [
+        1136,
+        1192,
+        1137,
+        1138,
+        1139,
+        1268,
+        1252,
+        1122,
+        1179,
+        1183,
+        1257,
+        1270
+      ],
+      "stay_options": [
+        {
+          "label": "2 days",
+          "text": "Spend day one at St. Peter's Basilica and the tomb of St. John Paul II, and add the Scavi tour if you have tickets. On day two, visit the other three major basilicas: St. John Lateran, St. Mary Major, where Pope Francis is buried, and St. Paul Outside the Walls."
+        },
+        {
+          "label": "4 days",
+          "text": "Add the Catacomb of Callixtus on the Appian Way, the layered church of San Clemente, and the saints' tombs in the historic center: St. Catherine of Siena at Santa Maria sopra Minerva, St. Ignatius at the Gesù, and St. Monica at Sant'Agostino. On a Wednesday, try to attend the papal audience."
+        },
+        {
+          "label": "1 week",
+          "text": "Walk the Seven Churches route made popular by St. Philip Neri, which adds San Lorenzo and San Sebastiano to the major basilicas. Leave time for Santa Cecilia in Trastevere and Chiesa Nuova, and take a day trip by train to Assisi or Orvieto."
+        }
+      ],
+      "combine_with": [
+        {
+          "site": 1115,
+          "name": "Basilica of St. Francis, Assisi",
+          "reason": "Pray at the tomb of St. Francis in the hill town where he lived.",
+          "travel_time": "about 2 h",
+          "mode": "train"
+        },
+        {
+          "site": 1106,
+          "name": "Orvieto",
+          "reason": "See the corporal from the Eucharistic Miracle of Bolsena in Orvieto Cathedral.",
+          "travel_time": "about 1 h 15",
+          "mode": "train"
+        },
+        {
+          "site": 1282,
+          "name": "Nettuno",
+          "reason": "Visit the shrine of the young martyr St. Maria Goretti by the sea.",
+          "travel_time": "about 1 h 15",
+          "mode": "train"
+        },
+        {
+          "site": 1276,
+          "name": "Monte Cassino Abbey",
+          "reason": "The mountaintop abbey founded by St. Benedict, rebuilt after World War II.",
+          "travel_time": "about 1 h 30",
+          "mode": "drive"
+        }
+      ]
+    },
+    {
+      "id": 2516,
+      "title": "Assisi & Umbria",
+      "status": "Ready to import",
+      "fields": {
+        "intro": "Assisi is the hill town where St. Francis and St. Clare lived, prayed and are buried, and where St. Carlo Acutis now rests. From here the green hills of Umbria lead to Cascia, home of St. Rita, and to Orvieto, keeper of the Eucharistic Miracle of Bolsena.",
+        "tile_caption": "Francis, Clare, and the hills of Umbria",
+        "country_codes": [
+          "IT"
+        ],
+        "localities": [
+          "Assisi"
+        ],
+        "include_auto": true,
+        "getting_around": "<ul><li>Assisi&#x27;s train station is in Santa Maria degli Angeli, about 3 km below the old town. Local buses leave from the station square about every 30 minutes and take 10 to 20 minutes to reach the upper town.</li><li>Direct trains from Rome Termini take about 2 hours. Trains that change at Foligno take longer.</li><li>The nearest airport is Perugia (PEG), about 20 minutes away by the airport bus. Most U.S. travelers arrive through Rome, a little over 2 hours by car.</li><li>Cars are restricted in the historic center. Park outside the walls; the Piazza Giovanni Paolo II car park is about 400 m from the Basilica of St. Francis.</li><li>The old town sits on a steep hillside with stone streets and stairs. Wear good shoes and allow extra time between St. Francis and St. Clare, at opposite ends of town.</li></ul>",
+        "travel_advisory_url": "https://travel.state.gov/en/international-travel/travel-advisories/italy.html"
+      },
+      "hub_sites": [
+        1115,
+        1176,
+        1124,
+        1207
+      ],
+      "stay_options": [
+        {
+          "label": "1 day",
+          "text": "Start early at the Basilica of St. Francis and pray at his tomb. Walk across the old town to the Sanctuary of the Renunciation, where St. Carlo Acutis rests, then to the Basilica of St. Clare. On the way back to the train, stop at the Porziuncola in Santa Maria degli Angeli."
+        },
+        {
+          "label": "2–3 days",
+          "text": "Add a slow morning at San Damiano below the town and a trip up to the Eremo delle Carceri on Mount Subasio. Go to Mass at the Basilica, and on a Friday or Saturday night join the quiet prayer at the tomb."
+        },
+        {
+          "label": "5 days",
+          "text": "Use Assisi as your base and add day trips: Cascia for St. Rita, Orvieto for the Corporal of Bolsena, and Gubbio. With a car you can also reach other Franciscan places such as Greccio and La Verna."
+        }
+      ],
+      "combine_with": [
+        {
+          "site": 1177,
+          "name": "Cascia",
+          "reason": "Tomb of St. Rita and the relic of the Eucharistic Miracle of Cascia, in the mountains of southeast Umbria.",
+          "travel_time": "about 1 h 25",
+          "mode": "drive"
+        },
+        {
+          "site": 1106,
+          "name": "Orvieto",
+          "reason": "The cathedral keeps the Corporal of the Eucharistic Miracle of Bolsena.",
+          "travel_time": "about 1 h 30",
+          "mode": "drive"
+        },
+        {
+          "site": null,
+          "name": "Gubbio",
+          "reason": "Medieval town tied to the story of Francis and the wolf.",
+          "travel_time": "about 1 h",
+          "mode": "drive"
+        },
+        {
+          "site": null,
+          "name": "Rome",
+          "reason": "Most international pilgrims arrive here, and Assisi is an easy rail link away.",
+          "travel_time": "about 2 h",
+          "mode": "train"
+        }
+      ]
+    },
+    {
+      "id": 2517,
+      "title": "Paris & Northern France",
+      "status": "Ready to import",
+      "fields": {
+        "intro": "Paris is home to the chapel where Our Lady gave St. Catherine Labouré the Miraculous Medal, and to the relics of St. Vincent de Paul and St. Louis. Beyond the city, trains reach Lisieux, home of St. Thérèse, and other shrines of northern France.",
+        "tile_caption": "The Miraculous Medal, St. Thérèse, and more",
+        "country_codes": [
+          "FR"
+        ],
+        "localities": [
+          "Paris",
+          "Lisieux",
+          "Troyes",
+          "Pontmain"
+        ],
+        "include_auto": true,
+        "getting_around": "<ul><li>From Charles de Gaulle Airport, the RER B train reaches Gare du Nord and Châtelet in about 30 to 50 minutes. From Orly, Metro Line 14 reaches Châtelet in about 25 minutes.</li><li>The metro is the easiest way around Paris. Sèvres-Babylone (Lines 10 and 12) is closest to the Rue du Bac chapel, and Line 13 stops at Basilique de Saint-Denis.</li><li>Notre-Dame de Paris reopened in December 2024. Entry is free, and you can book an optional time slot on the cathedral&#x27;s official website.</li><li>Sainte-Chapelle needs a timed ticket and sits inside the courthouse complex, so expect security screening. Arrive 20 to 30 minutes early.</li><li>Trains to Lisieux leave from Paris Saint-Lazare. Direct trains take about 1 hour 40 minutes.</li></ul>",
+        "travel_advisory_url": "https://travel.state.gov/en/international-travel/travel-advisories/france.html"
+      },
+      "hub_sites": [
+        1095,
+        1237,
+        1209,
+        1238,
+        1232,
+        1118,
+        1240,
+        1097
+      ],
+      "stay_options": [
+        {
+          "label": "2 days",
+          "text": "Start at the Chapel of Our Lady of the Miraculous Medal on Rue du Bac, then walk to the Chapel of St. Vincent de Paul nearby. On day two, visit Notre-Dame de Paris and Sainte-Chapelle on the Île de la Cité, and end with an evening at Sacré-Coeur."
+        },
+        {
+          "label": "4 days",
+          "text": "Add the Basilica of Saint-Denis, burial place of the kings of France, by metro. Then take a day trip by train to Lisieux to visit the Basilica of St. Thérèse."
+        },
+        {
+          "label": "1 week",
+          "text": "Add a day trip to Chartres Cathedral, then go farther to Troyes Cathedral or Our Lady of Pontmain. A car or a well-planned rail itinerary helps for the smaller towns."
+        }
+      ],
+      "combine_with": [
+        {
+          "site": null,
+          "name": "Chartres Cathedral",
+          "reason": "A great Gothic cathedral dedicated to Our Lady and an ancient pilgrimage goal.",
+          "travel_time": "about 1 h 15",
+          "mode": "train"
+        },
+        {
+          "site": 1234,
+          "name": "Tours",
+          "reason": "Pray at the tomb of St. Martin of Tours, one of France's most loved saints.",
+          "travel_time": "about 1 h 10",
+          "mode": "train"
+        },
+        {
+          "site": 1120,
+          "name": "Nevers",
+          "reason": "The incorrupt body of St. Bernadette of Lourdes rests in the convent chapel of Saint-Gildard.",
+          "travel_time": "about 2 h",
+          "mode": "train"
+        }
+      ]
+    },
+    {
+      "id": 2518,
+      "title": "Portugal",
+      "status": "Ready to import",
+      "fields": {
+        "intro": "Portugal is the land of Fátima, where Our Lady appeared to three shepherd children in 1917 and asked for prayer and penance. Nearby Santarém keeps one of the Church's best-known Eucharistic miracles, and Lisbon honors its native son, St. Anthony.",
+        "tile_caption": "Fátima, Santarém, and the shrines of Portugal",
+        "country_codes": [
+          "PT"
+        ],
+        "include_auto": true,
+        "getting_around": "<ul><li>From Lisbon Airport, the Red Line metro reaches Saldanha in about 20 minutes. For downtown, change to the Green Line at Alameda.</li><li>Buses from Lisbon to Fátima take about 1 hour 20 minutes to 1 hour 40 minutes, from Sete Rios or Oriente. The Fátima bus station is about 300 m from the Sanctuary. The nearest train station is about 19 km from town, so the bus is usually easier.</li><li>Driving from Lisbon to Fátima takes about 1 hour 15 minutes on the A1 toll road.</li><li>Trains from Lisbon Oriente reach Santarém in 30 minutes to an hour. Santarém is about 45 minutes by car from Fátima.</li><li>The Rosary is prayed at 9:30 pm at the Chapel of the Apparitions, followed by a candlelight procession. The May 12–13 and October 12–13 anniversary pilgrimages draw very large crowds, so book rooms early.</li></ul>",
+        "travel_advisory_url": "https://travel.state.gov/en/international-travel/travel-advisories/portugal.html"
+      },
+      "hub_sites": [
+        1093,
+        1108
+      ],
+      "stay_options": [
+        {
+          "label": "2 days",
+          "text": "Spend both days in Fátima. Pray at the Chapel of the Apparitions and the tombs of the three shepherd children, and join the Rosary and candlelight procession at night. In the morning, walk the Way of the Cross to the Valinhos and the children's homes in Aljustrel."
+        },
+        {
+          "label": "4 days",
+          "text": "Begin in Lisbon at the Church of St. Anthony, built where tradition says he was born. Visit the Eucharistic Miracle of Santarém on the way north, then give Fátima two full days."
+        },
+        {
+          "label": "1 week",
+          "text": "After Fátima, visit the monasteries of Batalha and Alcobaça and the seaside shrine at Nazaré. Continue to Coimbra, where Sister Lúcia lived as a Carmelite. With extra time, head north to Bom Jesus in Braga."
+        }
+      ],
+      "combine_with": [
+        {
+          "site": null,
+          "name": "Batalha Monastery",
+          "reason": "A grand Gothic monastery dedicated to Our Lady of Victory.",
+          "travel_time": "about 30 min",
+          "mode": "drive"
+        },
+        {
+          "site": null,
+          "name": "Nazaré and Alcobaça",
+          "reason": "Nazaré's old Marian shrine above the sea, and the great Cistercian abbey nearby.",
+          "travel_time": "about 45 min",
+          "mode": "drive"
+        },
+        {
+          "site": null,
+          "name": "Coimbra",
+          "reason": "The Carmel of St. Teresa, where Sister Lúcia lived, and a small memorial of her life.",
+          "travel_time": "about 55 min",
+          "mode": "drive"
+        }
+      ]
+    }
+  ]
+}
