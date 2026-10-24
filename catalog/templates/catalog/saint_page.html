@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags v2_tags destination_tags %}
 
 {% block body_class %}catalog catalog-saint{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">{% endblock %}
@@ -69,7 +69,8 @@
             {% endif %}
           </a>
         {% endfor %}
-      </div>
+      </div>{% v2_enabled as v2 %}{% if v2 %}{% hubs_for_saint page as saint_hubs %}{% if saint_hubs %}
+      <p class="catalog-hub-links">Visit in {% for hub in saint_hubs %}<a href="{% pageurl hub %}">{{ hub.title }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}</p>{% endif %}{% endif %}
     </section>
   {% endif %}
 

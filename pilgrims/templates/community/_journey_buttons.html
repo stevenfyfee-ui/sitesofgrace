@@ -3,15 +3,15 @@
 
 <div class="journey-buttons" data-site-id="{{ site.pk }}" data-set-url="{% url 'journey_set' %}">
   {% if is_authenticated %}
-    <button type="button" class="btn journey-btn{% if current_status == 'want_to_go' %} active{% endif %}" data-status="want_to_go">
+    {% if not only or only == "want_to_go" %}<button type="button" class="btn journey-btn{% if current_status == 'want_to_go' %} active{% endif %}" data-status="want_to_go">
       {% if current_status == 'want_to_go' %}✓ Saved to my journey{% else %}Save to my journey{% endif %}
-    </button>
+    </button>{% endif %}{% if not only or only == "visited" %}
     <button type="button" class="btn journey-btn{% if current_status == 'visited' %} active{% endif %}" data-status="visited">
       {% if current_status == 'visited' %}✓ Visited{% else %}Mark as visited{% endif %}
-    </button>
+    </button>{% endif %}
   {% else %}
-    <a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Save to my journey</a>
-    <a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Mark as visited</a>
+    {% if not only or only == "want_to_go" %}<a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Save to my journey</a>{% endif %}{% if not only or only == "visited" %}
+    <a class="btn journey-btn" href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Mark as visited</a>{% endif %}
   {% endif %}
 </div>
 

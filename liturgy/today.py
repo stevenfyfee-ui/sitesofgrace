@@ -257,3 +257,85 @@ def liturgical_today(now=None):
     }
     _attach_thumbnails(days.values())
     return days
+
+
+# --- Upcoming feasts (v2 homepage) -------------------------------------------
+
+UPCOMING_FEASTS_MAX = 4
+UPCOMING_FEASTS_DAYS = 60
+
+
+def _site_for_saint(saint_ref, day_sites, index):
+    """A place to keep a saint's feast: a site whose feast falls on the day and
+    whose principal saint this is, else any live site with this principal
+    saint, else None (the card then links the saint's own page)."""
+    from catalog.models import SacredSitePage
+
+    site_ids = list(
+        SacredSitePage.objects.live().public()
+        .filter(associated_saint_id=saint_ref["pk"]).order_by("title").values_list("pk", flat=True)
+    )
+    for ref in day_sites:
+        if ref["pk"] in site_ids:
+            return ref
+    if site_ids:
+        by_pk = {ref["pk"]: ref for ref in index["titles"].values() if ref["kind"] == "site"}
+        for pk in site_ids:
+            if pk in by_pk:
+                return by_pk[pk]
+    return None
+
+
+def upcoming_feasts(limit=UPCOMING_FEASTS_MAX, days=UPCOMING_FEASTS_DAYS, now=None):
+    """The next `limit` celebrations within `days` days (today included) that
+    match a live saint or site page -- for the v2 homepage's "Upcoming feasts".
+
+    Reuses the same LitCal data (celebrations_on), the same cached page index
+    (load_index, invalidated on publish/unpublish) and the same matching as
+    the Today in the Church card. A plain weekday is never a card. Each card
+    names one place: a site where possible (one whose feast falls that day, or
+    whose principal saint is the one celebrated), else the saint's page. A page
+    appears on at most one card.
+
+    [{date, month, day_number, rank_label, name, when ("Today"/"Tomorrow"/""),
+      place: {title, url, kind}}]
+    """
+    start = liturgical_date(now)
+    index = load_index()
+    cards, used = [], set()
+    for offset in range(days):
+        day = start + timedelta(days=offset)
+        events = celebrations_on(day)
+        entries = list(index["days"].get((day.month, day.day), []))
+        for event in events:
+            entries.extend(index["days"].get(event.get("event_key"), []))
+        day_sites = [e["page"] for e in entries if e["reason"] == "feast" and e["kind"] == "site"]
+        day_saints = [e["page"] for e in entries if e["reason"] == "feast" and e["kind"] == "saint"]
+        day_pool_used = False
+        for event in events:
+            if int(event.get("grade") or 0) == 0:
+                continue
+            ref = index["titles"].get(fold_celebration(event.get("name")))
+            place = None
+            if ref is not None:
+                place = ref if ref["kind"] == "site" else (_site_for_saint(ref, day_sites, index) or ref)
+            elif not day_pool_used and (day_sites or day_saints):
+                # A site or saint whose own feast text names this day, under the
+                # day's highest-ranked celebration that has no page of its own.
+                place = (day_sites or day_saints)[0]
+                day_pool_used = True
+            if place is None or place["pk"] in used:
+                continue
+            used.add(place["pk"])
+            cards.append({
+                "date": day,
+                "month": day.strftime("%b").upper(),
+                "day_number": day.day,
+                "rank_label": rank_label(event),
+                "name": display_name(event.get("name")),
+                "when": "Today" if offset == 0 else "Tomorrow" if offset == 1 else "",
+                "place": {"title": place["title"], "url": place["url"], "kind": place["kind"]},
+            })
+            if len(cards) >= limit:
+                return cards
+    return cards

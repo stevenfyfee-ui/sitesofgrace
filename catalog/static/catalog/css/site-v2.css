@@ -1,0 +1,327 @@
+/* Pilgrimage Platform v2 -- sacred site page.
+   Loaded only when the v2 switch is on (catalog/sacred_site_page.html).
+   Palette: the site tokens from css/site.css, plus the mockup's three
+   supporting tones (gold-deep, green, amber) and its body ink. */
+
+.v2-site {
+  --v2-gold-deep: #8A6420;
+  --v2-green: #3E7A5A;
+  --v2-amber: #B7791F;
+  --v2-ink: #2F3A52;
+  --v2-hairline: rgba(3, 37, 83, .08);
+  --v2-shadow: 0 14px 40px -26px rgba(3, 37, 83, .55);
+  color: var(--v2-ink);
+}
+
+.v2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .v2-wrap { padding: 0 28px; } }
+
+/* Anchor targets clear the sticky header (84px) plus the section bar. */
+.v2-site .section-anchor,
+.v2-site .plan-summary { scroll-margin-top: 150px; }
+
+/* ---------- Hero ---------- */
+.v2-hero {
+  background: var(--navy); color: var(--ivory);
+  padding: 28px 0 34px;
+}
+.v2-crumb ol { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--sans); font-size: 13px; }
+.v2-crumb li + li::before { content: "›"; margin-right: 6px; color: rgba(253, 249, 242, .5); }
+.v2-crumb a { color: rgba(253, 249, 242, .85); text-decoration: none; }
+.v2-crumb a:hover, .v2-crumb a:focus-visible { text-decoration: underline; color: var(--ivory); }
+.v2-crumb [aria-current] { color: rgba(253, 249, 242, .6); }
+
+.v2-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.v2-pill {
+  display: inline-flex; align-items: center;
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid rgba(253, 249, 242, .35); color: var(--ivory);
+}
+.v2-pill--category { background: var(--ivory); color: var(--navy); border-color: var(--ivory); }
+.v2-pill--status { border-color: var(--gold); color: #F0DCAE; cursor: help; }
+
+.v2-title {
+  font-family: var(--serif-display); font-weight: 600;
+  font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 0; color: var(--ivory);
+}
+.v2-subtitle { margin: 10px 0 0; font-family: var(--sans); font-size: 14.5px; color: #E9D8B0; }
+.v2-subtitle span + span::before { content: "·"; margin: 0 8px; }
+.v2-subtitle a { color: inherit; }
+.v2-lede { margin: 16px 0 0; max-width: 62ch; font-family: var(--serif-body); font-size: 17px; line-height: 1.6; color: rgba(253, 249, 242, .92); }
+
+.v2-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 22px; }
+.v2-hero-actions .journey-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.v2-hero .journey-btn { background: transparent; color: var(--ivory); border-color: rgba(253, 249, 242, .5); }
+.v2-hero .journey-btn.active { background: var(--ivory); color: var(--navy); }
+
+/* ---------- Section bar ---------- */
+.v2-sectionbar {
+  position: sticky; top: 84px; z-index: 900;
+  background: var(--ivory); border-bottom: 1px solid var(--gold-soft);
+  overflow-x: auto; scrollbar-width: thin;
+}
+.v2-sectionbar-list { list-style: none; margin: 0 auto; padding: 0 16px; max-width: 1200px; display: flex; gap: 4px; white-space: nowrap; }
+@media (min-width: 720px) { .v2-sectionbar-list { padding: 0 28px; } }
+.v2-sectionbar-link {
+  display: inline-block; padding: 14px 12px 12px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 600; color: var(--blue);
+  text-decoration: none; border-bottom: 2px solid transparent;
+}
+.v2-sectionbar-link:hover { color: var(--navy); }
+.v2-sectionbar-link[aria-current="true"] { color: var(--navy); border-bottom-color: var(--gold); }
+
+/* ---------- Layout ---------- */
+.v2-layout { display: grid; gap: 28px; padding-top: 28px; padding-bottom: 48px; }
+.v2-main { min-width: 0; }
+@media (min-width: 1060px) {
+  .v2-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 44px; }
+  .v2-main { grid-column: 1; grid-row: 1; }
+  .v2-glance { grid-column: 2; grid-row: 1; align-self: start; position: sticky; top: 150px; }
+}
+
+.v2-block { padding: 26px 0; border-bottom: 1px solid var(--v2-hairline); }
+.v2-block:first-child { padding-top: 0; }
+.v2-block:last-child { border-bottom: 0; }
+.v2-block .plan-visit { padding: 0; border: 0; margin: 0; }
+.v2-site .v2-eyebrow {
+  margin: 0 0 6px; font-family: var(--serif-titling); font-size: 12px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--v2-gold-deep);
+}
+.v2-site .v2-eyebrow--sub { margin-top: 22px; }
+.v2-h2, .v2-block .plan-visit h2 {
+  font-family: var(--serif-display); font-weight: 600; font-size: clamp(26px, 3vw, 32px);
+  line-height: 1.15; color: var(--navy); margin: 0 0 14px;
+}
+.v2-h3 { display: block; font-family: var(--serif-display); font-weight: 600; font-size: 22px; color: var(--navy); }
+.v2-feature-image img { width: 100%; height: auto; border-radius: 14px; margin-bottom: 8px; }
+.v2-site .rich-text { font-family: var(--serif-body); font-size: 16.5px; line-height: 1.7; }
+
+.v2-card {
+  display: block; background: #fff; border: 1px solid var(--gold-soft); border-radius: 14px;
+  padding: 18px 20px; color: inherit; text-decoration: none; box-shadow: var(--v2-shadow);
+}
+a.v2-card:hover { border-color: var(--gold); }
+.v2-arrow-link { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--blue); text-decoration: none; }
+.v2-arrow-link::after { content: " →"; }
+
+/* Overview */
+.v2-choice--wide { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+.v2-choice-text { flex: 1 1 320px; }
+.v2-choice-copy { display: block; margin-top: 4px; font-size: 15.5px; line-height: 1.55; }
+
+/* Read more */
+.v2-clamp-body.is-clamped {
+  max-height: var(--v2-clamp-height, 13.6em); overflow: hidden; position: relative;
+  -webkit-mask-image: linear-gradient(#000 70%, transparent);
+          mask-image: linear-gradient(#000 70%, transparent);
+}
+.v2-clamp-toggle {
+  margin-top: 10px; background: none; border: 0; padding: 4px 0; cursor: pointer;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--blue);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+@media print {
+  .v2-clamp-body.is-clamped { max-height: none !important; -webkit-mask-image: none; mask-image: none; overflow: visible; }
+  .v2-clamp-toggle, .v2-sectionbar { display: none !important; }
+}
+
+/* Church Recognition: "How to read this account" */
+.v2-readbox {
+  display: grid; gap: 1px; margin-top: 20px; background: var(--gold-soft);
+  border: 1px solid var(--gold-soft); border-radius: 14px; overflow: hidden;
+}
+@media (min-width: 640px) { .v2-readbox { grid-template-columns: 1fr 1fr; } }
+.v2-readbox-cell { background: var(--parchment); padding: 16px 18px; }
+.v2-readbox-label {
+  margin: 0 0 6px; font-family: var(--serif-titling); font-size: 12px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--v2-gold-deep);
+}
+.v2-readbox-cell .rich-text { font-size: 15px; line-height: 1.6; }
+.v2-readbox-cell .rich-text p { margin: 0 0 .6em; }
+
+/* Plan Your Visit pills */
+.v2-guide-pill {
+  display: inline-block; margin: 0 0 14px; padding: 5px 12px; border-radius: 999px;
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600;
+  color: var(--v2-green); background: rgba(62, 122, 90, .08); border: 1px solid rgba(62, 122, 90, .45);
+}
+.v2-guide-pill--essential { color: var(--blue); background: var(--parchment); border-color: var(--gold-soft); }
+.v2-guide-pill--full::before { content: "✓ "; }
+.v2-confirm-pill {
+  display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 999px; vertical-align: middle;
+  font-family: var(--sans); font-size: 11.5px; font-weight: 600;
+  color: var(--v2-amber); background: rgba(183, 121, 31, .08); border: 1px solid rgba(183, 121, 31, .5);
+}
+
+/* At a Glance */
+.v2-glance {
+  background: #fff; border: 1px solid var(--gold-soft); border-radius: 16px;
+  padding: 20px 20px 18px; box-shadow: var(--v2-shadow);
+}
+.v2-glance-title { margin: 0 0 12px; font-family: var(--serif-titling); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
+.v2-glance-list { margin: 0; }
+.v2-glance-row { padding: 10px 0; border-top: 1px solid var(--v2-hairline); }
+.v2-glance-row:first-child { border-top: 0; padding-top: 0; }
+.v2-glance-row dt { font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.v2-glance-row dd { margin: 3px 0 0; font-size: 15px; line-height: 1.5; }
+.v2-glance-row a { color: var(--blue); }
+.v2-glance-actions { display: grid; gap: 10px; margin-top: 16px; }
+.v2-glance-actions .journey-buttons { display: grid; margin: 0; }
+.v2-glance-actions .btn { width: 100%; }
+
+/* Nearby */
+.v2-near-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 640px) { .v2-near-grid { grid-template-columns: 1fr 1fr; } }
+.v2-near-card { display: flex; gap: 12px; align-items: flex-start; height: 100%; }
+.v2-dot { flex: 0 0 auto; width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; border: 1.5px solid; }
+.v2-near-text { display: grid; gap: 3px; }
+.v2-near-title { font-family: var(--serif-display); font-weight: 600; font-size: 19px; color: var(--navy); }
+.v2-near-sig { font-size: 14px; line-height: 1.5; }
+.v2-near-dist { font-family: var(--sans); font-size: 12.5px; font-weight: 600; color: var(--stone); }
+
+/* Prepare spiritually */
+.v2-prep-grid { display: grid; gap: 14px; }
+@media (min-width: 640px) { .v2-prep-grid { grid-template-columns: 1fr 1fr; } }
+.v2-prayer { font-family: var(--serif-display); font-size: 19px; font-style: italic; color: var(--navy); }
+.v2-readiness { margin-top: 14px; background: var(--parchment); box-shadow: none; }
+.v2-readiness p:last-child { margin: 0; font-size: 14.5px; }
+.v2-readiness a { color: var(--blue); }
+
+/* Information & sources */
+.v2-sources { margin: 0 0 12px; }
+.v2-sources-row { padding: 10px 0; border-top: 1px solid var(--v2-hairline); }
+@media (min-width: 640px) { .v2-sources-row { display: grid; grid-template-columns: 180px 1fr; gap: 16px; } }
+.v2-sources-row dt { font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--stone); }
+.v2-sources-row dd { margin: 0; }
+.v2-sources-row a { color: var(--blue); }
+.v2-sources-note { font-size: 14.5px; color: var(--stone); margin: 6px 0 14px; }
+.v2-site .catalog-tags { margin-top: 18px; }
+
+/* Pilgrim Photos -- always last */
+.v2-photos-head { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+.v2-photos-head .v2-h2 { margin: 0; }
+.v2-photos-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.v2-photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 720px) { .v2-photo-grid { grid-template-columns: repeat(4, 1fr); } }
+.v2-photo-tile { display: block; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; background: var(--parchment); }
+.v2-photo-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Visible focus on every new control */
+.v2-site a:focus-visible,
+.v2-site button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-site * { scroll-behavior: auto !important; transition: none !important; }
+}
+
+/* ---------- Phase 2: guided pilgrimages ---------- */
+.v2-choice-grid { display: grid; gap: 14px; }
+@media (min-width: 640px) { .v2-choice-grid { grid-template-columns: 1fr 1fr; } }
+.v2-choice { display: grid; gap: 6px; align-content: start; }
+.v2-choice-icon { font-size: 20px; color: var(--v2-gold-deep); }
+
+.v2-tour { margin-bottom: 14px; }
+.v2-tour-head { display: flex; flex-wrap: wrap; gap: 10px 16px; justify-content: space-between; align-items: flex-start; }
+.v2-tour-op { margin: 2px 0 0; font-family: var(--sans); font-size: 13.5px; color: var(--stone); }
+.v2-tour-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.v2-tour-pill {
+  display: inline-block; padding: 4px 11px; border-radius: 999px;
+  font-family: var(--sans); font-size: 12px; font-weight: 600; border: 1px solid var(--gold-soft);
+}
+.v2-tour-pill--solid { background: var(--navy); color: var(--ivory); border-color: var(--navy); }
+.v2-tour-pill--sample { border-style: dashed; color: var(--stone); }
+.v2-tour-stops { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.v2-tour-stops li {
+  font-family: var(--sans); font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--parchment);
+}
+.v2-tour-stops a { color: var(--blue); }
+.v2-tour-facts { display: grid; gap: 10px 18px; margin: 16px 0 0; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .v2-tour-facts { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .v2-tour-facts { grid-template-columns: repeat(4, 1fr); } }
+.v2-tour-facts dt { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.v2-tour-facts dd { margin: 2px 0 0; font-size: 14.5px; line-height: 1.45; }
+.v2-tour-foot {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--v2-hairline);
+}
+.v2-tour-foot small { font-size: 13px; color: var(--stone); }
+.v2-disclose { font-size: 13.5px; color: var(--stone); margin: 4px 0 0; }
+.v2-disclose a { color: var(--blue); }
+
+.v2-group-empty { display: flex; gap: 16px; align-items: flex-start; }
+.v2-group-icon { font-size: 24px; color: var(--v2-gold-deep); line-height: 1.2; }
+.v2-group-empty p { margin: 6px 0 0; font-size: 15px; line-height: 1.55; }
+.v2-group-acts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 14px; }
+.v2-group-acts form { margin: 0; }
+.v2-group-note { font-size: 13px; color: var(--stone); }
+.v2-interest-done {
+  margin: 0 !important; padding: 8px 14px; border-radius: 999px; font-family: var(--sans); font-size: 14px; font-weight: 600;
+  color: var(--v2-green); background: rgba(62, 122, 90, .08); border: 1px solid rgba(62, 122, 90, .45);
+}
+.v2-group-tier { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--v2-hairline); }
+.v2-group-tier ul { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
+.v2-group-tier-note { font-size: 13.5px !important; color: var(--stone); }
+
+/* ---------- Phase 3: Where to Stay & Map ---------- */
+.v2-stay-lede { margin: 0 0 14px; font-size: 15.5px; line-height: 1.55; }
+.v2-stay-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.v2-stay-tools[hidden] { display: none; }
+.v2-stay-tools-label { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--stone); }
+.v2-layer {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--stone);
+  background: #fff; border: 1px solid var(--gold-soft);
+}
+.v2-layer[aria-pressed="true"] { color: var(--navy); border-color: var(--navy); background: var(--parchment); }
+.v2-layer-swatch { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--navy); }
+.v2-layer-swatch--shrine { background: var(--gold); }
+.v2-layer-swatch--lodging { background: var(--navy); }
+.v2-layer-swatch--sacred { background: #fff; }
+.v2-layer-swatch--transit { background: #8FB9DD; }
+.v2-stay-map { height: 420px; border: 1px solid var(--gold-soft); border-radius: 16px; overflow: hidden; background: #E9E9E6; }
+.v2-stay-map .leaflet-container { font-family: var(--serif-body); }
+.v2-stay-info {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;
+  margin: 10px 0 14px; padding: 12px 14px; border-radius: 12px; background: var(--parchment);
+  border: 1px solid var(--gold-soft); font-size: 14.5px;
+}
+.v2-stay-info[hidden] { display: none; }
+.v2-stay-info em { color: var(--v2-amber); font-style: normal; font-weight: 600; }
+
+.v2-lodge-marker { background: none; border: 0; }
+.v2-lodge-icon {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--navy); color: var(--ivory); border: 2px solid var(--ivory);
+  font-family: var(--sans); font-size: 11px; font-weight: 700; box-shadow: 0 1px 4px rgba(3, 37, 83, .35);
+}
+.v2-lodge-marker.is-selected .v2-lodge-icon { background: var(--v2-gold-deep); }
+.leaflet-marker-icon.v2-lodge-marker:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 50%; }
+
+.v2-lodging-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+@media (min-width: 720px) { .v2-lodging-list { grid-template-columns: 1fr 1fr; } }
+.v2-lodging-list li { display: grid; gap: 6px; padding: 12px 14px; background: #fff; border: 1px solid var(--gold-soft); border-radius: 12px; }
+.v2-lodge { display: flex; gap: 10px; align-items: flex-start; border-radius: 8px; }
+.v2-lodge[role="button"] { cursor: pointer; }
+.v2-lodge[aria-pressed="true"] .v2-lodge-num { background: var(--v2-gold-deep); }
+.v2-lodging-list li:has(.v2-lodge[aria-pressed="true"]) { border-color: var(--v2-gold-deep); box-shadow: 0 0 0 1px var(--v2-gold-deep); }
+.v2-lodge-num {
+  flex: 0 0 auto; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--navy); color: var(--ivory); font-family: var(--sans); font-size: 11px; font-weight: 700;
+}
+.v2-lodge-body { display: grid; gap: 4px; }
+.v2-lodge-name { font-family: var(--serif-display); font-weight: 600; font-size: 18px; color: var(--navy); }
+.v2-lodge-kind { font-family: var(--sans); font-size: 12.5px; color: var(--stone); }
+.v2-lodge-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.v2-lodge-pill {
+  font-family: var(--sans); font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  color: var(--blue); background: var(--parchment); border: 1px solid var(--gold-soft);
+}
+.v2-lodge-pill--warn { color: var(--v2-amber); background: rgba(183, 121, 31, .08); border-color: rgba(183, 121, 31, .5); }
+.v2-lodge-note { font-size: 13.5px; line-height: 1.45; }
+.v2-lodge-book { justify-self: start; margin-left: 32px; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--blue); }
+
+/* "More in <hub>" beside the breadcrumb (phase 4) */
+.v2-crumb { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.v2-crumb-hub { margin: 0 0 16px; font-family: var(--sans); font-size: 13px; color: rgba(253, 249, 242, .85); }
+.v2-crumb-hub a { color: #F0DCAE; text-decoration: underline; text-underline-offset: 3px; }

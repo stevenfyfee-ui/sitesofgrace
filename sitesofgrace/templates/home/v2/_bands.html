@@ -1,0 +1,57 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% comment %}
+  The v2 homepage bands, in place of the three-column band (Featured Sites and
+  Saints, Your Journey, Today in the Church) and News, which are hidden in the
+  template only -- their fields, the liturgy app and the fetch-news job stay.
+  Partners and the Support band follow, unchanged, from home_page.html.
+  Each band hides when it has nothing to show.
+{% endcomment %}
+{% if destination_tiles %}
+<section class="v2-home-band v2-home-destinations" aria-labelledby="v2-destinations-heading">
+  <div class="container">
+    <p class="v2-home-eyebrow">Explore by destination</p>
+    <div class="v2-home-head">
+      <h2 id="v2-destinations-heading">Where in the world?</h2>
+      {% if destinations_index %}<a class="v2-home-more" href="{% pageurl destinations_index %}">All destinations <span aria-hidden="true">→</span></a>{% endif %}
+    </div>
+    <ul class="v2-home-tiles">
+      {% for hub in destination_tiles %}
+        <li>
+          <a class="v2-home-tile" href="{% pageurl hub %}">
+            {% if hub.hero_image %}{% image hub.hero_image fill-600x420 class="v2-home-tile-img" alt="" %}{% else %}<span class="v2-home-tile-img v2-home-tile-img--blank" aria-hidden="true"></span>{% endif %}
+            <span class="v2-home-tile-title">{{ hub.title }}</span>
+            {% if hub.tile_caption %}<span class="v2-home-tile-caption">{{ hub.tile_caption }}</span>{% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if upcoming_feasts %}
+<section class="v2-home-band v2-home-feasts" aria-labelledby="v2-feasts-heading">
+  <div class="container">
+    <p class="v2-home-eyebrow">Upcoming feasts</p>
+    <h2 id="v2-feasts-heading">{{ page.upcoming_heading|default:"Feasts coming up, and where to keep them" }}</h2>
+    <ul class="v2-home-feast-list">
+      {% for feast in upcoming_feasts %}
+        <li>
+          <a class="v2-home-feast" href="{{ feast.place.url }}">
+            <span class="v2-home-feast-date" aria-hidden="true">
+              <span class="v2-home-feast-month">{{ feast.month }}</span>
+              <span class="v2-home-feast-day">{{ feast.day_number }}</span>
+            </span>
+            <span class="v2-home-feast-text">
+              <span class="v2-home-feast-rank">{{ feast.rank_label }}{% if feast.when %} · <strong>{{ feast.when }}</strong>{% endif %}</span>
+              <span class="v2-home-feast-name">{{ feast.name }}</span>
+              <span class="v2-home-feast-place">{{ feast.place.title }}</span>
+              <span class="sr-only">{{ feast.date|date:"l, F j" }}</span>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}

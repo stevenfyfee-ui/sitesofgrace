@@ -1,0 +1,72 @@
+# Local development image -- used only by docker-compose.dev.yml.
+#
+# Mirrors the production Dockerfile step for step, plus one thing: it trusts
+# the TLS-inspection root CA that Norton Web/Mail Shield installs on this
+# machine (docker/dev-certs/, gitignored), because pip inside a container
+# otherwise can't verify pypi.org through it. Verification stays ON -- the
+# extra root is added to the system bundle; nothing here uses --trusted-host.
+#
+# If you change the production Dockerfile, make the same change here.
+
+FROM python:3.12-slim-bookworm AS builder
+
+RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libjpeg62-turbo-dev \
+    zlib1g-dev \
+    libwebp-dev \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/* \
+ && python -m venv /opt/venv
+
+COPY docker/dev-certs/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
+ENV PATH="/opt/venv/bin:$PATH" \
+    PIP_CERT=/etc/ssl/certs/ca-certificates.crt \
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+COPY requirements.txt /
+RUN pip install --no-cache-dir -r /requirements.txt
+
+
+FROM python:3.12-slim-bookworm AS runtime
+
+RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+    libpq5 \
+    libjpeg62-turbo \
+    libwebp7 \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY docker/dev-certs/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
+RUN useradd wagtail
+
+# Same port and gunicorn command as production; docker-compose.dev.yml
+# overrides the command with runserver on 8000 for local work.
+EXPOSE 8080
+
+ENV PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=sitesofgrace.settings.docker_dev \
+    PATH="/opt/venv/bin:$PATH" \
+    PIP_CERT=/etc/ssl/certs/ca-certificates.crt \
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+COPY --from=builder /opt/venv /opt/venv
+
+WORKDIR /app
+RUN chown wagtail:wagtail /app
+USER wagtail
+
+# The repo is mounted over /app at run time (docker-compose.dev.yml), so the
+# source isn't copied in and collectstatic runs against the mount instead.
+#
+# The access log format is gunicorn's default minus anything that can carry
+# a query string: the path without its query (%(U)s, not the full request
+# line %(r)s) and no Referer (%(f)s). Query strings can hold a Stripe
+# Checkout session id or a search term; client IPs (%(h)s) stay.
+CMD ["gunicorn", "sitesofgrace.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "60", "--access-logfile", "-", "--access-logformat", "%(h)s %(l)s %(u)s %(t)s \"%(m)s %(U)s %(H)s\" %(s)s %(b)s \"%(a)s\"", "--error-logfile", "-"]

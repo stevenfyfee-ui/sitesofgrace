@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     "store",
     "news",
     "blog",
+    "tours",
     "contact",
+    "destinations",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
@@ -254,6 +256,11 @@ TIME_ZONE = "UTC"
 # The home page's "Today in the Church" card turns over at midnight here,
 # not at the server clock's midnight (TIME_ZONE stays UTC for storage).
 LITURGICAL_TIME_ZONE = os.environ.get("LITURGICAL_TIME_ZONE", "America/Los_Angeles")
+
+# Pilgrimage Platform v2 feature switch: "off" (default), "staff" (only
+# request.user.is_staff sees v2), or "on". Anything else reads as "off".
+# Always check it through core.v2.v2_enabled(request) / {% v2_enabled %}.
+SOG_V2_ENABLED = os.environ.get("SOG_V2_ENABLED", "off").strip().lower()
 
 USE_I18N = True
 

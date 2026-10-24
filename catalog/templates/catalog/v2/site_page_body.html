@@ -1,0 +1,332 @@
+{% load static wagtailcore_tags wagtailimages_tags community_tags wagtailroutablepage_tags legal_tags contact_tags destination_tags %}
+{% comment %}
+  Pilgrimage Platform v2 sacred site page body. Rendered by
+  catalog/sacred_site_page.html only when {% v2_enabled %} is true; with the
+  switch off that template renders its original markup instead.
+
+  Order: hero, section bar, then At a Glance (first in the DOM, so on narrow
+  screens it sits above the main column; CSS moves it to the right at 1060px+)
+  and the main column: Overview, The Story, Church Recognition, other
+  narrative sections, Plan Your Visit, Nearby, Prepare Spiritually,
+  Information & sources, Pilgrim Photos (always last).
+
+  Everything works without JavaScript: the section bar is plain anchors,
+  Read more only clamps once site-v2.js has measured the text, and Plan Your
+  Visit keeps its native <details> panels.
+{% endcomment %}
+<article class="catalog-page v2-site">
+
+  {% if request.GET.photos_added %}
+    <div class="container">
+      <p class="pilgrims-flash">
+        {{ request.GET.photos_added }} photo{{ request.GET.photos_added|pluralize }} added — thank you for sharing your journey.
+      </p>
+    </div>
+  {% endif %}
+
+  <header class="v2-hero">
+    <div class="v2-wrap">
+      {% hubs_for_site page as site_hubs %}
+      {% if page.breadcrumbs or site_hubs %}
+        <nav class="v2-crumb" aria-label="Breadcrumb">
+          {% if page.breadcrumbs %}
+          <ol>
+            {% for crumb in page.breadcrumbs %}
+              <li><a href="{% pageurl crumb %}">{{ crumb.title }}</a></li>
+            {% endfor %}
+            <li><span aria-current="page">{{ page.title }}</span></li>
+          </ol>
+          {% endif %}
+          {% if site_hubs %}<span class="v2-crumb-hub">More in <a href="{% pageurl site_hubs.0 %}">{{ site_hubs.0.title }}</a></span>{% endif %}
+        </nav>
+      {% endif %}
+      <div class="v2-badges">
+        {% if page.category %}<span class="v2-pill v2-pill--category">{{ page.category }}</span>{% endif %}
+        {% if page.eucharistic_kind_label %}<span class="v2-pill">{{ page.eucharistic_kind_label }}</span>{% endif %}
+        {% if page.status_applies %}<span class="v2-pill v2-pill--status" title="{{ page.canonical_status }}">{{ page.status_label }}</span>{% endif %}
+        {% if page.location_line %}<span class="v2-pill">{{ page.location_line }}</span>{% endif %}
+      </div>
+      <h1 class="v2-title">{{ page.title }}</h1>
+      {% if page.date_display or page.associated_saint or page.feast_day %}
+        <p class="v2-subtitle">
+          {% if page.date_display %}<span>{{ page.date_display }}</span>{% endif %}
+          {% if page.associated_saint %}<span><a href="{% pageurl page.associated_saint %}">{{ page.associated_saint.title }}</a></span>{% endif %}
+          {% if page.feast_day %}<span>{{ page.feast_line }}</span>{% endif %}
+        </p>
+      {% endif %}
+      {% if page.summary_short %}<p class="v2-lede">{{ page.summary_short }}</p>{% endif %}
+      <div class="v2-hero-actions">
+        <a class="btn btn-gold" href="#overview">Plan your pilgrimage</a>
+        {% journey_buttons page %}
+      </div>
+      {% include "catalog/includes/_trail_band.html" %}
+    </div>
+  </header>
+
+  <nav class="v2-sectionbar" aria-label="On this page" data-section-nav>
+    <ul class="v2-sectionbar-list">
+      {% for item in page.v2_section_bar %}
+        <li><a class="v2-sectionbar-link" href="#{{ item.id }}" data-section-link="{{ item.id }}">{{ item.label }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="v2-wrap v2-layout">
+
+    {% if page.show_at_a_glance %}
+      <aside class="v2-glance" aria-labelledby="glance-heading">
+        <h2 class="v2-glance-title" id="glance-heading">At a Glance</h2>
+        <dl class="v2-glance-list">
+          {% for row in page.at_a_glance_rows %}
+            <div class="v2-glance-row v2-glance-row--{{ row.key }}">
+              <dt>{{ row.label }}</dt>
+              <dd>
+                {% if row.text %}{{ row.text }}{% endif %}
+                {% for text, url, external in row.links %}
+                  {% if row.text or not forloop.first %} · {% endif %}<a href="{{ url }}"{% if external %} target="_blank" rel="noopener"{% endif %}>{{ text }}{% if external %} <span aria-hidden="true">↗</span>{% endif %}</a>
+                {% endfor %}
+              </dd>
+            </div>
+          {% endfor %}
+        </dl>
+        <div class="v2-glance-actions">
+          <a class="btn btn-gold" href="/plan/?site={{ page.slug }}">Add to a trip plan</a>
+          {% journey_buttons page only="visited" %}
+          {% if page.latitude is not None and page.longitude is not None and map_page %}
+            <a class="v2-arrow-link" href="{% pageurl map_page %}?site={{ page.slug }}">See it on the interactive map</a>
+          {% endif %}
+        </div>
+      </aside>
+    {% endif %}
+
+    <div class="v2-main">
+
+      {% if page.featured_image %}
+        <div class="v2-feature-image">{% image page.featured_image width-900 %}</div>
+      {% endif %}
+
+      <section class="v2-block section-anchor" id="overview">
+        <p class="v2-eyebrow">Visit this holy place</p>
+        <h2 class="v2-h2">How would you like to make this pilgrimage?</h2>
+        {% if page.guided_pilgrimages %}
+          <div class="v2-choice-grid">
+            <a class="v2-card v2-choice" href="#guided-pilgrimages">
+              <span class="v2-choice-icon" aria-hidden="true">✠</span>
+              <span class="v2-h3">Join a guided pilgrimage</span>
+              <span class="v2-choice-copy">Travel with a Catholic group, a priest or spiritual director, daily Mass, and the logistics handled for you.</span>
+              <span class="v2-arrow-link">See guided pilgrimages</span>
+            </a>
+            <a class="v2-card v2-choice" href="{{ page.overview_plan_target }}">
+              <span class="v2-choice-icon" aria-hidden="true">⌖</span>
+              <span class="v2-h3">Plan your own visit</span>
+              <span class="v2-choice-copy">How long to stay, how to get there, what to see, and what to bring.</span>
+              <span class="v2-arrow-link">{% if page.has_plan_section %}Travel guide{% else %}Plan a trip here{% endif %}</span>
+            </a>
+          </div>
+        {% else %}
+          <a class="v2-card v2-choice v2-choice--wide" href="{{ page.overview_plan_target }}">
+            <span class="v2-choice-text">
+              <span class="v2-h3">Plan your own visit</span>
+              <span class="v2-choice-copy">How long to stay, how to get there, what to see, and what to bring.</span>
+            </span>
+            <span class="v2-arrow-link">{% if page.has_plan_section %}Travel guide{% else %}Plan a trip here{% endif %}</span>
+          </a>
+        {% endif %}
+      </section>
+
+      {% if page.the_story %}
+        <section class="v2-block section-anchor" id="the-story">
+          <p class="v2-eyebrow">What happened here</p>
+          <h2 class="v2-h2" id="the-story-heading">The Story</h2>
+          <div class="v2-clamp" data-clamp>
+            <div class="v2-clamp-body rich-text" id="the-story-body" data-clamp-body>{{ page.the_story|richtext }}</div>
+            <button type="button" class="v2-clamp-toggle" data-clamp-toggle aria-expanded="false" aria-controls="the-story-body" hidden>Read more</button>
+          </div>
+        </section>
+      {% endif %}
+
+      {% if page.has_church_recognition_section %}
+        <section class="v2-block section-anchor" id="church-recognition">
+          <p class="v2-eyebrow">How to read this account</p>
+          <h2 class="v2-h2" id="church-recognition-heading">Church Recognition</h2>
+          {% if page.church_recognition %}
+            <div class="v2-clamp" data-clamp>
+              <div class="v2-clamp-body rich-text" id="church-recognition-body" data-clamp-body>{{ page.church_recognition|richtext }}</div>
+              <button type="button" class="v2-clamp-toggle" data-clamp-toggle aria-expanded="false" aria-controls="church-recognition-body" hidden>Read more</button>
+            </div>
+          {% endif %}
+          {% if page.show_account_box %}
+            <div class="v2-readbox">
+              {% for label, body in page.account_box_cells %}
+                <div class="v2-readbox-cell">
+                  <h3 class="v2-readbox-label">{{ label }}</h3>
+                  <div class="rich-text">{{ body|richtext }}</div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </section>
+      {% endif %}
+
+      {% for section in page.v2_other_narrative %}
+        <section class="v2-block section-anchor" id="{{ section.anchor }}">
+          <h2 class="v2-h2">{{ section.label }}</h2>
+          <div class="rich-text">{{ section.body|richtext }}</div>
+        </section>
+      {% endfor %}
+
+      {% if page.has_plan_section %}
+        <div class="v2-block">
+          {% include "catalog/includes/_plan_your_visit.html" %}
+          <p class="plan-travel-note">{% notice "site_travel" %}</p>
+        </div>
+      {% endif %}
+
+      {% if page.has_stay_map_section %}{% include "catalog/v2/_stay_map.html" %}{% endif %}
+      {% include "tours/_site_section.html" %}
+
+      {% if page.nearby_sites or page.connected_sites %}
+        <section class="v2-block section-anchor" id="nearby">
+          <p class="v2-eyebrow">Continue your pilgrimage</p>
+          <h2 class="v2-h2">Sacred places nearby</h2>
+          {% if page.nearby_sites %}
+            <ul class="v2-near-grid">
+              {% for entry in page.nearby_sites %}
+                <li>
+                  <a class="v2-card v2-near-card" href="{% pageurl entry.page %}">
+                    <span class="v2-dot" style="background:{{ entry.style.fill }};border-color:{{ entry.style.stroke }}" aria-hidden="true"></span>
+                    <span class="v2-near-text">
+                      <span class="v2-near-title">{{ entry.page.title }}</span>
+                      {% if entry.page.summary_short %}<span class="v2-near-sig">{{ entry.page.summary_short|truncatechars:110 }}</span>{% endif %}
+                      <span class="v2-near-dist">{{ entry.miles_display }} mi</span>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if page.connected_sites %}
+            <p class="v2-eyebrow v2-eyebrow--sub">Connected by {{ page.associated_saint.title }}</p>
+            <ul class="v2-near-grid">
+              {% for entry in page.connected_sites %}
+                <li>
+                  <a class="v2-card v2-near-card" href="{% pageurl entry.page %}">
+                    <span class="v2-dot" style="background:{{ entry.style.fill }};border-color:{{ entry.style.stroke }}" aria-hidden="true"></span>
+                    <span class="v2-near-text">
+                      <span class="v2-near-title">{{ entry.page.title }}</span>
+                      {% if entry.miles_display %}<span class="v2-near-dist">{{ entry.miles_display }} mi</span>{% endif %}
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </section>
+      {% endif %}
+
+      {% if page.has_prep_section %}
+        <section class="v2-block section-anchor" id="prepare">
+          <p class="v2-eyebrow">Before you travel</p>
+          <h2 class="v2-h2">Prepare spiritually</h2>
+          <div class="v2-prep-grid">
+            {% if page.prep_prayer %}
+              <div class="v2-card v2-prep-card">
+                <p class="v2-eyebrow">A prayer for your pilgrimage</p>
+                <div class="rich-text v2-prayer">{{ page.prep_prayer|richtext }}</div>
+              </div>
+            {% endif %}
+            {% if page.prep_readings %}
+              <div class="v2-card v2-prep-card">
+                <p class="v2-eyebrow">Read before you go</p>
+                <div class="rich-text">{{ page.prep_readings|richtext }}</div>
+              </div>
+            {% endif %}
+          </div>
+          <div class="v2-card v2-readiness">
+            <p class="v2-eyebrow">Trip readiness</p>
+            {% if site_hubs.0.travel_advisory_url %}
+              <p>Check <a href="{{ site_hubs.0.travel_advisory_url }}" target="_blank" rel="noopener">travel information for {{ site_hubs.0.title }}</a> for entry requirements and advisories before you book, and again before you fly.</p>
+            {% else %}
+              <p>Check <a href="https://travel.state.gov/" target="_blank" rel="noopener">U.S. State Department travel information{% if page.trip_readiness_country %} for {{ page.trip_readiness_country }}{% endif %}</a> for entry requirements and advisories before you book, and again before you fly.</p>
+            {% endif %}
+          </div>
+        </section>
+      {% endif %}
+
+      <section class="v2-block section-anchor" id="sources">
+        <h2 class="v2-h2">Information &amp; sources</h2>
+        <dl class="v2-sources">
+          {% if page.status_applies %}
+            <div class="v2-sources-row">
+              <dt>Church recognition</dt>
+              <dd>
+                <span title="{{ page.canonical_status }}">{{ page.status_label }}</span>
+                {% if church_judgment_learn_page %} · <a href="{% pageurl church_judgment_learn_page %}">{{ church_judgment_learn_text }}</a>{% endif %}
+              </dd>
+            </div>
+          {% endif %}
+          {% if page.primary_references %}
+            <div class="v2-sources-row">
+              <dt>Primary references</dt>
+              <dd class="rich-text">{{ page.primary_references|richtext }}</dd>
+            </div>
+          {% endif %}
+        </dl>
+        <p class="v2-sources-note">Mass times, admission and travel requirements change. Confirm them with the official source before you visit.</p>
+        {% comment %}
+          The same Contact-form link as includes/_correction_link.html ("Spot an
+          error? Let us know"), which this button replaces on the v2 page.
+          correction_url is "" while no ContactPage is live, so nothing renders.
+        {% endcomment %}
+        {% correction_url page as correction_href %}
+        {% if correction_href %}
+          <a class="btn btn-outline-gold" href="{{ correction_href }}">Report something that&rsquo;s wrong</a>
+        {% endif %}
+        {% if page.topics.all %}
+          <div class="catalog-tags">
+            {% for t in page.topics.all %}<span class="tag">{{ t.name }}</span>{% endfor %}
+          </div>
+        {% endif %}
+      </section>
+
+      {% comment %}
+        Always the last section, and always rendered: a site with no photos
+        is exactly the one that most needs the "Add your photos" entry point.
+      {% endcomment %}
+      <section class="v2-block section-anchor v2-photos" id="pilgrim-photos">
+        <div class="v2-photos-head">
+          <div>
+            <p class="v2-eyebrow">From pilgrims who have been here</p>
+            <h2 class="v2-h2">Pilgrim Photos</h2>
+          </div>
+          <div class="v2-photos-actions">
+            {% if request.user.is_authenticated %}
+              <a class="btn btn-gold" href="{% url 'pilgrims:photo_upload' %}?site={{ page.slug }}">Add your photos</a>
+            {% else %}
+              <a class="btn btn-gold" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to add your photos</a>
+            {% endif %}
+            {% if gallery_preview_photos %}
+              <a class="btn btn-outline-gold" href="{% routablepageurl page 'gallery_view' %}">
+                See all {{ gallery_total_count }} pilgrim photo{{ gallery_total_count|pluralize }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+        {% if gallery_preview_photos %}
+          <div class="v2-photo-grid">
+            {% for photo in gallery_preview_photos|slice:":4" %}
+              <a class="v2-photo-tile" href="{% routablepageurl page 'gallery_view' %}">
+                <img src="{{ photo.public_thumb.url }}" alt="Pilgrim photo {{ forloop.counter }} from {{ page.title }}" loading="lazy">
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="catalog-gallery-empty">No pilgrim photos yet — be the first to share one from {{ page.title }}.</p>
+        {% endif %}
+      </section>
+
+    </div>
+  </div>
+</article>
+<script src="{% static 'js/section-nav.js' %}" defer></script>
+<script src="{% static 'catalog/js/site-v2.js' %}" defer></script>

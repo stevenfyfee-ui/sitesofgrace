@@ -1,0 +1,45 @@
+{
+  "_comment": "Format example for `manage.py import_site_map` (docs/v2/IMPORT-RULES.md). All values are invented and marked (sample); id 0 matches no page, so running this file changes nothing.",
+  "pages": [
+    {
+      "id": 0,
+      "title": "Example Shrine (sample)",
+      "status": "Ready to import",
+      "map_points": [
+        {
+          "name": "Main gate (sample)",
+          "kind": "main-entrance",
+          "latitude": 43.0957,
+          "longitude": -0.0531,
+          "note": "Open 5:30 a.m. to midnight (sample)",
+          "verified": true
+        },
+        {
+          "name": "Train station (sample)",
+          "kind": "train-station",
+          "latitude": 43.1003,
+          "longitude": -0.0416
+        }
+      ],
+      "lodging": [
+        {
+          "name": "Hotel by the main gate (sample)",
+          "kind": "hotel",
+          "latitude": 43.0962,
+          "longitude": -0.0512,
+          "website": "https://example.com/",
+          "booking_url": "https://example.com/book",
+          "is_affiliate_link": false,
+          "nearest_point": "Main gate (sample)",
+          "walk_minutes": 4,
+          "walk_miles": 0.2,
+          "slope": "level",
+          "step_free": "yes",
+          "note": "Lift to all floors (sample).",
+          "route_geojson": {"type": "LineString", "coordinates": [[-0.0512, 43.0962], [-0.0522, 43.0959], [-0.0531, 43.0957]]},
+          "verified_on": "2026-10-01"
+        }
+      ]
+    }
+  ]
+}

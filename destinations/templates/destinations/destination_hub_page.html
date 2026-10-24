@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags category_styles %}
+{% comment %}
+  A destination hub, in the mockup's order: hero; the hub map, full width
+  directly under it, with the category legend underneath; suggested lengths of
+  stay; major sacred sites; day trips beside local travel; Go deeper (saints,
+  routes, guided pilgrimages). Every section and card hides when empty.
+
+  Without JavaScript the map stays hidden and the site cards carry the page;
+  destinations/js/hub-map.js reveals and draws the map (Standing Rule 7).
+{% endcomment %}
+
+{% block body_class %}catalog destinations-hub{% endblock %}
+{% block extra_css %}
+{# Leaflet 1.9.4, served from our own static files (sitesofgrace/static/vendor/). #}
+<link rel="stylesheet" href="{% static 'vendor/leaflet-1.9.4/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}">
+<link rel="stylesheet" href="{% static 'destinations/css/destinations.css' %}">
+{% endblock %}
+
+{% block content %}
+<article class="catalog-page v2-site v2-hub">
+
+  <header class="v2-hero">
+    <div class="v2-wrap">
+      <nav class="v2-crumb" aria-label="Breadcrumb">
+        <ol>
+          {% if explore_page %}<li><a href="{% pageurl explore_page %}">Explore</a></li>{% endif %}
+          {% if index_page and index_page.live %}<li><a href="{% pageurl index_page %}">Destinations</a></li>{% else %}<li><span>Destinations</span></li>{% endif %}
+          <li><span aria-current="page">{{ page.title }}</span></li>
+        </ol>
+      </nav>
+      <p class="v2-eyebrow v2-hub-eyebrow">Destination</p>
+      <h1 class="v2-title">{{ page.title }}</h1>
+      {% if page.intro %}<p class="v2-lede">{{ page.intro }}</p>{% endif %}
+      <div class="v2-hero-actions">
+        <a class="btn btn-gold" href="{{ page.plan_url }}">Plan a trip here</a>
+        {% if page.tours %}<a class="btn v2-hub-ghost" href="#go-deeper">Guided pilgrimages</a>{% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% with map_sites=page.map_payload %}
+    {% if map_sites %}
+      <section class="v2-hub-mapband" aria-label="Map of {{ page.title }}">
+        <div class="v2-hub-map" id="hubMap" role="region" aria-label="Map of the sacred sites in {{ page.title }}" hidden></div>
+        <div class="v2-wrap">
+          <ul class="v2-hub-legend" aria-label="Map key">
+            {% for category, style in page.legend %}
+              <li><span class="v2-dot" style="background:{{ style.fill }};border-color:{{ style.stroke }}" aria-hidden="true"></span>{{ category }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% category_styles_json %}
+        {{ map_sites|json_script:"hub-map-data" }}
+      </section>
+    {% endif %}
+  {% endwith %}
+
+  <div class="v2-wrap v2-hub-body">
+
+    {% if page.stay_options.all %}
+      <section class="v2-block" id="stay">
+        <p class="v2-eyebrow">How long to stay</p>
+        <h2 class="v2-h2">Suggested lengths of stay</h2>
+        <div class="v2-hub-stays">
+          {% for option in page.stay_options.all %}
+            <div class="v2-card v2-hub-stay">
+              <p class="v2-hub-stay-label">{{ option.label }}</p>
+              <p>{{ option.text }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.major_sites %}
+      <section class="v2-block" id="sites">
+        <p class="v2-eyebrow">In {{ page.title }}</p>
+        <h2 class="v2-h2">Major sacred sites</h2>
+        <ul class="v2-hub-sites">
+          {% for site in page.major_sites %}
+            <li>
+              <a class="v2-card v2-hub-site" href="{% pageurl site %}">
+                <span class="v2-hub-site-cat"><span class="v2-dot" style="background:{{ site.category_style.fill }};border-color:{{ site.category_style.stroke }}" aria-hidden="true"></span>{{ site.category }}</span>
+                <span class="v2-near-title">{{ site.title }}</span>
+                {% if site.summary_short %}<span class="v2-near-sig">{{ site.summary_short|truncatechars:120 }}</span>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if page.day_trips or page.getting_around %}
+      <div class="v2-block v2-hub-two">
+        {% if page.day_trips %}
+          <section id="day-trips">
+            <p class="v2-eyebrow">Worth combining</p>
+            <h2 class="v2-h2">Day trips from {{ page.title }}</h2>
+            <ul class="v2-hub-trips">
+              {% for trip in page.day_trips %}
+                <li>
+                  {% if trip.style %}<span class="v2-dot" style="background:{{ trip.style.fill }};border-color:{{ trip.style.stroke }}" aria-hidden="true"></span>{% else %}<span class="v2-dot v2-dot--place" aria-hidden="true"></span>{% endif %}
+                  <span class="v2-hub-trip-text">
+                    <span class="v2-hub-trip-name">{% if trip.link %}<a href="{{ trip.link }}">{{ trip.label }}</a>{% else %}{{ trip.label }}{% endif %}</span>
+                    {% if trip.reason %}<span class="v2-hub-trip-reason">{{ trip.reason }}</span>{% endif %}
+                  </span>
+                  {% if trip.travel_time or trip.mode %}<span class="v2-hub-trip-time">{{ trip.travel_time }}{% if trip.travel_time and trip.mode %} {% endif %}{{ trip.get_mode_display|default:"" }}</span>{% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+        {% if page.getting_around %}
+          <section id="local-travel">
+            <p class="v2-eyebrow">Getting around</p>
+            <h2 class="v2-h2">Local travel</h2>
+            <div class="rich-text">{{ page.getting_around|richtext }}</div>
+          </section>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if page.has_go_deeper %}
+      <section class="v2-block section-anchor" id="go-deeper">
+        <p class="v2-eyebrow">Go deeper</p>
+        <h2 class="v2-h2">Saints, routes and group trips</h2>
+        {% if page.saints or page.trails %}
+          <div class="v2-hub-deeper">
+            {% if page.saints %}
+              <div class="v2-card">
+                <p class="v2-eyebrow">Saints</p>
+                <p class="v2-hub-links">{% for saint in page.saints %}<a href="{% pageurl saint %}">{{ saint.title }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+              </div>
+            {% endif %}
+            {% if page.trails %}
+              <div class="v2-card">
+                <p class="v2-eyebrow">Pilgrimage routes</p>
+                <p class="v2-hub-links">{% for trail in page.trails %}<a href="{% pageurl trail %}">{{ trail.title }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if page.tours %}
+          <h3 class="v2-h3 v2-hub-tours-h">Guided pilgrimages</h3>
+          {% for tour in page.tours %}
+            {% include "tours/_tour_card.html" %}
+          {% endfor %}
+          {% include "tours/_tour_links_notice.html" with fallback="Tour details, availability, payment and cancellation are handled by the tour operator, not by Sites of Grace. Some links may earn us a commission" %}
+        {% endif %}
+      </section>
+    {% endif %}
+
+  </div>
+</article>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/leaflet-1.9.4/leaflet.js' %}"></script>
+<script src="{% static 'js/basemap.js' %}"></script>
+<script src="{% static 'js/sog-maps.js' %}"></script>
+<script src="{% static 'destinations/js/hub-map.js' %}"></script>
+{% endblock %}

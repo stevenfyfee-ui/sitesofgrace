@@ -56,7 +56,7 @@ from contact import notify as contact_notify
 from contact import turnstile as contact_turnstile
 from core import ratelimit
 from home import legal, support
-from liturgy.today import date_at_noon, liturgical_today
+from liturgy.today import date_at_noon, liturgical_today, upcoming_feasts
 from pilgrims.views import _ip_hash
 
 logger = logging.getLogger(__name__)
@@ -209,6 +209,16 @@ class HomePage(Page):
     news_enabled = models.BooleanField(default=True)
     news_count = models.IntegerField(default=6)
 
+    # --- v2 homepage (only rendered behind SOG_V2_ENABLED) ---
+    # "Explore by destination" tiles come from live destination hubs, in the
+    # order of the destination_tiles rows if any are set, else by title.
+    upcoming_enabled = models.BooleanField(
+        default=True, help_text='Show "Upcoming feasts" on the v2 homepage.',
+    )
+    upcoming_heading = models.CharField(
+        max_length=120, blank=True, default="Feasts coming up, and where to keep them",
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -269,10 +279,20 @@ class HomePage(Page):
             ],
             heading="News feed",
         ),
+        MultiFieldPanel(
+            [InlinePanel("destination_tiles", max_num=8, label="Destination tile")],
+            heading="Explore by destination (v2 homepage)",
+            classname="collapsed",
+        ),
+        MultiFieldPanel(
+            [FieldPanel("upcoming_enabled"), FieldPanel("upcoming_heading")],
+            heading="Upcoming feasts (v2 homepage)",
+            classname="collapsed",
+        ),
     ]
 
     max_count = 1
-    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage"]
+    subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage", "destinations.DestinationIndexPage"]
 
     class Meta:
         verbose_name = "Home page"
@@ -298,7 +318,22 @@ class HomePage(Page):
 
         context["calendar_footer_url"] = self._calendar_footer_url()
         context["liturgical"] = None
-        if self.calendar_enabled:
+        from core.v2 import v2_enabled
+
+        v2 = v2_enabled(request)
+        if v2:
+            # The v2 homepage drops the three-column band (and with it Today in
+            # the Church) and News; their fields, the liturgy app and the
+            # fetch-news job all stay. It adds destinations and upcoming feasts.
+            context["destination_tiles"] = self.destination_hub_tiles()
+            context["destinations_index"] = self._destinations_index()
+            context["upcoming_feasts"] = []
+            if self.upcoming_enabled:
+                try:
+                    context["upcoming_feasts"] = upcoming_feasts(now=self._calendar_now(request))
+                except Exception:
+                    logger.exception("Upcoming feasts band failed to build")
+        if self.calendar_enabled and not v2:
             try:
                 liturgical = liturgical_today(self._calendar_now(request))
                 context["liturgical"] = liturgical
@@ -314,6 +349,23 @@ class HomePage(Page):
                 logger.exception("Today in the Church card failed to build")
 
         return context
+
+    def destination_hub_tiles(self):
+        """Up to 8 live, public hubs: the chosen tiles in order, else by title."""
+        from destinations.models import DestinationHubPage
+
+        live = DestinationHubPage.objects.live().public()
+        chosen = [tile.hub for tile in self.destination_tiles.select_related("hub") if tile.hub_id]
+        if chosen:
+            live_ids = set(live.filter(pk__in=[h.pk for h in chosen]).values_list("pk", flat=True))
+            return [hub for hub in chosen if hub.pk in live_ids][:8]
+        return list(live.order_by("title")[:8])
+
+    @staticmethod
+    def _destinations_index():
+        from destinations.models import DestinationIndexPage
+
+        return DestinationIndexPage.objects.live().public().first()
 
     @staticmethod
     def _calendar_now(request):
@@ -331,6 +383,15 @@ class HomePage(Page):
             return self.calendar_footer_link.url
         saints = StandardPage.objects.live().public().filter(layout="saints_directory").first()
         return saints.url if saints else "/explore/"
+
+
+class HomeDestinationTile(Orderable):
+    """The order of the v2 homepage's "Explore by destination" tiles."""
+
+    page = ParentalKey("home.HomePage", on_delete=models.CASCADE, related_name="destination_tiles")
+    hub = models.ForeignKey("destinations.DestinationHubPage", on_delete=models.CASCADE, related_name="+")
+
+    panels = [PageChooserPanel("hub", "destinations.DestinationHubPage")]
 
 
 class FeatureCard(Orderable):

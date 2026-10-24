@@ -1,0 +1,32 @@
+# Local development only. Runs Django from Dockerfile.dev (the production
+# Dockerfile plus this machine's TLS-inspection root CA) with the repo mounted
+# over /app, against the existing Postgres container.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web python manage.py check
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web python manage.py test
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up web      # http://localhost:8000
+#
+# "web" deliberately has no depends_on: db. The running db container is
+# defined by docker-compose.yml plus the gitignored docker-compose.override.yml
+# (postgres:18, custom PGDATA); these commands don't load that override, so a
+# dependency would let compose recreate db from the postgis:16 definition on
+# top of the existing data volume. Start db the usual way (docker compose up
+# -d db) first; web reaches it by service name on the shared project network.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: runtime
+    image: sitesofgrace-web-dev
+    command: python manage.py runserver 0.0.0.0:8000
+    user: wagtail
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: sitesofgrace.settings.docker_dev
+      DATABASE_URL: postgres://sog:local-dev-only-change-me@db:5432/sitesofgrace
+      SOG_V2_ENABLED: ${SOG_V2_ENABLED:-off}

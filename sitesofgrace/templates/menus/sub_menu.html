@@ -1,8 +1,8 @@
-{% load menu_tags %}
+{% load menu_tags wagtailcore_tags v2_tags destination_tags %}
 <ul class="subnav">
   {% for item in menu_items %}
     <li class="nav-item {{ item.active_class }}">
       <a href="{{ item.href }}">{{ item.text }}</a>
     </li>
-  {% endfor %}
+  {% endfor %}{% v2_enabled as v2 %}{% if v2 and parent_page.slug == "explore" %}{% destination_menu as dest %}{% if dest.hubs or dest.index_url %}<li class="nav-item nav-group-label" aria-hidden="true">By destination</li>{% for hub in dest.hubs %}<li class="nav-item nav-item--destination"><a href="{% pageurl hub %}">{{ hub.title }}</a></li>{% endfor %}{% if dest.index_url %}<li class="nav-item nav-item--destination"><a href="{{ dest.index_url }}">All destinations →</a></li>{% endif %}{% endif %}{% endif %}
 </ul>

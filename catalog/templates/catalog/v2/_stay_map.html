@@ -1,0 +1,80 @@
+{% load static wagtailcore_tags category_styles legal_tags %}
+{% comment %}
+  "Where to Stay & Map" on a v2 sacred site page. Renders when the site has
+  at least one place to stay or two map points (has_stay_map_section).
+
+  Without JavaScript this is the lodging list with every walk detail and a
+  "Check availability" link per place. catalog/js/site-map.js reveals the
+  map (hidden until then), the layer toggles and the info bar, and links the
+  list to the numbered markers. No nightly prices, ever.
+{% endcomment %}
+<section class="v2-block section-anchor" id="stay-map">
+  <p class="v2-eyebrow">Where to stay</p>
+  <h2 class="v2-h2">Places to stay and the walk to {{ page.title }}</h2>
+  {% if page.stay_lodgings %}
+    <p class="v2-stay-lede">The closest place to stay isn&rsquo;t always the easiest walk. Pick one to see its walk, the slope, and whether the way is step-free.</p>
+  {% endif %}
+
+  {% with layers=page.stay_layers_present %}
+    <div class="v2-stay-tools" data-needs-js hidden>
+      <span class="v2-stay-tools-label">Show</span>
+      {% if "shrine" in layers %}<button type="button" class="v2-layer" data-layer="shrine" aria-pressed="true"><span class="v2-layer-swatch v2-layer-swatch--shrine" aria-hidden="true"></span>Sanctuary &amp; entrances</button>{% endif %}
+      {% if "lodging" in layers %}<button type="button" class="v2-layer" data-layer="lodging" aria-pressed="true"><span class="v2-layer-swatch v2-layer-swatch--lodging" aria-hidden="true"></span>Lodging</button>{% endif %}
+      {% if "sacred" in layers %}<button type="button" class="v2-layer" data-layer="sacred" aria-pressed="true"><span class="v2-layer-swatch v2-layer-swatch--sacred" aria-hidden="true"></span>Sacred places</button>{% endif %}
+      {% if "transit" in layers %}<button type="button" class="v2-layer" data-layer="transit" aria-pressed="false"><span class="v2-layer-swatch v2-layer-swatch--transit" aria-hidden="true"></span>Train, bus &amp; parking</button>{% endif %}
+    </div>
+  {% endwith %}
+
+  <div class="v2-stay-map" id="siteStayMap" data-category="{{ page.category }}" role="region"
+       aria-label="Map of {{ page.title }} with its entrances, sacred places and places to stay" hidden></div>
+  <p class="v2-stay-info" id="stayInfo" aria-live="polite" data-needs-js hidden>Select a place to stay to see its walk.</p>
+
+  {% if page.stay_lodgings %}
+    <ol class="v2-lodging-list">
+      {% for lodging in page.stay_lodgings %}
+        <li>
+          <div class="v2-lodge" data-lodge-id="{{ lodging.pk }}">
+            <span class="v2-lodge-num" aria-hidden="true">{{ forloop.counter }}</span>
+            <span class="v2-lodge-body">
+              <span class="v2-lodge-name">{{ lodging.name }}</span>
+              <span class="v2-lodge-kind">{{ lodging.get_kind_display }}</span>
+              <span class="v2-lodge-pills">
+                {% if lodging.walk_line %}<span class="v2-lodge-pill">{{ lodging.walk_line }}</span>{% endif %}
+                {% if lodging.slope %}<span class="v2-lodge-pill{% if lodging.slope == 'steep' %} v2-lodge-pill--warn{% endif %}">{{ lodging.get_slope_display }}</span>{% endif %}
+                {% if lodging.step_free %}<span class="v2-lodge-pill{% if lodging.step_free == 'no' %} v2-lodge-pill--warn{% endif %}">{{ lodging.get_step_free_display }}</span>{% endif %}
+              </span>
+              {% if lodging.note %}<span class="v2-lodge-note">{{ lodging.note }}</span>{% endif %}
+            </span>
+          </div>
+          {% if lodging.outbound_url %}
+            <a class="v2-lodge-book" href="{% url 'go_lodging' lodging.pk %}?from={{ page.pk }}" target="_blank" rel="{{ lodging.link_rel }}">Check availability <span aria-hidden="true">↗</span></a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+    {% comment %}
+      The "travel_links" legal notice next to the booking links (Standing Rule 9);
+      its [Affiliate Disclosure] link only renders once that LegalPage is live.
+      If the notice is blank, the earlier sentence is shown instead.
+    {% endcomment %}
+    {% notice "travel_links" as travel_notice %}
+    {% if travel_notice %}
+      <p class="v2-disclose">{{ travel_notice }}</p>
+    {% else %}
+      {% legal_url "affiliate-disclosure" as disclosure_url %}
+      <p class="v2-disclose">
+        Places to stay are chosen by Sites of Grace.{% if page.stay_has_affiliate %} Some booking links may earn us a commission at no extra cost to you{% if disclosure_url %} (<a href="{{ disclosure_url }}">how we choose and disclose</a>){% endif %}.{% endif %}
+        Walk times are measured by hand; routes are drawn only once they have been checked.
+      </p>
+    {% endif %}
+  {% endif %}
+
+  {# Leaflet 1.9.4, served from our own static files (sitesofgrace/static/vendor/), like the Interactive Map. #}
+  <link rel="stylesheet" href="{% static 'vendor/leaflet-1.9.4/leaflet.css' %}">
+  {% category_styles_json %}
+  {{ page.stay_map_payload|json_script:"site-map-data" }}
+  <script src="{% static 'vendor/leaflet-1.9.4/leaflet.js' %}" defer></script>
+  <script src="{% static 'js/basemap.js' %}" defer></script>
+  <script src="{% static 'js/sog-maps.js' %}" defer></script>
+  <script src="{% static 'catalog/js/site-map.js' %}" defer></script>
+</section>

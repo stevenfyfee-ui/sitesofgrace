@@ -1,0 +1,14 @@
+{% load legal_tags %}
+{% comment %}
+  The "tour_links" legal notice (Settings > Legal notices) next to tour-operator
+  links (Standing Rule 9). Its [Affiliate Disclosure] link only renders once
+  that LegalPage is live. If the notice is blank, `fallback` is shown instead,
+  with the Affiliate Disclosure link added only when that page is live.
+{% endcomment %}
+{% notice "tour_links" as tour_notice %}
+{% if tour_notice %}
+  <p class="v2-disclose">{{ tour_notice }}</p>
+{% else %}
+  {% legal_url "affiliate-disclosure" as disclosure_url %}
+  <p class="v2-disclose">{{ fallback }}{% if disclosure_url %} (<a href="{{ disclosure_url }}">how we choose and disclose</a>){% endif %}.</p>
+{% endif %}
