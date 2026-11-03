@@ -5,12 +5,14 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.http import Http404
 from django.utils.text import slugify
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from wagtail.models import Orderable, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
@@ -292,7 +294,7 @@ class TripStop(models.Model):
         ordering = ["sort_order", "id"]
 
 
-class PlanPage(Page):
+class PlanPage(RoutablePageMixin, Page):
     heading = models.CharField(max_length=200, blank=True)
     intro = RichTextField(blank=True)
     hero_image = models.ForeignKey(
@@ -388,18 +390,26 @@ class PlanPage(Page):
     def _match_destination(self, site):
         """Resolve a SacredSitePage to a DestinationCost: explicit M2M link
         first, then a locality/city name match."""
-        from planner.models import DestinationCost
-        dc = DestinationCost.objects.filter(associated_sites=site).first()
-        if dc:
-            return dc
-        locality = (getattr(site, "locality", "") or "").strip()
-        if locality:
-            dc = DestinationCost.objects.filter(city__iexact=locality).first()
-            if dc:
-                return dc
-            low = locality.lower()
-            for cand in DestinationCost.objects.all():
-                cl = cand.city.lower()
-                if cl in low or low in cl:
-                    return cand
-        return None
+        from planner.api import destination_for_site
+        return destination_for_site(site)
+
+    # --- Trip Planner v2 routes (JSON responses). Each 404s unless SOG_PLANNER_V2 allows the
+    # request (core.v2.planner_v2_enabled). planner/tests/test_routes.py
+    # checks every one, so a merge can't drop RoutablePageMixin silently.
+
+    def _require_v2(self, request):
+        from core.v2 import planner_v2_enabled
+        if not planner_v2_enabled(request):
+            raise Http404
+
+    @path("build/", name="build_json")
+    def build_json_route(self, request):
+        self._require_v2(request)
+        from planner.api import build_json
+        return build_json(request)
+
+    @path("search/", name="search_json")
+    def search_json_route(self, request):
+        self._require_v2(request)
+        from planner.api import search_json
+        return search_json(request)

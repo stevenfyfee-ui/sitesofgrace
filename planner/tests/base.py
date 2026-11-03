@@ -83,3 +83,10 @@ class PlannerTestCase(SacredSitePageTestCase):
                          effective_date=date(2026, 10, 1), body="<p>Disclosure.</p>", live=live)
         self.site_root().add_child(instance=page)
         return page
+
+    def make_plan_page(self):
+        from planner.models import PlanPage
+
+        page = PlanPage(title="Plan your pilgrimage", slug="plan", heading="Plan your pilgrimage")
+        self.site_root().add_child(instance=page)
+        return page
