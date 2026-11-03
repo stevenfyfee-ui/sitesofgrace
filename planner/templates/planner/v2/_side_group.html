@@ -1,0 +1,20 @@
+{% comment %}
+  "Prefer a group?" in the planner sidebar. Real guided pilgrimages that
+  visit a site on the route are listed (only when the v2 tours are on);
+  otherwise the tours None state, never sample tours.
+{% endcomment %}
+<div class="pv2-group">
+  {% if group_tours %}
+    <div class="v2-card">
+      <h2 class="v2-h3">Prefer to go with a group?</h2>
+      <ul class="pv2-group-list">
+        {% for tour in group_tours %}
+          <li>{% if tour.booking_url %}<a class="v2-arrow-link" href="{% url 'tours:go' tour.pk %}?from={{ page.pk }}" target="_blank" rel="{{ tour.link_rel }}">{{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}</a>{% else %}{{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}{% endif %}</li>
+        {% endfor %}
+      </ul>
+      {% include "tours/_tour_links_notice.html" with fallback="Booked with the tour operator, not Sites of Grace. Some links may earn us a commission" %}
+    </div>
+  {% else %}
+    {% include "tours/_group_empty.html" with heading="Prefer to go with a group?" text="Guided Catholic pilgrimages that visit these places will appear here." interest_site=None tours_elsewhere=None %}
+  {% endif %}
+</div>

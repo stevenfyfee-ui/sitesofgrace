@@ -1,0 +1,54 @@
+{% comment %}
+  The compact "Prefer to travel with a group?" card, shown when there are no
+  guided pilgrimages to list. Never shows sample tours.
+
+  heading, text   the card's copy; without text, the site-level sentence
+                  naming interest_site is used
+  interest_site   optional: a site page; adds the "I'm interested" form
+                  (signed-out visitors are sent to sign in, tours.signals)
+  tour_interested optional: this pilgrim already registered interest
+  tours_elsewhere, tours_elsewhere_label, page
+                  optional: up to two tours elsewhere in the same country
+
+  Used by tours/_site_section.html (v2 site pages) and the Trip Planner v2
+  sidebar (planner/v2/_side_group.html).
+{% endcomment %}
+<div class="v2-card v2-group-empty">
+  <span class="v2-group-icon" aria-hidden="true">✠</span>
+  <div>
+    <h2 class="v2-h3">{{ heading }}</h2>
+    <p>{% if text %}{{ text }}{% else %}No guided pilgrimages that include {{ interest_site.title }} are listed yet. Many parishes and dioceses organize their own trips, so ask at yours.{% endif %}</p>
+    {% if interest_site %}
+    <div class="v2-group-acts">
+      {% if tour_interested %}
+        <p class="v2-interest-done" role="status">You&rsquo;ve told us you&rsquo;re interested</p>
+      {% else %}
+        <form method="post" action="{% url 'tours:interest' %}">
+          {% csrf_token %}
+          <input type="hidden" name="site" value="{{ interest_site.pk }}">
+          <button type="submit" class="btn btn-primary">I&rsquo;m interested in a group pilgrimage here</button>
+        </form>
+      {% endif %}
+      <span class="v2-group-note">We use this to ask Catholic tour operators to add trips.</span>
+    </div>
+    {% endif %}
+    {% if tours_elsewhere %}
+      <div class="v2-group-tier">
+        <p><strong>Guided pilgrimages elsewhere in {{ tours_elsewhere_label }}</strong></p>
+        <p class="v2-group-tier-note">These trips don&rsquo;t include {{ page.title }}.</p>
+        <ul>
+          {% for tour in tours_elsewhere %}
+            <li>
+              {% if tour.booking_url %}
+                <a class="v2-arrow-link" href="{% url 'tours:go' tour.pk %}?from={{ page.pk }}" target="_blank" rel="{{ tour.link_rel }}">{{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}</a>
+              {% else %}
+                {{ tour.title }}{% if tour.duration_days %} · {{ tour.duration_days }} days{% endif %}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        {% include "tours/_tour_links_notice.html" with fallback="Booked with the tour operator, not Sites of Grace. Some links may earn us a commission" %}
+      </div>
+    {% endif %}
+  </div>
+</div>

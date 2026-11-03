@@ -1,0 +1,230 @@
+/* Trip Planner v2 (/plan/ behind SOG_PLANNER_V2). Ported from
+   docs/planner/trip-planner-mockup.html onto the site's tokens (site.css):
+   every class is pv2-* so nothing here touches the rest of the site. */
+
+.pv2 {
+  --pv2-gold-deep: #8A6420;
+  --pv2-ink: #2F3A52;
+  --pv2-green: #3E7A5A;
+  --pv2-hair: rgba(3,37,83,.08);
+  --pv2-ivory-70: rgba(253,249,242,.72);
+  --pv2-shadow: 0 14px 40px -26px rgba(3,37,83,.55);
+  color: var(--navy);
+  font-family: var(--serif-body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.pv2 [hidden] { display: none !important; }
+.pv2 :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Buttons: the site's .btn base with the mockup's three looks. */
+.pv2 .btn { border-radius: 999px; font-size: 14px; line-height: 1.25; text-decoration: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 18px; }
+.pv2-btn-gold { background: var(--gold); color: var(--navy); border: 1px solid var(--gold); font-weight: 600; }
+.pv2-btn-gold:hover { background: #d4a957; }
+.pv2-btn-line { background: #fff; color: var(--navy); border: 1px solid var(--gold); }
+.pv2-btn-line:hover { background: var(--parchment); }
+.pv2 .pv2-btn-sm { padding: 6px 13px; font-size: 13px; }
+
+.pv2-eyebrow { font-family: var(--serif-titling); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--pv2-gold-deep); margin: 0 0 6px; font-weight: 500; }
+.pv2-card { background: #fff; border: 1px solid var(--gold-soft); border-radius: 14px; padding: 18px; }
+.pv2-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; letter-spacing: .04em; padding: 3px 9px;
+  border-radius: 999px; border: 1px solid var(--gold-soft); background: #fff; color: var(--blue); white-space: nowrap; }
+.pv2-pill-ok { border-color: rgba(62,122,90,.45); color: var(--pv2-green); background: rgba(62,122,90,.08); }
+.pv2-pill-auto { border-style: dashed; color: var(--stone); }
+.pv2-disclose { font-size: 12.5px; color: var(--stone); font-style: italic; margin: 10px 0 0; }
+.pv2-disclose a { color: var(--blue); }
+.pv2-placeholder { margin: 0; color: var(--stone); }
+
+/* Hero */
+.pv2-hero { background: radial-gradient(520px 280px at 86% 0%, rgba(199,154,66,.32), transparent 66%),
+  linear-gradient(155deg, var(--blue), var(--navy)); color: var(--ivory); }
+.pv2-hero .container { padding-block: 30px 32px; }
+.pv2-crumb { font-size: 12.5px; color: var(--pv2-ivory-70); margin: 0 0 12px; }
+.pv2-crumb a { color: inherit; }
+.pv2-hero-title { font-family: var(--serif-display); font-weight: 600; font-size: clamp(32px, 5vw, 50px); line-height: 1.02;
+  margin: 0 0 10px; color: var(--ivory); }
+.pv2-hero-txt { max-width: 62ch; color: var(--pv2-ivory-70); margin: 0; }
+.pv2-from-site { display: inline-flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; margin: 14px 0 0; font-size: 13px;
+  background: rgba(253,249,242,.1); border: 1px solid rgba(253,249,242,.3); border-radius: 999px; padding: 5px 12px; }
+.pv2-from-site a { color: var(--ivory); }
+
+/* Layout */
+/* Bottom padding 0: the site footer's own 64px margin is the gap (mockup ~60px). */
+.pv2-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 26px; align-items: start; padding-block: 28px 0; }
+.pv2-main > .pv2-step:last-child { margin-bottom: 0; }
+.pv2-main { min-width: 0; }
+.pv2-message { background: var(--parchment); border: 1px solid var(--gold-soft); border-radius: 10px; padding: 8px 12px;
+  font-size: 14px; margin: 0 0 14px; }
+.pv2-step { background: #fff; border: 1px solid var(--gold-soft); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+.pv2-step h2 { font-family: var(--serif-display); font-size: 24px; margin: 0 0 2px; font-weight: 600; line-height: 1.15; }
+.pv2-step h2 span { font-family: var(--serif-titling); font-size: 11px; letter-spacing: .14em; color: var(--pv2-gold-deep); margin-right: 8px; }
+.pv2-sub { margin: 0 0 12px; font-size: 13.5px; color: var(--stone); }
+
+/* Step 1 */
+.pv2-add { position: relative; margin: 0; }
+.pv2-add input[type="search"] { width: 100%; font: inherit; font-size: 15px; padding: 11px 14px 11px 38px;
+  border: 1px solid var(--gold-soft); border-radius: 999px; background: var(--ivory); color: var(--navy); }
+.pv2-add input[type="search"]:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.pv2-add::before { content: "⌕"; position: absolute; left: 14px; top: 9px; color: var(--pv2-gold-deep); font-size: 18px; pointer-events: none; }
+.pv2-add noscript .btn { margin-top: 8px; }
+.pv2-results { position: absolute; left: 0; right: 0; top: calc(100% + 6px); background: #fff; border: 1px solid var(--gold-soft);
+  border-radius: 12px; box-shadow: var(--pv2-shadow); z-index: 20; max-height: 300px; overflow: auto; padding: 6px; }
+.pv2-results a, .pv2-results [role="option"] { display: flex; gap: 10px; align-items: baseline; width: 100%; padding: 8px 10px;
+  border-radius: 8px; cursor: pointer; color: var(--navy); text-decoration: none; box-sizing: border-box; }
+.pv2-results [role="option"]:hover, .pv2-results [aria-selected="true"] { background: var(--parchment); }
+.pv2-results b { font-size: 14px; font-weight: 600; }
+.pv2-results small { color: var(--stone); font-size: 12px; }
+.pv2-kind { margin-left: auto; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--pv2-gold-deep); white-space: nowrap; }
+.pv2-noresults { margin: 8px 10px; color: var(--stone); font-size: 13.5px; }
+.pv2-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; font-size: 12.5px; color: var(--stone); }
+.pv2-chips a { font-size: 12.5px; border: 1px solid var(--gold-soft); border-radius: 999px; padding: 3px 11px; background: #fff;
+  color: var(--blue); text-decoration: none; }
+.pv2-chips a:hover { border-color: var(--gold); }
+
+.pv2-stops { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.pv2-stop { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center;
+  border: 1px solid var(--gold-soft); border-radius: 12px; padding: 10px 12px; background: var(--ivory); }
+.pv2-stop-n { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--ivory); display: grid;
+  place-items: center; font-size: 12.5px; font-weight: 600; }
+.pv2-stop-body { min-width: 0; }
+.pv2-stop-name { font-weight: 600; font-size: 15px; line-height: 1.3; }
+.pv2-stop-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; align-items: center; font-size: 12px; color: var(--stone); }
+.pv2-stop-ctrl { display: flex; align-items: center; gap: 6px; }
+.pv2-nights { display: inline-flex; align-items: center; border: 1px solid var(--gold-soft); border-radius: 999px; background: #fff; }
+.pv2-nights a, .pv2-nights .pv2-ctl-off { width: 30px; height: 30px; display: grid; place-items: center; color: var(--navy);
+  font-size: 16px; border-radius: 50%; text-decoration: none; }
+.pv2-nights a:hover { background: var(--parchment); }
+.pv2-nights-n { min-width: 62px; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pv2-icon-btn { width: 30px; height: 30px; border: 1px solid var(--gold-soft); background: #fff; border-radius: 50%; color: var(--blue);
+  display: grid; place-items: center; font-size: 13px; text-decoration: none; }
+a.pv2-icon-btn:hover { border-color: var(--gold); }
+.pv2-ctl-off { opacity: .35; }
+.pv2-empty { padding: 16px; text-align: center; color: var(--stone); border: 1px dashed var(--gold-soft); border-radius: 12px;
+  font-size: 14px; margin-top: 14px; }
+.pv2-suggest { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; border: 1px dashed var(--gold); border-radius: 12px;
+  padding: 10px 12px; margin-top: 10px; background: var(--ivory); }
+.pv2-suggest p { margin: 0; font-size: 13.5px; color: var(--pv2-ink); flex: 1; min-width: 0; }
+.pv2-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; background: var(--gold);
+  border: 1px solid rgba(3,37,83,.25); }
+
+/* Step 2 */
+.pv2-form-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.pv2-form-row label { display: grid; gap: 4px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--stone); min-width: 0; }
+.pv2-form-row input, .pv2-form-row select { font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; padding: 8px 10px;
+  border: 1px solid var(--gold-soft); border-radius: 8px; background: var(--ivory); color: var(--navy); width: 100%; min-width: 0; }
+
+/* Step 3 */
+.pv2-days { display: grid; margin-top: 4px; }
+.pv2-stop-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0 4px; }
+.pv2-stop-head:first-child { margin-top: 4px; }
+.pv2-stop-head h3 { font-family: var(--serif-display); font-size: 21px; margin: 0; font-weight: 600; }
+.pv2-stop-head-n { font-size: 12.5px; color: var(--stone); }
+.pv2-day { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 0;
+  border-bottom: 1px solid var(--pv2-hair); }
+.pv2-day-d { font-family: var(--serif-titling); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--pv2-gold-deep);
+  background: var(--parchment); border: 1px solid var(--gold-soft); border-radius: 8px; text-align: center; padding: 6px 4px; line-height: 1.35; }
+.pv2-day-d small { display: block; font-family: var(--serif-body); font-size: 10.5px; letter-spacing: 0; text-transform: none; color: var(--stone); }
+.pv2-day-tx { min-width: 0; }
+.pv2-day-tx b { display: block; font-size: 14.5px; }
+.pv2-sites { font-size: 13.5px; color: var(--pv2-ink); }
+.pv2-sites a { color: var(--blue); text-decoration-color: var(--gold-soft); }
+.pv2-extra { color: var(--stone); }
+.pv2-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(143,185,221,.25);
+  color: var(--blue); margin: 0 6px 4px 0; }
+.pv2-day-free .pv2-day-tx b { color: var(--stone); font-weight: 500; }
+.pv2-day-cut { opacity: .6; }
+.pv2-day-cut .pv2-day-d { background: #fff; border-style: dashed; }
+.pv2-cut-more { margin: 6px 0 0; padding-left: 86px; font-size: 12.5px; color: var(--stone); font-style: italic; }
+.pv2-print-only { display: none; }
+.pv2-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 12px; font-size: 12px; color: var(--stone); }
+
+/* Sidebar */
+.pv2-side { position: sticky; top: 90px; display: grid; gap: 14px; min-width: 0; }
+.pv2-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-family: var(--serif-display);
+  font-size: 21px; font-weight: 600; line-height: 1.2; }
+.pv2-route-strip i { font-style: normal; color: var(--gold); font-size: 14px; }
+.pv2-route-none { font-size: 15px; color: var(--stone); font-family: var(--serif-body); font-weight: 400; }
+.pv2-trip-len { font-size: 13px; color: var(--stone); margin: 6px 0 0; }
+.pv2-budget { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.pv2-budget th, .pv2-budget td { padding: 7px 0; border-bottom: 1px solid var(--pv2-hair); font-weight: 400; text-align: left; }
+.pv2-budget td { text-align: right; }
+.pv2-budget .pv2-total th, .pv2-budget .pv2-total td { font-weight: 600; border-bottom: 0; font-size: 16px; padding-top: 10px; }
+.pv2-budget .pv2-pp th, .pv2-budget .pv2-pp td { border-bottom: 0; font-size: 12.5px; color: var(--stone); padding-top: 0; }
+.pv2-basis { font-size: 12px; color: var(--stone); margin: 8px 0 0; line-height: 1.5; }
+.pv2-actions { display: grid; gap: 8px; }
+.pv2-signin-note { font-size: 12.5px; color: var(--stone); text-align: center; margin: 2px 0 0; }
+.pv2-book { display: grid; gap: 6px; margin-top: 6px; }
+.pv2-book a { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-decoration: none; font-size: 13.5px;
+  border: 1px solid var(--gold-soft); border-radius: 10px; padding: 9px 12px; color: var(--navy); }
+.pv2-book a:hover { border-color: var(--gold); background: var(--parchment); }
+.pv2-book a small { color: var(--stone); font-size: 12px; margin-left: auto; }
+.pv2-book a::after { content: "↗"; color: var(--pv2-gold-deep); }
+.pv2-group .v2-card { margin: 0; }
+.pv2-group .v2-group-empty p { font-size: 13.5px; }
+.pv2-group-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
+
+/* Phones */
+.pv2-mbar { display: none; }
+.pv2-toast { position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%); background: var(--navy); color: var(--ivory);
+  padding: 10px 18px; border-radius: 999px; font-size: 13.5px; box-shadow: var(--pv2-shadow); z-index: 60;
+  max-width: calc(100% - 32px); text-align: center; }
+
+@media (max-width: 980px) {
+  .pv2-layout { grid-template-columns: minmax(0, 1fr); padding-bottom: 110px; }
+  .pv2-side { position: static; }
+  .pv2-mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #fff;
+    border-top: 1px solid var(--gold-soft); box-shadow: 0 -10px 30px -20px rgba(3,37,83,.5);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); gap: 10px; align-items: center; }
+  .pv2-mbar-t { flex: 1; min-width: 0; line-height: 1.25; }
+  .pv2-mbar-t b { display: block; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .pv2-mbar-t small { font-size: 12px; color: var(--stone); }
+}
+@media (max-width: 860px) { .pv2-form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .pv2-step { padding: 16px 14px; }
+  .pv2-stop { grid-template-columns: 28px minmax(0, 1fr); }
+  .pv2-stop-ctrl { grid-column: 1 / -1; justify-content: space-between; }
+}
+
+/* Print: a clean one-page itinerary. No header, buttons or booking card. */
+@page { margin: 0.5in; }
+@media print {
+  .site-header, .site-footer, footer, .skip-link, .pv2-tools, .pv2-stop-ctrl, .pv2-suggest, .pv2-actions, .pv2-book-card,
+  .pv2-group, .pv2-mbar, .pv2-toast, .pv2-legend, .pv2-step-where, .pv2-step-about, .pv2-message, .pv2-crumb { display: none !important; }
+  .pv2-hero { background: none; color: var(--navy); }
+  .pv2-hero .container { padding-block: 0 8px; }
+  .pv2-hero-title, .pv2-hero-txt, .pv2-from-site { color: var(--navy); }
+  .pv2-hero-txt, .pv2-from-site { display: none; }
+  .pv2-layout { grid-template-columns: 1fr; padding: 0; gap: 8px; }
+  .pv2-side { position: static; grid-template-columns: 1fr 1fr; }
+  .pv2-step, .pv2-card { border: 0; padding: 0; }
+  .pv2-day { break-inside: avoid; }
+  .pv2-day-cut, .pv2-cut-more:not(.pv2-print-only) { display: none; }
+  .pv2-print-only { display: block; }
+  .pv2-cut-more { padding-left: 68px; font-size: 10px; margin-top: 2px; }
+  .pv2-step h2 span { display: none; }
+  .pv2-print-foot { margin: 10px 0 0; padding-top: 6px; border-top: 1px solid var(--pv2-hair); font-size: 9.5px;
+    color: var(--stone); word-break: break-all; }
+  .pv2-layout { display: flex; flex-direction: column; }
+  .pv2-side { order: -1; grid-template-columns: 1fr 2fr; gap: 16px; }
+  .pv2-hero-title { font-size: 26px; margin: 0; }
+  .pv2-route-strip { font-size: 17px; }
+  .pv2-budget { font-size: 11px; }
+  .pv2-budget th, .pv2-budget td { padding: 1px 0; }
+  .pv2-budget .pv2-total th, .pv2-budget .pv2-total td { font-size: 12.5px; padding-top: 3px; }
+  .pv2-basis, .pv2-disclose { font-size: 10px; margin-top: 4px; }
+  .pv2-step h2 { font-size: 18px; }
+  .pv2-stop-head { margin: 8px 0 2px; }
+  .pv2-stop-head h3 { font-size: 16px; }
+  .pv2-day { grid-template-columns: 60px minmax(0, 1fr); gap: 8px; padding: 3px 0; }
+  .pv2-day-d { padding: 2px; font-size: 9px; }
+  .pv2-day-tx b { font-size: 12.5px; }
+  .pv2-sites { font-size: 11.5px; }
+  .pv2-tag { font-size: 9.5px; margin-bottom: 1px; }
+  .pv2-sites a { color: inherit; text-decoration: none; }
+  body { font-size: 12px; }
+  .pv2 { font-size: 11px; line-height: 1.35; }
+  .pv2-sites { line-height: 1.35; }
+}

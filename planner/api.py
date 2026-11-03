@@ -85,7 +85,8 @@ def near_route(stops, candidates, limit_miles=NEAR_ROUTE_MILES):
 
 
 def stop_summary(dest, nights, index, pace):
-    sites_count = (sum(len(d.sites) for d in dest.curated) if dest.curated else len(dest.sites))
+    sites_count = (len({s.pk or s.slug for d in dest.curated for s in d.sites}) if dest.curated
+                   else len(dest.sites))
     return {
         "slug": dest.slug, "city": dest.city, "short": dest.short_name, "nights": nights,
         "plan_kind": dest.plan_kind, "curated_days": len(dest.curated), "sites": sites_count,
@@ -94,14 +95,87 @@ def stop_summary(dest, nights, index, pace):
     }
 
 
-def build_plan(request, params, max_stops=None):
+NUMBER_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight",
+                9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve"}
+
+
+def journey_destinations(user):
+    """Destinations of the sites on a signed-in pilgrim's journey, first seen
+    first (the old planner's "From your journey" preselect)."""
+    if not getattr(user, "is_authenticated", False):
+        return []
+    from pilgrims.models import SiteVisit
+
+    seen, out = set(), []
+    for visit in SiteVisit.objects.filter(owner=user).select_related("site"):
+        dc = destination_for_site(visit.site)
+        if dc and dc.slug not in seen:
+            seen.add(dc.slug)
+            out.append(dc)
+    return out
+
+
+def _add_stop(state, slug, max_stops, request, first=False):
+    """Add a destination with its default nights. Returns a message, or ""."""
+    data = load_destinations([slug], request).get(slug)
+    if data is None:
+        return ""
+    if any(s == slug for s, _ in state.stops):
+        return f"{data.city} is already in your plan."
+    if len(state.stops) >= max_stops:
+        return (f"{NUMBER_WORDS.get(max_stops, max_stops)} stop{'s' if max_stops != 1 else ''} "
+                f"is the most a plan can hold.")
+    nights = default_nights(data, first or not state.stops, state.pace)
+    if first:
+        state.stops.insert(0, (slug, nights))
+    else:
+        state.stops.append((slug, nights))
+    return ""
+
+
+def build_plan(request, params, max_stops=None, user=None):
     """Everything the page needs for one plan state. Used by /plan/build/ and
-    by the server-rendered page, so both always agree."""
+    by the server-rendered page, so both always agree.
+
+    Besides the URL state (planner/urlstate.py) it understands:
+    site=<sacred site slug>  that site's destination becomes the first stop
+                             ("Added from <site>"); a live site with no
+                             destination is reported as not plannable yet
+    add=<destination slug>   append it with its default nights
+    and, for a signed-in user with an empty plan, preselects the first
+    destination on their journey.
+    """
     settings = PlannerSettings.load(request_or_site=request)
     max_stops = max_stops or settings.max_stops
     all_dests = list(DestinationCost.objects.all())
     state = parse_state(params, {d.slug for d in all_dests}, max_stops,
                         default_party=CalculatorDefaults.load(request_or_site=request).default_party_size)
+    messages, added_from, unplannable = [], None, None
+
+    site_slug = (params.get("site") or "").strip()
+    if site_slug:
+        site = SacredSitePage.objects.live().filter(slug=site_slug).first()
+        if site:
+            dest = destination_for_site(site)
+            if dest:
+                added_from = site
+                if not any(s == dest.slug for s, _ in state.stops):
+                    if len(state.stops) >= max_stops:
+                        state.stops.pop()
+                    _add_stop(state, dest.slug, max_stops, request, first=True)
+            else:
+                unplannable = site
+
+    add_slug = (params.get("add") or "").strip().lower()
+    if add_slug:
+        message = _add_stop(state, add_slug, max_stops, request)
+        if message:
+            messages.append(message)
+
+    journey = journey_destinations(user) if user is not None else []
+    if not state.stops and not site_slug and not add_slug and not params.get("t") and journey:
+        _add_stop(state, journey[0].slug, max_stops, request)
+
     data = load_destinations([s for s, _ in state.stops], request)
     stops = [(data[slug], n) for slug, n in state.stops if slug in data]
     pricing = load_pricing(request)
@@ -115,7 +189,9 @@ def build_plan(request, params, max_stops=None):
         near = near_route([d for d, _ in stops], candidates)
     return {
         "state": state, "stops": stops, "itinerary": itinerary, "pricing": pricing,
-        "near": near, "max_stops": max_stops,
+        "near": near, "max_stops": max_stops, "messages": messages,
+        "added_from": added_from, "unplannable": unplannable, "journey": journey,
+        "all_dests": all_dests,
     }
 
 
@@ -131,18 +207,21 @@ def plan_json(plan):
         "near": ({"slug": near[0].slug, "city": near[0].city, "short": near[0].short_name, "miles": near[1],
                   "from": near[2].short_name} if near else None),
         "max_stops": plan["max_stops"],
+        "messages": plan["messages"],
     }
 
 
 def build_json(request):
     if rate_limited(request, "planner-build", BUILD_LIMIT):
         return too_many()
-    return cacheable(JsonResponse(plan_json(build_plan(request, request.GET))))
+    from planner.page import build_with_fragments
+
+    return cacheable(JsonResponse(build_with_fragments(request)))
 
 
 def search(q, limit=SEARCH_MAX_RESULTS):
-    """Destinations first, then live sacred sites, each site with the
-    destination it would add (or None: "not plannable yet")."""
+    """Destinations first, then live sacred sites that add a destination,
+    then sites that are "not plannable yet" (no destination)."""
     q = (q or "").strip()
     if len(q) < SEARCH_MIN_CHARS:
         return []
@@ -152,17 +231,22 @@ def search(q, limit=SEARCH_MAX_RESULTS):
                         "dest_city": d.city})
     room = limit - len(results)
     if room > 0:
+        # Look a little further than needed so plannable sites aren't crowded
+        # out by unplannable ones that sort earlier by title.
         sites = (SacredSitePage.objects.live()
                  .filter(Q(title__icontains=q) | Q(locality__icontains=q) | Q(country__icontains=q))
-                 .order_by("title")[:room])
+                 .order_by("title")[:room * 3])
+        found = []
         for site in sites:
             dest = destination_for_site(site)
-            results.append({
+            found.append({
                 "kind": "site", "label": site.title,
                 "sub": ", ".join(p for p in (site.locality, site.country) if p),
                 "slug": site.slug, "url": site.url or "",
                 "dest": dest.slug if dest else None, "dest_city": dest.city if dest else None,
             })
+        found.sort(key=lambda r: r["dest"] is None)  # stable: title order kept within each group
+        results += found[:room]
     return results
 
 

@@ -324,7 +324,24 @@ class PlanPage(RoutablePageMixin, Page):
 
     max_count = 1
 
-    def get_context(self, request):
+    V2_TEMPLATE = "planner/v2/page.html"
+
+    def get_template(self, request, *args, **kwargs):
+        from core.v2 import planner_v2_enabled
+        if planner_v2_enabled(request):
+            return self.V2_TEMPLATE
+        return super().get_template(request, *args, **kwargs)
+
+    def get_context(self, request, *args, **kwargs):
+        # Trip Planner v2 (SOG_PLANNER_V2). With the switch off, everything
+        # below this branch is the old estimator, untouched; test_flag_off.py
+        # proves /plan/ is byte-identical to main.
+        from core.v2 import planner_v2_enabled
+        if planner_v2_enabled(request):
+            from planner.page import page_context
+            context = super().get_context(request, *args, **kwargs)
+            context.update(page_context(request, self))
+            return context
         context = super().get_context(request)
         from planner.models import (
             CalculatorDefaults, DestinationCost, RegionFlightAssumption,
