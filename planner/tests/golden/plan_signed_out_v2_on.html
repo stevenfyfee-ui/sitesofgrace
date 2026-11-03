@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plan your pilgrimage — Sites of Grace</title>
+  <meta name="description" content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/site.css">
+  <link rel="stylesheet" href="/static/css/search.css">
+  <link rel="stylesheet" href="/static/planner/css/plan.css">
+  
+</head>
+<body class="">
+  <input type="hidden" name="csrfmiddlewaretoken" value="CSRF">
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  
+  
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Sites of Grace — home">
+        
+          <span class="brand-wordmark">Sites of Grace</span>
+        
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        
+        
+<ul class="nav-list">
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      </nav>
+
+      <div class="header-actions">
+        
+<form
+  id="sog-search-header"
+  class="sog-search sog-search--header"
+  role="search"
+  action="/search/"
+  method="get"
+  data-suggest-url="/search/suggest.json"
+  
+  
+>
+  <label class="sr-only" for="sog-search-header-input">Search</label>
+  <input
+    id="sog-search-header-input"
+    name="query"
+    type="search"
+    value=""
+    placeholder="Search"
+    autocomplete="off"
+    autocapitalize="off"
+    spellcheck="false"
+    role="combobox"
+    aria-expanded="false"
+    aria-autocomplete="list"
+    aria-controls="sog-search-header-panel"
+  >
+  <button type="submit" class="sog-search-submit" aria-label="Search">
+    
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    
+  </button>
+  <div class="sog-search-panel" id="sog-search-header-panel" role="listbox" hidden></div>
+  <div class="sog-search-status sr-only" aria-live="polite"></div>
+</form>
+
+        
+          <a class="btn btn-primary" aria-label="Pilgrim Portal" href="/accounts/login/?next=/pilgrims/">Sign in</a>
+        
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+    
+    <div class="mobile-nav" id="mobileNav" hidden>
+      
+<form
+  id="sog-search-header-mobile"
+  class="sog-search sog-search--header"
+  role="search"
+  action="/search/"
+  method="get"
+  data-suggest-url="/search/suggest.json"
+  
+  
+>
+  <label class="sr-only" for="sog-search-header-mobile-input">Search</label>
+  <input
+    id="sog-search-header-mobile-input"
+    name="query"
+    type="search"
+    value=""
+    placeholder="Search"
+    autocomplete="off"
+    autocapitalize="off"
+    spellcheck="false"
+    role="combobox"
+    aria-expanded="false"
+    aria-autocomplete="list"
+    aria-controls="sog-search-header-mobile-panel"
+  >
+  <button type="submit" class="sog-search-submit" aria-label="Search">
+    
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    
+  </button>
+  <div class="sog-search-panel" id="sog-search-header-mobile-panel" role="listbox" hidden></div>
+  <div class="sog-search-status sr-only" aria-live="polite"></div>
+</form>
+
+      
+      
+<ul class="mobile-list">
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      
+    </div>
+  </header>
+
+  <main id="content">
+    
+<section class="plan-hero">
+  <div class="container">
+    
+    <h1 class="plan-title">Plan your pilgrimage</h1>
+    <div class="plan-intro"><p>Estimate the cost of a trip.</p></div>
+  </div>
+</section>
+
+<section class="plan-calculator">
+  <div class="container">
+    
+    <div class="plan-calc" id="plan-calc">
+      <div class="plan-calc-controls">
+        <div class="plan-global-fields">
+          <div class="plan-field">
+            <label for="pc-party">Travelers</label>
+            <input type="number" id="pc-party" min="1" max="40" step="1">
+          </div>
+          <div class="plan-field">
+            <label for="pc-tier">Lodging</label>
+            <select id="pc-tier">
+              <option value="budget">Budget</option>
+              <option value="mid" selected>Mid-range</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="pc-stops" class="plan-stops"></div>
+        <button type="button" id="pc-add-stop" class="plan-add-stop">+ Add a stop</button>
+      </div>
+      <div class="plan-breakdown">
+        <ul class="plan-lines">
+          <li><span>Flights</span><span id="pc-flights"></span></li>
+          <li><span>Hotels</span><span id="pc-hotels"></span></li>
+          <li><span>Meals</span><span id="pc-meals"></span></li>
+          <li><span>Local transport</span><span id="pc-transport"></span></li>
+          <li><span>Estimated extras</span><span id="pc-misc"></span></li>
+        </ul>
+        <div class="plan-total">
+          <span class="plan-total-label">Estimated total</span>
+          <span class="plan-total-val" id="pc-total"></span>
+        </div>
+        <div class="plan-perperson"><span id="pc-perperson"></span> per person</div>
+        <p class="plan-basis" id="pc-basis"></p>
+        
+        <p class="plan-estimate-note"><strong>Planning estimate only:</strong> These figures are illustrative and are not a live price quote. Rates, availability, fees, exchange rates, and conditions can change. Confirm final costs with each provider before booking. Travel Disclaimer</p>
+      </div>
+    </div>
+
+    <div class="plan-booking">
+      <p class="plan-booking-label">Booking</p>
+      
+        <p class="plan-booking-soon">Direct booking is coming soon. For now, use the estimate above to plan your budget, then book flights and lodging through your preferred travel site.</p>
+      
+    </div>
+
+    <script id="plan-data" type="application/json">{"destinations": [{"id": 9002, "city": "Assisi", "country": "Italy", "region": "Southern Europe", "airport": "PEG", "airport_name": "Perugia", "hotel": 100.0, "meal": 20.0, "transport": 6.0, "taxi": 15.0}, {"id": 9001, "city": "Rome / Vatican City", "country": "Italy", "region": "Southern Europe", "airport": "FCO", "airport_name": "Rome Fiumicino", "hotel": 130.0, "meal": 22.0, "transport": 8.0, "taxi": 18.0}], "region_flights": {"Southern Europe": 850.0}, "defaults": {"party": 2, "nights": 5, "meals_per_day": 3, "people_per_room": 2, "budget": 0.7, "mid": 1.0, "comfort": 1.6, "misc_pct": 12, "hop": 150.0, "currency": "USD"}, "selected_id": null}</script>
+    <script src="/static/planner/js/plan.js" defer></script>
+  </div>
+</section>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        
+          <span class="footer-wordmark">Sites of Grace</span>
+        
+        <p class="footer-summary">Sites of Grace is a Catholic pilgrimage and sacred-sites reference: explore Marian apparitions, Eucharistic miracles, saints&#x27; tombs, shrines, and Holy Land destinations around the world.</p>
+        <div class="social">
+          
+          
+          
+          
+        </div>
+      </div>
+
+      
+      <div class="footer-col footer-col--explore">
+        <h3>Explore</h3>
+        
+      </div>
+      <div class="footer-col footer-col--learn">
+        <h3>Learn &amp; About</h3>
+        
+        
+        
+        
+        
+      </div>
+      
+      
+      
+
+      <div class="footer-newsletter">
+        <h3>Stay Inspired</h3>
+        <p>Receive sacred site highlights, pilgrimage inspiration, and Catholic resources.</p>
+        
+          <form method="post" action="/newsletter/signup/" class="newsletter-form">
+            <input type="hidden" name="csrfmiddlewaretoken" value="CSRF">
+            <input type="hidden" name="next" value="/plan/">
+            <label class="sr-only" for="nl-email">Your email</label>
+            <input id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+            <button class="btn btn-gold" type="submit">Sign Up</button>
+          </form>
+          
+          <p class="footer-newsletter-note">Unsubscribe anytime. See our Privacy Policy.</p>
+        
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <div class="container footer-base-inner">
+        <p class="disclaimer">Sites of Grace is an independent Catholic educational and pilgrimage resource. Unless expressly stated, it is not affiliated with or endorsed by the Holy See, a diocese, parish, shrine, or religious community. Church status information should be checked against official sources. Catholic Content Notice</p>
+        
+        <p class="copyright">© 2026 Sites of Grace. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+
+  <script>
+    // Minimal mobile menu toggle — no framework needed for the shell.
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('mobileNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.hasAttribute('hidden');
+        if (open) { nav.removeAttribute('hidden'); } else { nav.setAttribute('hidden', ''); }
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
+  <script src="/static/js/search.js"></script>
+  
+  
+</body>
+</html>

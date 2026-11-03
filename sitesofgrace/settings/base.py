@@ -262,6 +262,11 @@ LITURGICAL_TIME_ZONE = os.environ.get("LITURGICAL_TIME_ZONE", "America/Los_Angel
 # Always check it through core.v2.v2_enabled(request) / {% v2_enabled %}.
 SOG_V2_ENABLED = os.environ.get("SOG_V2_ENABLED", "off").strip().lower()
 
+# Trip Planner v2 switch, same values and rules as SOG_V2_ENABLED but set on
+# its own. Check it through core.v2.planner_v2_enabled(request) /
+# {% planner_v2_enabled %}. With "off", /plan/ renders exactly as before.
+SOG_PLANNER_V2 = os.environ.get("SOG_PLANNER_V2", "off").strip().lower()
+
 USE_I18N = True
 
 USE_TZ = True

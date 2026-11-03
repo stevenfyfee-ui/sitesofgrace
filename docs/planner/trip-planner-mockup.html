@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trip Planner Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#032553; --blue:#173A61; --sky:#8FB9DD; --gold:#C79A42; --gold-deep:#8A6420;
+  --parchment:#F9F1E8; --ivory:#FDF9F2; --white:#FFFFFF; --stone:#5F6470; --ink:#2F3A52;
+  --red:#D96B5F; --green:#3E7A5A; --amber:#B7791F;
+  --gold-soft:rgba(199,154,66,.35); --navy-08:rgba(3,37,83,.08); --ivory-70:rgba(253,249,242,.72);
+  --f-title:"Cinzel",Georgia,serif; --f-display:"Cormorant Garamond",Georgia,serif; --f-body:"Lora",Georgia,serif;
+  --shadow:0 14px 40px -26px rgba(3,37,83,.55);
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--ivory);color:var(--navy);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{text-wrap:balance}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:16px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button{font:inherit}
+
+/* Mockup chrome */
+.chrome{background:var(--blue);color:var(--ivory)}
+.chrome .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding-block:9px}
+.chrome-label{font-family:var(--f-title);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.ctabs{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.ctab,.ctoggle{white-space:nowrap;font-size:12.5px;padding:5px 12px;border-radius:999px;border:1px solid rgba(253,249,242,.3);color:var(--ivory);background:transparent;cursor:pointer}
+.ctab[aria-pressed="true"]{background:var(--ivory);color:var(--navy);border-color:var(--ivory);font-weight:600}
+.ctoggle{border-color:var(--gold)}
+.ctoggle[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.rn{display:none;background:var(--white);border:1px dashed var(--gold);border-radius:10px;padding:10px 12px;margin:10px 0 0;font-size:13px;line-height:1.5;color:var(--ink)}
+.rn b{color:var(--gold-deep)}
+.rn::before{content:"Review note";display:inline-block;margin-right:8px;font-family:var(--f-title);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:var(--navy);border-radius:999px;padding:3px 8px}
+body.notes .rn{display:block}
+
+/* Site header (matches live) */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(253,249,242,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gold-soft)}
+.hdr .wrap{display:flex;align-items:center;gap:22px;min-height:72px}
+.brand{font-family:var(--f-title);font-size:17px;letter-spacing:.08em;text-decoration:none;white-space:nowrap}
+.brand span{color:var(--gold-deep)}
+.nav{display:flex;gap:22px;flex:1;justify-content:center;font-size:14.5px}
+.nav a{text-decoration:none;color:var(--blue);padding:4px 0;border-bottom:2px solid transparent}
+.nav a.cur{color:var(--gold-deep);border-color:var(--gold)}
+.acct{font-size:13.5px;border:1px solid var(--gold);background:var(--white);border-radius:999px;padding:7px 14px;color:var(--navy);white-space:nowrap}
+.burger{display:none;margin-left:auto;font-size:13px;border:1px solid var(--gold-soft);background:var(--white);border-radius:8px;padding:6px 11px}
+@media (max-width:900px){.nav,.acct{display:none}.burger{display:inline-block}}
+
+/* Components */
+.btn{font-size:14px;cursor:pointer;border-radius:999px;padding:10px 18px;border:1px solid transparent;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;line-height:1.25}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:600}
+.btn-gold:hover{background:#d4a957}
+.btn-navy{background:var(--navy);color:var(--ivory)}
+.btn-line{background:var(--white);color:var(--navy);border-color:var(--gold)}
+.btn-line:hover{background:var(--parchment)}
+.btn-sm{padding:6px 13px;font-size:13px}
+.eyebrow{font-family:var(--f-title);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 6px;font-weight:500}
+.card{background:var(--white);border:1px solid var(--gold-soft);border-radius:14px;padding:18px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.04em;padding:3px 9px;border-radius:999px;border:1px solid var(--gold-soft);background:var(--white);color:var(--blue);white-space:nowrap}
+.pill.ok{border-color:rgba(62,122,90,.45);color:var(--green);background:rgba(62,122,90,.08)}
+.pill.auto{border-style:dashed;color:var(--stone)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;border:1px solid rgba(3,37,83,.25)}
+.disclose{font-size:12.5px;color:var(--stone);font-style:italic;margin:10px 0 0}
+.disclose a{color:var(--blue)}
+
+/* Hero */
+.dark-band{background:radial-gradient(520px 280px at 86% 0%,rgba(199,154,66,.32),transparent 66%),linear-gradient(155deg,var(--blue),var(--navy));color:var(--ivory)}
+.dark-band .wrap{padding-block:30px 32px}
+.crumb{font-size:12.5px;color:var(--ivory-70);margin:0 0 12px}
+.hero-title{font-family:var(--f-display);font-weight:600;font-size:clamp(32px,5vw,50px);line-height:1.02;margin:0 0 10px}
+.hero-txt{max-width:62ch;color:var(--ivory-70);margin:0}
+.from-site{display:inline-flex;gap:8px;align-items:center;margin-top:14px;font-size:13px;background:rgba(253,249,242,.1);border:1px solid rgba(253,249,242,.3);border-radius:999px;padding:5px 12px}
+
+/* Planner layout */
+.planner{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;align-items:start;padding-block:28px 60px}
+@media (max-width:980px){.planner{grid-template-columns:minmax(0,1fr);padding-bottom:110px}}
+.step{background:var(--white);border:1px solid var(--gold-soft);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+@media (max-width:560px){.step{padding:16px 14px}}
+.step h2{font-family:var(--f-display);font-size:24px;margin:0 0 2px;font-weight:600;line-height:1.15}
+.step h2 span{font-family:var(--f-title);font-size:11px;letter-spacing:.14em;color:var(--gold-deep);margin-right:8px}
+.step .sub{margin:0 0 12px;font-size:13.5px;color:var(--stone)}
+
+/* Step 1: search + stops */
+.add{position:relative}
+.add input{width:100%;font:inherit;font-size:15px;padding:11px 14px 11px 38px;border:1px solid var(--gold-soft);border-radius:999px;background:var(--ivory);color:var(--navy)}
+.add input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.add::before{content:"⌕";position:absolute;left:14px;top:9px;color:var(--gold-deep);font-size:18px}
+.results{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--white);border:1px solid var(--gold-soft);border-radius:12px;box-shadow:var(--shadow);z-index:20;max-height:300px;overflow:auto;padding:6px}
+.results button{all:unset;box-sizing:border-box;display:flex;gap:10px;align-items:baseline;width:100%;padding:8px 10px;border-radius:8px;cursor:pointer}
+.results button:hover,.results button.hi{background:var(--parchment)}
+.results b{font-size:14px;font-weight:600}
+.results small{color:var(--stone);font-size:12px}
+.results .kind{margin-left:auto;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap}
+.popular{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center;font-size:12.5px;color:var(--stone)}
+.popular button{font-size:12.5px;border:1px solid var(--gold-soft);border-radius:999px;padding:3px 11px;background:var(--white);color:var(--blue);cursor:pointer}
+.popular button:hover{border-color:var(--gold)}
+
+.stops{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.stop{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--gold-soft);border-radius:12px;padding:10px 12px;background:var(--ivory)}
+.stop .n{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--ivory);display:grid;place-items:center;font-size:12.5px;font-weight:600}
+.stop .nm{font-weight:600;font-size:15px;line-height:1.3}
+.stop .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;align-items:center;font-size:12px;color:var(--stone)}
+.stop .ctrl{display:flex;align-items:center;gap:6px}
+.nights{display:inline-flex;align-items:center;border:1px solid var(--gold-soft);border-radius:999px;background:var(--white)}
+.nights button{width:30px;height:30px;border:0;background:none;cursor:pointer;color:var(--navy);font-size:16px;border-radius:50%}
+.nights button:hover{background:var(--parchment)}
+.nights span{min-width:62px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.icon-btn{width:30px;height:30px;border:1px solid var(--gold-soft);background:var(--white);border-radius:50%;cursor:pointer;color:var(--blue);display:grid;place-items:center;font-size:13px}
+.icon-btn:hover{border-color:var(--gold)}
+.icon-btn:disabled{opacity:.35;cursor:default}
+@media (max-width:560px){
+  .stop{grid-template-columns:28px minmax(0,1fr)}
+  .stop .ctrl{grid-column:1/-1;justify-content:space-between}
+}
+.empty{padding:16px;text-align:center;color:var(--stone);border:1px dashed var(--gold-soft);border-radius:12px;font-size:14px;margin-top:14px}
+.suggest{display:flex;gap:12px;align-items:center;border:1px dashed var(--gold);border-radius:12px;padding:10px 12px;margin-top:10px;background:var(--ivory)}
+.suggest p{margin:0;font-size:13.5px;color:var(--ink);flex:1;min-width:0}
+
+/* Step 2 */
+.form-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:860px){.form-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.form-row label{display:grid;gap:4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);min-width:0}
+.form-row input,.form-row select{font:inherit;font-size:14px;letter-spacing:0;text-transform:none;padding:8px 10px;border:1px solid var(--gold-soft);border-radius:8px;background:var(--ivory);color:var(--navy);width:100%;min-width:0}
+
+/* Step 3 */
+.days{display:grid;margin-top:4px}
+.stop-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 4px}
+.stop-head:first-child{margin-top:4px}
+.stop-head h3{font-family:var(--f-display);font-size:21px;margin:0;font-weight:600}
+.day{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--navy-08)}
+.day .d{font-family:var(--f-title);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);background:var(--parchment);border:1px solid var(--gold-soft);border-radius:8px;text-align:center;padding:6px 4px;line-height:1.35}
+.day .d small{display:block;font-family:var(--f-body);font-size:10.5px;letter-spacing:0;text-transform:none;color:var(--stone)}
+.day .tx b{display:block;font-size:14.5px}
+.day .tx .sites{font-size:13.5px;color:var(--ink)}
+.day .tx .sites a{color:var(--blue);text-decoration-color:var(--gold-soft)}
+.day .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(143,185,221,.25);color:var(--blue);margin:0 6px 4px 0}
+.day.free .tx b{color:var(--stone);font-weight:500}
+.day.cut{opacity:.6}
+.day.cut .d{background:var(--white);border-style:dashed}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:12px;font-size:12px;color:var(--stone)}
+
+/* Sidebar */
+.side{position:sticky;top:90px;display:grid;gap:14px}
+@media (max-width:980px){.side{position:static}}
+.route-strip{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-family:var(--f-display);font-size:21px;font-weight:600;line-height:1.2}
+.route-strip i{font-style:normal;color:var(--gold);font-size:14px}
+.trip-len{font-size:13px;color:var(--stone);margin:6px 0 0}
+.budget{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.budget td{padding:7px 0;border-bottom:1px solid var(--navy-08)}
+.budget td:last-child{text-align:right}
+.budget tr.total td{font-weight:600;border-bottom:0;font-size:16px;padding-top:10px}
+.budget tr.pp td{border-bottom:0;font-size:12.5px;color:var(--stone);padding-top:0}
+.basis{font-size:12px;color:var(--stone);margin:8px 0 0;line-height:1.5}
+.actions{display:grid;gap:8px}
+.signin-note{font-size:12.5px;color:var(--stone);text-align:center;margin:2px 0 0}
+.book{display:grid;gap:6px;margin-top:6px}
+.book a{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;font-size:13.5px;border:1px solid var(--gold-soft);border-radius:10px;padding:9px 12px;color:var(--navy)}
+.book a:hover{border-color:var(--gold);background:var(--parchment)}
+.book a small{color:var(--stone);font-size:12px}
+.book a::after{content:"↗";color:var(--gold-deep)}
+
+/* Mobile sticky bar */
+.mbar{display:none}
+@media (max-width:980px){
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--white);border-top:1px solid var(--gold-soft);box-shadow:0 -10px 30px -20px rgba(3,37,83,.5);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));gap:10px;align-items:center}
+  .mbar .t{flex:1;min-width:0;line-height:1.25}
+  .mbar .t b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+  .mbar .t small{font-size:12px;color:var(--stone)}
+}
+
+/* My Trips view */
+.trips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-block:28px 60px}
+@media (max-width:700px){.trips{grid-template-columns:minmax(0,1fr)}}
+.trip-card h3{font-family:var(--f-display);font-size:23px;margin:0 0 4px;font-weight:600}
+.trip-card p{margin:0 0 10px;font-size:13.5px;color:var(--stone)}
+.trip-card .row{display:flex;flex-wrap:wrap;gap:8px}
+
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy);color:var(--ivory);padding:10px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);z-index:60;max-width:calc(100% - 32px);text-align:center}
+
+.foot{background:#011A3C;color:rgba(253,249,242,.7);font-size:12.5px}
+.foot .wrap{padding-block:22px}
+@media print{.chrome,.hdr,.side .actions,.mbar,.foot,.rn,.step-1-tools{display:none!important}.planner{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="notes">
+
+<div class="chrome">
+  <div class="wrap">
+    <span class="chrome-label">Mockup · not live</span>
+    <div class="ctabs" role="group" aria-label="Mockup views">
+      <button class="ctab" data-view="planner" aria-pressed="true">Trip planner (/plan/)</button>
+      <button class="ctab" data-view="trips" aria-pressed="false">My Pilgrimage › My Trips</button>
+    </div>
+    <button class="ctoggle" id="signedToggle" aria-pressed="false">Viewing: signed out</button>
+    <button class="ctoggle" id="notesToggle" aria-pressed="true">Review notes: on</button>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#">SITES <span>OF</span> GRACE</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#">Interactive Map</a><a href="#">Explore ▾</a><a href="#">Catholic Faith ▾</a>
+      <a href="#" class="cur">Plan a Pilgrimage</a><a href="#">Blog</a><a href="#">Our Story</a>
+    </nav>
+    <span class="acct" id="acct">Sign in</span>
+    <button class="burger" type="button">Menu</button>
+  </div>
+</header>
+
+<main>
+<!-- ================= PLANNER ================= -->
+<div id="view-planner">
+  <section class="dark-band">
+    <div class="wrap">
+      <p class="crumb">Home › Plan a Pilgrimage</p>
+      <h1 class="hero-title">Build your pilgrimage</h1>
+      <p class="hero-txt">Choose sacred places, tell us about the trip, and get a day-by-day plan with an estimated budget. Save it, print it, or send it to the people you're traveling with.</p>
+      <span class="from-site" id="fromSite" hidden>✦ Added from <b>Our Lady of Lourdes</b></span>
+      <div class="rn">Replaces today's cost estimator at the same URL. "Add to a trip plan" on a site page links to <b>/plan/?site=&lt;slug&gt;</b>, adds that site's destination as the first stop and shows this chip. The old estimator's math becomes the budget card on the right.</div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="planner">
+      <div>
+        <!-- STEP 1 -->
+        <section class="step" aria-labelledby="s1">
+          <h2 id="s1"><span>Step 1</span>Where do you want to go?</h2>
+          <p class="sub">Add up to six stops in the order you'll visit them. You can search for a town or a sacred site.</p>
+          <div class="add step-1-tools">
+            <label for="addInput" style="position:absolute;left:-9999px">Add a destination or sacred site</label>
+            <input id="addInput" type="search" autocomplete="off" placeholder="Add a destination or sacred site, e.g. Assisi or Divine Mercy" aria-controls="addResults" aria-expanded="false">
+            <div class="results" id="addResults" role="listbox" hidden></div>
+          </div>
+          <div class="popular step-1-tools" id="popular"><span>Popular:</span></div>
+          <ol class="stops" id="stops"></ol>
+          <div class="empty" id="stopsEmpty" hidden>Add a place to start your plan.</div>
+          <div class="suggest" id="suggest" hidden></div>
+          <div class="rn">Search covers the <b>planner destinations</b> (today's 22 cost records) and every live <b>sacred site</b>. Picking a site adds its destination (via the existing <code>associated_sites</code> link or locality match). A site with no destination shows "We can't plan around this one yet" and a link to its page. <b>Near your route</b> suggests the closest other destination within about 150 miles of a stop. Nights default to the curated plan's length.</div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="step" aria-labelledby="s2">
+          <h2 id="s2"><span>Step 2</span>About the trip</h2>
+          <p class="sub">Used for dates, the budget, and how full each day is.</p>
+          <div class="form-row">
+            <label for="pDate">Start date<input id="pDate" type="date" value="2027-05-10"></label>
+            <label for="pFrom">Flying from<select id="pFrom"><option>United States</option></select></label>
+            <label for="pParty">Travelers<select id="pParty"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+            <label for="pTier">Lodging<select id="pTier"><option value="budget">Budget</option><option value="mid" selected>Mid-range</option><option value="comfort">Comfort</option></select></label>
+            <label for="pPace">Pace<select id="pPace"><option value="2">Unhurried</option><option value="3" selected>Balanced</option><option value="4">Full days</option></select></label>
+          </div>
+          <div class="rn">Flight estimates are round trips <b>from the U.S.</b> by region (the existing RegionFlightAssumption records), so "Flying from" is a single option for now. <b>Pace</b> only changes automatically grouped days (2, 3 or 4 sites a day). Curated days stay as written.</div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="step" aria-labelledby="s3">
+          <h2 id="s3"><span>Step 3</span>Your day-by-day plan</h2>
+          <p class="sub" id="dayRange"></p>
+          <div class="days" id="days"></div>
+          <div class="legend">
+            <span><span class="pill ok">✓ Curated plan</span> written by Sites of Grace</span>
+            <span><span class="pill auto">Suggested order</span> grouped from the destination's sacred sites</span>
+          </div>
+          <div class="rn">Each destination gets an optional <b>curated plan</b>: a few day rows (a title plus linked sacred sites), written by you in Wagtail. We start with the 22 planner destinations, flagship ones first. Destinations without one fall back to <b>Suggested order</b>: their live sites in nearest-neighbor order, split by pace. The first day is always a light <b>arrival day</b>. Extra nights become <b>free days</b>. Curated days that don't fit are shown faded with "add a night". Between stops we show <b>distance in whole miles only</b>, no drive times, matching the Nearby decision. Mass times are never listed; each site links to its page.</div>
+        </section>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="side" aria-label="Trip summary">
+        <div class="card">
+          <p class="eyebrow">Your pilgrimage</p>
+          <div class="route-strip" id="routeStrip"></div>
+          <p class="trip-len" id="tripLen"></p>
+        </div>
+
+        <div class="card" id="budgetCard">
+          <p class="eyebrow" id="budgetTitle">Estimated budget</p>
+          <table class="budget" id="budget"></table>
+          <p class="basis" id="basis"></p>
+          <p class="disclose" style="margin-top:6px">Planning estimate only, not a price quote. Confirm costs with each provider before you book. <a href="#">Travel Disclaimer</a></p>
+        </div>
+
+        <div class="card actions">
+          <button class="btn btn-gold" id="saveBtn" type="button">Sign in to save this trip</button>
+          <button class="btn btn-line" id="shareBtn" type="button">Copy share link</button>
+          <button class="btn btn-line" id="printBtn" type="button">Print or save as PDF</button>
+          <p class="signin-note" id="saveNote">Your plan is kept in the link, so you can share it without an account.</p>
+          <div class="rn" style="margin-top:4px">Signed out: the whole plan lives in the URL (<code>/plan/?t=rome-vatican-city.3,assisi.2&amp;d=2027-05-10&amp;p=2&amp;l=mid&amp;pace=3</code>), so share and bookmark work with no account. <b>Signed in:</b> "Save to My Pilgrimage" stores a private Trip. Its share link is an unguessable token you can turn off. Use the toggle in the top bar to see both.</div>
+        </div>
+
+        <div class="card" id="bookCard">
+          <p class="eyebrow">Book the pieces</p>
+          <div class="book">
+            <a href="#" data-mock><span>Flights to <span class="arr">FCO</span></span><small>Aviasales</small></a>
+            <a href="#" data-mock>Airport transfer<small>Welcome Pickups</small></a>
+            <a href="#" data-mock>Museum &amp; site tickets<small>Tiqets</small></a>
+            <a href="#" data-mock>Travel insurance<small>EKTA</small></a>
+            <a href="#" data-mock>eSIM for your phone<small>Airalo</small></a>
+          </div>
+          <p class="disclose">Some links may earn Sites of Grace a commission at no extra cost to you. <a href="#">Affiliate Disclosure</a></p>
+          <div class="rn"><b>Built now, switched off.</b> This card stays hidden until a new setting, "Show booking links on the planner", is on. That setting refuses to turn on while the Affiliate Disclosure page isn't live. These are already-connected Travelpayouts programs. Links go through <code>/go/</code> with <code>sub_id</code> = the first stop's slug. Hotels stay "book on your preferred site" until Booking.com etc. approve the account.</div>
+        </div>
+
+        <div class="card">
+          <p class="eyebrow">Prefer to go with a group?</p>
+          <p style="margin:0 0 10px;font-size:13.5px;color:var(--ink)" id="groupTxt">Guided Catholic pilgrimages that visit these places will appear here.</p>
+          <a class="btn btn-line btn-sm" href="#">Guided pilgrimages</a>
+          <div class="rn">Uses the tours app from v2. Until there are real listings it shows this "None" line, never sample tours.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MY TRIPS ================= -->
+<div id="view-trips" hidden>
+  <section class="dark-band">
+    <div class="wrap">
+      <p class="crumb">My Pilgrimage › My Trips</p>
+      <h1 class="hero-title">My Trips</h1>
+      <p class="hero-txt">Trips you've saved from the planner. They're private unless you turn on a share link.</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <div class="trips">
+      <article class="card trip-card">
+        <p class="eyebrow">May 10–17, 2027 · 2 travelers</p>
+        <h3>Rome &amp; Assisi</h3>
+        <p>Rome / Vatican City (4 nights) → Assisi (3 nights) · Estimated $4,265</p>
+        <div class="row"><a class="btn btn-navy btn-sm" href="#" data-view-link="planner">Open in planner</a><span class="pill ok">Share link on</span><button class="btn btn-line btn-sm" type="button" data-mock>Turn off link</button></div>
+      </article>
+      <article class="card trip-card">
+        <p class="eyebrow">No dates yet · 4 travelers</p>
+        <h3>Lourdes &amp; Lisieux</h3>
+        <p>Lourdes (2 nights) → Paris (2 nights) → Lisieux (1 night)</p>
+        <div class="row"><a class="btn btn-navy btn-sm" href="#" data-view-link="planner">Open in planner</a><span class="pill">Private</span><button class="btn btn-line btn-sm" type="button" data-mock>Share</button></div>
+      </article>
+    </div>
+    <div class="rn" style="margin-bottom:40px">A new <b>My Trips</b> entry in the account menu and on the passport page. A Trip stores its stops, nights, date, party size, lodging tier and pace. It doesn't store prices; the budget is recalculated each time it's opened. Deleting your account deletes your trips. Visited sites aren't touched.</div>
+  </div>
+</div>
+</main>
+
+<div class="mbar" id="mbar" aria-hidden="true">
+  <div class="t"><b id="mTotal">$0</b><small id="mSub">Estimated total</small></div>
+  <button class="btn btn-line btn-sm" type="button" id="mShare">Share</button>
+  <button class="btn btn-gold btn-sm" type="button" id="mSave">Save</button>
+</div>
+
+<footer class="foot"><div class="wrap">Sites of Grace is an independent educational Catholic resource. Mockup with sample day plans. Distances are straight-line estimates.</div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+  /* ---------- Data: the 22 live DestinationCost records ---------- */
+  var DEF={budget:.7,mid:1,comfort:1.6,meals:3,ppr:2,misc:12,hop:150};
+  var RF={"Eastern Europe":900,"Holy Land":1100,"Ireland & UK":750,"Latin America":450,"North America":300,"Southern Europe":850,"Western Europe":800};
+  // id, city, region, airport, hotel, meal, transport, lat, lng
+  var D=[
+   ["assisi","Assisi","Southern Europe","PEG",100,20,6,43.070,12.617],
+   ["bethlehem","Bethlehem","Holy Land","TLV",90,18,7,31.705,35.202],
+   ["czestochowa","Czestochowa","Eastern Europe","KTW",60,12,5,50.812,19.097],
+   ["dublin","Dublin","Ireland & UK","DUB",150,24,9,53.349,-6.260],
+   ["einsiedeln","Einsiedeln","Western Europe","ZRH",160,30,12,47.127,8.751],
+   ["fatima","Fatima","Southern Europe","LIS",80,15,6,39.632,-8.672],
+   ["jerusalem","Jerusalem","Holy Land","TLV",140,25,8,31.778,35.230],
+   ["knock","Knock","Ireland & UK","NOC",110,22,8,53.792,-8.920],
+   ["krakow","Krakow","Eastern Europe","KRK",70,13,5,50.061,19.937],
+   ["lisieux","Lisieux","Western Europe","CDG",95,20,6,49.145,0.226],
+   ["loreto","Loreto","Southern Europe","AOI",90,19,6,43.440,13.610],
+   ["lourdes","Lourdes","Western Europe","LDE",90,20,8,43.097,-0.058],
+   ["medjugorje","Medjugorje","Eastern Europe","OMO",55,12,5,43.190,17.678],
+   ["mexico-city","Mexico City (Guadalupe)","Latin America","MEX",90,12,4,19.484,-99.117],
+   ["nazareth","Nazareth","Holy Land","TLV",100,20,7,32.702,35.297],
+   ["padua","Padua","Southern Europe","VCE",105,20,7,45.401,11.880],
+   ["paris","Paris","Western Europe","CDG",160,25,9,48.857,2.352],
+   ["rome-vatican-city","Rome / Vatican City","Southern Europe","FCO",130,22,8,41.902,12.454],
+   ["san-giovanni-rotondo","San Giovanni Rotondo","Southern Europe","BRI",85,18,6,41.706,15.700],
+   ["santiago","Santiago de Compostela","Southern Europe","SCQ",85,16,7,42.880,-8.545],
+   ["turin","Turin","Southern Europe","TRN",100,20,8,45.073,7.686],
+   ["walsingham","Walsingham","Ireland & UK","STN",120,22,10,52.893,0.874]
+  ].map(function(r){return {id:r[0],city:r[1],region:r[2],air:r[3],hotel:r[4],meal:r[5],tr:r[6],lat:r[7],lng:r[8]}});
+  var BY={};D.forEach(function(d){BY[d.id]=d});
+
+  /* Curated plans (sample text; written in Wagtail in the build) */
+  var CURATED={
+   "rome-vatican-city":[
+     ["St. Peter's and the Vatican",["St. Peter's Basilica","Tomb of St. Peter (Scavi, book ahead)","Vatican Museums"]],
+     ["Three papal basilicas",["St. John Lateran","Scala Santa","St. Mary Major"]],
+     ["Outside the walls",["St. Paul Outside the Walls","Catacombs of St. Callixtus"]],
+     ["Rome of the martyrs",["Santa Maria in Trastevere","San Clemente","Santa Croce in Gerusalemme"]]],
+   "assisi":[
+     ["Francis and Clare",["Basilica of St. Francis","Basilica of Santa Chiara","Sanctuary of the Renunciation (St. Carlo Acutis)"]],
+     ["Where Francis prayed",["San Damiano","Eremo delle Carceri","Santa Maria degli Angeli (Portiuncula)"]]],
+   "lourdes":[
+     ["The Grotto and the Sanctuary",["The Grotto of Massabielle","The baths","Torchlight procession"]],
+     ["In Bernadette's footsteps",["Boly Mill","The Cachot","Parish church (baptismal font)","Stations of the Cross"]]],
+   "fatima":[
+     ["The Cova da Iria",["Chapel of the Apparitions","Basilica of Our Lady of the Rosary","Candlelight Rosary"]],
+     ["The shepherds' village",["Aljustrel (the seers' homes)","Valinhos","Loca do Anjo"]]],
+   "paris":[
+     ["Rue du Bac and the Left Bank",["Chapel of Our Lady of the Miraculous Medal","Chapel of St. Vincent de Paul","Saint-Sulpice"]],
+     ["Montmartre and the Île de la Cité",["Basilica of Sacré-Cœur","Notre-Dame de Paris","Sainte-Chapelle"]]]
+  };
+  /* Sites for automatic grouping (sample) */
+  var SITES={
+   bethlehem:["Church of the Nativity","Milk Grotto","Shepherds' Field"],
+   czestochowa:["Jasna Góra Monastery"],
+   dublin:["Whitefriar Street Church","St. Mary's Pro-Cathedral","St. Michan's"],
+   einsiedeln:["Einsiedeln Abbey"],
+   jerusalem:["Church of the Holy Sepulchre","Via Dolorosa","Garden of Gethsemane","Dominus Flevit","The Cenacle","Church of St. Anne"],
+   knock:["Knock Shrine","Apparition Chapel"],
+   krakow:["Divine Mercy Sanctuary (Łagiewniki)","St. John Paul II Sanctuary","Wawel Cathedral","St. Mary's Basilica","Franciscan Basilica"],
+   lisieux:["Basilica of St. Thérèse","Carmel of Lisieux","Les Buissonnets","Cathedral of Saint-Pierre"],
+   loreto:["Basilica of the Holy House"],
+   medjugorje:["St. James Church","Apparition Hill","Cross Mountain","Risen Christ statue"],
+   "mexico-city":["Basilica of Our Lady of Guadalupe","Old Basilica","Tepeyac Hill chapel"],
+   nazareth:["Basilica of the Annunciation","Church of St. Joseph","Mount Tabor"],
+   padua:["Basilica of St. Anthony","Scrovegni Chapel","Basilica of St. Justina"],
+   "san-giovanni-rotondo":["Shrine of St. Pio","Santa Maria delle Grazie","Monte Sant'Angelo"],
+   santiago:["Cathedral of Santiago","Pilgrim's Mass","Monastery of San Martín Pinario"],
+   turin:["Turin Cathedral (Holy Shroud)","Basilica of Mary Help of Christians","Consolata Shrine"],
+   walsingham:["Shrine of Our Lady of Walsingham","Slipper Chapel","Walsingham Abbey grounds"]
+  };
+  /* Search index: destinations + some sites mapping to a destination */
+  var IDX=D.map(function(d){return {label:d.city,sub:d.region,kind:"Destination",dest:d.id}});
+  [["Our Lady of Lourdes","Lourdes, France","lourdes"],["St. Peter's Basilica","Vatican City","rome-vatican-city"],["Basilica of St. Francis","Assisi, Italy","assisi"],
+   ["Divine Mercy Sanctuary","Kraków, Poland","krakow"],["Our Lady of Fátima","Fátima, Portugal","fatima"],["Shrine of St. Pio","San Giovanni Rotondo, Italy","san-giovanni-rotondo"],
+   ["Miraculous Medal Chapel (Rue du Bac)","Paris, France","paris"],["Basilica of St. Thérèse","Lisieux, France","lisieux"],["Our Lady of Guadalupe","Mexico City, Mexico","mexico-city"],
+   ["Church of the Holy Sepulchre","Jerusalem","jerusalem"],["Holy House of Loreto","Loreto, Italy","loreto"],["Eucharistic Miracle of Lanciano","Lanciano, Italy",null]]
+   .forEach(function(s){IDX.push({label:s[0],sub:s[1],kind:"Sacred site",dest:s[2]})});
+
+  /* ---------- State ---------- */
+  var S={stops:[{id:"rome-vatican-city",n:4},{id:"assisi",n:3}],party:2,tier:"mid",pace:3,date:"2027-05-10",signed:false};
+
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return "$"+Math.round(n).toLocaleString("en-US")};
+  function miles(a,b){var R=3958.8,t=Math.PI/180,dl=(b.lat-a.lat)*t,dg=(b.lng-a.lng)*t;
+    var h=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dg/2)*Math.sin(dg/2);
+    return Math.round(2*R*Math.asin(Math.sqrt(h)))}
+  function defaultNights(id){return CURATED[id]?CURATED[id].length:Math.max(1,Math.ceil((SITES[id]||[]).length/3))}
+  function toast(msg){var t=$("toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2600)}
+
+  /* ---------- Step 1 ---------- */
+  ["lourdes","fatima","rome-vatican-city","assisi","medjugorje","jerusalem"].forEach(function(id){
+    var b=document.createElement("button");b.type="button";b.textContent=BY[id].city.replace(" / Vatican City","");
+    b.onclick=function(){addStop(id)};$("popular").appendChild(b);
+  });
+  function addStop(id){
+    if(!id){toast("We can't plan around this site yet. Its page has travel details.");return}
+    if(S.stops.some(function(s){return s.id===id})){toast(BY[id].city+" is already in your plan.");return}
+    if(S.stops.length>=6){toast("Six stops is the most a plan can hold.");return}
+    S.stops.push({id:id,n:defaultNights(id)});render();
+  }
+  var input=$("addInput"),res=$("addResults"),hi=-1,cur=[];
+  function showResults(){
+    var q=input.value.trim().toLowerCase();
+    if(!q){res.hidden=true;input.setAttribute("aria-expanded","false");return}
+    cur=IDX.filter(function(x){return (x.label+" "+x.sub).toLowerCase().indexOf(q)>=0}).slice(0,8);
+    hi=cur.length?0:-1;
+    res.innerHTML=cur.length?cur.map(function(x,i){return '<button type="button" role="option" data-i="'+i+'"'+(i===hi?' class="hi"':'')+'><span><b>'+x.label+'</b> <small>'+x.sub+(x.kind==="Sacred site"&&x.dest?' · adds '+BY[x.dest].city:'')+(x.kind==="Sacred site"&&!x.dest?' · not plannable yet':'')+'</small></span><span class="kind">'+x.kind+'</span></button>'}).join(""):'<p style="margin:8px 10px;color:var(--stone);font-size:13.5px">No matches. Try a town, shrine or saint.</p>';
+    res.hidden=false;input.setAttribute("aria-expanded","true");
+  }
+  function pick(i){var x=cur[i];if(!x)return;input.value="";res.hidden=true;addStop(x.dest)}
+  input.addEventListener("input",showResults);
+  input.addEventListener("keydown",function(e){
+    if(res.hidden)return;
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();hi=Math.max(0,Math.min(cur.length-1,hi+(e.key==="ArrowDown"?1:-1)));[].forEach.call(res.querySelectorAll("button"),function(b,i){b.classList.toggle("hi",i===hi)})}
+    else if(e.key==="Enter"){e.preventDefault();pick(hi)}
+    else if(e.key==="Escape"){res.hidden=true}
+  });
+  res.addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(b)pick(+b.dataset.i)});
+  document.addEventListener("click",function(e){if(!e.target.closest(".add"))res.hidden=true});
+
+  function renderStops(){
+    var ol=$("stops");ol.innerHTML="";
+    $("stopsEmpty").hidden=S.stops.length>0;
+    S.stops.forEach(function(s,i){
+      var d=BY[s.id],li=document.createElement("li");li.className="stop";
+      var cur=!!CURATED[s.id],nsites=cur?CURATED[s.id].reduce(function(a,r){return a+r[1].length},0):(SITES[s.id]||[]).length;
+      li.innerHTML='<span class="n">'+(i+1)+'</span><div style="min-width:0"><div class="nm">'+d.city+'</div><div class="meta">'+
+        (cur?'<span class="pill ok">✓ Curated plan · '+CURATED[s.id].length+' days</span>':'<span class="pill auto">Suggested order</span>')+
+        '<span>'+nsites+' sacred place'+(nsites===1?'':'s')+' · fly into '+d.air+'</span></div></div>'+
+        '<div class="ctrl"><span class="nights" role="group" aria-label="Nights in '+d.city+'"><button type="button" aria-label="One fewer night" data-a="dec">−</button><span>'+s.n+' night'+(s.n>1?'s':'')+'</span><button type="button" aria-label="One more night" data-a="inc">+</button></span>'+
+        '<button class="icon-btn" type="button" data-a="up" aria-label="Move earlier"'+(i===0?' disabled':'')+'>↑</button>'+
+        '<button class="icon-btn" type="button" data-a="down" aria-label="Move later"'+(i===S.stops.length-1?' disabled':'')+'>↓</button>'+
+        '<button class="icon-btn" type="button" data-a="rm" aria-label="Remove '+d.city+'">✕</button></div>';
+      li.addEventListener("click",function(e){
+        var b=e.target.closest("button[data-a]");if(!b)return;var a=b.dataset.a;
+        if(a==="inc"&&s.n<21)s.n++;
+        if(a==="dec"&&s.n>1)s.n--;
+        if(a==="rm")S.stops.splice(i,1);
+        if(a==="up"&&i>0){S.stops.splice(i-1,0,S.stops.splice(i,1)[0])}
+        if(a==="down"&&i<S.stops.length-1){S.stops.splice(i+1,0,S.stops.splice(i,1)[0])}
+        render();
+      });
+      ol.appendChild(li);
+    });
+    // Near your route
+    var sug=$("suggest"),best=null;
+    S.stops.forEach(function(s){
+      D.forEach(function(d){
+        if(S.stops.some(function(x){return x.id===d.id}))return;
+        var m=miles(BY[s.id],d);if(m<=150&&(!best||m<best.m))best={d:d,m:m,from:BY[s.id]};
+      });
+    });
+    if(best&&S.stops.length<6){
+      sug.innerHTML='<span class="dot" style="background:var(--gold)"></span><p><b>Near your route:</b> '+best.d.city+', about '+best.m+' miles from '+best.from.city.replace(" / Vatican City","")+'.</p><button class="btn btn-line btn-sm" type="button">Add</button>';
+      sug.querySelector("button").onclick=function(){addStop(best.d.id)};sug.hidden=false;
+    } else sug.hidden=true;
+  }
+
+  /* ---------- Step 3 ---------- */
+  function addDays(iso,k){var t=new Date(iso+"T12:00:00");t.setDate(t.getDate()+k);return t}
+  function short(t){return t.toLocaleDateString("en-US",{month:"short",day:"numeric"})}
+  function autoDays(id,pace){var list=(SITES[id]||[]).slice(),out=[];for(var i=0;i<list.length;i+=pace)out.push(["Sacred places",list.slice(i,i+pace)]);return out}
+  function renderDays(){
+    var el=$("days"),html="",day=0,dateOK=!!S.date;
+    if(!S.stops.length){el.innerHTML='<p style="margin:0;color:var(--stone)">Your plan appears here once you add a place.</p>';$("dayRange").textContent="";return}
+    S.stops.forEach(function(s,i){
+      var d=BY[s.id],cur=CURATED[s.id],rows=cur||autoDays(s.id,S.pace);
+      html+='<div class="stop-head"><h3>'+d.city+'</h3>'+(cur?'<span class="pill ok">✓ Curated plan</span>':'<span class="pill auto">Suggested order</span>')+'<span style="font-size:12.5px;color:var(--stone)">'+s.n+' night'+(s.n>1?'s':'')+'</span></div>';
+      if(i===0){rows=[["Arrive and settle in",null]].concat(rows)}
+      for(var k=0;k<Math.max(s.n,rows.length);k++){
+        var fits=k<s.n,r=rows[k];
+        var lbl=fits?(++day):null;
+        var dlabel=fits?('Day '+lbl+(dateOK?'<small>'+short(addDays(S.date,lbl-1))+'</small>':'')):'Extra<small>add a night</small>';
+        var tags="";
+        if(fits&&k===0&&i===0)tags+='<span class="tag">✈ Arrive · fly into '+d.air+'</span>';
+        if(fits&&k===0&&i>0)tags+='<span class="tag">Travel from '+BY[S.stops[i-1].id].city.replace(" / Vatican City","")+' · about '+miles(BY[S.stops[i-1].id],d)+' mi</span>';
+        if(r&&!r[1]){
+          html+='<div class="day"><span class="d">'+dlabel+'</span><span class="tx">'+tags+'<b>'+r[0]+'</b><span class="sites">Rest after the flight. Find an evening Mass near where you\'re staying.</span></span></div>';
+        } else if(r){
+          html+='<div class="day'+(fits?'':' cut')+'"><span class="d">'+dlabel+'</span><span class="tx">'+tags+'<b>'+r[0]+'</b><span class="sites">'+r[1].map(function(x){return '<a href="#">'+x+'</a>'}).join(" · ")+'</span></span></div>';
+        } else if(fits){
+          html+='<div class="day free"><span class="d">'+dlabel+'</span><span class="tx">'+tags+'<b>Free day</b><span class="sites">Rest, go back to a favorite place, or take a day trip.</span></span></div>';
+        }
+      }
+    });
+    var last=BY[S.stops[S.stops.length-1].id];day++;
+    html+='<div class="day"><span class="d">Day '+day+(dateOK?'<small>'+short(addDays(S.date,day-1))+'</small>':'')+'</span><span class="tx"><span class="tag">✈ Fly home from '+last.air+'</span><b>Departure</b></span></div>';
+    el.innerHTML=html;
+    var tn=S.stops.reduce(function(a,s){return a+s.n},0);
+    $("dayRange").textContent=(tn+1)+" days, "+tn+" nights"+(dateOK?" · "+short(addDays(S.date,0))+" – "+short(addDays(S.date,tn))+", "+addDays(S.date,tn).getFullYear():"");
+  }
+
+  /* ---------- Budget (same formula as today's plan.js) ---------- */
+  function budget(){
+    var party=S.party,rooms=Math.ceil(party/DEF.ppr),mult=DEF[S.tier],h=0,m=0,t=0,n=0,rt=0;
+    S.stops.forEach(function(s){var d=BY[s.id];h+=d.hotel*mult*rooms*s.n;m+=d.meal*DEF.meals*party*s.n;t+=d.tr*party*s.n;n+=s.n;rt=Math.max(rt,RF[d.region]||0)});
+    var f=rt*party+DEF.hop*party*Math.max(0,S.stops.length-1),sub=f+h+m+t,misc=sub*DEF.misc/100;
+    return {f:f,h:h,m:m,t:t,misc:misc,total:sub+misc,rooms:rooms,n:n};
+  }
+  function renderSide(){
+    var strip=$("routeStrip");
+    strip.innerHTML=S.stops.length?S.stops.map(function(s){return BY[s.id].city.replace(" / Vatican City","")}).join(' <i>→</i> '):'<span style="font-size:15px;color:var(--stone);font-family:var(--f-body);font-weight:400">No stops yet</span>';
+    var b=budget();
+    $("tripLen").textContent=S.stops.length?(b.n+1)+" days · "+S.stops.length+" stop"+(S.stops.length>1?"s":""):"";
+    $("budgetTitle").textContent="Estimated budget · "+S.party+" traveler"+(S.party>1?"s":"");
+    $("budget").innerHTML=S.stops.length?
+      '<tr><td>Flights</td><td>'+fmt(b.f)+'</td></tr><tr><td>Lodging</td><td>'+fmt(b.h)+'</td></tr><tr><td>Meals</td><td>'+fmt(b.m)+'</td></tr><tr><td>Local transport</td><td>'+fmt(b.t)+'</td></tr><tr><td>Extras ('+DEF.misc+'%)</td><td>'+fmt(b.misc)+'</td></tr><tr class="total"><td>Estimated total</td><td>'+fmt(b.total)+'</td></tr><tr class="pp"><td>Per person</td><td>'+fmt(b.total/S.party)+'</td></tr>'
+      :'<tr><td>Add a place to see an estimate</td><td></td></tr>';
+    $("basis").textContent=S.stops.length?b.rooms+" room"+(b.rooms>1?"s":"")+", "+b.n+" nights, "+$("pTier").selectedOptions[0].text.toLowerCase()+" lodging, 1 round trip from the U.S."+(S.stops.length>1?" + "+(S.stops.length-1)+" hop"+(S.stops.length>2?"s":"")+" between stops":"")+".":"";
+    document.querySelectorAll(".arr").forEach(function(a){a.textContent=S.stops.length?BY[S.stops[0].id].air:"your destination"});
+    $("mTotal").textContent=S.stops.length?fmt(b.total):"—";
+    $("mSub").textContent=S.stops.length?"Estimated total · "+(b.n+1)+" days":"Add a place to start";
+    $("saveBtn").textContent=S.signed?"Save to My Pilgrimage":"Sign in to save this trip";
+    $("saveNote").textContent=S.signed?"Saved trips are private. Turn on a share link any time.":"Your plan is kept in the link, so you can share it without an account.";
+    $("mSave").textContent=S.signed?"Save":"Sign in";
+    $("acct").textContent=S.signed?"♡ My Pilgrimage":"Sign in";
+  }
+  function shareUrl(){return "https://sitesofgrace.com/plan/?t="+S.stops.map(function(s){return s.id+"."+s.n}).join(",")+"&d="+S.date+"&p="+S.party+"&l="+S.tier+"&pace="+S.pace}
+  function render(){renderStops();renderDays();renderSide()}
+
+  /* ---------- Controls ---------- */
+  $("pParty").onchange=function(){S.party=+this.value;render()};
+  $("pTier").onchange=function(){S.tier=this.value;render()};
+  $("pPace").onchange=function(){S.pace=+this.value;render()};
+  $("pDate").onchange=function(){S.date=this.value;render()};
+  function share(){
+    var u=shareUrl();
+    try{navigator.clipboard&&navigator.clipboard.writeText(u)}catch(_){}
+    toast(S.signed?"Share link copied. Anyone with it can view this trip.":"Link copied: "+u.replace("https://",""));
+  }
+  function save(){toast(S.signed?"Saved to My Pilgrimage › My Trips.":"Sign in or create a free account to save. Your plan comes with you.")}
+  $("shareBtn").onclick=share;$("mShare").onclick=share;
+  $("saveBtn").onclick=save;$("mSave").onclick=save;
+  $("printBtn").onclick=function(){toast("Opens the print dialog with a clean one-page itinerary.")};
+  document.addEventListener("click",function(e){if(e.target.closest("[data-mock]")){e.preventDefault();toast("Mockup only. Booking links stay off until the Affiliate Disclosure is live.")}});
+
+  /* Chrome */
+  function view(v){
+    $("view-planner").hidden=v!=="planner";$("view-trips").hidden=v!=="trips";
+    $("mbar").style.visibility=v==="planner"?"":"hidden";
+    document.querySelectorAll(".ctab").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v))});
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll(".ctab").forEach(function(b){b.onclick=function(){view(b.dataset.view)}});
+  document.querySelectorAll("[data-view-link]").forEach(function(a){a.onclick=function(e){e.preventDefault();view("planner")}});
+  $("signedToggle").onclick=function(){S.signed=!S.signed;this.setAttribute("aria-pressed",String(S.signed));this.textContent="Viewing: "+(S.signed?"signed in":"signed out");render()};
+  $("notesToggle").onclick=function(){var on=document.body.classList.toggle("notes");this.setAttribute("aria-pressed",String(on));this.textContent="Review notes: "+(on?"on":"off")};
+
+  render();
+})();
+</script>
+</body>
+</html>
