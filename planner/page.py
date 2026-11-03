@@ -29,6 +29,17 @@ FRAGMENTS = {
 }
 
 
+def absolute_url(page, request, suffix=""):
+    """An absolute planner URL on the canonical site (https://sitesofgrace.com
+    in production): built from the Wagtail Site's root, like robots.txt's
+    sitemap link, never from the request's Host header (which could be the
+    app's ondigitalocean.app address)."""
+    base = page.get_full_url(request)
+    if not base:
+        base = request.build_absolute_uri(page.url)
+    return base + suffix
+
+
 def _q(state, **changes):
     return "?" + replace(state, **changes).query()
 
@@ -141,7 +152,8 @@ def page_context(request, page):
         "page": page,
         "query": query,
         "share_path": page.url + "?" + query,
-        "share_url": request.build_absolute_uri(page.url + "?" + query),
+        "share_url": absolute_url(page, request, "?" + query),
+        "share_base": absolute_url(page, request),
         "journey": [{"dest": d, "href": base + f"&add={d.slug}"} for d in journey_chips(plan)],
         "search_q": q,
         "search_results": [dict(r, href=(base + f"&add={r['dest']}") if r["dest"] else "")
@@ -157,8 +169,21 @@ def page_context(request, page):
         "first_stop": plan["stops"][0][0] if plan["stops"] else None,
         "login_url": reverse("account_login") + "?next=" + quote(page.url + "?" + query, safe=""),
         "group_tours": _route_tours(request, plan),
+        "trip": _open_trip(request),
+        "saved": request.GET.get("saved") == "1",
     })
     return ctx
+
+
+def _open_trip(request):
+    """The pilgrim's own trip named by ?trip=<id> (Open from My Trips), so
+    Save updates it. Anyone else's id is ignored without a word."""
+    trip_id = request.GET.get("trip", "")
+    if not trip_id.isdigit() or not request.user.is_authenticated:
+        return None
+    from planner.models import Trip
+
+    return Trip.objects.filter(pk=int(trip_id), owner=request.user).first()
 
 
 def _route_tours(request, plan):

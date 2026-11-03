@@ -285,7 +285,7 @@ class ReviewFixTests(PageTestCase):
     def test_print_footer_carries_the_share_url(self):
         html = self.html(GOLDEN)
         self.assertIn("Sites of Grace · sitesofgrace.com · Reopen this plan: <span data-share-url>"
-                      "http://testserver/plan/?t=rome-vatican-city.4,assisi.3&amp;d=2027-05-10&amp;p=2&amp;l=mid&amp;pace=3"
+                      "http://localhost/plan/?t=rome-vatican-city.4,assisi.3&amp;d=2027-05-10&amp;p=2&amp;l=mid&amp;pace=3"
                       "</span>", html)
 
 

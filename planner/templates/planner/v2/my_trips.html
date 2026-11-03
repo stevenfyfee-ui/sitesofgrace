@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static planner_tags %}
+{% comment %}
+  My Trips (/plan/trips/): the signed-in pilgrim's saved trips. Totals are
+  recalculated on every visit (planner/trips.py summarize). Rename, delete
+  and share are plain POST forms with CSRF, so they work without JavaScript.
+{% endcomment %}
+
+{% block title %}My Trips{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'planner/css/plan-v2.css' %}">{% endblock %}
+
+{% block content %}
+<div class="pv2">
+  <section class="pv2-hero">
+    <div class="container">
+      <p class="pv2-crumb">My Pilgrimage › My Trips</p>
+      <h1 class="pv2-hero-title">My Trips</h1>
+      <p class="pv2-hero-txt">Trips you&rsquo;ve saved from the planner. They&rsquo;re private unless you turn on a share link.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    {% if flash == "renamed" %}<p class="pv2-message pv2-trips-flash" role="status">Trip renamed.</p>
+    {% elif flash == "deleted" %}<p class="pv2-message pv2-trips-flash" role="status">Trip deleted.</p>
+    {% elif flash == "shared" %}<p class="pv2-message pv2-trips-flash" role="status">Share link is on. Anyone with the link can see the plan, but not who made it.</p>
+    {% elif flash == "unshared" %}<p class="pv2-message pv2-trips-flash" role="status">Share link is off. The old link no longer works.</p>{% endif %}
+
+    {% if trips %}
+    <div class="pv2-trips">
+      {% for t in trips %}
+      <article class="pv2-card pv2-trip-card" id="trip-{{ t.trip.pk }}">
+        <p class="pv2-eyebrow">{% if t.state.start_date %}{{ t.itinerary.start_date|date_range:t.itinerary.end_date }}{% else %}No dates yet{% endif %} · {{ t.state.party }} traveler{{ t.state.party|pluralize }}</p>
+        <h2 class="pv2-trip-title">{{ t.trip.title }}</h2>
+        <p class="pv2-trip-route">{% for d, n in t.stops %}{{ d.city }} ({{ n }} night{{ n|pluralize }}){% if not forloop.last %} → {% endif %}{% endfor %}{% if t.total %} · Estimated {{ t.total }}{% endif %}</p>
+        <div class="pv2-trip-row">
+          <a class="btn pv2-btn-navy pv2-btn-sm" href="{{ page.url }}?{{ t.query }}">Open in planner</a>
+          {% if t.trip.share_token %}
+            <span class="pv2-pill pv2-pill-ok">Share link on</span>
+            <form method="post" action="{{ page.url }}trips/{{ t.trip.pk }}/share/">{% csrf_token %}<input type="hidden" name="on" value="0"><button class="btn pv2-btn-line pv2-btn-sm" type="submit">Turn off link</button></form>
+          {% else %}
+            <span class="pv2-pill">Private</span>
+            <form method="post" action="{{ page.url }}trips/{{ t.trip.pk }}/share/">{% csrf_token %}<input type="hidden" name="on" value="1"><button class="btn pv2-btn-line pv2-btn-sm" type="submit">Share</button></form>
+          {% endif %}
+        </div>
+        {% if t.trip.share_token %}
+          <label class="pv2-share-field">Share link<input type="text" readonly value="{{ share_base }}{{ t.trip.share_token }}/" aria-describedby="share-note-{{ t.trip.pk }}"></label>
+          <p class="pv2-share-note" id="share-note-{{ t.trip.pk }}">Anyone with this link can see this trip&rsquo;s name and plan.</p>
+        {% endif %}
+        <div class="pv2-trip-more">
+          <details>
+            <summary>Rename</summary>
+            <form class="pv2-inline-form" method="post" action="{{ page.url }}trips/{{ t.trip.pk }}/rename/">
+              {% csrf_token %}
+              <label class="sr-only" for="trip-title-{{ t.trip.pk }}">Trip name</label>
+              <input id="trip-title-{{ t.trip.pk }}" name="title" value="{{ t.trip.title }}" maxlength="120" required>
+              <button class="btn pv2-btn-line pv2-btn-sm" type="submit">Save name</button>
+            </form>
+          </details>
+          <details>
+            <summary>Delete</summary>
+            <form class="pv2-inline-form" method="post" action="{{ page.url }}trips/{{ t.trip.pk }}/delete/">
+              {% csrf_token %}
+              <span>Delete &ldquo;{{ t.trip.title }}&rdquo;? This can&rsquo;t be undone.</span>
+              <button class="btn pv2-btn-line pv2-btn-sm pv2-btn-danger" type="submit">Delete trip</button>
+            </form>
+          </details>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="pv2-trips-empty pv2-card">
+      <p>You haven&rsquo;t saved a trip yet.</p>
+      <a class="btn pv2-btn-gold" href="{{ page.url }}">Build a pilgrimage</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static legal_tags %}
+{% comment %}
+  A shared trip (/plan/t/<token>/): read-only. Shows the plan and nothing
+  about the account that made it; noindex (also sent as X-Robots-Tag by
+  planner/trips.py shared). "Open in the planner" copies the plan into the
+  visitor's own planner URL; it never edits the shared trip.
+{% endcomment %}
+
+{% block title %}{{ trip.title }} · shared pilgrimage plan{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex, nofollow"><meta name="referrer" content="same-origin">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}"><link rel="stylesheet" href="{% static 'planner/css/plan-v2.css' %}">{% endblock %}
+
+{% block content %}
+<div class="pv2 pv2-shared">
+  <section class="pv2-hero">
+    <div class="container">
+      <p class="pv2-crumb">Shared pilgrimage plan</p>
+      <h1 class="pv2-hero-title">{{ trip.title }}</h1>
+      <p class="pv2-hero-txt">Someone shared this plan with you. Open it in the planner to change it or save your own copy.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="pv2-layout">
+      <div class="pv2-main">
+        <section class="pv2-step pv2-step-days" aria-labelledby="pv2-s3">
+          <h2 id="pv2-s3">Day-by-day plan</h2>
+          <div id="pv2-days">{% include "planner/v2/_days.html" %}</div>
+        </section>
+      </div>
+      <aside class="pv2-side" aria-label="Trip summary">
+        <div class="pv2-card">{% include "planner/v2/_route.html" %}</div>
+        <div class="pv2-card">
+          {% include "planner/v2/_budget.html" %}
+          <p class="pv2-disclose">{% notice "plan_estimate" %}</p>
+        </div>
+        <div class="pv2-card pv2-actions">
+          <a class="btn pv2-btn-gold" href="{{ open_url }}">Open in the planner</a>
+          <p class="pv2-signin-note">Changes you make there are yours; this shared plan stays as it is.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+{% endblock %}

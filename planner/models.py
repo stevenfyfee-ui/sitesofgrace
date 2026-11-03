@@ -430,3 +430,39 @@ class PlanPage(RoutablePageMixin, Page):
         self._require_v2(request)
         from planner.api import search_json
         return search_json(request)
+
+    @path("trips/", name="my_trips")
+    def my_trips_route(self, request):
+        self._require_v2(request)
+        from planner import trips
+        return trips.my_trips(request, self)
+
+    @path("trips/save/", name="trip_save")
+    def trip_save_route(self, request):
+        self._require_v2(request)
+        from planner import trips
+        return trips.save(request, self)
+
+    @path("trips/<int:trip_id>/rename/", name="trip_rename")
+    def trip_rename_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.rename(request, self, trip_id)
+
+    @path("trips/<int:trip_id>/delete/", name="trip_delete")
+    def trip_delete_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.delete(request, self, trip_id)
+
+    @path("trips/<int:trip_id>/share/", name="trip_share")
+    def trip_share_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.share(request, self, trip_id)
+
+    @path("t/<str:token>/", name="shared_trip")
+    def shared_trip_route(self, request, token):
+        self._require_v2(request)
+        from planner import trips
+        return trips.shared(request, self, token)

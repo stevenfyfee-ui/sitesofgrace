@@ -11,6 +11,7 @@
   var searchUrl = root.getAttribute('data-search-url');
   var pageUrl = root.getAttribute('data-page-url');
   var query = root.getAttribute('data-query') || '';
+  var tripId = root.getAttribute('data-trip');
   var $ = function (id) { return document.getElementById(id); };
   var targets = { stops: 'pv2-stops', days: 'pv2-days', route: 'pv2-route', budget: 'pv2-budget', mbar: 'pv2-mbar-total' };
   var pending = null, timer = null, lastTotal = null;
@@ -24,7 +25,9 @@
     toast.h = setTimeout(function () { t.hidden = true; }, 3200);
   }
 
-  function shareUrl() { return window.location.origin + pageUrl + '?' + query; }
+  // The canonical address (https://sitesofgrace.com/plan/ in production), from the server.
+  var shareBase = root.getAttribute('data-share-base') || (window.location.origin + pageUrl);
+  function shareUrl() { return shareBase + '?' + query; }
 
   function syncLinks() {
     Array.prototype.forEach.call(root.querySelectorAll('input[type="hidden"][name="t"]'), function (input) {
@@ -33,6 +36,8 @@
     });
     Array.prototype.forEach.call(root.querySelectorAll('[data-share]'), function (a) { a.href = pageUrl + '?' + query; });
     Array.prototype.forEach.call(root.querySelectorAll('[data-share-url]'), function (el) { el.textContent = shareUrl(); });
+    var saveQ = root.querySelector('[data-save-form] input[name="q"]');
+    if (saveQ) saveQ.value = query;
     Array.prototype.forEach.call(root.querySelectorAll('[data-login]'), function (a) {
       a.href = a.href.split('?next=')[0] + '?next=' + encodeURIComponent(pageUrl + '?' + query);
     });
@@ -45,7 +50,7 @@
       var el = $(targets[name]);
       if (el && data.html && data.html[name] != null) el.innerHTML = data.html[name];
     });
-    if (window.history && history.replaceState) history.replaceState(null, '', pageUrl + '?' + query);
+    if (window.history && history.replaceState) history.replaceState(null, '', pageUrl + '?' + query + (tripId ? '&trip=' + tripId : ''));
     // "From your journey" is rendered once (it's per user); keep it and Popular from repeating the plan.
     var chosen = {}, journey = {};
     ((data.state && data.state.stops) || []).forEach(function (s) { chosen[s.slug] = true; });
@@ -226,6 +231,34 @@
     }
     if (e.target.closest('[data-print]')) window.print();
   });
+  /* Save (signed in): the form posts the plan; here it's sent in place. */
+  var saveForm = root.querySelector('[data-save-form]');
+  if (saveForm) {
+    saveForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      syncLinks();
+      fetch(saveForm.action, { method: 'POST', body: new FormData(saveForm), credentials: 'same-origin',
+                               headers: { 'X-Requested-With': 'fetch', Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data.success) { toast(data.message || 'Couldn’t save the trip.'); return; }
+          if (!tripId) {
+            tripId = String(data.trip);
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden'; hidden.name = 'trip'; hidden.value = tripId;
+            saveForm.appendChild(hidden);
+            root.setAttribute('data-trip', tripId);
+            var btn = $('pv2-save');
+            if (btn) btn.textContent = 'Save changes to My Pilgrimage';
+            syncLinks();
+            if (window.history && history.replaceState) history.replaceState(null, '', pageUrl + '?' + query + '&trip=' + tripId);
+          }
+          toast('Saved to My Pilgrimage › My Trips.');
+        })
+        .catch(function () { toast('Couldn’t save the trip. Try again.'); });
+    });
+  }
+
   var printBtn = $('pv2-print');
   if (printBtn) printBtn.hidden = false;
 

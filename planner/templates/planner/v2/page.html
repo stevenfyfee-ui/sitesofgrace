@@ -14,7 +14,7 @@
 {% block body_class %}pv2-body{% endblock %}
 
 {% block content %}
-<div class="pv2" id="pv2" data-build-url="{{ page.url }}build/" data-search-url="{{ page.url }}search/" data-page-url="{{ page.url }}" data-query="{{ query }}" data-signed-in="{{ request.user.is_authenticated|yesno:'1,0' }}">
+<div class="pv2" id="pv2"{% if trip %} data-trip="{{ trip.pk }}"{% endif %} data-build-url="{{ page.url }}build/" data-search-url="{{ page.url }}search/" data-page-url="{{ page.url }}" data-share-base="{{ share_base }}" data-query="{{ query }}" data-signed-in="{{ request.user.is_authenticated|yesno:'1,0' }}">
   <section class="pv2-hero">
     <div class="container">
       <p class="pv2-crumb"><a href="/">Home</a> › Plan a Pilgrimage</p>
@@ -29,6 +29,7 @@
     <div class="pv2-layout">
       <div class="pv2-main">
         {% if messages %}<p class="pv2-message" role="status">{% for m in messages %}{{ m }} {% endfor %}</p>{% endif %}
+        {% if saved and trip %}<p class="pv2-message" role="status">Saved to My Pilgrimage › <a href="{{ page.url }}trips/">My Trips</a>.</p>{% endif %}
 
         {# ---------- Step 1 ---------- #}
         <section class="pv2-step pv2-step-where" aria-labelledby="pv2-s1">
@@ -101,13 +102,18 @@
 
         <div class="pv2-card pv2-actions">
           {% if request.user.is_authenticated %}
-            <button class="btn pv2-btn-gold" type="button" id="pv2-save" data-save>Save to My Pilgrimage</button>
+            <form id="pv2-save-form" class="pv2-save-form" method="post" action="{{ page.url }}trips/save/" data-save-form data-my-trips="{{ page.url }}trips/">
+              {% csrf_token %}
+              <input type="hidden" name="q" value="{{ query }}">
+              {% if trip %}<input type="hidden" name="trip" value="{{ trip.pk }}">{% endif %}
+              <button class="btn pv2-btn-gold" type="submit" id="pv2-save">{% if trip %}Save changes to My Pilgrimage{% else %}Save to My Pilgrimage{% endif %}</button>
+            </form>
           {% else %}
             <a class="btn pv2-btn-gold" id="pv2-save" href="{{ login_url }}" data-login>Sign in to save this trip</a>
           {% endif %}
           <a class="btn pv2-btn-line" id="pv2-share" href="{{ share_path }}" data-share>Copy share link</a>
           <button class="btn pv2-btn-line" id="pv2-print" type="button" data-print hidden>Print or save as PDF</button>
-          <p class="pv2-signin-note">{% if request.user.is_authenticated %}Saved trips are private. Turn on a share link any time.{% else %}Your plan is kept in the link, so you can share it without an account.{% endif %}</p>
+          <p class="pv2-signin-note">{% if trip %}Editing &ldquo;{{ trip.title }}&rdquo; from <a href="{{ page.url }}trips/">My Trips</a>.{% elif request.user.is_authenticated %}Saved trips are private. Turn on a share link any time.{% else %}Your plan is kept in the link, so you can share it without an account.{% endif %}</p>
         </div>
 
         {% if booking_links and first_stop %}
@@ -133,7 +139,7 @@
     <div class="pv2-mbar-t" id="pv2-mbar-total">{% include "planner/v2/_mbar_total.html" %}</div>
     <a class="btn pv2-btn-line pv2-btn-sm" href="{{ share_path }}" data-share>Share</a>
     {% if request.user.is_authenticated %}
-      <button class="btn pv2-btn-gold pv2-btn-sm" type="button" data-save>Save</button>
+      <button class="btn pv2-btn-gold pv2-btn-sm" type="submit" form="pv2-save-form">Save</button>
     {% else %}
       <a class="btn pv2-btn-gold pv2-btn-sm" href="{{ login_url }}" data-login>Sign in</a>
     {% endif %}

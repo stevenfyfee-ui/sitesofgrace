@@ -24,7 +24,7 @@
   Sign out stays a POST form with the CSRF token -- allauth refuses a GET
   logout, and a GET link would let any page sign a pilgrim out.
 {% endcomment %}
-{% with pilgrim=request.user.pilgrim %}
+{% load planner_tags %}{% planner_trips_url as trips_url %}{% with pilgrim=request.user.pilgrim %}
 {% with name=pilgrim.display_name|default:request.user.get_username %}
 {% url 'pilgrims:photo_library' as photos_url %}
 {% url 'pilgrims:feed' as feed_url %}
@@ -44,7 +44,7 @@
     </p>
     <ul class="mobile-list mobile-account-list" aria-label="My account">
       {% if profile_url %}<li{% if request.path == profile_url %} class="active"{% endif %}><a href="{{ profile_url }}"{% if request.path == profile_url %} aria-current="page"{% endif %}>My Passport &amp; Profile</a></li>{% endif %}
-      <li{% if photos_url in request.path %} class="active"{% endif %}><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}>My Photos</a></li>
+      <li{% if photos_url in request.path %} class="active"{% endif %}><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}>My Photos</a></li>{% if trips_url %}<li{% if trips_url in request.path %} class="active"{% endif %}><a href="{{ trips_url }}"{% if trips_url in request.path %} aria-current="page"{% endif %}>My Trips</a></li>{% endif %}
       <li{% if feed_url in request.path %} class="active"{% endif %}><a href="{{ feed_url }}"{% if feed_url in request.path %} aria-current="page"{% endif %}>Feed</a></li>
       <li{% if notifications_url in request.path %} class="active"{% endif %}><a href="{{ notifications_url }}"{% if notifications_url in request.path %} aria-current="page"{% endif %}>Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}</a></li>
     </ul>
@@ -63,7 +63,7 @@
         {% if profile_url %}<a class="account-panel-profile" href="{{ profile_url }}"{% if request.path == profile_url %} aria-current="page"{% endif %}>My Passport &amp; Profile</a>{% endif %}
       </div>
       <ul class="account-panel-list">
-        <li><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}><span class="account-icon">{% include "includes/_line_icon.html" with icon="camera" %}</span>My Photos</a></li>
+        <li><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}><span class="account-icon">{% include "includes/_line_icon.html" with icon="camera" %}</span>My Photos</a></li>{% if trips_url %}<li><a href="{{ trips_url }}"{% if trips_url in request.path %} aria-current="page"{% endif %}><span class="account-icon"></span>My Trips</a></li>{% endif %}
         <li><a href="{{ feed_url }}"{% if feed_url in request.path %} aria-current="page"{% endif %}><span class="account-icon"></span>Feed</a></li>
         <li><a href="{{ notifications_url }}"{% if notifications_url in request.path %} aria-current="page"{% endif %}><span class="account-icon"></span>Notifications{% if unread_count %} <span class="pilgrims-nav-badge">{{ unread_count }}</span>{% endif %}</a></li>
       </ul>

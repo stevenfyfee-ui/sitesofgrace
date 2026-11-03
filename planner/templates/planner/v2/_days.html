@@ -11,7 +11,7 @@
     {% if group.dest.plan_kind == "curated" %}<span class="pv2-pill pv2-pill-ok">✓ Curated plan</span>{% elif group.dest.plan_kind == "suggested" %}<span class="pv2-pill pv2-pill-auto">Suggested order</span>{% endif %}
     <span class="pv2-stop-head-n">{{ group.nights }} night{{ group.nights|pluralize }}</span>
   </div>
-  {% for day in group.days %}
+  {% for day in group.days %}{% if not hide_cut or not day.cut %}
   <div class="pv2-day{% if day.kind == 'free' %} pv2-day-free{% endif %}{% if day.cut %} pv2-day-cut{% endif %}">
     <span class="pv2-day-d">{% if day.number %}Day {{ day.number }}{% if day.date %}<small>{{ day.date|date:"M j" }}</small>{% endif %}{% else %}Extra<small>add a night</small>{% endif %}</span>
     <span class="pv2-day-tx">
@@ -24,11 +24,11 @@
       {% endif %}
     </span>
   </div>
-  {% endfor %}
-  {% if group.cut_more %}
+  {% endif %}{% endfor %}
+  {% if group.cut_more and not hide_cut %}
   <p class="pv2-cut-more">+{{ group.cut_more }} more day{{ group.cut_more|pluralize }} of sacred places · add nights to include them</p>
   {% endif %}
-  {% if group.cut_total %}
+  {% if group.cut_total and not hide_cut %}
   <p class="pv2-cut-more pv2-print-only">+{{ group.cut_total }} more day{{ group.cut_total|pluralize }} of sacred places · add nights to include them</p>
   {% endif %}
   {% endfor %}
