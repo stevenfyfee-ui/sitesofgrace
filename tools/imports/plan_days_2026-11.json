@@ -1,0 +1,532 @@
+{
+  "_note": "Draft curated day plans for import_plan_days. All 22 planner destinations. gateway_airport_iata values are proposals for Steven to confirm (blank = keep the nearest airport). Days with an empty sites list use extra_places only. No Mass times, prices or opening hours by design.",
+  "destinations": [
+    {
+      "slug": "rome-vatican-city",
+      "gateway_airport_iata": "FCO",
+      "days": [
+        {
+          "title": "St. Peter's and the Vatican",
+          "sites": [
+            "st-peters-basilica",
+            "tomb-of-st-john-paul-ii"
+          ],
+          "extra_places": "Vatican Museums and the Sistine Chapel; the Scavi tour of St. Peter's tomb (book well ahead)"
+        },
+        {
+          "title": "The papal basilicas",
+          "sites": [
+            "st-john-lateran",
+            "scala-santa-holy-stairs-rome",
+            "basilica-of-san-clemente",
+            "st-mary-major"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Outside the walls and the catacombs",
+          "sites": [
+            "st-paul-outside-the-walls",
+            "catacomb-of-callixtus",
+            "basilica-of-san-sebastiano-fuori-le-mura"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Saints of the historic center",
+          "sites": [
+            "tomb-of-st-ignatius-of-loyola",
+            "santa-maria-sopra-minerva",
+            "tomb-of-st-monica",
+            "chiesa-nuova"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Trastevere and the martyrs",
+          "sites": [
+            "basilica-of-santa-cecilia-in-trastevere",
+            "basilica-of-st-bartholomew-on-the-island",
+            "basilica-of-san-lorenzo-fuori-le-mura"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "assisi",
+      "gateway_airport_iata": "FCO",
+      "days": [
+        {
+          "title": "Francis and Clare",
+          "sites": [
+            "basilica-of-st-francis-of-assisi",
+            "tomb-of-st-clare-assisi",
+            "carlo-acutis-assisi"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Where Francis prayed",
+          "sites": [
+            "porziuncola"
+          ],
+          "extra_places": "San Damiano; the Eremo delle Carceri on Mount Subasio"
+        },
+        {
+          "title": "Day trip to Cascia",
+          "sites": [
+            "tomb-of-st-rita-cascia",
+            "eucharistic-miracle-of-cascia"
+          ],
+          "extra_places": "Roccaporena, St. Rita's birthplace"
+        }
+      ]
+    },
+    {
+      "slug": "lourdes",
+      "gateway_airport_iata": "CDG",
+      "days": [
+        {
+          "title": "The Grotto and the Sanctuary",
+          "sites": [
+            "lourdes"
+          ],
+          "extra_places": "The Grotto of Massabielle; the baths; the Rosary Basilica and the Basilica of the Immaculate Conception; the evening torchlight procession (in season)"
+        },
+        {
+          "title": "In Bernadette's footsteps",
+          "sites": [
+            "lourdes"
+          ],
+          "extra_places": "Boly Mill, where she was born; the Cachot; the parish church with her baptismal font; the Stations of the Cross on the hillside"
+        }
+      ]
+    },
+    {
+      "slug": "fatima",
+      "gateway_airport_iata": "LIS",
+      "days": [
+        {
+          "title": "The Cova da Iria",
+          "sites": [
+            "fatima"
+          ],
+          "extra_places": "The Chapel of the Apparitions; the Basilica of Our Lady of the Rosary, with the tombs of Sts. Francisco and Jacinta Marto and of Sister Lúcia; the evening candlelight Rosary"
+        },
+        {
+          "title": "The shepherds' village",
+          "sites": [
+            "fatima"
+          ],
+          "extra_places": "Aljustrel, the seers' family homes; Valinhos; the Loca do Cabeço"
+        },
+        {
+          "title": "Day trip to Santarém",
+          "sites": [
+            "eucharistic-miracle-of-santarem"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "paris",
+      "gateway_airport_iata": "CDG",
+      "days": [
+        {
+          "title": "Rue du Bac and the Left Bank",
+          "sites": [
+            "rue-du-bac",
+            "chapel-of-the-congregation-of-the-mission"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "The Île de la Cité and Montmartre",
+          "sites": [
+            "notre-dame-cathedral-paris",
+            "sainte-chapelle-saint-denis",
+            "sacre-coeur"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Saint-Denis",
+          "sites": [
+            "basilica-of-saint-denis"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "jerusalem",
+      "gateway_airport_iata": "TLV",
+      "days": [
+        {
+          "title": "The Way of the Cross",
+          "sites": [
+            "via-dolorosa",
+            "church-of-the-holy-sepulchre"
+          ],
+          "extra_places": "The Church of St. Anne and the Pools of Bethesda"
+        },
+        {
+          "title": "The Mount of Olives",
+          "sites": [
+            "pater-noster",
+            "gethsemane",
+            "tomb-of-lazarus"
+          ],
+          "extra_places": "Dominus Flevit"
+        },
+        {
+          "title": "Mount Zion and Ein Karem",
+          "sites": [
+            "cenacle",
+            "dormition-abbey",
+            "church-of-the-visitation"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "bethlehem",
+      "gateway_airport_iata": "TLV",
+      "days": [
+        {
+          "title": "The birthplace of Christ",
+          "sites": [
+            "basilica-of-the-nativity"
+          ],
+          "extra_places": "The Milk Grotto; Shepherds' Field in Beit Sahour"
+        }
+      ]
+    },
+    {
+      "slug": "nazareth",
+      "gateway_airport_iata": "TLV",
+      "days": [
+        {
+          "title": "Nazareth",
+          "sites": [
+            "basilica-of-the-annunciation"
+          ],
+          "extra_places": "The Church of St. Joseph"
+        },
+        {
+          "title": "The Sea of Galilee",
+          "sites": [
+            "mount-of-beatitudes",
+            "tabgha",
+            "capernaum"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Cana and Mount Tabor",
+          "sites": [
+            "cana",
+            "mount-tabor"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "medjugorje",
+      "gateway_airport_iata": "SPU",
+      "days": [
+        {
+          "title": "St. James Church",
+          "sites": [
+            "medjugorje"
+          ],
+          "extra_places": "St. James Church and the outdoor altar; the Risen Christ statue"
+        },
+        {
+          "title": "Apparition Hill",
+          "sites": [
+            "medjugorje"
+          ],
+          "extra_places": "Podbrdo, climbed with the Joyful and Sorrowful Mysteries (rocky path; sturdy shoes)"
+        },
+        {
+          "title": "Cross Mountain",
+          "sites": [
+            "medjugorje"
+          ],
+          "extra_places": "Križevac and the Stations of the Cross (steep, rocky climb)"
+        }
+      ]
+    },
+    {
+      "slug": "krakow",
+      "gateway_airport_iata": "",
+      "days": [
+        {
+          "title": "Divine Mercy",
+          "sites": [
+            "divine-mercy-sanctuary"
+          ],
+          "extra_places": "The St. John Paul II Sanctuary next door"
+        },
+        {
+          "title": "The Old Town and Wawel",
+          "sites": [
+            "wawel-cathedral"
+          ],
+          "extra_places": "St. Mary's Basilica; the Franciscan Basilica"
+        },
+        {
+          "title": "Day trip in John Paul II's footsteps",
+          "sites": [],
+          "extra_places": "Wadowice, his birthplace; Kalwaria Zebrzydowska"
+        }
+      ]
+    },
+    {
+      "slug": "czestochowa",
+      "gateway_airport_iata": "",
+      "days": [
+        {
+          "title": "Jasna Góra",
+          "sites": [
+            "czestochowa"
+          ],
+          "extra_places": "The Chapel of the Miraculous Image of Our Lady; the basilica; the evening Jasna Góra Appeal"
+        },
+        {
+          "title": "The ramparts and the treasury",
+          "sites": [
+            "czestochowa"
+          ],
+          "extra_places": "The Stations of the Cross on the ramparts; the monastery's votive treasury"
+        }
+      ]
+    },
+    {
+      "slug": "dublin",
+      "gateway_airport_iata": "DUB",
+      "days": [
+        {
+          "title": "Dublin's churches",
+          "sites": [],
+          "extra_places": "Whitefriar Street Church (Our Lady of Dublin; relics of St. Valentine); St. Mary's Pro-Cathedral; St. Michan's"
+        },
+        {
+          "title": "Day trip to Glendalough",
+          "sites": [],
+          "extra_places": "St. Kevin's monastic site in the Wicklow Mountains"
+        }
+      ]
+    },
+    {
+      "slug": "einsiedeln",
+      "gateway_airport_iata": "ZRH",
+      "days": [
+        {
+          "title": "Our Lady of Einsiedeln",
+          "sites": [
+            "einsiedeln"
+          ],
+          "extra_places": "The Lady Chapel and its Black Madonna; the Salve Regina sung by the monks after Vespers"
+        },
+        {
+          "title": "Day trip to Flüeli-Ranft",
+          "sites": [],
+          "extra_places": "Home and hermitage of St. Nicholas of Flüe, patron of Switzerland"
+        }
+      ]
+    },
+    {
+      "slug": "knock",
+      "gateway_airport_iata": "SNN",
+      "days": [
+        {
+          "title": "Knock Shrine",
+          "sites": [
+            "knock"
+          ],
+          "extra_places": "The Apparition Chapel at the gable wall; the Basilica of Our Lady, Queen of Ireland; Knock Museum"
+        },
+        {
+          "title": "Croagh Patrick and Ballintubber",
+          "sites": [],
+          "extra_places": "Croagh Patrick, St. Patrick's mountain (a steep, rocky climb); Ballintubber Abbey"
+        }
+      ]
+    },
+    {
+      "slug": "lisieux",
+      "gateway_airport_iata": "CDG",
+      "days": [
+        {
+          "title": "The Little Flower",
+          "sites": [
+            "lisieux"
+          ],
+          "extra_places": "The Carmel chapel, where St. Thérèse's relics rest; Les Buissonnets, her family home; the Cathedral of Saint-Pierre"
+        },
+        {
+          "title": "Day trip to Alençon",
+          "sites": [],
+          "extra_places": "Birthplace of St. Thérèse and home of Sts. Louis and Zélie Martin; the Basilica of Notre-Dame d'Alençon"
+        }
+      ]
+    },
+    {
+      "slug": "loreto",
+      "gateway_airport_iata": "FCO",
+      "days": [
+        {
+          "title": "The Holy House",
+          "sites": [
+            "loreto"
+          ],
+          "extra_places": "The Holy House inside the basilica"
+        },
+        {
+          "title": "Eucharistic miracles of the Marche",
+          "sites": [
+            "eucharistic-miracle-of-morrovalle",
+            "eucharistic-miracle-of-offida"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "mexico-city",
+      "gateway_airport_iata": "MEX",
+      "days": [
+        {
+          "title": "Our Lady of Guadalupe",
+          "sites": [
+            "our-lady-of-guadalupe"
+          ],
+          "extra_places": "The Basilica and St. Juan Diego's tilma; the Old Basilica; the chapel on Tepeyac Hill"
+        },
+        {
+          "title": "The historic center",
+          "sites": [],
+          "extra_places": "The Metropolitan Cathedral on the Zócalo"
+        }
+      ]
+    },
+    {
+      "slug": "padua",
+      "gateway_airport_iata": "VCE",
+      "days": [
+        {
+          "title": "St. Anthony and St. Luke",
+          "sites": [
+            "basilica-of-st-anthony-of-padua",
+            "basilica-of-santa-giustina"
+          ],
+          "extra_places": "The Chapel of the Relics in the Basilica of St. Anthony"
+        },
+        {
+          "title": "Day trip to Venice",
+          "sites": [
+            "st-mark-s-basilica",
+            "church-of-san-geremia"
+          ],
+          "extra_places": ""
+        },
+        {
+          "title": "Day trip to Schio",
+          "sites": [
+            "canossian-convent"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "san-giovanni-rotondo",
+      "gateway_airport_iata": "FCO",
+      "days": [
+        {
+          "title": "St. Pio",
+          "sites": [
+            "san-giovanni-rotondo"
+          ],
+          "extra_places": "His tomb; the old church of Santa Maria delle Grazie; his cell and the crucifix of the stigmata"
+        },
+        {
+          "title": "Monte Sant'Angelo",
+          "sites": [],
+          "extra_places": "The Sanctuary of St. Michael the Archangel, a cave shrine on the Gargano"
+        },
+        {
+          "title": "Day trip to Lanciano",
+          "sites": [
+            "eucharistic-miracle-of-lanciano"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "santiago-de-compostela",
+      "gateway_airport_iata": "MAD",
+      "days": [
+        {
+          "title": "The tomb of St. James",
+          "sites": [
+            "cathedral-of-santiago-de-compostela"
+          ],
+          "extra_places": "The Pilgrim's Mass; the crypt and the tomb of St. James; the Pilgrim's Office, for the Compostela if you walked or cycled"
+        },
+        {
+          "title": "Day trip to O Cebreiro",
+          "sites": [
+            "eucharistic-miracle-of-o-cebreiro"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "turin",
+      "gateway_airport_iata": "MXP",
+      "days": [
+        {
+          "title": "The Shroud and the Eucharistic miracle",
+          "sites": [
+            "eucharistic-miracle-of-turin"
+          ],
+          "extra_places": "Turin Cathedral, where the Holy Shroud is kept (shown only at rare expositions); the Consolata Shrine"
+        },
+        {
+          "title": "St. John Bosco",
+          "sites": [
+            "basilica-of-mary-help-of-christians"
+          ],
+          "extra_places": ""
+        }
+      ]
+    },
+    {
+      "slug": "walsingham",
+      "gateway_airport_iata": "LHR",
+      "days": [
+        {
+          "title": "England's Nazareth",
+          "sites": [
+            "walsingham"
+          ],
+          "extra_places": "The Slipper Chapel; the Holy Mile; the abbey grounds"
+        },
+        {
+          "title": "Day trip to Norwich",
+          "sites": [],
+          "extra_places": "St. Julian's Church and the cell of Julian of Norwich"
+        }
+      ]
+    }
+  ]
+}
