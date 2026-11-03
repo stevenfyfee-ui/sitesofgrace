@@ -136,6 +136,54 @@ class ProposeApplyTests(TempDirMixin, PlannerTestCase):
         self.assertFalse(self.dest.associated_sites.filter(pk=self.near.pk).exists())
 
 
+class ApplySlugOnlyTests(TempDirMixin, PlannerTestCase):
+    """The hand-reviewed CSV format: destination_slug, site_slug, site_title,
+    miles, approve, note (no site_id, since IDs differ between databases)."""
+
+    def setUp(self):
+        super().setUp()
+        self.dest = self.make_destination("assisi")
+        self.a = self.make_site("basilica-of-st-francis-of-assisi")
+        self.b = self.make_site("tomb-of-st-clare-assisi")
+
+    def write(self, rows):
+        path = self.path("reviewed.csv")
+        with open(path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.writer(fh)
+            w.writerow(["destination_slug", "site_slug", "site_title", "miles", "approve", "note"])
+            w.writerows(rows)
+        return path
+
+    def test_slug_only_rows(self):
+        path = self.write([["assisi", "basilica-of-st-francis-of-assisi", "", "0.7", "yes", ""],
+                           ["assisi", "tomb-of-st-clare-assisi", "", "0.0", "no", "duplicate"]])
+        out = self.call("apply_destination_sites", path)
+        self.assertIn("Linked: 1", out)
+        self.assertEqual(list(self.dest.associated_sites.values_list("slug", flat=True)),
+                         ["basilica-of-st-francis-of-assisi"])
+
+    def test_missing_slug_stops_the_run_by_default(self):
+        path = self.write([["assisi", "basilica-of-st-francis-of-assisi", "", "", "yes", ""],
+                           ["assisi", "not-in-this-database", "", "", "yes", ""]])
+        with self.assertRaises(CommandError):
+            self.call("apply_destination_sites", path)
+        self.assertFalse(self.dest.associated_sites.exists())
+
+    def test_skip_missing_lists_and_skips(self):
+        path = self.write([["assisi", "basilica-of-st-francis-of-assisi", "", "", "yes", ""],
+                           ["assisi", "not-in-this-database", "", "", "yes", ""]])
+        out = self.call("apply_destination_sites", path, "--skip-missing")
+        self.assertIn("Skipped (not in this database): 1", out)
+        self.assertIn("not-in-this-database", out)
+        self.assertEqual(self.dest.associated_sites.count(), 1)
+
+    def test_skip_missing_still_stops_on_other_problems(self):
+        self.b.unpublish()
+        path = self.write([["assisi", "tomb-of-st-clare-assisi", "", "", "yes", ""]])
+        with self.assertRaises(CommandError):
+            self.call("apply_destination_sites", path, "--skip-missing")
+
+
 class ImportPlanDaysTests(TempDirMixin, PlannerTestCase):
     """The format in Claude outputs/claude-code-prompt-trip-planner.md: day
     order is a day's position in the list."""

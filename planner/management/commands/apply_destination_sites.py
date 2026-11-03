@@ -1,12 +1,21 @@
-"""Link the sites approved in a propose_destination_sites CSV.
+"""Link the sites approved in a reviewed destination/site CSV.
 
     python manage.py apply_destination_sites docs/v2/reports/destination_sites.csv --dry-run
     python manage.py apply_destination_sites docs/v2/reports/destination_sites.csv
 
-Only rows with approve=yes are used; every other row is ignored. Rows match
-on site_id; the row's site_slug must still be that page's slug, and the page
-must be live. Links are only ever added, never removed. Every approved row is
-checked before anything is written; one bad row stops the whole run.
+Columns: destination_slug, site_slug, approve, and optionally site_id (as
+propose_destination_sites writes it). Only rows with approve=yes are used;
+every other row is ignored.
+
+A row with a site_id matches on it, and its site_slug must still be that
+page's slug. A row without one matches its site_slug against live pages,
+which must find exactly one. The page must be live. Links are only ever
+added, never removed. Every approved row is checked before anything is
+written, and one bad row stops the whole run.
+
+--skip-missing lists approved rows whose site slug doesn't exist here and
+skips them instead of stopping (for a local database older than production).
+Every other problem still stops the run.
 """
 import csv
 import glob
@@ -17,7 +26,7 @@ from django.db import transaction
 from catalog.models import SacredSitePage
 from planner.models import DestinationCost
 
-REQUIRED = {"destination_slug", "site_id", "site_slug", "approve"}
+REQUIRED = {"destination_slug", "site_slug", "approve"}
 
 
 class Command(BaseCommand):
@@ -26,6 +35,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("path", help="The reviewed CSV (glob allowed; must match exactly one file).")
         parser.add_argument("--dry-run", action="store_true", help="Check and report; write nothing.")
+        parser.add_argument("--skip-missing", action="store_true",
+                            help="Skip (and list) site slugs that don't exist in this database.")
 
     def handle(self, *args, **options):
         matches = sorted(glob.glob(options["path"]))
@@ -40,21 +51,35 @@ class Command(BaseCommand):
 
         approved = [(n, r) for n, r in enumerate(rows, start=2) if (r.get("approve") or "").strip().lower() == "yes"]
         dests = {d.slug: d for d in DestinationCost.objects.all()}
-        errors, todo = [], []
+        errors, not_here, todo = [], [], []
         for line, row in approved:
             dest = dests.get((row["destination_slug"] or "").strip())
-            site_id = (row["site_id"] or "").strip()
-            site = SacredSitePage.objects.filter(pk=int(site_id)).first() if site_id.isdigit() else None
+            slug = (row["site_slug"] or "").strip()
+            site_id = (row.get("site_id") or "").strip()
             if dest is None:
                 errors.append(f"line {line}: unknown destination {row['destination_slug']!r}")
-            elif site is None:
-                errors.append(f"line {line}: no site with id {site_id!r}")
-            elif site.slug != (row["site_slug"] or "").strip():
-                errors.append(f"line {line}: site {site.pk} is now {site.slug!r}, not {row['site_slug']!r}")
-            elif not site.live:
-                errors.append(f"line {line}: site {site.pk} ({site.slug}) isn't live")
+                continue
+            if site_id:
+                site = SacredSitePage.objects.filter(pk=int(site_id)).first() if site_id.isdigit() else None
+                if site is None:
+                    errors.append(f"line {line}: no site with id {site_id!r}")
+                elif site.slug != slug:
+                    errors.append(f"line {line}: site {site.pk} is now {site.slug!r}, not {slug!r}")
+                elif not site.live:
+                    errors.append(f"line {line}: site {site.pk} ({site.slug}) isn't live")
+                else:
+                    todo.append((dest, site))
+                continue
+            found = list(SacredSitePage.objects.filter(slug=slug))
+            live = [s for s in found if s.live]
+            if not found:
+                (not_here if options["skip_missing"] else errors).append(f"line {line}: no site with slug {slug!r}")
+            elif not live:
+                errors.append(f"line {line}: site {slug!r} isn't live")
+            elif len(live) > 1:
+                errors.append(f"line {line}: {len(live)} live sites have the slug {slug!r}; add a site_id column")
             else:
-                todo.append((dest, site))
+                todo.append((dest, live[0]))
         if errors:
             raise CommandError("Nothing was linked. Fix these rows first:\n  " + "\n  ".join(errors))
 
@@ -72,5 +97,8 @@ class Command(BaseCommand):
 
         self.stdout.write(
             f"\nApproved rows: {len(approved)}   {'Would link' if options['dry_run'] else 'Linked'}: {added}   "
-            f"Already linked: {already}   Ignored (not approved): {len(rows) - len(approved)}"
+            f"Already linked: {already}   Skipped (not in this database): {len(not_here)}   "
+            f"Ignored (not approved): {len(rows) - len(approved)}"
         )
+        for line in not_here:
+            self.stdout.write(f"  - {line}")
