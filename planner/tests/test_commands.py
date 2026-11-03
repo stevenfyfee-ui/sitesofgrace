@@ -78,6 +78,33 @@ class FillCoordsTests(TempDirMixin, PlannerTestCase):
         self.assertEqual(dest.latitude, Decimal("43.070300"))
 
 
+class FillCoordsSetTests(TempDirMixin, PlannerTestCase):
+    def test_set_by_hand_dry_run_then_real(self):
+        dublin = self.make_destination("dublin", city="Dublin", latitude=None, longitude=None)
+        out = self.call("fill_destination_coords", "--set", "dublin=53.3498,-6.2603", "--dry-run")
+        self.assertIn("would fill dublin: 53.349800, -6.260300 (set by hand)", out)
+        dublin.refresh_from_db()
+        self.assertIsNone(dublin.latitude)
+        self.call("fill_destination_coords", "--set", "dublin=53.3498,-6.2603")
+        dublin.refresh_from_db()
+        self.assertEqual((dublin.latitude, dublin.longitude), (Decimal("53.349800"), Decimal("-6.260300")))
+
+    def test_set_never_overwrites(self):
+        assisi = self.make_destination("assisi")
+        out = self.call("fill_destination_coords", "--set", "assisi=1,1")
+        self.assertIn("Not changed assisi", out)
+        assisi.refresh_from_db()
+        self.assertEqual(assisi.latitude, Decimal("43.070300"))
+
+    def test_bad_set_values_stop_before_writing(self):
+        dublin = self.make_destination("dublin", city="Dublin", latitude=None, longitude=None)
+        for bad in ("atlantis=1,1", "dublin=91,0", "dublin=abc,1", "dublin=53.3"):
+            with self.assertRaises(CommandError, msg=bad):
+                self.call("fill_destination_coords", "--set", bad)
+        dublin.refresh_from_db()
+        self.assertIsNone(dublin.latitude)
+
+
 class ProposeApplyTests(TempDirMixin, PlannerTestCase):
     def setUp(self):
         super().setUp()
