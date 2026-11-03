@@ -4,7 +4,8 @@ import re
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.db import models
+from django.db import IntegrityError, models, transaction
+from django.db.models import F, Q
 from django.http import Http404
 from django.utils.text import slugify
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -212,7 +213,10 @@ class PlannerBookingLink(models.Model):
     reach it through /go/planner/<id>/, which counts the click and fills the
     placeholders."""
 
-    label = models.CharField(max_length=80)
+    label = models.CharField(
+        max_length=80,
+        help_text="Shown on the card. {iata} becomes the first stop's airport, e.g. \"Flights to {iata}\".",
+    )
     provider = models.CharField(max_length=80)
     url_template = models.CharField(
         max_length=500,
@@ -247,6 +251,53 @@ class PlannerBookingLink(models.Model):
                 "url_template": "Unknown placeholder(s): " + ", ".join("{%s}" % u for u in unknown)
                                 + ". Use {dest_slug}, {iata} or {sub_id}.",
             })
+
+
+    def fill(self, dest_slug, iata):
+        """The outbound URL: {dest_slug} and {sub_id} are the trip's first
+        stop, {iata} its gateway (or nearest) airport. Values are URL-encoded."""
+        from urllib.parse import quote
+
+        values = {"dest_slug": dest_slug, "sub_id": dest_slug, "iata": iata or ""}
+        return _PLACEHOLDER_RE.sub(lambda m: quote(values.get(m.group(1), ""), safe=""), self.url_template)
+
+    def display_label(self, iata):
+        """The card label; "Flights to {iata}" shows the first stop's airport."""
+        return self.label.replace("{iata}", iata or "your destination")
+
+
+class PlannerBookingClickDaily(models.Model):
+    """Outbound booking-link clicks, one row per link, first-stop destination
+    and day: the same pattern as tours.TourClickDaily. Deliberately nothing
+    about who clicked: no IP, no user, no cookie."""
+
+    link = models.ForeignKey(PlannerBookingLink, on_delete=models.CASCADE, related_name="click_days")
+    destination = models.ForeignKey(DestinationCost, null=True, blank=True, on_delete=models.SET_NULL,
+                                    related_name="+")
+    date = models.DateField()
+    count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["link", "destination", "date"], name="unique_planner_click_day"),
+            models.UniqueConstraint(fields=["link", "date"], condition=Q(destination__isnull=True),
+                                    name="unique_planner_click_day_no_dest"),
+        ]
+
+    @classmethod
+    def record(cls, link, destination=None, day=None):
+        """Add one click for (link, destination, day), safely under concurrency."""
+        from datetime import date
+
+        day = day or date.today()
+        lookup = {"link": link, "destination": destination, "date": day}
+        if cls.objects.filter(**lookup).update(count=F("count") + 1):
+            return
+        try:
+            with transaction.atomic():
+                cls.objects.create(count=1, **lookup)
+        except IntegrityError:
+            cls.objects.filter(**lookup).update(count=F("count") + 1)
 
 
 TIER_CHOICES = [("budget", "Budget"), ("mid", "Mid-range"), ("comfort", "Comfort")]

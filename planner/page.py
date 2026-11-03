@@ -164,7 +164,7 @@ def page_context(request, page):
         "party_options": range(1, PARTY_MAX + 1),
         "pace_options": PACE_CHOICES,
         "tier_options": list(TIER_LABELS.items()),
-        "booking_links": list(PlannerBookingLink.objects.filter(active=True)) if links_allowed else [],
+        "booking_links": _booking_links(plan) if links_allowed else [],
         "disclosure_url": affiliate_disclosure_url(request) if links_allowed else "",
         "first_stop": plan["stops"][0][0] if plan["stops"] else None,
         "login_url": reverse("account_login") + "?next=" + quote(page.url + "?" + query, safe=""),
@@ -173,6 +173,18 @@ def page_context(request, page):
         "saved": request.GET.get("saved") == "1",
     })
     return ctx
+
+
+def _booking_links(plan):
+    """Active booking links, labelled for the trip's first stop
+    ("Flights to FCO"). [] when the plan is empty."""
+    if not plan["stops"]:
+        return []
+    first = plan["stops"][0][0]
+    links = list(PlannerBookingLink.objects.filter(active=True))
+    for link in links:
+        link.label_text = link.display_label(first.fly_iata)
+    return links
 
 
 def _open_trip(request):

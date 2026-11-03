@@ -121,7 +121,7 @@
           <p class="pv2-eyebrow">Book the pieces</p>
           <div class="pv2-book">
             {% for link in booking_links %}
-              <a href="/go/planner/{{ link.pk }}/?dest={{ first_stop.slug }}" target="_blank" rel="sponsored nofollow noopener"><span>{{ link.label }}</span><small>{{ link.provider }}</small></a>
+              <a href="{% url 'go_planner' link.pk %}?dest={{ first_stop.slug }}" target="_blank" rel="sponsored nofollow noopener"><span>{{ link.label_text }}</span><small>{{ link.provider }}</small></a>
             {% endfor %}
           </div>
           <p class="pv2-disclose">Some links may earn Sites of Grace a commission at no extra cost to you. <a href="{{ disclosure_url }}">Affiliate Disclosure</a></p>
