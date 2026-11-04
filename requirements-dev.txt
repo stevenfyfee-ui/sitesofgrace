@@ -1,0 +1,8 @@
+# Development and review tools only. Never installed in the production image
+# (the Dockerfile installs requirements.txt alone).
+#
+#   pip install -r requirements-dev.txt
+#   python -m playwright install chromium
+#
+# Playwright drives tools/check_overflow.py and the planner browser tests.
+playwright==1.64.1

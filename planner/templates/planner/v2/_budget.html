@@ -1,0 +1,22 @@
+{% comment %}
+  The budget card: today's estimator formula (planner/itinerary.py
+  build_budget), recalculated on every request. Shared with /plan/build/.
+{% endcomment %}
+<p class="pv2-eyebrow">Estimated budget · {{ state.party }} traveler{{ state.party|pluralize }}</p>
+{% if budget %}
+<table class="pv2-budget">
+  <caption class="sr-only">Estimated budget</caption>
+  <tbody>
+    <tr><th scope="row">Flights</th><td>{{ money.flights }}</td></tr>
+    <tr><th scope="row">Lodging</th><td>{{ money.lodging }}</td></tr>
+    <tr><th scope="row">Meals</th><td>{{ money.meals }}</td></tr>
+    <tr><th scope="row">Local transport</th><td>{{ money.transport }}</td></tr>
+    <tr><th scope="row">Extras ({{ budget.misc_pct }}%)</th><td>{{ money.extras }}</td></tr>
+    <tr class="pv2-total"><th scope="row">Estimated total</th><td data-total="{{ money.total }}">{{ money.total }}</td></tr>
+    <tr class="pv2-pp"><th scope="row">Per person</th><td>{{ money.per_person }}</td></tr>
+  </tbody>
+</table>
+<p class="pv2-basis">{{ budget.basis }}</p>
+{% else %}
+<p class="pv2-placeholder">Add a place to see an estimate.</p>
+{% endif %}

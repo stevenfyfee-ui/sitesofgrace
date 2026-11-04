@@ -10,6 +10,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from catalog import views as catalog_views
 from core import views as core_views
 from pilgrims import views as pilgrims_views
+from planner import views as planner_views
 from search import views as search_views
 from store import views as store_views
 
@@ -25,6 +26,8 @@ urlpatterns = [
     path("sacred-sites.json", catalog_views.sites_json, name="sacred_sites_json"),
     path("pilgrimage-trails.json", catalog_views.trails_json, name="pilgrimage_trails_json"),
     path("go/lodging/<int:pk>/", catalog_views.go_lodging, name="go_lodging"),
+    # Trip Planner v2 booking links (404 unless SOG_PLANNER_V2 and booking links are on).
+    path("go/planner/<int:pk>/", planner_views.go_planner, name="go_planner"),
     path("newsletter/signup/", core_views.newsletter_signup, name="newsletter_signup"),
     path("store/waitlist/", store_views.waitlist_signup, name="waitlist_signup"),
     path("accounts/", include("allauth.urls")),

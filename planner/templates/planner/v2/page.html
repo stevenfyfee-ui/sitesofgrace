@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static legal_tags %}
+{% comment %}
+  Trip Planner v2 (/plan/), rendered only when SOG_PLANNER_V2 allows the
+  request (planner.models.PlanPage.get_template). The whole plan lives in the
+  query string, so this page renders a shared link without JavaScript.
+  The fragments under planner/v2/_*.html are also returned by /plan/build/,
+  so the page and its JavaScript always show the same thing.
+{% endcomment %}
+
+{% block title %}Build your pilgrimage{% endblock %}
+{% block extra_head %}<link rel="canonical" href="{{ page.full_url }}">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'catalog/css/site-v2.css' %}"><link rel="stylesheet" href="{% static 'planner/css/plan-v2.css' %}">{% endblock %}
+{% block body_class %}pv2-body{% endblock %}
+
+{% block content %}
+<div class="pv2" id="pv2"{% if trip %} data-trip="{{ trip.pk }}"{% endif %} data-build-url="{{ page.url }}build/" data-search-url="{{ page.url }}search/" data-page-url="{{ page.url }}" data-share-base="{{ share_base }}" data-query="{{ query }}" data-signed-in="{{ request.user.is_authenticated|yesno:'1,0' }}">
+  <section class="pv2-hero">
+    <div class="container">
+      <p class="pv2-crumb"><a href="/">Home</a> › Plan a Pilgrimage</p>
+      <h1 class="pv2-hero-title">Build your pilgrimage</h1>
+      <p class="pv2-hero-txt">Choose sacred places, tell us about the trip, and get a day-by-day plan with an estimated budget. Save it, print it, or send it to the people you&rsquo;re traveling with.</p>
+      {% if added_from %}<p class="pv2-from-site">✦ Added from <b>{{ added_from.title }}</b></p>{% endif %}
+      {% if unplannable %}<p class="pv2-from-site">We can&rsquo;t plan around <b>{{ unplannable.title }}</b> yet. <a href="{{ unplannable.url }}">Its page has travel details.</a></p>{% endif %}
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="pv2-layout">
+      <div class="pv2-main">
+        {% if messages %}<p class="pv2-message" role="status">{% for m in messages %}{{ m }} {% endfor %}</p>{% endif %}
+        {% if saved and trip %}<p class="pv2-message" role="status">Saved to My Pilgrimage › <a href="{{ page.url }}trips/">My Trips</a>.</p>{% endif %}
+
+        {# ---------- Step 1 ---------- #}
+        <section class="pv2-step pv2-step-where" aria-labelledby="pv2-s1">
+          <h2 id="pv2-s1"><span>Step 1</span>Where do you want to go?</h2>
+          <p class="pv2-sub">Add up to {{ max_stops_word }} stops in the order you&rsquo;ll visit them. You can search for a town or a sacred site.</p>
+          <form class="pv2-add pv2-tools" method="get" action="{{ page.url }}" role="search">
+            <label class="sr-only" for="pv2-add-input">Add a destination or sacred site</label>
+            <input id="pv2-add-input" name="q" type="search" autocomplete="off" value="{{ search_q }}"
+                   placeholder="Add a destination or sacred site, e.g. Assisi or Divine Mercy"
+                   role="combobox" aria-autocomplete="list" aria-controls="pv2-results" aria-expanded="{% if search_results %}true{% else %}false{% endif %}">
+            <input type="hidden" name="t" value="{% for slug, nights in state.stops %}{{ slug }}.{{ nights }}{% if not forloop.last %},{% endif %}{% endfor %}">
+            <input type="hidden" name="p" value="{{ state.party }}"><input type="hidden" name="l" value="{{ state.tier }}"><input type="hidden" name="pace" value="{{ state.pace }}">
+            {% if state.start_date %}<input type="hidden" name="d" value="{{ state.start_date|date:'Y-m-d' }}">{% endif %}
+            <noscript><button type="submit" class="btn pv2-btn-line pv2-btn-sm">Search</button></noscript>
+            <div class="pv2-results" id="pv2-results" role="listbox" aria-label="Places you can add"{% if not search_q %} hidden{% endif %}>
+              {% if search_q %}
+                {% for r in search_results %}
+                  {% if r.href %}
+                    <a role="option" href="{{ r.href }}" rel="nofollow"><span><b>{{ r.label }}</b> <small>{{ r.sub }}{% if r.kind == "site" %} · adds {{ r.dest_city }}{% endif %}</small></span><span class="pv2-kind">{% if r.kind == "site" %}Sacred site{% else %}Destination{% endif %}</span></a>
+                  {% else %}
+                    <a role="option" href="{{ r.url }}"><span><b>{{ r.label }}</b> <small>{{ r.sub }} · not plannable yet</small></span><span class="pv2-kind">Sacred site</span></a>
+                  {% endif %}
+                {% empty %}
+                  <p class="pv2-noresults">No matches. Try a town, shrine or saint.</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </form>
+          {% if journey %}
+          <div class="pv2-chips pv2-tools" data-journey><span>From your journey:</span>{% for j in journey %}<a href="{{ j.href }}" rel="nofollow" data-add="{{ j.dest.slug }}">{{ j.dest.city|cut:" / Vatican City" }}</a>{% endfor %}</div>
+          {% endif %}
+          <div id="pv2-stops">{% include "planner/v2/_stops.html" %}</div>
+        </section>
+
+        {# ---------- Step 2 ---------- #}
+        <section class="pv2-step pv2-step-about" aria-labelledby="pv2-s2">
+          <h2 id="pv2-s2"><span>Step 2</span>About the trip</h2>
+          <p class="pv2-sub">Used for dates, the budget, and how full each day is.</p>
+          <form class="pv2-form-row" id="pv2-trip-form" method="get" action="{{ page.url }}">
+            <input type="hidden" name="t" value="{% for slug, nights in state.stops %}{{ slug }}.{{ nights }}{% if not forloop.last %},{% endif %}{% endfor %}">
+            <label for="pv2-date">Start date<input id="pv2-date" name="d" type="date" value="{{ state.start_date|date:'Y-m-d' }}"></label>
+            <label for="pv2-from">Flying from<select id="pv2-from" aria-describedby="pv2-from-note"><option>United States</option></select></label>
+            <label for="pv2-party">Travelers<select id="pv2-party" name="p">{% for n in party_options %}<option{% if n == state.party %} selected{% endif %}>{{ n }}</option>{% endfor %}</select></label>
+            <label for="pv2-tier">Lodging<select id="pv2-tier" name="l">{% for value, label in tier_options %}<option value="{{ value }}"{% if value == state.tier %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+            <label for="pv2-pace">Pace<select id="pv2-pace" name="pace">{% for value, label in pace_options %}<option value="{{ value }}"{% if value == state.pace %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+            <noscript><button type="submit" class="btn pv2-btn-line pv2-btn-sm">Update plan</button></noscript>
+          </form>
+          <p class="sr-only" id="pv2-from-note">Flight estimates are round trips from the United States.</p>
+        </section>
+
+        {# ---------- Step 3 ---------- #}
+        <section class="pv2-step pv2-step-days" aria-labelledby="pv2-s3">
+          <h2 id="pv2-s3"><span>Step 3</span>Your day-by-day plan</h2>
+          <div id="pv2-days">{% include "planner/v2/_days.html" %}</div>
+          <div class="pv2-legend">
+            <span><span class="pv2-pill pv2-pill-ok">✓ Curated plan</span> written by Sites of Grace</span>
+            <span><span class="pv2-pill pv2-pill-auto">Suggested order</span> grouped from the destination&rsquo;s sacred sites</span>
+          </div>
+        </section>
+      </div>
+
+      {# ---------- Sidebar ---------- #}
+      <aside class="pv2-side" aria-label="Trip summary">
+        <div class="pv2-card" id="pv2-route">{% include "planner/v2/_route.html" %}</div>
+
+        <div class="pv2-card">
+          <div id="pv2-budget">{% include "planner/v2/_budget.html" %}</div>
+          <p class="pv2-disclose">{% notice "plan_estimate" %}</p>
+        </div>
+
+        <div class="pv2-card pv2-actions">
+          {% if request.user.is_authenticated %}
+            <form id="pv2-save-form" class="pv2-save-form" method="post" action="{{ page.url }}trips/save/" data-save-form data-my-trips="{{ page.url }}trips/">
+              {% csrf_token %}
+              <input type="hidden" name="q" value="{{ query }}">
+              {% if trip %}<input type="hidden" name="trip" value="{{ trip.pk }}">{% endif %}
+              <button class="btn pv2-btn-gold" type="submit" id="pv2-save">{% if trip %}Save changes to My Pilgrimage{% else %}Save to My Pilgrimage{% endif %}</button>
+            </form>
+          {% else %}
+            <a class="btn pv2-btn-gold" id="pv2-save" href="{{ login_url }}" data-login>Sign in to save this trip</a>
+          {% endif %}
+          <a class="btn pv2-btn-line" id="pv2-share" href="{{ share_path }}" data-share>Copy share link</a>
+          <button class="btn pv2-btn-line" id="pv2-print" type="button" data-print hidden>Print or save as PDF</button>
+          <p class="pv2-signin-note">{% if trip %}Editing &ldquo;{{ trip.title }}&rdquo; from <a href="{{ page.url }}trips/">My Trips</a>.{% elif request.user.is_authenticated %}Saved trips are private. Turn on a share link any time.{% else %}Your plan is kept in the link, so you can share it without an account.{% endif %}</p>
+        </div>
+
+        {% if booking_links and first_stop %}
+        <div class="pv2-card pv2-book-card">
+          <p class="pv2-eyebrow">Book the pieces</p>
+          <div class="pv2-book">
+            {% for link in booking_links %}
+              <a href="{% url 'go_planner' link.pk %}?dest={{ first_stop.slug }}" target="_blank" rel="sponsored nofollow noopener"><span>{{ link.label_text }}</span><small>{{ link.provider }}</small></a>
+            {% endfor %}
+          </div>
+          <p class="pv2-disclose">Some links may earn Sites of Grace a commission at no extra cost to you. <a href="{{ disclosure_url }}">Affiliate Disclosure</a></p>
+        </div>
+        {% endif %}
+
+        {% include "planner/v2/_side_group.html" %}
+      </aside>
+    </div>
+    <p class="pv2-print-only pv2-print-foot">Sites of Grace · sitesofgrace.com · Reopen this plan: <span data-share-url>{{ share_url }}</span></p>
+  </div>
+
+  {# Phones: total and the two main actions stay in reach. #}
+  <div class="pv2-mbar">
+    <div class="pv2-mbar-t" id="pv2-mbar-total">{% include "planner/v2/_mbar_total.html" %}</div>
+    <a class="btn pv2-btn-line pv2-btn-sm" href="{{ share_path }}" data-share>Share</a>
+    {% if request.user.is_authenticated %}
+      <button class="btn pv2-btn-gold pv2-btn-sm" type="submit" form="pv2-save-form">Save</button>
+    {% else %}
+      <a class="btn pv2-btn-gold pv2-btn-sm" href="{{ login_url }}" data-login>Sign in</a>
+    {% endif %}
+  </div>
+  <p class="sr-only" id="pv2-live" aria-live="polite" role="status"></p>
+  <div class="pv2-toast" id="pv2-toast" role="status" hidden></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}<script src="{% static 'planner/js/plan-v2.js' %}" defer></script>{% endblock %}

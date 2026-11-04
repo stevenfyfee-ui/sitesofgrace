@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags planner_tags %}
 
 {% block body_class %}pilgrims{% endblock %}
 {% block title %}{{ profile.display_name|default:profile.handle }}{% endblock %}
@@ -58,7 +58,7 @@
     <div class="pilgrim-header-actions">
       {% if is_self %}
         <a class="btn btn-secondary" href="{% url 'pilgrims:photo_library' %}">My Photos</a>
-        <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>
+        <a class="btn btn-secondary" href="{% url 'pilgrims:feed' %}">Feed</a>{% planner_trips_url as trips_url %}{% if trips_url %}<a class="btn btn-secondary" href="{{ trips_url }}">My Trips</a>{% endif %}
         <a class="btn btn-secondary" href="{% url 'pilgrims:settings' %}">Edit Profile</a>
       {% elif not request.user.is_authenticated %}
         <a class="btn btn-primary" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Sign in to follow</a>

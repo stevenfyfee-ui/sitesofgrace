@@ -1,9 +1,19 @@
 import json
+import re
 
-from django.db import models
-from wagtail.models import Page
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import IntegrityError, models, transaction
+from django.db.models import F, Q
+from django.http import Http404
+from django.utils.text import slugify
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.models import ClusterableModel
+from wagtail.models import Orderable, Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
@@ -18,13 +28,36 @@ REGION_CHOICES = [
 ]
 
 
+# Slugs that don't follow slugify(city). Used by the backfill migration and
+# by save() when a new destination arrives without a slug.
+DESTINATION_SLUG_OVERRIDES = {
+    "Mexico City (Guadalupe)": "mexico-city",
+}
+
+
+def destination_slug_for(city):
+    return DESTINATION_SLUG_OVERRIDES.get(city) or slugify(city)
+
+
 @register_snippet
-class DestinationCost(models.Model):
+class DestinationCost(ClusterableModel):
     city = models.CharField(max_length=120)
+    slug = models.SlugField(
+        max_length=140, unique=True, null=True, blank=True,
+        help_text="Used in trip planner links (e.g. rome-vatican-city). Filled from the city if left blank.",
+    )
     country = models.CharField(max_length=120, blank=True)
     region = models.CharField(max_length=40, choices=REGION_CHOICES)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     nearest_airport_iata = models.CharField(max_length=8, blank=True)
     nearest_airport_name = models.CharField(max_length=160, blank=True)
+    gateway_airport_iata = models.CharField(
+        max_length=8, null=True, blank=True,
+        help_text="International gateway, e.g. FCO for Assisi. Departure uses this when set, "
+                  "otherwise the nearest airport.",
+    )
+    gateway_airport_name = models.CharField(max_length=160, null=True, blank=True)
     hotel_night_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     meal_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     local_transport_day_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
@@ -36,15 +69,23 @@ class DestinationCost(models.Model):
 
     panels = [
         FieldPanel("city"),
+        FieldPanel("slug"),
         FieldPanel("country"),
         FieldPanel("region"),
+        MultiFieldPanel(
+            [FieldPanel("latitude"), FieldPanel("longitude")],
+            heading="Location",
+        ),
         FieldPanel("nearest_airport_iata"),
         FieldPanel("nearest_airport_name"),
+        FieldPanel("gateway_airport_iata"),
+        FieldPanel("gateway_airport_name"),
         FieldPanel("hotel_night_usd"),
         FieldPanel("meal_usd"),
         FieldPanel("local_transport_day_usd"),
         FieldPanel("taxi_typical_usd"),
         FieldPanel("associated_sites"),
+        InlinePanel("plan_days", heading="Curated plan", label="Day"),
         FieldPanel("notes"),
     ]
 
@@ -53,6 +94,40 @@ class DestinationCost(models.Model):
 
     def __str__(self):
         return self.city
+
+    def save(self, *args, **kwargs):
+        # Only ever fills a blank slug; an editor's slug is never rewritten.
+        if not self.slug:
+            self.slug = destination_slug_for(self.city) or None
+        super().save(*args, **kwargs)
+
+    @property
+    def departure_airport(self):
+        """(iata, name) to fly home from: the gateway when set, else the nearest airport."""
+        if self.gateway_airport_iata:
+            return self.gateway_airport_iata, self.gateway_airport_name or ""
+        return self.nearest_airport_iata, self.nearest_airport_name
+
+
+class DestinationPlanDay(Orderable):
+    """One row of a destination's curated plan: a title plus the sacred
+    sites that day covers. Places without a page go in extra_places."""
+
+    destination = ParentalKey(DestinationCost, on_delete=models.CASCADE, related_name="plan_days")
+    title = models.CharField(max_length=120)
+    sites = ParentalManyToManyField(
+        "catalog.SacredSitePage", blank=True, related_name="destination_plan_days",
+        limit_choices_to={"live": True},
+    )
+    extra_places = models.CharField(
+        max_length=255, null=True, blank=True,
+        help_text="Places on this day that have no sacred site page, e.g. \"Lunch in Piazza Navona\".",
+    )
+
+    panels = [FieldPanel("title"), FieldPanel("sites"), FieldPanel("extra_places")]
+
+    def __str__(self):
+        return self.title
 
 
 @register_snippet
@@ -101,7 +176,176 @@ class CalculatorDefaults(BaseGenericSetting):
         verbose_name = "Trip calculator defaults"
 
 
-class PlanPage(Page):
+@register_setting
+class PlannerSettings(BaseGenericSetting):
+    show_booking_links = models.BooleanField(
+        default=False,
+        help_text="Show the booking card and /go/planner/ links. Can't be turned on until the "
+                  "Affiliate Disclosure page is live.",
+    )
+    max_stops = models.PositiveSmallIntegerField(
+        default=6, validators=[MinValueValidator(1), MaxValueValidator(12)],
+        help_text="The most stops one trip can have.",
+    )
+
+    panels = [FieldPanel("show_booking_links"), FieldPanel("max_stops")]
+
+    class Meta:
+        verbose_name = "Trip planner"
+
+    def clean(self):
+        super().clean()
+        from planner.booking import affiliate_disclosure_live
+
+        if self.show_booking_links and not affiliate_disclosure_live():
+            raise ValidationError({
+                "show_booking_links": "Publish the Affiliate Disclosure page before turning on booking links.",
+            })
+
+
+BOOKING_PLACEHOLDERS = ("dest_slug", "iata", "sub_id")
+_PLACEHOLDER_RE = re.compile(r"\{([^{}]*)\}")
+
+
+@register_snippet
+class PlannerBookingLink(models.Model):
+    """An affiliate booking link on the planner's booking card. Visitors
+    reach it through /go/planner/<id>/, which counts the click and fills the
+    placeholders."""
+
+    label = models.CharField(
+        max_length=80,
+        help_text="Shown on the card. {iata} becomes the first stop's airport, e.g. \"Flights to {iata}\".",
+    )
+    provider = models.CharField(max_length=80)
+    url_template = models.CharField(
+        max_length=500,
+        help_text="https:// link. May use {dest_slug}, {iata} and {sub_id}; they are filled "
+                  "from the trip's first stop.",
+    )
+    sort_order = models.IntegerField(default=0)
+    active = models.BooleanField(default=True)
+
+    panels = [
+        FieldPanel("label"),
+        FieldPanel("provider"),
+        FieldPanel("url_template"),
+        FieldPanel("sort_order"),
+        FieldPanel("active"),
+    ]
+
+    class Meta:
+        ordering = ["sort_order", "label"]
+        verbose_name = "planner booking link"
+
+    def __str__(self):
+        return f"{self.label} ({self.provider})"
+
+    def clean(self):
+        super().clean()
+        if not (self.url_template or "").startswith("https://"):
+            raise ValidationError({"url_template": "The link must start with https://."})
+        unknown = sorted(set(_PLACEHOLDER_RE.findall(self.url_template)) - set(BOOKING_PLACEHOLDERS))
+        if unknown:
+            raise ValidationError({
+                "url_template": "Unknown placeholder(s): " + ", ".join("{%s}" % u for u in unknown)
+                                + ". Use {dest_slug}, {iata} or {sub_id}.",
+            })
+
+
+    def fill(self, dest_slug, iata):
+        """The outbound URL: {dest_slug} and {sub_id} are the trip's first
+        stop, {iata} its gateway (or nearest) airport. Values are URL-encoded."""
+        from urllib.parse import quote
+
+        values = {"dest_slug": dest_slug, "sub_id": dest_slug, "iata": iata or ""}
+        return _PLACEHOLDER_RE.sub(lambda m: quote(values.get(m.group(1), ""), safe=""), self.url_template)
+
+    def display_label(self, iata):
+        """The card label; "Flights to {iata}" shows the first stop's airport."""
+        return self.label.replace("{iata}", iata or "your destination")
+
+
+class PlannerBookingClickDaily(models.Model):
+    """Outbound booking-link clicks, one row per link, first-stop destination
+    and day: the same pattern as tours.TourClickDaily. Deliberately nothing
+    about who clicked: no IP, no user, no cookie."""
+
+    link = models.ForeignKey(PlannerBookingLink, on_delete=models.CASCADE, related_name="click_days")
+    destination = models.ForeignKey(DestinationCost, null=True, blank=True, on_delete=models.SET_NULL,
+                                    related_name="+")
+    date = models.DateField()
+    count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["link", "destination", "date"], name="unique_planner_click_day"),
+            models.UniqueConstraint(fields=["link", "date"], condition=Q(destination__isnull=True),
+                                    name="unique_planner_click_day_no_dest"),
+        ]
+
+    @classmethod
+    def record(cls, link, destination=None, day=None):
+        """Add one click for (link, destination, day), safely under concurrency."""
+        from datetime import date
+
+        day = day or date.today()
+        lookup = {"link": link, "destination": destination, "date": day}
+        if cls.objects.filter(**lookup).update(count=F("count") + 1):
+            return
+        try:
+            with transaction.atomic():
+                cls.objects.create(count=1, **lookup)
+        except IntegrityError:
+            cls.objects.filter(**lookup).update(count=F("count") + 1)
+
+
+TIER_CHOICES = [("budget", "Budget"), ("mid", "Mid-range"), ("comfort", "Comfort")]
+PACE_CHOICES = [(2, "Unhurried"), (3, "Balanced"), (4, "Full days")]
+PARTY_MIN, PARTY_MAX = 1, 12
+NIGHTS_MIN, NIGHTS_MAX = 1, 21
+
+
+class Trip(models.Model):
+    """A pilgrim's saved plan. Only the inputs are stored; the itinerary and
+    budget are rebuilt from current data every time (planner/itinerary.py)."""
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="trips")
+    title = models.CharField(max_length=120)
+    start_date = models.DateField(null=True, blank=True)
+    party = models.PositiveSmallIntegerField(
+        default=2, validators=[MinValueValidator(PARTY_MIN), MaxValueValidator(PARTY_MAX)],
+    )
+    tier = models.CharField(max_length=10, choices=TIER_CHOICES, default="mid")
+    pace = models.PositiveSmallIntegerField(choices=PACE_CHOICES, default=3)
+    share_token = models.CharField(max_length=32, null=True, blank=True, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-updated"]
+        indexes = [
+            # Backs the save rate limit's filter(owner=X, updated__gte=Y).
+            models.Index(fields=["owner", "updated"]),
+        ]
+
+    def __str__(self):
+        return self.title
+
+
+class TripStop(models.Model):
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name="stops")
+    destination = models.ForeignKey(DestinationCost, on_delete=models.PROTECT, related_name="trip_stops")
+    nights = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(NIGHTS_MIN), MaxValueValidator(NIGHTS_MAX)],
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+
+
+class PlanPage(RoutablePageMixin, Page):
     heading = models.CharField(max_length=200, blank=True)
     intro = RichTextField(blank=True)
     hero_image = models.ForeignKey(
@@ -131,7 +375,24 @@ class PlanPage(Page):
 
     max_count = 1
 
-    def get_context(self, request):
+    V2_TEMPLATE = "planner/v2/page.html"
+
+    def get_template(self, request, *args, **kwargs):
+        from core.v2 import planner_v2_enabled
+        if planner_v2_enabled(request):
+            return self.V2_TEMPLATE
+        return super().get_template(request, *args, **kwargs)
+
+    def get_context(self, request, *args, **kwargs):
+        # Trip Planner v2 (SOG_PLANNER_V2). With the switch off, everything
+        # below this branch is the old estimator, untouched; test_flag_off.py
+        # proves /plan/ is byte-identical to main.
+        from core.v2 import planner_v2_enabled
+        if planner_v2_enabled(request):
+            from planner.page import page_context
+            context = super().get_context(request, *args, **kwargs)
+            context.update(page_context(request, self))
+            return context
         context = super().get_context(request)
         from planner.models import (
             CalculatorDefaults, DestinationCost, RegionFlightAssumption,
@@ -197,18 +458,62 @@ class PlanPage(Page):
     def _match_destination(self, site):
         """Resolve a SacredSitePage to a DestinationCost: explicit M2M link
         first, then a locality/city name match."""
-        from planner.models import DestinationCost
-        dc = DestinationCost.objects.filter(associated_sites=site).first()
-        if dc:
-            return dc
-        locality = (getattr(site, "locality", "") or "").strip()
-        if locality:
-            dc = DestinationCost.objects.filter(city__iexact=locality).first()
-            if dc:
-                return dc
-            low = locality.lower()
-            for cand in DestinationCost.objects.all():
-                cl = cand.city.lower()
-                if cl in low or low in cl:
-                    return cand
-        return None
+        from planner.api import destination_for_site
+        return destination_for_site(site)
+
+    # --- Trip Planner v2 routes (JSON responses). Each 404s unless SOG_PLANNER_V2 allows the
+    # request (core.v2.planner_v2_enabled). planner/tests/test_routes.py
+    # checks every one, so a merge can't drop RoutablePageMixin silently.
+
+    def _require_v2(self, request):
+        from core.v2 import planner_v2_enabled
+        if not planner_v2_enabled(request):
+            raise Http404
+
+    @path("build/", name="build_json")
+    def build_json_route(self, request):
+        self._require_v2(request)
+        from planner.api import build_json
+        return build_json(request)
+
+    @path("search/", name="search_json")
+    def search_json_route(self, request):
+        self._require_v2(request)
+        from planner.api import search_json
+        return search_json(request)
+
+    @path("trips/", name="my_trips")
+    def my_trips_route(self, request):
+        self._require_v2(request)
+        from planner import trips
+        return trips.my_trips(request, self)
+
+    @path("trips/save/", name="trip_save")
+    def trip_save_route(self, request):
+        self._require_v2(request)
+        from planner import trips
+        return trips.save(request, self)
+
+    @path("trips/<int:trip_id>/rename/", name="trip_rename")
+    def trip_rename_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.rename(request, self, trip_id)
+
+    @path("trips/<int:trip_id>/delete/", name="trip_delete")
+    def trip_delete_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.delete(request, self, trip_id)
+
+    @path("trips/<int:trip_id>/share/", name="trip_share")
+    def trip_share_route(self, request, trip_id):
+        self._require_v2(request)
+        from planner import trips
+        return trips.share(request, self, trip_id)
+
+    @path("t/<str:token>/", name="shared_trip")
+    def shared_trip_route(self, request, token):
+        self._require_v2(request)
+        from planner import trips
+        return trips.shared(request, self, token)

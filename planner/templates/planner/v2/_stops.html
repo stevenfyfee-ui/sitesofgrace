@@ -1,0 +1,44 @@
+{% comment %}
+  Step 1's stop list and "Near your route". Rendered by the page and by
+  /plan/build/ (planner/page.py FRAGMENTS). Every control is a link to the
+  plan after that change; plan-v2.js handles them in place.
+{% endcomment %}
+{% if popular %}
+<div class="pv2-chips pv2-tools"><span>Popular:</span>{% for p in popular %}<a href="{{ p.href }}" rel="nofollow" data-add="{{ p.dest.slug }}">{{ p.dest.city|cut:" / Vatican City" }}</a>{% endfor %}</div>
+{% endif %}
+{% if stops %}
+<ol class="pv2-stops">
+  {% for s in stops %}
+  <li class="pv2-stop" data-slug="{{ s.dest.slug }}">
+    <span class="pv2-stop-n" aria-hidden="true">{{ s.number }}</span>
+    <div class="pv2-stop-body">
+      <div class="pv2-stop-name">{{ s.dest.city }}</div>
+      <div class="pv2-stop-meta">
+        {% if s.dest.plan_kind == "curated" %}<span class="pv2-pill pv2-pill-ok">✓ Curated plan · {{ s.dest.curated|length }} day{{ s.dest.curated|length|pluralize }}</span>{% elif s.dest.plan_kind == "suggested" %}<span class="pv2-pill pv2-pill-auto">Suggested order</span>{% endif %}
+        {% comment %}Only the first stop flies in; later stops show their nearest airport, if known.{% endcomment %}
+        <span>{% if s.sites %}{{ s.sites }} sacred place{{ s.sites|pluralize }}{% endif %}{% if s.first and s.dest.fly_iata %}{% if s.sites %} · {% endif %}fly into {{ s.dest.fly_iata }}{% if s.dest.nearest_iata_if_different %} · nearest airport {{ s.dest.nearest_iata_if_different }}{% endif %}{% elif not s.first and s.dest.airport_iata %}{% if s.sites %} · {% endif %}nearest airport {{ s.dest.airport_iata }}{% endif %}</span>
+      </div>
+    </div>
+    <div class="pv2-stop-ctrl">
+      <span class="pv2-nights" role="group" aria-label="Nights in {{ s.dest.city }}">
+        {% if s.controls.dec %}<a href="{{ s.controls.dec }}" rel="nofollow" data-action="dec" data-index="{{ s.index }}" aria-label="One fewer night in {{ s.dest.city }}">−</a>{% else %}<span class="pv2-ctl-off" aria-hidden="true">−</span>{% endif %}
+        <span class="pv2-nights-n">{{ s.nights }} night{{ s.nights|pluralize }}</span>
+        {% if s.controls.inc %}<a href="{{ s.controls.inc }}" rel="nofollow" data-action="inc" data-index="{{ s.index }}" aria-label="One more night in {{ s.dest.city }}">+</a>{% else %}<span class="pv2-ctl-off" aria-hidden="true">+</span>{% endif %}
+      </span>
+      {% if s.controls.up %}<a class="pv2-icon-btn" href="{{ s.controls.up }}" rel="nofollow" data-action="up" data-index="{{ s.index }}" aria-label="Move {{ s.dest.city }} earlier">↑</a>{% else %}<span class="pv2-icon-btn pv2-ctl-off" aria-hidden="true">↑</span>{% endif %}
+      {% if s.controls.down %}<a class="pv2-icon-btn" href="{{ s.controls.down }}" rel="nofollow" data-action="down" data-index="{{ s.index }}" aria-label="Move {{ s.dest.city }} later">↓</a>{% else %}<span class="pv2-icon-btn pv2-ctl-off" aria-hidden="true">↓</span>{% endif %}
+      <a class="pv2-icon-btn" href="{{ s.controls.remove }}" rel="nofollow" data-action="remove" data-index="{{ s.index }}" aria-label="Remove {{ s.dest.city }}">✕</a>
+    </div>
+  </li>
+  {% endfor %}
+</ol>
+{% else %}
+<div class="pv2-empty">Add a place to start your plan.</div>
+{% endif %}
+{% if near %}
+<div class="pv2-suggest">
+  <span class="pv2-dot" aria-hidden="true"></span>
+  <p><b>Near your route:</b> {{ near.0.city }}, about {{ near.1 }} mile{{ near.1|pluralize }} from {{ near.2.short_name }}.</p>
+  <a class="btn pv2-btn-line pv2-btn-sm" href="{{ near_add }}" rel="nofollow" data-add="{{ near.0.slug }}" aria-label="Add {{ near.0.city }}">Add</a>
+</div>
+{% endif %}

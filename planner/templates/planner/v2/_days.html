@@ -1,0 +1,44 @@
+{% comment %}
+  Step 3: the day-by-day plan from planner/itinerary.py. Shared with
+  /plan/build/. Site names link to their pages; no Mass times anywhere.
+{% endcomment %}
+{% if itinerary.days %}
+<p class="pv2-sub">{{ itinerary.day_count }} days, {{ itinerary.nights }} night{{ itinerary.nights|pluralize }}{% if itinerary.start_date %} · {{ itinerary.start_date|date:"M j" }} – {{ itinerary.end_date|date:"M j, Y" }}{% endif %}</p>
+<div class="pv2-days">
+  {% for group in day_groups %}
+  <div class="pv2-stop-head">
+    <h3>{{ group.dest.city }}</h3>
+    {% if group.dest.plan_kind == "curated" %}<span class="pv2-pill pv2-pill-ok">✓ Curated plan</span>{% elif group.dest.plan_kind == "suggested" %}<span class="pv2-pill pv2-pill-auto">Suggested order</span>{% endif %}
+    <span class="pv2-stop-head-n">{{ group.nights }} night{{ group.nights|pluralize }}</span>
+  </div>
+  {% for day in group.days %}{% if not hide_cut or not day.cut %}
+  <div class="pv2-day{% if day.kind == 'free' %} pv2-day-free{% endif %}{% if day.cut %} pv2-day-cut{% endif %}">
+    <span class="pv2-day-d">{% if day.number %}Day {{ day.number }}{% if day.date %}<small>{{ day.date|date:"M j" }}</small>{% endif %}{% else %}Extra<small>add a night</small>{% endif %}</span>
+    <span class="pv2-day-tx">
+      {% if day.tag %}<span class="pv2-tag">{% if day.kind == "arrival" %}✈ {% endif %}{{ day.tag }}</span>{% endif %}
+      <b>{{ day.title }}</b>
+      {% if day.sites or day.extra_places %}
+      <span class="pv2-sites">{% for site in day.sites %}{% if site.url %}<a href="{{ site.url }}">{{ site.title }}</a>{% else %}{{ site.title }}{% endif %}{% if not forloop.last %} · {% endif %}{% endfor %}{% if day.sites and day.extra_places %} · {% endif %}{% if day.extra_places %}<span class="pv2-extra">{{ day.extra_places }}</span>{% endif %}</span>
+      {% elif day.note %}
+      <span class="pv2-sites">{{ day.note }}</span>
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}{% endfor %}
+  {% if group.cut_more and not hide_cut %}
+  <p class="pv2-cut-more">+{{ group.cut_more }} more day{{ group.cut_more|pluralize }} of sacred places · add nights to include them</p>
+  {% endif %}
+  {% if group.cut_total and not hide_cut %}
+  <p class="pv2-cut-more pv2-print-only">+{{ group.cut_total }} more day{{ group.cut_total|pluralize }} of sacred places · add nights to include them</p>
+  {% endif %}
+  {% endfor %}
+  {% if departure %}
+  <div class="pv2-day">
+    <span class="pv2-day-d">Day {{ departure.number }}{% if departure.date %}<small>{{ departure.date|date:"M j" }}</small>{% endif %}</span>
+    <span class="pv2-day-tx"><span class="pv2-tag">✈ {{ departure.tag }}</span><b>{{ departure.title }}</b></span>
+  </div>
+  {% endif %}
+</div>
+{% else %}
+<p class="pv2-placeholder">Your plan appears here once you add a place.</p>
+{% endif %}

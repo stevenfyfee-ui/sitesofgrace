@@ -1,0 +1,3 @@
+<p class="pv2-eyebrow">{{ route_eyebrow|default:"Your pilgrimage" }}</p>
+<div class="pv2-route-strip">{% for s in stops %}{% if not forloop.first %} <i aria-hidden="true">→</i> {% endif %}<span>{{ s.dest.short_name }}</span>{% empty %}<span class="pv2-route-none">No stops yet</span>{% endfor %}</div>
+{% if stops %}<p class="pv2-trip-len">{{ itinerary.day_count }} days · {{ stops|length }} stop{{ stops|length|pluralize }}</p>{% endif %}
