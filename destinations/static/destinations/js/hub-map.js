@@ -42,6 +42,7 @@
   });
 
   M.bindRadiusOnZoom(map, function () { return dots; });
+  if (window.SoGMapTaps) window.SoGMapTaps.attach(map, function () { return dots; });
   if (bounds.length > 1) {
     map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
   } else {

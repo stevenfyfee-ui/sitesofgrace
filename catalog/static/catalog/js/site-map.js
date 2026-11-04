@@ -59,6 +59,8 @@
            "<b>" + M.escapeHtml(data.site.title) + "</b>", SITE_EXTRA);
   }
 
+  if (window.SoGMapTaps) window.SoGMapTaps.attach(map, function () { return dots; });
+
   data.points.forEach(function (p) {
     var html = "<b>" + M.escapeHtml(p.name) + "</b><br>" + M.escapeHtml(p.kind_label) +
       (p.note ? "<br>" + M.escapeHtml(p.note) : "") +

@@ -15,7 +15,11 @@
   "use strict";
 
   // Same curve as the Interactive Map (sitesofgrace/templates/home/map_page.html).
-  function radiusFor(z) { return Math.max(2.4, Math.min(7, 2.4 + (z - 2) * 0.62)); }
+  // On touch screens the floor is 4px (js/sog-map-taps.js) so dots can be seen.
+  function radiusFor(z) {
+    var floor = window.SoGMapTaps ? window.SoGMapTaps.minRadius() : 2.4;
+    return Math.max(floor, Math.min(7, 2.4 + (z - 2) * 0.62));
+  }
 
   /* {styles, default} from the {% category_styles_json %} block. */
   function readCategoryStyles(id) {
