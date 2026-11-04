@@ -178,9 +178,12 @@ class RenderTests(StayMapTestCase):
 
 class ExistingMapsUnchangedTests(StayMapTestCase):
     def test_three_pre_v2_maps_keep_their_own_code(self):
-        curve = "function radiusFor(z) { return Math.max(2.4, Math.min(7, 2.4 + (z - 2) * 0.62)); }"
+        # Same curve as before; the floor is 2.4px, or 4px on touch screens
+        # (js/sog-map-taps.js, fix/nav-and-map-taps).
+        curve = "return Math.max(floor, Math.min(7, 2.4 + (z - 2) * 0.62));"
         map_page = get_template("home/map_page.html").template.source
         self.assertIn(curve, map_page)
+        self.assertIn("window.SoGMapTaps ? window.SoGMapTaps.minRadius() : 2.4", map_page)
         self.assertIn("map.createPane('sitesPane').style.zIndex = 450;", map_page)
         self.assertIn("L.map(el).setView([20, 0], 2)", map_page)
         trail = get_template("catalog/pilgrimage_trail_page.html").template.source
@@ -337,3 +340,16 @@ class ImportSiteMapTests(StayMapTestCase):
         out = self.run_import(os.path.join(os.path.dirname(os.path.dirname(__file__)), "tools", "site_map_example.json"),
                               "--dry-run")
         self.assertIn("no SacredSitePage with this id", out)
+
+
+class MapTapsLoadedTests(StayMapTestCase):
+    """Every map with site dots loads the shared tap helper (fix/nav-and-map-taps)."""
+
+    def test_tap_helper_on_every_dot_map(self):
+        for name in ("home/map_page.html", "pilgrims/profile_detail.html", "catalog/v2/_stay_map.html",
+                     "destinations/destination_hub_page.html"):
+            source = get_template(name).template.source
+            self.assertIn("js/sog-map-taps.js", source, name)
+        for path in ("catalog/static/catalog/js/site-map.js", "destinations/static/destinations/js/hub-map.js"):
+            with open(path, encoding="utf-8") as fh:
+                self.assertIn("SoGMapTaps.attach(map", fh.read(), path)

@@ -35,6 +35,7 @@
 <script src="{% static 'vendor/leaflet-1.9.4/leaflet.js' %}"></script>
 <script src="{% static 'community/js/journey_buttons.js' %}"></script>
 <script src="{% static 'js/basemap.js' %}"></script>
+<script src="{% static 'js/sog-map-taps.js' %}"></script>
 <script src="{% static 'js/trails.js' %}"></script>
 <script>
   (function () {
@@ -59,7 +60,11 @@
 
     // Capped at 7: any bigger and the ~28 sites inside Rome merge into one
     // blob at exactly the zoom where you need to pick one.
-    function radiusFor(z) { return Math.max(2.4, Math.min(7, 2.4 + (z - 2) * 0.62)); }
+    // On touch screens the floor is 4px (js/sog-map-taps.js) so dots can be seen.
+    function radiusFor(z) {
+      var floor = window.SoGMapTaps ? window.SoGMapTaps.minRadius() : 2.4;
+      return Math.max(floor, Math.min(7, 2.4 + (z - 2) * 0.62));
+    }
 
     function popupHtml(site) {
       var locationLine = [site.locality, site.country].filter(Boolean).join(', ');
@@ -88,6 +93,11 @@
     // a click on a dot under a line would open the trail's popup instead.
     map.createPane('sitesPane').style.zIndex = 450;
     var markerLayer = L.layerGroup().addTo(map);
+    // A tap that just misses a dot opens the nearest one in markerLayer
+    // (so legend and search filters still apply); popups fit the map.
+    if (window.SoGMapTaps) {
+      window.SoGMapTaps.attach(map, function () { return allMarkers.map(function (e) { return e.marker; }); });
+    }
 
     // ---------- Legend / category filter ----------
     var legendEl = document.createElement('div');

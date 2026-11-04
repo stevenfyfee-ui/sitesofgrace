@@ -185,6 +185,7 @@
 {% if is_self and has_map_sites %}
 <script src="{% static 'vendor/leaflet-1.9.4/leaflet.js' %}"></script>
 <script src="{% static 'js/basemap.js' %}"></script>
+<script src="{% static 'js/sog-map-taps.js' %}"></script>
 <script>
   (function () {
     var el = document.getElementById('passportMap');
@@ -201,11 +202,12 @@
     }
     var map = L.map(el).setView([20, 0], 2);
     window.SoGBasemap.add(map);
+    var dots = [];
+    if (window.SoGMapTaps) window.SoGMapTaps.attach(map, function () { return dots; });
     fetch(el.dataset.journeyUrl)
       .then(function (response) { return response.json(); })
       .then(function (data) {
         var bounds = [];
-        var dots = [];
         data.sites.forEach(function (site) {
           var s = site.status === 'visited' ? RED : WHITE;
           var marker = L.circleMarker([site.lat, site.lng], {
