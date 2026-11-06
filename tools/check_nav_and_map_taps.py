@@ -38,6 +38,14 @@ DOT_CENTERS_JS = """(paneSelector) => {
 }"""
 
 
+# True if (x, y) is bare map: not a dot, line, marker icon or map control.
+BARE_MAP_JS = """([sel, x, y]) => {
+  const e = document.elementFromPoint(x, y);
+  return !!(e && e.closest(sel) && !e.closest('.leaflet-interactive')
+            && !e.closest('.leaflet-marker-pane') && !e.closest('.leaflet-control-container'));
+}"""
+
+
 def fail(msg):
     print("FAIL:", msg)
     sys.exit(1)
@@ -138,15 +146,20 @@ def popup_fits(page, map_selector):
 
 
 def tap_near_a_dot(page, map_selector, pane_selector, label):
-    """Tap 10px right of the dot nearest the map's center; expect a popup."""
+    """Tap 10px right of the dot nearest the map's center; expect a popup.
+
+    Only dots whose tap point is bare map count: on real data a lodging pin
+    (a 24px marker icon) can sit there, and tapping it selects that lodging
+    instead, by design."""
     page.wait_for_function(f"() => document.querySelectorAll('{pane_selector} path.leaflet-interactive').length > 0")
     page.wait_for_timeout(600)
     m = page.locator(map_selector).bounding_box()
     cx, cy = m["x"] + m["width"] / 2, m["y"] + m["height"] / 2
     dots = [d for d in page.evaluate(DOT_CENTERS_JS, pane_selector)
-            if m["x"] + 30 < d["x"] < m["x"] + m["width"] - 30 and m["y"] + 30 < d["y"] < m["y"] + m["height"] - 30]
+            if m["x"] + 30 < d["x"] < m["x"] + m["width"] - 30 and m["y"] + 30 < d["y"] < m["y"] + m["height"] - 30
+            and page.evaluate(BARE_MAP_JS, [map_selector, d["x"] + 10, d["y"]])]
     if not dots:
-        fail(f"{label}: no dot inside the map")
+        fail(f"{label}: no dot inside the map with bare map 10px to its right")
     dot = min(dots, key=lambda d: (d["x"] - cx) ** 2 + (d["y"] - cy) ** 2)
     if dot["w"] < 7.5:
         fail(f"{label}: dot is {dot['w']:.1f}px wide on a touch screen (expected at least 8px)")
