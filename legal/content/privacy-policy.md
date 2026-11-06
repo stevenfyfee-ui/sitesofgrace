@@ -14,6 +14,7 @@ Depending on how you use the site, we may collect the following:
 
 - **Account information:** your email address, your password (stored only in scrambled, hashed form), and your confirmation that you are at least 13. We create a username for you automatically. If you choose, you can add a profile photo, a short bio, and your home city and country. We never ask for your street address.
 - **Pilgrimage and community information:** places you save or mark as visited, photos, captions, stories, corrections, and other content you submit. Saved religious destinations may indirectly reveal your religious interests, so please share only what you are comfortable providing.
+- **Saved trips:** if you save a plan from the trip planner, we store the trip's name, its destinations and the number of nights in each, your start date if you gave one, the number of travelers, and the lodging and pace you chose. We never store prices. The estimated budget is worked out again from our current figures each time you open the trip. If you use the planner without saving, your plan lives only in the page's web address, and we do not keep it.
 - **Communications:** what you send us by email, and the email address you give when you sign up for our newsletter or join a product waitlist.
 - **Prayer requests:** if you send us a prayer request, it may include religious or health information about you or someone else. We read it only so we can pray for the intention. We never publish or share it, and we delete it automatically after 90 days.
 - **Payment information:** support payments are made on Stripe's secure checkout page. Your card details go directly to Stripe; our website never receives or stores them. Stripe shares with us the amount, date, payment status, and the name and email address you give at checkout.
@@ -27,6 +28,8 @@ We use information as reasonably needed to provide and secure the website; creat
 
 ## 4. When information is public
 Your profile is private by default. On a private profile, anyone can see your profile photo, display name, and username, so people can find you and ask to follow you. Only followers you approve can see the rest of your profile, including your badges, follower counts, and Visited and Want-to-Go lists. If you make your profile public, anyone can see them, and anyone can follow you without needing your approval. Your photo library stays private unless you share a photo. A photo you share to a sacred site's page can be seen by anyone, along with its caption and the name you choose for credit. Profile photos are stored so they can be shown on the site, and anyone with an image's link can view it. We remove the location data that cameras and phones can embed in photo files when you upload them. Do not post private details or photos of someone else without their permission.
+
+Your saved trips are private. Only you can see them, unless you turn on a share link for a trip. Anyone who has a trip's share link can view that trip's name and plan, even without an account. They cannot see your name, username, email address, or anything else about your account, and they cannot change your trip. The link is long and hard to guess, but anyone you send it to can pass it on. If you turn the link off, it stops working right away. If you turn sharing on again later, you get a new link, and the old one still won't work. Shared trip pages ask search engines not to list them.
 
 ## 5. Who we share information with
 We share personal information only with companies that help us run the site, and only as much as each one needs:
@@ -57,6 +60,7 @@ If you sign up for our newsletter, we use your email address to send it. Joining
 
 ## 8. How long we keep information
 - **Account information, saved places, and your photo library:** while your account is open. When you ask us to delete your account, we delete it and its content within 30 days.
+- **Saved trips and their share links:** while your account is open, or until you delete the trip. When you delete a trip, or when your account is deleted, the trip and any share link are deleted with it.
 - **Photos and stories you share publicly:** until you remove them, delete your account, or we remove them under our [Community Policy](/community-policy/).
 - **Newsletter signup:** until you unsubscribe. After that we keep only your email address on a do-not-send list, so we do not email you again by mistake.
 - **Messages sent through our Contact page:** up to 18 months, then deleted automatically. Prayer requests: 90 days. The scrambled record of your IP address that we use to stop form spam: 7 days.

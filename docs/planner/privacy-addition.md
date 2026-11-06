@@ -1,8 +1,9 @@
 # Privacy Policy addition: saved trips (draft for review)
 
-**Status:** draft. Not published, and `legal/content/privacy-policy.md` is unchanged. Once approved, it goes in
-through the usual legal-page process: update the LegalPage in the admin, set a new effective date, and review
-the published page. Publish it no later than the day `SOG_PLANNER_V2` goes to "on".
+**Status:** approved and in `legal/content/privacy-policy.md` (November 2026). The production Privacy Policy
+draft (LegalPage 2502) was rebuilt from that file by `tools/rebuild_privacy_draft.py` as draft revision 1395,
+not published. It goes live with the other legal pages through `publish_legal_pages`, with the effective date
+set to the publish day, no later than the day `SOG_PLANNER_V2` goes to "on".
 
 The policy's existing numbered sections stay as they are. These are three short additions, worded to match the
 rest of the policy.
