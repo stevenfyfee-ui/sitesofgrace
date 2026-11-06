@@ -4,7 +4,10 @@ swap_contact_page, publish_legal_pages, set_legal_details (home) and
 publish_hubs (destinations): each is idempotent, has a --dry-run that
 changes nothing, and refuses rather than half-doing a job.
 """
+import datetime
+import types
 from io import StringIO
+from unittest import mock
 
 from django.core.management import call_command
 from django.core.management.base import CommandError
@@ -13,6 +16,7 @@ from wagtail.test.utils import WagtailPageTestCase
 
 from destinations.models import DestinationHubPage, DestinationIndexPage
 from home import legal
+from home.management.commands import publish_legal_pages
 from home.models import ContactPage, HomePage, LegalDetails, LegalPage, StandardPage
 
 DETAILS = {
@@ -106,6 +110,52 @@ class LegalCommandsTests(GoLiveTestCase):
         self.assertEqual(LegalPage.objects.live().count(), len(legal.LEGAL_SLUGS))
         out = self.run_cmd("publish_legal_pages")
         self.assertIn("Publishing: none", out)
+
+    def test_effective_dry_run_shows_old_and_new_dates_and_changes_nothing(self):
+        self.fill(**DETAILS)
+        old = {p.slug: p.get_latest_revision_as_object().effective_date for p in LegalPage.objects.all()}
+        out = self.run_cmd("publish_legal_pages", "--effective", "2026-11-20", "--dry-run")
+        for slug in legal.LEGAL_SLUGS:
+            self.assertIn(f"{slug}: {old[slug]} -> 2026-11-20", out)
+        self.assertEqual(LegalPage.objects.live().count(), 0)
+        for page in LegalPage.objects.all():
+            self.assertEqual(page.get_latest_revision_as_object().effective_date, old[page.slug])
+
+    def test_effective_sets_the_date_on_all_ten_as_they_publish(self):
+        self.fill(**DETAILS)
+        self.run_cmd("publish_legal_pages", "--effective", "2026-11-20")
+        pages = LegalPage.objects.live()
+        self.assertEqual(pages.count(), len(legal.LEGAL_SLUGS))
+        for page in pages:
+            self.assertEqual(page.effective_date, datetime.date(2026, 11, 20))
+            self.assertFalse(page.has_unpublished_changes)
+
+    def test_effective_without_a_date_is_today_in_los_angeles(self):
+        # 05:00 UTC on Nov 7 is still Nov 6 in Los Angeles.
+        utc_now = datetime.datetime(2026, 11, 7, 5, 0, tzinfo=datetime.timezone.utc)
+        fake = types.SimpleNamespace(
+            date=datetime.date,
+            datetime=types.SimpleNamespace(now=lambda tz: utc_now.astimezone(tz)),
+        )
+        self.fill(**DETAILS)
+        with mock.patch.object(publish_legal_pages, "datetime", fake):
+            out = self.run_cmd("publish_legal_pages", "--effective", "--dry-run")
+        self.assertIn("set to 2026-11-06", out)
+
+    def test_effective_refuses_when_a_page_is_already_live(self):
+        self.fill(**DETAILS)
+        page = LegalPage.objects.get(slug="cookie-notice")
+        page.get_latest_revision_as_object().save_revision().publish()
+        out = StringIO()
+        with self.assertRaises(CommandError):
+            call_command("publish_legal_pages", "--effective", "2026-11-20", stdout=out)
+        self.assertIn("cookie-notice: already live", out.getvalue())
+        self.assertEqual(LegalPage.objects.live().count(), 1, "all or none")
+
+    def test_effective_rejects_a_bad_date(self):
+        with self.assertRaises(CommandError):
+            self.run_cmd("publish_legal_pages", "--effective", "20-11-2026")
+        self.assertEqual(LegalPage.objects.live().count(), 0)
 
     def test_set_legal_details_reads_the_prompt_and_never_echoes_values(self):
         answers = iter([DETAILS[name] for name in legal.TOKENS.values()])
