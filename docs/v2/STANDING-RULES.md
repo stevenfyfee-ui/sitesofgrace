@@ -36,3 +36,15 @@
     SOG_V2_ENABLED=off to prove nothing changed. List every place you differ from the mockup and why.
     Wait. When I say "go", stage only this phase's files by explicit path and make one scoped commit on
     pilgrimage-v2.
+
+## Working trees, branches and merges (every session, every task)
+Added 2026-11-05 after a commit landed on another session's branch in a shared checkout and was
+merged and deployed with that branch's PR (#14). See docs/future-saints/phase1-review.md.
+
+13. One working tree per session. Every Claude Code session works in its own git worktree
+    (`git worktree add ../sitesofgrace-<branch> <branch>`), never in a checkout that another session
+    might be using.
+14. Before every commit and every push, run `git branch --show-current`. If it isn't this task's
+    branch, stop.
+15. Before merging any PR, list its commits (`gh pr view <n> --json commits`). If any commit isn't
+    part of that task, stop and tell me.
