@@ -1,4 +1,4 @@
-{% load menu_tags about_tags blog_tags %}
+{% load menu_tags about_tags blog_tags future_saints_tags %}
 <ul class="mobile-list">
   {% for item in menu_items %}
     <li class="{{ item.active_class }}">
@@ -19,5 +19,8 @@
     <li class="{% if request.path == our_story_link %}active{% endif %}">
       <a href="{{ our_story_link }}">Our Story</a>
     </li>
-  {% endif %}
+  {% endif %}{% comment %} "Future Saints" is gated by SOG_FUTURE_SAINTS -- see future_saints/templatetags/future_saints_tags.py; kept on this line so the menu is byte-identical when the switch is off {% endcomment %}{% future_saints_menu_url as fs_link %}{% if fs_link %}
+    <li class="{% if request.path|startswith:fs_link %}active{% endif %}">
+      <a href="{{ fs_link }}"{% if request.path|startswith:fs_link %} aria-current="page"{% endif %}>Future Saints</a>
+    </li>{% endif %}
 </ul>

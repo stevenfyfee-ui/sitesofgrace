@@ -1,0 +1,5 @@
+{% comment %} A plain parchment panel (no texture behind text). Usage: with heading="…" text="…" extra_class="…" {% endcomment %}
+<div class="fs-panel{% if extra_class %} {{ extra_class }}{% endif %}">
+  {% if heading %}<h3>{{ heading }}</h3>{% endif %}
+  {% if text %}<p>{{ text }}</p>{% endif %}
+</div>

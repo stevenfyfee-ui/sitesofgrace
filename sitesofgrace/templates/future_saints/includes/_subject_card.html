@@ -1,0 +1,10 @@
+{% comment %} A subject card: art on top, an accent label band below. Links only to a live index. {% endcomment %}
+{% if card.url %}<a class="fs-card fs-accent-{{ card.accent|default:'sand' }}" href="{{ card.url }}">{% else %}<div class="fs-card fs-card--unlinked fs-accent-{{ card.accent|default:'sand' }}">{% endif %}
+  {% include "future_saints/includes/_art_frame.html" with art=card.art variant="card" slot=card.slot %}
+  <span class="fs-card-label">
+    {% include "future_saints/includes/_icon.html" with name=card.icon class="fs-card-icon" %}
+    <span class="fs-card-title">{{ card.title }}{% if card.line %}<span class="fs-card-line">{{ card.line }}</span>{% endif %}</span>
+    {% if card.url %}{% include "future_saints/includes/_icon.html" with name="chevron" class="fs-card-chevron" %}{% endif %}
+  </span>
+  {% if not card.url and request.user.is_staff %}<span class="fs-chip-staff">Staff only: no published index linked</span>{% endif %}
+{% if card.url %}</a>{% else %}</div>{% endif %}

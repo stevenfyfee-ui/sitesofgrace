@@ -1,0 +1,46 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<header class="fs-header">
+  <div class="fs-wrap fs-header-inner">
+    <div class="fs-brand">
+      <a class="fs-brand-logo" href="/" aria-label="Sites of Grace main site">
+        {% with s=settings.core.SiteSettings %}
+          {% if s.logo %}
+            {% comment %} The real logo, rendered at 2x pixel density. Never traced or re-lettered. {% endcomment %}
+            {% image s.logo max-320x88 as fs_logo %}
+            <img src="{{ fs_logo.url }}" width="{% widthratio fs_logo.width 2 1 %}" height="{% widthratio fs_logo.height 2 1 %}" alt="">
+          {% else %}
+            <span class="fs-brand-wordmark">Sites of Grace</span>
+          {% endif %}
+        {% endwith %}
+      </a>
+      <span class="fs-brand-divider" aria-hidden="true"></span>
+      <a class="fs-lockup" href="{% if fs_home %}{% pageurl fs_home %}{% else %}#content{% endif %}">Future Saints</a>
+    </div>
+
+    <button type="button" class="fs-menu-button" data-fs-menu-button aria-expanded="false" aria-controls="fs-nav">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      Menu
+    </button>
+
+    <nav id="fs-nav" class="fs-nav" aria-label="Future Saints">
+      <ul class="fs-nav-list">
+        {% if fs_home %}
+          <li><a href="{% pageurl fs_home %}"{% if page.pk == fs_home.pk %} aria-current="page"{% endif %}>Home</a></li>
+        {% endif %}
+        {% for item in fs_nav %}
+          <li><a href="{{ item.url }}"{% if item.current %} aria-current="{{ item.current }}"{% endif %}>{{ item.label }}</a></li>
+        {% endfor %}
+        {% if request.user.is_staff %}
+          {% comment %} /future-saints/map/ arrives in Phase 4: staff see it as "coming soon", everyone else sees nothing. {% endcomment %}
+          <li><span class="fs-nav-soon">Map <small>(coming soon)</small></span></li>
+        {% endif %}
+        <li>
+          <a class="fs-back-link" href="/">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sites of Grace
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

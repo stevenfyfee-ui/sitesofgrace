@@ -1,0 +1,12 @@
+{% comment %} The full-width feature card (Holy Land): never a fifth small card. {% endcomment %}
+{% if card.url %}<a class="fs-feature fs-accent-{{ card.accent|default:'sand' }}" href="{{ card.url }}" data-fs-feature>{% else %}<div class="fs-feature fs-accent-{{ card.accent|default:'sand' }}" data-fs-feature>{% endif %}
+  {% include "future_saints/includes/_art_frame.html" with art=card.art variant="feature" slot=card.slot %}
+  <span class="fs-feature-text">
+    <span class="fs-feature-title">
+      {% include "future_saints/includes/_icon.html" with name=card.icon class="fs-card-icon" %}
+      {{ card.title }}
+    </span>
+    {% if card.line %}<span class="fs-feature-line">{{ card.line }}</span>{% endif %}
+    {% if card.url %}{% include "future_saints/includes/_icon.html" with name="arrow" class="fs-card-chevron" %}{% elif request.user.is_staff %}<span class="fs-chip-staff">Staff only: no published index linked</span>{% endif %}
+  </span>
+{% if card.url %}</a>{% else %}</div>{% endif %}

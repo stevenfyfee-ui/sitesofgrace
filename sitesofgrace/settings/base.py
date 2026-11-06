@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "tours",
     "contact",
     "destinations",
+    "future_saints",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
@@ -266,6 +267,12 @@ SOG_V2_ENABLED = os.environ.get("SOG_V2_ENABLED", "off").strip().lower()
 # its own. Check it through core.v2.planner_v2_enabled(request) /
 # {% planner_v2_enabled %}. With "off", /plan/ renders exactly as before.
 SOG_PLANNER_V2 = os.environ.get("SOG_PLANNER_V2", "off").strip().lower()
+
+# Future Saints (the children's section) switch, same values and rules as
+# SOG_V2_ENABLED, set on its own. Check it through
+# future_saints.switch.future_saints_enabled(request) /
+# {% future_saints_enabled %}. With "off", every /future-saints/ URL is a 404.
+SOG_FUTURE_SAINTS = os.environ.get("SOG_FUTURE_SAINTS", "off").strip().lower()
 
 USE_I18N = True
 

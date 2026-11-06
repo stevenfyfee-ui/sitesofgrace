@@ -1,0 +1,18 @@
+{% comment %}
+  Reading level: two real buttons with aria-pressed. Without JavaScript this
+  GET form reloads the page with ?level=; with it, future-saints.js sets
+  ?level= and sessionStorage only. No cookie, nothing saved on the server.
+{% endcomment %}
+<form class="fs-level-form" method="get" action="">
+  <div class="fs-level-buttons" role="group" aria-label="Reading level">
+    <button type="submit" name="level" value="explorer" class="fs-level fs-level--explorer" data-fs-level data-fs-level-label="Reading level: Grades 2–3 Explorer" aria-pressed="{% if fs_level == 'explorer' %}true{% else %}false{% endif %}">
+      {% include "future_saints/includes/_icon.html" with name="book" %}
+      <span><small>Grades 2–3</small><strong>Explorer</strong></span>
+    </button>
+    <button type="submit" name="level" value="researcher" class="fs-level fs-level--researcher" data-fs-level data-fs-level-label="Reading level: Grades 4–5 Researcher" aria-pressed="{% if fs_level == 'researcher' %}true{% else %}false{% endif %}">
+      {% include "future_saints/includes/_icon.html" with name="books" %}
+      <span><small>Grades 4–5</small><strong>Researcher</strong></span>
+    </button>
+  </div>
+  <p class="fs-level-status" data-fs-level-status aria-live="polite">{% if fs_level == "explorer" %}Reading level: Grades 2–3 Explorer{% elif fs_level == "researcher" %}Reading level: Grades 4–5 Researcher{% endif %}</p>
+</form>
