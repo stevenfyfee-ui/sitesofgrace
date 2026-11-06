@@ -1,0 +1,34 @@
+{% extends "future_saints/base.html" %}
+{% load wagtailcore_tags %}
+{% block body_class %}fs-index fs-index--{{ page.content_kind|default:"none" }}{% endblock %}
+{% block content %}
+<div class="fs-band fs-accent-{{ page.accent|default:'sand' }}">
+  <div class="fs-wrap fs-band-inner">
+    <div>
+      <h1>{{ page.title }}</h1>
+      {% if page.intro %}<p class="fs-prose">{{ page.intro }}</p>{% endif %}
+    </div>
+    {% include "future_saints/includes/_art_frame.html" with art=page.banner_art variant="banner" slot="index banner" %}
+  </div>
+</div>
+
+<section class="fs-wrap fs-section" aria-label="Stories">
+  {% if fs_children %}
+    <ul class="fs-cards fs-cards--three">
+      {% for child in fs_children %}
+        <li>
+          <a class="fs-card fs-accent-{{ page.accent|default:'sand' }}" href="{% pageurl child %}">
+            {% include "future_saints/includes/_art_frame.html" with art=None variant="card" slot="story card" %}
+            <span class="fs-card-label">
+              <span class="fs-card-title">{{ child.title }}</span>
+              {% include "future_saints/includes/_icon.html" with name="chevron" class="fs-card-chevron" %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif request.user.is_staff %}
+    {% include "future_saints/includes/_parchment_panel.html" with heading="Stories are on the way!" text="Staff only: this index has no published stories yet. Story pages arrive in Phase 2." extra_class="fs-empty" %}
+  {% endif %}
+</section>
+{% endblock %}

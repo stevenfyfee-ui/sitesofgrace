@@ -1,10 +1,22 @@
-{% load menu_tags about_tags blog_tags %}
+{% load menu_tags about_tags blog_tags future_saints_tags %}
 <ul class="mobile-list">
   {% for item in menu_items %}
+    {% if item.has_children_in_menu %}
+    {# A collapsible section (the script in base.html). It renders open, so without JS everything shows; the script closes every section but the current page's. The overview link keeps the parent page reachable. #}
+    <li class="mobile-section {{ item.active_class }}">
+      <button type="button" class="mobile-section-toggle" aria-expanded="true" aria-controls="mobile-section-{{ forloop.counter }}"{% if item.active_class %} data-start-open{% endif %} data-section-toggle>
+        <span>{{ item.text }}</span><svg class="mobile-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+      <div class="mobile-section-panel" id="mobile-section-{{ forloop.counter }}">
+        <a class="mobile-overview" href="{{ item.href }}">All of {{ item.text }} →</a>
+        {% sub_menu item %}
+      </div>
+    </li>
+    {% else %}
     <li class="{{ item.active_class }}">
       <a href="{{ item.href }}">{{ item.text }}</a>
-      {% if item.has_children_in_menu %}{% sub_menu item %}{% endif %}
     </li>
+    {% endif %}
   {% endfor %}
   {# "Blog" isn't a wagtailmenus item either -- see blog/templatetags/blog_tags.py #}
   {% blog_url as blog_link %}
@@ -19,5 +31,8 @@
     <li class="{% if request.path == our_story_link %}active{% endif %}">
       <a href="{{ our_story_link }}">Our Story</a>
     </li>
-  {% endif %}
+  {% endif %}{% comment %} "Future Saints" is gated by SOG_FUTURE_SAINTS -- see future_saints/templatetags/future_saints_tags.py; kept on this line so the menu is byte-identical when the switch is off {% endcomment %}{% future_saints_menu_url as fs_link %}{% if fs_link %}
+    <li class="{% if request.path|startswith:fs_link %}active{% endif %}">
+      <a href="{{ fs_link }}"{% if request.path|startswith:fs_link %} aria-current="page"{% endif %}>Future Saints</a>
+    </li>{% endif %}
 </ul>

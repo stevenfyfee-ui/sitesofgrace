@@ -1,0 +1,20 @@
+{% load wagtailimages_tags %}
+{% comment %}
+  One illustration slot. `art` is {image, alt, credit} or None; it is only ever
+  set when the picture has a credit (future_saints.models._art). With no art,
+  this draws the placeholder frame. variant: hero | card | feature | banner | portrait.
+{% endcomment %}
+{% if art %}
+  <figure class="fs-art fs-art--{{ variant }}">
+    {% if variant == "portrait" %}{% image art.image fill-400x400 as img %}
+    {% elif variant == "card" %}{% image art.image fill-800x600 as img %}
+    {% elif variant == "hero" %}{% image art.image fill-1600x1000 as img %}
+    {% else %}{% image art.image fill-1600x900 as img %}{% endif %}
+    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ art.alt }}"{% if variant != "hero" %} loading="lazy"{% endif %}>
+  </figure>
+{% else %}
+  <div class="fs-art fs-art--{{ variant }} fs-art--placeholder" aria-hidden="true">
+    {% include "future_saints/includes/_icon.html" with name="mark" class="fs-art-mark" %}
+    {% if request.user.is_staff %}<span class="fs-art-slot">Illustration: {{ slot }}</span>{% endif %}
+  </div>
+{% endif %}

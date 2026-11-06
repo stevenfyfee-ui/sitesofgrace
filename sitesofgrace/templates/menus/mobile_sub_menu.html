@@ -2,5 +2,5 @@
 <ul class="mobile-sublist">
   {% for item in menu_items %}
     <li class="{{ item.active_class }}"><a href="{{ item.href }}">{{ item.text }}</a></li>
-  {% endfor %}{% v2_enabled as v2 %}{% if v2 and parent_page.slug == "explore" %}{% destination_menu as dest %}{% if dest.hubs or dest.index_url %}<li class="mobile-group-label" aria-hidden="true">By destination</li>{% for hub in dest.hubs %}<li><a href="{% pageurl hub %}">{{ hub.title }}</a></li>{% endfor %}{% if dest.index_url %}<li><a href="{{ dest.index_url }}">All destinations →</a></li>{% endif %}{% endif %}{% endif %}
+  {% endfor %}{% v2_enabled as v2 %}{% if v2 and parent_page.slug == "explore" %}{% destination_menu as dest %}{% if dest.hubs or dest.index_url %}<li class="mobile-group"><p class="mobile-group-label" id="mobile-group-destinations">By destination</p><ul class="mobile-sublist" aria-labelledby="mobile-group-destinations">{% for hub in dest.hubs %}<li><a href="{% pageurl hub %}">{{ hub.title }}</a></li>{% endfor %}{% if dest.index_url %}<li><a href="{{ dest.index_url }}">All destinations →</a></li>{% endif %}</ul></li>{% endif %}{% endif %}
 </ul>

@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+{% if fs_home %}
+<nav class="fs-wrap fs-breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    {% if page.pk == fs_home.pk %}
+      <li aria-current="page">Future Saints</li>
+    {% else %}
+      <li><a href="{% pageurl fs_home %}">Future Saints</a></li>
+      {% for ancestor in page.get_ancestors %}
+        {% if ancestor.depth > fs_home.depth %}<li><a href="{% pageurl ancestor %}">{{ ancestor.title }}</a></li>{% endif %}
+      {% endfor %}
+      <li aria-current="page">{{ page.title }}</li>
+    {% endif %}
+  </ol>
+</nav>
+{% endif %}

@@ -1,0 +1,75 @@
+{% extends "future_saints/base.html" %}
+{% block body_class %}fs-home{% endblock %}
+{% block content %}
+<section class="fs-wrap fs-hero" aria-labelledby="fs-headline">
+  <div>
+    {% if page.eyebrow %}<p class="fs-eyebrow"><span>{{ page.eyebrow }}</span></p>{% endif %}
+    <h1 id="fs-headline" class="fs-headline">{{ page.headline|default:page.title }}</h1>
+    {% if page.subheading %}<p class="fs-subheading">{{ page.subheading }}</p>{% endif %}
+    {% if page.cta_label %}
+      <a class="fs-button" href="#fs-subjects">{{ page.cta_label }}{% include "future_saints/includes/_icon.html" with name="chevron" %}</a>
+    {% endif %}
+  </div>
+  {% include "future_saints/includes/_art_frame.html" with art=page.hero_art variant="hero" slot="homepage hero" %}
+</section>
+
+<section class="fs-wrap" id="fs-subjects" aria-labelledby="fs-subjects-heading">
+  <h2 id="fs-subjects-heading" class="sr-only">Explore by subject</h2>
+  <ul class="fs-cards fs-cards--four" data-fs-subject-cards>
+    {% for card in fs_cards %}
+      <li>{% include "future_saints/includes/_subject_card.html" with card=card %}</li>
+    {% endfor %}
+  </ul>
+  <div class="fs-section">
+    {% include "future_saints/includes/_feature_card.html" with card=fs_holy_land %}
+  </div>
+</section>
+
+<section class="fs-wrap fs-section">
+  <div class="fs-split">
+    <div>
+      {% include "future_saints/includes/_section_heading.html" with text=page.adventure_heading id="fs-adventure" %}
+      {% if page.adventure_text %}<p class="fs-prose">{{ page.adventure_text }}</p>{% endif %}
+      {% include "future_saints/includes/_reading_level.html" %}
+    </div>
+    {% if fs_saint %}
+      <div aria-labelledby="fs-saint-heading">
+        <h2 id="fs-saint-heading" class="fs-ribbon">{{ page.saint_of_week_heading|default:"Saint of the Week" }}</h2>
+        <div class="fs-saint">
+          {% include "future_saints/includes/_art_frame.html" with art=fs_saint.art variant="portrait" slot="saint portrait" %}
+          <div>
+            <h3 class="fs-saint-name">{{ fs_saint.name }}</h3>
+            {% if fs_saint.line %}<p>{{ fs_saint.line }}</p>{% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if request.user.is_staff %}
+  {% comment %} Phase 4 placeholders: staff only, never shown to visitors. {% endcomment %}
+  <section class="fs-wrap fs-section" aria-label="Staff preview: Phase 4 placeholders">
+    <ul class="fs-cards">
+      <li>
+        <div class="fs-staff-only fs-card fs-accent-blue" data-fs-phase4="map">
+          <span class="fs-card-label">
+            {% include "future_saints/includes/_icon.html" with name="map" class="fs-card-icon" %}
+            <span class="fs-card-title">World Discovery Map<span class="fs-card-line">Phase 4 placeholder. The illustrated world map is built in Phase 4.</span></span>
+          </span>
+          <span class="fs-chip-staff">Staff only</span>
+        </div>
+      </li>
+      <li>
+        <div class="fs-staff-only fs-card fs-accent-lavender" data-fs-phase4="quiz">
+          <span class="fs-card-label">
+            {% include "future_saints/includes/_icon.html" with name="quiz" class="fs-card-icon" %}
+            <span class="fs-card-title">Take a Quiz<span class="fs-card-line">Phase 4 placeholder. Quizzes arrive with the published stories.</span></span>
+          </span>
+          <span class="fs-chip-staff">Staff only</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+{% endif %}
+{% endblock %}
