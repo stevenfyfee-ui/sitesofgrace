@@ -3,7 +3,7 @@
 
   Usage (signed-in users only -- base.html guards it):
     {% include "includes/_account_menu.html" %}                  desktop trigger + panel
-    {% include "includes/_account_menu.html" with variant="mobile" %}  "My account" group, top of .mobile-nav
+    {% include "includes/_account_menu.html" with variant="mobile" %}  "My account" group (collapsible), top of .mobile-nav
     {% include "includes/_account_menu.html" with variant="mobile-signout" %}  Sign out, last in .mobile-nav
 
   Desktop is a <details>/<summary> disclosure, so it opens and closes with no
@@ -37,12 +37,13 @@
     <button type="submit">Sign out</button>
   </form>
 {% elif variant == "mobile" %}
+  {# Collapses like the menu's sections (base.html script), closed by default; open without JS. #}
   <div class="mobile-account">
-    <p class="mobile-account-head">
+    <button type="button" class="mobile-account-head mobile-section-toggle" aria-expanded="true" aria-controls="mobile-account-list"{% if photos_url in request.path or feed_url in request.path or notifications_url in request.path or request.path == profile_url or trips_url and trips_url in request.path %} data-start-open{% endif %} data-section-toggle>
       <span class="account-avatar" aria-hidden="true">{% if pilgrim.avatar %}<img src="{{ pilgrim.avatar.url }}" alt="">{% else %}{{ name|first|upper }}{% endif %}</span>
-      <span class="mobile-account-name">{{ name }}</span>
-    </p>
-    <ul class="mobile-list mobile-account-list" aria-label="My account">
+      <span class="mobile-account-name">{{ name }}</span>{% if unread_count %}<span class="account-trigger-dot" aria-label="{{ unread_count }} unread notification{{ unread_count|pluralize }}"></span>{% endif %}<svg class="mobile-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="mobile-list mobile-account-list" id="mobile-account-list" aria-label="My account">
       {% if profile_url %}<li{% if request.path == profile_url %} class="active"{% endif %}><a href="{{ profile_url }}"{% if request.path == profile_url %} aria-current="page"{% endif %}>My Passport &amp; Profile</a></li>{% endif %}
       <li{% if photos_url in request.path %} class="active"{% endif %}><a href="{{ photos_url }}"{% if photos_url in request.path %} aria-current="page"{% endif %}>My Photos</a></li>{% if trips_url %}<li{% if trips_url in request.path %} class="active"{% endif %}><a href="{{ trips_url }}"{% if trips_url in request.path %} aria-current="page"{% endif %}>My Trips</a></li>{% endif %}
       <li{% if feed_url in request.path %} class="active"{% endif %}><a href="{{ feed_url }}"{% if feed_url in request.path %} aria-current="page"{% endif %}>Feed</a></li>

@@ -10,6 +10,7 @@ live hubs and only with v2 on; and the importer and draft-creation commands.
 import csv
 import json
 import os
+import re
 import shutil
 import tempfile
 from decimal import Decimal
@@ -238,6 +239,23 @@ class LinkingTests(HubTestCase):
         self.assertIn('v2-crumb-hub">More in <a href="/destinations/live-hub/">Live Hub</a>', html)
         saint_html = self.client.get(SaintPage.objects.get(pk=self.saint.pk).url).content.decode()
         self.assertIn('Visit in <a href="/destinations/live-hub/">Live Hub</a>', saint_html)
+
+    @V2_ON
+    def test_mobile_menu_sections_collapse_with_an_overview_and_a_destination_group(self):
+        self.hub(title="Live Hub", sites=[self.member])
+        html = self.html(self.member)
+        toggle = re.search(r'<button type="button" class="mobile-section-toggle" aria-expanded="true" '
+                           r'aria-controls="(mobile-section-\d+)"( data-start-open)? data-section-toggle>\s*'
+                           r'<span>Explore</span>', html)
+        self.assertIsNotNone(toggle)
+        self.assertIsNone(toggle.group(2), "a site page isn't inside Explore here, so Explore starts closed")
+        self.assertIn(f'<div class="mobile-section-panel" id="{toggle.group(1)}">\n'
+                      f'        <a class="mobile-overview" href="/explore/">All of Explore →</a>', html)
+        self.assertIn('<li class="mobile-group"><p class="mobile-group-label" id="mobile-group-destinations">By destination</p>'
+                      '<ul class="mobile-sublist" aria-labelledby="mobile-group-destinations">', html)
+        self.assertIn(">Live Hub</a></li>", html)
+        inside = self.client.get("/explore/marian-test/").content.decode()
+        self.assertRegex(inside, r'aria-controls="mobile-section-\d+" data-start-open data-section-toggle>\s*<span>Explore</span>')
 
     @V2_ON
     def test_trip_readiness_uses_the_hub_advisory(self):

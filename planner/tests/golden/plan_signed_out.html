@@ -266,15 +266,56 @@
   
 
   <script>
-    // Minimal mobile menu toggle — no framework needed for the shell.
+    // Mobile menu (≤900px) — no framework needed for the shell. The open menu
+    // scrolls itself (site.css: .mobile-nav, body.nav-open) and closes on Esc,
+    // on a link tap, and when the window grows past 900px. Sections with
+    // children (and "My account") collapse; they render open, so without JS
+    // everything shows, and this closes all but the current page's section.
     (function () {
       var btn = document.querySelector('.nav-toggle');
       var nav = document.getElementById('mobileNav');
       if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.hasAttribute('hidden');
-        if (open) { nav.removeAttribute('hidden'); } else { nav.setAttribute('hidden', ''); }
+      var bar = document.querySelector('.site-header .header-inner');
+      var wide = window.matchMedia('(min-width: 901px)');
+
+      function setOpen(open, returnFocus) {
+        if (open) {
+          // The menu's top edge on screen, so its max-height is what's left below the header.
+          nav.style.setProperty('--mobile-nav-top', Math.max(0, Math.round(bar.getBoundingClientRect().bottom)) + 'px');
+          nav.removeAttribute('hidden');
+        } else {
+          nav.setAttribute('hidden', '');
+        }
         btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.classList.toggle('nav-open', open);
+        if (!open && returnFocus) btn.focus();
+      }
+      function isOpen() { return !nav.hasAttribute('hidden'); }
+
+      btn.addEventListener('click', function () { setOpen(!isOpen(), true); });
+      // Capture phase: runs before the search box's own Escape (which closes its
+      // suggestions), so Esc with suggestions showing closes those, not the menu.
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || !isOpen()) return;
+        if (e.target.getAttribute && e.target.getAttribute('aria-expanded') === 'true' && e.target.matches('input')) return;
+        setOpen(false, true);
+      }, true);
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false, false);
+      });
+      var onWide = function (e) { if (e.matches && isOpen()) setOpen(false, false); };
+      if (wide.addEventListener) { wide.addEventListener('change', onWide); } else { wide.addListener(onWide); }
+
+      Array.prototype.forEach.call(nav.querySelectorAll('[data-section-toggle]'), function (toggle) {
+        var panel = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (!panel) return;
+        function setSection(open) {
+          toggle.setAttribute('aria-expanded', String(open));
+          if (open) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); }
+        }
+        setSection(toggle.hasAttribute('data-start-open'));
+        toggle.addEventListener('click', function () { setSection(toggle.getAttribute('aria-expanded') !== 'true'); });
       });
     })();
   </script>
