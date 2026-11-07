@@ -1,0 +1,33 @@
+{% comment %}
+  The quiz. future-saints.js turns [data-fs-quiz] into one question at a time
+  with real buttons, friendly feedback, Next / Finish / Try again. Nothing is
+  stored or sent. Without JavaScript, the noscript list below shows every
+  question with its answer behind a "Show the answer" toggle.
+{% endcomment %}
+{% if fs_quiz %}
+  {{ fs_quiz|json_script:"fs-quiz-data" }}
+  <div class="fs-quiz" data-fs-quiz hidden>
+    <p class="fs-quiz-progress" data-fs-quiz-progress></p>
+    <h3 class="fs-quiz-prompt" data-fs-quiz-prompt tabindex="-1"></h3>
+    <div class="fs-quiz-choices" data-fs-quiz-choices role="group" aria-labelledby="fs-quiz-prompt-label"></div>
+    <div class="fs-quiz-feedback" data-fs-quiz-feedback aria-live="polite"></div>
+    <div class="fs-quiz-actions">
+      <button type="button" class="fs-button" data-fs-quiz-next hidden>Next question</button>
+      <button type="button" class="fs-button" data-fs-quiz-finish hidden>Finish</button>
+      <button type="button" class="fs-button fs-button--quiet" data-fs-quiz-retry hidden>Try again</button>
+    </div>
+  </div>
+  <noscript>
+    <ol class="fs-quiz-static">
+      {% for q in fs_quiz %}
+        <li>
+          <p><strong>{{ q.prompt }}</strong></p>
+          <ul>{% for c in q.choices %}<li>{{ c.text }}</li>{% endfor %}</ul>
+          <details><summary>Show the answer</summary>{% for c in q.choices %}{% if c.correct %}<p>{{ c.text }}</p>{% endif %}{% endfor %}{% if q.explanation %}<p>{{ q.explanation }}</p>{% endif %}</details>
+        </li>
+      {% endfor %}
+    </ol>
+  </noscript>
+{% elif request.user.is_staff %}
+  <p class="fs-chip-staff">Staff only: add five quiz questions before publishing.</p>
+{% endif %}

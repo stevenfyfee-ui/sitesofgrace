@@ -32,7 +32,7 @@ inline menu toggle, `js/search.js`, `js/account-menu.js` (signed-in only).
 | `sessionid` | session writes in home/models.py:2177, tours/views.py:53, allauth login | no (only on those actions) | none. Future Saints never writes the session. |
 | `messages` | messages middleware, only when a message is queued | no | none |
 | localStorage `LEGEND_KEY` | map_page.html only | n/a | not included |
-| sessionStorage `fs-reading-level` | **new** (future-saints.js) | yes, tab-scoped, cleared when the tab closes | value "explorer" / "researcher" only. Not an identifier; never sent to the server. COUNSEL to confirm it's acceptable. |
+| sessionStorage `fs-reading-level` | removed in Phase 2a (one reading level for grades 2–5) | n/a | Future Saints now uses no cookies and no browser storage. |
 
 Note for SOC 2 records: the site-wide `csrftoken` on anonymous adult pages is pre-existing and
 unchanged by this work. It's a functional cookie, but the Cookies & Tracking Notice (draft, prod
@@ -94,7 +94,7 @@ inquiry (item 1). COUNSEL.
 Personal information and identifiers
 - [ ] Confirm that anonymous Future Saints responses set no cookies (automated test, Phase 1).
 - [ ] Confirm no persistent identifiers: no analytics, no fingerprinting, no third-party requests (test + manual network-panel check at launch).
-- [ ] Decide whether the `fs-reading-level` sessionStorage value is acceptable. COUNSEL.
+- [x] ~~Decide whether the `fs-reading-level` sessionStorage value is acceptable.~~ Moot: removed in Phase 2a; Future Saints uses no browser storage.
 - [ ] Confirm server logs: what request data (IP, user agent) App Platform and the CDN keep, for how long, and whether it's used for anything beyond operations. Document in the privacy note. COUNSEL on the "support for internal operations" exception.
 - [ ] Confirm no data collection: no forms, uploads, accounts, comments, quiz-score storage, or email.
 

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><!-- Subdued rays (Eucharistic). -->
+<defs><radialGradient id="g"><stop offset="0" stop-opacity=".9"/><stop offset="1" stop-opacity="0"/></radialGradient></defs>
+<g fill="url(#g)">
+<path d="M200 200L190 0h20z"/><path d="M200 200L190 400h20z"/><path d="M200 200L0 190v20z"/><path d="M200 200L400 190v20z"/>
+<path d="M200 200L52 52l14-14z" /><path d="M200 200L348 348l-14 14z"/><path d="M200 200L348 52l-14-14z"/><path d="M200 200L52 348l14 14z"/>
+<path d="M200 200L118 12l18-6z"/><path d="M200 200L282 388l-18 6z"/><path d="M200 200L388 118l6 18z"/><path d="M200 200L12 282l-6-18z"/>
+<path d="M200 200L282 12l-18-6z"/><path d="M200 200L118 388l18 6z"/><path d="M200 200L12 118l-6 18z"/><path d="M200 200L388 282l6-18z"/></g></svg>

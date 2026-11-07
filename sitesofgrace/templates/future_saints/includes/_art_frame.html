@@ -1,20 +1,25 @@
 {% load wagtailimages_tags %}
 {% comment %}
   One illustration slot. `art` is {image, alt, credit} or None; it is only ever
-  set when the picture has a credit (future_saints.models._art). With no art,
-  this draws the placeholder frame. variant: hero | card | feature | banner | portrait.
+  set when the picture has a credit (future_saints models: _art). With no art
+  this draws the placeholder frame at the slot's final aspect ratio, so the
+  real picture can replace it later without moving anything.
+  variant: hero 16:10 | card 4:3 | feature 16:9 | banner 16:9 | portrait 1:1 |
+           profile 3:4 | context 2:3 | thumb 4:3.   icon: the type's sprite icon.
 {% endcomment %}
 {% if art %}
   <figure class="fs-art fs-art--{{ variant }}">
     {% if variant == "portrait" %}{% image art.image fill-400x400 as img %}
-    {% elif variant == "card" %}{% image art.image fill-800x600 as img %}
+    {% elif variant == "card" or variant == "thumb" %}{% image art.image fill-800x600 as img %}
     {% elif variant == "hero" %}{% image art.image fill-1600x1000 as img %}
+    {% elif variant == "profile" %}{% image art.image fill-900x1200 as img %}
+    {% elif variant == "context" %}{% image art.image fill-400x600 as img %}
     {% else %}{% image art.image fill-1600x900 as img %}{% endif %}
-    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ art.alt }}"{% if variant != "hero" %} loading="lazy"{% endif %}>
+    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ art.alt }}"{% if variant != "hero" and variant != "profile" %} loading="lazy"{% endif %}>
   </figure>
 {% else %}
   <div class="fs-art fs-art--{{ variant }} fs-art--placeholder" aria-hidden="true">
-    {% include "future_saints/includes/_icon.html" with name="mark" class="fs-art-mark" %}
-    {% if request.user.is_staff %}<span class="fs-art-slot">Illustration: {{ slot }}</span>{% endif %}
+    {% include "future_saints/includes/_icon.html" with name=icon|default:"mark" class="fs-art-mark" %}
+    {% if request.user.is_staff %}<span class="fs-art-slot">Art needed: {{ slot }} ({% if variant == "hero" %}16:10{% elif variant == "card" or variant == "thumb" %}4:3{% elif variant == "portrait" %}1:1{% elif variant == "profile" %}3:4{% elif variant == "context" %}2:3{% else %}16:9{% endif %})</span>{% endif %}
   </div>
 {% endif %}

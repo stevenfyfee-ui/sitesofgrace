@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140"><!-- Original watercolor wash blob (mask shape; color comes from CSS). Future Saints. -->
+<defs><filter id="w" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="14"/><feGaussianBlur stdDeviation="1.2"/></filter>
+<radialGradient id="g" cx="50%" cy="48%" r="55%"><stop offset="0" stop-opacity=".95"/><stop offset=".7" stop-opacity=".75"/><stop offset="1" stop-opacity=".35"/></radialGradient></defs>
+<path filter="url(#w)" fill="url(#g)" d="M30 70c-6-26 18-48 52-50 22-2 34 6 56 4 30-3 50 18 46 44-4 24-24 42-58 44-26 2-36-8-60-6-24 2-42-10-36-36z"/></svg>

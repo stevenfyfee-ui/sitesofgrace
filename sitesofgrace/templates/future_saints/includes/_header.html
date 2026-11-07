@@ -22,19 +22,23 @@
       Menu
     </button>
 
+    {% comment %}
+      Icon-over-label section nav (comp 03), the same on every Future Saints
+      page. Map arrives in Phase 4: staff see it as "coming soon", everyone else
+      sees nothing.
+    {% endcomment %}
     <nav id="fs-nav" class="fs-nav" aria-label="Future Saints">
       <ul class="fs-nav-list">
         {% if fs_home %}
-          <li><a href="{% pageurl fs_home %}"{% if page.pk == fs_home.pk %} aria-current="page"{% endif %}>Home</a></li>
+          <li><a class="fs-nav-item" href="{% pageurl fs_home %}"{% if page.pk == fs_home.pk %} aria-current="page"{% endif %}>{% include "future_saints/includes/_icon.html" with name="home" class="fs-nav-icon" %}<span>Home</span></a></li>
         {% endif %}
         {% for item in fs_nav %}
-          <li><a href="{{ item.url }}"{% if item.current %} aria-current="{{ item.current }}"{% endif %}>{{ item.label }}</a></li>
+          <li><a class="fs-nav-item" href="{{ item.url }}"{% if item.current %} aria-current="{{ item.current }}"{% endif %}>{% include "future_saints/includes/_icon.html" with name=item.icon class="fs-nav-icon" %}<span>{{ item.label }}</span></a></li>
         {% endfor %}
         {% if request.user.is_staff %}
-          {% comment %} /future-saints/map/ arrives in Phase 4: staff see it as "coming soon", everyone else sees nothing. {% endcomment %}
-          <li><span class="fs-nav-soon">Map <small>(coming soon)</small></span></li>
+          <li><span class="fs-nav-item fs-nav-soon">{% include "future_saints/includes/_icon.html" with name="map" class="fs-nav-icon" %}<span>Map <small>(coming soon)</small></span></span></li>
         {% endif %}
-        <li>
+        <li class="fs-nav-back">
           <a class="fs-back-link" href="/">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Sites of Grace

@@ -1,0 +1,24 @@
+{% comment %}
+  Quick Facts card (comp 03): parchment, thin gold border, a gold ribbon header
+  over the top edge, rows of icon + label + value. Inherited values are read
+  live from the canonical page (LearningPage.quick_fact_rows). The context
+  vignette sits behind the card's top-right edge and fades into the page.
+{% endcomment %}
+<aside class="fs-qf" aria-labelledby="fs-qf-title">
+  <div class="fs-qf-context">{% include "future_saints/includes/_art_frame.html" with art=fs_art.context variant="context" slot="context scene" icon=fs_type_icon %}</div>
+  <div class="fs-qf-card">
+    <h2 id="fs-qf-title" class="fs-ribbon-head"><span>Quick Facts</span></h2>
+    {% if fs_quick_facts %}
+      <dl class="fs-qf-list">
+        {% for row in fs_quick_facts %}
+          <div class="fs-qf-row">
+            <dt><span class="fs-qf-icon">{% include "future_saints/includes/_icon.html" with name=row.icon %}</span>{{ row.label }}:</dt>
+            <dd>{{ row.value }}</dd>
+          </div>
+        {% endfor %}
+      </dl>
+    {% elif request.user.is_staff %}
+      <p class="fs-chip-staff">Staff only: no Quick Facts yet.</p>
+    {% endif %}
+  </div>
+</aside>

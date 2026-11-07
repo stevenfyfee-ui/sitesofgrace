@@ -38,17 +38,16 @@ CONTENT_KIND_CHOICES = [
     ("california_mission", "California missions"),
 ]
 
-# Section navigation, in the order the header shows it. These are short UI
-# labels, not editorial text; each links to the live index of that kind.
+# Section navigation, in the order the header shows it (comp 03): UI labels,
+# not editorial text, each with its sprite icon; each links to the live index
+# of that kind.
 NAV_KINDS = [
-    ("saint", "Saints"),
-    ("marian_apparition", "Mary"),
-    ("eucharistic_miracle", "Miracles"),
-    ("holy_land", "Holy Land"),
-    ("california_mission", "Missions"),
+    ("saint", "Saints", "saint"),
+    ("marian_apparition", "Marian Apparitions", "mary"),
+    ("eucharistic_miracle", "Eucharistic Miracles", "miracle"),
+    ("holy_land", "Holy Land", "holyland"),
+    ("california_mission", "California Missions", "mission"),
 ]
-
-READING_LEVELS = ("explorer", "researcher")
 
 # The line icon drawn on a subject card: from the linked index's subject,
 # falling back to the card slot's usual subject while no index is linked.
@@ -108,8 +107,6 @@ class FutureSaintsGateMixin:
         context["fs_noindex"] = not future_saints_public()
         context["fs_nav"] = home.nav_items(request, self) if home else []
         context["fs_privacy_url"] = live_legal_urls(request).get("privacy-policy", "")
-        level = request.GET.get("level", "")
-        context["fs_level"] = level if level in READING_LEVELS else ""
         return context
 
     def future_saints_home(self):
@@ -179,12 +176,6 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     holy_land_illustration_credit = models.CharField(max_length=255, blank=True)
     holy_land_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sand")
 
-    adventure_heading = models.CharField(max_length=80, blank=True, default="Choose Your Adventure!")
-    adventure_text = models.CharField(
-        max_length=200, blank=True,
-        default="Pick your reading level so we can show you the right amount of information.",
-    )
-
     saint_of_week_heading = models.CharField(max_length=60, blank=True, default="Saint of the Week")
     saint_of_week = models.ForeignKey(
         "catalog.SaintPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
@@ -247,10 +238,6 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
             heading="Holy Land feature card (full width, below the four cards)",
         ),
         MultiFieldPanel(
-            [FieldPanel("adventure_heading"), FieldPanel("adventure_text")],
-            heading="Reading level (Choose Your Adventure)",
-        ),
-        MultiFieldPanel(
             [FieldPanel("saint_of_week_heading"), FieldPanel("saint_of_week"), FieldPanel("saint_of_week_line")],
             heading="Saint of the Week",
         ),
@@ -261,13 +248,13 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         verbose_name = "Future Saints home page"
 
     def nav_items(self, request, current):
-        """[{label, url, active}] for the five subject indexes that are live."""
+        """[{label, icon, url, current}] for the five subject indexes that are live."""
         indexes = {
             p.content_kind: p
             for p in FutureSaintsIndexPage.objects.child_of(self).live().order_by("path")
         }
         items = []
-        for kind, label in NAV_KINDS:
+        for kind, label, icon in NAV_KINDS:
             page = indexes.get(kind)
             if page is None:
                 continue
@@ -277,7 +264,7 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
                 aria_current = "true"
             else:
                 aria_current = ""
-            items.append({"label": label, "url": page.get_url(request), "current": aria_current})
+            items.append({"label": label, "icon": icon, "url": page.get_url(request), "current": aria_current})
         return items
 
     @property
@@ -333,8 +320,15 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
     banner_illustration_credit = models.CharField(max_length=255, blank=True)
 
     parent_page_types = ["future_saints.FutureSaintsHomePage"]
-    # The five learning page types are added here in Phase 2.
-    subpage_types = []
+    # Each index takes only the learning type matching its content_kind;
+    # LearningPage.can_create_at() narrows this list per index.
+    subpage_types = [
+        "future_saints.SaintLearningPage",
+        "future_saints.MarianLearningPage",
+        "future_saints.EucharisticLearningPage",
+        "future_saints.HolyLandLearningPage",
+        "future_saints.MissionLearningPage",
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel("content_kind"),
@@ -370,7 +364,27 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context["fs_children"] = [p.specific for p in self.get_children().live().public()]
+        context["fs_children"] = [p.specific for p in self.get_children().live().public().order_by("path")]
+        context["fs_type_icon"] = KIND_ICONS.get(self.content_kind, "mark")
         art = self.banner_art
         context["fs_credits"] = [art["credit"]] if art else []
         return context
+
+
+# Phase 2: the five learning page types live in their own module.
+from .learning import (  # noqa: E402,F401
+    BibleReference,
+    EucharisticLearningPage,
+    FunFact,
+    HolyLandLearningPage,
+    LearningPage,
+    MarianLearningPage,
+    MissionLearningPage,
+    QuickFact,
+    QuizChoice,
+    QuizQuestion,
+    SaintLearningPage,
+    SourceLink,
+    TimelineEntry,
+    WordToKnow,
+)

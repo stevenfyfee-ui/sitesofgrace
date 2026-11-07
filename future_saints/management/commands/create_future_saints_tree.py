@@ -14,6 +14,11 @@ edit and publish only inside /future-saints/) and a "Future Saints editorial
 review" workflow on the subtree, using Wagtail's built-in moderation.
 
 If a Future Saints home page already exists, nothing is changed.
+
+    python manage.py create_future_saints_tree --dry-run
+
+makes the same checks, prints the six pages it would create (type, slug,
+parent) and the review setup, and writes nothing.
 """
 from django.contrib.auth.models import Group, Permission
 from django.core.management.base import BaseCommand, CommandError
@@ -40,6 +45,12 @@ INDEXES = [
 class Command(BaseCommand):
     help = "Create the Future Saints home page and five subject indexes as unpublished drafts."
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--dry-run", action="store_true",
+            help="Print the six pages it would create (type, slug, parent) and write nothing.",
+        )
+
     def handle(self, *args, **options):
         existing = FutureSaintsHomePage.objects.first()
         if existing is not None:
@@ -52,6 +63,10 @@ class Command(BaseCommand):
         home = self._home_page()
         if Page.objects.child_of(home).filter(slug=HOME_SLUG).exists():
             raise CommandError(f"Another page already uses the slug {HOME_SLUG!r} under the home page.")
+
+        if options["dry_run"]:
+            self._dry_run(home)
+            return
 
         with transaction.atomic():
             fs_home = FutureSaintsHomePage(title="Future Saints", slug=HOME_SLUG, live=False, show_in_menus=False)
@@ -76,6 +91,26 @@ class Command(BaseCommand):
             "Nothing was published. Review the drafts in the admin and publish them there; "
             "they still 404 unless SOG_FUTURE_SAINTS allows the request."
         ))
+
+    def _dry_run(self, home):
+        fs_path = f"{home.url_path}{HOME_SLUG}/"
+        self.stdout.write("Dry run: nothing will be written.")
+        self.stdout.write(
+            f"Would create (draft): FutureSaintsHomePage  title 'Future Saints'  slug '{HOME_SLUG}'  "
+            f"path {fs_path}  parent {home.url_path} ({home.title}, {type(home).__name__})"
+        )
+        for kind, slug, title, accent, card_field in INDEXES:
+            self.stdout.write(
+                f"Would create (draft): FutureSaintsIndexPage  title '{title}'  slug '{slug}'  "
+                f"path {fs_path}{slug}/  parent {fs_path}  content_kind {kind}  linked from {card_field}"
+            )
+        group_exists = Group.objects.filter(name=REVIEW_GROUP).exists()
+        workflow_exists = Workflow.objects.filter(name=WORKFLOW_NAME).exists()
+        self.stdout.write(
+            f'Would set up review: group "{REVIEW_GROUP}" ({"exists" if group_exists else "would be created, no members"}), '
+            f'workflow "{WORKFLOW_NAME}" ({"exists" if workflow_exists else "would be created"}) on {fs_path}.'
+        )
+        self.stdout.write("Run again without --dry-run to create these drafts.")
 
     def _home_page(self):
         site = Site.objects.filter(is_default_site=True).first()

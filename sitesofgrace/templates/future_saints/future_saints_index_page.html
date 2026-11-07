@@ -18,9 +18,9 @@
       {% for child in fs_children %}
         <li>
           <a class="fs-card fs-accent-{{ page.accent|default:'sand' }}" href="{% pageurl child %}">
-            {% include "future_saints/includes/_art_frame.html" with art=None variant="card" slot="story card" %}
+            {% include "future_saints/includes/_art_frame.html" with art=child.art.thumbnail variant="thumb" slot="index thumbnail" icon=fs_type_icon %}
             <span class="fs-card-label">
-              <span class="fs-card-title">{{ child.title }}</span>
+              <span class="fs-card-title">{{ child.heading }}{% if child.subtitle %}<span class="fs-card-line">{{ child.subtitle }}</span>{% endif %}</span>
               {% include "future_saints/includes/_icon.html" with name="chevron" class="fs-card-chevron" %}
             </span>
           </a>

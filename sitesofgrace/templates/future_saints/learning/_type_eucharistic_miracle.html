@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  Eucharistic miracle: what Catholics believe, what was reported vs. what the
+  Church says, and an evidence note (never a definitive scientific claim).
+{% endcomment %}
+<section id="why-it-matters" class="fs-section-block" aria-labelledby="why-it-matters-h">
+  <h2 id="why-it-matters-h" class="fs-block-title">What Catholics Believe About the Eucharist</h2>
+  {% if page.belief %}<div class="fs-type-card fs-type-card--feature">{% include "future_saints/includes/_icon.html" with name="chalice" class="fs-type-card-icon" %}<div class="fs-prose">{{ page.belief|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
+</section>
+
+<section id="what-happened" class="fs-section-block" aria-labelledby="what-happened-h">
+  <h2 id="what-happened-h" class="fs-block-title">What Happened?</h2>
+  <div class="fs-compare">
+    <div class="fs-type-card"><h3>What Was Reported</h3>{% if page.reported %}<div class="fs-prose">{{ page.reported|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>
+    <div class="fs-type-card"><h3>What the Church Says</h3>{% if page.church_says %}<div class="fs-prose">{{ page.church_says|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>
+  </div>
+  {% if page.evidence_note %}<div class="fs-note"><h3>About the Evidence</h3><div class="fs-prose">{{ page.evidence_note|richtext }}</div></div>{% endif %}
+</section>

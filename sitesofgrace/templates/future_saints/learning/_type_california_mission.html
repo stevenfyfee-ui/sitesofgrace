@@ -1,0 +1,35 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  California mission: Native Peoples and Mission History, Mission Life,
+  Architecture, the founding-order chain (Founding #, never trail order), and
+  the Build This Mission slot (Phase 3; staff see "coming soon").
+{% endcomment %}
+<section id="native-peoples" class="fs-section-block" aria-labelledby="native-peoples-h">
+  <h2 id="native-peoples-h" class="fs-block-title">Native Peoples and Mission History</h2>
+  {% if page.native_peoples %}<div class="fs-prose">{{ page.native_peoples|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet (name communities only from cited sources).</p>{% endif %}
+</section>
+
+<section id="mission-life" class="fs-section-block" aria-labelledby="mission-life-h">
+  <h2 id="mission-life-h" class="fs-block-title">Mission Life</h2>
+  {% if page.mission_life %}<div class="fs-prose">{{ page.mission_life|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
+</section>
+
+<section id="architecture" class="fs-section-block" aria-labelledby="architecture-h">
+  <h2 id="architecture-h" class="fs-block-title">Architecture</h2>
+  {% if page.architecture %}<div class="fs-type-card"><div class="fs-prose">{{ page.architecture|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
+</section>
+
+<section id="founding" class="fs-section-block" aria-labelledby="founding-h">
+  <h2 id="founding-h" class="fs-block-title">Founding Order</h2>
+  {% if fs_founding_chain %}
+    <ol class="fs-founding">{% for m in fs_founding_chain %}<li{% if m.current %} class="is-current" aria-current="page"{% endif %}><span class="fs-date-chip">Founding #{{ m.number }}</span> {% if m.current %}<strong>{{ m.title }}</strong>{% else %}<a href="{{ m.url }}">{{ m.title }}</a>{% endif %}{% if m.date %} · {{ m.date }}{% endif %}</li>{% endfor %}</ol>
+    {% if page.founding_source_note %}<p class="fs-source-note">Source: {{ page.founding_source_note }}</p>{% endif %}
+  {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no founding numbers set yet (add them with a source, Phase 3).</p>{% endif %}
+</section>
+
+{% if request.user.is_staff %}
+<section id="build" class="fs-section-block" aria-labelledby="build-h">
+  <h2 id="build-h" class="fs-block-title">Build This Mission</h2>
+  <div class="fs-staff-only">{% include "future_saints/includes/_icon.html" with name="church" class="fs-type-card-icon" %}<p>Coming soon (Phase 3): the model-building project for this mission. <span class="fs-chip-staff">Staff only</span></p></div>
+</section>
+{% endif %}

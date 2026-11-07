@@ -47,34 +47,27 @@ class HomepageTests(FutureSaintsTestCase):
         self.assertNotIn('href="/future-saints/saints/"', html)
         self.assertIn("Meet the Saints", html)
 
-    def test_reading_level_buttons(self):
+    def test_one_reading_level_on_the_homepage(self):
         with FS_ON:
-            html = self.html("/future-saints/")
-            pressed = self.html("/future-saints/", level="researcher")
-            bogus = self.html("/future-saints/", level="<script>")
-        buttons = re.findall(r"<button[^>]*data-fs-level[^>]*>", html)
-        self.assertEqual(len(buttons), 2)
-        for b in buttons:
-            self.assertIn('type="submit"', b)
-            self.assertIn('aria-pressed="false"', b)
-        self.assertIn('name="level" value="explorer"', html)
-        self.assertIn('name="level" value="researcher"', html)
-        self.assertIn('method="get"', html)
-        self.assertRegex(pressed, r'value="researcher"[^>]*aria-pressed="true"')
-        self.assertRegex(pressed, r'value="explorer"[^>]*aria-pressed="false"')
-        self.assertNotIn('aria-pressed="true"', bogus)
-        self.assertNotIn("<script>", bogus, "an unknown ?level= is ignored, never echoed")
+            html = self.html("/future-saints/").lower()
+            ignored = self.html("/future-saints/", level="<script>")
+        for marker in ("grades 2", "grades 4", "explorer", "researcher", "choose your adventure",
+                       "data-fs-level", "reading level"):
+            self.assertNotIn(marker, html)
+        self.assertNotIn("<form", html)
+        self.assertNotIn("<script>", ignored, "an old ?level= link is ignored, never echoed")
 
     def test_menu_disclosure_markup(self):
         with FS_ON:
             html = self.html("/future-saints/saints/")
         self.assertRegex(html, r'<button type="button" class="fs-menu-button" data-fs-menu-button aria-expanded="false" aria-controls="fs-nav">')
         self.assertIn('<nav id="fs-nav" class="fs-nav" aria-label="Future Saints">', html)
-        for label, url in (("Saints", "/future-saints/saints/"), ("Mary", "/future-saints/marian-apparitions/"),
-                           ("Miracles", "/future-saints/eucharistic-miracles/"), ("Holy Land", "/future-saints/holy-land/"),
-                           ("Missions", "/future-saints/california-missions/")):
+        # Icon-over-label items (comp 03), full labels.
+        for label, url in (("Saints", "/future-saints/saints/"), ("Marian Apparitions", "/future-saints/marian-apparitions/"),
+                           ("Eucharistic Miracles", "/future-saints/eucharistic-miracles/"), ("Holy Land", "/future-saints/holy-land/"),
+                           ("California Missions", "/future-saints/california-missions/")):
             self.assertIn(f'href="{url}"', html)
-            self.assertIn(f">{label}</a>", html)
+            self.assertIn(f"<span>{label}</span></a>", html)
         self.assertIn('href="/future-saints/saints/" aria-current="page"', html)
         self.assertIn("Sites of Grace", html.split('class="fs-back-link"', 1)[1][:400])
 
@@ -94,7 +87,7 @@ class HomepageTests(FutureSaintsTestCase):
         with FS_ON:
             html = self.html("/future-saints/saints/")
         crumb = re.search(r'aria-label="Breadcrumb">(.*?)</nav>', html, re.S).group(1)
-        self.assertIn('<a href="/">Home</a>', crumb)
+        self.assertRegex(crumb, r'(?s)<a href="/">.*?Home</a>')
         self.assertIn('<a href="/future-saints/">Future Saints</a>', crumb)
         self.assertIn('<li aria-current="page">Saints</li>', crumb)
 
@@ -179,3 +172,22 @@ class PictureRuleTests(FutureSaintsTestCase):
         saint.unpublish()
         with FS_ON:
             self.assertNotIn("Saint of the Week", self.html("/future-saints/"))
+
+    def test_saint_of_week_full_width_alone_and_quiz_beside_it_for_staff(self):
+        saint = self.saint()
+        self.home.saint_of_week = saint
+        self.publish(self.home)
+        with FS_ON:
+            public = self.html("/future-saints/")
+        with FS_STAFF:
+            staff = self.html("/future-saints/", self.staff)
+        row = re.search(r'<div class="(fs-split[^"]*)" data-fs-saint-row>(.*?)</section>', public, re.S)
+        self.assertIn("fs-split--single", row.group(1), "alone: full band width")
+        self.assertIn("St. Test of Example", row.group(2))
+        self.assertNotIn("data-fs-phase4", public)
+
+        row = re.search(r'<div class="(fs-split[^"]*)" data-fs-saint-row>(.*?)</section>', staff, re.S)
+        self.assertNotIn("fs-split--single", row.group(1))
+        self.assertIn('data-fs-phase4="quiz"', row.group(2), "staff: Take a Quiz sits beside it")
+        self.assertNotIn('data-fs-phase4="map"', row.group(2))
+        self.assertIn('data-fs-phase4="map"', staff)

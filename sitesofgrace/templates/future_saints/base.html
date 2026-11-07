@@ -17,11 +17,12 @@
 </head>
 <body class="fs-body {% block body_class %}{% endblock %}">
   <a class="skip-link" href="#content">Skip to content</a>
+  {% include "future_saints/includes/_sprite.html" %}
 
   {% include "future_saints/includes/_header.html" %}
 
   <main id="content">
-    {% include "future_saints/includes/_breadcrumb.html" %}
+    {% block breadcrumb %}{% include "future_saints/includes/_breadcrumb.html" %}{% endblock %}
     {% block content %}{% endblock %}
 
     {% if fs_credits %}
