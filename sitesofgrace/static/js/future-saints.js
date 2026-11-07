@@ -1,6 +1,6 @@
 /* Future Saints: small progressive enhancements. Pages work without this file.
-   No cookies. One sessionStorage key ("fs-reading-level"), tab-scoped, never sent anywhere.
-   The quiz keeps its state in memory only: nothing is stored or sent. */
+   No cookies and no browser storage. The quiz keeps its state in memory only:
+   nothing is stored or sent. */
 (function () {
   "use strict";
   var root = document.documentElement;
@@ -34,50 +34,6 @@
       window.print();
     });
   });
-
-  // ---- Reading level: ?level= in the address and sessionStorage only. ----
-  // On learning pages the text for both levels is in the page; the body's
-  // fs-level-* class shows one, so switching never moves the layout.
-  var KEY = "fs-reading-level";
-  var LEVELS = ["explorer", "researcher"];
-  var levelButtons = Array.prototype.slice.call(document.querySelectorAll("[data-fs-level]"));
-  if (levelButtons.length) {
-    var status = document.querySelector("[data-fs-level-status]");
-    var read = function () {
-      try { return window.sessionStorage.getItem(KEY) || ""; } catch (e) { return ""; }
-    };
-    var write = function (level) {
-      try { window.sessionStorage.setItem(KEY, level); } catch (e) { /* storage blocked: fine */ }
-    };
-    var show = function (level) {
-      levelButtons.forEach(function (b) {
-        b.setAttribute("aria-pressed", b.value === level ? "true" : "false");
-      });
-      LEVELS.forEach(function (l) { document.body.classList.toggle("fs-level-" + l, l === level); });
-      if (status) {
-        var chosen = levelButtons.filter(function (b) { return b.value === level; })[0];
-        status.textContent = chosen ? chosen.getAttribute("data-fs-level-label") : "";
-      }
-    };
-    var params = new URLSearchParams(window.location.search);
-    var fromUrl = params.get("level");
-    if (LEVELS.indexOf(fromUrl) !== -1) {
-      write(fromUrl);
-      show(fromUrl);
-    } else if (LEVELS.indexOf(read()) !== -1) {
-      show(read());
-    }
-    levelButtons.forEach(function (b) {
-      b.addEventListener("click", function (event) {
-        event.preventDefault();
-        var level = b.value;
-        write(level);
-        show(level);
-        params.set("level", level);
-        window.history.replaceState(null, "", window.location.pathname + "?" + params.toString() + window.location.hash);
-      });
-    });
-  }
 
   // ---- Quiz: one question at a time, friendly feedback, nothing stored. ----
   var quiz = document.querySelector("[data-fs-quiz]");

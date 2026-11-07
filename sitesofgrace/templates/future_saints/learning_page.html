@@ -5,15 +5,14 @@
   region from comp 03 (St. Carlo): a top row, b art column, c title, d story +
   Quick Facts, e four learning cards, f Think About It band, g sections below.
   Type differences are only: accent tokens (fs-type-*), card set, and the
-  type block include. Both reading levels are in the page; the inactive one is
-  hidden by the body's fs-level-* class, so the layout never moves.
+  type block include. One version of all text for grades 2–5.
 {% endcomment %}
-{% block body_class %}fs-learning fs-type-{{ page.content_kind }} fs-level-{{ fs_level }}{% endblock %}
+{% block body_class %}fs-learning fs-type-{{ page.content_kind }}{% endblock %}
 
 {% block breadcrumb %}
 <div class="fs-wrap fs-toprow fs-screen-only">
   {% include "future_saints/includes/_breadcrumb.html" with inline=True %}
-  <div class="fs-toprow-center">{% if fs_show_level_switch %}{% include "future_saints/includes/_level_pill.html" %}{% endif %}</div>
+  <div class="fs-toprow-center"></div>
   <a class="fs-print-link" href="#fs-print-sheet" data-fs-print>{% include "future_saints/includes/_icon.html" with name="printer" class="fs-print-icon" %}<span>Print Research Sheet</span></a>
 </div>
 {% endblock %}
@@ -23,7 +22,6 @@
 <div class="fs-wrap fs-profile fs-screen-only">
   {# b. Art column #}
   <div class="fs-profile-art">
-    <span class="fs-foliage" aria-hidden="true"></span>
     <span class="fs-halo" aria-hidden="true"></span>
     {% include "future_saints/includes/_art_frame.html" with art=fs_art.hero variant="profile" slot="hero portrait" icon=fs_type_icon %}
   </div>
@@ -40,11 +38,7 @@
     <div class="fs-profile-mid">
       <div class="fs-profile-intro">
         <h2 class="fs-tab">{{ page.story_heading }}</h2>
-        {# Both levels share one grid cell, so switching never moves the cards below. #}
-        <div class="fs-intro-stack">
-          <div class="fs-level-text fs-intro-text" data-level="explorer">{{ page.explorer_intro|richtext }}</div>
-          <div class="fs-level-text fs-intro-text" data-level="researcher">{{ page.researcher_intro|richtext }}</div>
-        </div>
+        <div class="fs-intro-text">{{ page.intro|richtext }}</div>
       </div>
       {% include "future_saints/includes/_quick_facts.html" %}
     </div>
@@ -65,8 +59,7 @@
 <div class="fs-wrap fs-sections fs-screen-only">
   <section id="story" class="fs-section-block" aria-labelledby="story-h">
     <h2 id="story-h" class="fs-block-title">{{ page.story_heading }}</h2>
-    <div class="fs-prose fs-level-text" data-level="explorer">{{ page.explorer_story|richtext }}</div>
-    <div class="fs-prose fs-level-text" data-level="researcher">{{ page.researcher_story|richtext }}</div>
+    <div class="fs-prose">{{ page.story|richtext }}</div>
   </section>
 
   <section id="timeline" class="fs-section-block" aria-labelledby="timeline-h">
@@ -84,7 +77,7 @@
   <section id="words" class="fs-section-block" aria-labelledby="words-h">
     <h2 id="words-h" class="fs-block-title">Words to Know</h2>
     {% if page.words.all %}
-      <dl class="fs-words">{% for w in page.words.all %}<div class="fs-word"><dt>{{ w.word }}</dt><dd class="fs-level-text" data-level="explorer">{{ w.explorer_definition|default:w.researcher_definition }}</dd><dd class="fs-level-text" data-level="researcher">{{ w.researcher_definition|default:w.explorer_definition }}</dd></div>{% endfor %}</dl>
+      <dl class="fs-words">{% for w in page.words.all %}<div class="fs-word"><dt>{{ w.word }}</dt><dd>{{ w.definition }}</dd></div>{% endfor %}</dl>
     {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no words yet.</p>{% endif %}
   </section>
 

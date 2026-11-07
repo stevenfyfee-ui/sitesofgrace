@@ -15,12 +15,12 @@
 
   {% if page.timeline.all %}
     <h2>Timeline</h2>
-    <ol class="fs-ps-timeline">{% for entry in page.timeline.all|slice:":5" %}<li><strong>{{ entry.date_display }}</strong>: <span class="fs-level-text" data-level="explorer">{{ entry.explorer_text|default:entry.researcher_text }}</span><span class="fs-level-text" data-level="researcher">{{ entry.researcher_text|default:entry.explorer_text }}</span></li>{% endfor %}</ol>
+    <ol class="fs-ps-timeline">{% for entry in page.timeline.all|slice:":5" %}<li><strong>{{ entry.date_display }}</strong>: {{ entry.text }}</li>{% endfor %}</ol>
   {% endif %}
 
   {% if page.words.all %}
     <h2>Words to Know</h2>
-    <dl class="fs-ps-words">{% for w in page.words.all %}<div><dt>{{ w.word }}</dt> <dd class="fs-level-text" data-level="explorer">{{ w.explorer_definition|default:w.researcher_definition }}</dd><dd class="fs-level-text" data-level="researcher">{{ w.researcher_definition|default:w.explorer_definition }}</dd></div>{% endfor %}</dl>
+    <dl class="fs-ps-words">{% for w in page.words.all %}<div><dt>{{ w.word }}</dt> <dd>{{ w.definition }}</dd></div>{% endfor %}</dl>
   {% endif %}
 
   {% if fs_points %}

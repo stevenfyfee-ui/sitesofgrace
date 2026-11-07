@@ -4,16 +4,18 @@ For anyone entering a learning page in the Wagtail admin. Every learning page wi
 through the "Future Saints editorial review" workflow before it's published, never through a
 shell command.
 
+## One version for grades 2–5
+
+There's one version of every text for all of grades 2–5: no reading levels, no grade labels
+anywhere on the site, print sheet or page metadata (owner decision, replacing brief §1.6 and the §4
+reading-level sections).
+
 ## Lengths (the layout is built for these)
 
-| field | Explorer (Grades 2–3) | Researcher (Grades 4–5) |
-|---|---|---|
-| Intro (beside Quick Facts) | **40–70 words** | **60–100 words** |
-| Story (full section below) | 150–250 words | 300–500 words |
-
-**Keep the two intros close in length.** Both share one box so switching the reading level never
-moves the page; if one is much longer, the shorter one leaves a gap under it. If only one level is
-written, the Grades 2–3 / 4–5 switch is hidden and that level is shown.
+| field | target |
+|---|---|
+| Intro (beside Quick Facts) | **50–80 words** |
+| Story (full section below) | **250–400 words, short sentences, explain hard words** |
 
 Other short fields: subtitle one line; Think About It one question; reflection one question;
 fun facts and timeline lines one or two short sentences each.

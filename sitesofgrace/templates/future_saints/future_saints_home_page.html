@@ -25,18 +25,19 @@
   </div>
 </section>
 
+{% comment %}
+  Saint of the Week (one reading level for grades 2–5, so no "Choose Your
+  Adventure" block). It spans the full band when nothing sits beside it; for
+  staff, the Phase 4 "Take a Quiz" placeholder sits beside it.
+{% endcomment %}
+{% if fs_saint or request.user.is_staff %}
 <section class="fs-wrap fs-section">
-  <div class="fs-split">
-    <div>
-      {% include "future_saints/includes/_section_heading.html" with text=page.adventure_heading id="fs-adventure" %}
-      {% if page.adventure_text %}<p class="fs-prose">{{ page.adventure_text }}</p>{% endif %}
-      {% include "future_saints/includes/_reading_level.html" %}
-    </div>
+  <div class="fs-split{% if not fs_saint or not request.user.is_staff %} fs-split--single{% endif %}" data-fs-saint-row>
     {% if fs_saint %}
-      <div aria-labelledby="fs-saint-heading">
+      <div class="fs-saint-band" aria-labelledby="fs-saint-heading">
         <h2 id="fs-saint-heading" class="fs-ribbon">{{ page.saint_of_week_heading|default:"Saint of the Week" }}</h2>
         <div class="fs-saint">
-          {% include "future_saints/includes/_art_frame.html" with art=fs_saint.art variant="portrait" slot="saint portrait" %}
+          {% include "future_saints/includes/_art_frame.html" with art=fs_saint.art variant="portrait" slot="saint portrait" icon="saint" %}
           <div>
             <h3 class="fs-saint-name">{{ fs_saint.name }}</h3>
             {% if fs_saint.line %}<p>{{ fs_saint.line }}</p>{% endif %}
@@ -44,32 +45,29 @@
         </div>
       </div>
     {% endif %}
+    {% if request.user.is_staff %}
+      <div class="fs-staff-only fs-card fs-accent-lavender" data-fs-phase4="quiz">
+        <span class="fs-card-label">
+          {% include "future_saints/includes/_icon.html" with name="quiz" class="fs-card-icon" %}
+          <span class="fs-card-title">Take a Quiz<span class="fs-card-line">Phase 4 placeholder. Quizzes arrive with the published stories.</span></span>
+        </span>
+        <span class="fs-chip-staff">Staff only</span>
+      </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}
 
 {% if request.user.is_staff %}
-  {% comment %} Phase 4 placeholders: staff only, never shown to visitors. {% endcomment %}
-  <section class="fs-wrap fs-section" aria-label="Staff preview: Phase 4 placeholders">
-    <ul class="fs-cards">
-      <li>
-        <div class="fs-staff-only fs-card fs-accent-blue" data-fs-phase4="map">
-          <span class="fs-card-label">
-            {% include "future_saints/includes/_icon.html" with name="map" class="fs-card-icon" %}
-            <span class="fs-card-title">World Discovery Map<span class="fs-card-line">Phase 4 placeholder. The illustrated world map is built in Phase 4.</span></span>
-          </span>
-          <span class="fs-chip-staff">Staff only</span>
-        </div>
-      </li>
-      <li>
-        <div class="fs-staff-only fs-card fs-accent-lavender" data-fs-phase4="quiz">
-          <span class="fs-card-label">
-            {% include "future_saints/includes/_icon.html" with name="quiz" class="fs-card-icon" %}
-            <span class="fs-card-title">Take a Quiz<span class="fs-card-line">Phase 4 placeholder. Quizzes arrive with the published stories.</span></span>
-          </span>
-          <span class="fs-chip-staff">Staff only</span>
-        </div>
-      </li>
-    </ul>
+  {% comment %} Phase 4 placeholder: staff only, never shown to visitors. {% endcomment %}
+  <section class="fs-wrap fs-section" aria-label="Staff preview: Phase 4 placeholder">
+    <div class="fs-staff-only fs-card fs-accent-blue" data-fs-phase4="map">
+      <span class="fs-card-label">
+        {% include "future_saints/includes/_icon.html" with name="map" class="fs-card-icon" %}
+        <span class="fs-card-title">World Discovery Map<span class="fs-card-line">Phase 4 placeholder. The illustrated world map is built in Phase 4.</span></span>
+      </span>
+      <span class="fs-chip-staff">Staff only</span>
+    </div>
   </section>
 {% endif %}
 {% endblock %}

@@ -49,8 +49,6 @@ NAV_KINDS = [
     ("california_mission", "California Missions", "mission"),
 ]
 
-READING_LEVELS = ("explorer", "researcher")
-
 # The line icon drawn on a subject card: from the linked index's subject,
 # falling back to the card slot's usual subject while no index is linked.
 KIND_ICONS = {
@@ -109,8 +107,6 @@ class FutureSaintsGateMixin:
         context["fs_noindex"] = not future_saints_public()
         context["fs_nav"] = home.nav_items(request, self) if home else []
         context["fs_privacy_url"] = live_legal_urls(request).get("privacy-policy", "")
-        level = request.GET.get("level", "")
-        context["fs_level"] = level if level in READING_LEVELS else ""
         return context
 
     def future_saints_home(self):
@@ -180,6 +176,9 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     holy_land_illustration_credit = models.CharField(max_length=255, blank=True)
     holy_land_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sand")
 
+    # Unused since Phase 2a (one reading level, no "Choose Your Adventure"
+    # block). The columns stay because migration 0001 is already applied in
+    # production and standing rule 4 forbids removing fields without approval.
     adventure_heading = models.CharField(max_length=80, blank=True, default="Choose Your Adventure!")
     adventure_text = models.CharField(
         max_length=200, blank=True,
@@ -246,10 +245,6 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
                 FieldPanel("holy_land_accent"),
             ],
             heading="Holy Land feature card (full width, below the four cards)",
-        ),
-        MultiFieldPanel(
-            [FieldPanel("adventure_heading"), FieldPanel("adventure_text")],
-            heading="Reading level (Choose Your Adventure)",
         ),
         MultiFieldPanel(
             [FieldPanel("saint_of_week_heading"), FieldPanel("saint_of_week"), FieldPanel("saint_of_week_line")],

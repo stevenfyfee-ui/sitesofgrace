@@ -10,9 +10,8 @@ sessionid to also capture the staff view. Writes PNGs to out_dir only; exits
 
 Checks: the four subject cards share one row at >=1024px (2x2 at 768, one
 column at <=430) with the Holy Land card full width below; the <=900px menu
-opens from the keyboard, closes on Esc and returns focus; the reading-level
-buttons work from the keyboard, set aria-pressed, ?level= and sessionStorage,
-and write no cookie; an anonymous visit sets no cookie and requests nothing
+opens from the keyboard, closes on Esc and returns focus; the page works
+without JavaScript; an anonymous visit sets no cookie and requests nothing
 from any other host.
 """
 import base64
@@ -103,35 +102,10 @@ def main():
         check(page.evaluate("() => document.activeElement.hasAttribute('data-fs-menu-button')"), "focus returns to the menu button")
         ctx.close()
 
-        # Reading level: keyboard, aria-pressed, ?level=, sessionStorage, no cookie
-        ctx = context(1440)
-        page = ctx.new_page()
-        page.goto(base + HOME, wait_until="networkidle")
-        explorer = page.locator('[data-fs-level][value="explorer"]')
-        researcher = page.locator('[data-fs-level][value="researcher"]')
-        explorer.focus()
-        page.keyboard.press("Space")
-        check(explorer.get_attribute("aria-pressed") == "true" and researcher.get_attribute("aria-pressed") == "false",
-              "Space on Explorer sets aria-pressed")
-        researcher.focus()
-        page.keyboard.press("Enter")
-        check(researcher.get_attribute("aria-pressed") == "true" and explorer.get_attribute("aria-pressed") == "false",
-              "Enter on Researcher sets aria-pressed")
-        check("level=researcher" in page.url, "?level= in the address")
-        check(page.evaluate("() => sessionStorage.getItem('fs-reading-level')") == "researcher", "sessionStorage holds the level")
-        check(page.evaluate("() => document.cookie") == "" and ctx.cookies() == [], "reading level writes no cookie")
-        page.reload(wait_until="networkidle")
-        check(researcher.get_attribute("aria-pressed") == "true", "level survives a reload in the same tab")
-        ctx.close()
-
-        # Without JavaScript the GET form still works
+        # Without JavaScript the page still works
         ctx = browser.new_context(viewport={"width": 1440, "height": 900}, java_script_enabled=False)
         page = ctx.new_page()
         page.goto(base + HOME)
-        page.locator('[data-fs-level][value="explorer"]').click()
-        page.wait_for_load_state()
-        check("level=explorer" in page.url and page.locator('[data-fs-level][value="explorer"]').get_attribute("aria-pressed") == "true",
-              "no-JS: reading level submits ?level= and the server marks it pressed")
         check(page.locator("#fs-nav").is_visible(), "no-JS: section nav visible at 1440")
         ctx.close()
 

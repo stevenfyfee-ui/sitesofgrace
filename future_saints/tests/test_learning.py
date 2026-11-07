@@ -2,7 +2,7 @@
 
 Switch gating per type, no cookies, banned strings and travel field names,
 live (never copied) canonical Quick Facts, uncredited images never shown,
-the reading switch hidden when a level is empty, the four cards linking to
+one reading level with no grade labels anywhere, the four cards linking to
 sections, index placement rules, quiz validation in the admin form, and the
 staff-only Build This Mission slot.
 """
@@ -39,6 +39,10 @@ TRAVEL_FIELDS = (
 )
 BANNED = ("tp-em.com", "fonts.googleapis", "amazon", "amzn", "affiliate", "booking", "/plan/",
           "newsletter", "sign in", "donate")
+# One version of all text for grades 2–5: no grade labels or level controls anywhere.
+# (Hyphenated digit pairs aren't checked: they occur in SVG path data.)
+GRADE_MARKERS = ("grade", "2–3", "4–5", "explorer", "researcher", "reading level",
+                 "data-fs-level", "fs-level", "sessionstorage")
 
 
 def image(title="Picture"):
@@ -77,16 +81,15 @@ class LearningTestCase(FutureSaintsTestCase):
         page = model(
             title=f"{canonical.title} profile", slug=f"{canonical.slug}-profile", canonical=canonical,
             student_title=canonical.title, subtitle="A test subtitle",
-            explorer_intro="<p>Explorer intro text.</p>", researcher_intro="<p>Researcher intro text.</p>",
-            explorer_story="<p>Explorer story text.</p>", researcher_story="<p>Researcher story text.</p>",
+            intro="<p>Intro text.</p>", story="<p>Story text.</p>",
             think_about_it="A test question?", reflection_question="A test reflection?", **fields,
         )
         inherit = "saint_feast" if model is SaintLearningPage else "site_place"
         page.quick_facts = [QuickFact(icon="calendar", label="Inherited", inherit=inherit),
                             QuickFact(icon="star", label="Typed", value="Typed value")]
-        page.timeline = [TimelineEntry(date_display="Step", explorer_text="Explorer step", researcher_text="Researcher step")]
+        page.timeline = [TimelineEntry(date_display="Step", text="A timeline step")]
         page.fun_facts = [FunFact(text="A fun fact")]
-        page.words = [WordToKnow(word="Word", explorer_definition="Simple meaning", researcher_definition="Fuller meaning")]
+        page.words = [WordToKnow(word="Word", definition="A simple meaning")]
         questions = []
         for n in range(5):
             q = QuizQuestion(prompt=f"Question {n}?", explanation="Because.")
@@ -117,7 +120,7 @@ class GateTests(LearningTestCase):
     def test_no_cookies_banned_strings_or_travel_fields(self):
         with FS_ON:
             for kind, page in self.pages.items():
-                for params in ({}, {"level": "researcher"}):
+                for params in ({}, {"level": "researcher"}):  # an old ?level= link is simply ignored
                     self.client.cookies.clear()
                     response = self.get(page.url, **params)
                     self.assertEqual(dict(response.cookies), {}, kind)
@@ -174,22 +177,22 @@ class TemplateTests(LearningTestCase):
     def test_church_status_uses_canonical_plain_wording(self):
         self.assertIn("The Church's current judgment:</strong> Devotion permitted", self.html("marian_apparition"))
 
-    def test_reading_switch_hidden_when_a_level_is_empty(self):
-        self.assertIn('class="fs-pill"', self.html("saint"))
-        page = self.pages["saint"]
-        page.researcher_intro = ""
-        page.researcher_story = ""
-        page.save_revision().publish()
+    def test_one_reading_level_and_no_grade_labels(self):
+        for kind in self.pages:
+            for params in ({}, {"level": "researcher"}):
+                html = self.html(kind, **params).lower()
+                for marker in GRADE_MARKERS:
+                    self.assertNotIn(marker, html, f"{marker!r} on {kind} {params}")
+                self.assertNotIn("<form", html, "no level control (or any form) on learning pages")
         html = self.html("saint")
-        self.assertNotIn('class="fs-pill"', html)
-        self.assertIn("fs-level-explorer", html)
+        self.assertIn("Intro text.", html)
+        self.assertIn("Story text.", html)
+        self.assertIn("A timeline step", html)
+        self.assertIn("A simple meaning", html)
 
-    def test_level_param_sets_the_body_class_and_pill(self):
-        html = self.html("saint", level="researcher")
-        self.assertRegex(html, r'<body class="fs-body fs-learning fs-type-saint fs-level-researcher')
-        self.assertRegex(html, r'value="researcher"[^>]*aria-pressed="true"')
-        self.assertIn("Researcher story text", html)
-        self.assertIn("Explorer story text", html, "both levels are in the page; CSS shows one")
+    def test_no_foliage_decoration(self):
+        for kind in self.pages:
+            self.assertNotIn("foliage", self.html(kind))
 
     def test_uncredited_images_are_never_rendered(self):
         portrait = image("Canonical portrait")
@@ -267,7 +270,7 @@ class QuizFormTests(LearningTestCase):
             value = blank.initial.get(name, field.initial)
             if value in (None, ""):
                 continue
-            if name in ("explorer_intro", "researcher_intro", "explorer_story", "researcher_story"):
+            if name in ("intro", "story"):
                 continue
             data[name] = value.pk if hasattr(value, "pk") else value
         for prefix, formset in blank.formsets.items():

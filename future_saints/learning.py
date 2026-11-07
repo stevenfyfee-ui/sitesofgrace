@@ -29,7 +29,6 @@ from .models import FutureSaintsGateMixin
 STORY_FEATURES = ["bold", "italic", "ol", "ul", "link"]
 SHORT_FEATURES = ["bold", "italic", "link"]
 
-READING_LEVELS = ("explorer", "researcher")
 QUIZ_LENGTH = 5
 MISSION_TRAIL_SLUG = "california-mission-trail"
 
@@ -125,10 +124,6 @@ def _canonical_value(source, canonical):
     return ""
 
 
-def _filled(*values):
-    return all(_text(v) for v in values)
-
-
 def _kept_forms(formset):
     """The formset's forms that were cleaned and aren't marked for deletion."""
     if formset is None:
@@ -201,10 +196,12 @@ class LearningPage(FutureSaintsGateMixin, Page):
     index_thumbnail_alt = models.CharField(max_length=200, blank=True)
     index_thumbnail_credit = models.CharField(max_length=255, blank=True)
 
-    explorer_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Explorer 40–70 words, Researcher 60–100 words; keep them close in length so the box doesn't leave a gap.")
-    researcher_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Explorer 40–70 words, Researcher 60–100 words; keep them close in length so the box doesn't leave a gap.")
-    explorer_story = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 2–3: about 150–250 words.")
-    researcher_story = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 4–5: about 300–500 words.")
+    # One version of all text for grades 2–5 (owner decision, replacing brief
+    # §1.6 and the §4 reading levels).
+    intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="50–80 words.")
+    story = RichTextField(
+        blank=True, features=STORY_FEATURES, help_text="250–400 words, short sentences, explain hard words.",
+    )
     think_about_it = models.CharField(max_length=200, blank=True, help_text="The question in the Think About It band.")
     reflection_question = models.CharField(max_length=255, blank=True, help_text="Closes the page and the research sheet.")
 
@@ -236,13 +233,7 @@ class LearningPage(FutureSaintsGateMixin, Page):
             ],
             heading="Pictures (each shows only when its credit is filled)",
         ),
-        MultiFieldPanel(
-            [
-                FieldPanel("explorer_intro"), FieldPanel("researcher_intro"),
-                FieldPanel("explorer_story"), FieldPanel("researcher_story"),
-            ],
-            heading="Story at two reading levels",
-        ),
+        MultiFieldPanel([FieldPanel("intro"), FieldPanel("story")], heading="Story"),
         InlinePanel("quick_facts", label="Quick Fact", heading="Quick Facts"),
         InlinePanel("timeline", label="Timeline entry", heading="Timeline"),
         InlinePanel("fun_facts", label="Fun fact", heading="Fun Facts"),
@@ -298,11 +289,6 @@ class LearningPage(FutureSaintsGateMixin, Page):
     def story_heading(self):
         return "The Story"
 
-    def levels_available(self):
-        explorer = _filled(self.explorer_intro) or _filled(self.explorer_story)
-        researcher = _filled(self.researcher_intro) or _filled(self.researcher_story)
-        return explorer, researcher
-
     def quick_fact_rows(self):
         canonical = self.canonical_page
         rows = []
@@ -324,9 +310,8 @@ class LearningPage(FutureSaintsGateMixin, Page):
         """Five short points for the research sheet: fun facts first, then timeline text."""
         points = [f.text for f in self.fun_facts.all() if f.text]
         for entry in self.timeline.all():
-            text = entry.explorer_text or entry.researcher_text
-            if text:
-                points.append(text)
+            if entry.text:
+                points.append(entry.text)
         return points[:5]
 
     def art(self):
@@ -345,14 +330,8 @@ class LearningPage(FutureSaintsGateMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        explorer, researcher = self.levels_available()
-        level = context.get("fs_level") or ""
-        if not (explorer and researcher):
-            level = "explorer" if explorer else ("researcher" if researcher else "explorer")
         context.update({
             "fs_learning": self,
-            "fs_show_level_switch": explorer and researcher,
-            "fs_level": level or "explorer",
             "fs_quick_facts": self.quick_fact_rows(),
             "fs_quiz": self.quiz_data(),
             "fs_cards": self.learning_cards,
@@ -387,10 +366,9 @@ class QuickFact(Orderable):
 class TimelineEntry(Orderable):
     page = ParentalKey(LearningPage, related_name="timeline", on_delete=models.CASCADE)
     date_display = models.CharField(max_length=60, help_text='As children should read it, e.g. "1991" or "Age 11".')
-    explorer_text = models.CharField(max_length=255, blank=True)
-    researcher_text = models.CharField(max_length=400, blank=True)
+    text = models.CharField(max_length=300, blank=True)
 
-    panels = ["date_display", "explorer_text", "researcher_text"]
+    panels = ["date_display", "text"]
 
 
 class FunFact(Orderable):
@@ -403,10 +381,9 @@ class FunFact(Orderable):
 class WordToKnow(Orderable):
     page = ParentalKey(LearningPage, related_name="words", on_delete=models.CASCADE)
     word = models.CharField(max_length=60)
-    explorer_definition = models.CharField(max_length=255, blank=True)
-    researcher_definition = models.CharField(max_length=400, blank=True)
+    definition = models.CharField(max_length=300, blank=True)
 
-    panels = ["word", "explorer_definition", "researcher_definition"]
+    panels = ["word", "definition"]
 
 
 class SourceLink(Orderable):

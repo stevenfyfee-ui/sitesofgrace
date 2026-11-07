@@ -31,8 +31,14 @@ comps in `docs/future-saints/` (kept local, not committed).
   renders only when image and credit are both filled. Saint of the Week uses the SaintPage portrait
   only when `portrait_credit` is filled; otherwise the placeholder frame. No fallback to an uncredited
   canonical image.
-- **Reading level.** Two real `<button>`s with `aria-pressed` inside a GET form (so it works without
-  JavaScript). With JS: `?level=` and sessionStorage `fs-reading-level` only, never a cookie.
+- **Reading level: superseded in Phase 2a.** Phase 1 shipped an Explorer/Researcher control
+  (`?level=` plus sessionStorage). **Owner decision (Phase 2a review): one version of all text for
+  grades 2–5, with no grade labels anywhere on the site, print sheet or metadata.** This replaces brief §1.6
+  and the §4 reading-level sections. The control, its JavaScript and its storage are removed; Future
+  Saints now uses no browser storage at all. The homepage "Choose Your Adventure" block is gone and
+  Saint of the Week takes its place. Its two homepage fields (`adventure_heading`,
+  `adventure_text`) are no longer used or shown in the admin, but their columns stay: migration
+  0001 is applied in production, and removing fields needs explicit approval (standing rule 4).
 - **Links between pages** are set by object or slug lookup (`create_future_saints_tree`, the dev
   sample), never by page ID.
 - **Review.** Wagtail moderation workflow, approved. The tree command creates the group "Future Saints
@@ -152,6 +158,11 @@ because the brief requires a per-project status independent of page publishing.
 
 ### Phase 2a as built (PR #17), and how it differs from the proposal above
 
+- **One reading level (owner decision).** Each explorer/researcher pair is a single field:
+  `intro` (help text "50–80 words"), `story` ("250–400 words, short sentences, explain hard
+  words"), `TimelineEntry.text` and `WordToKnow.definition`. The Phase 3 `MissionSchoolProject`
+  uses single fields too: `project_intro`, and one `instructions` text per step.
+
 - **The shared base is a concrete model, `LearningPage(FutureSaintsGateMixin, Page)`, not an
   abstract `LearningPageBase` (owner-accepted).** The repeating items (QuickFact, TimelineEntry,
   FunFact, WordToKnow, SourceLink, QuizQuestion → QuizChoice) need a real model for their
@@ -238,7 +249,7 @@ Source static lives in `sitesofgrace/static/` (repo `static/` is collectstatic o
   (Lora is SIL OFL 1.1; **not currently in the repo**. It must be fetched from the upstream
   Cyreal release. Needs owner OK; see the open questions.)
 - `sitesofgrace/static/js/future-saints.js`: menu disclosure plus the reading-level control. No
-  cookies, sessionStorage key `fs-reading-level` only. Pages work without it.
+  cookies and (since Phase 2a) no browser storage. Pages work without it.
 
 Tokens (on `:root`): navy #032553, pilgrimage blue #173A61, ivory #FDF9F2, parchment #F9F1E8,
 gold #C79A42, stone #5F6470. Proposed accent tints, sampled to sit with comp 01 (for approval):

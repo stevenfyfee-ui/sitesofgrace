@@ -10,13 +10,12 @@ exits 1 if any check fails.
 
 Screenshots (device scale factor 2): the saint sample at 1440/1024/768/390
 and its first screen at 1440 beside comp 03; each other type at 1440 and 390;
-the Saints index; a Letter print preview as PDF.
+the homepage at 1440 and 390; the Saints index; a Letter print preview as PDF.
 
 Checks, on every type: 200, no cookies, nothing requested from another host,
 four learning cards in one row at 1440 each linking to a section on the page.
-On the saint sample: the reading-level pill works from the keyboard
-(aria-pressed, body class, ?level=, sessionStorage, no cookie) and switching
-moves nothing; the cards and the print link are keyboard links; the quiz runs
+On the saint sample: one reading level (no grade labels, no level control, no
+browser storage); the cards and the print link are keyboard links; the quiz runs
 start to finish from the keyboard with feedback in an aria-live region,
 storing and sending nothing.
 """
@@ -79,6 +78,14 @@ def main():
                 check(ctx.cookies() == [], f"{name} {width}: no cookies")
                 ctx.close()
 
+        for width in (1440, 390):
+            ctx = context(width)
+            page = ctx.new_page()
+            page.goto(base + "/future-saints/", wait_until="networkidle")
+            page.screenshot(path=f"{out}/home-{width}.png", full_page=True)
+            check(ctx.cookies() == [] and "explorer" not in page.content().lower(), f"homepage {width}: no cookie, no level control")
+            ctx.close()
+
         ctx = context(1440)
         page = ctx.new_page()
         page.goto(base + SAINTS_INDEX, wait_until="networkidle")
@@ -86,30 +93,15 @@ def main():
         check(page.locator(".fs-cards--three a.fs-card").count() >= 1, "Saints index lists its sample as a card")
         ctx.close()
 
-        # Saint sample: reading level, keyboard, layout stays put.
+        # Saint sample: one reading level, no grade labels, no browser storage.
         ctx = context(1440)
         page = ctx.new_page()
         page.goto(base + PAGES["saint"], wait_until="networkidle")
-        explorer = page.locator('.fs-pill [data-fs-level][value="explorer"]')
-        researcher = page.locator('.fs-pill [data-fs-level][value="researcher"]')
-        check(explorer.get_attribute("aria-pressed") == "true", "pill: Grades 2–3 pressed by default")
-        before = page.evaluate(CARDS_JS)
-        researcher.focus()
-        page.keyboard.press("Enter")
-        check(researcher.get_attribute("aria-pressed") == "true" and explorer.get_attribute("aria-pressed") == "false",
-              "pill: Enter on Grades 4–5 sets aria-pressed")
-        check(page.evaluate("() => document.body.classList.contains('fs-level-researcher')"), "pill: body switches to researcher")
-        check(page.locator('#story [data-level="researcher"]').is_visible() and not page.locator('#story [data-level="explorer"]').is_visible(),
-              "pill: the story shows the researcher text only")
-        after = page.evaluate(CARDS_JS)
-        check([c["top"] for c in before] == [c["top"] for c in after], "pill: switching level moves nothing above the fold")
-        check("level=researcher" in page.url, "pill: ?level= in the address")
-        check(page.evaluate("() => sessionStorage.getItem('fs-reading-level')") == "researcher", "pill: sessionStorage holds the level")
-        check(page.evaluate("() => document.cookie") == "" and ctx.cookies() == [], "pill: no cookie")
-        explorer.focus()
-        page.keyboard.press("Space")
-        check(explorer.get_attribute("aria-pressed") == "true", "pill: Space on Grades 2–3 switches back")
-
+        text = page.content().lower()
+        check(not any(m in text for m in ("grades 2", "grades 4", "explorer", "researcher", "data-fs-level")),
+              "saint: no grade labels or level control")
+        check(page.evaluate("() => sessionStorage.length + localStorage.length") == 0 and ctx.cookies() == [],
+              "saint: no browser storage and no cookie")
         first_card = page.locator(".fs-lcard").first
         first_card.focus()
         check(page.evaluate("() => document.activeElement.classList.contains('fs-lcard')"), "cards: reachable by keyboard")

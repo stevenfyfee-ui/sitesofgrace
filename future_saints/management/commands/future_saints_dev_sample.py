@@ -11,8 +11,8 @@ Saints pages locally.
 Phase 2: adds one learning page of each type (title ends "(sample)"), each
 linked by slug to a LOCAL canonical page. Quick Facts inherit the real
 canonical values live. Every prose field is obvious "[SAMPLE TEXT]" filler at
-the brief's lengths (Explorer 150–250 words, Researcher 300–500) with no
-dates, names or claims; quiz items start "[SAMPLE]". No canonical page is
+the target lengths (one version for grades 2–5: intro 50–80 words, story
+250–400) with no dates, names or claims; quiz items start "[SAMPLE]". No canonical page is
 changed. A type whose sample already exists is left alone.
 """
 from django.conf import settings
@@ -156,10 +156,8 @@ class Command(BaseCommand):
             canonical=canonical,
             student_title="" if model is SaintLearningPage else canonical.title,
             subtitle="[SAMPLE] One italic line about this story goes here.",
-            explorer_intro=filler(55, 2),
-            researcher_intro=filler(70, 2),
-            explorer_story=filler(200, 3),
-            researcher_story=filler(400, 5),
+            intro=filler(65, 2),
+            story=filler(320, 4),
             think_about_it="[SAMPLE] A question to think about goes here?",
             reflection_question="[SAMPLE] A reflection question goes here?",
         )
@@ -194,13 +192,12 @@ class Command(BaseCommand):
             for i, (icon, fact_label, inherit) in enumerate(facts)
         ]
         page.timeline = [
-            TimelineEntry(sort_order=n, date_display="[SAMPLE]", explorer_text=sample_line(n), researcher_text=f"[SAMPLE] A longer line {n} for older readers, with a little more context.")
+            TimelineEntry(sort_order=n, date_display="[SAMPLE]", text=sample_line(n))
             for n in range(1, 5)
         ]
         page.fun_facts = [FunFact(sort_order=n, text=f"[SAMPLE] Fun fact {n} goes here.") for n in range(1, 5)]
         page.words = [
-            WordToKnow(sort_order=n, word=f"[SAMPLE] word {n}", explorer_definition=f"[SAMPLE] A simple meaning for word {n}.",
-                       researcher_definition=f"[SAMPLE] A fuller meaning for word {n}, for older readers.")
+            WordToKnow(sort_order=n, word=f"[SAMPLE] word {n}", definition=f"[SAMPLE] A simple meaning for word {n}.")
             for n in range(1, 5)
         ]
         page.sources = [

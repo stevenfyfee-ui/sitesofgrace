@@ -47,6 +47,6 @@ Staff see "Art needed: {slot} ({ratio})" on each empty frame.
 | Context scene (`context_illustration`) | 2:3 | 800 × 1200 | fill-400x600 | The small vignette behind the Quick Facts card's top-right edge (comp 03 shows a hill town). It fades into the page on its left side, so keep detail to the right. |
 | Index thumbnail (`index_thumbnail`) | 4:3 | 1600 × 1200 | fill-800x600 | The card on the subject index. |
 
-The halo disc, watercolor washes, brushstroke tab, ribbon, swash, sparkles, foliage, star motif and rays are
+The halo disc, watercolor washes, brushstroke tab, ribbon, swash, sparkles, star motif and rays are
 original SVG masks in `sitesofgrace/static/future_saints/svg/`, colored by CSS tokens. They aren't illustration
 slots and need no art.

@@ -1,11 +1,10 @@
-{% comment %} Vertical timeline with date chips; the text follows the reading level. {% endcomment %}
+{% comment %} Vertical timeline with date chips. {% endcomment %}
 {% if page.timeline.all %}
 <ol class="fs-timeline">
   {% for entry in page.timeline.all %}
     <li class="fs-timeline-item">
       <span class="fs-date-chip">{{ entry.date_display }}</span>
-      <p class="fs-level-text" data-level="explorer">{{ entry.explorer_text|default:entry.researcher_text }}</p>
-      <p class="fs-level-text" data-level="researcher">{{ entry.researcher_text|default:entry.explorer_text }}</p>
+      <p>{{ entry.text }}</p>
     </li>
   {% endfor %}
 </ol>
