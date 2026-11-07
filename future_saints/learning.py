@@ -290,12 +290,16 @@ class LearningPage(FutureSaintsGateMixin, Page):
         return "The Story"
 
     def quick_fact_rows(self):
+        """Inherited facts read the canonical page live; their typed value is a
+        fallback, shown only when that canonical field is empty."""
         canonical = self.canonical_page
         rows = []
         for fact in self.quick_facts.all():
-            value = _canonical_value(fact.inherit, canonical) if fact.inherit else _text(fact.value)
+            value = _canonical_value(fact.inherit, canonical) if fact.inherit else ""
+            source = "canonical" if value else "value"
+            value = value or _text(fact.value)
             if fact.label and value:
-                rows.append({"icon": fact.icon or "star", "label": fact.label, "value": value})
+                rows.append({"icon": fact.icon or "star", "label": fact.label, "value": value, "source": source})
         return rows
 
     def quiz_data(self):
@@ -360,7 +364,12 @@ class QuickFact(Orderable):
     )
     value = models.CharField(max_length=120, blank=True, help_text="Leave empty when inheriting.")
 
-    panels = ["icon", "label", "inherit", "value"]
+    # The panel's help text (not the field's, so no migration) describes the
+    # fallback: with Inherit set, this value shows only if the canonical field is empty.
+    panels = [
+        "icon", "label", "inherit",
+        FieldPanel("value", help_text="Fixed text. With Inherit set, shown only if the canonical field is empty."),
+    ]
 
 
 class TimelineEntry(Orderable):
