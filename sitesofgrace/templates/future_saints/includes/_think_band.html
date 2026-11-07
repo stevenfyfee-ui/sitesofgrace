@@ -1,0 +1,11 @@
+{% comment %} Think About It band (comp 03): watercolor strip, thought bubble, gold divider, the question, and the quiz pill. {% endcomment %}
+{% if page.think_about_it or fs_quiz %}
+<section class="fs-think fs-screen-only" aria-label="Think About It">
+  <div class="fs-wrap fs-think-inner">
+    <span class="fs-think-icon" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="thought" %}</span>
+    <span class="fs-think-divider" aria-hidden="true"></span>
+    {% if page.think_about_it %}<p class="fs-think-text"><strong>Think About It:</strong> <em>{{ page.think_about_it }}</em></p>{% else %}<p class="fs-think-text"></p>{% endif %}
+    {% if fs_quiz %}<a class="fs-think-button" href="#quiz"><span class="fs-sparkles fs-sparkles--small" aria-hidden="true"></span>Try a {{ fs_quiz|length }}-Question Quiz{% include "future_saints/includes/_icon.html" with name="arrow" %}<span class="fs-sparkles fs-sparkles--small fs-sparkles--right" aria-hidden="true"></span></a>{% endif %}
+  </div>
+</section>
+{% endif %}

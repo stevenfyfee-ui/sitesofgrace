@@ -34,3 +34,19 @@ correct modern vs. historic identification. The credit text is shown to readers.
 
 Production records relevant to slot 12 (content audit): St. Carlo Acutis has a portrait (img#43) with
 **no credit**; St. Francis of Assisi has **no portrait**.
+
+## Phase 2a: learning (profile) pages, per page
+
+Every learning page has three slots. Each renders only when its image and credit are both filled;
+otherwise the placeholder frame keeps the final ratio, so swapping in art never moves the layout.
+Staff see "Art needed: {slot} ({ratio})" on each empty frame.
+
+| slot (admin field) | aspect | min source px | rendered as | notes (comp 03 and the brief) |
+|---|---|---|---|---|
+| Hero portrait (`hero_illustration`) | 3:4 | 1800 × 2400 | fill-900x1200 | The large left-column figure. Saints: the saint, seated or standing, over the code-drawn gold halo disc (the halo is CSS, not part of the art; keep the head in the upper third). Marian: Mary in the apparition setting. Eucharistic: chalice/monstrance scene. Holy Land: the site or landscape. Missions: the mission facade. A transparent background lets the halo show through. |
+| Context scene (`context_illustration`) | 2:3 | 800 × 1200 | fill-400x600 | The small vignette behind the Quick Facts card's top-right edge (comp 03 shows a hill town). It fades into the page on its left side, so keep detail to the right. |
+| Index thumbnail (`index_thumbnail`) | 4:3 | 1600 × 1200 | fill-800x600 | The card on the subject index. |
+
+The halo disc, watercolor washes, brushstroke tab, ribbon, swash, sparkles, foliage, star motif and rays are
+original SVG masks in `sitesofgrace/static/future_saints/svg/`, colored by CSS tokens. They aren't illustration
+slots and need no art.

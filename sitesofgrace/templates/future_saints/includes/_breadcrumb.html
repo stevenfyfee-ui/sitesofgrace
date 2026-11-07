@@ -1,8 +1,9 @@
 {% load wagtailcore_tags %}
+{% comment %} Home › Future Saints › … With inline=True it sits inside the learning page's top row. {% endcomment %}
 {% if fs_home %}
-<nav class="fs-wrap fs-breadcrumb" aria-label="Breadcrumb">
+<nav class="{% if not inline %}fs-wrap {% endif %}fs-breadcrumb" aria-label="Breadcrumb">
   <ol>
-    <li><a href="/">Home</a></li>
+    <li><a href="/">{% include "future_saints/includes/_icon.html" with name="home" class="fs-crumb-home" %}Home</a></li>
     {% if page.pk == fs_home.pk %}
       <li aria-current="page">Future Saints</li>
     {% else %}

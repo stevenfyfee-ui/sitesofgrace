@@ -70,11 +70,12 @@ class HomepageTests(FutureSaintsTestCase):
             html = self.html("/future-saints/saints/")
         self.assertRegex(html, r'<button type="button" class="fs-menu-button" data-fs-menu-button aria-expanded="false" aria-controls="fs-nav">')
         self.assertIn('<nav id="fs-nav" class="fs-nav" aria-label="Future Saints">', html)
-        for label, url in (("Saints", "/future-saints/saints/"), ("Mary", "/future-saints/marian-apparitions/"),
-                           ("Miracles", "/future-saints/eucharistic-miracles/"), ("Holy Land", "/future-saints/holy-land/"),
-                           ("Missions", "/future-saints/california-missions/")):
+        # Icon-over-label items (comp 03), full labels.
+        for label, url in (("Saints", "/future-saints/saints/"), ("Marian Apparitions", "/future-saints/marian-apparitions/"),
+                           ("Eucharistic Miracles", "/future-saints/eucharistic-miracles/"), ("Holy Land", "/future-saints/holy-land/"),
+                           ("California Missions", "/future-saints/california-missions/")):
             self.assertIn(f'href="{url}"', html)
-            self.assertIn(f">{label}</a>", html)
+            self.assertIn(f"<span>{label}</span></a>", html)
         self.assertIn('href="/future-saints/saints/" aria-current="page"', html)
         self.assertIn("Sites of Grace", html.split('class="fs-back-link"', 1)[1][:400])
 
@@ -94,7 +95,7 @@ class HomepageTests(FutureSaintsTestCase):
         with FS_ON:
             html = self.html("/future-saints/saints/")
         crumb = re.search(r'aria-label="Breadcrumb">(.*?)</nav>', html, re.S).group(1)
-        self.assertIn('<a href="/">Home</a>', crumb)
+        self.assertRegex(crumb, r'(?s)<a href="/">.*?Home</a>')
         self.assertIn('<a href="/future-saints/">Future Saints</a>', crumb)
         self.assertIn('<li aria-current="page">Saints</li>', crumb)
 

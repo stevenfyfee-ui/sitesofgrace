@@ -1,0 +1,116 @@
+{% extends "future_saints/base.html" %}
+{% load wagtailcore_tags %}
+{% comment %}
+  The one learning (profile) template for all five types, built region by
+  region from comp 03 (St. Carlo): a top row, b art column, c title, d story +
+  Quick Facts, e four learning cards, f Think About It band, g sections below.
+  Type differences are only: accent tokens (fs-type-*), card set, and the
+  type block include. Both reading levels are in the page; the inactive one is
+  hidden by the body's fs-level-* class, so the layout never moves.
+{% endcomment %}
+{% block body_class %}fs-learning fs-type-{{ page.content_kind }} fs-level-{{ fs_level }}{% endblock %}
+
+{% block breadcrumb %}
+<div class="fs-wrap fs-toprow fs-screen-only">
+  {% include "future_saints/includes/_breadcrumb.html" with inline=True %}
+  <div class="fs-toprow-center">{% if fs_show_level_switch %}{% include "future_saints/includes/_level_pill.html" %}{% endif %}</div>
+  <a class="fs-print-link" href="#fs-print-sheet" data-fs-print>{% include "future_saints/includes/_icon.html" with name="printer" class="fs-print-icon" %}<span>Print Research Sheet</span></a>
+</div>
+{% endblock %}
+
+{% block content %}
+{% with kind=page.content_kind %}
+<div class="fs-wrap fs-profile fs-screen-only">
+  {# b. Art column #}
+  <div class="fs-profile-art">
+    <span class="fs-foliage" aria-hidden="true"></span>
+    <span class="fs-halo" aria-hidden="true"></span>
+    {% include "future_saints/includes/_art_frame.html" with art=fs_art.hero variant="profile" slot="hero portrait" icon=fs_type_icon %}
+  </div>
+
+  <div class="fs-profile-main">
+    {# c. Title #}
+    <header class="fs-profile-head">
+      <h1 class="fs-profile-title{% if page.heading|length > 24 %} fs-profile-title--long{% endif %}"><span class="fs-sparkles" aria-hidden="true"></span><span class="fs-profile-title-text">{{ page.heading }}</span><span class="fs-sparkles fs-sparkles--right" aria-hidden="true"></span></h1>
+      <span class="fs-swash" aria-hidden="true"></span>
+      {% if page.subtitle %}<p class="fs-profile-subtitle">{{ page.subtitle }}</p>{% endif %}
+    </header>
+
+    {# d. Story intro + Quick Facts #}
+    <div class="fs-profile-mid">
+      <div class="fs-profile-intro">
+        <h2 class="fs-tab">{{ page.story_heading }}</h2>
+        {# Both levels share one grid cell, so switching never moves the cards below. #}
+        <div class="fs-intro-stack">
+          <div class="fs-level-text fs-intro-text" data-level="explorer">{{ page.explorer_intro|richtext }}</div>
+          <div class="fs-level-text fs-intro-text" data-level="researcher">{{ page.researcher_intro|richtext }}</div>
+        </div>
+      </div>
+      {% include "future_saints/includes/_quick_facts.html" %}
+    </div>
+
+    {# e. Four learning cards #}
+    <ul class="fs-lcards" aria-label="Learn more">
+      {% for card in fs_cards %}
+        <li>{% include "future_saints/includes/_learning_card.html" %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{# f. Think About It #}
+{% include "future_saints/includes/_think_band.html" %}
+
+{# g. Sections #}
+<div class="fs-wrap fs-sections fs-screen-only">
+  <section id="story" class="fs-section-block" aria-labelledby="story-h">
+    <h2 id="story-h" class="fs-block-title">{{ page.story_heading }}</h2>
+    <div class="fs-prose fs-level-text" data-level="explorer">{{ page.explorer_story|richtext }}</div>
+    <div class="fs-prose fs-level-text" data-level="researcher">{{ page.researcher_story|richtext }}</div>
+  </section>
+
+  <section id="timeline" class="fs-section-block" aria-labelledby="timeline-h">
+    <h2 id="timeline-h" class="fs-block-title">Timeline</h2>
+    {% include "future_saints/includes/_timeline.html" %}
+  </section>
+
+  <section id="fun-facts" class="fs-section-block" aria-labelledby="fun-facts-h">
+    <h2 id="fun-facts-h" class="fs-block-title">Fun Facts</h2>
+    {% if page.fun_facts.all %}
+      <ul class="fs-funfacts">{% for fact in page.fun_facts.all %}<li class="fs-funfact">{% include "future_saints/includes/_icon.html" with name="lightbulb" class="fs-funfact-icon" %}<p>{{ fact.text }}</p></li>{% endfor %}</ul>
+    {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no fun facts yet.</p>{% endif %}
+  </section>
+
+  <section id="words" class="fs-section-block" aria-labelledby="words-h">
+    <h2 id="words-h" class="fs-block-title">Words to Know</h2>
+    {% if page.words.all %}
+      <dl class="fs-words">{% for w in page.words.all %}<div class="fs-word"><dt>{{ w.word }}</dt><dd class="fs-level-text" data-level="explorer">{{ w.explorer_definition|default:w.researcher_definition }}</dd><dd class="fs-level-text" data-level="researcher">{{ w.researcher_definition|default:w.explorer_definition }}</dd></div>{% endfor %}</dl>
+    {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no words yet.</p>{% endif %}
+  </section>
+
+  {% include "future_saints/learning/_type_"|add:kind|add:".html" %}
+
+  <section id="quiz" class="fs-section-block" aria-labelledby="quiz-h">
+    <h2 id="quiz-h" class="fs-block-title">Quiz</h2>
+    {% include "future_saints/includes/_quiz.html" %}
+  </section>
+
+  <section id="sources" class="fs-section-block" aria-labelledby="sources-h">
+    <h2 id="sources-h" class="fs-block-title">Sources &amp; Credits</h2>
+    {% if page.sources.all %}
+      <ul class="fs-sources">{% for s in page.sources.all %}<li>{% if s.url %}<a href="{{ s.url }}" rel="noopener">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}{% if s.publisher %}, <span class="fs-source-pub">{{ s.publisher }}</span>{% endif %}{% if s.note %}. <span class="fs-source-note">{{ s.note }}</span>{% endif %}</li>{% endfor %}</ul>
+    {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: add at least one source before publishing.</p>{% endif %}
+    {% if fs_picture_credits %}<p class="fs-picture-credits"><strong>Pictures:</strong> {{ fs_picture_credits|join:"; " }}</p>{% endif %}
+  </section>
+
+  {% if page.reflection_question %}
+  <section id="reflection" class="fs-section-block fs-reflection" aria-labelledby="reflection-h">
+    <h2 id="reflection-h" class="fs-block-title">Think and Pray</h2>
+    <p class="fs-reflection-q">{{ page.reflection_question }}</p>
+  </section>
+  {% endif %}
+</div>
+
+{% include "future_saints/includes/_print_sheet.html" %}
+{% endwith %}
+{% endblock %}

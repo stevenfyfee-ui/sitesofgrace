@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><!-- Soft halo disc: glowing center, faint ring. -->
+<defs><radialGradient id="g"><stop offset="0" stop-opacity=".9"/><stop offset=".72" stop-opacity=".75"/><stop offset=".9" stop-opacity=".35"/><stop offset="1" stop-opacity="0"/></radialGradient></defs>
+<circle cx="100" cy="100" r="98" fill="url(#g)"/><circle cx="100" cy="100" r="86" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/></svg>

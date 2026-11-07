@@ -1,0 +1,6 @@
+{% comment %} One of the four learning cards (comp 03). The whole card is a link to its section below. {% endcomment %}<a class="fs-lcard" href="#{{ card.anchor }}">
+  <span class="fs-lcard-art fs-wash fs-wash--{{ card.wash }}" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name=card.icon class="fs-lcard-icon" %}</span>
+  <span class="fs-lcard-title">{{ card.title }}</span>
+  <span class="fs-lcard-line">{{ card.line }}</span>
+  <span class="fs-lcard-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span>
+</a>

@@ -1,0 +1,40 @@
+{% comment %}
+  Research sheet: hidden on screen, the only content when printing. Title,
+  Quick Facts, a short timeline, Words to Know, five learning points, sources
+  and lined space to reflect. One to two pages on US Letter or A4.
+{% endcomment %}
+<section id="fs-print-sheet" class="fs-print-sheet" aria-label="Research sheet for printing">
+  <h1 class="fs-ps-title">{{ page.heading }}</h1>
+  {% if page.subtitle %}<p class="fs-ps-subtitle">{{ page.subtitle }}</p>{% endif %}
+  <p class="fs-ps-meta">Sites of Grace | Future Saints · Research Sheet · Name: ____________________</p>
+
+  {% if fs_quick_facts %}
+    <h2>Quick Facts</h2>
+    <dl class="fs-ps-facts">{% for row in fs_quick_facts %}<div><dt>{{ row.label }}:</dt> <dd>{{ row.value }}</dd></div>{% endfor %}</dl>
+  {% endif %}
+
+  {% if page.timeline.all %}
+    <h2>Timeline</h2>
+    <ol class="fs-ps-timeline">{% for entry in page.timeline.all|slice:":5" %}<li><strong>{{ entry.date_display }}</strong>: <span class="fs-level-text" data-level="explorer">{{ entry.explorer_text|default:entry.researcher_text }}</span><span class="fs-level-text" data-level="researcher">{{ entry.researcher_text|default:entry.explorer_text }}</span></li>{% endfor %}</ol>
+  {% endif %}
+
+  {% if page.words.all %}
+    <h2>Words to Know</h2>
+    <dl class="fs-ps-words">{% for w in page.words.all %}<div><dt>{{ w.word }}</dt> <dd class="fs-level-text" data-level="explorer">{{ w.explorer_definition|default:w.researcher_definition }}</dd><dd class="fs-level-text" data-level="researcher">{{ w.researcher_definition|default:w.explorer_definition }}</dd></div>{% endfor %}</dl>
+  {% endif %}
+
+  {% if fs_points %}
+    <h2>Five Things I Learned</h2>
+    <ol class="fs-ps-points">{% for p in fs_points %}<li>{{ p }}</li>{% endfor %}</ol>
+  {% endif %}
+
+  {% if page.sources.all %}
+    <h2>Sources</h2>
+    <ul class="fs-ps-sources">{% for s in page.sources.all %}<li>{{ s.title }}{% if s.publisher %}, {{ s.publisher }}{% endif %}{% if s.url %} ({{ s.url }}){% endif %}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if fs_picture_credits %}<p class="fs-ps-credits">Pictures: {{ fs_picture_credits|join:"; " }}</p>{% endif %}
+
+  <h2>Reflect</h2>
+  {% if page.reflection_question %}<p>{{ page.reflection_question }}</p>{% endif %}
+  <div class="fs-ps-lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
