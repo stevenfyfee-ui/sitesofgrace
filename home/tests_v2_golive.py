@@ -178,8 +178,13 @@ class LegalCommandsTests(GoLiveTestCase):
         self.assertEqual(LegalDetails.load().contact_email, "")
 
     def test_set_legal_details_refuses_without_a_prompt(self):
-        with self.assertRaises(CommandError):
-            self.run_cmd("set_legal_details")
+        # Pin the terminal check: under an interactive shell sys.stdin is a TTY,
+        # so the command would prompt instead (and hit EOF), making the result
+        # depend on how the suite was launched rather than on the command.
+        with mock.patch("home.management.commands.set_legal_details.sys.stdin") as stdin:
+            stdin.isatty.return_value = False
+            with self.assertRaises(CommandError):
+                self.run_cmd("set_legal_details")
 
 
 class PublishHubsTests(GoLiveTestCase):

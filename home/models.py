@@ -792,6 +792,66 @@ class CardBlock(StructBlock):
         value_class = BecomingCardValue
 
 
+def default_aboutpage_pillars():
+    """Launch copy for AboutPage.pillars. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "pillar", "value": {
+            "icon": "globe", "title": "Discover",
+            "text": "Find sacred sites around the world.",
+        }},
+        {"type": "pillar", "value": {
+            "icon": "book", "title": "Learn",
+            "text": "Understand the history, miracles, saints, and traditions connected to them.",
+        }},
+        {"type": "pillar", "value": {
+            "icon": "map", "title": "Prepare",
+            "text": "Use practical pilgrimage guides to plan meaningful visits.",
+        }},
+        {"type": "pillar", "value": {
+            "icon": "camera", "title": "Remember",
+            "text": (
+                "Record the places you have visited and the experiences you encountered "
+                "along the way."
+            ),
+        }},
+    ]
+
+
+def default_aboutpage_becoming_cards():
+    """Launch copy for AboutPage.becoming_cards. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "card", "value": {
+            "title": "Explore Sacred Places",
+            "text": (
+                "Marian apparitions, Eucharistic miracles, saints, shrines, churches, "
+                "missions, and other places of Catholic significance."
+            ),
+            "link_label": "Open the map",
+        }},
+        {"type": "card", "value": {
+            "title": "Plan Your Pilgrimage",
+            "text": (
+                "Practical travel guides, itineraries, Mass and confession information, "
+                "accessibility guidance, lodging, transportation, and local "
+                "recommendations."
+            ),
+            "link_label": "See the guides",
+        }},
+        {"type": "card", "value": {
+            "title": "Create Your Pilgrim Story",
+            "text": (
+                "Track the sites you have visited, save photographs, preserve memories, "
+                "and share your experiences with other pilgrims."
+            ),
+            "link_label": "Start your passport",
+        }},
+    ]
+
+
 class AboutPage(Page):
     """The "Our Story" page -- mission + founder story.
 
@@ -848,27 +908,7 @@ class AboutPage(Page):
         [("pillar", PillarBlock())],
         max_num=4,
         blank=True,
-        default=[
-            {"type": "pillar", "value": {
-                "icon": "globe", "title": "Discover",
-                "text": "Find sacred sites around the world.",
-            }},
-            {"type": "pillar", "value": {
-                "icon": "book", "title": "Learn",
-                "text": "Understand the history, miracles, saints, and traditions connected to them.",
-            }},
-            {"type": "pillar", "value": {
-                "icon": "map", "title": "Prepare",
-                "text": "Use practical pilgrimage guides to plan meaningful visits.",
-            }},
-            {"type": "pillar", "value": {
-                "icon": "camera", "title": "Remember",
-                "text": (
-                    "Record the places you have visited and the experiences you encountered "
-                    "along the way."
-                ),
-            }},
-        ],
+        default=default_aboutpage_pillars,
     )
 
     # --- How It Began ---
@@ -962,33 +1002,7 @@ class AboutPage(Page):
         [("card", CardBlock())],
         max_num=3,
         blank=True,
-        default=[
-            {"type": "card", "value": {
-                "title": "Explore Sacred Places",
-                "text": (
-                    "Marian apparitions, Eucharistic miracles, saints, shrines, churches, "
-                    "missions, and other places of Catholic significance."
-                ),
-                "link_label": "Open the map",
-            }},
-            {"type": "card", "value": {
-                "title": "Plan Your Pilgrimage",
-                "text": (
-                    "Practical travel guides, itineraries, Mass and confession information, "
-                    "accessibility guidance, lodging, transportation, and local "
-                    "recommendations."
-                ),
-                "link_label": "See the guides",
-            }},
-            {"type": "card", "value": {
-                "title": "Create Your Pilgrim Story",
-                "text": (
-                    "Track the sites you have visited, save photographs, preserve memories, "
-                    "and share your experiences with other pilgrims."
-                ),
-                "link_label": "Start your passport",
-            }},
-        ],
+        default=default_aboutpage_becoming_cards,
     )
 
     # --- Closing Call to Action ---
@@ -1245,6 +1259,79 @@ def default_support_ways():
     ]
 
 
+def default_supportpage_helps():
+    """Launch copy for SupportPage.helps. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "help", "value": {
+            "icon": "server", "title": "Hosting & Upkeep",
+            "blurb": "Keeping the site fast, secure, and available to pilgrims around the world.",
+        }},
+        {"type": "help", "value": {
+            "icon": "document", "title": "Research",
+            "blurb": "Checking every site and saint against Church and shrine sources.",
+        }},
+        {"type": "help", "value": {
+            "icon": "map", "title": "Maps & Photography",
+            "blurb": "Better maps, original photos, and more places on the map.",
+        }},
+        {"type": "help", "value": {
+            "icon": "pin", "title": "New Pilgrimage Guides",
+            "blurb": "Plan Your Visit guides and trails for more sacred sites.",
+        }},
+    ]
+
+
+def default_supportpage_faqs():
+    """Launch copy for SupportPage.faqs. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "faq", "value": {
+            "question": "Is my contribution tax-deductible?",
+            "answer": (
+                "<p>No. Sites of Grace is independently owned and is not a 501(c)(3) "
+                "charitable organization, so contributions are not tax-deductible. If "
+                "you'd like to make a tax-deductible gift, please consider your parish "
+                "or a shrine you love.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "What does my support pay for?",
+            "answer": (
+                "<p>The costs of running the site: hosting, research, maps and "
+                "photography, and new pilgrimage guides. It helps Sites of Grace keep "
+                "growing while everything stays free to use.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "Do supporters get anything extra?",
+            "answer": (
+                "<p>No. Support is a gift toward the work, not a purchase. Every page, "
+                "map, and guide is open to everyone.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "How do I change or cancel monthly support?",
+            "answer": (
+                "<p>You can update your card or cancel anytime. Stripe handles it "
+                "securely: enter the email you used, and Stripe sends you a link where "
+                "you can make changes.</p>"
+            ),
+            "show_manage_link": True,
+        }},
+        {"type": "faq", "value": {
+            "question": "Is my payment information safe?",
+            "answer": (
+                "<p>Payments are handled entirely by Stripe, a widely used payment "
+                "processor. Your card details go straight to Stripe and never pass "
+                "through or get stored on Sites of Grace.</p>"
+            ),
+        }},
+    ]
+
+
 class SupportPage(Page):
     """ "Support Sites of Grace" -- optional one-time or monthly support
     through Stripe-hosted Checkout.
@@ -1305,24 +1392,7 @@ class SupportPage(Page):
         [("help", SupportHelpBlock())],
         max_num=6,
         blank=True,
-        default=[
-            {"type": "help", "value": {
-                "icon": "server", "title": "Hosting & Upkeep",
-                "blurb": "Keeping the site fast, secure, and available to pilgrims around the world.",
-            }},
-            {"type": "help", "value": {
-                "icon": "document", "title": "Research",
-                "blurb": "Checking every site and saint against Church and shrine sources.",
-            }},
-            {"type": "help", "value": {
-                "icon": "map", "title": "Maps & Photography",
-                "blurb": "Better maps, original photos, and more places on the map.",
-            }},
-            {"type": "help", "value": {
-                "icon": "pin", "title": "New Pilgrimage Guides",
-                "blurb": "Plan Your Visit guides and trails for more sacred sites.",
-            }},
-        ],
+        default=default_supportpage_helps,
     )
 
     # --- The give card ---
@@ -1423,49 +1493,7 @@ class SupportPage(Page):
     faqs = StreamField(
         [("faq", SupportFaqBlock())],
         blank=True,
-        default=[
-            {"type": "faq", "value": {
-                "question": "Is my contribution tax-deductible?",
-                "answer": (
-                    "<p>No. Sites of Grace is independently owned and is not a 501(c)(3) "
-                    "charitable organization, so contributions are not tax-deductible. If "
-                    "you'd like to make a tax-deductible gift, please consider your parish "
-                    "or a shrine you love.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "What does my support pay for?",
-                "answer": (
-                    "<p>The costs of running the site: hosting, research, maps and "
-                    "photography, and new pilgrimage guides. It helps Sites of Grace keep "
-                    "growing while everything stays free to use.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "Do supporters get anything extra?",
-                "answer": (
-                    "<p>No. Support is a gift toward the work, not a purchase. Every page, "
-                    "map, and guide is open to everyone.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "How do I change or cancel monthly support?",
-                "answer": (
-                    "<p>You can update your card or cancel anytime. Stripe handles it "
-                    "securely: enter the email you used, and Stripe sends you a link where "
-                    "you can make changes.</p>"
-                ),
-                "show_manage_link": True,
-            }},
-            {"type": "faq", "value": {
-                "question": "Is my payment information safe?",
-                "answer": (
-                    "<p>Payments are handled entirely by Stripe, a widely used payment "
-                    "processor. Your card details go straight to Stripe and never pass "
-                    "through or get stored on Sites of Grace.</p>"
-                ),
-            }},
-        ],
+        default=default_supportpage_faqs,
     )
 
     # --- Home page band ---
@@ -1753,6 +1781,90 @@ class ContactFaqBlock(StructBlock):
         label = "Question"
 
 
+def default_contactpage_topic_cards():
+    """Launch copy for ContactPage.topic_cards. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "card", "value": {
+            "topic": "question", "title": "Ask a Question", "icon": "question",
+            "blurb": "About a site, a saint, or the Church's teaching.",
+        }},
+        {"type": "card", "value": {
+            "topic": "suggest", "title": "Suggest a Site", "icon": "pin",
+            "blurb": "A shrine, miracle, or holy place we're missing.",
+        }},
+        {"type": "card", "value": {
+            "topic": "correction", "title": "Submit a Correction", "icon": "edit",
+            "blurb": "Help us keep every page accurate.",
+        }},
+        {"type": "card", "value": {
+            "topic": "pilgrimage", "title": "Plan a Pilgrimage", "icon": "map",
+            "blurb": "Group trips, parishes, and travel questions.",
+        }},
+        {"type": "card", "value": {
+            "topic": "partner", "title": "Partnerships & Press", "icon": "partners",
+            "blurb": "Shrines, tour operators, media, and collaborations.",
+        }},
+        {"type": "card", "value": {
+            "topic": "prayer", "title": "Prayer Request", "icon": "candle",
+            "blurb": "Share an intention. We'll hold it in prayer.",
+        }},
+    ]
+
+
+def default_contactpage_faqs():
+    """Launch copy for ContactPage.faqs. A callable, so each new page gets its own
+    copy: Wagtail adds block ids to a default's dicts in place, which with a shared
+    literal leaked into the model state and repeated the same ids across new pages."""
+    return [
+        {"type": "faq", "value": {
+            "question": "Can I book a pilgrimage through Sites of Grace?",
+            "answer": (
+                "<p>We don't run tours ourselves. Each site page links to trusted "
+                "pilgrimage operators and travel resources, and the Plan Your Visit "
+                "guides cover getting there, where to stay, and what to expect. If "
+                "you're organizing a parish or group trip, send us a message and we'll "
+                "point you in the right direction.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "I found an error on a page. What should I do?",
+            "answer": (
+                "<p>Thank you for helping. Choose \"Submit a Correction\" above and link "
+                "the page. Every site and saint page also has a \"Spot an error?\" link "
+                "that fills this in for you. We check every correction against Church "
+                "and shrine sources before we change anything.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "How do you decide which sites to include?",
+            "answer": (
+                "<p>We include places of genuine Catholic significance, and we're careful "
+                "to show each one's status as the Church describes it: approved, "
+                "recognized as a devotion, or still under study. Suggestions are always "
+                "welcome.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "Can I share my own photos from a pilgrimage?",
+            "answer": (
+                "<p>Yes. Create a free pilgrim account, mark the sites you've visited, "
+                "and add your photos. You choose whether each photo is private or shared "
+                "with other pilgrims.</p>"
+            ),
+        }},
+        {"type": "faq", "value": {
+            "question": "What happens to my prayer request?",
+            "answer": (
+                "<p>It's read only by the Sites of Grace team and is never published or "
+                "shared. We keep it for 90 days so it can be remembered in prayer, and "
+                "then it's deleted.</p>"
+            ),
+        }},
+    ]
+
+
 class ContactPage(Page):
     """ "Contact Us" -- a real contact form. Messages are saved as
     contact.ContactMessage, read in the admin "Messages" inbox, and alert
@@ -1791,32 +1903,7 @@ class ContactPage(Page):
         max_num=8,
         blank=True,
         help_text="Shortcuts into the form. The form's topic list always offers all eight topics.",
-        default=[
-            {"type": "card", "value": {
-                "topic": "question", "title": "Ask a Question", "icon": "question",
-                "blurb": "About a site, a saint, or the Church's teaching.",
-            }},
-            {"type": "card", "value": {
-                "topic": "suggest", "title": "Suggest a Site", "icon": "pin",
-                "blurb": "A shrine, miracle, or holy place we're missing.",
-            }},
-            {"type": "card", "value": {
-                "topic": "correction", "title": "Submit a Correction", "icon": "edit",
-                "blurb": "Help us keep every page accurate.",
-            }},
-            {"type": "card", "value": {
-                "topic": "pilgrimage", "title": "Plan a Pilgrimage", "icon": "map",
-                "blurb": "Group trips, parishes, and travel questions.",
-            }},
-            {"type": "card", "value": {
-                "topic": "partner", "title": "Partnerships & Press", "icon": "partners",
-                "blurb": "Shrines, tour operators, media, and collaborations.",
-            }},
-            {"type": "card", "value": {
-                "topic": "prayer", "title": "Prayer Request", "icon": "candle",
-                "blurb": "Share an intention. We'll hold it in prayer.",
-            }},
-        ],
+        default=default_contactpage_topic_cards,
     )
 
     # --- The form ---
@@ -1889,52 +1976,7 @@ class ContactPage(Page):
     faqs = StreamField(
         [("faq", ContactFaqBlock())],
         blank=True,
-        default=[
-            {"type": "faq", "value": {
-                "question": "Can I book a pilgrimage through Sites of Grace?",
-                "answer": (
-                    "<p>We don't run tours ourselves. Each site page links to trusted "
-                    "pilgrimage operators and travel resources, and the Plan Your Visit "
-                    "guides cover getting there, where to stay, and what to expect. If "
-                    "you're organizing a parish or group trip, send us a message and we'll "
-                    "point you in the right direction.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "I found an error on a page. What should I do?",
-                "answer": (
-                    "<p>Thank you for helping. Choose \"Submit a Correction\" above and link "
-                    "the page. Every site and saint page also has a \"Spot an error?\" link "
-                    "that fills this in for you. We check every correction against Church "
-                    "and shrine sources before we change anything.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "How do you decide which sites to include?",
-                "answer": (
-                    "<p>We include places of genuine Catholic significance, and we're careful "
-                    "to show each one's status as the Church describes it: approved, "
-                    "recognized as a devotion, or still under study. Suggestions are always "
-                    "welcome.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "Can I share my own photos from a pilgrimage?",
-                "answer": (
-                    "<p>Yes. Create a free pilgrim account, mark the sites you've visited, "
-                    "and add your photos. You choose whether each photo is private or shared "
-                    "with other pilgrims.</p>"
-                ),
-            }},
-            {"type": "faq", "value": {
-                "question": "What happens to my prayer request?",
-                "answer": (
-                    "<p>It's read only by the Sites of Grace team and is never published or "
-                    "shared. We keep it for 90 days so it can be remembered in prayer, and "
-                    "then it's deleted.</p>"
-                ),
-            }},
-        ],
+        default=default_contactpage_faqs,
     )
 
     content_panels = Page.content_panels + [
