@@ -201,8 +201,8 @@ class LearningPage(FutureSaintsGateMixin, Page):
     index_thumbnail_alt = models.CharField(max_length=200, blank=True)
     index_thumbnail_credit = models.CharField(max_length=255, blank=True)
 
-    explorer_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 2–3: the short story beside Quick Facts.")
-    researcher_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 4–5: the short story beside Quick Facts.")
+    explorer_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Explorer 40–70 words, Researcher 60–100 words; keep them close in length so the box doesn't leave a gap.")
+    researcher_intro = RichTextField(blank=True, features=STORY_FEATURES, help_text="Explorer 40–70 words, Researcher 60–100 words; keep them close in length so the box doesn't leave a gap.")
     explorer_story = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 2–3: about 150–250 words.")
     researcher_story = RichTextField(blank=True, features=STORY_FEATURES, help_text="Grades 4–5: about 300–500 words.")
     think_about_it = models.CharField(max_length=200, blank=True, help_text="The question in the Think About It band.")

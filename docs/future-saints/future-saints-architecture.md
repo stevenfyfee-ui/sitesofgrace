@@ -150,6 +150,29 @@ Phase 3: `MissionSchoolProject` (ParentalKey to the mission learning page) with 
 and `ProjectStep` Orderables, plus its own `status` choice (not_started/draft/review_ready/published)
 because the brief requires a per-project status independent of page publishing.
 
+### Phase 2a as built (PR #17), and how it differs from the proposal above
+
+- **The shared base is a concrete model, `LearningPage(FutureSaintsGateMixin, Page)`, not an
+  abstract `LearningPageBase` (owner-accepted).** The repeating items (QuickFact, TimelineEntry,
+  FunFact, WordToKnow, SourceLink, QuizQuestion → QuizChoice) need a real model for their
+  `ParentalKey`, and an abstract model can't be one. The alternative, a `ParentalKey` to Wagtail's
+  `Page`, would add those (empty) child lists to every adult page's revision content. A concrete
+  base keeps the relations inside the Future Saints app. It is `is_creatable = False`, so editors only
+  ever create the five types (`SaintLearningPage`, `MarianLearningPage`,
+  `EucharisticLearningPage`, `HolyLandLearningPage`, `MissionLearningPage`); the cost is one extra
+  join (multi-table inheritance) when a learning page loads.
+- Names as built: `TimelineEntry` (not `TimelineItem`), `QuizChoice` (not `QuizAnswer`); Holy Land
+  adds a `BibleReference` Orderable.
+- Mission founding fields are on `MissionLearningPage` now: `founding_number` (1–21, validated),
+  `founding_date` + `founding_date_display`, and `founding_source_note`. The canonical FK accepts
+  only pages on the California Mission Trail, which excludes the duplicates 1144 and 1126.
+- `show_on_discovery_map` waits for Phase 4.
+- Quiz validation lives in the admin form's `is_valid()`, because a cluster form validates its
+  inline formsets after `clean()`.
+- Each index takes only its own type: `LearningPage.can_create_at()` compares the index's
+  `content_kind`.
+- `create_future_saints_tree --dry-run` prints the six pages it would create and writes nothing.
+
 ### Review: Wagtail moderation workflow (chosen)
 
 Wagtail 7.4 has workflows enabled by default and no setting here turns them off. Plan: a "Future

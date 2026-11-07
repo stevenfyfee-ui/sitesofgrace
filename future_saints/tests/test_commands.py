@@ -48,6 +48,36 @@ class TreeCommandTests(CleanSiteCacheTestCase):
         self.assertEqual(WorkflowPage.objects.get(page=home).workflow.name, "Future Saints editorial review")
         self.assertIn("Nothing was published", out.getvalue())
 
+    def test_dry_run_lists_six_pages_and_writes_nothing(self):
+        from django.contrib.auth.models import Group
+        from wagtail.models import GroupPagePermission, Page, Revision, Workflow
+
+        def counts():
+            return (Page.objects.count(), Revision.objects.count(), Group.objects.count(),
+                    GroupPagePermission.objects.count(), Workflow.objects.count(), WorkflowPage.objects.count())
+
+        before = counts()
+        out = StringIO()
+        call_command("create_future_saints_tree", "--dry-run", stdout=out)
+        self.assertEqual(counts(), before, "a dry run writes nothing")
+        text = out.getvalue()
+        self.assertIn("Dry run: nothing will be written.", text)
+        lines = [line for line in text.splitlines() if line.startswith("Would create (draft):")]
+        self.assertEqual(len(lines), 6)
+        self.assertIn("FutureSaintsHomePage", lines[0])
+        self.assertIn("slug 'future-saints'", lines[0])
+        for slug in ("saints", "marian-apparitions", "eucharistic-miracles", "california-missions", "holy-land"):
+            self.assertTrue(any(f"slug '{slug}'" in line and "parent /home/future-saints/" in line for line in lines[1:]), slug)
+        self.assertIn("Would set up review", text)
+
+        # Once the tree exists, a dry run says so and still writes nothing.
+        call_command("create_future_saints_tree", stdout=StringIO())
+        after_real_run = counts()
+        out = StringIO()
+        call_command("create_future_saints_tree", "--dry-run", stdout=out)
+        self.assertIn("already exists", out.getvalue())
+        self.assertEqual(counts(), after_real_run)
+
     def test_second_run_changes_nothing(self):
         call_command("create_future_saints_tree", stdout=StringIO())
         out = StringIO()
