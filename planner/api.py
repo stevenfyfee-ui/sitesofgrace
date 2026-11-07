@@ -107,7 +107,10 @@ def journey_destinations(user):
     from pilgrims.models import SiteVisit
 
     seen, out = set(), []
-    for visit in SiteVisit.objects.filter(owner=user).select_related("site"):
+    # Ordered explicitly: without it the rows come back in storage order,
+    # which drifts from creation order once rows are removed and space reused.
+    visits = SiteVisit.objects.filter(owner=user).select_related("site").order_by("created_at", "pk")
+    for visit in visits:
         dc = destination_for_site(visit.site)
         if dc and dc.slug not in seen:
             seen.add(dc.slug)
