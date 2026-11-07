@@ -26,3 +26,7 @@
   here gives the test a stdin, and the test expects none (`EOFError`).
 - `pilgrims.tests.test_storage.RealSettingsConfigTests.test_pilgrim_private_options`: expects the Spaces
   region env var (`sfo3`), which isn't set locally.
+
+## Known gap: v1 planner journey order
+
+- The v1 planner (`planner/models.py`, served only with `SOG_PLANNER_V2` off) has the same unordered `SiteVisit` query that #20 fixed in v2; fix it (`order_by("created_at", "pk")`) or remove it whenever v1 is retired.

@@ -5,9 +5,12 @@ from urllib.parse import quote
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
+from django.db import connection
 from django.test import override_settings
+from django.test.utils import CaptureQueriesContext
 
 from pilgrims.models import SiteVisit
+from planner.api import journey_destinations
 from planner.models import PlannerBookingLink, PlannerSettings
 
 from .base import PlannerTestCase
@@ -287,6 +290,41 @@ class ReviewFixTests(PageTestCase):
         for slug in shown | {"lourdes"}:
             self.assertNotIn(f'data-add="{slug}"', popular)
         self.assertIn('data-add="rome-vatican-city"', popular)
+
+    def test_journey_keeps_first_saved_order_after_the_pilgrim_edits_it(self):
+        user = get_user_model().objects.create_user("pilgrim", "p@example.com", "pw")
+        slugs = ("fatima", "medjugorje", "jerusalem", "knock", "dublin")
+        visits = []
+        for slug in slugs:
+            dest = self.make_destination(slug)
+            site = self.make_site(f"site-in-{slug}")
+            dest.associated_sites.add(site)
+            visits.append(SiteVisit.objects.create(owner=user, site=site, status=SiteVisit.STATUS_WANT_TO_GO))
+        self.client.force_login(user)
+
+        def journey():
+            html = self.html("/plan/?t=lourdes.2")
+            row = html.split("From your journey:")[1].split("</div>")[0]
+            return re.findall(r'data-add="([^"]+)"', row)
+
+        first_four = ["fatima", "medjugorje", "jerusalem", "knock"]
+        self.assertEqual(journey(), first_four)
+        # Marking sites visited updates their rows; the database may store
+        # the new row versions anywhere, but the journey keeps first-saved order.
+        for visit in (visits[0], visits[2]):
+            visit.status = SiteVisit.STATUS_VISITED
+            visit.save(update_fields=["status"])
+        self.assertEqual(journey(), first_four)
+
+    def test_journey_query_is_ordered_first_saved_first(self):
+        # Storage order isn't creation order once rows are removed and space is
+        # reused, so the order has to be in the query itself.
+        user = get_user_model().objects.create_user("pilgrim", "p@example.com", "pw")
+        with CaptureQueriesContext(connection) as queries:
+            journey_destinations(user)
+        visit_sql = [q["sql"] for q in queries if 'FROM "pilgrims_sitevisit"' in q["sql"]]
+        self.assertEqual(len(visit_sql), 1)
+        self.assertRegex(visit_sql[0], r'ORDER BY "pilgrims_sitevisit"\."created_at" ASC, "pilgrims_sitevisit"\."id" ASC')
 
     def test_print_footer_carries_the_share_url(self):
         html = self.html(GOLDEN)
