@@ -19,7 +19,9 @@ from django.template import Context, Template
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
-from wagtail.models import Page, PageViewRestriction, Site
+from wagtail.models import Page, PageViewRestriction
+
+from core.testing import use_only_default_site
 
 from catalog.models import SacredSitePage, SaintPage
 from contact import forms as contact_forms
@@ -59,8 +61,7 @@ class ContactTestCase(TestCase):
         # against the next.
         cache.clear()
         self.root = Page.get_first_root_node()
-        Site.objects.update(is_default_site=False)
-        Site.objects.create(hostname="testserver", root_page=self.root, is_default_site=True)
+        use_only_default_site(self, hostname="testserver", root_page=self.root)
         self.homepage = HomePage(title="Home", slug="home-test")
         self.root.add_child(instance=self.homepage)
         self.page = ContactPage(title="Contact")

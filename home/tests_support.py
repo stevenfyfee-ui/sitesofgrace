@@ -18,6 +18,8 @@ from django.test import SimpleTestCase, override_settings
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
 
+from core.testing import use_only_default_site
+
 from home.models import HomePage, StorePage, SupportPage
 
 FAKE_KEY = "sk_test_FAKEKEYabcd1234"
@@ -62,7 +64,7 @@ class SupportTestCase(WagtailPageTestCase):
         # The migration-created "localhost" site is also flagged default;
         # make this test's site the only one, so "/contact/" means one place.
         Site.objects.update(is_default_site=False)
-        Site.objects.create(hostname="testsite", root_page=self.root, is_default_site=True)
+        use_only_default_site(self, hostname="testsite", root_page=self.root)
         self.homepage = HomePage(title="Home")
         self.root.add_child(instance=self.homepage)
         self.page = SupportPage(title="Support Sites of Grace")
