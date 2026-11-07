@@ -1,7 +1,9 @@
 from home.models import AboutPage, HomePage, StorePage
 
-from wagtail.models import Page, Site
+from wagtail.models import Page
 from wagtail.test.utils import WagtailPageTestCase
+
+from core.testing import use_only_default_site
 
 
 class AboutPageStructureTests(WagtailPageTestCase):
@@ -9,7 +11,7 @@ class AboutPageStructureTests(WagtailPageTestCase):
 
     def setUp(self):
         root_page = Page.get_first_root_node()
-        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        use_only_default_site(self, hostname="testsite", root_page=root_page)
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
 
@@ -30,7 +32,7 @@ class AboutPageDefaultCopyTests(WagtailPageTestCase):
 
     def setUp(self):
         root_page = Page.get_first_root_node()
-        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        use_only_default_site(self, hostname="testsite", root_page=root_page)
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
         self.about = AboutPage(title="Our Story")
@@ -74,7 +76,7 @@ class AboutPageRenderTests(WagtailPageTestCase):
 
     def setUp(self):
         root_page = Page.get_first_root_node()
-        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        use_only_default_site(self, hostname="testsite", root_page=root_page)
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
         self.about = AboutPage(title="Our Story")
@@ -101,7 +103,7 @@ class OurStoryNavLinkTests(WagtailPageTestCase):
 
     def setUp(self):
         root_page = Page.get_first_root_node()
-        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        use_only_default_site(self, hostname="testsite", root_page=root_page)
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
         self.about = AboutPage(title="Our Story")

@@ -21,6 +21,8 @@ from django.urls import reverse
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
 
+from core.testing import use_only_default_site
+
 from home import legal, support
 from home.models import HomePage, LegalDetails, LegalNotices, LegalPage, SupportPage
 
@@ -63,7 +65,7 @@ class LegalSiteTestCase(WagtailPageTestCase):
         cache.clear()
         self.root = Page.get_first_root_node()
         Site.objects.update(is_default_site=False)
-        self.site = Site.objects.create(hostname="testsite", root_page=self.root, is_default_site=True)
+        self.site = use_only_default_site(self, hostname="testsite", root_page=self.root)
         self.homepage = HomePage(title="Home")
         self.root.add_child(instance=self.homepage)
         Site.objects.filter(pk=self.site.pk).update(root_page=self.homepage)
