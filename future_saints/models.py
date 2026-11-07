@@ -176,15 +176,6 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     holy_land_illustration_credit = models.CharField(max_length=255, blank=True)
     holy_land_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sand")
 
-    # Unused since Phase 2a (one reading level, no "Choose Your Adventure"
-    # block). The columns stay because migration 0001 is already applied in
-    # production and standing rule 4 forbids removing fields without approval.
-    adventure_heading = models.CharField(max_length=80, blank=True, default="Choose Your Adventure!")
-    adventure_text = models.CharField(
-        max_length=200, blank=True,
-        default="Pick your reading level so we can show you the right amount of information.",
-    )
-
     saint_of_week_heading = models.CharField(max_length=60, blank=True, default="Saint of the Week")
     saint_of_week = models.ForeignKey(
         "catalog.SaintPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",

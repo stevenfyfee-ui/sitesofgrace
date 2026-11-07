@@ -37,8 +37,9 @@ comps in `docs/future-saints/` (kept local, not committed).
   and the §4 reading-level sections. The control, its JavaScript and its storage are removed; Future
   Saints now uses no browser storage at all. The homepage "Choose Your Adventure" block is gone and
   Saint of the Week takes its place. Its two homepage fields (`adventure_heading`,
-  `adventure_text`) are no longer used or shown in the admin, but their columns stay: migration
-  0001 is applied in production, and removing fields needs explicit approval (standing rule 4).
+  `adventure_text`) are dropped by migration 0004 (`RemoveField`). That's an owner-approved
+  exception to standing rule 4: the columns were empty and production had no
+  `FutureSaintsHomePage` rows, confirmed by a read-only production query before merging.
 - **Links between pages** are set by object or slug lookup (`create_future_saints_tree`, the dev
   sample), never by page ID.
 - **Review.** Wagtail moderation workflow, approved. The tree command creates the group "Future Saints
