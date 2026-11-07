@@ -1,4 +1,5 @@
 """Phase 3: the Trip Planner v2 page (/plan/ with SOG_PLANNER_V2 on)."""
+import re
 from decimal import Decimal
 from urllib.parse import quote
 
@@ -276,9 +277,14 @@ class ReviewFixTests(PageTestCase):
         self.client.force_login(user)
         html = self.html("/plan/?t=lourdes.2")
         journey = html.split("From your journey:")[1].split("</div>")[0]
-        self.assertEqual(journey.count("data-add="), 4)
         popular = html.split("Popular:")[1].split("</div>")[0]
-        for slug in ("fatima", "medjugorje", "jerusalem", "lourdes"):
+        # Which four of the five show is decided by the journey query's row
+        # order, which isn't pinned (no order_by), so check the rule rather
+        # than the exact four: four chips, none repeated under Popular.
+        shown = set(re.findall(r'data-add="([^"]+)"', journey))
+        self.assertEqual(len(shown), 4)
+        self.assertLessEqual(shown, {"fatima", "medjugorje", "jerusalem", "knock", "dublin"})
+        for slug in shown | {"lourdes"}:
             self.assertNotIn(f'data-add="{slug}"', popular)
         self.assertIn('data-add="rome-vatican-city"', popular)
 
