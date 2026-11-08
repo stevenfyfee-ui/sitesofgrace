@@ -1,11 +1,10 @@
-{% comment %} Saint: the saintly example (virtues, a sourced quotation, a small act of kindness). {% endcomment %}
-{% if page.virtues or page.quote or page.kindness_prompt %}
+{% comment %} Saint: the saintly example (virtues, a sourced quotation). The kindness prompt follows the reflection question (learning_page.html). {% endcomment %}
+{% if page.virtues or page.quote %}
 <section id="example" class="fs-section-block" aria-labelledby="example-h">
   <h2 id="example-h" class="fs-block-title">A Saintly Example</h2>
   <div class="fs-type-grid">
     {% if page.virtues %}<div class="fs-type-card"><h3>{% include "future_saints/includes/_icon.html" with name="star" class="fs-type-card-icon" %}Virtues</h3><p>{{ page.virtues }}</p></div>{% endif %}
     {% if page.quote %}<figure class="fs-type-card fs-quote"><blockquote><p>{{ page.quote }}</p></blockquote>{% if page.quote_source %}<figcaption>{{ page.quote_source }}</figcaption>{% endif %}</figure>{% endif %}
-    {% if page.kindness_prompt %}<div class="fs-type-card"><h3>{% include "future_saints/includes/_icon.html" with name="dove" class="fs-type-card-icon" %}Try a Small Act of Kindness</h3><p>{{ page.kindness_prompt }}</p></div>{% endif %}
   </div>
 </section>
 {% endif %}

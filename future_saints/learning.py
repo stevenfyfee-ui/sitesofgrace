@@ -290,12 +290,16 @@ class LearningPage(FutureSaintsGateMixin, Page):
         return "The Story"
 
     def quick_fact_rows(self):
+        """Inherited facts read the canonical page live; their typed value is a
+        fallback, shown only when that canonical field is empty."""
         canonical = self.canonical_page
         rows = []
         for fact in self.quick_facts.all():
-            value = _canonical_value(fact.inherit, canonical) if fact.inherit else _text(fact.value)
+            value = _canonical_value(fact.inherit, canonical) if fact.inherit else ""
+            source = "canonical" if value else "value"
+            value = value or _text(fact.value)
             if fact.label and value:
-                rows.append({"icon": fact.icon or "star", "label": fact.label, "value": value})
+                rows.append({"icon": fact.icon or "star", "label": fact.label, "value": value, "source": source})
         return rows
 
     def quiz_data(self):
@@ -360,7 +364,12 @@ class QuickFact(Orderable):
     )
     value = models.CharField(max_length=120, blank=True, help_text="Leave empty when inheriting.")
 
-    panels = ["icon", "label", "inherit", "value"]
+    # The panel's help text (not the field's, so no migration) describes the
+    # fallback: with Inherit set, this value shows only if the canonical field is empty.
+    panels = [
+        "icon", "label", "inherit",
+        FieldPanel("value", help_text="Fixed text. With Inherit set, shown only if the canonical field is empty."),
+    ]
 
 
 class TimelineEntry(Orderable):
@@ -441,6 +450,8 @@ class SaintLearningPage(LearningPage):
         "catalog.SaintPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
         limit_choices_to={"live": True}, help_text="The existing saint page this profile teaches from.",
     )
+    # Unused since Phase 2b (the heading is "Meet " + student_title); kept so
+    # no migration removes a column. Not in the admin panels.
     saint_name = models.CharField(max_length=80, blank=True, help_text='Builds the title "Meet Saint {name}".')
     story_label = models.CharField(max_length=4, choices=STORY_HEADING_CHOICES, default="the")
     virtues = models.CharField(max_length=200, blank=True, help_text="Key virtues, comma-separated.")
@@ -456,10 +467,19 @@ class SaintLearningPage(LearningPage):
         ("Quiz", "Check what you learned!", "clipboard", "quiz", "lavender"),
     )
 
+    # The saint title panel carries its own help text (panel level, so no
+    # migration): the page puts "Meet" in front of student_title.
     content_panels = Page.content_panels + [
         FieldPanel("canonical"),
-        MultiFieldPanel([FieldPanel("saint_name"), FieldPanel("story_label")], heading="Saint"),
-    ] + LearningPage.common_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("student_title", help_text="Include the title, e.g. 'Saint Carlo Acutis'. The page adds 'Meet'."),
+                FieldPanel("subtitle"),
+                FieldPanel("story_label"),
+            ],
+            heading="Title",
+        ),
+    ] + LearningPage.common_panels[1:] + [
         MultiFieldPanel(
             [FieldPanel("virtues"), FieldPanel("quote"), FieldPanel("quote_source"), FieldPanel("kindness_prompt")],
             heading="Saintly example",
@@ -471,7 +491,8 @@ class SaintLearningPage(LearningPage):
 
     @property
     def heading(self):
-        return f"Meet Saint {self.saint_name}" if self.saint_name else super().heading
+        """Saint pages read "Meet " + student_title, e.g. "Meet Saint Carlo Acutis" (comp 03)."""
+        return f"Meet {self.student_title}" if self.student_title else super().heading
 
     @property
     def story_heading(self):

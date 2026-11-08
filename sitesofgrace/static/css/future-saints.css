@@ -639,3 +639,8 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-split--single .fs-saint .fs-art--portrait { width: 200px; }
 @media (max-width: 559px) { .fs-split--single .fs-saint { grid-template-columns: 1fr; } }
 .fs-split .fs-staff-only.fs-card { align-self: start; }
+
+/* "Try a small act of kindness": a small block after the reflection question. */
+.fs-kindness { padding-top: .5rem; border-top: 0; }
+.fs-kindness-title { font-size: 1.3rem; margin-bottom: .3rem; }
+.fs-kindness p { margin: 0; }

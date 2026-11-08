@@ -154,7 +154,7 @@ class Command(BaseCommand):
             title=f"{canonical.title} (sample)",
             slug=f"{slug}-sample",
             canonical=canonical,
-            student_title="" if model is SaintLearningPage else canonical.title,
+            student_title=canonical.title,
             subtitle="[SAMPLE] One italic line about this story goes here.",
             intro=filler(65, 2),
             story=filler(320, 4),
@@ -162,8 +162,6 @@ class Command(BaseCommand):
             reflection_question="[SAMPLE] A reflection question goes here?",
         )
         if model is SaintLearningPage:
-            # The canonical page's own name, so the heading reads "Meet Saint …".
-            page.saint_name = canonical.title.removeprefix("St. ").removeprefix("Saint ")
             page.story_label = "his"
             page.virtues = "[SAMPLE] virtue one, virtue two"
             page.kindness_prompt = "[SAMPLE] A small act of kindness to try goes here."

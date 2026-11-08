@@ -9,6 +9,7 @@ staff-only Build This Mission slot.
 import re
 
 from django.core.exceptions import ValidationError
+from django.utils.html import escape
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
@@ -69,7 +70,7 @@ class LearningTestCase(FutureSaintsTestCase):
         trail.stops = [TrailStop(site=self.sites["Shrine & Basilica"], sort_order=0)]
         root.add_child(instance=trail)
         self.pages = {
-            "saint": self.make(SaintLearningPage, "saint", self.saint, saint_name="Example of Testing", story_label="his"),
+            "saint": self.make(SaintLearningPage, "saint", self.saint, story_label="his"),
             "marian_apparition": self.make(MarianLearningPage, "marian_apparition", self.sites["Marian Apparition"]),
             "eucharistic_miracle": self.make(EucharisticLearningPage, "eucharistic_miracle", self.sites["Eucharistic Miracle"]),
             "holy_land": self.make(HolyLandLearningPage, "holy_land", self.sites["Holy Land"]),
@@ -157,9 +158,22 @@ class TemplateTests(LearningTestCase):
             for anchor, _ in cards:
                 self.assertIn(f'id="{anchor}"', html, f"{kind}: #{anchor}")
 
+    def test_heading_is_meet_plus_student_title_on_saints_only(self):
+        page = self.pages["saint"]
+        page.student_title = "Saint Carlo Acutis"
+        page.save_revision().publish()
+        html = self.html("saint")
+        self.assertIn('<span class="fs-profile-title-text">Meet Saint Carlo Acutis</span>', html)
+        self.assertIn("<h1 class=\"fs-ps-title\">Meet Saint Carlo Acutis</h1>", html, "print sheet too")
+        for kind in ("marian_apparition", "eucharistic_miracle", "holy_land", "california_mission"):
+            title = escape(self.pages[kind].student_title)
+            html = self.html(kind)
+            self.assertIn(f'<span class="fs-profile-title-text">{title}</span>', html, kind)
+            self.assertNotIn(f"Meet {title}", html, kind)
+
     def test_saint_title_and_story_label(self):
         html = self.html("saint")
-        self.assertIn("Meet Saint Example of Testing", html)
+        self.assertIn("Meet St. Example of Testing", html)
         self.assertIn('<h2 class="fs-tab">His Story</h2>', html)
         # Other types use student_title.
         self.assertIn("Test Marian Apparition", self.html("marian_apparition"))
@@ -237,7 +251,7 @@ class TemplateTests(LearningTestCase):
     def test_index_lists_its_child_as_a_card(self):
         with FS_ON:
             html = FutureSaintsTestCase.html(self, "/future-saints/saints/")
-        self.assertIn("Meet Saint Example of Testing", html)
+        self.assertIn("Meet St. Example of Testing", html)
         self.assertIn("A test subtitle", html)
 
 

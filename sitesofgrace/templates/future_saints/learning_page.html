@@ -102,6 +102,15 @@
     <p class="fs-reflection-q">{{ page.reflection_question }}</p>
   </section>
   {% endif %}
+
+  {% if page.kindness_prompt %}
+  <section id="kindness" class="fs-section-block fs-kindness" aria-labelledby="kindness-h">
+    <div class="fs-type-card fs-type-card--feature">
+      {% include "future_saints/includes/_icon.html" with name="dove" class="fs-type-card-icon" %}
+      <div><h2 id="kindness-h" class="fs-kindness-title">Try a small act of kindness</h2><p>{{ page.kindness_prompt }}</p></div>
+    </div>
+  </section>
+  {% endif %}
 </div>
 
 {% include "future_saints/includes/_print_sheet.html" %}

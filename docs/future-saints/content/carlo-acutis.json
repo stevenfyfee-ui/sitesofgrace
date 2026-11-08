@@ -1,0 +1,250 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-07",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "carlo-acutis",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "Carlo Acutis",
+        "production_id_hint": 2247
+      },
+      "student_title": "Saint Carlo Acutis",
+      "subtitle": "A teenager who loved Jesus and used technology to share his faith.",
+      "story_label": "His Story",
+      "intro": "Carlo Acutis was an Italian teenager who loved soccer, video games, and computers. Most of all, he loved Jesus in the Eucharist. He went to Mass almost every day and called the Eucharist “my highway to heaven.” Carlo used his computer skills to make an exhibit about Eucharistic miracles that has traveled all over the world. In 2025, Pope Leo XIV declared him a saint.",
+      "story_paragraphs": [
+        "Carlo Acutis was born on May 3, 1991, in London, England, where his Italian parents were living. A few months later, the family moved to Milan, Italy, where Carlo grew up.",
+        "Carlo received his First Holy Communion on June 16, 1998, when he was seven years old. After that, he tried never to miss daily Mass, and he prayed the Rosary every day. He often prayed in front of Jesus in the Blessed Sacrament. This kind of prayer is called Adoration. Carlo explained his goal this way: “To be always united to Jesus, this is my program for life.”",
+        "In many ways, Carlo was a normal kid. He played soccer and liked video games. But he played games for only one hour a week, so they would not take over his life. He was so good with computers that a Vatican cardinal later called him a “computer genius.”",
+        "Carlo showed his faith in the way he treated people. He used his own savings to buy sleeping bags for homeless people in Milan, and he brought them hot drinks in the evening. He helped at a soup kitchen. At school, he stood up for classmates who were bullied, especially students with disabilities.",
+        "In 2002, Carlo started a big project: an exhibit about Eucharistic miracles. These are events the Church has studied in which people reported special signs connected to the Eucharist. With his family’s help, Carlo worked on it for about two and a half years. Since then, it has been shown on every inhabited continent.",
+        "In October 2006, Carlo suddenly became very sick with leukemia, a serious illness of the blood. He offered his suffering to God for the Pope and for the Church. Carlo died on October 12, 2006. He was 15 years old. Because he loved Saint Francis, Carlo is buried in Assisi, Italy.",
+        "After Carlo died, many people asked for his prayers, and the Church studied his life carefully. He was named “Blessed” in 2020. On September 7, 2025, Pope Leo XIV declared him a saint in St. Peter’s Square in Rome."
+      ],
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1991–2006"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Milan, Italy (born in London, England)"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 12"
+        },
+        {
+          "icon": "chalice",
+          "label": "Known for",
+          "value": "Love of the Eucharist"
+        }
+      ],
+      "timeline": [
+        {
+          "date_display": "May 3, 1991",
+          "text": "Carlo is born in London, England. His family moves to Milan, Italy, a few months later."
+        },
+        {
+          "date_display": "June 16, 1998",
+          "text": "Carlo receives his First Holy Communion at age seven. He begins going to Mass almost every day."
+        },
+        {
+          "date_display": "2002",
+          "text": "Carlo starts his exhibit about Eucharistic miracles. It takes about two and a half years to finish."
+        },
+        {
+          "date_display": "May 24, 2003",
+          "text": "Carlo receives the Sacrament of Confirmation."
+        },
+        {
+          "date_display": "October 12, 2006",
+          "text": "Carlo dies of leukemia at age 15, after offering his suffering for the Pope and the Church."
+        },
+        {
+          "date_display": "July 5, 2018",
+          "text": "Pope Francis declares Carlo “Venerable,” meaning he lived a life of great virtue."
+        },
+        {
+          "date_display": "October 10, 2020",
+          "text": "Carlo is named “Blessed” at a celebration in Assisi."
+        },
+        {
+          "date_display": "September 7, 2025",
+          "text": "Pope Leo XIV declares Carlo a saint in St. Peter’s Square, together with Pier Giorgio Frassati."
+        }
+      ],
+      "fun_facts": [
+        "Carlo limited himself to playing video games for just one hour a week.",
+        "Carlo loved soccer.",
+        "Carlo’s Eucharistic miracles exhibit has traveled to every inhabited continent.",
+        "Carlo called the Eucharist “my highway to heaven.”",
+        "Carlo saved his own money to buy sleeping bags for homeless people.",
+        "Carlo is often called the first “millennial” saint, meaning a saint born in the 1980s or 1990s."
+      ],
+      "words_to_know": [
+        {
+          "word": "Eucharist",
+          "definition": "The Body and Blood of Jesus, which Catholics receive at Mass. Catholics believe Jesus is truly present in it, under the appearance of bread and wine."
+        },
+        {
+          "word": "Adoration",
+          "definition": "Quiet prayer in front of Jesus in the Eucharist, often placed in a special holder called a monstrance."
+        },
+        {
+          "word": "Eucharistic miracle",
+          "definition": "An event the Church has studied in which people reported a special sign connected to the Eucharist."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we pray the Hail Mary and think about events in the lives of Jesus and Mary."
+        },
+        {
+          "word": "Canonize",
+          "definition": "When the Pope officially declares that someone is a saint."
+        }
+      ],
+      "think_about_it": "How can you use technology to do good?",
+      "reflection_question": "Carlo spent time with Jesus every day. What is one small way you can spend time with Jesus this week?",
+      "kindness_prompt": "Like Carlo, look for someone who is left out at lunch or recess, and invite them to join you.",
+      "quiz": [
+        {
+          "prompt": "Where was Carlo Acutis born?",
+          "choices": [
+            {
+              "text": "Rome, Italy"
+            },
+            {
+              "text": "London, England",
+              "correct": true
+            },
+            {
+              "text": "Assisi, Italy"
+            },
+            {
+              "text": "Paris, France"
+            }
+          ],
+          "explanation": "Carlo was born in London, where his Italian parents were living. His family moved to Milan, Italy, when he was a baby."
+        },
+        {
+          "prompt": "What did Carlo call the Eucharist?",
+          "choices": [
+            {
+              "text": "“My favorite game”"
+            },
+            {
+              "text": "“My highway to heaven”",
+              "correct": true
+            },
+            {
+              "text": "“My secret treasure”"
+            }
+          ],
+          "explanation": "Carlo called the Eucharist “my highway to heaven” because receiving Jesus helped him grow closer to God."
+        },
+        {
+          "prompt": "What big project did Carlo make with his computer skills?",
+          "choices": [
+            {
+              "text": "A video game about saints"
+            },
+            {
+              "text": "An exhibit and website about Eucharistic miracles",
+              "correct": true
+            },
+            {
+              "text": "A map of every church in Italy"
+            },
+            {
+              "text": "A music album"
+            }
+          ],
+          "explanation": "Carlo spent about two and a half years making an exhibit about Eucharistic miracles. It has been shown around the world."
+        },
+        {
+          "prompt": "How did Carlo help people who had no home?",
+          "choices": [
+            {
+              "text": "He built them houses."
+            },
+            {
+              "text": "He used his savings to buy them sleeping bags and brought them warm drinks.",
+              "correct": true
+            },
+            {
+              "text": "He gave them his video games."
+            }
+          ],
+          "explanation": "Carlo used his own money to buy sleeping bags for homeless people in Milan and brought them hot drinks."
+        },
+        {
+          "prompt": "Which Pope declared Carlo a saint in 2025?",
+          "choices": [
+            {
+              "text": "Pope Francis"
+            },
+            {
+              "text": "Pope Benedict XVI"
+            },
+            {
+              "text": "Pope Leo XIV",
+              "correct": true
+            },
+            {
+              "text": "Pope John Paul II"
+            }
+          ],
+          "explanation": "Pope Leo XIV declared Carlo a saint on September 7, 2025. Pope Francis had named him Venerable in 2018, and he was beatified in 2020."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Carlo’s timeline",
+          "publisher": "Carlo Acutis Association",
+          "url": "https://carloacutis.com/en/association/la-linea-del-tempo-di-carlo",
+          "note": "Dates; “program for life” quote"
+        },
+        {
+          "title": "Carlo Acutis, Creator of the Exhibition",
+          "publisher": "Eucharistic Miracles of the World",
+          "url": "https://www.miracolieucaristici.org/en/liste/mostra.html",
+          "note": "First Communion, daily Mass and Rosary, “highway to heaven,” the 2002 exhibit"
+        },
+        {
+          "title": "Card. Becciu: Carlo Acutis, a life offered for Jesus and the Church",
+          "publisher": "Vatican News (2020)",
+          "url": "https://www.vaticannews.va/en/church/news/2020-06/card-becciu-carlo-acutis-a-life-offered-for-jesus-the-church.html",
+          "note": "“Computer genius”; offering of his suffering"
+        },
+        {
+          "title": "Carlo Acutis loved the homeless, St. Francis of Assisi, and souls in purgatory",
+          "publisher": "Catholic World Report / CNA (2020)",
+          "url": "https://www.catholicworldreport.com/2020/10/07/carlo-acutis-loved-the-homeless-st-francis-of-assisi-and-souls-in-purgatory",
+          "note": "Sleeping bags, hot drinks, soup kitchen, burial in Assisi"
+        },
+        {
+          "title": "Who is Carlo Acutis? 10 things you should know",
+          "publisher": "Catholic World Report (2021)",
+          "url": "https://www.catholicworldreport.com/2021/10/11/who-is-carlo-acutis-10-things-you-should-know-about-him/",
+          "note": "Bullied classmates, one hour of gaming, soccer"
+        },
+        {
+          "title": "Carlo Acutis: First Millennial Saint Canonized",
+          "publisher": "Jesuits Global (2025)",
+          "url": "https://www.jesuits.global/2025/09/08/carlo-acutis-first-millennial-saint-canonized/",
+          "note": "Canonization with Pier Giorgio Frassati"
+        }
+      ]
+    }
+  ]
+}
