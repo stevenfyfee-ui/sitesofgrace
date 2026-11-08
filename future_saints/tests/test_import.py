@@ -229,6 +229,7 @@ class RenderingTests(ImportTestCase):
         page.save_revision().publish()
         with FS_ON:
             html = self.html(page.url)
+        self.assertIn('<span class="fs-profile-title-text">Meet Saint Carlo Acutis</span>', html, "comp 03 heading")
         self.assertIn('<h2 class="fs-tab">His Story</h2>', html)
         self.assertIn("1991–2006", html, "fallback shown: the fixture saint has no born/died")
         self.assertIn("Fixture feast day", html, "canonical value wins over the fallback")
