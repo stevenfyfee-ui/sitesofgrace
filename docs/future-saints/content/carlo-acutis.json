@@ -9,7 +9,7 @@
       "slug": "carlo-acutis",
       "canonical": {
         "model": "catalog.SaintPage",
-        "match_title": "Carlo Acutis",
+        "match_title": "St. Carlo Acutis",
         "production_id_hint": 2247
       },
       "student_title": "Saint Carlo Acutis",
