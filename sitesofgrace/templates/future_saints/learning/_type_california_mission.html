@@ -4,21 +4,28 @@
   Architecture, the founding-order chain (Founding #, never trail order), and
   the Build This Mission slot (Phase 3; staff see "coming soon").
 {% endcomment %}
+{% if page.native_peoples or request.user.is_staff %}
 <section id="native-peoples" class="fs-section-block" aria-labelledby="native-peoples-h">
   <h2 id="native-peoples-h" class="fs-block-title">Native Peoples and Mission History</h2>
   {% if page.native_peoples %}<div class="fs-prose">{{ page.native_peoples|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet (name communities only from cited sources).</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.mission_life or request.user.is_staff %}
 <section id="mission-life" class="fs-section-block" aria-labelledby="mission-life-h">
   <h2 id="mission-life-h" class="fs-block-title">Mission Life</h2>
   {% if page.mission_life %}<div class="fs-prose">{{ page.mission_life|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.architecture or request.user.is_staff %}
 <section id="architecture" class="fs-section-block" aria-labelledby="architecture-h">
   <h2 id="architecture-h" class="fs-block-title">Architecture</h2>
   {% if page.architecture %}<div class="fs-type-card"><div class="fs-prose">{{ page.architecture|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if fs_founding_chain or request.user.is_staff %}
 <section id="founding" class="fs-section-block" aria-labelledby="founding-h">
   <h2 id="founding-h" class="fs-block-title">Founding Order</h2>
   {% if fs_founding_chain %}
@@ -26,6 +33,7 @@
     {% if page.founding_source_note %}<p class="fs-source-note">Source: {{ page.founding_source_note }}</p>{% endif %}
   {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no founding numbers set yet (add them with a source, Phase 3).</p>{% endif %}
 </section>
+{% endif %}
 
 {% if request.user.is_staff %}
 <section id="build" class="fs-section-block" aria-labelledby="build-h">
