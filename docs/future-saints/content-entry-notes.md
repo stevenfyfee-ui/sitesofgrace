@@ -37,8 +37,12 @@ fun facts and timeline lines one or two short sentences each.
 
 ## Pictures
 
-- A picture appears only when **both the image and its credit** are filled. With no credit, the page
-  shows the placeholder frame. Canonical (adult) images are never used unless they have a credit.
+- A picture appears when its **image** is chosen (with alt text). With no image, the page shows the
+  placeholder frame. Only images uploaded to the Future Saints page's own fields are used; the adult
+  site's images (for example SaintPage portraits, which are CC-licensed and need attribution) never are.
+- **Credit fields are optional and are an internal note only: never shown on the site,** on the page,
+  the print sheet or in metadata. Fill them in as a record of where a picture came from.
+- The last section of a learning page is **Sources**: the source links only (no picture credits).
 - Alt text describes what's in the picture for a child who can't see it.
 - Sizes and ratios: see `art-manifest.md` (hero 3:4, context scene 2:3, index thumbnail 4:3).
 
