@@ -1,0 +1,221 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-10",
+  "pages": [
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-lanciano",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Lanciano",
+        "production_id_hint": 1105
+      },
+      "student_title": "The Eucharistic Miracle of Lanciano",
+      "subtitle": "A very old story about a priest who doubted, and a sign that helped him believe.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "The 700s, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Lanciano, Italy"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "The bread and wine were reported to look like real flesh and blood"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Church of Saint Francis in Lanciano"
+        }
+      ],
+      "intro": "Long ago, in a town in Italy now called Lanciano, a priest was saying Mass. He had doubts. He wondered if Jesus was really present in the Eucharist. According to an old tradition, when he said the words of consecration, the bread and wine changed to look like real flesh and blood. People have honored these relics for centuries.",
+      "story_paragraphs": [
+        "More than 1,200 years ago, in the 700s, a monk was celebrating Mass in a small church in the Italian town that is now called Lanciano. The monk was a priest, but he was struggling with doubts. He wondered whether the bread and wine really become the Body and Blood of Jesus at Mass.",
+        "According to the story, when the priest said the words of consecration, something amazing happened. The bread in his hands looked like a thin piece of real flesh. The wine in the chalice looked like real blood. Later, the blood formed five small, hard lumps.",
+        "The story says the priest was filled with wonder, and his doubts turned to faith. People in the town came to see what had happened, and the flesh and blood were kept carefully as relics.",
+        "These relics are still kept today in the Church of Saint Francis in Lanciano, inside a silver and glass container made in 1713. Franciscan friars take care of them.",
+        "Historians point out that the oldest written record of the story we have comes from 1574, many centuries after it is said to have happened. In the 1970s, a doctor named Edoardo Linoli studied the relics. He reported that the flesh was heart muscle and the blood was type AB. Other scientists have questioned how those tests were done, and no newer studies have been allowed.",
+        "The Church does not ask Catholics to believe in any particular Eucharistic miracle. What every Catholic believes is even more amazing: at every Mass, Jesus is truly present in the Eucharist, even though it still looks like bread and wine. Stories like Lanciano remind people of that great gift."
+      ],
+      "timeline": [
+        {
+          "date_display": "700s",
+          "text": "According to tradition, a doubting priest sees the bread and wine change during Mass."
+        },
+        {
+          "date_display": "1574",
+          "text": "The oldest written record of the story that we have, made during a Church investigation."
+        },
+        {
+          "date_display": "1713",
+          "text": "A silver and glass reliquary is made to hold the relics."
+        },
+        {
+          "date_display": "1970–1971",
+          "text": "Doctor Edoardo Linoli studies the relics and reports his findings."
+        },
+        {
+          "date_display": "Today",
+          "text": "The relics are kept by Franciscan friars in the Church of Saint Francis in Lanciano."
+        }
+      ],
+      "fun_facts": [
+        "The Lanciano story is one of the oldest Eucharistic miracle stories in the world.",
+        "The relics have been kept in the same town for more than 1,200 years, according to tradition.",
+        "The reliquary that holds them is made of silver and glass and is more than 300 years old.",
+        "The blood in the story formed five small lumps.",
+        "Saint Carlo Acutis included Lanciano in his exhibit about Eucharistic miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Consecration",
+          "definition": "The moment at Mass when the priest says Jesus' words, and the bread and wine become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Real Presence",
+          "definition": "The Catholic belief that Jesus is truly present in the Eucharist."
+        },
+        {
+          "word": "Relic",
+          "definition": "Something holy that is kept and honored, like an object connected to a saint or a miracle."
+        },
+        {
+          "word": "Reliquary",
+          "definition": "A special container that holds a relic."
+        },
+        {
+          "word": "Doubt",
+          "definition": "Not being sure whether something is true."
+        }
+      ],
+      "think_about_it": "The priest in this story had doubts, and God helped him. What can you do when you have questions about your faith?",
+      "reflection_question": "Next time you are at Mass, how can you show Jesus that you know he is truly present?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a priest's doubt, then bread and wine that changed to look like flesh and blood.",
+        "what_the_church_says": "the Church allows people to honor these relics and to pray in their presence. It never asks Catholics to believe in a particular miracle. The Real Presence of Jesus in every Eucharist is what the Church teaches as true.",
+        "evidence_note": "Scientific tests on the relics were reported in the 1970s, but other experts have questioned them. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Lanciano?",
+          "choices": [
+            {
+              "text": "Italy",
+              "correct": true
+            },
+            {
+              "text": "France"
+            },
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Spain"
+            }
+          ],
+          "explanation": "Lanciano is a town in Italy."
+        },
+        {
+          "prompt": "What was the priest in the story struggling with?",
+          "choices": [
+            {
+              "text": "He was lost."
+            },
+            {
+              "text": "He doubted that Jesus is really present in the Eucharist.",
+              "correct": true
+            },
+            {
+              "text": "He forgot the words of the Mass."
+            }
+          ],
+          "explanation": "The priest wondered whether the bread and wine really become the Body and Blood of Jesus. The story says the sign helped him believe."
+        },
+        {
+          "prompt": "Where are the relics kept today?",
+          "choices": [
+            {
+              "text": "In a museum in Rome"
+            },
+            {
+              "text": "In the Church of Saint Francis in Lanciano",
+              "correct": true
+            },
+            {
+              "text": "In the priest's house"
+            },
+            {
+              "text": "They were lost long ago"
+            }
+          ],
+          "explanation": "The relics are kept in a silver and glass reliquary in the Church of Saint Francis, cared for by Franciscan friars."
+        },
+        {
+          "prompt": "What do Catholics believe happens at every Mass?",
+          "choices": [
+            {
+              "text": "Nothing changes."
+            },
+            {
+              "text": "The bread and wine become the Body and Blood of Jesus.",
+              "correct": true
+            },
+            {
+              "text": "Only special Masses are holy."
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in the Eucharist at every Mass. This is called the Real Presence."
+        },
+        {
+          "prompt": "When is the oldest written record of the Lanciano story that we have?",
+          "choices": [
+            {
+              "text": "700"
+            },
+            {
+              "text": "1000"
+            },
+            {
+              "text": "1574",
+              "correct": true
+            },
+            {
+              "text": "1970"
+            }
+          ],
+          "explanation": "The story is said to have happened in the 700s, but the oldest written record we have comes from 1574."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Physician Tells of Eucharistic Miracle of Lanciano",
+          "url": "https://www.ewtn.com/catholicism/library/physician-tells-of-eucharistic-miracle-of-lanciano-1866",
+          "note": "the 8th century, the Basilian monk, the Linoli study",
+          "publisher": "EWTN"
+        },
+        {
+          "title": "Carlo Acutis, Creator of the Exhibition",
+          "url": "https://www.miracolieucaristici.org/en/liste/mostra.html",
+          "note": "Lanciano in Carlo's exhibit",
+          "publisher": "Eucharistic Miracles of the World (Carlo Acutis’s exhibit)"
+        },
+        {
+          "title": "Eucharistic miracle of Lanciano",
+          "url": "https://en.wikipedia.org/wiki/Eucharistic_miracle_of_Lanciano",
+          "note": "Church of St. Francis, the 1713 reliquary, the 1574 earliest record, critiques of the scientific claims Use it to cross-check only; swap it for a Catholic source if you prefer.",
+          "publisher": "Wikipedia"
+        }
+      ]
+    }
+  ]
+}

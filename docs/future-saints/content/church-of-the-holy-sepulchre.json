@@ -1,0 +1,238 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-10",
+  "pages": [
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "church-of-the-holy-sepulchre",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Church of the Holy Sepulchre",
+        "production_id_hint": 1128
+      },
+      "student_title": "The Church of the Holy Sepulchre",
+      "subtitle": "The church in Jerusalem built over the places where Christians remember Jesus died and rose again.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus' death, burial, and Resurrection"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "300s, by Emperor Constantine"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Several Christian communities together"
+        }
+      ],
+      "intro": "In the city of Jerusalem stands a very old church called the Church of the Holy Sepulchre. \"Sepulchre\" means tomb. For about 1,700 years, Christians have honored this place as the hill where Jesus died on the cross and the tomb where he was buried and rose from the dead on Easter morning.",
+      "story_paragraphs": [
+        "The Gospels tell us that Jesus was crucified on a hill outside the walls of Jerusalem called Golgotha, which means \"the place of the skull.\" After Jesus died, a man named Joseph of Arimathea placed his body in a new tomb cut into the rock nearby. A large stone was rolled in front of the entrance.",
+        "On the third day, early Sunday morning, Mary Magdalene and other women came to the tomb. The stone had been rolled away, and the tomb was empty! Jesus had risen from the dead. This is the great news Christians celebrate every Easter.",
+        "About 100 years later, a Roman emperor named Hadrian built a pagan temple over the area. But Christians remembered where the tomb was.",
+        "In the 300s, Emperor Constantine became the first Roman emperor to support Christianity. His mother, Helena, traveled to Jerusalem. Constantine ordered the temple taken down and a great church built in its place. According to tradition, Helena helped find the holy places.",
+        "Over the centuries, the church was damaged and rebuilt several times. In 1009, a ruler ordered it destroyed, and it was later rebuilt. The church we see today has parts from many different times in history.",
+        "Inside the church are two very special places. One is the rock of Calvary, where Christians remember the cross. The other is a small shrine called the Edicule, which surrounds what Christians honor as Jesus' tomb.",
+        "Today, several Christian communities share and care for the church together. Catholic Franciscan friars pray there every day, alongside Greek Orthodox and Armenian Christians. People from all over the world come here to remember that Jesus died for us and rose again."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus is crucified, buried, and rises from the dead in Jerusalem."
+        },
+        {
+          "date_display": "About AD 135",
+          "text": "Emperor Hadrian builds a pagan temple over the area."
+        },
+        {
+          "date_display": "300s",
+          "text": "Emperor Constantine orders a great church built at the site."
+        },
+        {
+          "date_display": "1009",
+          "text": "A ruler orders the church destroyed. It is later rebuilt."
+        },
+        {
+          "date_display": "2016",
+          "text": "Experts carefully repair the Edicule and study the tomb inside it."
+        },
+        {
+          "date_display": "Today",
+          "text": "Several Christian communities share the church and pray there every day."
+        }
+      ],
+      "fun_facts": [
+        "\"Sepulchre\" (say it SEP-ul-ker) is an old word that means tomb.",
+        "One building holds both the place of the cross and the place of the tomb.",
+        "Several different Christian communities share the church and take turns leading prayers.",
+        "The small shrine over the tomb is called the Edicule, which means \"little house.\"",
+        "In 2016, experts moved the marble slab covering the tomb for the first time in centuries."
+      ],
+      "words_to_know": [
+        {
+          "word": "Sepulchre",
+          "definition": "A tomb, a place where someone is buried."
+        },
+        {
+          "word": "Golgotha",
+          "definition": "The hill where Jesus was crucified. Its name means \"the place of the skull.\" It is also called Calvary."
+        },
+        {
+          "word": "Resurrection",
+          "definition": "Jesus rising from the dead on the third day."
+        },
+        {
+          "word": "Edicule",
+          "definition": "The small shrine inside the church that surrounds the tomb of Jesus."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        }
+      ],
+      "think_about_it": "The empty tomb is the best news in the world. How can you share the joy of Easter with someone?",
+      "reflection_question": "Jesus died and rose again for each of us. What would you like to say to Jesus to thank him?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Matthew 27:33 – 28:10",
+            "url": "https://bible.usccb.org/bible/matthew/27"
+          },
+          {
+            "reference": "Mark 15:22 – 16:8",
+            "url": "https://bible.usccb.org/bible/mark/15"
+          },
+          {
+            "reference": "Luke 23:33 – 24:12",
+            "url": "https://bible.usccb.org/bible/luke/23"
+          },
+          {
+            "reference": "John 19:17 – 20:18",
+            "url": "https://bible.usccb.org/bible/john/19"
+          }
+        ],
+        "then": "In Jesus' time, Golgotha and the tomb were just outside the city walls, in an area with old stone quarries and rock-cut tombs.",
+        "now": "The city grew around them, so the church now stands inside the walls of Jerusalem's Old City. One huge building covers both Calvary and the tomb.",
+        "what_historians_know": "Christians were honoring this spot before Constantine built his church in the 300s, and rock-cut tombs from Jesus' time have been found in the area. During repair work in 2016, experts studied the tomb inside the Edicule and found materials from Constantine's time.",
+        "what_comes_from_tradition": "that this is the exact place of the cross and the exact tomb of Jesus, and that Saint Helena helped find them. Many historians think the location is likely, but no one can prove it for certain."
+      },
+      "quiz": [
+        {
+          "prompt": "What does the word \"sepulchre\" mean?",
+          "choices": [
+            {
+              "text": "A garden"
+            },
+            {
+              "text": "A tomb",
+              "correct": true
+            },
+            {
+              "text": "A tower"
+            },
+            {
+              "text": "A road"
+            }
+          ],
+          "explanation": "\"Sepulchre\" means tomb. The church is named for the tomb of Jesus."
+        },
+        {
+          "prompt": "In what city is the Church of the Holy Sepulchre?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Bethlehem"
+            },
+            {
+              "text": "Jerusalem",
+              "correct": true
+            },
+            {
+              "text": "Nazareth"
+            }
+          ],
+          "explanation": "The church is in Jerusalem, where Jesus died and rose again."
+        },
+        {
+          "prompt": "What did the women find when they came to the tomb on Sunday morning?",
+          "choices": [
+            {
+              "text": "The tomb was locked."
+            },
+            {
+              "text": "The stone was rolled away, and the tomb was empty.",
+              "correct": true
+            },
+            {
+              "text": "Soldiers sleeping inside."
+            }
+          ],
+          "explanation": "The Gospels tell us the stone was rolled away and the tomb was empty, because Jesus had risen."
+        },
+        {
+          "prompt": "Which emperor ordered the first great church built here?",
+          "choices": [
+            {
+              "text": "Hadrian"
+            },
+            {
+              "text": "Constantine",
+              "correct": true
+            },
+            {
+              "text": "Augustus"
+            },
+            {
+              "text": "Nero"
+            }
+          ],
+          "explanation": "Emperor Constantine ordered the church built in the 300s. Earlier, Emperor Hadrian had built a pagan temple over the area."
+        },
+        {
+          "prompt": "Who cares for the church today?",
+          "choices": [
+            {
+              "text": "Only one family"
+            },
+            {
+              "text": "Several Christian communities together",
+              "correct": true
+            },
+            {
+              "text": "No one"
+            }
+          ],
+          "explanation": "Catholic Franciscans, Greek Orthodox, and Armenian Christians share the church and pray there."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Matthew 27–28, Mark 15–16, Luke 23–24, John 19–20",
+          "url": "https://bible.usccb.org/bible/john/19",
+          "note": "",
+          "publisher": "USCCB New American Bible"
+        },
+        {
+          "title": "The history of the Holy Sepulchre",
+          "url": "https://www.proterrasancta.org/en/the-history-of-holy-sepulchre",
+          "note": "Hadrian, Constantine and Helena, 1009, the shared communities, the 2016 restoration",
+          "publisher": "Pro Terra Sancta (Custody of the Holy Land)"
+        }
+      ]
+    }
+  ]
+}

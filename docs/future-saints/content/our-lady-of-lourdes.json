@@ -1,0 +1,236 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-10",
+  "pages": [
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-lourdes",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Lourdes",
+        "production_id_hint": 1091
+      },
+      "student_title": "Our Lady of Lourdes",
+      "subtitle": "Mary appeared to a poor young girl named Bernadette in a small town in France.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "February 11 – July 16, 1858"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Lourdes, France"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Saint Bernadette Soubirous, age 14"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1862"
+        }
+      ],
+      "intro": "In 1858, a 14-year-old girl named Bernadette saw a beautiful lady at a rocky cave near Lourdes, France. The lady appeared to her 18 times. She asked people to pray for sinners, and she showed Bernadette where to find a spring of water. On March 25, the lady said, \"I am the Immaculate Conception.\" Today, millions of people visit Lourdes to pray.",
+      "story_paragraphs": [
+        "Bernadette Soubirous lived in Lourdes, a small town in the mountains of southern France. Her family was very poor. Bernadette was often sick, and she had not yet learned to read well.",
+        "On February 11, 1858, Bernadette went with two other girls to gather firewood near a rocky cave called the grotto of Massabielle. Suddenly, she saw a young lady standing in an opening in the rock. The lady wore a white dress with a blue sash, and yellow roses rested on her feet. Bernadette knelt down and prayed the Rosary, and the lady prayed with her.",
+        "Over the next five months, the lady appeared to Bernadette 18 times. One day, the lady asked Bernadette to drink from a spring. Bernadette saw no spring, so she dug in the muddy ground. Soon, clean water began to flow. That spring still flows today.",
+        "The lady asked people to pray for sinners. She also asked for a chapel to be built at the grotto. For a long time, Bernadette did not know the lady's name. Then, on March 25, the lady said in Bernadette's local language, \"I am the Immaculate Conception.\" Bernadette did not understand these words, but the priest did. They meant that Mary, the Mother of Jesus, was free from sin from the very first moment of her life.",
+        "Many people did not believe Bernadette at first. Officials questioned her again and again, but she never changed her story. The bishop studied what happened for almost four years. In 1862, he declared that Mary really had appeared to Bernadette.",
+        "Bernadette later became a religious sister in Nevers, France. She died in 1879, and the Church declared her a saint in 1933. Today, millions of pilgrims visit Lourdes every year to pray, and many sick people come asking God for healing."
+      ],
+      "timeline": [
+        {
+          "date_display": "February 11, 1858",
+          "text": "Bernadette sees a lady in white at the grotto while gathering firewood."
+        },
+        {
+          "date_display": "February–July 1858",
+          "text": "The lady appears to Bernadette 18 times. She asks for prayer for sinners and shows her a spring of water."
+        },
+        {
+          "date_display": "March 25, 1858",
+          "text": "The lady says, \"I am the Immaculate Conception.\""
+        },
+        {
+          "date_display": "July 16, 1858",
+          "text": "Bernadette sees the lady for the last time."
+        },
+        {
+          "date_display": "January 18, 1862",
+          "text": "Bishop Laurence of Tarbes declares that Mary really appeared to Bernadette."
+        },
+        {
+          "date_display": "April 16, 1879",
+          "text": "Bernadette dies in Nevers, France."
+        },
+        {
+          "date_display": "December 8, 1933",
+          "text": "Pope Pius XI declares Bernadette a saint."
+        }
+      ],
+      "fun_facts": [
+        "Mary appeared to Bernadette 18 times in just five months.",
+        "When Mary told Bernadette her name, she spoke in Bernadette's local language, not in French.",
+        "The spring Bernadette uncovered still flows at the grotto today.",
+        "Bernadette was gathering firewood when she first saw Mary.",
+        "The Church celebrates Our Lady of Lourdes every year on February 11.",
+        "The Church has recognized more than 70 healings at Lourdes as miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Grotto",
+          "definition": "A small cave or opening in a rock."
+        },
+        {
+          "word": "Immaculate Conception",
+          "definition": "The Church's teaching that Mary was free from sin from the first moment of her life."
+        },
+        {
+          "word": "Pilgrim",
+          "definition": "A person who travels to a holy place to pray."
+        },
+        {
+          "word": "Sinner",
+          "definition": "A person who has done something wrong against God or others. Everyone is a sinner and needs God's mercy."
+        }
+      ],
+      "think_about_it": "Bernadette told the truth, even when people did not believe her. When is it hard for you to tell the truth?",
+      "reflection_question": "Mary asked people to pray for sinners. Who is someone you can pray for today?",
+      "type_specific": {
+        "who_saw_her": "Only Bernadette saw and heard the lady. Crowds came to the grotto during the later apparitions, but they saw Bernadette praying, not the lady.",
+        "marys_message": "Mary asked people to pray for sinners. She asked Bernadette to drink from the spring and asked for a chapel to be built at the grotto.",
+        "prayer": "Our Lady of Lourdes, pray for us.",
+        "church_recognition": "After almost four years of study, Bishop Laurence of Tarbes declared in 1862 that \"the Immaculate Mary, Mother of God, really appeared to Bernadette Soubirous.\" The Church allows and encourages devotion to Our Lady of Lourdes. Catholics are not required to believe in any particular apparition, but this one has been honored by the Church for more than 160 years."
+      },
+      "quiz": [
+        {
+          "prompt": "How old was Bernadette when she first saw the lady?",
+          "choices": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "14",
+              "correct": true
+            },
+            {
+              "text": "21"
+            },
+            {
+              "text": "30"
+            }
+          ],
+          "explanation": "Bernadette was 14 years old when she first saw the lady at the grotto in 1858."
+        },
+        {
+          "prompt": "How many times did the lady appear to Bernadette?",
+          "choices": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "7"
+            },
+            {
+              "text": "18",
+              "correct": true
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "explanation": "The lady appeared to Bernadette 18 times between February and July 1858."
+        },
+        {
+          "prompt": "What did Bernadette find when she dug in the muddy ground?",
+          "choices": [
+            {
+              "text": "A gold coin"
+            },
+            {
+              "text": "A spring of water",
+              "correct": true
+            },
+            {
+              "text": "A buried church"
+            }
+          ],
+          "explanation": "The lady asked Bernadette to drink from a spring. When she dug, water began to flow, and it still flows today."
+        },
+        {
+          "prompt": "What name did the lady give herself?",
+          "choices": [
+            {
+              "text": "Queen of Peace"
+            },
+            {
+              "text": "The Immaculate Conception",
+              "correct": true
+            },
+            {
+              "text": "Our Lady of the Snows"
+            },
+            {
+              "text": "The Lady of the Rosary"
+            }
+          ],
+          "explanation": "On March 25, 1858, the lady said, \"I am the Immaculate Conception,\" a title for Mary, who was free from sin from the very beginning of her life."
+        },
+        {
+          "prompt": "What did the lady ask people to do?",
+          "choices": [
+            {
+              "text": "Build a castle"
+            },
+            {
+              "text": "Pray for sinners",
+              "correct": true
+            },
+            {
+              "text": "Move to a new town"
+            }
+          ],
+          "explanation": "The lady asked people to pray for sinners, and she asked for a chapel to be built at the grotto."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Recognition of the apparitions",
+          "url": "https://www.lourdes-france.com/en/recognition-of-the-apparitions/",
+          "note": "dates, the 18 apparitions, the 1862 recognition and its quote",
+          "publisher": "Sanctuary of Our Lady of Lourdes"
+        },
+        {
+          "title": "Our Lady of Lourdes",
+          "url": "https://www.ewtn.com/learn/feasts/our-lady-of-lourdes",
+          "note": "age 14, firewood, her appearance, the spring, \"Immaculate Conception,\" her requests",
+          "publisher": "EWTN"
+        },
+        {
+          "title": "St. Bernadette of Lourdes",
+          "url": "https://www.britannica.com/biography/Saint-Bernadette-of-Lourdes",
+          "note": "Nevers, death 1879, canonization 1933",
+          "publisher": "Britannica"
+        },
+        {
+          "title": "Lourdes announces 72nd miracle",
+          "url": "https://www.catholicworldreport.com/2025/04/16/lourdes-announces-72nd-miracle/",
+          "note": "the recognized-miracle count",
+          "publisher": "Catholic World Report (April 2025)"
+        }
+      ]
+    }
+  ]
+}

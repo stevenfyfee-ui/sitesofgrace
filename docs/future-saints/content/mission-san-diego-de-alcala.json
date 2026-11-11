@@ -1,0 +1,247 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-10",
+  "pages": [
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-diego-de-alcala",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Diego de Alcalá",
+        "production_id_hint": 1310
+      },
+      "student_title": "Mission San Diego de Alcalá",
+      "subtitle": "The first of California's 21 missions, built on the land of the Kumeyaay people.",
+      "story_label": "The Mission Story",
+      "founding_number": 1,
+      "founding_date": "1769-07-16",
+      "founding_date_display": "July 16, 1769",
+      "founding_source_note": "Mission San Diego de Alcalá, \"Early History\"; California State Parks mission list.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "1 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "July 16, 1769"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Didacus (San Diego) of Alcalá"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Kumeyaay"
+        }
+      ],
+      "intro": "Mission San Diego de Alcalá was the first of the 21 California missions. Saint Junípero Serra founded it in 1769. The mission was built on the homeland of the Kumeyaay people, who had lived in this region long before the Spanish arrived. Its story includes faith, hard work, and also great loss for the Kumeyaay. Today it is a church called a basilica.",
+      "story_paragraphs": [
+        "Long before the Spanish came, the Kumeyaay people lived in the land we now call San Diego. They lived in villages near water and oak trees. They gathered acorns and ground them into meal, fished in the bay, and made beautiful baskets and clay pots. They watched the stars to know when to harvest plants, and they used fire carefully to care for the land.",
+        "On July 16, 1769, a Franciscan priest named Junípero Serra founded Mission San Diego de Alcalá. It was the first of 21 missions that Spain built along the coast of California. Spain wanted to claim the land, and the missionaries wanted to share the Catholic faith.",
+        "In 1774, the mission moved a few miles inland, closer to Kumeyaay villages, fresh water, and good land for farming. Many Kumeyaay were baptized. Life at the mission was very hard for them. They were expected to work in the fields and follow strict rules. Many were not allowed to leave. Diseases brought by the Spanish made many people sick, and many died.",
+        "Some Kumeyaay fought back. In November 1775, warriors from many villages attacked the mission and burned it. A priest named Luis Jayme was killed. The mission was later rebuilt, and much of the work was finished by 1790.",
+        "After Mexico became independent from Spain, the missions were taken away from the Church. Soldiers later used the San Diego mission buildings. In 1862, President Abraham Lincoln returned the mission lands to the Church.",
+        "In 1976, Pope Paul VI named the church a basilica. Today, it is an active Catholic parish. The Kumeyaay people are still here too, keeping their language, culture, and traditions alive."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1769",
+          "text": "The Kumeyaay people live in villages throughout the San Diego region."
+        },
+        {
+          "date_display": "July 16, 1769",
+          "text": "Saint Junípero Serra founds Mission San Diego de Alcalá, the first California mission."
+        },
+        {
+          "date_display": "1774",
+          "text": "The mission moves inland, closer to Kumeyaay villages and fresh water."
+        },
+        {
+          "date_display": "November 1775",
+          "text": "Kumeyaay warriors from many villages attack and burn the mission. Father Luis Jayme is killed."
+        },
+        {
+          "date_display": "By 1790",
+          "text": "Most of the rebuilding is finished."
+        },
+        {
+          "date_display": "1813",
+          "text": "Buttresses are added to the church front to protect it from earthquakes."
+        },
+        {
+          "date_display": "1862",
+          "text": "President Abraham Lincoln returns the mission lands to the Church."
+        },
+        {
+          "date_display": "1976",
+          "text": "Pope Paul VI names the church a minor basilica."
+        }
+      ],
+      "fun_facts": [
+        "Mission San Diego was the first of California's 21 missions.",
+        "The mission is named for Saint Didacus, a Spanish Franciscan brother known in Spanish as San Diego.",
+        "President Abraham Lincoln returned the mission lands to the Church in 1862.",
+        "The Kumeyaay made baskets so tightly woven that some could hold water.",
+        "Acorns were the most important food for the Kumeyaay, who ground them into meal."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Kumeyaay",
+          "definition": "The Native people whose homeland includes San Diego County and northern Baja California."
+        },
+        {
+          "word": "Adobe",
+          "definition": "Bricks made of mud and straw, dried in the sun."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        },
+        {
+          "word": "Buttress",
+          "definition": "A thick support built against a wall to keep it strong."
+        }
+      ],
+      "think_about_it": "The mission's story includes both faith and great loss for the Kumeyaay people. Why is it important to learn the whole story of a place, even the hard parts?",
+      "reflection_question": "How can you show respect for people whose culture or history is different from yours?",
+      "type_specific": {
+        "native_peoples_and_history": "The Kumeyaay have lived in the San Diego region since long before the Spanish arrived. They had their own villages, leaders, healers, trade routes, and ways of caring for the land. When the mission came, many Kumeyaay were baptized, but mission life also brought forced work, strict rules, disease, and the loss of land and freedom. Some Kumeyaay resisted. Today, Kumeyaay communities continue to live in San Diego County and northern Baja California.",
+        "mission_life": "At the mission, people farmed, raised cattle and sheep, and built adobe buildings. The day followed a schedule of prayer, work, and meals. For the Kumeyaay, this was a big change from their own way of life.",
+        "architecture": "The church walls are made of adobe, mud bricks dried in the sun. In 1813, thick supports called buttresses were added to the front to help the building stand during earthquakes. The buildings were arranged around a courtyard. The church you see today was restored in the 1930s, so it is not exactly the same as the first mission buildings."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was Mission San Diego in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st",
+              "correct": true
+            },
+            {
+              "text": "5th"
+            },
+            {
+              "text": "10th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Diego de Alcalá, founded in 1769, was the first of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Kumeyaay",
+              "correct": true
+            },
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The mission was built on the homeland of the Kumeyaay people, who still live in the San Diego region today."
+        },
+        {
+          "prompt": "Who founded the mission?",
+          "choices": [
+            {
+              "text": "Father Luis Jayme"
+            },
+            {
+              "text": "Saint Junípero Serra",
+              "correct": true
+            },
+            {
+              "text": "President Abraham Lincoln"
+            }
+          ],
+          "explanation": "Saint Junípero Serra, a Franciscan priest, founded the mission on July 16, 1769."
+        },
+        {
+          "prompt": "Why did the mission move in 1774?",
+          "choices": [
+            {
+              "text": "To be closer to the ocean"
+            },
+            {
+              "text": "To be closer to Kumeyaay villages, fresh water, and farmland",
+              "correct": true
+            },
+            {
+              "text": "Because of a flood"
+            }
+          ],
+          "explanation": "The mission moved inland to be near Kumeyaay villages, a reliable water source, and good land for farming."
+        },
+        {
+          "prompt": "What was one important Kumeyaay food?",
+          "choices": [
+            {
+              "text": "Rice"
+            },
+            {
+              "text": "Acorns",
+              "correct": true
+            },
+            {
+              "text": "Apples"
+            },
+            {
+              "text": "Corn bread"
+            }
+          ],
+          "explanation": "The Kumeyaay gathered acorns and ground them into a meal. It was one of their most important foods."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Early History",
+          "url": "https://www.missionsandiego.org/early-history",
+          "note": "founding, the 1774 move, 1775, Father Jayme, rebuilding by 1790, 1813 buttresses, the 1862 return, 1976 basilica",
+          "publisher": "Mission San Diego de Alcalá"
+        },
+        {
+          "title": "Sociopolitical Aspects of the 1775 Revolt at Mission San Diego de Alcalá",
+          "url": "https://sandiegohistory.org/journal/1997/july/missionrevolt/",
+          "note": "causes of the revolt, villages involved",
+          "publisher": "Richard L. Carrico, Journal of San Diego History 43:3 (1997)"
+        },
+        {
+          "title": "Kumeyaay: Precontact Culture",
+          "url": "https://kumeyaay.com/kumeyaay-precontact-culture.html",
+          "note": "acorns, baskets, pottery, astronomy, land care with fire",
+          "publisher": "Mike Connolly (Campo), kumeyaay.com"
+        },
+        {
+          "title": "The 21 California Missions",
+          "url": "https://www.parks.ca.gov/?page_id=22679",
+          "note": "founding order",
+          "publisher": "California State Parks"
+        }
+      ]
+    }
+  ]
+}
