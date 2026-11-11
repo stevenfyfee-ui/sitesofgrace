@@ -130,7 +130,7 @@ class Command(BaseCommand):
 
         saint = home.saint_of_week
         self.stdout.write(f"Saint of the Week: {saint.title if saint else 'none'} "
-                          f"(portrait shown: {'yes' if saint and saint.portrait_id and saint.portrait_credit else 'no, placeholder'})")
+                          "(placeholder frame; the adult portrait is never used)")
         for line in made:
             self.stdout.write(line)
         self.stdout.write(self.style.SUCCESS(

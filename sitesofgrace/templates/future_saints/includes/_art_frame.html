@@ -1,8 +1,8 @@
 {% load wagtailimages_tags %}
 {% comment %}
-  One illustration slot. `art` is {image, alt, credit} or None; it is only ever
-  set when the picture has a credit (future_saints models: _art). With no art
-  this draws the placeholder frame at the slot's final aspect ratio, so the
+  One illustration slot. `art` is {image, alt} or None: only an image uploaded
+  to the page's own Future Saints field (future_saints models: _art); credits
+  are never rendered. With no art this draws the placeholder frame at the slot's final aspect ratio, so the
   real picture can replace it later without moving anything.
   variant: hero 16:10 | card 4:3 | feature 16:9 | banner 16:9 | portrait 1:1 |
            profile 3:4 | context 2:3 | thumb 4:3.   icon: the type's sprite icon.

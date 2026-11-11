@@ -25,12 +25,6 @@
     {% block breadcrumb %}{% include "future_saints/includes/_breadcrumb.html" %}{% endblock %}
     {% block content %}{% endblock %}
 
-    {% if fs_credits %}
-      <aside class="fs-wrap fs-credits" aria-label="Picture credits">
-        <strong>Pictures:</strong>
-        <ul>{% for credit in fs_credits %}<li>{{ credit }}</li>{% endfor %}</ul>
-      </aside>
-    {% endif %}
   </main>
 
   {% include "future_saints/includes/_footer.html" %}
