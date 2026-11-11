@@ -4,10 +4,11 @@ Every page here is behind settings.SOG_FUTURE_SAINTS (future_saints.switch).
 The pages never render a canonical page's travel, lodging, booking, pricing
 or itinerary fields and never use the adult travel templates.
 
-Pictures: a slot shows its image only when the image AND its credit are
-filled. A saint's existing portrait is used only when portrait_credit is
-filled. Otherwise the template draws the placeholder art frame -- there is no
-fallback to an uncredited canonical image.
+Pictures: a slot shows only an image uploaded to its own Future Saints field
+(with its alt text); with none, the template draws the placeholder art frame.
+Image credit fields are an internal note only and are never rendered on any
+page, print sheet or meta. The adult site's images (e.g. SaintPage portraits,
+CC-licensed and needing attribution) are never used here.
 """
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -61,6 +62,14 @@ KIND_ICONS = {
 SLOT_ICONS = {"card_1": "saint", "card_2": "mary", "card_3": "miracle", "card_4": "mission", "holy_land": "holyland"}
 
 
+CREDIT_HELP = "Internal note only — never shown on the site."
+
+
+def _credit_field():
+    """An image credit: optional, kept in the admin as an internal record, never rendered."""
+    return models.CharField(max_length=255, blank=True, help_text=CREDIT_HELP)
+
+
 def _image_field(help_text=""):
     return models.ForeignKey(
         "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL,
@@ -68,11 +77,11 @@ def _image_field(help_text=""):
     )
 
 
-def _art(image, alt, credit):
-    """A picture the page may show, or None for the placeholder frame."""
-    if image is None or not (credit or "").strip():
+def _art(image, alt):
+    """A picture the page shows, or None for the placeholder frame. Credits are never rendered."""
+    if image is None:
         return None
-    return {"image": image, "alt": alt or "", "credit": credit.strip()}
+    return {"image": image, "alt": alt or ""}
 
 
 def _live_url(page, request):
@@ -122,18 +131,18 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         max_length=200, blank=True, default="Amazing stories, holy people, and places to discover.",
     )
     cta_label = models.CharField(max_length=40, blank=True, default="Start Exploring")
-    hero_illustration = _image_field("Shown only when the credit below is filled.")
+    hero_illustration = _image_field()
     hero_illustration_alt = models.CharField(max_length=200, blank=True)
-    hero_illustration_credit = models.CharField(max_length=255, blank=True)
+    hero_illustration_credit = _credit_field()
 
     card_1_title = models.CharField(max_length=60, blank=True, default="Meet the Saints")
     card_1_line = models.CharField(max_length=120, blank=True)
     card_1_page = models.ForeignKey(
         "future_saints.FutureSaintsIndexPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    card_1_illustration = _image_field("Shown only when the credit below is filled.")
+    card_1_illustration = _image_field()
     card_1_illustration_alt = models.CharField(max_length=200, blank=True)
-    card_1_illustration_credit = models.CharField(max_length=255, blank=True)
+    card_1_illustration_credit = _credit_field()
     card_1_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sage")
 
     card_2_title = models.CharField(max_length=60, blank=True, default="Mary & Apparitions")
@@ -141,9 +150,9 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     card_2_page = models.ForeignKey(
         "future_saints.FutureSaintsIndexPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    card_2_illustration = _image_field("Shown only when the credit below is filled.")
+    card_2_illustration = _image_field()
     card_2_illustration_alt = models.CharField(max_length=200, blank=True)
-    card_2_illustration_credit = models.CharField(max_length=255, blank=True)
+    card_2_illustration_credit = _credit_field()
     card_2_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="blue")
 
     card_3_title = models.CharField(max_length=60, blank=True, default="Eucharistic Miracles")
@@ -151,9 +160,9 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     card_3_page = models.ForeignKey(
         "future_saints.FutureSaintsIndexPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    card_3_illustration = _image_field("Shown only when the credit below is filled.")
+    card_3_illustration = _image_field()
     card_3_illustration_alt = models.CharField(max_length=200, blank=True)
-    card_3_illustration_credit = models.CharField(max_length=255, blank=True)
+    card_3_illustration_credit = _credit_field()
     card_3_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="gold")
 
     card_4_title = models.CharField(max_length=60, blank=True, default="California Missions")
@@ -161,9 +170,9 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     card_4_page = models.ForeignKey(
         "future_saints.FutureSaintsIndexPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    card_4_illustration = _image_field("Shown only when the credit below is filled.")
+    card_4_illustration = _image_field()
     card_4_illustration_alt = models.CharField(max_length=200, blank=True)
-    card_4_illustration_credit = models.CharField(max_length=255, blank=True)
+    card_4_illustration_credit = _credit_field()
     card_4_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="terracotta")
 
     holy_land_title = models.CharField(max_length=60, blank=True, default="Explore the Holy Land")
@@ -171,17 +180,17 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     holy_land_page = models.ForeignKey(
         "future_saints.FutureSaintsIndexPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    holy_land_illustration = _image_field("Shown only when the credit below is filled.")
+    holy_land_illustration = _image_field()
     holy_land_illustration_alt = models.CharField(max_length=200, blank=True)
-    holy_land_illustration_credit = models.CharField(max_length=255, blank=True)
+    holy_land_illustration_credit = _credit_field()
     holy_land_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sand")
 
     saint_of_week_heading = models.CharField(max_length=60, blank=True, default="Saint of the Week")
     saint_of_week = models.ForeignKey(
         "catalog.SaintPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
         limit_choices_to={"live": True},
-        help_text="Leave empty to hide Saint of the Week. The saint's portrait is shown only "
-                  "when its portrait credit is filled.",
+        help_text="Leave empty to hide Saint of the Week. It shows the placeholder frame: the adult "
+                  "site's portrait is never used here.",
     )
     saint_of_week_line = models.CharField(
         max_length=160, blank=True, help_text="One short line for children, shown under the name.",
@@ -269,7 +278,7 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
 
     @property
     def hero_art(self):
-        return _art(self.hero_illustration, self.hero_illustration_alt, self.hero_illustration_credit)
+        return _art(self.hero_illustration, self.hero_illustration_alt)
 
     def _card(self, prefix, request):
         page = getattr(self, f"{prefix}_page")
@@ -280,11 +289,7 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
             "url": _live_url(page, request),
             "icon": KIND_ICONS.get(page.content_kind, SLOT_ICONS[prefix]) if page else SLOT_ICONS[prefix],
             "accent": getattr(self, f"{prefix}_accent"),
-            "art": _art(
-                getattr(self, f"{prefix}_illustration"),
-                getattr(self, f"{prefix}_illustration_alt"),
-                getattr(self, f"{prefix}_illustration_credit"),
-            ),
+            "art": _art(getattr(self, f"{prefix}_illustration"), getattr(self, f"{prefix}_illustration_alt")),
             "slot": prefix.replace("_", " "),
         }
 
@@ -292,11 +297,8 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         saint = self.saint_of_week
         if saint is None or not saint.live:
             return None
-        portrait = None
-        if saint.portrait_id and (saint.portrait_credit or "").strip():
-            portrait = {"image": saint.portrait, "alt": f"Portrait of {saint.title}",
-                        "credit": saint.portrait_credit.strip()}
-        return {"name": saint.title, "line": self.saint_of_week_line, "art": portrait}
+        # No picture: the adult portrait is never used (the placeholder frame shows instead).
+        return {"name": saint.title, "line": self.saint_of_week_line, "art": None}
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -306,8 +308,6 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         context["fs_cards"] = cards
         context["fs_holy_land"] = holy_land
         context["fs_saint"] = saint
-        shown = [self.hero_art] + [c["art"] for c in cards] + [holy_land["art"]] + [saint and saint["art"]]
-        context["fs_credits"] = [a["credit"] for a in shown if a]
         return context
 
 
@@ -315,9 +315,9 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
     content_kind = models.CharField(max_length=30, blank=True, choices=CONTENT_KIND_CHOICES)
     intro = models.TextField(max_length=400, blank=True, help_text="One or two short sentences for children.")
     accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES)
-    banner_illustration = _image_field("Shown only when the credit below is filled.")
+    banner_illustration = _image_field()
     banner_illustration_alt = models.CharField(max_length=200, blank=True)
-    banner_illustration_credit = models.CharField(max_length=255, blank=True)
+    banner_illustration_credit = _credit_field()
 
     parent_page_types = ["future_saints.FutureSaintsHomePage"]
     # Each index takes only the learning type matching its content_kind;
@@ -360,14 +360,12 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
 
     @property
     def banner_art(self):
-        return _art(self.banner_illustration, self.banner_illustration_alt, self.banner_illustration_credit)
+        return _art(self.banner_illustration, self.banner_illustration_alt)
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["fs_children"] = [p.specific for p in self.get_children().live().public().order_by("path")]
         context["fs_type_icon"] = KIND_ICONS.get(self.content_kind, "mark")
-        art = self.banner_art
-        context["fs_credits"] = [art["credit"]] if art else []
         return context
 
 

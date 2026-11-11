@@ -295,8 +295,6 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-empty { text-align: center; padding: 2.5rem 1rem; }
 
 /* ---------- Credits + footer ---------- */
-.fs-credits { font-size: .9rem; color: var(--fs-stone); padding-block: 1rem; }
-.fs-credits ul { margin: .25rem 0 0; padding-left: 1.2rem; }
 
 .fs-footer { background: var(--fs-navy); color: var(--fs-ivory); margin-top: 2rem; }
 .fs-footer-inner { display: grid; gap: 1rem; padding-block: 2rem; }
@@ -528,7 +526,6 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-founding li.is-current { font-weight: 700; }
 .fs-sources { padding-left: 1.2rem; }
 .fs-source-pub, .fs-source-note { color: var(--fs-stone); }
-.fs-picture-credits { font-size: .95rem; color: var(--fs-stone); }
 .fs-reflection-q { font-size: 1.35rem; font-style: italic; max-width: var(--fs-measure); }
 
 /* Quiz */
@@ -579,7 +576,7 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-print-sheet { display: none; }
 @media print {
   @page { margin: 12mm; }
-  .fs-screen-only, .fs-learning .fs-header, .fs-learning .fs-footer, .fs-learning .fs-credits { display: none !important; }
+  .fs-screen-only, .fs-learning .fs-header, .fs-learning .fs-footer { display: none !important; }
   .fs-learning .fs-print-sheet { display: block; font-size: 11pt; line-height: 1.4; color: #000; }
   .fs-print-sheet h1 { font-size: 22pt; margin: 0 0 2pt; }
   .fs-print-sheet h2 { font-size: 13pt; margin: 10pt 0 3pt; border-bottom: 1pt solid #999; break-after: avoid; }
@@ -591,7 +588,6 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
   .fs-print-sheet ol, .fs-print-sheet ul { margin: 0; padding-left: 16pt; }
   .fs-print-sheet li { break-inside: avoid; }
   .fs-ps-lines span { display: block; height: 22pt; border-bottom: 1pt solid #999; }
-  .fs-ps-credits { font-size: 9pt; }
 }
 
 /* Profile art column: the halo reads through the top of the placeholder

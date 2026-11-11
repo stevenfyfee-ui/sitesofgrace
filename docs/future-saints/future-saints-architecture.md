@@ -27,10 +27,15 @@ comps in `docs/future-saints/` (kept local, not committed).
 - **Editable children's text.** Besides the brief's fields, the "Choose Your Adventure!" heading, its
   intro line and the "Saint of the Week" heading are fields with defaults. Section-nav labels (Saints,
   Mary, Miracles, Holy Land, Missions) and staff-only notes are UI chrome in code.
-- **Pictures.** Every illustration slot has an image, alt text and a **credit** field; a picture
-  renders only when image and credit are both filled. Saint of the Week uses the SaintPage portrait
-  only when `portrait_credit` is filled; otherwise the placeholder frame. No fallback to an uncredited
-  canonical image.
+- **Pictures (owner decision, 2026-11-11, superseding the earlier credit rule).** Every illustration
+  slot has an image, alt text and an optional credit field. A picture renders when its image is set;
+  with none, the placeholder art frame. **Credits are an internal note only (help text "Internal note
+  only — never shown on the site.") and are never rendered on any page, print sheet or meta;** there
+  is no publish-time credit requirement. The learning page's last section is "Sources" (source links
+  only). Future Saints shows only images uploaded to its own fields: there is **no fallback to the
+  adult SaintPage portrait** (CC-licensed Wikimedia images that require attribution), so Saint of the
+  Week always shows the placeholder frame. Phase 3's `MissionSchoolProject` publish rule requires a
+  reference image + alt text, but not a credit.
 - **Reading level: superseded in Phase 2a.** Phase 1 shipped an Explorer/Researcher control
   (`?level=` plus sessionStorage). **Owner decision (Phase 2a review): one version of all text for
   grades 2–5, with no grade labels anywhere on the site, print sheet or metadata.** This replaces brief §1.6

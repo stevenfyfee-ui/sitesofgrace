@@ -9,7 +9,8 @@ model to hang their ParentalKey on; it is never created directly.
 Canonical facts (dates, feast day, place, Church status) are read live from
 the canonical page through QuickFact.inherit -- never copied into a field.
 The canonical page's prose, travel fields and images are never rendered:
-Future Saints shows only its own illustrations, and only with a credit.
+Future Saints shows only images uploaded to its own fields. Image credits are
+an internal note only and are never rendered.
 """
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -24,7 +25,7 @@ from wagtail.models import Orderable, Page
 from catalog.models import CANONICAL_STATUS_LABELS
 
 # Imported at the end of future_saints/models.py, after the gate mixin exists.
-from .models import FutureSaintsGateMixin
+from .models import CREDIT_HELP, FutureSaintsGateMixin
 
 STORY_FEATURES = ["bold", "italic", "ol", "ul", "link"]
 SHORT_FEATURES = ["bold", "italic", "link"]
@@ -88,17 +89,18 @@ TYPE_ICONS = {
 }
 
 
-def _image_field(help_text="Shown only when the credit is filled."):
+def _image_field(help_text=""):
     return models.ForeignKey(
         "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL,
         related_name="+", help_text=help_text,
     )
 
 
-def _art(image, alt, credit):
-    if image is None or not (credit or "").strip():
+def _art(image, alt):
+    """A picture the page shows, or None for the placeholder frame. Credits are never rendered."""
+    if image is None:
         return None
-    return {"image": image, "alt": alt or "", "credit": credit.strip()}
+    return {"image": image, "alt": alt or ""}
 
 
 def _text(value):
@@ -196,13 +198,13 @@ class LearningPage(FutureSaintsGateMixin, Page):
     subtitle = models.CharField(max_length=200, blank=True, help_text="One italic line under the title.")
     hero_illustration = _image_field()
     hero_illustration_alt = models.CharField(max_length=200, blank=True)
-    hero_illustration_credit = models.CharField(max_length=255, blank=True)
-    context_illustration = _image_field("The small scene behind Quick Facts. Shown only when the credit is filled.")
+    hero_illustration_credit = models.CharField(max_length=255, blank=True, help_text=CREDIT_HELP)
+    context_illustration = _image_field("The small scene behind Quick Facts.")
     context_illustration_alt = models.CharField(max_length=200, blank=True)
-    context_illustration_credit = models.CharField(max_length=255, blank=True)
-    index_thumbnail = _image_field("The picture on this page's card in its index. Shown only with a credit.")
+    context_illustration_credit = models.CharField(max_length=255, blank=True, help_text=CREDIT_HELP)
+    index_thumbnail = _image_field("The picture on this page's card in its index.")
     index_thumbnail_alt = models.CharField(max_length=200, blank=True)
-    index_thumbnail_credit = models.CharField(max_length=255, blank=True)
+    index_thumbnail_credit = models.CharField(max_length=255, blank=True, help_text=CREDIT_HELP)
 
     # One version of all text for grades 2–5 (owner decision, replacing brief
     # §1.6 and the §4 reading levels).
@@ -239,7 +241,7 @@ class LearningPage(FutureSaintsGateMixin, Page):
                 FieldPanel("context_illustration"), FieldPanel("context_illustration_alt"), FieldPanel("context_illustration_credit"),
                 FieldPanel("index_thumbnail"), FieldPanel("index_thumbnail_alt"), FieldPanel("index_thumbnail_credit"),
             ],
-            heading="Pictures (each shows only when its credit is filled)",
+            heading="Pictures (credits are an internal note only)",
         ),
         MultiFieldPanel([FieldPanel("intro"), FieldPanel("story")], heading="Story"),
         InlinePanel("quick_facts", label="Quick Fact", heading="Quick Facts"),
@@ -328,9 +330,9 @@ class LearningPage(FutureSaintsGateMixin, Page):
 
     def art(self):
         return {
-            "hero": _art(self.hero_illustration, self.hero_illustration_alt, self.hero_illustration_credit),
-            "context": _art(self.context_illustration, self.context_illustration_alt, self.context_illustration_credit),
-            "thumbnail": _art(self.index_thumbnail, self.index_thumbnail_alt, self.index_thumbnail_credit),
+            "hero": _art(self.hero_illustration, self.hero_illustration_alt),
+            "context": _art(self.context_illustration, self.context_illustration_alt),
+            "thumbnail": _art(self.index_thumbnail, self.index_thumbnail_alt),
         }
 
     def cards(self):
@@ -355,11 +357,6 @@ class LearningPage(FutureSaintsGateMixin, Page):
             "fs_points": self.learning_points(),
             "fs_type_icon": TYPE_ICONS.get(self.content_kind, "mark"),
         })
-        art = context["fs_art"]
-        # Credits are listed in this page's own "Sources & Credits" section,
-        # so the base template's generic credits line stays empty here.
-        context["fs_picture_credits"] = [a["credit"] for a in (art["hero"], art["context"]) if a]
-        context["fs_credits"] = []
         context.update(self.type_context(request))
         return context
 

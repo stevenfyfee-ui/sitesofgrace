@@ -32,7 +32,6 @@
     <h2>Sources</h2>
     <ul class="fs-ps-sources">{% for s in page.sources.all %}<li>{{ s.title }}{% if s.publisher %}, {{ s.publisher }}{% endif %}{% if s.url %} ({{ s.url }}){% endif %}</li>{% endfor %}</ul>
   {% endif %}
-  {% if fs_picture_credits %}<p class="fs-ps-credits">Pictures: {{ fs_picture_credits|join:"; " }}</p>{% endif %}
 
   <h2>Reflect</h2>
   {% if page.reflection_question %}<p>{{ page.reflection_question }}</p>{% endif %}

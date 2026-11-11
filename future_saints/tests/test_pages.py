@@ -1,6 +1,6 @@
 """Homepage and index structure: four cards plus a full-width Holy Land card,
 reading-level buttons, the menu disclosure, staff-only placeholders, and the
-picture rule (an image shows only with a credit)."""
+picture rule (a page's own image shows; credits never render; no adult portrait)."""
 import datetime
 import re
 
@@ -118,22 +118,35 @@ class GrownUpsNoteTests(FutureSaintsTestCase):
 
 
 class PictureRuleTests(FutureSaintsTestCase):
-    def test_illustration_needs_a_credit(self):
+    def test_illustration_shows_without_a_credit(self):
+        with FS_ON:
+            self.assertIn("fs-art--hero fs-art--placeholder", self.html("/future-saints/"))
         self.home.hero_illustration = image()
         self.home.hero_illustration_alt = "A painted map"
-        self.publish(self.home)
-        with FS_ON:
-            html = self.html("/future-saints/")
-        self.assertNotIn('alt="A painted map"', html)
-        self.assertIn("fs-art--hero fs-art--placeholder", html)
-
-        self.home.hero_illustration_credit = "Painted for Sites of Grace by A. Artist (sample)"
+        self.home.full_clean()
         self.publish(self.home)
         with FS_ON:
             html = self.html("/future-saints/")
         self.assertIn('alt="A painted map"', html)
         self.assertNotIn("fs-art--hero fs-art--placeholder", html)
-        self.assertIn("Painted for Sites of Grace by A. Artist (sample)", html)
+
+    def test_credits_are_never_rendered(self):
+        self.home.hero_illustration = image()
+        self.home.hero_illustration_credit = "HOME CREDIT NOTE (sample)"
+        self.home.card_1_illustration = image("Card")
+        self.home.card_1_illustration_credit = "CARD CREDIT NOTE (sample)"
+        self.publish(self.home)
+        index = self.saints
+        index.banner_illustration = image("Banner")
+        index.banner_illustration_alt = "A banner"
+        index.banner_illustration_credit = "BANNER CREDIT NOTE (sample)"
+        self.publish(index)
+        with FS_ON:
+            pages = [self.html("/future-saints/"), self.html(index.url), self.html(index.url, self.staff)]
+        for html in pages:
+            self.assertNotIn("CREDIT NOTE", html)
+            self.assertNotIn("Pictures:", html)
+        self.assertIn('alt="A banner"', pages[1])
 
     def saint(self, **fields):
         saint = SaintPage(title="St. Test of Example", slug="st-test-of-example", **fields)
@@ -145,8 +158,8 @@ class PictureRuleTests(FutureSaintsTestCase):
             html = self.html("/future-saints/")
         self.assertNotIn("Saint of the Week", html)
 
-    def test_saint_portrait_only_with_portrait_credit(self):
-        saint = self.saint(portrait=image("Portrait"))
+    def test_saint_of_week_never_uses_the_adult_portrait(self):
+        saint = self.saint(portrait=image("Portrait"), portrait_credit="Wikimedia Commons, CC BY-SA (sample)")
         self.home.saint_of_week = saint
         self.home.saint_of_week_line = "A line for children (sample)"
         self.publish(self.home)
@@ -156,14 +169,8 @@ class PictureRuleTests(FutureSaintsTestCase):
         self.assertIn("St. Test of Example", html)
         self.assertIn("A line for children (sample)", html)
         self.assertIn("fs-art--portrait fs-art--placeholder", html)
-        self.assertNotIn('alt="Portrait of St. Test of Example"', html)
-
-        saint.portrait_credit = "Public domain (sample)"
-        saint.save_revision().publish()
-        with FS_ON:
-            html = self.html("/future-saints/")
-        self.assertIn('alt="Portrait of St. Test of Example"', html)
-        self.assertIn("Public domain (sample)", html)
+        self.assertNotIn("Portrait of St. Test of Example", html)
+        self.assertNotIn("Wikimedia", html)
 
     def test_saint_of_week_hidden_when_saint_not_live(self):
         saint = self.saint()

@@ -3,10 +3,11 @@
 No art was generated or downloaded for Phase 1. Every slot currently shows the placeholder art frame
 (staff also see the slot name on it).
 
-**Rule enforced in code:** an illustration appears only when its image AND its credit field are filled
-in the admin. A saint portrait (Saint of the Week) appears only when the SaintPage's `portrait_credit`
-is filled. There is no fallback to an uncredited canonical image. Credits are listed under "Pictures:"
-at the foot of the page.
+**Rule enforced in code (owner decision, 2026-11-11):** an illustration appears when its image is
+chosen in the Future Saints page's own field (with alt text). Credit fields are optional and an
+internal note only: they are **never shown** on any page, print sheet or meta. Future Saints never
+uses the adult site's images: Saint of the Week shows the placeholder frame, never the SaintPage
+portrait (those are CC-licensed Wikimedia images that require attribution).
 
 Style for every slot (brief §2): the approved watercolor look of the three comps; warm ivory and
 parchment grounds; gold and powder-blue accents; no bright preschool palette; no cartoon mascots;
@@ -26,19 +27,19 @@ trace, stretch or embed them.
 | 9 | Eucharistic Miracles index banner | 16:9 | 1600 × 900 | fill-1600x900 | Gold/ivory; monstrance or chalice and host; subdued rays. | |
 | 10 | Holy Land index banner | 16:9 | 1600 × 900 | fill-1600x900 | Sandstone/olive/sage landscape; may share a palette with slot 6 but should not be the same picture. | |
 | 11 | California Missions index banner | 16:9 | 1600 × 900 | fill-1600x900 | Parchment/copper/sage; mission silhouette, poppies. Phase 3 replaces this index with the illustrated 21-mission map hub (comp 02); that map is separate art and not part of this manifest. | |
-| 12 | Saint portrait frame (Saint of the Week; SaintPage `portrait` + `portrait_credit`) | 1:1, shown in a circle with a gold ring | 800 × 800 | fill-400x400 | Uses the canonical saint's portrait only when `portrait_credit` is filled. Keep the face in the middle 60% (the circle crops the corners). Comp 01 shows St. Francis of Assisi; locally and in production his page has no portrait. | |
+| 12 | Saint portrait frame (Saint of the Week) | 1:1, shown in a circle with a gold ring | 800 × 800 | fill-400x400 | Always the placeholder frame: the adult SaintPage portrait is never used. Comp 01 shows St. Francis of Assisi. | |
 
-Credits to record per image (in the slot's credit field): artist or source, licence (e.g. "Commissioned
-for Sites of Grace, all rights assigned", "CC BY 4.0, <author>", "Public domain"), and for photos the
-correct modern vs. historic identification. The credit text is shown to readers.
+Credits to record per image (in the slot's credit field, an internal record only): artist or source,
+licence (e.g. "Commissioned for Sites of Grace, all rights assigned", "Public domain"), and for photos
+the correct modern vs. historic identification. The credit text is never shown to readers.
 
 Production records relevant to slot 12 (content audit): St. Carlo Acutis has a portrait (img#43) with
 **no credit**; St. Francis of Assisi has **no portrait**.
 
 ## Phase 2a: learning (profile) pages, per page
 
-Every learning page has three slots. Each renders only when its image and credit are both filled;
-otherwise the placeholder frame keeps the final ratio, so swapping in art never moves the layout.
+Every learning page has three slots. Each renders when its image is set (credits are an internal
+note, never shown); otherwise the placeholder frame keeps the final ratio, so swapping in art never moves the layout.
 Staff see "Art needed: {slot} ({ratio})" on each empty frame.
 
 | slot (admin field) | aspect | min source px | rendered as | notes (comp 03 and the brief) |

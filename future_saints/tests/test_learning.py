@@ -1,7 +1,7 @@
 """Phase 2a: the five learning templates.
 
 Switch gating per type, no cookies, banned strings and travel field names,
-live (never copied) canonical Quick Facts, uncredited images never shown,
+live (never copied) canonical Quick Facts, image credits never rendered,
 one reading level with no grade labels anywhere, the four cards linking to
 sections, index placement rules, quiz validation in the admin form, and the
 staff-only Build This Mission slot.
@@ -26,6 +26,7 @@ from future_saints.models import (
     QuizChoice,
     QuizQuestion,
     SaintLearningPage,
+    SourceLink,
     TimelineEntry,
     WordToKnow,
 )
@@ -257,24 +258,48 @@ class TemplateTests(LearningTestCase):
         for kind in self.pages:
             self.assertNotIn("foliage", self.html(kind))
 
-    def test_uncredited_images_are_never_rendered(self):
-        portrait = image("Canonical portrait")
-        self.saint.portrait = portrait
-        self.saint.portrait_credit = ""
+    def test_no_adult_portrait_only_the_pages_own_pictures(self):
+        self.saint.portrait = image("Canonical portrait")
+        self.saint.portrait_credit = "Wikimedia Commons, CC BY-SA (test)"
         self.saint.save_revision().publish()
+        html = self.html("saint")
+        self.assertNotIn("<img", html.split('<main id="content">', 1)[1], "the adult portrait is never used")
+        self.assertIn("fs-art--profile fs-art--placeholder", html)
+
+    def test_images_render_without_a_credit_and_credits_never_render(self):
         page = self.pages["saint"]
         page.hero_illustration = image("Hero")
         page.hero_illustration_alt = "Hero picture"
-        page.save_revision().publish()
-        html = self.html("saint")
-        self.assertNotIn("<img", html.split('<main id="content">', 1)[1])
-        self.assertIn("fs-art--profile fs-art--placeholder", html)
-
-        page.hero_illustration_credit = "Painted for Sites of Grace (test)"
-        page.save_revision().publish()
+        page.context_illustration = image("Context")
+        page.context_illustration_alt = "Context picture"
+        page.full_clean()                       # no credit: still valid
+        page.save_revision().publish()          # and publishes
         html = self.html("saint")
         self.assertIn('alt="Hero picture"', html)
-        self.assertIn("Painted for Sites of Grace (test)", html)
+        self.assertIn('alt="Context picture"', html)
+        self.assertNotIn("fs-art--profile fs-art--placeholder", html)
+
+        page.hero_illustration_credit = "HERO CREDIT NOTE (test)"
+        page.context_illustration_credit = "CONTEXT CREDIT NOTE (test)"
+        page.index_thumbnail = image("Thumb")
+        page.index_thumbnail_alt = "Thumbnail picture"
+        page.index_thumbnail_credit = "THUMB CREDIT NOTE (test)"
+        page.save_revision().publish()
+        html = self.html("saint")
+        with FS_ON:
+            index_html = FutureSaintsTestCase.html(self, self.saints.url, self.staff)
+        for out in (html, self.html("saint", self.staff), index_html):
+            self.assertNotIn("CREDIT NOTE", out, "never on the page, print sheet or meta")
+            self.assertNotIn("Pictures:", out)
+        self.assertIn('alt="Thumbnail picture"', index_html)
+
+    def test_sources_section_is_only_sources(self):
+        page = self.pages["saint"]
+        page.sources = [SourceLink(title="A test source", url="https://example.com/source")]
+        page.save_revision().publish()
+        html = self.html("saint")
+        self.assertIn('<h2 id="sources-h" class="fs-block-title">Sources</h2>', html)
+        self.assertNotIn("Credits", html)
 
     def test_placeholder_labels_and_build_slot_are_staff_only(self):
         with FS_ON:
