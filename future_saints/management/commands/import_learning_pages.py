@@ -21,11 +21,14 @@ Per page:
   Unchanged content: no revision ("0 changed").
 - Text is escaped; no HTML is accepted from the JSON. story_paragraphs and intro become <p>s.
 - Structural mappings only (no text is ever changed): semantic inherit names to the model's
-  QuickFact inherit keys, icon names to the model's icons, story_label to the saint choice.
+  QuickFact inherit keys, icon names to the model's icons, story_label to the saint choice,
+  short kind names to the model's content_kind, "type_specific" keys to the type's fields, and
+  each Bible reference split into book / chapter / verses that read back as the same text.
 """
 import glob
 import json
 import re
+from datetime import date
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
@@ -36,6 +39,7 @@ from django.utils.html import escape
 from catalog.models import SacredSitePage, SaintPage
 from future_saints.learning import SAINT_SOURCES, SITE_SOURCES, STORY_HEADING_CHOICES, _canonical_value
 from future_saints.models import (
+    BibleReference,
     EucharisticLearningPage,
     FunFact,
     FutureSaintsHomePage,
@@ -64,6 +68,8 @@ KIND_MODELS = {
     "holy_land": HolyLandLearningPage,
     "california_mission": MissionLearningPage,
 }
+# Short kind names the content files use.
+KIND_ALIASES = {"marian": "marian_apparition", "eucharistic": "eucharistic_miracle", "mission": "california_mission"}
 CANONICAL_MODELS = {"catalog.SaintPage": SaintPage, "catalog.SacredSitePage": SacredSitePage}
 
 # Semantic inherit names in the JSON -> the model's QuickFact.inherit keys, by page family.
@@ -79,12 +85,30 @@ SITE_INHERIT = {
 # JSON icon names that differ from the model's icon keys.
 ICON_ALIASES = {"calendar-cross": "feast"}
 
+# "type_specific" keys -> each type's own rich-text fields (one escaped paragraph each).
+# Holy Land "bible_references" is handled separately (the BibleReference rows).
+TYPE_FIELDS = {
+    MarianLearningPage: {"who_saw_her": "witnesses", "marys_message": "message", "prayer": "prayer",
+                         "church_recognition": "recognition_note"},
+    EucharisticLearningPage: {"what_catholics_believe": "belief", "what_was_reported": "reported",
+                              "what_the_church_says": "church_says", "evidence_note": "evidence_note"},
+    HolyLandLearningPage: {"then": "then_text", "now": "now_text", "what_historians_know": "what_we_know",
+                           "what_comes_from_tradition": "tradition"},
+    MissionLearningPage: {"native_peoples_and_history": "native_peoples", "mission_life": "mission_life",
+                          "architecture": "architecture"},
+}
+# Types with a free-text story heading (empty shows "The Story").
+FREE_STORY_LABEL = (HolyLandLearningPage, MissionLearningPage)
+BIBLE_REFERENCE = re.compile(r"^(?P<book>.+?) (?P<chapter>\d+)(?::(?P<verses>.+))?$")
+
 PAGE_KEYS = {
     "kind", "parent_index", "slug", "canonical", "student_title", "subtitle", "story_label", "intro",
     "story_paragraphs", "quick_facts", "timeline", "fun_facts", "words_to_know", "think_about_it",
-    "reflection_question", "kindness_prompt", "quiz", "sources",
+    "reflection_question", "kindness_prompt", "quiz", "sources", "type_specific",
+    "founding_number", "founding_date", "founding_date_display", "founding_source_note",
 }
 SAINT_ONLY_KEYS = {"kindness_prompt"}
+MISSION_ONLY_KEYS = {"founding_number", "founding_date", "founding_date_display", "founding_source_note"}
 GRADE_WORDING = re.compile(r"\bgrades?\s*[0-9k]|\bgrade[- ]level\b|\breading level\b", re.IGNORECASE)
 
 
@@ -173,13 +197,16 @@ class Command(BaseCommand):
         unknown = set(row) - PAGE_KEYS
         if unknown:
             errors.append(f"unknown key(s): {', '.join(sorted(unknown))} (not imported; nothing is dropped silently)")
-        kind = row.get("kind")
+        kind = KIND_ALIASES.get(row.get("kind"), row.get("kind"))
         model = KIND_MODELS.get(kind)
         if model is None:
-            raise PageError(f'"kind" must be one of {", ".join(KIND_MODELS)} (got {kind!r})')
+            raise PageError(f'"kind" must be one of {", ".join([*KIND_MODELS, *KIND_ALIASES])} (got {row.get("kind")!r})')
         for key in SAINT_ONLY_KEYS & set(row):
             if model is not SaintLearningPage:
                 errors.append(f'"{key}" exists only on saint pages (this page is {kind})')
+        for key in sorted(MISSION_ONLY_KEYS & set(row)):
+            if model is not MissionLearningPage:
+                errors.append(f'"{key}" exists only on mission pages (this page is {kind})')
         for key in ("parent_index", "slug", "canonical", "student_title", "intro", "story_paragraphs", "quiz"):
             if not row.get(key):
                 errors.append(f'"{key}" is required')
@@ -271,6 +298,12 @@ class Command(BaseCommand):
                 scalars["story_label"] = by_label.get(label, label)
             else:
                 errors.append(f'story_label {label!r} must be one of {", ".join(by_label)}')
+        elif model in FREE_STORY_LABEL:
+            if not isinstance(label, str):
+                errors.append('"story_label" must be text')
+            else:
+                L(errors, model, "story_label", label, "story_label")
+                scalars["story_label"] = label
         elif label and label != "The Story":
             errors.append(f'story_label {label!r}: {model.__name__} has no story label field (it always shows "The Story")')
 
@@ -339,10 +372,90 @@ class Command(BaseCommand):
                 out.append({"text": c.get("text", ""), "is_correct": c.get("correct") is True})
             children["quiz"].append({"prompt": q.get("prompt", ""), "explanation": q.get("explanation", ""), "choices": out})
 
+        self._type_specific(row, model, scalars, children, errors)
+        if model is MissionLearningPage:
+            self._founding(row, scalars, errors)
+
         hits = sorted({m.group(0) for m in GRADE_WORDING.finditer(json.dumps(row, ensure_ascii=False))})
         if hits:
             errors.append(f"grade-level wording isn't allowed (found: {', '.join(hits)})")
         return scalars, children
+
+    def _type_specific(self, row, model, scalars, children, errors):
+        """Map "type_specific" onto the type's fields. A key without a field stops the page."""
+        block = row.get("type_specific") or {}
+        if not isinstance(block, dict):
+            errors.append('"type_specific" must be an object')
+            return
+        fields = TYPE_FIELDS.get(model, {})
+        known = set(fields) | ({"bible_references"} if model is HolyLandLearningPage else set())
+        unknown = set(block) - known
+        if unknown:
+            errors.append(f"type_specific: no {model.__name__} field for key(s) {', '.join(sorted(unknown))} "
+                          f"(not imported; nothing is dropped silently)")
+        for key, field in fields.items():
+            value = block.get(key) or ""
+            if not isinstance(value, str):
+                errors.append(f"type_specific.{key} must be text")
+                continue
+            scalars[field] = _paragraphs([value]) if value else ""
+        if model is HolyLandLearningPage:
+            children["bible_references"] = self._bible_references(block.get("bible_references") or [], errors)
+
+    def _bible_references(self, refs, errors):
+        url_ok = URLValidator(schemes=["https"])
+        out = []
+        for i, ref in enumerate(refs):
+            where = f"type_specific.bible_references[{i}]"
+            if not isinstance(ref, dict):
+                errors.append(f"{where} must be an object")
+                continue
+            if set(ref) - {"reference", "url"}:
+                errors.append(f"{where}: unknown key(s) {sorted(set(ref) - {'reference', 'url'})}")
+            text = ref.get("reference") or ""
+            match = BIBLE_REFERENCE.match(text)
+            if not match:
+                errors.append(f'{where}.reference {text!r} isn\'t "Book chapter[:verses]"')
+                continue
+            item = {"book": match["book"], "chapter": int(match["chapter"]), "verses": match["verses"] or "",
+                    "url": ref.get("url") or "", "note": ""}
+            if BibleReference(**item).citation != text:
+                errors.append(f"{where}.reference {text!r} doesn't read back unchanged")
+            L = _check_length
+            L(errors, BibleReference, "book", item["book"], f"{where} (book)")
+            L(errors, BibleReference, "verses", item["verses"], f"{where} (verses)")
+            L(errors, BibleReference, "url", item["url"], f"{where}.url")
+            if item["url"]:
+                try:
+                    url_ok(item["url"])
+                except ValidationError:
+                    errors.append(f"{where}.url must be a valid https URL (got {item['url']!r})")
+            out.append(item)
+        return out
+
+    def _founding(self, row, scalars, errors):
+        """Mission founding fields, with the model's rules (1-21, each number used once)."""
+        number = row.get("founding_number")
+        if number is not None and (not isinstance(number, int) or isinstance(number, bool) or not 1 <= number <= 21):
+            errors.append(f"founding_number must be a whole number from 1 to 21 (got {number!r})")
+            number = None
+        if number is not None:
+            taken = MissionLearningPage.objects.filter(founding_number=number).exclude(slug=row["slug"]).first()
+            if taken is not None:
+                errors.append(f"founding_number {number} is already used by #{taken.pk} {taken.title!r}")
+        scalars["founding_number"] = number
+        raw = row.get("founding_date") or ""
+        try:
+            scalars["founding_date"] = date.fromisoformat(raw) if raw else None
+        except (TypeError, ValueError):
+            errors.append(f"founding_date must be an ISO date like 1769-07-16 (got {raw!r})")
+        for key in ("founding_date_display", "founding_source_note"):
+            value = row.get(key) or ""
+            if not isinstance(value, str):
+                errors.append(f'"{key}" must be text')
+                continue
+            _check_length(errors, MissionLearningPage, key, value, key)
+            scalars[key] = value
 
     def _quick_facts(self, facts, model, errors):
         inherit_map = SAINT_INHERIT if model is SaintLearningPage else SITE_INHERIT
@@ -390,6 +503,15 @@ class Command(BaseCommand):
         if model is SaintLearningPage:
             scalars["kindness_prompt"] = page.kindness_prompt or ""
             scalars["story_label"] = page.story_label or "the"
+        if model in FREE_STORY_LABEL:
+            scalars["story_label"] = page.story_label or ""
+        for field in TYPE_FIELDS.get(model, {}).values():
+            scalars[field] = getattr(page, field) or ""
+        if model is MissionLearningPage:
+            scalars["founding_number"] = page.founding_number
+            scalars["founding_date"] = page.founding_date
+            scalars["founding_date_display"] = page.founding_date_display or ""
+            scalars["founding_source_note"] = page.founding_source_note or ""
         scalars["canonical_id"] = page.canonical_id
         children = {
             "quick_facts": [{"icon": q.icon, "label": q.label, "inherit": q.inherit, "value": q.value}
@@ -403,6 +525,11 @@ class Command(BaseCommand):
                       "choices": [{"text": c.text, "is_correct": c.is_correct} for c in self._ordered(q.choices.all())]}
                      for q in self._ordered(page.quiz_questions.all())],
         }
+        if model is HolyLandLearningPage:
+            children["bible_references"] = [
+                {"book": b.book, "chapter": b.chapter, "verses": b.verses, "url": b.url, "note": b.note}
+                for b in self._ordered(page.bible_references.all())
+            ]
         return scalars, children
 
     @staticmethod
@@ -439,6 +566,8 @@ class Command(BaseCommand):
             question.choices = [QuizChoice(sort_order=j, **ch) for j, ch in enumerate(q["choices"])]
             questions.append(question)
         page.quiz_questions = questions
+        if "bible_references" in c:
+            page.bible_references = [BibleReference(sort_order=i, **b) for i, b in enumerate(c["bible_references"])]
 
     def report(self, plan, action, extra=""):
         p = plan
@@ -452,6 +581,21 @@ class Command(BaseCommand):
             f"sources {len(c['sources'])}, quiz {len(c['quiz'])} questions / "
             f"{sum(len(q['choices']) for q in c['quiz'])} choices; intro {p['words'][0]} words, story {p['words'][1]} words"
         )
+        s = p["scalars"]
+        fields = TYPE_FIELDS.get(p["model"], {})
+        if fields:
+            filled = [f for f in fields.values() if s.get(f)]
+            line = f"  type blocks: {len(filled)} of {len(fields)} filled ({', '.join(filled) or 'none'})"
+            if "bible_references" in c:
+                line += f"; Bible references {len(c['bible_references'])}: " + "; ".join(
+                    BibleReference(**b).citation for b in c["bible_references"])
+            self.stdout.write(line)
+        if p["model"] in FREE_STORY_LABEL:
+            self.stdout.write(f"  story heading: {(s.get('story_label') or 'The Story')!r}")
+        if p["model"] is MissionLearningPage:
+            self.stdout.write(f"  founding: #{s['founding_number']}, {s['founding_date']} ({s['founding_date_display']!r})")
+        icons = ", ".join(f"{f['label']}={f['icon']}" for f in c["quick_facts"])
+        self.stdout.write(f"  quick fact icons: {icons}")
         for f in c["quick_facts"]:
             if f["inherit"]:
                 live = _canonical_value(f["inherit"], p["canonical"])
