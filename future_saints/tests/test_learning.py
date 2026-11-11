@@ -148,15 +148,64 @@ class TemplateTests(LearningTestCase):
             "saint": ["The Story", "Timeline", "Fun Facts", "Quiz"],
             "marian_apparition": ["The Story", "Timeline", "Mary&#x27;s Message", "Quiz"],
             "eucharistic_miracle": ["The Story", "What Happened?", "Why It Matters", "Quiz"],
-            "holy_land": ["Bible Story", "Timeline", "People &amp; Places", "Quiz"],
+            "holy_land": ["Bible Story", "Timeline", "Then &amp; Now", "Quiz"],  # People & Places is empty
             "california_mission": ["Mission Story", "Timeline", "Native Peoples", "Build &amp; Quiz"],
         }
+        # The sections the cards point at, written (an empty one is hidden from visitors).
+        filled = {"marian_apparition": {"message": "<p>Pray.</p>"},
+                  "eucharistic_miracle": {"reported": "<p>Reported.</p>", "belief": "<p>Believed.</p>"},
+                  "holy_land": {"then_text": "<p>Then.</p>"},
+                  "california_mission": {"native_peoples": "<p>The people who lived here.</p>"}}
+        for kind, fields in filled.items():
+            page = self.pages[kind]
+            for field, value in fields.items():
+                setattr(page, field, value)
+            page.save_revision().publish()
         for kind in self.pages:
             html = self.html(kind)
             cards = re.findall(r'<a class="fs-lcard" href="#([a-z-]+)">.*?<span class="fs-lcard-title">(.*?)</span>', html, re.S)
             self.assertEqual([t for _, t in cards], expected[kind], kind)
             for anchor, _ in cards:
                 self.assertIn(f'id="{anchor}"', html, f"{kind}: #{anchor}")
+
+    def test_empty_sections_are_hidden_from_visitors_staff_see_the_note(self):
+        saint = self.pages["saint"]
+        saint.story = ""
+        saint.fun_facts = []
+        saint.words = []
+        saint.save_revision().publish()
+        empty = {                                   # the fixtures have no sources and no type blocks
+            "saint": ["story", "fun-facts", "words", "sources"],
+            "marian_apparition": ["witnesses", "message", "sources"],
+            "eucharistic_miracle": ["why-it-matters", "what-happened", "sources"],
+            "holy_land": ["bible", "people-places", "then-now", "known-tradition", "sources"],
+            "california_mission": ["native-peoples", "mission-life", "architecture", "founding", "sources"],
+        }
+        for kind, ids in empty.items():
+            visitor, staff = self.html(kind), self.html(kind, self.staff)
+            for section in ids:
+                self.assertNotIn(f'<section id="{section}"', visitor, f"{kind}: #{section} hidden, heading included")
+                self.assertNotIn(f'id="{section}-h"', visitor, f"{kind}: #{section} heading")
+                self.assertIn(f'<section id="{section}"', staff, f"{kind}: staff still see #{section}")
+            self.assertNotIn("Staff only", visitor, kind)
+            self.assertIn("Staff only:", staff, kind)
+            for section in ("timeline", "quiz"):           # these have content
+                self.assertIn(f'<section id="{section}"', visitor, f"{kind}: #{section}")
+        self.assertIn("Staff only: not written yet.", self.html("holy_land", self.staff).split('id="people-places"')[1].split("</section>")[0])
+        self.assertIn('<section id="recognition"', self.html("marian_apparition"), "shown: the canonical status is content")
+
+    def test_holy_land_third_card_follows_people_and_places(self):
+        def third_card():
+            html = self.html("holy_land")
+            cards = re.findall(r'<a class="fs-lcard" href="#([a-z-]+)">.*?<span class="fs-lcard-title">(.*?)</span>', html, re.S)
+            self.assertEqual(len(cards), 4)
+            return cards[2]
+
+        self.assertEqual(third_card(), ("then-now", "Then &amp; Now"), "no card points at the empty People & Places")
+        page = self.pages["holy_land"]
+        page.people_places = "<p>Peter and John ran to the tomb.</p>"
+        page.save_revision().publish()
+        self.assertEqual(third_card(), ("people-places", "People &amp; Places"), "switches back once it has content")
 
     def test_heading_is_meet_plus_student_title_on_saints_only(self):
         page = self.pages["saint"]
@@ -269,6 +318,27 @@ class PlacementTests(LearningTestCase):
         page.founding_number = 22
         with self.assertRaises(ValidationError):
             page.full_clean()
+
+    def test_founding_number_is_unique(self):
+        page = self.pages["california_mission"]
+        page.founding_number = 1
+        page.full_clean()
+        page.save_revision().publish()
+        other = MissionLearningPage(title="Second mission", slug="second-mission", canonical=page.canonical,
+                                    founding_number=2)
+        page.get_parent().add_child(instance=other)
+        other.founding_number = 1
+        with self.assertRaisesMessage(ValidationError, "Founding number 1 is already used"):
+            other.full_clean()
+        page.founding_number = 1
+        page.full_clean()                       # its own number isn't a clash
+
+    def test_every_quick_fact_icon_is_in_the_sprite(self):
+        with FS_ON:
+            html = self.html(self.pages["california_mission"].url)
+        for key, _ in QuickFact._meta.get_field("icon").choices:
+            if key:
+                self.assertIn(f'<symbol id="fs-i-{key}"', html, key)
 
 
 class QuizFormTests(LearningTestCase):

@@ -3,27 +3,41 @@
   Holy Land: Find It in the Bible, People & Places, Then and Now (history,
   never travel), What We Know vs. Tradition.
 {% endcomment %}
+{% if page.bible_references.all or request.user.is_staff %}
 <section id="bible" class="fs-section-block" aria-labelledby="bible-h">
   <h2 id="bible-h" class="fs-block-title">Find It in the Bible</h2>
   {% if page.bible_references.all %}
     <ul class="fs-bible">{% for ref in page.bible_references.all %}<li class="fs-type-card">{% include "future_saints/includes/_icon.html" with name="book" class="fs-type-card-icon" %}<span>{% if ref.url %}<a href="{{ ref.url }}" rel="noopener">{{ ref.citation }}</a>{% else %}{{ ref.citation }}{% endif %}{% if ref.note %} <span class="fs-bible-note">{{ ref.note }}</span>{% endif %}</span></li>{% endfor %}</ul>
   {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: add the Bible passages.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.people_places or request.user.is_staff %}
 <section id="people-places" class="fs-section-block" aria-labelledby="people-places-h">
   <h2 id="people-places-h" class="fs-block-title">People &amp; Places</h2>
   {% if page.people_places %}<div class="fs-prose">{{ page.people_places|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.then_text or page.now_text or page.then_and_now or request.user.is_staff %}
 <section id="then-now" class="fs-section-block" aria-labelledby="then-now-h">
   <h2 id="then-now-h" class="fs-block-title">Then and Now</h2>
-  {% if page.then_and_now %}<div class="fs-type-card"><div class="fs-prose">{{ page.then_and_now|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
+  {% if page.then_text or page.now_text %}
+    <div class="fs-compare">
+      {% if page.then_text %}<div class="fs-type-card"><h3>Then</h3><div class="fs-prose">{{ page.then_text|richtext }}</div></div>{% endif %}
+      {% if page.now_text %}<div class="fs-type-card"><h3>Now</h3><div class="fs-prose">{{ page.now_text|richtext }}</div></div>{% endif %}
+    </div>
+  {% endif %}
+  {% if page.then_and_now %}<div class="fs-type-card"><div class="fs-prose">{{ page.then_and_now|richtext }}</div></div>{% elif not page.then_text and not page.now_text and request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.what_we_know or page.tradition or request.user.is_staff %}
 <section id="known-tradition" class="fs-section-block" aria-labelledby="known-tradition-h">
   <h2 id="known-tradition-h" class="fs-block-title">What We Know and What Tradition Says</h2>
   <div class="fs-compare">
-    <div class="fs-type-card"><h3>What We Know</h3>{% if page.what_we_know %}<div class="fs-prose">{{ page.what_we_know|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>
-    <div class="fs-type-card"><h3>What Tradition Says</h3>{% if page.tradition %}<div class="fs-prose">{{ page.tradition|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>
+    {% if page.what_we_know or request.user.is_staff %}<div class="fs-type-card"><h3>What We Know</h3>{% if page.what_we_know %}<div class="fs-prose">{{ page.what_we_know|richtext }}</div>{% else %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>{% endif %}
+    {% if page.tradition or request.user.is_staff %}<div class="fs-type-card"><h3>What Tradition Says</h3>{% if page.tradition %}<div class="fs-prose">{{ page.tradition|richtext }}</div>{% else %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}</div>{% endif %}
   </div>
 </section>
+{% endif %}

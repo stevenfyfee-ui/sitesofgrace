@@ -4,15 +4,19 @@
   The status line is the canonical page's DDF judgment, in the adult site's
   plain-English wording; it is never a claim of proof.
 {% endcomment %}
+{% if page.witnesses or request.user.is_staff %}
 <section id="witnesses" class="fs-section-block" aria-labelledby="witnesses-h">
   <h2 id="witnesses-h" class="fs-block-title">Who Saw Her</h2>
   {% if page.witnesses %}<div class="fs-prose">{{ page.witnesses|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
+{% if page.message or request.user.is_staff %}
 <section id="message" class="fs-section-block" aria-labelledby="message-h">
   <h2 id="message-h" class="fs-block-title">Mary's Message</h2>
   {% if page.message %}<div class="fs-type-card fs-type-card--feature">{% include "future_saints/includes/_icon.html" with name="dove" class="fs-type-card-icon" %}<div class="fs-prose">{{ page.message|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
+{% endif %}
 
 {% if page.prayer %}
 <section id="prayer" class="fs-section-block" aria-labelledby="prayer-h">
@@ -21,6 +25,7 @@
 </section>
 {% endif %}
 
+{% if fs_church_status or page.recognition_note or request.user.is_staff %}
 <section id="recognition" class="fs-section-block" aria-labelledby="recognition-h">
   <h2 id="recognition-h" class="fs-block-title">What the Church Says</h2>
   <div class="fs-type-card">
@@ -28,3 +33,4 @@
     {% if page.recognition_note %}<div class="fs-prose">{{ page.recognition_note|richtext }}</div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: explain what this judgment means, and what it does not claim.</p>{% endif %}
   </div>
 </section>
+{% endif %}

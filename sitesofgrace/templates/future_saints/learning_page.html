@@ -5,7 +5,8 @@
   region from comp 03 (St. Carlo): a top row, b art column, c title, d story +
   Quick Facts, e four learning cards, f Think About It band, g sections below.
   Type differences are only: accent tokens (fs-type-*), card set, and the
-  type block include. One version of all text for grades 2–5.
+  type block include. One version of all text for grades 2–5. A section with
+  no content is left out, heading included; staff see a note in its place.
 {% endcomment %}
 {% block body_class %}fs-learning fs-type-{{ page.content_kind }}{% endblock %}
 
@@ -57,37 +58,48 @@
 
 {# g. Sections #}
 <div class="fs-wrap fs-sections fs-screen-only">
+  {% if page.story or request.user.is_staff %}
   <section id="story" class="fs-section-block" aria-labelledby="story-h">
     <h2 id="story-h" class="fs-block-title">{{ page.story_heading }}</h2>
-    <div class="fs-prose">{{ page.story|richtext }}</div>
+    {% if page.story %}<div class="fs-prose">{{ page.story|richtext }}</div>{% else %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
   </section>
+  {% endif %}
 
+  {% if page.timeline.all or request.user.is_staff %}
   <section id="timeline" class="fs-section-block" aria-labelledby="timeline-h">
     <h2 id="timeline-h" class="fs-block-title">Timeline</h2>
     {% include "future_saints/includes/_timeline.html" %}
   </section>
+  {% endif %}
 
+  {% if page.fun_facts.all or request.user.is_staff %}
   <section id="fun-facts" class="fs-section-block" aria-labelledby="fun-facts-h">
     <h2 id="fun-facts-h" class="fs-block-title">Fun Facts</h2>
     {% if page.fun_facts.all %}
       <ul class="fs-funfacts">{% for fact in page.fun_facts.all %}<li class="fs-funfact">{% include "future_saints/includes/_icon.html" with name="lightbulb" class="fs-funfact-icon" %}<p>{{ fact.text }}</p></li>{% endfor %}</ul>
     {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no fun facts yet.</p>{% endif %}
   </section>
+  {% endif %}
 
+  {% if page.words.all or request.user.is_staff %}
   <section id="words" class="fs-section-block" aria-labelledby="words-h">
     <h2 id="words-h" class="fs-block-title">Words to Know</h2>
     {% if page.words.all %}
       <dl class="fs-words">{% for w in page.words.all %}<div class="fs-word"><dt>{{ w.word }}</dt><dd>{{ w.definition }}</dd></div>{% endfor %}</dl>
     {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: no words yet.</p>{% endif %}
   </section>
+  {% endif %}
 
   {% include "future_saints/learning/_type_"|add:kind|add:".html" %}
 
+  {% if fs_quiz or request.user.is_staff %}
   <section id="quiz" class="fs-section-block" aria-labelledby="quiz-h">
     <h2 id="quiz-h" class="fs-block-title">Quiz</h2>
     {% include "future_saints/includes/_quiz.html" %}
   </section>
+  {% endif %}
 
+  {% if page.sources.all or fs_picture_credits or request.user.is_staff %}
   <section id="sources" class="fs-section-block" aria-labelledby="sources-h">
     <h2 id="sources-h" class="fs-block-title">Sources &amp; Credits</h2>
     {% if page.sources.all %}
@@ -95,6 +107,7 @@
     {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: add at least one source before publishing.</p>{% endif %}
     {% if fs_picture_credits %}<p class="fs-picture-credits"><strong>Pictures:</strong> {{ fs_picture_credits|join:"; " }}</p>{% endif %}
   </section>
+  {% endif %}
 
   {% if page.reflection_question %}
   <section id="reflection" class="fs-section-block fs-reflection" aria-labelledby="reflection-h">
