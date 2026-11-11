@@ -42,6 +42,9 @@ QUICK_FACT_ICONS = [
     ("dove", "Dove"),
     ("scroll", "Scroll"),
     ("book", "Book"),
+    ("person", "Person"),
+    ("people", "People (group)"),
+    ("number", "Number"),
 ]
 
 # Canonical fields a Quick Fact may read live. Saint sources apply to saint
@@ -69,6 +72,11 @@ INHERIT_CHOICES = [("", "Don't inherit: use the value below")] + [
 ]
 
 STORY_HEADING_CHOICES = [("the", "The Story"), ("his", "His Story"), ("her", "Her Story")]
+
+
+def _story_label_field():
+    """Holy Land and Mission pages: free-text story heading, e.g. "The Bible Story"."""
+    return models.CharField(max_length=40, blank=True, help_text='The story heading. Leave empty for "The Story".')
 
 # The sprite icon drawn in each type's placeholder art frames.
 TYPE_ICONS = {
@@ -325,6 +333,10 @@ class LearningPage(FutureSaintsGateMixin, Page):
             "thumbnail": _art(self.index_thumbnail, self.index_thumbnail_alt, self.index_thumbnail_credit),
         }
 
+    def cards(self):
+        """The four learning cards under the title."""
+        return self.learning_cards
+
     def type_context(self, request):
         """Extra template context for the type-specific blocks."""
         return {}
@@ -338,7 +350,7 @@ class LearningPage(FutureSaintsGateMixin, Page):
             "fs_learning": self,
             "fs_quick_facts": self.quick_fact_rows(),
             "fs_quiz": self.quiz_data(),
-            "fs_cards": self.learning_cards,
+            "fs_cards": self.cards(),
             "fs_art": self.art(),
             "fs_points": self.learning_points(),
             "fs_type_icon": TYPE_ICONS.get(self.content_kind, "mark"),
@@ -579,8 +591,11 @@ class HolyLandLearningPage(LearningPage):
         limit_choices_to={"live": True, "category": "Holy Land"},
         help_text="The existing Holy Land page this profile teaches from.",
     )
+    story_label = _story_label_field()
     people_places = RichTextField(blank=True, features=SHORT_FEATURES, help_text="The people and places in this story.")
     then_and_now = RichTextField(blank=True, features=SHORT_FEATURES, help_text="History then and the place now. Not travel.")
+    then_text = RichTextField(blank=True, features=SHORT_FEATURES, help_text='The "Then" card: the place in Bible times.')
+    now_text = RichTextField(blank=True, features=SHORT_FEATURES, help_text='The "Now" card: the place today. Not travel.')
     what_we_know = RichTextField(blank=True, features=SHORT_FEATURES, help_text="What historians and archaeologists know.")
     tradition = RichTextField(blank=True, features=SHORT_FEATURES, help_text="What tradition says, where it is less certain.")
 
@@ -591,17 +606,34 @@ class HolyLandLearningPage(LearningPage):
         ("People & Places", "Who was here, and where.", "marker", "people-places", "blue"),
         ("Quiz", "Check what you learned!", "clipboard", "quiz", "lavender"),
     )
+    # The third card while People & Places is empty, so no card points at an empty section.
+    then_now_card = _cards(("Then & Now", "How it changed over time.", "map", "then-now", "blue"))[0]
 
-    content_panels = Page.content_panels + [FieldPanel("canonical")] + LearningPage.common_panels + [
+    content_panels = Page.content_panels + [
+        FieldPanel("canonical"),
+        MultiFieldPanel([FieldPanel("student_title"), FieldPanel("subtitle"), FieldPanel("story_label")], heading="Title"),
+    ] + LearningPage.common_panels[1:] + [
         InlinePanel("bible_references", label="Bible reference", heading="Find It in the Bible"),
         MultiFieldPanel(
-            [FieldPanel("people_places"), FieldPanel("then_and_now"), FieldPanel("what_we_know"), FieldPanel("tradition")],
+            [FieldPanel("people_places"), FieldPanel("then_text"), FieldPanel("now_text"), FieldPanel("then_and_now"),
+             FieldPanel("what_we_know"), FieldPanel("tradition")],
             heading="Holy Land",
         ),
     ]
 
     class Meta:
         verbose_name = "Future Saints Holy Land profile"
+
+    @property
+    def story_heading(self):
+        return self.story_label or "The Story"
+
+    def cards(self):
+        if self.people_places:
+            return self.learning_cards
+        cards = list(self.learning_cards)
+        cards[2] = self.then_now_card
+        return tuple(cards)
 
 
 class MissionLearningPage(LearningPage):
@@ -610,6 +642,7 @@ class MissionLearningPage(LearningPage):
         limit_choices_to=Q(live=True) & Q(trail_stops__trail__slug=MISSION_TRAIL_SLUG),
         help_text="The current Mission Trail page (never the older duplicate pages).",
     )
+    story_label = _story_label_field()
     founding_number = models.PositiveSmallIntegerField(
         null=True, blank=True, help_text="Founding order 1–21 (not the trail's south-to-north stop order).",
     )
@@ -634,17 +667,27 @@ class MissionLearningPage(LearningPage):
             [FieldPanel("founding_number"), FieldPanel("founding_date"), FieldPanel("founding_date_display"), FieldPanel("founding_source_note")],
             heading="Founding (verified, with a source)",
         ),
-    ] + LearningPage.common_panels + [
+        MultiFieldPanel([FieldPanel("student_title"), FieldPanel("subtitle"), FieldPanel("story_label")], heading="Title"),
+    ] + LearningPage.common_panels[1:] + [
         MultiFieldPanel([FieldPanel("native_peoples"), FieldPanel("mission_life"), FieldPanel("architecture")], heading="Mission"),
     ]
 
     class Meta:
         verbose_name = "Future Saints California mission profile"
 
+    @property
+    def story_heading(self):
+        return self.story_label or "The Story"
+
     def clean(self):
         super().clean()
-        if self.founding_number is not None and not 1 <= self.founding_number <= 21:
+        if self.founding_number is None:
+            return
+        if not 1 <= self.founding_number <= 21:
             raise ValidationError({"founding_number": "Founding numbers run from 1 to 21."})
+        taken = MissionLearningPage.objects.filter(founding_number=self.founding_number).exclude(pk=self.pk).first()
+        if taken is not None:
+            raise ValidationError({"founding_number": f"Founding number {self.founding_number} is already used by {taken.title!r}."})
 
     def type_context(self, request):
         siblings = (

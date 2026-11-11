@@ -17,7 +17,13 @@
 
 <section id="then-now" class="fs-section-block" aria-labelledby="then-now-h">
   <h2 id="then-now-h" class="fs-block-title">Then and Now</h2>
-  {% if page.then_and_now %}<div class="fs-type-card"><div class="fs-prose">{{ page.then_and_now|richtext }}</div></div>{% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
+  {% if page.then_text or page.now_text %}
+    <div class="fs-compare">
+      {% if page.then_text %}<div class="fs-type-card"><h3>Then</h3><div class="fs-prose">{{ page.then_text|richtext }}</div></div>{% endif %}
+      {% if page.now_text %}<div class="fs-type-card"><h3>Now</h3><div class="fs-prose">{{ page.now_text|richtext }}</div></div>{% endif %}
+    </div>
+  {% endif %}
+  {% if page.then_and_now %}<div class="fs-type-card"><div class="fs-prose">{{ page.then_and_now|richtext }}</div></div>{% elif not page.then_text and not page.now_text and request.user.is_staff %}<p class="fs-chip-staff">Staff only: not written yet.</p>{% endif %}
 </section>
 
 <section id="known-tradition" class="fs-section-block" aria-labelledby="known-tradition-h">
