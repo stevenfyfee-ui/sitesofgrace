@@ -148,7 +148,7 @@ class TemplateTests(LearningTestCase):
             "saint": ["The Story", "Timeline", "Fun Facts", "Quiz"],
             "marian_apparition": ["The Story", "Timeline", "Mary&#x27;s Message", "Quiz"],
             "eucharistic_miracle": ["The Story", "What Happened?", "Why It Matters", "Quiz"],
-            "holy_land": ["Bible Story", "Timeline", "People &amp; Places", "Quiz"],
+            "holy_land": ["Bible Story", "Timeline", "Then &amp; Now", "Quiz"],  # People & Places is empty
             "california_mission": ["Mission Story", "Timeline", "Native Peoples", "Build &amp; Quiz"],
         }
         for kind in self.pages:
@@ -157,6 +157,19 @@ class TemplateTests(LearningTestCase):
             self.assertEqual([t for _, t in cards], expected[kind], kind)
             for anchor, _ in cards:
                 self.assertIn(f'id="{anchor}"', html, f"{kind}: #{anchor}")
+
+    def test_holy_land_third_card_follows_people_and_places(self):
+        def third_card():
+            html = self.html("holy_land")
+            cards = re.findall(r'<a class="fs-lcard" href="#([a-z-]+)">.*?<span class="fs-lcard-title">(.*?)</span>', html, re.S)
+            self.assertEqual(len(cards), 4)
+            return cards[2]
+
+        self.assertEqual(third_card(), ("then-now", "Then &amp; Now"), "no card points at the empty People & Places")
+        page = self.pages["holy_land"]
+        page.people_places = "<p>Peter and John ran to the tomb.</p>"
+        page.save_revision().publish()
+        self.assertEqual(third_card(), ("people-places", "People &amp; Places"), "switches back once it has content")
 
     def test_heading_is_meet_plus_student_title_on_saints_only(self):
         page = self.pages["saint"]
@@ -269,6 +282,27 @@ class PlacementTests(LearningTestCase):
         page.founding_number = 22
         with self.assertRaises(ValidationError):
             page.full_clean()
+
+    def test_founding_number_is_unique(self):
+        page = self.pages["california_mission"]
+        page.founding_number = 1
+        page.full_clean()
+        page.save_revision().publish()
+        other = MissionLearningPage(title="Second mission", slug="second-mission", canonical=page.canonical,
+                                    founding_number=2)
+        page.get_parent().add_child(instance=other)
+        other.founding_number = 1
+        with self.assertRaisesMessage(ValidationError, "Founding number 1 is already used"):
+            other.full_clean()
+        page.founding_number = 1
+        page.full_clean()                       # its own number isn't a clash
+
+    def test_every_quick_fact_icon_is_in_the_sprite(self):
+        with FS_ON:
+            html = self.html(self.pages["california_mission"].url)
+        for key, _ in QuickFact._meta.get_field("icon").choices:
+            if key:
+                self.assertIn(f'<symbol id="fs-i-{key}"', html, key)
 
 
 class QuizFormTests(LearningTestCase):
