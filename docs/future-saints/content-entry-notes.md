@@ -37,6 +37,9 @@ fun facts and timeline lines one or two short sentences each.
 
 ## Pictures
 
+- **Image policy:** Future Saints images must be original, commissioned, public domain, or licensed with no
+  attribution requirement. Never use CC BY / CC BY-SA or other images that require a visible
+  credit, because Future Saints never displays credits.
 - A picture appears when its **image** is chosen (with alt text). With no image, the page shows the
   placeholder frame. Only images uploaded to the Future Saints page's own fields are used; the adult
   site's images (for example SaintPage portraits, which are CC-licensed and need attribution) never are.
