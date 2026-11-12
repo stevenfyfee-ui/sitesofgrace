@@ -126,3 +126,95 @@ outline's southernmost vertex (646.01, 985.89) and its northwest corner (82.27, 
 - The trail line follows the trail's stop order.
 - The border control points match the outline's extremes.
 - The `albers()` reference values match PROJ.
+
+---
+
+# World Discovery Map (Phase 4)
+
+The world map at `/future-saints/map/` uses the same approach as the California map. The land outline
+and every pin go through one function, `future_saints.geo.world_viewbox(lat, lng)`: the outline once,
+when `tools/build_world_outline.py` builds it, and the pins on every request from each story's own
+canonical coordinates. Comp 01's map hero is the style target only.
+
+## Geography source
+
+- **Natural Earth, 1:110m Physical Vectors, Land (`ne_110m_land`), version 5.1.2.**
+  https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
+- Licence: public domain (Natural Earth terms of use, "All versions of Natural Earth raster + vector
+  map data … are in the public domain").
+- The build used the GeoJSON copy at
+  https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_110m_land.geojson.
+  That download isn't committed.
+- The build:
+  - leaves out **Antarctica**: any land wholly south of 60°S (8 rings), to save space;
+  - simplifies each ring with Douglas-Peucker at **0.4 units** (about 15 km at the equator);
+  - drops islands smaller than 2 square units.
+- The result is 109 polygons, 1 hole and 3,104 points.
+- Files written:
+  - `sitesofgrace/static/future_saints/svg/world-outline.svg`, 43 KB: one `<path id="fs-world-land">`.
+    The map and the homepage preview both `<use>` it, so browsers fetch it once. In production it's
+    served with a hashed, cache-forever name.
+  - `future_saints/data/world_outline.json`: the same rings, for the tests and the staff checks.
+
+## Projection
+
+**Equal Earth** (Šavrič, Patterson & Jenny, 2018, *International Journal of Geographical Information
+Science* 33(3)):
+- on a sphere, central meridian 0°;
+- coefficients A1 = 1.340264, A2 = −0.081106, A3 = 0.000893, A4 = 0.003796;
+- in plain Python (`geo.equal_earth`).
+
+When written, it was checked against PROJ (`+proj=eqearth +R=1`) at nine points, and the difference
+was 0.
+
+## viewBox
+
+```
+viewBox = "0 0 1000 445"     preserveAspectRatio = "xMidYMid meet"
+x_view = 500 + x_EE × 500 / x_EE(0°, 180°)
+y_view = (y_EE(90°N) − y_EE) × 500 / x_EE(0°, 180°)        (SVG y grows downward)
+```
+
+- 90°N is at y 0. 60°S is at y 444.4, the bottom edge.
+- The map box keeps the viewBox's aspect ratio, so a pin's `left` / `top` percentages are x/1000 and
+  y/445.
+- The compass rose is in the South Pacific, around (70, 370). A test checks it's clear of land.
+
+## Control points
+
+| point | lat, lng | viewBox |
+|---|---|---|
+| Mexico City | 19.4326, −99.1332 | 232.2, 171.4 |
+| Fátima | 39.6317, −8.6724 | 478.6, 101.5 |
+| Lourdes | 43.0967, −0.0558 | 499.9, 90.4 |
+| Rome | 41.9028, 12.4964 | 530.4, 94.2 |
+| Jerusalem | 31.7784, 35.2296 | 590.8, 127.7 |
+
+All five are on land.
+- West to east: Mexico City, Fátima, Lourdes, Rome, Jerusalem.
+- North to south: Lourdes, Rome, Fátima, Jerusalem, Mexico City.
+
+## Pins
+
+Only **published** stories appear.
+
+| Story type | Where its pin goes |
+|---|---|
+| Marian, Eucharistic, Holy Land | the canonical page's coordinates |
+| Saint | `map_place` if set; otherwise the saint's one live principal site (`SacredSitePage.associated_saint`) |
+| California missions | one callout at 37.2°N, 119.6°W, with the count of published mission pages |
+
+A saint with no principal site, or with two or more, is listed but not pinned, and staff see it as
+needing a map place.
+
+**Offsets.** Markers are 34 px discs. At 1440 the map is 691 px wide. Where markers would overlap
+there, a reviewed offset in `worldmap.WORLD_MARKER_OFFSETS` moves the marker on desktop (1024 and
+wider) only. A thin line and a dot anchor it to its true spot.
+
+| Story | Offset (px) |
+|---|---|
+| Lourdes | (−16, 0) |
+| Saint Carlo Acutis (Assisi) | (0, −8) |
+| Lanciano | (0, 28) |
+
+These are the smallest offsets that clear every marker. Staff see any new overlap on the map page.
