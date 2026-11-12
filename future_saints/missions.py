@@ -69,13 +69,18 @@ def badge_box(x, y, number, offset, scale):
 
 # City labels: parchment ribbons in the Pacific (viewBox units: x, y, width, height), each
 # with a leader line to a dot at the city's real position (city-centre lat/lng through the
-# same projection). Placed so no ribbon touches the coast, an island, the compass, the
-# scroll, another ribbon, or any bell or badge at the six QA widths (test_missions).
+# same projection). The text is CITY_LABEL_FONT units, so it is at least 11 px only once the
+# map is CITY_LABEL_MIN_MAP_PX wide; on a narrower map the ribbons, dots and leaders hide
+# (a CSS container query on .fs-map). Placed so no ribbon touches the coast, an island, the
+# compass, the scroll, another ribbon, or any bell or badge at the QA widths where they show.
+CITY_LABEL_FONT = 22
+CITY_LABEL_MIN_PX = 11
+CITY_LABEL_MIN_MAP_PX = 1000 * CITY_LABEL_MIN_PX / CITY_LABEL_FONT      # 500 px
 CITY_LABELS = [
-    {"name": "San Francisco", "lines": ["San", "Francisco"], "lat": 37.7749, "lng": -122.4194, "box": (16, 500, 132, 52)},
-    {"name": "Monterey", "lines": ["Monterey"], "lat": 36.6002, "lng": -121.8947, "box": (68, 596, 120, 30)},
-    {"name": "Los Angeles", "lines": ["Los Angeles"], "lat": 34.0522, "lng": -118.2437, "box": (344, 872, 156, 30)},
-    {"name": "San Diego", "lines": ["San Diego"], "lat": 32.7157, "lng": -117.1611, "box": (512, 1016, 132, 30)},
+    {"name": "San Francisco", "lines": ["San", "Francisco"], "lat": 37.7749, "lng": -122.4194, "box": (28, 472, 143, 54)},
+    {"name": "Monterey", "lines": ["Monterey"], "lat": 36.6002, "lng": -121.8947, "box": (80, 576, 130, 32)},
+    {"name": "Los Angeles", "lines": ["Los Angeles"], "lat": 34.0522, "lng": -118.2437, "box": (340, 860, 170, 32)},
+    {"name": "San Diego", "lines": ["San Diego"], "lat": 32.7157, "lng": -117.1611, "box": (496, 996, 143, 32)},
 ]
 
 
@@ -88,7 +93,8 @@ def city_labels():
         end_x, end_y = min(max(dot_x, x), x + w), min(max(dot_y, y), y + h)
         labels.append({
             "name": city["name"], "x": x, "y": y, "w": w, "h": h, "cx": x + w / 2,
-            "lines": [{"text": t, "y": y + 21 + 22 * i} for i, t in enumerate(city["lines"])],
+            "lines": [{"text": t, "y": y + (h - 23 * (len(city["lines"]) - 1)) / 2 + 7.5 + 23 * i}
+                      for i, t in enumerate(city["lines"])],
             "dot_x": round(dot_x, 2), "dot_y": round(dot_y, 2), "end_x": round(end_x, 2), "end_y": round(end_y, 2),
             "ribbon": (f"M{x + 6},{y} H{x + w - 6} L{x + w},{y + h / 2} L{x + w - 6},{y + h} "
                        f"H{x + 6} L{x},{y + h / 2} Z"),

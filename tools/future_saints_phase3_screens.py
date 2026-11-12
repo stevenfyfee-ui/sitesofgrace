@@ -43,8 +43,9 @@ PINS_JS = """() => Array.from(document.querySelectorAll('[data-fs-pin]')).map(b 
 MARKS_JS = """() => { const box = e => { const r = e.getBoundingClientRect(); return [r.left, r.top, r.right, r.bottom]; };
   return {badges: Array.from(document.querySelectorAll('.fs-pin-num')).map(e => [e.textContent, box(e)]),
           bells: Array.from(document.querySelectorAll('.fs-pin-bell')).map(box),
-          cities: Array.from(document.querySelectorAll('[data-fs-city]')).filter(g => getComputedStyle(g).display !== 'none')
-            .map(g => [g.getAttribute('data-fs-city'), box(g.querySelector('path'))])}; }"""
+          cities: Array.from(document.querySelectorAll('[data-fs-city]')).filter(g => getComputedStyle(g.closest('.fs-map-cities')).display !== 'none')
+            .map(g => [g.getAttribute('data-fs-city'), box(g.querySelector('path')),
+                       22 * g.querySelector('text').getScreenCTM().a])}; }"""
 BOXES_JS = """() => { const m = document.querySelector('.fs-map').getBoundingClientRect();
   const p = document.querySelector('#mission-panel').getBoundingClientRect();
   return {map: [m.left, m.top, m.right, m.bottom], panel: [p.left, p.top, p.right, p.bottom]}; }"""
@@ -92,8 +93,12 @@ def main():
             clashes = [(a[0], b[0]) for i, a in enumerate(badges) for b in badges[i + 1:] if boxes_overlap(a[1], b[1])]
             check(not clashes, f"hub {width}: no two Founding # badges intersect {clashes}")
             cities = marks["cities"]
-            check(sorted(c[0] for c in cities) == ["Los Angeles", "Monterey", "San Diego", "San Francisco"],
-                  f"hub {width}: the four city ribbons, no Sonoma {[c[0] for c in cities]}")
+            if width in (1440, 1024, 768):
+                check(sorted(c[0] for c in cities) == ["Los Angeles", "Monterey", "San Diego", "San Francisco"],
+                      f"hub {width}: the four city ribbons, no Sonoma {[c[0] for c in cities]}")
+                check(all(c[2] >= 11 - 0.01 for c in cities), f"hub {width}: ribbon text at least 11 px {[round(c[2], 1) for c in cities]}")
+            else:
+                check(cities == [], f"hub {width}: ribbons hidden (their text would be under 11 px)")
             touching = [c[0] for c in cities if any(boxes_overlap(c[1], b) for b in marks["bells"])
                         or any(boxes_overlap(c[1], b[1]) for b in badges)
                         or any(boxes_overlap(c[1], o[1]) for o in cities if o is not c)]

@@ -29,6 +29,9 @@ from future_saints.geo import albers, point_in_polygon, to_viewbox
 from future_saints.learning import MISSION_TRAIL_SLUG
 from future_saints.missions import (
     BADGE_OFFSETS,
+    CITY_LABEL_FONT,
+    CITY_LABEL_MIN_MAP_PX,
+    CITY_LABEL_MIN_PX,
     CITY_LABELS,
     MAP_WIDTHS_PX,
     MissionProjectsGuidePage,
@@ -238,6 +241,15 @@ class ProjectionTests(MissionsTestCase):
                                  "Medford, OR": (42.33, -122.87), "Tecate, BC": (32.57, -116.63)}.items():
             self.assertFalse(point_in_polygon(*to_viewbox(lat, lng), ocean), f"{name} must be drawn as land")
 
+    def test_city_labels_hide_where_the_text_would_be_under_11px(self):
+        self.assertEqual(CITY_LABEL_MIN_MAP_PX, 500)
+        css = (Path(settings.BASE_DIR) / "sitesofgrace" / "static" / "css" / "future-saints.css").read_text(encoding="utf-8")
+        self.assertIn(".fs-map { container-type: inline-size; }", css)
+        self.assertIn("@container (max-width: 499.98px) { .fs-map-cities { display: none; } }", css)
+        self.assertIn(f".fs-map-city-text {{ font: italic 700 {CITY_LABEL_FONT}px", css)
+        shown = sorted(w for w, px in MAP_WIDTHS_PX.items() if px >= CITY_LABEL_MIN_MAP_PX)
+        self.assertEqual(shown, [768, 1024, 1440], "ribbons show at these QA widths and hide at 430/390/360")
+
     def test_no_two_badges_intersect_at_any_qa_width(self):
         pins = self.pins()
         for width, map_px in MAP_WIDTHS_PX.items():
@@ -263,7 +275,10 @@ class ProjectionTests(MissionsTestCase):
             self.assertEqual((c["dot_x"], c["dot_y"]), tuple(round(v, 2) for v in to_viewbox(city["lat"], city["lng"])))
             self.assertTrue(box[0] <= c["end_x"] <= box[2] and box[1] <= c["end_y"] <= box[3], "leader starts on the ribbon")
             for width, map_px in MAP_WIDTHS_PX.items():
+                if map_px < CITY_LABEL_MIN_MAP_PX:
+                    continue                                   # hidden there (text would be under 11 px)
                 s = map_px / 1000
+                self.assertGreaterEqual(CITY_LABEL_FONT * s, CITY_LABEL_MIN_PX, f"{width}px: text at least 11 px")
                 px = tuple(v * s for v in box)
                 others = [(pins[n][0] * s - 16, pins[n][1] * s - 16, pins[n][0] * s + 16, pins[n][1] * s + 16) for n in pins]
                 others += [badge_box(*pins[n], n, BADGE_OFFSETS.get(n, (0, 0)), s) for n in pins]
