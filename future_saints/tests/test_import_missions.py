@@ -55,10 +55,7 @@ class ImportMissionContentTestCase(MissionsTestCase):
         return out.getvalue()
 
     def importable(self):
-        """The approved file with the grade line blank, until the owner decides on it."""
-        data = copy.deepcopy(self.data)
-        data["project"]["grade_note"] = ""
-        return data
+        return copy.deepcopy(self.data)
 
     def latest(self, page):
         page.refresh_from_db()
@@ -67,8 +64,13 @@ class ImportMissionContentTestCase(MissionsTestCase):
 
 class FileTests(ImportMissionContentTestCase):
     def test_every_text_value_is_verbatim_from_the_approved_markdown(self):
+        """Except the owner-approved amendments, each recorded with the text it replaces."""
         plain = MARKDOWN.read_text(encoding="utf-8").replace("**", "")
         structural = {"format", "source", "approved_by", "approved_on", "slug", "status", "model"}
+        amended = {a["value"] for a in self.data["amendments"]}
+        for a in self.data["amendments"]:
+            self.assertIn(a["replaces"], plain, "an amendment names the approved text it replaces")
+            self.assertTrue(a["approved_by"] and a["approved_on"])
         found = []
 
         def walk(value, key=""):
@@ -80,14 +82,21 @@ class FileTests(ImportMissionContentTestCase):
                     walk(v, key)
             elif isinstance(value, str) and value and key not in structural:
                 found.append(value)
-                self.assertIn(value, plain, f"{key}: not verbatim in the approved file")
+                if value not in amended:
+                    self.assertIn(value, plain, f"{key}: not verbatim in the approved file")
 
-        walk(self.data)
+        walk({k: self.data[k] for k in ("hub", "guide", "project")})
         self.assertGreater(len(found), 180)
 
-    def test_the_grade_line_is_held_by_the_no_grade_labels_rule(self):
-        out = self.failing(self.data, "--dry-run")
-        self.assertIn("grade-level wording isn't allowed (found: Grades 2)", out)
+    def test_the_grade_line_is_the_owners_amendment(self):
+        self.assertEqual(self.data["project"]["grade_note"], "young builders, with a grown-up helping with any cutting.")
+        self.assertEqual(self.data["amendments"][0]["field"], "project.grade_note")
+
+    def test_grade_wording_is_refused(self):
+        for text in ("Grades 2–5, with a grown-up", "Good for any grade", "Ages and grades vary"):
+            data = copy.deepcopy(self.data)
+            data["project"]["grade_note"] = text
+            self.assertIn("isn't allowed", self.failing(data, "--dry-run"), text)
         self.assertFalse(MissionProjectsGuidePage.objects.exists(), "nothing written")
 
 
@@ -125,6 +134,7 @@ class ImportTests(ImportMissionContentTestCase):
         self.assertEqual(project.project_title, "Build This Mission: Mission San Diego de Alcalá")
         self.assertEqual(len(project.steps.all()), 8)
         self.assertEqual(project.model_reference_image_credit, "")
+        self.assertEqual(project.grade_note, "young builders, with a grown-up helping with any cutting.")
         for page in (self.hub, guide, self.mission):
             self.assertFalse(WorkflowState.objects.filter(object_id=str(page.pk)).exists(), "never submitted")
 

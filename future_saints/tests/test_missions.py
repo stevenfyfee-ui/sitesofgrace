@@ -77,7 +77,7 @@ MISSIONS = {
 }
 MONTEREY_CLUSTER = (2, 13, 15)
 BAY_CLUSTER = (6, 8, 12, 14, 20, 21)
-BANNED_WORDS = ("buy", "shop", "store", "price", "amazon", "amzn", "affiliate")
+BANNED_WORDS = ("buy", "shop", "store", "price", "amazon", "amzn", "affiliate", "grade", "grades")
 
 
 def km(a, b):
@@ -380,6 +380,23 @@ class SeedTests(MissionsTestCase):
         self.assertIn("#14 'Mission San José': 2 match(es)", out.getvalue())
         self.assertFalse(self.hub.revisions.exists() and self.hub.get_latest_revision_as_object().mission_hub_entries.exists())
 
+    def test_a_needs_review_mission_is_left_exactly_as_it_is(self):
+        self.seed()
+        self.hub.refresh_from_db()
+        latest = self.hub.get_latest_revision_as_object()
+        entry = next(e for e in latest.mission_hub_entries.all() if e.founding_number == 6)
+        entry.founded_display, entry.needs_review = "1776", True
+        entry.review_note = "Founding vs. dedication date unverified (June 29 vs. October 9, 1776)"
+        latest.save_revision()
+        out = self.seed()
+        self.assertIn("kept as it is (needs review): #6 '1776' -- Founding vs. dedication date unverified", out)
+        self.assertIn("Unchanged", out)
+        self.hub.refresh_from_db()
+        kept = next(e for e in self.hub.get_latest_revision_as_object().mission_hub_entries.all() if e.founding_number == 6)
+        self.assertEqual((kept.founded_display, kept.needs_review, kept.review_note),
+                         ("1776", True, "Founding vs. dedication date unverified (June 29 vs. October 9, 1776)"))
+        self.assertEqual(self.sites[6].date_display, "Founded October 9, 1776", "the adult page is never changed")
+
     def test_an_editors_badge_offset_is_kept(self):
         self.seed()
         self.hub.refresh_from_db()
@@ -464,6 +481,15 @@ class HubTests(MissionsTestCase):
         html = self.hub_html()
         self.assertRegex(html, r'value="fixture-mission-8"[^>]*--label-dx: -36\.0; --label-dy: 0;')
         self.assertEqual(re.findall(r'data-fs-city="([^"]+)"', html), ["San Francisco", "Monterey", "Los Angeles", "San Diego"])
+
+    def test_the_review_note_is_never_shown(self):
+        self.hub.refresh_from_db()
+        latest = self.hub.get_latest_revision_as_object()
+        entry = next(e for e in latest.mission_hub_entries.all() if e.founding_number == 6)
+        entry.needs_review, entry.review_note = True, "INTERNAL REVIEW NOTE (sample)"
+        latest.save_revision().publish()
+        for html in (self.hub_html(), self.hub_html(self.staff), self.hub_html(mission=slug_of(6))):
+            self.assertNotIn("INTERNAL REVIEW NOTE", html)
 
     def test_close_pin_chooser_markup(self):
         html = self.hub_html()
