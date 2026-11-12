@@ -10,13 +10,19 @@ Image credit fields are an internal note only and are never rendered on any
 page, print sheet or meta. The adult site's images (e.g. SaintPage portraits,
 CC-licensed and needing attribution) are never used here.
 """
+import random
+from datetime import timedelta
+from zoneinfo import ZoneInfo
+
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
+from modelcluster.fields import ParentalKey
 from django.http import Http404
 from django.utils.cache import patch_cache_control
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, ObjectList, TabbedInterface
-from wagtail.models import Page
+from wagtail.models import Orderable, Page
 
 from home.legal import live_legal_urls
 
@@ -116,6 +122,9 @@ class FutureSaintsGateMixin:
         context["fs_home"] = home
         context["fs_noindex"] = not future_saints_public()
         context["fs_nav"] = home.nav_items(request, self) if home else []
+        world = home.world_map_page() if home else None
+        context["fs_world_map_url"] = world.get_url(request) if world else ""
+        context["fs_world_map_current"] = world is not None and world.pk == self.pk
         context["fs_privacy_url"] = live_legal_urls(request).get("privacy-policy", "")
         return context
 
@@ -123,6 +132,33 @@ class FutureSaintsGateMixin:
         if isinstance(self, FutureSaintsHomePage):
             return self
         return FutureSaintsHomePage.objects.ancestor_of(self).first()
+
+
+SAINT_OF_WEEK_TZ = ZoneInfo("America/Los_Angeles")
+
+
+class FutureSaintsHomePageForm(WagtailAdminPageForm):
+    """Saint of the Week schedule: each week_start is a Monday, and no two entries share one.
+    Run in is_valid() so the inline rows are cleaned."""
+
+    def is_valid(self):
+        valid = super().is_valid()
+        from .learning import _kept_forms
+
+        ok, seen = True, set()
+        for form in _kept_forms(self.formsets.get("saint_of_week_entries")):
+            start = form.cleaned_data.get("week_start")
+            if start is None:
+                continue
+            if start.weekday() != 0:
+                form.add_error("week_start", f"{start:%A}, {start:%B} {start.day}, {start.year} isn't a Monday. "
+                                             "Weeks start on Monday.")
+                ok = False
+            if start in seen:
+                form.add_error("week_start", "Another entry already starts this week.")
+                ok = False
+            seen.add(start)
+        return ok & valid
 
 
 class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
@@ -187,11 +223,13 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
     holy_land_accent = models.CharField(max_length=20, blank=True, choices=ACCENT_CHOICES, default="sand")
 
     saint_of_week_heading = models.CharField(max_length=60, blank=True, default="Saint of the Week")
+    # Phase 4: the scheduled entries (saint_of_week_entries) come first. This manual pick is the
+    # fallback for a week with no entry; it links to that saint's published Future Saints page.
     saint_of_week = models.ForeignKey(
         "catalog.SaintPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
         limit_choices_to={"live": True},
-        help_text="Leave empty to hide Saint of the Week. It shows the placeholder frame: the adult "
-                  "site's portrait is never used here.",
+        help_text="Fallback for a week with no scheduled entry below. Links to this saint's published "
+                  "Future Saints page (name only if there isn't one). Leave empty to hide the block then.",
     )
     saint_of_week_line = models.CharField(
         max_length=160, blank=True, help_text="One short line for children, shown under the name.",
@@ -202,10 +240,17 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         default="Church status information should be checked against official sources.",
         help_text="The Church-status line in the Future Saints footer, on every Future Saints page.",
     )
+    quiz_page = models.ForeignKey(
+        "future_saints.LearningPage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        limit_choices_to={"live": True},
+        help_text='The "Take a Quiz" block: a published story whose quiz to feature. Leave empty to pick '
+                  "one published story with a quiz at random on each visit.",
+    )
 
     parent_page_types = ["home.HomePage"]
-    subpage_types = ["future_saints.FutureSaintsIndexPage"]
+    subpage_types = ["future_saints.FutureSaintsIndexPage", "future_saints.WorldMapPage"]
     max_count = 1
+    base_form_class = FutureSaintsHomePageForm
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -249,8 +294,10 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         ),
         MultiFieldPanel(
             [FieldPanel("saint_of_week_heading"), FieldPanel("saint_of_week"), FieldPanel("saint_of_week_line")],
-            heading="Saint of the Week",
+            heading="Saint of the Week: fallback pick (for a week with no scheduled entry)",
         ),
+        InlinePanel("saint_of_week_entries", label="Week", heading="Saint of the Week: schedule (weeks start on Monday)"),
+        FieldPanel("quiz_page"),
         FieldPanel("church_status_note"),
     ]
 
@@ -294,22 +341,73 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
             "slot": prefix.replace("_", " "),
         }
 
-    def saint_of_week_card(self):
+    def world_map_page(self):
+        from .worldmap import WorldMapPage
+
+        return WorldMapPage.objects.child_of(self).live().public().first()
+
+    def saint_of_week_card(self, request, today=None):
+        """The scheduled entry whose week (Monday to Sunday, America/Los_Angeles) contains today;
+        otherwise the fallback pick; otherwise None (the block is hidden). It links to the
+        Future Saints saint page, never the adult SaintPage, and uses no adult picture."""
+        from .learning import SaintLearningPage
+
+        today = today or timezone.now().astimezone(SAINT_OF_WEEK_TZ).date()
+        monday = today - timedelta(days=today.weekday())
+        entry = next((e for e in self.saint_of_week_entries.all()
+                      if e.week_start == monday and e.saint_id and e.saint.live), None)
+        if entry is not None:
+            page = entry.saint
+            return {"name": page.student_title or page.title, "line": entry.line, "url": page.get_url(request),
+                    "art": page.art()["thumbnail"], "scheduled": True}
         saint = self.saint_of_week
         if saint is None or not saint.live:
             return None
-        # No picture: the adult portrait is never used (the placeholder frame shows instead).
-        return {"name": saint.title, "line": self.saint_of_week_line, "art": None}
+        page = SaintLearningPage.objects.live().public().filter(canonical=saint).first()
+        return {"name": (page.student_title or page.title) if page else saint.title, "line": self.saint_of_week_line,
+                "url": page.get_url(request) if page else "", "art": page.art()["thumbnail"] if page else None,
+                "scheduled": False}
+
+    def quiz_card(self, request):
+        """The featured story's quiz, or one published story with a quiz chosen per request."""
+        from .learning import LearningPage
+
+        page = self.quiz_page.specific if self.quiz_page_id and self.quiz_page.live else None
+        if page is None or not page.quiz_questions.exists():
+            pool = list(LearningPage.objects.descendant_of(self).live().public()
+                        .filter(quiz_questions__isnull=False).distinct().specific())
+            page = random.choice(pool) if pool else None
+        if page is None:
+            return None
+        return {"title": page.student_title or page.title, "url": page.get_url(request) + "#quiz"}
 
     def get_context(self, request, *args, **kwargs):
+        from .worldmap import world_preview
+
         context = super().get_context(request, *args, **kwargs)
         cards = [self._card(f"card_{n}", request) for n in (1, 2, 3, 4)]
         holy_land = self._card("holy_land", request)
-        saint = self.saint_of_week_card()
         context["fs_cards"] = cards
         context["fs_holy_land"] = holy_land
-        context["fs_saint"] = saint
+        context["fs_saint"] = self.saint_of_week_card(request)
+        context["fs_quiz_card"] = self.quiz_card(request)
+        context["fs_world_preview"] = world_preview(self, request)
         return context
+
+
+class SaintOfWeekEntry(Orderable):
+    page = ParentalKey(FutureSaintsHomePage, related_name="saint_of_week_entries", on_delete=models.CASCADE)
+    week_start = models.DateField(help_text="The Monday the week starts (America/Los_Angeles).")
+    saint = models.ForeignKey(
+        "future_saints.SaintLearningPage", on_delete=models.CASCADE, related_name="+",
+        limit_choices_to={"live": True}, help_text="A published Future Saints saint page.",
+    )
+    line = models.CharField(max_length=160, blank=True, help_text="One short line for children, under the name.")
+
+    panels = ["week_start", "saint", "line"]
+
+    class Meta(Orderable.Meta):
+        ordering = ["week_start"]
 
 
 class FutureSaintsIndexPageForm(WagtailAdminPageForm):
@@ -475,3 +573,6 @@ from .missions import (  # noqa: E402,F401
     ProjectSource,
     ProjectStep,
 )
+
+# Phase 4: the World Discovery Map.
+from .worldmap import WorldMapPage  # noqa: E402,F401
