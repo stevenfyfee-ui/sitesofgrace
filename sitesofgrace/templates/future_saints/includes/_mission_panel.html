@@ -1,0 +1,27 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  The selected mission (comp 02's right-hand card; below the map on narrow
+  screens, never over it). Server-rendered for ?mission=<slug> (default #1);
+  future-saints.js swaps the same fields in place from #fs-mission-data.
+  A published story adds its subtitle, intro and "Read & Learn"; "Build This
+  Mission" shows only when that mission's project is published.
+{% endcomment %}
+<aside id="mission-panel" class="fs-mission-panel" aria-labelledby="fs-panel-name" data-fs-panel>
+  {% include "future_saints/includes/_art_frame.html" with art=None variant="feature" slot="mission illustration" icon="mission" %}
+  <div class="fs-mission-panel-body" aria-live="polite">
+    <h2 id="fs-panel-name" class="fs-mission-panel-name" data-fs-panel-name>{{ m.name }}</h2>
+    <p class="fs-mission-panel-meta">
+      <span class="fs-date-chip">{% include "future_saints/includes/_icon.html" with name="calendar" %}Founded: <span data-fs-panel-founded>{{ m.founded }}</span></span>
+      <span class="fs-date-chip">Founding #<span data-fs-panel-number>{{ m.number }}</span></span>
+    </p>
+    <div data-fs-panel-story{% if not m.story %} hidden{% endif %}>
+      <p class="fs-mission-panel-subtitle" data-fs-panel-subtitle>{{ m.subtitle }}</p>
+      <div class="fs-prose" data-fs-panel-intro>{% if m.story %}{{ m.intro|richtext }}{% endif %}</div>
+      <p class="fs-mission-panel-links">
+        <a class="fs-button" href="{{ m.story_url }}" data-fs-panel-read>Read &amp; Learn{% include "future_saints/includes/_icon.html" with name="arrow" %}</a>
+        <a class="fs-button fs-button--quiet" href="{{ m.project_url }}" data-fs-panel-build{% if not m.project_url %} hidden{% endif %}>Build This Mission</a>
+      </p>
+    </div>
+    <p class="fs-coming-soon" data-fs-panel-soon{% if m.story %} hidden{% endif %}>This mission's story is coming soon.</p>
+  </div>
+</aside>

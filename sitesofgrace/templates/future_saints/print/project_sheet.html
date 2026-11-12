@@ -1,0 +1,34 @@
+{% load static %}<!doctype html>
+{% comment %}
+  One printable sheet for a published Build This Mission project:
+  ?print=materials (Materials Checklist), ?print=steps (Step-by-Step
+  Instructions) or ?print=factcard (Fact Card). Standard browser print, one
+  page on US Letter and A4. No links to buy, brands or product names.
+{% endcomment %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if fs_noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
+  <title>{{ fs_sheet_title }} · {{ page.heading }}</title>
+  <link rel="stylesheet" href="{% static 'css/future-saints-print-sheets.css' %}">
+</head>
+<body class="fs-sheet fs-sheet--{{ fs_sheet }}">
+  <p class="fs-sheet-tools"><a href="{{ page.url }}#build">Back to the project</a> · <button type="button" onclick="window.print()">Print this page</button></p>
+  <header class="fs-sheet-head">
+    <p class="fs-sheet-kicker">Sites of Grace | Future Saints · {{ fs_sheet_title }}</p>
+    <h1>{{ fs_project.project_title }}</h1>
+  </header>
+  {% with project=fs_project %}
+    {% if fs_sheet == "materials" %}
+      {% include "future_saints/includes/_project_materials.html" %}
+      {% if project.adult_supervision_notes %}<p class="fs-sheet-note"><strong>For grown-ups:</strong> {{ project.adult_supervision_notes }}</p>{% endif %}
+    {% elif fs_sheet == "steps" %}
+      {% include "future_saints/includes/_project_steps.html" %}
+    {% else %}
+      {% include "future_saints/includes/_project_fact_card.html" %}
+      <p class="fs-sheet-line">My name: <span></span></p>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

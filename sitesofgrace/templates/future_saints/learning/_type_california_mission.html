@@ -2,7 +2,8 @@
 {% comment %}
   California mission: Native Peoples and Mission History, Mission Life,
   Architecture, the founding-order chain (Founding #, never trail order), and
-  the Build This Mission slot (Phase 3; staff see "coming soon").
+  Build This Mission (Phase 3): shown only when the mission's project status is
+  Published; staff see a note otherwise. Its three print views are ?print=…
 {% endcomment %}
 {% if page.native_peoples or request.user.is_staff %}
 <section id="native-peoples" class="fs-section-block" aria-labelledby="native-peoples-h">
@@ -35,9 +36,11 @@
 </section>
 {% endif %}
 
-{% if request.user.is_staff %}
+{% if fs_project %}
+  {% include "future_saints/includes/_mission_project.html" with project=fs_project %}
+{% elif request.user.is_staff %}
 <section id="build" class="fs-section-block" aria-labelledby="build-h">
   <h2 id="build-h" class="fs-block-title">Build This Mission</h2>
-  <div class="fs-staff-only">{% include "future_saints/includes/_icon.html" with name="church" class="fs-type-card-icon" %}<p>Coming soon (Phase 3): the model-building project for this mission. <span class="fs-chip-staff">Staff only</span></p></div>
+  <div class="fs-staff-only">{% include "future_saints/includes/_icon.html" with name="church" class="fs-type-card-icon" %}<p>The Build This Mission project shows here once its status is Published (in this page's "Build This Mission" panel). <span class="fs-chip-staff">Staff only</span></p></div>
 </section>
 {% endif %}

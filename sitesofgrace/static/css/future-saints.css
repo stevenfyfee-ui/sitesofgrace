@@ -640,3 +640,100 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-kindness { padding-top: .5rem; border-top: 0; }
 .fs-kindness-title { font-size: 1.3rem; margin-bottom: .3rem; }
 .fs-kindness p { margin: 0; }
+
+/* ---------- Phase 3: California Missions hub (comp 02) ---------- */
+.fs-wash--gold::before { background: var(--fs-gold-pale); }
+.fs-hub-head { padding-block: clamp(1rem, .8rem + 1.5vw, 2rem) .5rem; text-align: center; }
+.fs-hub-eyebrow { display: inline-flex; align-items: center; gap: .8rem; margin: 0 0 .4rem; font-size: clamp(1rem, .9rem + .4vw, 1.25rem);
+  font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--fs-gold-deep); }
+.fs-hub-eyebrow::before, .fs-hub-eyebrow::after { content: ""; width: 2.5rem; height: 2px; background: var(--fs-gold); }
+.fs-hub-title { font-size: clamp(2.1rem, 1.3rem + 3vw, 3.6rem); letter-spacing: -.01em; }
+.fs-hub-explore { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+@media (min-width: 1024px) { .fs-hub-explore { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 2rem; } }
+.fs-hub-notes { margin-top: .75rem; }
+.fs-map-note { font-size: .98rem; color: var(--fs-stone); }
+.fs-hub-cards { margin-block: 1.5rem; }
+.fs-hub-cards .fs-lcard-title { padding-right: 2.6rem; }
+.fs-coming-soon { font-style: italic; color: var(--fs-blue); }
+
+/* The map keeps the viewBox's aspect ratio, so the pins' percentages match the art. */
+.fs-map { position: relative; width: 100%; aspect-ratio: 1000 / 1100; border-radius: var(--fs-radius); overflow: hidden;
+  box-shadow: 0 1px 0 rgba(3, 37, 83, .07), 0 10px 26px rgba(3, 37, 83, .12); }
+.fs-map-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.fs-map-compass-n { font: 700 22px var(--fs-serif); fill: #8a6a26; }
+.fs-map-scroll-text { font: italic 700 24px var(--fs-serif); fill: var(--fs-navy); }
+.fs-map-pins { position: absolute; inset: 0; margin: 0; }
+.fs-pin { position: absolute; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0;
+  display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; cursor: pointer; color: var(--fs-gold); }
+.fs-pin-bell { width: 24px; height: 24px; fill: currentColor; stroke: #6f5418; stroke-width: 1.4; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+.fs-pin-num { position: absolute; top: 1px; right: 0; transform: translate(calc(var(--label-dx, 0) * 1px), calc(var(--label-dy, 0) * 1px));
+  min-width: 18px; padding: 0 3px; border-radius: 9px; background: var(--fs-navy); color: #fff; font: 700 11px/18px system-ui, sans-serif; text-align: center; }
+.fs-pin[aria-pressed="true"] { color: #f6d27a; z-index: 2; }
+.fs-pin[aria-pressed="true"] .fs-pin-bell { width: 30px; height: 30px; stroke: var(--fs-navy); stroke-width: 1.8; }
+.fs-pin:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 0; z-index: 3; }
+@media (prefers-reduced-motion: no-preference) { .fs-pin-bell { transition: width .15s ease, height .15s ease; } }
+.fs-pin-chooser { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(92%, 340px); z-index: 5;
+  padding: .8rem; border: 2px solid var(--fs-gold); border-radius: 14px; background: var(--fs-ivory); box-shadow: 0 10px 26px rgba(3, 37, 83, .25); }
+.fs-pin-chooser-title { margin: 0 0 .4rem; font-weight: 700; }
+.fs-pin-chooser-list { display: grid; gap: .35rem; margin-bottom: .5rem; }
+.fs-pin-choice { min-height: 44px; padding: .4rem .7rem; border: 1px solid var(--fs-gold); border-radius: 10px; background: #fff;
+  font: inherit; text-align: left; cursor: pointer; }
+
+.fs-mission-panel { display: grid; gap: .75rem; padding: 1rem; border: 2px solid color-mix(in srgb, var(--fs-gold) 55%, transparent);
+  border-radius: var(--fs-radius); background: var(--fs-parchment); box-shadow: 0 10px 26px rgba(3, 37, 83, .1); }
+.fs-mission-panel-name { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); text-align: center; }
+.fs-mission-panel-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: .3rem 0 .6rem; }
+.fs-mission-panel-meta .fs-icon { width: 1em; height: 1em; margin-right: .3rem; vertical-align: -.1em; }
+.fs-mission-panel-subtitle { font-style: italic; color: var(--fs-blue); }
+.fs-mission-panel-links { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+.fs-projects-banner { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-block: 1.25rem; padding: 1.1rem 1.4rem;
+  border-radius: var(--fs-radius); background: var(--fs-accent-sand); color: var(--fs-navy); text-decoration: none;
+  box-shadow: 0 1px 0 rgba(3, 37, 83, .07), 0 8px 22px rgba(3, 37, 83, .1); }
+.fs-projects-banner-icon { width: 54px; height: 54px; color: var(--fs-accent-terracotta-ink); }
+.fs-projects-banner-text { flex: 1 1 16rem; display: grid; gap: .2rem; }
+.fs-projects-banner-text strong { font-size: clamp(1.3rem, 1.1rem + .6vw, 1.7rem); }
+
+.fs-list-tab-buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.fs-list-tab-buttons [role="tab"] { min-height: 44px; padding: .4rem 1rem; border: 2px solid var(--fs-gold); border-radius: 999px;
+  background: var(--fs-ivory); font: inherit; cursor: pointer; }
+.fs-list-tab-buttons [aria-selected="true"] { background: var(--fs-gold); font-weight: 700; }
+.fs-mission-list ol, .fs-mission-list ul { columns: 2 18rem; column-gap: 2rem; padding-left: 1.4rem; }
+.fs-mission-list li { break-inside: avoid; margin-bottom: .35rem; }
+.fs-list-meta { color: var(--fs-stone); font-size: .9rem; }
+.fs-list-tabs.is-tabbed .fs-list-heading { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.fs-founding--hub { columns: 2 18rem; display: block; }
+.fs-founding--hub li { break-inside: avoid; margin-bottom: .45rem; }
+
+/* ---------- Phase 3: Build This Mission + the projects guide ---------- */
+.fs-project-top { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 900px) { .fs-project-top { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
+.fs-project-facts { list-style: none; padding: 0; margin: 0 0 .75rem; display: grid; gap: .25rem; }
+.fs-project-print { display: flex; flex-wrap: wrap; gap: .5rem; }
+.fs-project-print .fs-icon { width: 1em; height: 1em; margin-right: .35rem; }
+.fs-project h3 { margin-top: 1.4rem; }
+.fs-project-features { padding-left: 1.2rem; }
+.fs-materials { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.fs-materials th, .fs-materials td { padding: .45rem .5rem; border-bottom: 1px solid color-mix(in srgb, var(--fs-gold) 35%, transparent); text-align: left; vertical-align: top; }
+.fs-check { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--fs-navy); border-radius: 4px; }
+.fs-project-steps { padding-left: 1.4rem; display: grid; gap: .9rem; }
+.fs-project-steps h4 { font-size: 1.15rem; margin: 0; }
+.fs-step-img { max-width: 100%; height: auto; border-radius: 10px; }
+.fs-step-safety { color: var(--fs-accent-terracotta-ink); }
+.fs-fact-card { display: grid; gap: .3rem; max-width: 34rem; padding: 1rem 1.2rem; border: 2px solid var(--fs-gold); border-radius: 12px; background: #fff; }
+.fs-fact-card dt { display: inline; font-weight: 700; }
+.fs-fact-card dt::after { content: ":"; }
+.fs-fact-card dd { display: inline; margin: 0 0 0 .3rem; }
+.fs-guide-steps, .fs-guide-list { padding-left: 1.4rem; display: grid; gap: .45rem; }
+.fs-project-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: .8rem; }
+.fs-project-tile { display: grid; gap: .3rem; height: 100%; padding: .8rem 1rem; border-radius: 14px; background: var(--fs-parchment);
+  border: 1px solid color-mix(in srgb, var(--fs-gold) 40%, transparent); color: var(--fs-navy); text-decoration: none; }
+a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
+.fs-project-tile-name { font-weight: 700; }
+.fs-project-tile-state { font-size: .95rem; color: var(--fs-blue); }
+.fs-project-tile.is-soon .fs-project-tile-state { font-style: italic; color: var(--fs-stone); }
+
+@media print {
+  .fs-hub .fs-map, .fs-hub .fs-list-tab-buttons, .fs-hub .fs-hub-cards, .fs-projects-banner { display: none !important; }
+  .fs-hub .fs-mission-list { display: block !important; }
+}

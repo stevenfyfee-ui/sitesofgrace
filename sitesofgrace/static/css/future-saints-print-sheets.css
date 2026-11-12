@@ -1,0 +1,35 @@
+/* Future Saints printable sheets (Build This Mission: Materials Checklist,
+   Step-by-Step Instructions, Fact Card; the guide's checklist + blank fact
+   card). Standard browser print, one page on US Letter and A4: the content
+   fits the smaller of the two (A4's width, Letter's height) inside 12 mm margins. */
+:root { color-scheme: light; }
+body.fs-sheet { margin: 0 auto; max-width: 186mm; padding: 10mm 12mm; background: #fff; color: #111;
+  font: 11pt/1.4 Georgia, "Times New Roman", serif; }
+.fs-sheet-tools { font: 10pt system-ui, sans-serif; margin: 0 0 6mm; }
+.fs-sheet-head { border-bottom: 1.5pt solid #000; margin-bottom: 5mm; }
+.fs-sheet-kicker { margin: 0; font-size: 9pt; letter-spacing: .04em; color: #333; }
+.fs-sheet h1 { margin: 1mm 0 2mm; font-size: 19pt; line-height: 1.15; }
+.fs-sheet h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+.fs-materials { width: 100%; border-collapse: collapse; font-size: 10pt; }
+.fs-materials th, .fs-materials td { padding: 1.6mm 1.5mm; border-bottom: .75pt solid #999; text-align: left; vertical-align: top; }
+.fs-check { display: inline-block; width: 4mm; height: 4mm; border: 1pt solid #000; border-radius: 1mm; margin-right: 2mm; vertical-align: -.5mm; }
+.fs-project-steps { margin: 0; padding-left: 6mm; }
+.fs-project-steps li { margin-bottom: 2.4mm; break-inside: avoid; }
+.fs-project-steps h4 { margin: 0; font-size: 11pt; }
+.fs-project-steps p { margin: .6mm 0 0; font-size: 10pt; }
+.fs-step-img { max-height: 30mm; width: auto; }
+.fs-fact-card { display: grid; gap: 3mm; padding: 6mm; border: 1.5pt solid #000; border-radius: 3mm; font-size: 13pt; }
+.fs-fact-card div { border-bottom: .75pt solid #999; padding-bottom: 2mm; }
+.fs-fact-card dt { display: inline; font-weight: 700; }
+.fs-fact-card dt::after { content: ":"; }
+.fs-fact-card dd { display: inline; margin: 0 0 0 2mm; }
+.fs-fact-card--blank dd { display: block; min-height: 7mm; margin: 0; }
+.fs-checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 2.4mm; font-size: 12pt; }
+.fs-sheet-note { font-size: 10pt; margin-top: 4mm; }
+.fs-sheet-line span { display: inline-block; width: 90mm; max-width: calc(100% - 6em); border-bottom: .75pt solid #000; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@page { margin: 12mm; }
+@media print {
+  .fs-sheet-tools { display: none; }
+  body.fs-sheet { padding: 0; max-width: none; }
+}

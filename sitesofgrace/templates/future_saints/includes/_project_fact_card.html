@@ -1,0 +1,4 @@
+{% comment %} The mission fact card (page and print), to set beside a finished model. {% endcomment %}
+<dl class="fs-fact-card">
+  {% for row in project.fact_card_rows.all %}<div><dt>{{ row.label }}</dt><dd>{{ row.value }}</dd></div>{% endfor %}
+</dl>
