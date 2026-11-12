@@ -1,0 +1,12 @@
+{% load wagtailimages_tags %}
+{% comment %} The numbered steps (page and print), each with an optional sketch and safety note. {% endcomment %}
+<ol class="fs-project-steps">
+  {% for step in project.steps.all %}
+    <li>
+      <h4>{{ step.title }}</h4>
+      <p>{{ step.instructions|linebreaksbr }}</p>
+      {% if step.art %}{% image step.art.image max-600x400 as img %}<img class="fs-step-img" src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ step.art.alt }}" loading="lazy">{% endif %}
+      {% if step.safety_note %}<p class="fs-step-safety"><strong>Safety:</strong> {{ step.safety_note }}</p>{% endif %}
+    </li>
+  {% endfor %}
+</ol>

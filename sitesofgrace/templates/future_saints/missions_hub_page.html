@@ -1,0 +1,113 @@
+{% extends "future_saints/base.html" %}
+{% load wagtailcore_tags %}
+{% comment %}
+  The California Missions hub (comp 02 layout): eyebrow, title, subtitle; the
+  illustrated map with the selected-mission panel (right at >=1024, below
+  otherwise, never over the map); the map note; four action cards; the Mission
+  School Projects banner; then the sections the cards link to. Everything is
+  server-rendered: the panel shows ?mission=<slug> (default #1), the pins are
+  submit buttons of a GET form, and every mission is in the three lists, so the
+  page works without JavaScript. The map is an enhancement.
+{% endcomment %}
+{% block body_class %}fs-hub fs-type-california_mission{% endblock %}
+{% block content %}
+<header class="fs-wrap fs-hub-head">
+  {% if page.hub_eyebrow %}<p class="fs-hub-eyebrow">{{ page.hub_eyebrow }}</p>{% endif %}
+  <h1 class="fs-hub-title">{{ page.hub_title|default:page.title }}</h1>
+  {% if page.hub_subtitle %}<p class="fs-subheading">{{ page.hub_subtitle }}</p>{% endif %}
+</header>
+
+{% if fs_missions %}
+<div class="fs-wrap fs-hub-explore">
+  {% include "future_saints/includes/_mission_map.html" %}
+  {% include "future_saints/includes/_mission_panel.html" with m=fs_selected %}
+</div>
+<div class="fs-wrap fs-hub-notes">
+  {% if page.map_note %}<p class="fs-map-note">{{ page.map_note }}</p>{% endif %}
+  {% if page.hub_intro %}<p class="fs-prose fs-hub-intro">{{ page.hub_intro }}</p>{% endif %}
+</div>
+{% elif request.user.is_staff %}
+<div class="fs-wrap">{% include "future_saints/includes/_parchment_panel.html" with heading="The map needs its 21 missions." text="Staff only: run manage.py seed_mission_hub, then publish this index." extra_class="fs-empty" %}</div>
+{% endif %}
+
+<div class="fs-wrap">
+  <ul class="fs-lcards fs-hub-cards" aria-label="Explore the missions">
+    <li><a class="fs-lcard" href="#mission-stories"><span class="fs-lcard-art fs-wash" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="mission" class="fs-lcard-icon" %}</span><span class="fs-lcard-title">Mission Stories</span><span class="fs-lcard-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span></a></li>
+    <li><a class="fs-lcard" href="#founding-order"><span class="fs-lcard-art fs-wash fs-wash--gold" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="calendar" class="fs-lcard-icon" %}</span><span class="fs-lcard-title">Timeline</span><span class="fs-lcard-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span></a></li>
+    <li><a class="fs-lcard" href="#native-peoples"><span class="fs-lcard-art fs-wash fs-wash--sage" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="people" class="fs-lcard-icon" %}</span><span class="fs-lcard-title">Native Peoples</span><span class="fs-lcard-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span></a></li>
+    <li><a class="fs-lcard" href="#quiz"><span class="fs-lcard-art fs-wash fs-wash--lavender" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="lightbulb" class="fs-lcard-icon" %}</span><span class="fs-lcard-title">Test Your Knowledge</span><span class="fs-lcard-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span></a></li>
+  </ul>
+
+  {% if fs_guide_url and page.projects_banner_heading %}
+  <a class="fs-projects-banner" href="{{ fs_guide_url }}">
+    {% include "future_saints/includes/_icon.html" with name="church" class="fs-projects-banner-icon" %}
+    <span class="fs-projects-banner-text"><strong>{{ page.projects_banner_heading }}</strong>{% if page.projects_banner_text %}<span>{{ page.projects_banner_text }}</span>{% endif %}</span>
+    {% if page.projects_banner_button %}<span class="fs-button">{{ page.projects_banner_button }}{% include "future_saints/includes/_icon.html" with name="chevron" %}</span>{% endif %}
+  </a>
+  {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: the Mission School Projects banner shows once the projects guide is published and the banner heading is filled.</p>{% endif %}
+</div>
+
+<div class="fs-wrap fs-sections">
+  <section id="mission-stories" class="fs-section-block" aria-labelledby="mission-stories-h">
+    <h2 id="mission-stories-h" class="fs-block-title">Mission Stories</h2>
+    {% if fs_stories %}
+      <ul class="fs-cards fs-cards--three">
+        {% for m in fs_stories %}
+          <li>
+            <a class="fs-card fs-accent-terracotta" href="{{ m.story_url }}">
+              {% include "future_saints/includes/_art_frame.html" with art=m.story.art.thumbnail variant="thumb" slot="index thumbnail" icon="mission" %}
+              <span class="fs-card-label"><span class="fs-card-title">{{ m.story.heading }}{% if m.subtitle %}<span class="fs-card-line">{{ m.subtitle }}</span>{% endif %}</span>{% include "future_saints/includes/_icon.html" with name="chevron" class="fs-card-chevron" %}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="fs-coming-soon">Mission stories are coming soon.</p>
+    {% endif %}
+  </section>
+
+  {% if fs_missions %}
+  <section id="founding-order" class="fs-section-block" aria-labelledby="founding-order-h">
+    <h2 id="founding-order-h" class="fs-block-title">{{ page.timeline_heading|default:"The Missions in Founding Order" }}</h2>
+    <ol class="fs-founding fs-founding--hub">
+      {% for m in fs_missions %}<li><span class="fs-date-chip">Founding #{{ m.number }}</span> <a href="?mission={{ m.slug }}#mission-panel">{{ m.name }}</a> · {{ m.year }}</li>{% endfor %}
+    </ol>
+  </section>
+
+  <section id="find-a-mission" class="fs-section-block" aria-labelledby="find-a-mission-h">
+    <h2 id="find-a-mission-h" class="fs-block-title">Find a Mission</h2>
+    <div class="fs-list-tabs" data-fs-tabs>
+      <div class="fs-list-tab-buttons" role="tablist" aria-label="List the missions" hidden data-fs-tab-buttons>
+        <button type="button" role="tab" id="tab-order" aria-controls="list-order" aria-selected="true">Founding order</button>
+        <button type="button" role="tab" id="tab-ns" aria-controls="list-ns" aria-selected="false" tabindex="-1">North to south</button>
+        <button type="button" role="tab" id="tab-az" aria-controls="list-az" aria-selected="false" tabindex="-1">A–Z</button>
+      </div>
+      <div id="list-order" class="fs-mission-list" role="tabpanel" aria-labelledby="tab-order" data-fs-list="order">
+        <h3 class="fs-list-heading">Founding order</h3>
+        <ol>{% for m in fs_missions %}<li><a href="?mission={{ m.slug }}#mission-panel">{{ m.name }}</a> <span class="fs-list-meta">Founding #{{ m.number }}</span></li>{% endfor %}</ol>
+      </div>
+      <div id="list-ns" class="fs-mission-list" role="tabpanel" aria-labelledby="tab-ns" data-fs-list="ns">
+        <h3 class="fs-list-heading">North to south</h3>
+        <ol>{% for m in fs_missions_north_south %}<li><a href="?mission={{ m.slug }}#mission-panel">{{ m.name }}</a> <span class="fs-list-meta">Founding #{{ m.number }}</span></li>{% endfor %}</ol>
+      </div>
+      <div id="list-az" class="fs-mission-list" role="tabpanel" aria-labelledby="tab-az" data-fs-list="az">
+        <h3 class="fs-list-heading">A–Z</h3>
+        <ul>{% for m in fs_missions_az %}<li><a href="?mission={{ m.slug }}#mission-panel">{{ m.name }}</a> <span class="fs-list-meta">Founding #{{ m.number }}</span></li>{% endfor %}</ul>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {# The four cards always have a section to land on: an empty one says "coming soon". #}
+  <section id="native-peoples" class="fs-section-block" aria-labelledby="native-peoples-h">
+    <h2 id="native-peoples-h" class="fs-block-title">Native Peoples of the Mission Lands</h2>
+    {% if page.native_peoples_text %}<div class="fs-prose">{{ page.native_peoples_text|linebreaks }}</div>{% else %}<p class="fs-coming-soon">This section is coming soon.</p>{% endif %}
+  </section>
+
+  <section id="quiz" class="fs-section-block" aria-labelledby="quiz-h">
+    <h2 id="quiz-h" class="fs-block-title">Test Your Knowledge</h2>
+    {% if fs_quiz %}{% include "future_saints/includes/_quiz.html" %}{% else %}<p class="fs-coming-soon">The quiz is coming soon.</p>{% endif %}
+  </section>
+</div>
+{% if fs_panel_data %}{{ fs_panel_data|json_script:"fs-mission-data" }}{% endif %}
+{% endblock %}

@@ -1,0 +1,106 @@
+{% comment %}
+  The illustrated California map. Two layers in one fixed viewBox:
+  1. .fs-map-art: aria-hidden: watercolor Pacific and California on the real
+     outline (Census, public domain; projected by future_saints.geo), the
+     neighbouring states as plain parchment land, a soft terrain tint, the
+     dotted trail through the missions in the Mission Trail's stop order, four
+     city ribbons in the Pacific with leader lines to each city's real position,
+     and the compass rose and "California Mission Trail" scroll in the ocean. A
+     painted basemap can replace the fills later (map-art-template.svg).
+  2. .fs-map-pins: the interactive layer. Each mission is a real submit button
+     of a GET form (so it works without JavaScript), placed at its canonical
+     latitude/longitude through the same projection, in founding order (= tab
+     order). The box keeps the viewBox's aspect ratio, so percentages match the art.
+{% endcomment %}
+<div class="fs-map" id="mission-map">
+  <svg class="fs-map-art" viewBox="{{ fs_viewbox }}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="fs-map-sea" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#b9d8ea"/><stop offset=".55" stop-color="#8dbfdc"/><stop offset="1" stop-color="#6aa5cc"/>
+      </linearGradient>
+      <linearGradient id="fs-map-land" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#bcd59a"/><stop offset=".45" stop-color="#d6dca6"/><stop offset=".75" stop-color="#e6d7a4"/><stop offset="1" stop-color="#e8c993"/>
+      </linearGradient>
+      <radialGradient id="fs-map-hills" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#a8906a" stop-opacity=".6"/><stop offset="1" stop-color="#a8906a" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="fs-map-valley" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#8fb873" stop-opacity=".6"/><stop offset="1" stop-color="#8fb873" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="fs-map-watercolor" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+        <feGaussianBlur in="wobbly" stdDeviation="1.4"/>
+      </filter>
+      <filter id="fs-map-paper" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="grain"/>
+        <feColorMatrix in="grain" type="matrix" values="0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  0 0 0 .07 0"/>
+        <feComposite in2="SourceGraphic" operator="in"/>
+      </filter>
+      <path id="fs-map-ca" d="{{ fs_outline.path }}"/>
+      <clipPath id="fs-map-clip"><use href="#fs-map-ca"/></clipPath>
+    </defs>
+
+    <g class="fs-map-decor">
+      <rect width="100%" height="100%" fill="#ede3cc"/>{# Oregon, Nevada, Arizona, Mexico: land, unlabelled #}
+      <path d="{{ fs_outline.ocean_path }}" fill="url(#fs-map-sea)" filter="url(#fs-map-watercolor)"/>
+      <rect width="100%" height="100%" filter="url(#fs-map-paper)"/>
+      <use href="#fs-map-ca" fill="none" stroke="#e7f2f8" stroke-width="18" stroke-linejoin="round" filter="url(#fs-map-watercolor)" opacity=".7"/>
+      <use href="#fs-map-ca" fill="#f4ecd4" stroke="#f4ecd4" stroke-width="8" stroke-linejoin="round" filter="url(#fs-map-watercolor)" opacity=".9"/>
+      <use href="#fs-map-ca" fill="url(#fs-map-land)" filter="url(#fs-map-watercolor)"/>
+      <g clip-path="url(#fs-map-clip)">
+        <ellipse cx="600" cy="420" rx="230" ry="330" fill="url(#fs-map-hills)"/>
+        <ellipse cx="330" cy="560" rx="150" ry="300" fill="url(#fs-map-valley)"/>
+        <ellipse cx="760" cy="860" rx="200" ry="160" fill="url(#fs-map-hills)"/>
+      </g>
+      <use href="#fs-map-ca" fill="none" stroke="#8a7550" stroke-width="1.6" stroke-linejoin="round" opacity=".7"/>
+
+      {# The trail: missions joined in the Mission Trail page's stop order (south to north). #}
+      {% if fs_trail_points %}<polyline class="fs-map-trail" points="{{ fs_trail_points }}" fill="none" stroke="#b4842c" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 9"/>{% endif %}
+
+      {# City ribbons in the Pacific; each leader line ends at the city's real position. #}
+      <g class="fs-map-cities">
+        {% for c in fs_city_labels %}
+          <g class="fs-map-city" data-fs-city="{{ c.name }}">
+            <line x1="{{ c.end_x }}" y1="{{ c.end_y }}" x2="{{ c.dot_x }}" y2="{{ c.dot_y }}" stroke="#5c4a2c" stroke-width="1.4"/>
+            <circle cx="{{ c.dot_x }}" cy="{{ c.dot_y }}" r="4" fill="#032553" stroke="#fdf9f2" stroke-width="1.5"/>
+            <path d="{{ c.ribbon }}" fill="#f9f1e8" stroke="#c79a42" stroke-width="2"/>
+            {% for line in c.lines %}<text x="{{ c.cx }}" y="{{ line.y }}" text-anchor="middle" class="fs-map-city-text">{{ line.text }}</text>{% endfor %}
+          </g>
+        {% endfor %}
+      </g>
+
+      {# Compass rose, in the ocean (decorative). #}
+      <g class="fs-map-compass" transform="translate(110 990)">
+        <circle r="44" fill="#fdf9f2" opacity=".55"/>
+        <path d="M0 -52 L9 -9 L0 0 L-9 -9 Z M0 52 L9 9 L0 0 L-9 9 Z M52 0 L9 9 L0 0 L9 -9 Z M-52 0 L-9 9 L0 0 L-9 -9 Z" fill="#c79a42" stroke="#8a6a26" stroke-width="1.5"/>
+        <text y="-60" text-anchor="middle" class="fs-map-compass-n">N</text>
+      </g>
+
+      {# "California Mission Trail" scroll, in the ocean (decorative). #}
+      <g class="fs-map-scroll" transform="translate(60 765)">
+        <path d="M14 8 H226 Q238 8 238 20 V70 Q238 82 226 82 H14 Q2 82 2 70 V20 Q2 8 14 8 Z" fill="#f9f1e8" stroke="#c79a42" stroke-width="2.5"/>
+        <path d="M2 20 Q-8 20 -8 30 Q-8 40 2 40 M238 50 Q248 50 248 60 Q248 70 238 70" fill="none" stroke="#c79a42" stroke-width="2.5"/>
+        <text x="120" y="40" text-anchor="middle" class="fs-map-scroll-text">California</text>
+        <text x="120" y="66" text-anchor="middle" class="fs-map-scroll-text">Mission Trail</text>
+      </g>
+    </g>
+  </svg>
+
+  <form class="fs-map-pins" method="get" action="#mission-panel" data-fs-map data-fs-pin-radius="{{ fs_pin_radius }}" aria-label="Missions on the map">
+    {% for m in fs_missions %}{% if m.left %}
+      <button type="submit" name="mission" value="{{ m.slug }}" class="fs-pin" data-fs-pin
+              style="--x: {{ m.left }}%; --y: {{ m.top }}%; --label-dx: {{ m.label_dx }}; --label-dy: {{ m.label_dy }};"
+              aria-label="{{ m.name }}, Founding number {{ m.number }}, founded {{ m.year }}"
+              aria-pressed="{% if m.selected %}true{% else %}false{% endif %}" aria-controls="mission-panel">
+        <svg class="fs-pin-bell" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4c-1.2 0-2 .8-2 2v.6C10 7.6 8 11 8 15v5l-2.5 3h21L24 20v-5c0-4-2-7.4-6-8.4V6c0-1.2-.8-2-2-2z"/><circle cx="16" cy="26.5" r="2.4"/></svg>
+        <span class="fs-pin-num" aria-hidden="true">{{ m.number }}</span>
+      </button>
+    {% endif %}{% endfor %}
+    <div class="fs-pin-chooser" role="dialog" aria-modal="false" aria-labelledby="fs-pin-chooser-h" hidden data-fs-chooser>
+      <p id="fs-pin-chooser-h" class="fs-pin-chooser-title">Which mission?</p>
+      <div class="fs-pin-chooser-list" data-fs-chooser-list></div>
+      <button type="button" class="fs-button fs-button--quiet" data-fs-chooser-close>Close</button>
+    </div>
+  </form>
+</div>

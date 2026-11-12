@@ -1,0 +1,51 @@
+{% load wagtailcore_tags %}
+{% comment %}
+  Build This Mission (brief §7), on a mission page, only for a Published
+  project. The reference picture shows with its alt text; credits are an
+  internal note and never render. No product names, brands or links to buy.
+  The three print views are ?print=materials|steps|factcard.
+{% endcomment %}
+<section id="build" class="fs-section-block fs-project" aria-labelledby="build-h">
+  <h2 id="build-h" class="fs-block-title">{{ project.project_title }}</h2>
+  <div class="fs-project-top">
+    {% include "future_saints/includes/_art_frame.html" with art=project.reference_art variant="feature" slot="model reference picture" icon="mission" %}
+    <div>
+      <ul class="fs-project-facts">
+        {% if project.grade_note %}<li><strong>Good for:</strong> {{ project.grade_note }}</li>{% endif %}
+        {% if project.difficulty %}<li><strong>Difficulty:</strong> {{ project.difficulty }}</li>{% endif %}
+        {% if project.stages_summary %}<li><strong>Stages:</strong> {{ project.stages_summary }}</li>{% endif %}
+      </ul>
+      {% if project.project_intro %}<div class="fs-prose">{{ project.project_intro|linebreaks }}</div>{% endif %}
+      <p class="fs-project-print">
+        {% for key, label in fs_print_sheets.items %}<a class="fs-button fs-button--quiet" href="?print={{ key }}">{% include "future_saints/includes/_icon.html" with name="printer" %}Print: {{ label }}</a>{% endfor %}
+      </p>
+    </div>
+  </div>
+
+  {% if project.historical_vs_restored_note %}<div class="fs-note"><h3>Then and Now</h3><div class="fs-prose">{{ project.historical_vs_restored_note|linebreaks }}</div></div>{% endif %}
+
+  {% if project.features.all %}
+    <h3>What makes this mission special</h3>
+    <ul class="fs-project-features">{% for f in project.features.all %}<li><strong>{{ f.title }}</strong>{% if f.text %} {{ f.text }}{% endif %}</li>{% endfor %}</ul>
+  {% endif %}
+
+  <h3>Materials</h3>
+  {% include "future_saints/includes/_project_materials.html" %}
+
+  {% if project.adult_supervision_notes %}<div class="fs-note fs-note--safety"><h3>For grown-ups</h3><div class="fs-prose">{{ project.adult_supervision_notes|linebreaks }}</div></div>{% endif %}
+
+  <h3>Steps</h3>
+  {% include "future_saints/includes/_project_steps.html" %}
+
+  {% if project.finishing_tips %}<h3>Finishing tips</h3><div class="fs-prose">{{ project.finishing_tips|linebreaks }}</div>{% endif %}
+
+  {% if project.fact_card_rows.all %}
+    <h3>Fact card</h3>
+    {% include "future_saints/includes/_project_fact_card.html" %}
+  {% endif %}
+
+  {% if project.sources.all %}
+    <h3>Sources</h3>
+    <ul class="fs-sources">{% for s in project.sources.all %}<li>{% if s.url %}<a href="{{ s.url }}" rel="noopener">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}{% if s.publisher %}, <span class="fs-source-pub">{{ s.publisher }}</span>{% endif %}{% if s.note %}. <span class="fs-source-note">{{ s.note }}</span>{% endif %}</li>{% endfor %}</ul>
+  {% endif %}
+</section>

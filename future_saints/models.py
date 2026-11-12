@@ -14,7 +14,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.http import Http404
 from django.utils.cache import patch_cache_control
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.forms import WagtailAdminPageForm
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, ObjectList, TabbedInterface
 from wagtail.models import Page
 
 from home.legal import live_legal_urls
@@ -311,6 +312,19 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         return context
 
 
+class FutureSaintsIndexPageForm(WagtailAdminPageForm):
+    """The California Missions hub's rules: founding numbers 1–21 used once, each
+    mission once, and the hub quiz's 3–4 choices with one correct (five to publish,
+    once it has questions). Run in is_valid() so the inline rows are cleaned."""
+
+    def is_valid(self):
+        from .learning import check_quiz
+        from .missions import validate_hub_entries
+
+        valid = super().is_valid()
+        return check_quiz(self, "hub_quiz_questions", "The hub quiz", required=False) & validate_hub_entries(self) & valid
+
+
 class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
     content_kind = models.CharField(max_length=30, blank=True, choices=CONTENT_KIND_CHOICES)
     intro = models.TextField(max_length=400, blank=True, help_text="One or two short sentences for children.")
@@ -318,6 +332,18 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
     banner_illustration = _image_field()
     banner_illustration_alt = models.CharField(max_length=200, blank=True)
     banner_illustration_credit = _credit_field()
+
+    # The California Missions hub (Phase 3): used only on the california_mission index.
+    hub_eyebrow = models.CharField(max_length=80, blank=True)
+    hub_title = models.CharField(max_length=120, blank=True, help_text="Leave empty to use the page title.")
+    hub_subtitle = models.CharField(max_length=255, blank=True)
+    hub_intro = models.TextField(max_length=800, blank=True, help_text="The intro under the map.")
+    map_note = models.CharField(max_length=300, blank=True, help_text="Small print under the map.")
+    timeline_heading = models.CharField(max_length=120, blank=True, help_text='e.g. "The Missions in Founding Order".')
+    native_peoples_text = models.TextField(max_length=2000, blank=True, help_text="The hub's Native Peoples section.")
+    projects_banner_heading = models.CharField(max_length=120, blank=True)
+    projects_banner_text = models.CharField(max_length=255, blank=True)
+    projects_banner_button = models.CharField(max_length=60, blank=True)
 
     parent_page_types = ["future_saints.FutureSaintsHomePage"]
     # Each index takes only the learning type matching its content_kind;
@@ -328,7 +354,9 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
         "future_saints.EucharisticLearningPage",
         "future_saints.HolyLandLearningPage",
         "future_saints.MissionLearningPage",
+        "future_saints.MissionProjectsGuidePage",
     ]
+    base_form_class = FutureSaintsIndexPageForm
 
     content_panels = Page.content_panels + [
         FieldPanel("content_kind"),
@@ -343,6 +371,26 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
             heading="Banner illustration",
         ),
     ]
+    hub_panels = [
+        MultiFieldPanel(
+            [FieldPanel("hub_eyebrow"), FieldPanel("hub_title"), FieldPanel("hub_subtitle"), FieldPanel("hub_intro"),
+             FieldPanel("map_note")],
+            heading="Hub title, intro and map note",
+        ),
+        MultiFieldPanel([FieldPanel("timeline_heading"), FieldPanel("native_peoples_text")], heading="Hub sections"),
+        MultiFieldPanel(
+            [FieldPanel("projects_banner_heading"), FieldPanel("projects_banner_text"), FieldPanel("projects_banner_button")],
+            heading="Mission School Projects banner",
+        ),
+        InlinePanel("mission_hub_entries", label="Mission", heading="The 21 missions (founding order)"),
+        InlinePanel("hub_quiz_questions", label="Quiz question", heading="Hub quiz: Test Your Knowledge (five questions)"),
+    ]
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading="Content"),
+        ObjectList(hub_panels, heading="Missions hub (California Missions only)"),
+        ObjectList(Page.promote_panels, heading="Promote"),
+        ObjectList(Page.settings_panels, heading="Settings"),
+    ])
 
     class Meta:
         verbose_name = "Future Saints subject index"
@@ -362,10 +410,31 @@ class FutureSaintsIndexPage(FutureSaintsGateMixin, Page):
     def banner_art(self):
         return _art(self.banner_illustration, self.banner_illustration_alt)
 
+    @property
+    def is_missions_hub(self):
+        return self.content_kind == "california_mission"
+
+    def hub_quiz_data(self):
+        data = []
+        for question in self.hub_quiz_questions.all():
+            choices = [{"text": c.text, "correct": c.is_correct} for c in question.choices.all() if c.text]
+            if question.prompt and choices:
+                data.append({"prompt": question.prompt, "explanation": question.explanation, "choices": choices})
+        return data
+
+    def get_template(self, request, *args, **kwargs):
+        if self.is_missions_hub:
+            return "future_saints/missions_hub_page.html"
+        return super().get_template(request, *args, **kwargs)
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["fs_children"] = [p.specific for p in self.get_children().live().public().order_by("path")]
         context["fs_type_icon"] = KIND_ICONS.get(self.content_kind, "mark")
+        if self.is_missions_hub:
+            from .missions import hub_context
+
+            context.update(hub_context(self, request))
         return context
 
 
@@ -385,4 +454,24 @@ from .learning import (  # noqa: E402,F401
     SourceLink,
     TimelineEntry,
     WordToKnow,
+)
+
+# Phase 3: the California Missions hub, the projects guide and Build This Mission.
+from .missions import (  # noqa: E402,F401
+    ArchitecturalFeature,
+    GuideBuildStep,
+    GuideChecklistItem,
+    GuideFactCardLabel,
+    GuidePlanStep,
+    GuideSafetyItem,
+    GuideSupply,
+    HubQuizChoice,
+    HubQuizQuestion,
+    MissionHubEntry,
+    MissionProjectsGuidePage,
+    MissionSchoolProject,
+    ProjectFactCardRow,
+    ProjectMaterial,
+    ProjectSource,
+    ProjectStep,
 )

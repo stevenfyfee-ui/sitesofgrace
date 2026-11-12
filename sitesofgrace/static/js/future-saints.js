@@ -121,4 +121,110 @@
       render();
     }
   }
+
+  // ---- Missions hub: select a pin in place, share it as ?mission=<slug>. ----
+  // Without this the pins are submit buttons of a GET form and the server
+  // renders the selected panel, so nothing here is required.
+  var map = document.querySelector("[data-fs-map]");
+  var panel = document.querySelector("[data-fs-panel]");
+  var missionData = document.getElementById("fs-mission-data");
+  if (map && panel && missionData) {
+    var missions = {};
+    try {
+      JSON.parse(missionData.textContent).forEach(function (m) { missions[m.slug] = m; });
+    } catch (e) { missions = {}; }
+    var pins = Array.prototype.slice.call(map.querySelectorAll("[data-fs-pin]"));
+    var part = function (name) { return panel.querySelector("[data-fs-panel-" + name + "]"); };
+    var chooser = map.querySelector("[data-fs-chooser]");
+    var chooserList = map.querySelector("[data-fs-chooser-list]");
+    var radius = parseFloat(map.getAttribute("data-fs-pin-radius")) || 24;
+    var coarse = window.matchMedia && window.matchMedia("(pointer: coarse)");
+
+    var select = function (slug) {
+      var m = missions[slug];
+      if (!m) { return; }
+      pins.forEach(function (pin) { pin.setAttribute("aria-pressed", pin.value === slug ? "true" : "false"); });
+      part("name").textContent = m.name;
+      part("founded").textContent = m.founded;
+      part("number").textContent = m.number;
+      var hasStory = Boolean(m.story_url);
+      part("story").hidden = !hasStory;
+      part("soon").hidden = hasStory;
+      part("subtitle").textContent = m.subtitle || "";
+      part("intro").innerHTML = m.intro || "";   // the page's own rich text, rendered by the server
+      part("read").setAttribute("href", m.story_url || "#");
+      part("build").hidden = !m.project_url;
+      part("build").setAttribute("href", m.project_url || "#");
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set("mission", slug);
+        url.hash = "";
+        window.history.replaceState(null, "", url.toString());
+      }
+    };
+
+    var closeChooser = function (returnTo) {
+      chooser.hidden = true;
+      chooserList.innerHTML = "";
+      if (returnTo) { returnTo.focus(); }
+    };
+    var openChooser = function (near, returnTo) {
+      chooserList.innerHTML = "";
+      near.forEach(function (pin) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "fs-pin-choice";
+        b.textContent = "#" + missions[pin.value].number + " " + missions[pin.value].name;
+        b.addEventListener("click", function () { select(pin.value); closeChooser(pin); });
+        chooserList.appendChild(b);
+      });
+      chooser.hidden = false;
+      chooserList.querySelector("button").focus();
+      chooser.onkeydown = function (event) {
+        if (event.key === "Escape") { closeChooser(returnTo); }
+      };
+    };
+    map.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeChooser(pins[0]); });
+
+    map.addEventListener("click", function (event) {
+      var pin = event.target.closest("[data-fs-pin]");
+      if (!pin) { return; }
+      event.preventDefault();
+      // A touch tap (not a keyboard press) near two or more pins asks which one.
+      if (coarse && coarse.matches && event.detail > 0) {
+        var near = pins.filter(function (p) {
+          var r = p.getBoundingClientRect();
+          return Math.hypot(r.left + r.width / 2 - event.clientX, r.top + r.height / 2 - event.clientY) <= radius;
+        });
+        if (near.length > 1) { openChooser(near, pin); return; }
+        if (near.length === 1) { pin = near[0]; }
+      }
+      select(pin.value);
+    });
+  }
+
+  // ---- "Find a Mission" lists: tabs when JavaScript is on, three lists when it's off. ----
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fs-tabs]"), function (box) {
+    var bar = box.querySelector("[data-fs-tab-buttons]");
+    var tabs = Array.prototype.slice.call(bar.querySelectorAll("[role=tab]"));
+    var show = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) { tab.focus(); }
+    };
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { show(tab, false); });
+      tab.addEventListener("keydown", function (event) {
+        var step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+        if (step) { event.preventDefault(); show(tabs[(i + step + tabs.length) % tabs.length], true); }
+      });
+    });
+    box.classList.add("is-tabbed");
+    bar.hidden = false;
+    show(tabs[0], false);
+  });
 })();

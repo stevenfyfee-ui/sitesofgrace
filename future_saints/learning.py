@@ -141,38 +141,46 @@ def _kept_forms(formset):
     return [f for f in formset.forms if hasattr(f, "cleaned_data") and not f.cleaned_data.get("DELETE")]
 
 
+def check_quiz(page_form, formset_name, what="A learning page", required=True):
+    """Quiz rules on an admin form: every question needs 3–4 choices with exactly one
+    correct (every save); publishing needs exactly five questions (a page whose quiz is
+    optional, required=False, needs five only once it has any)."""
+    ok = True
+    questions = [f for f in _kept_forms(page_form.formsets.get(formset_name)) if f.cleaned_data.get("prompt")]
+    for form in questions:
+        choices = [f for f in _kept_forms(form.formsets.get("choices")) if f.cleaned_data.get("text")]
+        correct = sum(1 for f in choices if f.cleaned_data.get("is_correct"))
+        if not 3 <= len(choices) <= 4:
+            form.add_error("prompt", f"A question needs 3 or 4 choices (it has {len(choices)}).")
+            ok = False
+        if correct != 1:
+            form.add_error("prompt", f"Mark exactly one choice correct (it has {correct}).")
+            ok = False
+    if "action-publish" in page_form.data and (required or questions) and len(questions) != QUIZ_LENGTH:
+        page_form.add_error(None, (
+            f"{what} is published with exactly {QUIZ_LENGTH} quiz questions "
+            f"(this one has {len(questions)}). Save a draft until the quiz is complete."
+        ))
+        ok = False
+    return ok
+
+
 class LearningPageForm(WagtailAdminPageForm):
     """Quiz rules: every question needs 3–4 choices with exactly one correct
     (checked on every save); publishing also needs exactly five questions.
     Quick Facts may only inherit canonical fields that fit the page type.
+    A mission's Build This Mission project set to Published must meet the
+    project publishing rules (missions.check_project_forms).
 
     These run in is_valid(), not clean(): a cluster form validates its inline
     formsets after its own clean(), so only then do the question, choice and
     fact rows have cleaned_data to check."""
 
     def is_valid(self):
-        valid = super().is_valid()
-        return self._check_quiz() & self._check_quick_facts() & valid
+        from .missions import check_project_forms
 
-    def _check_quiz(self):
-        ok = True
-        questions = [f for f in _kept_forms(self.formsets.get("quiz_questions")) if f.cleaned_data.get("prompt")]
-        for form in questions:
-            choices = [f for f in _kept_forms(form.formsets.get("choices")) if f.cleaned_data.get("text")]
-            correct = sum(1 for f in choices if f.cleaned_data.get("is_correct"))
-            if not 3 <= len(choices) <= 4:
-                form.add_error("prompt", f"A question needs 3 or 4 choices (it has {len(choices)}).")
-                ok = False
-            if correct != 1:
-                form.add_error("prompt", f"Mark exactly one choice correct (it has {correct}).")
-                ok = False
-        if "action-publish" in self.data and len(questions) != QUIZ_LENGTH:
-            self.add_error(None, (
-                f"A learning page is published with exactly {QUIZ_LENGTH} quiz questions "
-                f"(this one has {len(questions)}). Save a draft until the quiz is complete."
-            ))
-            ok = False
-        return ok
+        valid = super().is_valid()
+        return check_quiz(self, "quiz_questions") & self._check_quick_facts() & check_project_forms(self) & valid
 
     def _check_quick_facts(self):
         ok = True
@@ -667,10 +675,30 @@ class MissionLearningPage(LearningPage):
         MultiFieldPanel([FieldPanel("student_title"), FieldPanel("subtitle"), FieldPanel("story_label")], heading="Title"),
     ] + LearningPage.common_panels[1:] + [
         MultiFieldPanel([FieldPanel("native_peoples"), FieldPanel("mission_life"), FieldPanel("architecture")], heading="Mission"),
+        InlinePanel("school_projects", label="Project", heading="Build This Mission (one project)", max_num=1),
     ]
 
     class Meta:
         verbose_name = "Future Saints California mission profile"
+
+    def published_project(self):
+        """This mission's Build This Mission project, if its status is Published (else None)."""
+        return next((p for p in self.school_projects.all() if p.is_published), None)
+
+    def cards(self):
+        """The fourth card goes to the project once it's published, otherwise to the quiz."""
+        if self.published_project() is None:
+            return self.learning_cards
+        cards = list(self.learning_cards)
+        cards[3] = {**cards[3], "anchor": "build"}
+        return tuple(cards)
+
+    def get_template(self, request, *args, **kwargs):
+        from .missions import PRINT_SHEETS
+
+        if request.GET.get("print") in PRINT_SHEETS and self.published_project() is not None:
+            return "future_saints/print/project_sheet.html"
+        return super().get_template(request, *args, **kwargs)
 
     @property
     def story_heading(self):
@@ -693,4 +721,9 @@ class MissionLearningPage(LearningPage):
         )
         chain = [{"number": p.founding_number, "title": p.heading, "date": p.founding_date_display,
                   "url": p.get_url(request), "current": p.pk == self.pk} for p in siblings]
-        return {"fs_founding_chain": chain}
+        from .missions import PRINT_SHEETS
+
+        sheet = request.GET.get("print", "")
+        return {"fs_founding_chain": chain, "fs_project": self.published_project(),
+                "fs_print_sheets": PRINT_SHEETS, "fs_sheet": sheet if sheet in PRINT_SHEETS else "",
+                "fs_sheet_title": PRINT_SHEETS.get(sheet, "")}

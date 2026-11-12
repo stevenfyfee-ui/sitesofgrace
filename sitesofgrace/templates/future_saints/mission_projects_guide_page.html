@@ -1,0 +1,70 @@
+{% extends "future_saints/base.html" %}
+{% comment %}
+  The general guide, "How to Build a California Mission Model" (brief §7):
+  plan, supplies (generic household items: no products, brands or links to
+  buy), safety, a simple build, "Remember the people", the printable checklist
+  and blank fact card (?print=checklist), and the 21-mission grid. A mission
+  links to its project only when that project is published; otherwise "Guide
+  coming soon" with no link.
+{% endcomment %}
+{% block body_class %}fs-guide fs-type-california_mission{% endblock %}
+{% block content %}
+<header class="fs-wrap fs-hub-head">
+  <h1 class="fs-hub-title">{{ page.title }}</h1>
+  {% if page.intro %}<div class="fs-prose fs-guide-intro">{{ page.intro|linebreaks }}</div>{% endif %}
+  <p><a class="fs-button fs-button--quiet" href="?print=checklist">{% include "future_saints/includes/_icon.html" with name="printer" %}Print the checklist and fact card</a></p>
+</header>
+
+<div class="fs-wrap fs-sections">
+  {% if page.plan_steps.all %}
+  <section id="plan" class="fs-section-block" aria-labelledby="plan-h">
+    <h2 id="plan-h" class="fs-block-title">Plan your project</h2>
+    <ol class="fs-guide-steps">{% for step in page.plan_steps.all %}<li><strong>{{ step.title }}</strong>{% if step.text %} {{ step.text }}{% endif %}</li>{% endfor %}</ol>
+  </section>
+  {% endif %}
+
+  {% if page.supplies.all %}
+  <section id="supplies" class="fs-section-block" aria-labelledby="supplies-h">
+    <h2 id="supplies-h" class="fs-block-title">Supplies you may already have</h2>
+    <ul class="fs-guide-list">{% for item in page.supplies.all %}<li>{{ item.text }}</li>{% endfor %}</ul>
+    {% if page.supplies_note %}<p class="fs-note">{{ page.supplies_note }}</p>{% endif %}
+  </section>
+  {% endif %}
+
+  {% if page.safety_items.all %}
+  <section id="safety" class="fs-section-block" aria-labelledby="safety-h">
+    <h2 id="safety-h" class="fs-block-title">Safety first</h2>
+    <ul class="fs-guide-list fs-guide-list--safety">{% for item in page.safety_items.all %}<li>{% if item.lead %}<strong>{{ item.lead }}</strong> {% endif %}{{ item.text }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+  {% if page.build_steps.all %}
+  <section id="build" class="fs-section-block" aria-labelledby="build-h">
+    <h2 id="build-h" class="fs-block-title">Build a simple cardboard mission</h2>
+    <ol class="fs-guide-steps">{% for step in page.build_steps.all %}<li><strong>{{ step.title }}</strong>{% if step.text %} {{ step.text }}{% endif %}</li>{% endfor %}</ol>
+  </section>
+  {% endif %}
+
+  {% if page.remember_people %}
+  <section id="remember" class="fs-section-block" aria-labelledby="remember-h">
+    <h2 id="remember-h" class="fs-block-title">Remember the people</h2>
+    <div class="fs-prose">{{ page.remember_people|linebreaks }}</div>
+  </section>
+  {% endif %}
+
+  <section id="missions" class="fs-section-block" aria-labelledby="missions-h">
+    <h2 id="missions-h" class="fs-block-title">Choose your mission</h2>
+    {% if fs_project_grid %}
+      <ol class="fs-project-grid">
+        {% for m in fs_project_grid %}
+          <li>{% if m.url %}<a class="fs-project-tile" href="{{ m.url }}">{% else %}<span class="fs-project-tile is-soon">{% endif %}
+            <span class="fs-date-chip">Founding #{{ m.number }}</span>
+            <span class="fs-project-tile-name">{{ m.name }}</span>
+            <span class="fs-project-tile-state">{% if m.url %}Build This Mission{% else %}Guide coming soon{% endif %}</span>
+          {% if m.url %}</a>{% else %}</span>{% endif %}</li>
+        {% endfor %}
+      </ol>
+    {% elif request.user.is_staff %}<p class="fs-chip-staff">Staff only: the grid fills once the hub has its 21 missions (seed_mission_hub).</p>{% endif %}
+  </section>
+</div>
+{% endblock %}

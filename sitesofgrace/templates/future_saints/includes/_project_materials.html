@@ -1,0 +1,7 @@
+{% comment %} The materials table (page and print). Generic items only: no brands, stores or links. {% endcomment %}
+<table class="fs-materials">
+  <thead><tr><th scope="col"><span class="fs-check" aria-hidden="true"></span><span class="sr-only">Got it</span></th><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Or use instead</th><th scope="col">Safety note</th></tr></thead>
+  <tbody>
+    {% for m in project.materials.all %}<tr><td><span class="fs-check" aria-hidden="true"></span></td><th scope="row">{{ m.item }}</th><td>{{ m.quantity }}</td><td>{{ m.alternative }}</td><td>{{ m.safety_note }}</td></tr>{% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+{% load static %}<!doctype html>
+{% comment %} The general guide's printable: the project checklist and a blank fact card (?print=checklist). {% endcomment %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if fs_noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
+  <title>Project Checklist · {{ page.title }}</title>
+  <link rel="stylesheet" href="{% static 'css/future-saints-print-sheets.css' %}">
+</head>
+<body class="fs-sheet fs-sheet--checklist">
+  <p class="fs-sheet-tools"><a href="{{ page.url }}">Back to the guide</a> · <button type="button" onclick="window.print()">Print this page</button></p>
+  <header class="fs-sheet-head">
+    <p class="fs-sheet-kicker">Sites of Grace | Future Saints · Mission Projects</p>
+    <h1>Project Checklist</h1>
+  </header>
+  <ul class="fs-checklist">{% for item in page.checklist_items.all %}<li><span class="fs-check" aria-hidden="true"></span>{{ item.text }}</li>{% endfor %}</ul>
+  <h2>My Mission Fact Card</h2>
+  <dl class="fs-fact-card fs-fact-card--blank">{% for label in page.fact_card_labels.all %}<div><dt>{{ label.label }}</dt><dd></dd></div>{% endfor %}</dl>
+</body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "format": "future-saints-mission-founding-order/v1",
+  "source": {
+    "publisher": "California State Parks",
+    "title": "California Missions (Franciscan Establishments 1769–1823)",
+    "url": "https://www.parks.ca.gov/?page_id=22679",
+    "note": "Years only. #2 spelling corrected (State Parks shows 'San Calros Borremeo'); #14 is 'San José de Guadalupe' on State Parks; #21 is 'San Francisco de Solano' on State Parks."
+  },
+  "approved_by": null,
+  "missions": [
+    {
+      "founding_number": 1,
+      "name": "Mission San Diego de Alcalá",
+      "founded_year": 1769
+    },
+    {
+      "founding_number": 2,
+      "name": "Mission San Carlos Borromeo de Carmelo",
+      "founded_year": 1770
+    },
+    {
+      "founding_number": 3,
+      "name": "Mission San Antonio de Padua",
+      "founded_year": 1771
+    },
+    {
+      "founding_number": 4,
+      "name": "Mission San Gabriel Arcángel",
+      "founded_year": 1771
+    },
+    {
+      "founding_number": 5,
+      "name": "Mission San Luis Obispo de Tolosa",
+      "founded_year": 1772
+    },
+    {
+      "founding_number": 6,
+      "name": "Mission San Francisco de Asís",
+      "founded_year": 1776
+    },
+    {
+      "founding_number": 7,
+      "name": "Mission San Juan Capistrano",
+      "founded_year": 1776
+    },
+    {
+      "founding_number": 8,
+      "name": "Mission Santa Clara de Asís",
+      "founded_year": 1777
+    },
+    {
+      "founding_number": 9,
+      "name": "Mission San Buenaventura",
+      "founded_year": 1782
+    },
+    {
+      "founding_number": 10,
+      "name": "Mission Santa Bárbara",
+      "founded_year": 1786
+    },
+    {
+      "founding_number": 11,
+      "name": "Mission La Purísima Concepción",
+      "founded_year": 1787
+    },
+    {
+      "founding_number": 12,
+      "name": "Mission Santa Cruz",
+      "founded_year": 1791
+    },
+    {
+      "founding_number": 13,
+      "name": "Mission Nuestra Señora de la Soledad",
+      "founded_year": 1791
+    },
+    {
+      "founding_number": 14,
+      "name": "Mission San José",
+      "founded_year": 1797
+    },
+    {
+      "founding_number": 15,
+      "name": "Mission San Juan Bautista",
+      "founded_year": 1797
+    },
+    {
+      "founding_number": 16,
+      "name": "Mission San Miguel Arcángel",
+      "founded_year": 1797
+    },
+    {
+      "founding_number": 17,
+      "name": "Mission San Fernando Rey de España",
+      "founded_year": 1797
+    },
+    {
+      "founding_number": 18,
+      "name": "Mission San Luis Rey de Francia",
+      "founded_year": 1798
+    },
+    {
+      "founding_number": 19,
+      "name": "Mission Santa Inés",
+      "founded_year": 1804
+    },
+    {
+      "founding_number": 20,
+      "name": "Mission San Rafael Arcángel",
+      "founded_year": 1817
+    },
+    {
+      "founding_number": 21,
+      "name": "Mission San Francisco Solano",
+      "founded_year": 1823
+    }
+  ]
+}
