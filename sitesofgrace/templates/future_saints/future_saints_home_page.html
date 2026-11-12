@@ -26,48 +26,59 @@
 </section>
 
 {% comment %}
-  Saint of the Week (one reading level for grades 2–5, so no "Choose Your
-  Adventure" block). It spans the full band when nothing sits beside it; for
-  staff, the Phase 4 "Take a Quiz" placeholder sits beside it.
+  Saint of the Week (the scheduled week's saint, else the fallback pick; hidden when
+  neither) and "Take a Quiz" (the featured story's quiz, else one published story with a
+  quiz chosen per visit; hidden when none has one). Each spans the band alone when the
+  other is hidden. Then the World Discovery Map preview: a small static render of the
+  same map with its published pins, linking to the map; hidden until the map is live.
 {% endcomment %}
-{% if fs_saint or request.user.is_staff %}
+{% if fs_saint or fs_quiz_card %}
 <section class="fs-wrap fs-section">
-  <div class="fs-split{% if not fs_saint or not request.user.is_staff %} fs-split--single{% endif %}" data-fs-saint-row>
+  <div class="fs-split{% if not fs_saint or not fs_quiz_card %} fs-split--single{% endif %}" data-fs-saint-row>
     {% if fs_saint %}
-      <div class="fs-saint-band" aria-labelledby="fs-saint-heading">
+      <div class="fs-saint-band" aria-labelledby="fs-saint-heading" data-fs-saint>
         <h2 id="fs-saint-heading" class="fs-ribbon">{{ page.saint_of_week_heading|default:"Saint of the Week" }}</h2>
         <div class="fs-saint">
           {% include "future_saints/includes/_art_frame.html" with art=fs_saint.art variant="portrait" slot="saint portrait" icon="saint" %}
           <div>
-            <h3 class="fs-saint-name">{{ fs_saint.name }}</h3>
+            <h3 class="fs-saint-name">{% if fs_saint.url %}<a href="{{ fs_saint.url }}">{{ fs_saint.name }}</a>{% else %}{{ fs_saint.name }}{% endif %}</h3>
             {% if fs_saint.line %}<p>{{ fs_saint.line }}</p>{% endif %}
+            {% if fs_saint.url %}<a class="fs-button fs-button--quiet" href="{{ fs_saint.url }}">Meet this saint{% include "future_saints/includes/_icon.html" with name="arrow" %}</a>{% endif %}
           </div>
         </div>
       </div>
     {% endif %}
-    {% if request.user.is_staff %}
-      <div class="fs-staff-only fs-card fs-accent-lavender" data-fs-phase4="quiz">
+    {% if fs_quiz_card %}
+      <a class="fs-card fs-accent-lavender fs-quiz-card" href="{{ fs_quiz_card.url }}" data-fs-quiz-card>
         <span class="fs-card-label">
           {% include "future_saints/includes/_icon.html" with name="quiz" class="fs-card-icon" %}
-          <span class="fs-card-title">Take a Quiz<span class="fs-card-line">Phase 4 placeholder. Quizzes arrive with the published stories.</span></span>
+          <span class="fs-card-title">Take a Quiz<span class="fs-card-line">{{ fs_quiz_card.title }}: five questions. How much do you know?</span></span>
+          {% include "future_saints/includes/_icon.html" with name="chevron" class="fs-card-chevron" %}
         </span>
-        <span class="fs-chip-staff">Staff only</span>
-      </div>
+      </a>
     {% endif %}
   </div>
 </section>
 {% endif %}
 
-{% if request.user.is_staff %}
-  {% comment %} Phase 4 placeholder: staff only, never shown to visitors. {% endcomment %}
-  <section class="fs-wrap fs-section" aria-label="Staff preview: Phase 4 placeholder">
-    <div class="fs-staff-only fs-card fs-accent-blue" data-fs-phase4="map">
-      <span class="fs-card-label">
-        {% include "future_saints/includes/_icon.html" with name="map" class="fs-card-icon" %}
-        <span class="fs-card-title">World Discovery Map<span class="fs-card-line">Phase 4 placeholder. The illustrated world map is built in Phase 4.</span></span>
-      </span>
-      <span class="fs-chip-staff">Staff only</span>
-    </div>
-  </section>
+{% if fs_world_preview %}
+<section class="fs-wrap fs-section" aria-labelledby="fs-world-preview-h">
+  <a class="fs-world-preview" href="{{ fs_world_preview.url }}" data-fs-world-preview>
+    <svg class="fs-world-preview-map" viewBox="{{ fs_world_preview.viewbox }}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+      {% include "future_saints/includes/_world_art.html" %}
+      {% for i in fs_world_preview.items %}
+        <g class="fs-wm-{{ i.kind }}" transform="translate({{ i.x|floatformat:1 }} {{ i.y|floatformat:1 }})">
+          <circle r="7" class="fs-world-preview-dot"/>
+          <use href="#fs-i-{{ i.icon }}" x="-5" y="-5" width="10" height="10" class="fs-world-preview-icon"/>
+        </g>
+      {% endfor %}
+    </svg>
+    <span class="fs-world-preview-text">
+      <span id="fs-world-preview-h" class="fs-feature-title">{% include "future_saints/includes/_icon.html" with name="map" class="fs-card-icon" %}{{ fs_world_preview.title }}</span>
+      <span class="fs-feature-line">See where the stories happened around the world.</span>
+      <span class="fs-button">Open the map{% include "future_saints/includes/_icon.html" with name="arrow" %}</span>
+    </span>
+  </a>
+</section>
 {% endif %}
 {% endblock %}

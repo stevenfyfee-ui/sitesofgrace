@@ -116,14 +116,12 @@ html { -webkit-text-size-adjust: 100%; }
 
 .fs-nav { display: flex; align-items: center; justify-content: flex-end; flex: 1 1 auto; min-width: 0; }
 .fs-nav-list { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 0; margin: 0; padding: 0; list-style: none; }
-.fs-nav-list a, .fs-nav-soon {
+.fs-nav-list a {
   display: inline-flex; align-items: center; min-height: 44px; padding: .25rem .55rem;
   font-size: 1rem; color: var(--fs-ivory); text-decoration: none; border-radius: 8px;
 }
 .fs-nav-list a:hover { background: rgba(253, 249, 242, .1); }
 .fs-nav-list a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--fs-gold); border-radius: 0; }
-.fs-nav-soon { opacity: .75; font-style: italic; cursor: default; }
-.fs-nav-soon small { font-size: .78em; margin-left: .35em; }
 .fs-back-link { font-size: .95rem; }
 .fs-back-link svg { width: 1em; height: 1em; margin-right: .3em; flex: none; }
 
@@ -139,7 +137,7 @@ html { -webkit-text-size-adjust: 100%; }
   .fs-js .fs-menu-button { display: inline-flex; }
   .fs-nav { width: 100%; flex-basis: 100%; }
   .fs-nav-list { flex-direction: column; align-items: stretch; width: 100%; padding-bottom: .75rem; }
-  .fs-nav-list a, .fs-nav-soon { width: 100%; }
+  .fs-nav-list a { width: 100%; }
   .fs-js .fs-nav:not(.is-open) { display: none; }
 }
 @media (max-width: 430px) {
@@ -370,7 +368,6 @@ a.fs-card:hover { box-shadow: 0 1px 0 rgba(3, 37, 83, .08), 0 10px 24px rgba(3, 
 .fs-nav-list a.fs-nav-item[aria-current]::after {
   content: ""; position: absolute; left: 16%; right: 16%; bottom: 2px; height: 3px; border-radius: 2px; background: var(--fs-gold);
 }
-.fs-nav-soon .fs-nav-icon { opacity: .7; }
 .fs-nav-back { margin-left: .4rem; }
 .fs-nav-back .fs-back-link { font-size: .85rem; opacity: .85; }
 @media (max-width: 1180px) {
@@ -742,3 +739,77 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
    (missions.CITY_LABEL_MIN_MAP_PX); on a narrower map the ribbons, dots and leaders hide. */
 .fs-map { container-type: inline-size; }
 @container (max-width: 499.98px) { .fs-map-cities { display: none; } }
+
+/* ---------- Phase 4: the World Discovery Map (brief §8; comp 01's map hero style) ---------- */
+/* Marker accents, one token per story type. */
+:root {
+  --fs-wm-saint: #4E6B3A; --fs-wm-marian_apparition: #2F5E9E; --fs-wm-eucharistic_miracle: #A97A1E;
+  --fs-wm-holy_land: #8A6A3A; --fs-wm-california_mission: #9A4A2E;
+}
+.fs-wm-saint { --fs-wm: var(--fs-wm-saint); }
+.fs-wm-marian_apparition { --fs-wm: var(--fs-wm-marian_apparition); }
+.fs-wm-eucharistic_miracle { --fs-wm: var(--fs-wm-eucharistic_miracle); }
+.fs-wm-holy_land { --fs-wm: var(--fs-wm-holy_land); }
+.fs-wm-california_mission { --fs-wm: var(--fs-wm-california_mission); }
+
+.fs-world-intro { max-width: var(--fs-measure); margin-inline: auto; }
+.fs-world-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: .5rem 0 1rem; }
+.fs-world-filters[hidden] { display: none; }
+.fs-world-filter { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .35rem .9rem;
+  border: 2px solid var(--fs-wm, var(--fs-gold)); border-radius: 999px; background: var(--fs-ivory); color: var(--fs-navy);
+  font: inherit; cursor: pointer; }
+.fs-world-filter .fs-icon { width: 1.2em; height: 1.2em; color: var(--fs-wm, var(--fs-gold-deep)); }
+.fs-world-filter[aria-pressed="true"] { background: color-mix(in srgb, var(--fs-wm, var(--fs-gold)) 16%, var(--fs-ivory)); font-weight: 700; }
+.fs-world-filter[aria-pressed="false"] { opacity: .65; text-decoration: line-through; }
+.fs-world-filter--all { border-style: dashed; }
+
+.fs-wmap { position: relative; width: 100%; aspect-ratio: 1000 / 445; border-radius: var(--fs-radius);
+  box-shadow: 0 1px 0 rgba(3, 37, 83, .07), 0 10px 26px rgba(3, 37, 83, .12); }
+.fs-wmap .fs-map-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: var(--fs-radius); }
+/* The world map is short on phones: "Which story?" opens just below it rather than inside it. */
+.fs-wmap .fs-pin-chooser { top: calc(100% + 8px); bottom: auto; z-index: 20; }
+.fs-wmap-pins { position: absolute; inset: 0; margin: 0; }
+.fs-wm-marker { position: absolute; left: var(--x); top: var(--y); width: 0; height: 0; }
+.fs-wm-marker[hidden] { display: none; }
+.fs-wm-anchor { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--fs-wm); border: 1px solid #fff; display: none; }
+.fs-wm-leader { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: visible; display: none; }
+.fs-wm-leader line { stroke: var(--fs-wm); stroke-width: 1.5; }
+.fs-wm-pin { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; padding: 0; display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.fs-wm-disc { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--fs-ivory);
+  border: 3px solid var(--fs-wm); box-shadow: 0 2px 4px rgba(0, 0, 0, .3); }
+.fs-wm-icon { width: 20px; height: 20px; color: var(--fs-wm); }
+.fs-wm-count { position: absolute; top: 0; right: 0; min-width: 18px; padding: 0 3px; border-radius: 9px; background: var(--fs-navy);
+  color: #fff; font: 700 11px/18px system-ui, sans-serif; text-align: center; }
+.fs-wm-pin[aria-pressed="true"] .fs-wm-disc { background: var(--fs-wm); transform: scale(1.12); }
+.fs-wm-pin[aria-pressed="true"] .fs-wm-icon { color: #fff; }
+.fs-wm-pin:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 0; z-index: 3; }
+@media (prefers-reduced-motion: no-preference) { .fs-wm-disc { transition: transform .15s ease; } }
+/* Reviewed offsets apply on the desktop map only; a thin line anchors the marker to its true spot. */
+@media (min-width: 1024px) {
+  .fs-wm-marker.is-offset .fs-wm-pin { transform: translate(var(--dx), var(--dy)); }
+  .fs-wm-marker.is-offset .fs-wm-anchor, .fs-wm-marker.is-offset .fs-wm-leader { display: block; }
+}
+
+.fs-world-card-type { margin: 0; text-align: center; }
+.fs-world-card-type span { display: inline-block; padding: .1rem .7rem; border-radius: 999px; font-weight: 700; font-size: .95rem;
+  background: color-mix(in srgb, var(--fs-wm, var(--fs-gold)) 16%, var(--fs-ivory)); color: var(--fs-wm, var(--fs-navy)); }
+.fs-world-card-place { display: flex; gap: .4rem; align-items: flex-start; }
+.fs-world-card-place .fs-icon { flex: none; width: 1.1em; height: 1.1em; margin-top: .2em; color: var(--fs-wm, var(--fs-gold-deep)); }
+.fs-world-group[hidden], .fs-world-list li[hidden] { display: none; }
+.fs-world-group-title { font-size: 1.25rem; margin-top: 1rem; }
+.fs-world-list { columns: 2 18rem; column-gap: 2rem; padding-left: 1.4rem; }
+.fs-world-list li { break-inside: avoid; margin-bottom: .4rem; }
+.fs-world-show { margin-left: .4rem; font-size: .9rem; }
+
+/* Homepage: Take a Quiz and the map preview. */
+.fs-quiz-card { align-self: center; }
+.fs-world-preview { display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: center; padding: 1rem; border-radius: var(--fs-radius);
+  background: var(--fs-parchment); color: var(--fs-navy); text-decoration: none; box-shadow: 0 1px 0 rgba(3, 37, 83, .07), 0 10px 26px rgba(3, 37, 83, .1); }
+@media (min-width: 768px) { .fs-world-preview { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } }
+.fs-world-preview-map { width: 100%; height: auto; aspect-ratio: 1000 / 445; border-radius: 12px; display: block; }
+.fs-world-preview-dot { fill: var(--fs-ivory); stroke: var(--fs-wm); stroke-width: 2; }
+.fs-world-preview-icon { color: var(--fs-wm); }
+.fs-world-preview-text { display: grid; gap: .6rem; justify-items: start; }
+@media print { .fs-world .fs-wmap, .fs-world-filters { display: none !important; } }

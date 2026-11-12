@@ -1,0 +1,41 @@
+{% load static %}
+{% comment %}
+  The world map. Two layers in one fixed Equal Earth viewBox:
+  1. .fs-map-art (aria-hidden): a watercolor ocean, the Natural Earth land outline
+     (public domain; one cached static SVG, <use>d here and on the homepage preview), a
+     compass rose in the ocean. No country labels, nothing that could be read as a place.
+  2. .fs-wmap-pins: one marker per pinned story, a real submit button of a GET form
+     (?story=<key>), at its true spot (future_saints.worldmap). On desktop a reviewed
+     offset may move a marker clear of its neighbours; a thin line anchors it to its spot.
+{% endcomment %}
+<div class="fs-wmap" id="world-map">
+  <svg class="fs-map-art" viewBox="{{ fs_world_viewbox }}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+    {% include "future_saints/includes/_world_art.html" %}
+    {# Compass rose, in the South Pacific (decorative). #}
+    <g class="fs-map-compass" transform="translate(70 370) scale(.8)">
+      <circle r="44" fill="#fdf9f2" opacity=".55"/>
+      <path d="M0 -52 L9 -9 L0 0 L-9 -9 Z M0 52 L9 9 L0 0 L-9 9 Z M52 0 L9 9 L0 0 L9 -9 Z M-52 0 L-9 9 L0 0 L-9 -9 Z" fill="#c79a42" stroke="#8a6a26" stroke-width="1.5"/>
+      <text y="-60" text-anchor="middle" class="fs-map-compass-n">N</text>
+    </g>
+  </svg>
+
+  <form class="fs-wmap-pins" method="get" action="#story-card" data-fs-world data-fs-pin-radius="24" aria-label="Stories on the map">
+    {% for i in fs_world_items %}{% if i.pinned %}
+      <div class="fs-wm-marker fs-wm-{{ i.kind }}{% if i.dx or i.dy %} is-offset{% endif %}" data-fs-kind="{{ i.kind }}"
+           style="--x: {{ i.left }}%; --y: {{ i.top }}%; --dx: {{ i.dx }}px; --dy: {{ i.dy }}px;">
+        <span class="fs-wm-anchor" aria-hidden="true"></span>
+        <svg class="fs-wm-leader" aria-hidden="true" focusable="false"><line x1="0" y1="0" x2="{{ i.dx }}" y2="{{ i.dy }}"/></svg>
+        <button type="submit" name="story" value="{{ i.key }}" class="fs-wm-pin" data-fs-world-pin
+                aria-label="{{ i.aria_label }}" aria-pressed="{% if i.selected %}true{% else %}false{% endif %}" aria-controls="story-card">
+          <span class="fs-wm-disc">{% include "future_saints/includes/_icon.html" with name=i.icon class="fs-wm-icon" %}</span>
+          {% if i.count %}<span class="fs-wm-count" aria-hidden="true">{{ i.count }}</span>{% endif %}
+        </button>
+      </div>
+    {% endif %}{% endfor %}
+    <div class="fs-pin-chooser" role="dialog" aria-modal="false" aria-labelledby="fs-world-chooser-h" hidden data-fs-chooser>
+      <p id="fs-world-chooser-h" class="fs-pin-chooser-title">Which story?</p>
+      <div class="fs-pin-chooser-list" data-fs-chooser-list></div>
+      <button type="button" class="fs-button fs-button--quiet" data-fs-chooser-close>Close</button>
+    </div>
+  </form>
+</div>

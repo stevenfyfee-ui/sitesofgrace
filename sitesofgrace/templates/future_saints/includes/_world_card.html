@@ -1,0 +1,15 @@
+{% comment %}
+  The story card (beside the map at >=1024, below it on smaller screens; never over it).
+  Server-rendered for ?story=<key> (default: the first story in the list); future-saints.js
+  swaps the same fields in place from #fs-world-data.
+{% endcomment %}
+<aside id="story-card" class="fs-mission-panel fs-world-card fs-wm-{{ item.kind }}" aria-labelledby="fs-card-title" data-fs-world-card>
+  {% include "future_saints/includes/_art_frame.html" with art=item.art variant="thumb" slot="story thumbnail" icon=item.icon %}
+  <div aria-live="polite">
+    <p class="fs-world-card-type"><span data-fs-card-type>{{ item.type_label }}</span></p>
+    <h2 id="fs-card-title" class="fs-mission-panel-name" data-fs-card-title>{{ item.title }}</h2>
+    <p class="fs-mission-panel-subtitle" data-fs-card-subtitle{% if not item.subtitle %} hidden{% endif %}>{{ item.subtitle }}</p>
+    <p class="fs-world-card-place" data-fs-card-place{% if not item.place_line %} hidden{% endif %}>{% include "future_saints/includes/_icon.html" with name="marker" %}<span data-fs-card-place-text>{{ item.place_line }}</span></p>
+    <p><a class="fs-button" href="{{ item.url }}" data-fs-card-link><span data-fs-card-link-text>{{ item.link_label }}</span>{% include "future_saints/includes/_icon.html" with name="arrow" %}</a></p>
+  </div>
+</aside>
