@@ -159,9 +159,14 @@ class MissionHubEntry(Orderable):
     founded_display = models.CharField(max_length=160, help_text="From the canonical page's founding text.")
     map_offset_x = models.FloatField(null=True, blank=True, help_text="Moves the Founding # badge only, in screen pixels. The pin never moves.")
     map_offset_y = models.FloatField(null=True, blank=True, help_text="Moves the Founding # badge only, in screen pixels. The pin never moves.")
-    needs_review = models.BooleanField(default=False, help_text="Set while a badge offset hasn't been checked.")
+    needs_review = models.BooleanField(
+        default=False, help_text="Set while something on this mission (its date, its badge offset) needs checking. "
+                                 "seed_mission_hub leaves a needs-review mission exactly as it is.",
+    )
+    review_note = models.CharField(max_length=255, blank=True, help_text="Internal review note only — never shown on the site.")
 
-    panels = ["canonical", "founding_number", "founded_year", "founded_display", "map_offset_x", "map_offset_y", "needs_review"]
+    panels = ["canonical", "founding_number", "founded_year", "founded_display", "map_offset_x", "map_offset_y",
+              "needs_review", "review_note"]
 
     class Meta(Orderable.Meta):
         constraints = [
