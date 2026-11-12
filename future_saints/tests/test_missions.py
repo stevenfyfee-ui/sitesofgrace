@@ -28,13 +28,18 @@ from catalog.models import PilgrimageTrailPage, SacredSitePage, TrailStop
 from future_saints.geo import albers, point_in_polygon, to_viewbox
 from future_saints.learning import MISSION_TRAIL_SLUG
 from future_saints.missions import (
+    BADGE_OFFSETS,
+    CITY_LABELS,
+    MAP_WIDTHS_PX,
     MissionProjectsGuidePage,
     MissionSchoolProject,
     ProjectFactCardRow,
     ProjectMaterial,
     ProjectSource,
     ProjectStep,
+    badge_box,
     california_outline,
+    city_labels,
     project_publish_problems,
 )
 from future_saints.models import FutureSaintsIndexPage, MissionHubEntry, MissionLearningPage
@@ -210,13 +215,64 @@ class ProjectionTests(MissionsTestCase):
             for n in cluster:
                 self.assertLess(((pins[n][0] - cx) ** 2 + (pins[n][1] - cy) ** 2) ** .5, 80, f"#{n} near its cluster")
 
+    DECOR = {"compass": (110 - 52, 990 - 60, 110 + 52, 990 + 52), "scroll": (60 - 8, 765 + 8, 60 + 248, 765 + 82)}
+
+    def assert_in_the_pacific(self, name, box, step=3):
+        """Every sampled point of the box is in the Pacific: inside the ocean shape and on no island."""
+        outline = california_outline()
+        x1, y1, x2, y2 = box
+        for x in [x1 + i * (x2 - x1) / int((x2 - x1) / step) for i in range(int((x2 - x1) / step) + 1)]:
+            for y in [y1 + i * (y2 - y1) / int((y2 - y1) / step) for i in range(int((y2 - y1) / step) + 1)]:
+                self.assertTrue(point_in_polygon(x, y, outline["ocean"]), f"{name} leaves the ocean at ({x:.0f}, {y:.0f})")
+                self.assertFalse(any(point_in_polygon(x, y, r) for r in outline["rings"]), f"{name} touches land at ({x:.0f}, {y:.0f})")
+
     def test_decorations_stay_in_the_ocean(self):
-        rings = california_outline()["rings"]
-        decor = {"compass": (110 - 52, 990 - 60, 110 + 52, 990 + 52), "scroll": (60 - 8, 765 + 8, 60 + 248, 765 + 82)}
-        for name, (x1, y1, x2, y2) in decor.items():
-            for x in range(int(x1), int(x2) + 1, 4):
-                for y in range(int(y1), int(y2) + 1, 4):
-                    self.assertFalse(any(point_in_polygon(x, y, r) for r in rings), f"{name} touches land at ({x}, {y})")
+        for name, box in self.DECOR.items():
+            self.assert_in_the_pacific(name, box, step=4)
+
+    def test_only_the_pacific_is_water(self):
+        ocean = california_outline()["ocean"]
+        for name, (lat, lng) in {"Pacific off Point Reyes": (38.0, -123.5), "Pacific off Point Conception": (34.2, -121.0)}.items():
+            self.assertTrue(point_in_polygon(*to_viewbox(lat, lng), ocean), name)
+        for name, (lat, lng) in {"Reno, NV": (39.53, -119.81), "Las Vegas, NV": (36.17, -115.14), "Yuma, AZ": (32.69, -114.62),
+                                 "Medford, OR": (42.33, -122.87), "Tecate, BC": (32.57, -116.63)}.items():
+            self.assertFalse(point_in_polygon(*to_viewbox(lat, lng), ocean), f"{name} must be drawn as land")
+
+    def test_no_two_badges_intersect_at_any_qa_width(self):
+        pins = self.pins()
+        for width, map_px in MAP_WIDTHS_PX.items():
+            scale = map_px / 1000
+            boxes = {n: badge_box(*pins[n], n, BADGE_OFFSETS.get(n, (0, 0)), scale) for n in pins}
+            for a in boxes:
+                for b in boxes:
+                    if a < b:
+                        A, B = boxes[a], boxes[b]
+                        self.assertTrue(A[2] <= B[0] or B[2] <= A[0] or A[3] <= B[1] or B[3] <= A[1],
+                                        f"badges #{a} and #{b} intersect at {width}px")
+
+    def test_city_labels_sit_in_the_pacific_clear_of_pins_and_badges(self):
+        labels = city_labels()
+        self.assertEqual([c["name"] for c in labels], ["San Francisco", "Monterey", "Los Angeles", "San Diego"], "no Sonoma")
+        pins = self.pins()
+        for c in labels:
+            box = (c["x"], c["y"], c["x"] + c["w"], c["y"] + c["h"])
+            self.assert_in_the_pacific(c["name"], box)
+            for name, d in self.DECOR.items():
+                self.assertTrue(box[2] <= d[0] or d[2] <= box[0] or box[3] <= d[1] or d[3] <= box[1], f"{c['name']} touches the {name}")
+            city = next(x for x in CITY_LABELS if x["name"] == c["name"])
+            self.assertEqual((c["dot_x"], c["dot_y"]), tuple(round(v, 2) for v in to_viewbox(city["lat"], city["lng"])))
+            self.assertTrue(box[0] <= c["end_x"] <= box[2] and box[1] <= c["end_y"] <= box[3], "leader starts on the ribbon")
+            for width, map_px in MAP_WIDTHS_PX.items():
+                s = map_px / 1000
+                px = tuple(v * s for v in box)
+                others = [(pins[n][0] * s - 16, pins[n][1] * s - 16, pins[n][0] * s + 16, pins[n][1] * s + 16) for n in pins]
+                others += [badge_box(*pins[n], n, BADGE_OFFSETS.get(n, (0, 0)), s) for n in pins]
+                for o in others:
+                    self.assertTrue(px[2] <= o[0] or o[2] <= px[0] or px[3] <= o[1] or o[3] <= px[1],
+                                    f"{c['name']} touches a pin or badge at {width}px")
+        for i, a in enumerate(labels):
+            for b in labels[i + 1:]:
+                self.assertLess(a["y"] + a["h"], b["y"] + 1, f"{a['name']} above {b['name']}, north to south")
 
     def test_a_pin_moves_when_its_canonical_lat_lng_changes(self):
         self.seed_and_publish()
@@ -254,6 +310,9 @@ class SeedTests(MissionsTestCase):
         latest = self.hub.get_latest_revision_as_object()
         entries = sorted(latest.mission_hub_entries.all(), key=lambda e: e.founding_number)
         self.assertEqual([e.founding_number for e in entries], list(range(1, 22)))
+        self.assertEqual({e.founding_number: (e.map_offset_x, e.map_offset_y) for e in entries},
+                         {n: tuple(float(v) for v in BADGE_OFFSETS.get(n, (0, 0))) for n in range(1, 22)})
+        self.assertFalse(any(e.needs_review for e in entries), "the reviewed offsets are marked reviewed")
         self.assertEqual(entries[0].canonical_id, self.sites[1].pk)
         self.assertEqual(entries[0].founded_display, "July 16, 1769")
         self.assertEqual(entries[6].founded_display, "1776")
@@ -305,6 +364,18 @@ class SeedTests(MissionsTestCase):
             call_command("seed_mission_hub", stdout=out)
         self.assertIn("#14 'Mission San José': 2 match(es)", out.getvalue())
         self.assertFalse(self.hub.revisions.exists() and self.hub.get_latest_revision_as_object().mission_hub_entries.exists())
+
+    def test_an_editors_badge_offset_is_kept(self):
+        self.seed()
+        self.hub.refresh_from_db()
+        latest = self.hub.get_latest_revision_as_object()
+        entry = next(e for e in latest.mission_hub_entries.all() if e.founding_number == 4)
+        entry.map_offset_x, entry.map_offset_y, entry.needs_review = 5.0, 6.0, True
+        latest.save_revision()
+        self.assertIn("Unchanged", self.seed())
+        self.hub.refresh_from_db()
+        kept = next(e for e in self.hub.get_latest_revision_as_object().mission_hub_entries.all() if e.founding_number == 4)
+        self.assertEqual((kept.map_offset_x, kept.map_offset_y, kept.needs_review), (5.0, 6.0, True))
 
     def test_year_mismatch_is_reported_not_fixed(self):
         data = json.loads(FOUNDING_FILE.read_text(encoding="utf-8"))
@@ -367,6 +438,17 @@ class HubTests(MissionsTestCase):
         timeline = html.split('id="founding-order"')[1].split("</section>")[0]
         self.assertEqual(timeline.count("<li>"), 21)
         self.assertIn("Founding #7</span> <a href=\"?mission=fixture-mission-7#mission-panel\">Mission Basilica San Juan Capistrano</a> · 1776", timeline)
+
+    def test_trail_line_follows_the_trail_stop_order(self):
+        html = self.hub_html()
+        points = re.search(r'<polyline class="fs-map-trail" points="([^"]+)"', html).group(1).split()
+        by_stop = sorted(self.sites.values(), key=lambda s: s.latitude)        # the fixture trail runs south to north
+        self.assertEqual(points, [f"{x:.1f},{y:.1f}" for x, y in (to_viewbox(s.latitude, s.longitude) for s in by_stop)])
+
+    def test_badge_offsets_render_and_city_ribbons_are_drawn(self):
+        html = self.hub_html()
+        self.assertRegex(html, r'value="fixture-mission-8"[^>]*--label-dx: -36\.0; --label-dy: 0;')
+        self.assertEqual(re.findall(r'data-fs-city="([^"]+)"', html), ["San Francisco", "Monterey", "Los Angeles", "San Diego"])
 
     def test_close_pin_chooser_markup(self):
         html = self.hub_html()

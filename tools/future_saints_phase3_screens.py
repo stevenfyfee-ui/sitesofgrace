@@ -14,8 +14,10 @@ the projects guide at 1440 and 390; the mission sample's Build This Mission
 section at 1440. PDFs: the three project print views and the guide's
 checklist, each on US Letter and A4.
 
-Checks: 200, no cookies, nothing requested from another host; 21 pins; the
-selected panel never overlaps the map (beside it at >=1024, below it under
+Checks: 200, no cookies, nothing requested from another host; 21 pins; no
+two Founding # badges intersect; exactly the four city ribbons (no Sonoma),
+none touching a bell, a badge or another ribbon; the selected panel never
+overlaps the map (beside it at >=1024, below it under
 1024); keyboard: Tab walks the pins in founding order and Enter selects one
 (aria-pressed, the panel and ?mission= update); touch: a tap between two close
 pins opens the chooser, and choosing selects that mission; without JavaScript
@@ -38,9 +40,18 @@ VIEWPORTS = (1440, 1024, 768, 430, 390, 360)
 PINS_JS = """() => Array.from(document.querySelectorAll('[data-fs-pin]')).map(b => {
   const r = b.getBoundingClientRect(); return {slug: b.value, x: r.left + r.width / 2, y: r.top + r.height / 2,
   pressed: b.getAttribute('aria-pressed'), label: b.getAttribute('aria-label')}; })"""
+MARKS_JS = """() => { const box = e => { const r = e.getBoundingClientRect(); return [r.left, r.top, r.right, r.bottom]; };
+  return {badges: Array.from(document.querySelectorAll('.fs-pin-num')).map(e => [e.textContent, box(e)]),
+          bells: Array.from(document.querySelectorAll('.fs-pin-bell')).map(box),
+          cities: Array.from(document.querySelectorAll('[data-fs-city]')).filter(g => getComputedStyle(g).display !== 'none')
+            .map(g => [g.getAttribute('data-fs-city'), box(g.querySelector('path'))])}; }"""
 BOXES_JS = """() => { const m = document.querySelector('.fs-map').getBoundingClientRect();
   const p = document.querySelector('#mission-panel').getBoundingClientRect();
   return {map: [m.left, m.top, m.right, m.bottom], panel: [p.left, p.top, p.right, p.bottom]}; }"""
+
+
+def boxes_overlap(a, b):
+    return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
 
 
 def pdf_pages(data):
@@ -76,6 +87,17 @@ def main():
             check(not foreign, f"hub {width}: nothing from another host {foreign[:3]}")
             pins = page.evaluate(PINS_JS)
             check(len(pins) == 21, f"hub {width}: 21 pins")
+            marks = page.evaluate(MARKS_JS)
+            badges = marks["badges"]
+            clashes = [(a[0], b[0]) for i, a in enumerate(badges) for b in badges[i + 1:] if boxes_overlap(a[1], b[1])]
+            check(not clashes, f"hub {width}: no two Founding # badges intersect {clashes}")
+            cities = marks["cities"]
+            check(sorted(c[0] for c in cities) == ["Los Angeles", "Monterey", "San Diego", "San Francisco"],
+                  f"hub {width}: the four city ribbons, no Sonoma {[c[0] for c in cities]}")
+            touching = [c[0] for c in cities if any(boxes_overlap(c[1], b) for b in marks["bells"])
+                        or any(boxes_overlap(c[1], b[1]) for b in badges)
+                        or any(boxes_overlap(c[1], o[1]) for o in cities if o is not c)]
+            check(not touching, f"hub {width}: no ribbon touches a bell, a badge or another ribbon {touching}")
             boxes = page.evaluate(BOXES_JS)
             m, pn = boxes["map"], boxes["panel"]
             overlap = not (pn[0] >= m[2] - .5 or pn[2] <= m[0] + .5 or pn[1] >= m[3] - .5 or pn[3] <= m[1] + .5)
