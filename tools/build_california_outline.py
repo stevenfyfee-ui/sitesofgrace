@@ -101,7 +101,7 @@ def main(zip_path):
     }
     data = ROOT / "future_saints" / "data" / "california_outline.json"
     data.parent.mkdir(exist_ok=True)
-    data.write_text(json.dumps(out, separators=(",", ":")) + "\n", encoding="utf-8")
+    data.write_text(json.dumps(out, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
     template = ROOT / "docs" / "future-saints" / "map-art-template.svg"
     template.write_text(
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VIEWBOX}" width="1000" height="1100">\n'
@@ -109,7 +109,7 @@ def main(zip_path):
         f"{SOURCE['licence']}. Paint the basemap under this outline; keep the viewBox. -->\n"
         f'  <rect width="100%" height="100%" fill="#ffffff"/>\n'
         f'  <path d="{path}" fill="none" stroke="#000000" stroke-width="1"/>\n</svg>\n',
-        encoding="utf-8",
+        encoding="utf-8", newline="\n",
     )
     points = sum(len(r) for r in rings)
     print(f"{len(rings)} ring(s), {points} points; mainland {len(rings[0])} points; "
