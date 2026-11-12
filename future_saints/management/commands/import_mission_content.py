@@ -5,7 +5,8 @@
     python manage.py import_mission_content --verify
 
 Format "future-saints-missions-content/v1" (docs/future-saints/content/missions-hub-and-projects.json,
-converted from the approved Markdown with no wording changes). Three parts:
+converted from the approved Markdown with no wording changes; any later owner-approved change
+is recorded in "amendments" with the value it replaces). Three parts:
 
 - "hub": the California Missions index's hub text and its five-question quiz.
 - "guide": the projects guide page at <hub>/projects/ (created unpublished if missing).
@@ -17,8 +18,8 @@ seeded hub missions (or any other draft work on those pages) are kept: only the 
 file owns are replaced (the hub's text and quiz; the guide's content; the mission page's
 project). It never publishes and never submits to the workflow. Everything is validated
 before anything is written (lengths from the models, rejected never truncated; the quiz's
-5 questions with 3-4 choices and one correct; https URLs; no grade-level wording; no
-shopping words), --dry-run and --verify write nothing, and a second run reports 0 changed.
+5 questions with 3-4 choices and one correct; https URLs; no grade-level wording and no
+"grade"/"grades" at all; no shopping words), --dry-run and --verify write nothing, and a second run reports 0 changed.
 """
 import json
 import re
@@ -55,7 +56,8 @@ FORMAT = "future-saints-missions-content/v1"
 DEFAULT_PATH = "docs/future-saints/content/missions-hub-and-projects.json"
 QUIZ_LENGTH = 5
 SHOPPING = re.compile(r"\b(buy|shop|store|price|amazon|amzn|affiliate)\b", re.IGNORECASE)
-TOP_KEYS = {"format", "source", "approved_by", "approved_on", "hub", "guide", "project"}
+GRADE_WORDS = re.compile(r"\bgrades?\b", re.IGNORECASE)       # no grade numbers or labels at all (owner rule)
+TOP_KEYS = {"format", "source", "approved_by", "approved_on", "amendments", "hub", "guide", "project"}
 HUB_FIELDS = {
     "eyebrow": "hub_eyebrow", "title": "hub_title", "subtitle": "hub_subtitle", "intro": "hub_intro",
     "map_note": "map_note", "native_peoples_text": "native_peoples_text", "timeline_heading": "timeline_heading",
@@ -214,7 +216,8 @@ class Command(BaseCommand):
             except ValidationError:
                 errors.append(f"project.sources[{i}].url must be a valid https URL (got {s['url']!r})")
         blob = json.dumps({k: data.get(k) for k in ("hub", "guide", "project")}, ensure_ascii=False)
-        for name, pattern in (("grade-level wording", GRADE_WORDING), ("shopping wording", SHOPPING)):
+        for name, pattern in (("grade-level wording", GRADE_WORDING), ("grade wording", GRADE_WORDS),
+                              ("shopping wording", SHOPPING)):
             hits = sorted({m.group(0) for m in pattern.finditer(blob)})
             if hits:
                 errors.append(f"{name} isn't allowed (found: {', '.join(hits)})")

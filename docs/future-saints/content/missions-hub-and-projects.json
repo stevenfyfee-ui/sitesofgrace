@@ -3,6 +3,16 @@
   "source": "docs/future-saints/content/future-saints-content-missions-hub-and-projects.md",
   "approved_by": "Steven",
   "approved_on": "2026-11-11",
+  "amendments": [
+    {
+      "field": "project.grade_note",
+      "value": "young builders, with a grown-up helping with any cutting.",
+      "replaces": "Grades 2–5, with a grown-up helping with any cutting.",
+      "approved_by": "Steven",
+      "approved_on": "2026-11-12",
+      "reason": "No grade numbers anywhere on the site. The page shows it after its \"Good for:\" label: \"Good for: young builders, with a grown-up helping with any cutting.\""
+    }
+  ],
   "hub": {
     "eyebrow": "California Missions",
     "title": "Discover the 21 California Missions",
@@ -94,7 +104,7 @@
     "mission": {"model": "catalog.SacredSitePage", "match_title": "Mission San Diego de Alcalá"},
     "project_title": "Build This Mission: Mission San Diego de Alcalá",
     "status": "review_ready",
-    "grade_note": "Grades 2–5, with a grown-up helping with any cutting.",
+    "grade_note": "young builders, with a grown-up helping with any cutting.",
     "difficulty": "Beginner",
     "stages_summary": "Plan → Base → Church → Front and buttresses → Roof → Bell wall → Paint → Courtyard and fact card",
     "project_intro": "Mission San Diego de Alcalá was the first California mission. Its most famous feature is its tall bell wall, called a campanario, which stands right next to the church. Follow these steps to build a simple model of the mission as it looks today.",
