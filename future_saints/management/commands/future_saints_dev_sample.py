@@ -22,13 +22,28 @@ from django.db import connection, transaction
 
 from catalog.models import SacredSitePage, SaintPage
 from future_saints.models import (
+    ArchitecturalFeature,
     EucharisticLearningPage,
     FunFact,
     FutureSaintsHomePage,
     FutureSaintsIndexPage,
+    GuideBuildStep,
+    GuideChecklistItem,
+    GuideFactCardLabel,
+    GuidePlanStep,
+    GuideSafetyItem,
+    GuideSupply,
     HolyLandLearningPage,
+    HubQuizChoice,
+    HubQuizQuestion,
     MarianLearningPage,
     MissionLearningPage,
+    MissionProjectsGuidePage,
+    MissionSchoolProject,
+    ProjectFactCardRow,
+    ProjectMaterial,
+    ProjectSource,
+    ProjectStep,
     QuickFact,
     QuizChoice,
     QuizQuestion,
@@ -127,6 +142,7 @@ class Command(BaseCommand):
                 publish(index)
 
             made = [self.learning_sample(home, *row) for row in SAMPLES]
+            made += self.phase3_sample(home)
 
         saint = home.saint_of_week
         self.stdout.write(f"Saint of the Week: {saint.title if saint else 'none'} "
@@ -213,3 +229,86 @@ class Command(BaseCommand):
         index.add_child(instance=page)
         publish(page)
         return f"{label}: created {page.url_path} from local canonical {slug!r}"
+
+    def phase3_sample(self, home):
+        """Phase 3: the hub's text and quiz (only where blank), the projects guide, and a
+        published Build This Mission project on the mission sample. All "[SAMPLE]" filler.
+        The 21 map missions come from seed_mission_hub, not from here."""
+        hub = FutureSaintsIndexPage.objects.child_of(home).filter(content_kind="california_mission").first()
+        if hub is None:
+            return ["Missions hub: no california_mission index, skipped"]
+        lines = []
+        hub = hub.get_latest_revision_as_object() if hub.get_latest_revision() else hub
+        for field, value in {
+            "hub_eyebrow": "California Missions", "hub_title": "[SAMPLE] Discover the California Missions",
+            "hub_subtitle": "[SAMPLE] One italic line about the missions goes here.",
+            "hub_intro": "[SAMPLE TEXT] " + FILLER, "map_note": "[SAMPLE] A short note about the founding numbers goes here.",
+            "timeline_heading": "The Missions in Founding Order", "native_peoples_text": "[SAMPLE TEXT] " + FILLER * 2,
+            "projects_banner_heading": "[SAMPLE] Building a mission model for school?",
+            "projects_banner_text": "[SAMPLE] One line about the project guide goes here.", "projects_banner_button": "See Mission Projects",
+        }.items():
+            if not getattr(hub, field):
+                setattr(hub, field, value)
+        if not hub.hub_quiz_questions.exists():
+            questions = []
+            for n in range(1, 6):
+                q = HubQuizQuestion(sort_order=n, prompt=f"[SAMPLE] Hub question {n} goes here?", explanation="[SAMPLE] A kind explanation.")
+                q.choices = [HubQuizChoice(sort_order=i, text=f"[SAMPLE] Choice {letter}", is_correct=(letter == "C"))
+                             for i, letter in enumerate("ABCD")]
+                questions.append(q)
+            hub.hub_quiz_questions = questions
+        publish(hub)
+        lines.append(f"Missions hub: sample text and quiz where blank, published {hub.url_path}")
+
+        if not MissionProjectsGuidePage.objects.child_of(hub).exists():
+            guide = MissionProjectsGuidePage(
+                title="How to Build a California Mission Model (sample)", slug="projects",
+                intro="[SAMPLE TEXT] " + FILLER, supplies_note="[SAMPLE] A note about asking a grown-up goes here.",
+                remember_people="[SAMPLE TEXT] " + FILLER,
+            )
+            guide.plan_steps = [GuidePlanStep(sort_order=n, title=f"[SAMPLE] Plan step {n}.", text=sample_line(n)) for n in range(1, 6)]
+            guide.supplies = [GuideSupply(sort_order=n, text=f"[SAMPLE] Supply {n}") for n in range(1, 8)]
+            guide.safety_items = [GuideSafetyItem(sort_order=n, lead="[SAMPLE]" if n == 1 else "", text=sample_line(n)) for n in range(1, 5)]
+            guide.build_steps = [GuideBuildStep(sort_order=n, title=f"[SAMPLE] Build step {n}.", text=sample_line(n)) for n in range(1, 9)]
+            guide.fact_card_labels = [GuideFactCardLabel(sort_order=n, label=label) for n, label in
+                                      enumerate(["Mission name", "Founding #", "Year founded", "Founded by", "My name"])]
+            guide.checklist_items = [GuideChecklistItem(sort_order=n, text=f"[SAMPLE] Checklist item {n}") for n in range(1, 8)]
+            hub.add_child(instance=guide)
+            publish(guide)
+            lines.append(f"Projects guide: created {guide.url_path}")
+
+        mission = MissionLearningPage.objects.child_of(hub).filter(slug__endswith="-sample").first()
+        if mission is None or mission.school_projects.exists():
+            lines.append("Build This Mission sample: no mission sample page, or it already has a project; left alone")
+            return lines
+        project = MissionSchoolProject(
+            page=mission, project_title="[SAMPLE] Build This Mission", status="published",
+            grade_note="[SAMPLE] Who this is good for", difficulty="[SAMPLE] Beginner", stages_summary="[SAMPLE] Plan → Base → Build → Paint",
+            project_intro="[SAMPLE TEXT] " + FILLER, model_reference_image=sample_image(),
+            model_reference_image_alt="[SAMPLE] A plain placeholder picture", historical_vs_restored_note="[SAMPLE TEXT] " + FILLER,
+            finishing_tips="[SAMPLE TEXT] " + FILLER, adult_supervision_notes="[SAMPLE] A grown-up does all cutting.",
+        )
+        project.features = [ArchitecturalFeature(sort_order=n, title=f"[SAMPLE] Feature {n}", text=sample_line(n)) for n in range(1, 4)]
+        project.materials = [ProjectMaterial(sort_order=n, item=f"[SAMPLE] Material {n}", quantity="1",
+                                             alternative="[SAMPLE] Something else", safety_note="") for n in range(1, 7)]
+        project.steps = [ProjectStep(sort_order=n, title=f"[SAMPLE] Step {n}", instructions=FILLER) for n in range(1, 9)]
+        project.fact_card_rows = [ProjectFactCardRow(sort_order=n, label=label, value="[SAMPLE]") for n, label in
+                                  enumerate(["Mission", "Founding #", "Founded", "Founded by", "Named for", "Native people"])]
+        project.sources = [ProjectSource(sort_order=n, title=f"[SAMPLE] Source {n} title", publisher="[SAMPLE] Publisher") for n in range(1, 3)]
+        project.save()
+        lines.append(f"Build This Mission sample: published on {mission.url_path}")
+        return lines
+
+
+def sample_image():
+    """A plain parchment-coloured placeholder picture, clearly titled as a sample."""
+    from io import BytesIO
+
+    from django.core.files.images import ImageFile
+    from PIL import Image
+    from wagtail.images import get_image_model
+
+    buffer = BytesIO()
+    Image.new("RGB", (1600, 900), (233, 220, 190)).save(buffer, format="PNG")
+    return get_image_model().objects.create(title="[SAMPLE] Placeholder picture",
+                                            file=ImageFile(buffer, name="future-saints-sample.png"))
