@@ -8,6 +8,7 @@ from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
 from catalog.models import SaintPage
+from future_saints.models import WorldMapPage
 from home.models import LegalPage
 
 from .base import FS_ON, FS_STAFF, FutureSaintsTestCase
@@ -71,17 +72,20 @@ class HomepageTests(FutureSaintsTestCase):
         self.assertIn('href="/future-saints/saints/" aria-current="page"', html)
         self.assertIn("Sites of Grace", html.split('class="fs-back-link"', 1)[1][:400])
 
-    def test_map_item_and_phase4_placeholders_are_staff_only(self):
+    def test_map_item_appears_for_everyone_only_once_the_map_is_live(self):
         with FS_STAFF:
             staff = self.html("/future-saints/", self.staff)
         with FS_ON:
             public = self.html("/future-saints/")
-        self.assertIn("(coming soon)", staff)
-        self.assertNotIn("/future-saints/map/", staff)
-        self.assertIn('data-fs-phase4="map"', staff)
-        self.assertIn('data-fs-phase4="quiz"', staff)
-        for marker in ("(coming soon)", "data-fs-phase4", "Illustration:", "Staff only"):
-            self.assertNotIn(marker, public)
+        for html in (staff, public):
+            self.assertNotIn("/future-saints/map/", html, "the map page is still a draft")
+            for marker in ("(coming soon)", "data-fs-phase4", "fs-nav-soon"):
+                self.assertNotIn(marker, html)
+        self.publish(WorldMapPage.objects.get())
+        with FS_ON:
+            public = self.html("/future-saints/")
+        self.assertIn('href="/future-saints/map/"><svg class="fs-icon fs-nav-icon"', public)
+        self.assertIn("<span>Map</span></a>", public)
 
     def test_breadcrumb(self):
         with FS_ON:
@@ -180,7 +184,7 @@ class PictureRuleTests(FutureSaintsTestCase):
         with FS_ON:
             self.assertNotIn("Saint of the Week", self.html("/future-saints/"))
 
-    def test_saint_of_week_full_width_alone_and_quiz_beside_it_for_staff(self):
+    def test_saint_of_week_spans_the_band_alone_with_no_quiz_to_feature(self):
         saint = self.saint()
         self.home.saint_of_week = saint
         self.publish(self.home)
@@ -188,13 +192,9 @@ class PictureRuleTests(FutureSaintsTestCase):
             public = self.html("/future-saints/")
         with FS_STAFF:
             staff = self.html("/future-saints/", self.staff)
-        row = re.search(r'<div class="(fs-split[^"]*)" data-fs-saint-row>(.*?)</section>', public, re.S)
-        self.assertIn("fs-split--single", row.group(1), "alone: full band width")
-        self.assertIn("St. Test of Example", row.group(2))
-        self.assertNotIn("data-fs-phase4", public)
-
-        row = re.search(r'<div class="(fs-split[^"]*)" data-fs-saint-row>(.*?)</section>', staff, re.S)
-        self.assertNotIn("fs-split--single", row.group(1))
-        self.assertIn('data-fs-phase4="quiz"', row.group(2), "staff: Take a Quiz sits beside it")
-        self.assertNotIn('data-fs-phase4="map"', row.group(2))
-        self.assertIn('data-fs-phase4="map"', staff)
+        for html in (public, staff):
+            row = re.search(r'<div class="(fs-split[^"]*)" data-fs-saint-row>(.*?)</section>', html, re.S)
+            self.assertIn("fs-split--single", row.group(1), "alone (no story has a quiz yet): full band width")
+            self.assertIn("St. Test of Example", row.group(2))
+            self.assertNotIn("data-fs-quiz-card", html)
+            self.assertNotIn("data-fs-phase4", html)

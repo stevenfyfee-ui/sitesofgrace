@@ -51,6 +51,7 @@ from future_saints.models import (
     SourceLink,
     TimelineEntry,
     WordToKnow,
+    WorldMapPage,
 )
 
 LOCAL_DB_HOSTS = {"db", "localhost", "127.0.0.1", ""}
@@ -143,6 +144,7 @@ class Command(BaseCommand):
 
             made = [self.learning_sample(home, *row) for row in SAMPLES]
             made += self.phase3_sample(home)
+            made += self.phase4_sample(home)
 
         saint = home.saint_of_week
         self.stdout.write(f"Saint of the Week: {saint.title if saint else 'none'} "
@@ -230,6 +232,9 @@ class Command(BaseCommand):
         publish(page)
         return f"{label}: created {page.url_path} from local canonical {slug!r}"
 
+    def phase4_sample(self, home):
+        return phase4_lines(self, home)
+
     def phase3_sample(self, home):
         """Phase 3: the hub's text and quiz (only where blank), the projects guide, and a
         published Build This Mission project on the mission sample. All "[SAMPLE]" filler.
@@ -298,6 +303,36 @@ class Command(BaseCommand):
         project.save()
         lines.append(f"Build This Mission sample: published on {mission.url_path}")
         return lines
+
+
+def phase4_lines(command, home):
+    """Phase 4: the World Discovery Map (published, [SAMPLE] text) and this week's Saint of the Week
+    entry for the saint sample. The map page itself comes from create_future_saints_tree."""
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    from future_saints.models import SAINT_OF_WEEK_TZ, SaintLearningPage, SaintOfWeekEntry
+
+    lines = []
+    if not WorldMapPage.objects.child_of(home).exists():
+        call_command("create_future_saints_tree", stdout=command.stdout)
+    world = WorldMapPage.objects.child_of(home).first()
+    world = world.get_latest_revision_as_object() if world.get_latest_revision() else world
+    world.subtitle = world.subtitle or "[SAMPLE] One line about the map goes here."
+    world.intro = world.intro or "[SAMPLE TEXT] " + FILLER
+    publish(world)
+    lines.append(f"World Discovery Map: published {world.url_path}")
+    saint = SaintLearningPage.objects.live().descendant_of(home).first()
+    today = timezone.now().astimezone(SAINT_OF_WEEK_TZ).date()
+    monday = today - timedelta(days=today.weekday())
+    home = FutureSaintsHomePage.objects.get(pk=home.pk)
+    if saint and not home.saint_of_week_entries.filter(week_start=monday).exists():
+        home = home.get_latest_revision_as_object()
+        home.saint_of_week_entries.add(SaintOfWeekEntry(week_start=monday, saint=saint, line="[SAMPLE] A short line for this week."))
+        publish(home)
+        lines.append(f"Saint of the Week: {saint.title} for the week of {monday}")
+    return lines
 
 
 def sample_image():
