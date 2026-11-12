@@ -737,3 +737,4 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
   .fs-hub .fs-map, .fs-hub .fs-list-tab-buttons, .fs-hub .fs-hub-cards, .fs-projects-banner { display: none !important; }
   .fs-hub .fs-mission-list { display: block !important; }
 }
+.fs-map-city-text { font: italic 700 20px var(--fs-serif); fill: var(--fs-navy); }

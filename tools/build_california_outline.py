@@ -36,6 +36,11 @@ SOURCE = {
 TOLERANCE = 0.2          # viewBox units (1 unit = 1.1 km), so about 220 m
 MIN_AREA = 4.0           # square viewBox units: keeps the Channel Islands, drops rocks
 KML = "{http://www.opengis.net/kml/2.2}"
+# The Pacific beyond California's own coast, only to close the ocean shape at the map's
+# edges (decorative; never used for pins): approximate coast points north into Oregon and
+# south into Baja California (lat, lng), named for the calibration notes.
+OREGON_COAST = [("Brookings, OR", 42.05, -124.28), ("Cape Ferrelo, OR", 42.10, -124.35)]
+BAJA_COAST = [("Rosarito, BC", 32.36, -117.06), ("Ensenada, BC", 31.86, -116.63), ("Punta Banda, BC", 31.75, -116.75)]
 
 
 def california_rings(zip_path):
@@ -80,6 +85,27 @@ def simplify(points, tolerance):
     return [p for p, k in zip(points, keep) if k]
 
 
+def ocean_ring(mainland):
+    """The Pacific as one ring: California's coast from the Oregon border (the mainland's
+    northernmost vertex) south to the Mexico border at the sea (its southernmost vertex),
+    then the neighbour coast points and the map's west and south edges. Everything else
+    outside California is land (Oregon, Nevada, Arizona, Mexico) and is drawn as such."""
+    from future_saints.geo import VIEWBOX_HEIGHT
+
+    ring = mainland[:-1] if mainland[0] == mainland[-1] else mainland
+    north = min(range(len(ring)), key=lambda i: ring[i][1])
+    south = max(range(len(ring)), key=lambda i: ring[i][1])
+    coast = (ring[north:] + ring[:south + 1]) if north > south else ring[north:south + 1]
+    if sum(x for x, _ in coast) / len(coast) > sum(x for x, _ in ring) / len(ring):
+        coast = (ring[south:] + ring[:north + 1])[::-1]          # took the inland side; flip
+    oregon = [to_viewbox(lat, lng) for _, lat, lng in reversed(OREGON_COAST)]
+    baja = [to_viewbox(lat, lng) for _, lat, lng in BAJA_COAST]
+    top = (oregon[0][0] - oregon[0][1] * (oregon[1][0] - oregon[0][0]) / (oregon[1][1] - oregon[0][1]), 0)
+    bottom = (baja[-1][0], VIEWBOX_HEIGHT)
+    points = [(0, 0), top, *oregon, *coast, *baja, bottom, (0, VIEWBOX_HEIGHT)]
+    return [(round(x, 2), round(y, 2)) for x, y in points]
+
+
 def main(zip_path):
     rings = []
     for ring in california_rings(zip_path):
@@ -90,6 +116,7 @@ def main(zip_path):
         rings.append([(round(x, 2), round(y, 2)) for x, y in simple])
     rings.sort(key=area, reverse=True)          # the mainland first
     path = " ".join("M" + " L".join(f"{x:g},{y:g}" for x, y in r[:-1]) + " Z" for r in rings)
+    ocean = ocean_ring(rings[0])
     out = {
         "source": SOURCE,
         "projection": "EPSG:3310 California Albers via future_saints.geo.to_viewbox",
@@ -98,6 +125,9 @@ def main(zip_path):
         "min_island_area_units": MIN_AREA,
         "rings": rings,
         "path": path,
+        "ocean": ocean,
+        "ocean_path": "M" + " L".join(f"{x:g},{y:g}" for x, y in ocean) + " Z",
+        "neighbour_coast": [name for name, _, _ in OREGON_COAST + BAJA_COAST],
     }
     data = ROOT / "future_saints" / "data" / "california_outline.json"
     data.parent.mkdir(exist_ok=True)

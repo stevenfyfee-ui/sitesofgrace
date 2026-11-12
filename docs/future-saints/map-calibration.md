@@ -50,7 +50,50 @@ y_view = (480,000 − y_3310) / 1,100          (SVG y grows downward)
   773–847) sit in the ocean.
 - The map box has the viewBox's aspect ratio (CSS `aspect-ratio: 1000 / 1100`), so "meet" fills it
   exactly. A pin's `left` / `top` percentages are therefore x/1000 and y/1100.
-- `MissionHubEntry.map_offset_x/y` only nudge a pin's number label. They never move the pin.
+- `MissionHubEntry.map_offset_x/y` move a pin's Founding # badge, in screen pixels. They never move
+  the pin (see "Founding # badges" below).
+
+## Ocean and neighbouring land
+
+Only the Pacific is drawn as water. The build writes an `ocean` ring:
+- California's own coast, from the mainland's northernmost vertex (the Oregon border at the sea) south
+  to its southernmost vertex (the Mexico border at the sea);
+- short neighbour coasts, decorative only and never used for pins:
+  - Oregon: Brookings (42.05, −124.28) and Cape Ferrelo (42.10, −124.35);
+  - Baja California: Rosarito (32.36, −117.06), Ensenada (31.86, −116.63) and Punta Banda (31.75, −116.75);
+- the map's west and south edges.
+
+Everything else outside California (Oregon, Nevada, Arizona, Mexico) is plain, unlabelled parchment
+land. A test checks that Reno, Las Vegas, Yuma, Medford and Tecate fall outside the ocean.
+
+## City labels
+
+There are four parchment ribbons: San Francisco (on two lines), Monterey, Los Angeles and San Diego.
+There's no Sonoma ribbon.
+- Each ribbon sits in the Pacific. A thin leader line runs from it to a dot at the city's real position:
+  the city-centre latitude/longitude, through the same projection.
+- The boxes are in `future_saints/missions.py` (`CITY_LABELS`). They were chosen by a search that keeps
+  each ribbon:
+  - clear of the coast and the islands (6-unit margin), the compass, the scroll and the other ribbons;
+  - clear of every bell and Founding # badge at all six QA widths;
+  - within 70 units of its city's latitude, in north-to-south order.
+- All four fit at every width, so none is hidden at 390 or 360. Their text is about 7 px at 360.
+- Tests check all of this in viewBox units. The browser QA checks the rendered boxes.
+
+## Trail line
+
+A dotted gold line joins the pins in the Mission Trail page's stop order (south to north along the
+coast), from the same canonical positions as the pins.
+
+## Founding # badges
+
+Each badge sits up and to the right of its bell, at a fixed size in screen pixels. The pins themselves
+scale with the map, at 0.328–0.707 px per unit across the QA widths (`MAP_WIDTHS_PX`, measured with
+`tools/measure_mission_map.py`).
+- The reviewed offsets in `BADGE_OFFSETS` keep every pair of badges apart at 1440, 1024, 768, 430,
+  390 and 360. The largest is 36 px; 16 of the 21 missions have one.
+- `seed_mission_hub` writes them where a mission has no offset yet, marked reviewed. An editor's own
+  offset is kept.
 
 ## Control points
 
@@ -74,6 +117,8 @@ outline's southernmost vertex (646.01, 985.89) and its northwest corner (82.27, 
   - every pair's map distance is within 3% (plus 0.5 km) of its great-circle distance;
   - each pin is within 80 units of its cluster's centre.
 - A pin moves when its canonical latitude/longitude changes.
-- The compass rose and the scroll don't touch land.
+- The compass rose, the scroll and the four city ribbons stay in the Pacific. Only the Pacific is water.
+- No two Founding # badges intersect at any QA width, and no ribbon touches a bell or a badge.
+- The trail line follows the trail's stop order.
 - The border control points match the outline's extremes.
 - The `albers()` reference values match PROJ.

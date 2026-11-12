@@ -44,6 +44,70 @@ PROJECT_STATUS_CHOICES = [
 PRINT_SHEETS = {"materials": "Materials Checklist", "steps": "Step-by-Step Instructions", "factcard": "Fact Card"}
 PIN_RADIUS_PX = 24          # a tap within this many CSS pixels of 2+ pins opens the chooser
 
+# Founding # badges: each sits up and to the right of its bell (CSS .fs-pin-num): its right
+# edge BADGE_RIGHT px right of the pin's centre, its top BADGE_TOP px above it, BADGE_HEIGHT
+# tall and 18 px wide (19.2 px for two digits). These offsets (CSS px, reviewed) move a
+# badge so no two badges touch at any of the QA map widths; the pins never move.
+# seed_mission_hub writes them into MissionHubEntry where no offset has been set.
+BADGE_RIGHT, BADGE_TOP, BADGE_HEIGHT = 22, 21, 18
+BADGE_OFFSETS = {
+    1: (0, 8), 2: (0, 8), 3: (0, 12), 5: (8, 0), 7: (-12, 4), 8: (-36, 0), 9: (12, 0), 11: (-28, 0),
+    13: (8, 0), 14: (12, -4), 15: (24, -8), 16: (12, -8), 17: (0, -20), 19: (-12, 0), 20: (0, -16), 21: (20, -4),
+}
+# The map's width in CSS px at the QA viewports 1440, 1024, 768, 430, 390, 360 (one viewBox
+# unit = width/1000 px). Measured with tools/measure_mission_map.py.
+MAP_WIDTHS_PX = {1440: 691.2, 1024: 546.0, 768: 706.6, 430: 395.6, 390: 358.0, 360: 328.0}
+
+
+def badge_box(x, y, number, offset, scale):
+    """A badge's box in CSS px, for a pin at viewBox (x, y) on a map `scale` px per unit."""
+    cx, cy = x * scale, y * scale
+    dx, dy = offset
+    width = 19.2 if number >= 10 else 18
+    return (cx + BADGE_RIGHT - width + dx, cy - BADGE_TOP + dy, cx + BADGE_RIGHT + dx, cy - BADGE_TOP + BADGE_HEIGHT + dy)
+
+
+# City labels: parchment ribbons in the Pacific (viewBox units: x, y, width, height), each
+# with a leader line to a dot at the city's real position (city-centre lat/lng through the
+# same projection). Placed so no ribbon touches the coast, an island, the compass, the
+# scroll, another ribbon, or any bell or badge at the six QA widths (test_missions).
+CITY_LABELS = [
+    {"name": "San Francisco", "lines": ["San", "Francisco"], "lat": 37.7749, "lng": -122.4194, "box": (16, 500, 132, 52)},
+    {"name": "Monterey", "lines": ["Monterey"], "lat": 36.6002, "lng": -121.8947, "box": (68, 596, 120, 30)},
+    {"name": "Los Angeles", "lines": ["Los Angeles"], "lat": 34.0522, "lng": -118.2437, "box": (344, 872, 156, 30)},
+    {"name": "San Diego", "lines": ["San Diego"], "lat": 32.7157, "lng": -117.1611, "box": (512, 1016, 132, 30)},
+]
+
+
+def city_labels():
+    labels = []
+    for city in CITY_LABELS:
+        x, y, w, h = city["box"]
+        dot_x, dot_y = to_viewbox(city["lat"], city["lng"])
+        # The leader runs from the ribbon's nearest edge point to the dot.
+        end_x, end_y = min(max(dot_x, x), x + w), min(max(dot_y, y), y + h)
+        labels.append({
+            "name": city["name"], "x": x, "y": y, "w": w, "h": h, "cx": x + w / 2,
+            "lines": [{"text": t, "y": y + 21 + 22 * i} for i, t in enumerate(city["lines"])],
+            "dot_x": round(dot_x, 2), "dot_y": round(dot_y, 2), "end_x": round(end_x, 2), "end_y": round(end_y, 2),
+            "ribbon": (f"M{x + 6},{y} H{x + w - 6} L{x + w},{y + h / 2} L{x + w - 6},{y + h} "
+                       f"H{x + 6} L{x},{y + h / 2} Z"),
+        })
+    return labels
+
+
+def trail_points(entries):
+    """The dotted trail through the pins, in the Mission Trail page's stop order."""
+    from catalog.models import TrailStop
+
+    from .learning import MISSION_TRAIL_SLUG
+
+    placed = {e.canonical_id: e.canonical for e in entries
+              if e.canonical.latitude is not None and e.canonical.longitude is not None}
+    stops = TrailStop.objects.filter(trail__slug=MISSION_TRAIL_SLUG, site_id__in=placed).order_by("sort_order")
+    points = [to_viewbox(placed[s.site_id].latitude, placed[s.site_id].longitude) for s in stops]
+    return " ".join(f"{x:.1f},{y:.1f}" for x, y in points)
+
 
 @lru_cache(maxsize=1)
 def california_outline():
@@ -87,9 +151,9 @@ class MissionHubEntry(Orderable):
     )
     founded_year = models.PositiveSmallIntegerField()
     founded_display = models.CharField(max_length=160, help_text="From the canonical page's founding text.")
-    map_offset_x = models.FloatField(null=True, blank=True, help_text="Label nudge only, in map units. The pin never moves.")
-    map_offset_y = models.FloatField(null=True, blank=True, help_text="Label nudge only, in map units. The pin never moves.")
-    needs_review = models.BooleanField(default=False, help_text="Set while a label offset hasn't been checked.")
+    map_offset_x = models.FloatField(null=True, blank=True, help_text="Moves the Founding # badge only, in screen pixels. The pin never moves.")
+    map_offset_y = models.FloatField(null=True, blank=True, help_text="Moves the Founding # badge only, in screen pixels. The pin never moves.")
+    needs_review = models.BooleanField(default=False, help_text="Set while a badge offset hasn't been checked.")
 
     panels = ["canonical", "founding_number", "founded_year", "founded_display", "map_offset_x", "map_offset_y", "needs_review"]
 
@@ -174,6 +238,8 @@ def hub_context(index, request):
         "fs_outline": california_outline(),
         "fs_viewbox": VIEWBOX,
         "fs_pin_radius": PIN_RADIUS_PX,
+        "fs_city_labels": city_labels(),
+        "fs_trail_points": trail_points(entries),
         "fs_panel_data": panel_data,
         "fs_quiz": index.hub_quiz_data(),
         "fs_guide_url": guide.get_url(request) if guide else "",

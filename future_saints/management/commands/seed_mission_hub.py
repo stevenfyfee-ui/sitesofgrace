@@ -19,8 +19,10 @@ audit.
 
 Writes only when all 21 entries resolve, as a new DRAFT revision of the
 California Missions index (never published; an editor publishes in the admin).
-Label offsets and review flags already set on a mission are kept. Never writes
-into any adult page. A second run with nothing changed writes nothing.
+Badge offsets and review flags already set on a mission are kept; where none is
+set, the reviewed BADGE_OFFSETS (future_saints.missions) are written, marked
+reviewed. Never writes into any adult page. A second run with nothing changed
+writes nothing.
 """
 import json
 import re
@@ -30,7 +32,7 @@ from django.db import transaction
 
 from catalog.models import PilgrimageTrailPage
 from future_saints.learning import MISSION_TRAIL_SLUG
-from future_saints.missions import MISSION_COUNT, MissionHubEntry, normalize_mission_name
+from future_saints.missions import BADGE_OFFSETS, MISSION_COUNT, MissionHubEntry, normalize_mission_name
 from future_saints.models import FutureSaintsIndexPage
 
 FORMAT = "future-saints-mission-founding-order/v1"
@@ -116,8 +118,18 @@ class Command(BaseCommand):
             raise CommandError(f"{len(failures)} entr(y/ies) didn't resolve; nothing was written.")
 
         latest = hub.get_latest_revision_as_object() if hub.get_latest_revision() else hub
+        kept = {e.canonical_id: e for e in latest.mission_hub_entries.all()}
+        for w in wanted:
+            old = kept.get(w["canonical_id"])
+            if old is not None and (old.map_offset_x is not None or old.map_offset_y is not None):
+                w.update(map_offset_x=old.map_offset_x, map_offset_y=old.map_offset_y, needs_review=old.needs_review)
+            else:
+                dx, dy = BADGE_OFFSETS.get(w["founding_number"], (0, 0))
+                w.update(map_offset_x=float(dx), map_offset_y=float(dy), needs_review=False)
         have = [{"founding_number": e.founding_number, "canonical_id": e.canonical_id, "founded_year": e.founded_year,
-                 "founded_display": e.founded_display} for e in sorted(latest.mission_hub_entries.all(), key=lambda e: e.founding_number)]
+                 "founded_display": e.founded_display, "map_offset_x": e.map_offset_x, "map_offset_y": e.map_offset_y,
+                 "needs_review": e.needs_review}
+                for e in sorted(latest.mission_hub_entries.all(), key=lambda e: e.founding_number)]
         if have == wanted:
             self.stdout.write(self.style.SUCCESS(f"Unchanged: all {MISSION_COUNT} missions already match (no revision)."))
             return
@@ -125,17 +137,8 @@ class Command(BaseCommand):
             self.stdout.write(f"Would save a draft revision of {hub.url_path} with {len(wanted)} missions "
                               f"({len(have)} now). Nothing is published.")
             return
-        kept = {e.canonical_id: e for e in latest.mission_hub_entries.all()}
         with transaction.atomic():
-            entries = []
-            for i, w in enumerate(wanted):
-                old = kept.get(w["canonical_id"])
-                entries.append(MissionHubEntry(
-                    sort_order=i, **w,
-                    map_offset_x=old.map_offset_x if old else None,
-                    map_offset_y=old.map_offset_y if old else None,
-                    needs_review=old.needs_review if old else False,
-                ))
+            entries = [MissionHubEntry(sort_order=i, **w) for i, w in enumerate(wanted)]
             latest.mission_hub_entries = entries
             latest.save_revision(log_action=True)
         self.stdout.write(self.style.SUCCESS(
