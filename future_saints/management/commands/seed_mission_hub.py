@@ -19,8 +19,9 @@ audit.
 
 Writes only when all 21 entries resolve, as a new DRAFT revision of the
 California Missions index (never published; an editor publishes in the admin).
-Badge offsets and review flags already set on a mission are kept; where none is
-set, the reviewed BADGE_OFFSETS (future_saints.missions) are written, marked
+A mission marked needs-review is left exactly as it is (its date, offsets and
+review note included). Otherwise badge offsets already set are kept; where none
+is set, the reviewed BADGE_OFFSETS (future_saints.missions) are written, marked
 reviewed. Never writes into any adult page. A second run with nothing changed
 writes nothing.
 """
@@ -121,14 +122,21 @@ class Command(BaseCommand):
         kept = {e.canonical_id: e for e in latest.mission_hub_entries.all()}
         for w in wanted:
             old = kept.get(w["canonical_id"])
-            if old is not None and (old.map_offset_x is not None or old.map_offset_y is not None):
-                w.update(map_offset_x=old.map_offset_x, map_offset_y=old.map_offset_y, needs_review=old.needs_review)
+            if old is not None and old.needs_review:
+                w.update(founded_year=old.founded_year, founded_display=old.founded_display, map_offset_x=old.map_offset_x,
+                         map_offset_y=old.map_offset_y, needs_review=True, review_note=old.review_note)
+                self.stdout.write(f"  kept as it is (needs review): #{w['founding_number']} {old.founded_display!r}"
+                                  + (f" -- {old.review_note}" if old.review_note else ""))
+            elif old is not None and (old.map_offset_x is not None or old.map_offset_y is not None):
+                w.update(map_offset_x=old.map_offset_x, map_offset_y=old.map_offset_y, needs_review=False,
+                         review_note=old.review_note)
             else:
                 dx, dy = BADGE_OFFSETS.get(w["founding_number"], (0, 0))
-                w.update(map_offset_x=float(dx), map_offset_y=float(dy), needs_review=False)
+                w.update(map_offset_x=float(dx), map_offset_y=float(dy), needs_review=False,
+                         review_note=old.review_note if old else "")
         have = [{"founding_number": e.founding_number, "canonical_id": e.canonical_id, "founded_year": e.founded_year,
                  "founded_display": e.founded_display, "map_offset_x": e.map_offset_x, "map_offset_y": e.map_offset_y,
-                 "needs_review": e.needs_review}
+                 "needs_review": e.needs_review, "review_note": e.review_note}
                 for e in sorted(latest.mission_hub_entries.all(), key=lambda e: e.founding_number)]
         if have == wanted:
             self.stdout.write(self.style.SUCCESS(f"Unchanged: all {MISSION_COUNT} missions already match (no revision)."))

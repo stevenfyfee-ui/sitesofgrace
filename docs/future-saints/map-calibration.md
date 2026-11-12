@@ -75,9 +75,13 @@ There's no Sonoma ribbon.
 - The boxes are in `future_saints/missions.py` (`CITY_LABELS`). They were chosen by a search that keeps
   each ribbon:
   - clear of the coast and the islands (6-unit margin), the compass, the scroll and the other ribbons;
-  - clear of every bell and Founding # badge at all six QA widths;
+  - clear of every bell and Founding # badge at every QA width where the ribbons show;
   - within 70 units of its city's latitude, in north-to-south order.
-- All four fit at every width, so none is hidden at 390 or 360. Their text is about 7 px at 360.
+- **Ribbon text is never under 11 px.** It is 22 units tall, so it reaches 11 px once the map is
+  500 px wide (`CITY_LABEL_MIN_MAP_PX`). On a narrower map, a CSS container query on `.fs-map`
+  hides the ribbons, their dots and their leaders.
+  - Shown at 1440 (15.2 px), 1024 (12.0 px) and 768 (15.5 px).
+  - Hidden at 430, 390 and 360.
 - Tests check all of this in viewBox units. The browser QA checks the rendered boxes.
 
 ## Trail line

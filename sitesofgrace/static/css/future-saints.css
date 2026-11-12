@@ -737,4 +737,8 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
   .fs-hub .fs-map, .fs-hub .fs-list-tab-buttons, .fs-hub .fs-hub-cards, .fs-projects-banner { display: none !important; }
   .fs-hub .fs-mission-list { display: block !important; }
 }
-.fs-map-city-text { font: italic 700 20px var(--fs-serif); fill: var(--fs-navy); }
+.fs-map-city-text { font: italic 700 22px var(--fs-serif); fill: var(--fs-navy); }
+/* City ribbons: 22 viewBox units of text is 11 px only once the map is 500 px wide
+   (missions.CITY_LABEL_MIN_MAP_PX); on a narrower map the ribbons, dots and leaders hide. */
+.fs-map { container-type: inline-size; }
+@container (max-width: 499.98px) { .fs-map-cities { display: none; } }

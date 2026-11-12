@@ -1,0 +1,156 @@
+{
+  "format": "future-saints-missions-content/v1",
+  "source": "docs/future-saints/content/future-saints-content-missions-hub-and-projects.md",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-11",
+  "amendments": [
+    {
+      "field": "project.grade_note",
+      "value": "young builders, with a grown-up helping with any cutting.",
+      "replaces": "Grades 2–5, with a grown-up helping with any cutting.",
+      "approved_by": "Steven",
+      "approved_on": "2026-11-12",
+      "reason": "No grade numbers anywhere on the site. The page shows it after its \"Good for:\" label: \"Good for: young builders, with a grown-up helping with any cutting.\""
+    }
+  ],
+  "hub": {
+    "eyebrow": "California Missions",
+    "title": "Discover the 21 California Missions",
+    "subtitle": "Follow the historic mission trail and discover the people, places, and stories of early California.",
+    "intro": "Between 1769 and 1823, Spain built 21 missions along the coast of California. Each mission had a church, and Franciscan priests taught the Catholic faith there. Every mission was also built on land where Native people had lived for a very long time. Tap or click a bell on the map to learn about each mission.",
+    "map_note": "The numbers show the order the missions were founded, starting with #1 in San Diego. That is different from their order on the map from south to north.",
+    "native_peoples_text": "Long before the missions, California was home to many Native nations, each with its own language, leaders, beliefs, and ways of caring for the land. These include the Kumeyaay near San Diego, the Chumash near Santa Barbara, and the Ohlone near San Francisco Bay. When the missions came, many Native people were baptized. Mission life also brought forced work, strict rules, disease, and the loss of land and freedom, and many people died. Some Native people resisted. Today, California's Native nations are still here, keeping their languages, cultures, and traditions alive. Each mission page tells you about the Native people of that place.",
+    "timeline_heading": "The Missions in Founding Order",
+    "projects_banner_heading": "Building a mission model for school?",
+    "projects_banner_text": "Get step-by-step help, safety tips, and a printable checklist.",
+    "projects_banner_button": "See Mission Projects",
+    "quiz": [
+      {
+        "prompt": "How many missions did Spain build in California?",
+        "choices": [{"text": "7"}, {"text": "12"}, {"text": "21", "correct": true}, {"text": "50"}],
+        "explanation": "Spain built 21 missions in California between 1769 and 1823."
+      },
+      {
+        "prompt": "Which was the first California mission?",
+        "choices": [{"text": "Mission San Diego de Alcalá", "correct": true}, {"text": "Mission Santa Bárbara"},
+                    {"text": "Mission San Juan Capistrano"}, {"text": "Mission San Francisco Solano"}],
+        "explanation": "Mission San Diego de Alcalá, founded in 1769, was the first."
+      },
+      {
+        "prompt": "Who founded the first California missions?",
+        "choices": [{"text": "Christopher Columbus"}, {"text": "Saint Junípero Serra", "correct": true}, {"text": "Abraham Lincoln"}],
+        "explanation": "Saint Junípero Serra, a Franciscan priest, founded the first nine California missions, beginning with San Diego in 1769."
+      },
+      {
+        "prompt": "What were most mission walls made of?",
+        "choices": [{"text": "Glass"}, {"text": "Steel"}, {"text": "Adobe, bricks of mud and straw dried in the sun", "correct": true}],
+        "explanation": "Mission walls were usually made of adobe bricks, which kept the buildings cool in summer and warm in winter."
+      },
+      {
+        "prompt": "Who lived on the land before the missions were built?",
+        "choices": [{"text": "No one"}, {"text": "Native peoples, like the Kumeyaay, Chumash, and Ohlone", "correct": true}, {"text": "Only Spanish soldiers"}],
+        "explanation": "California was home to many Native nations long before the missions. Each mission was built on Native land."
+      }
+    ]
+  },
+  "guide": {
+    "title": "How to Build a California Mission Model",
+    "slug": "projects",
+    "intro": "Many students in California learn about the missions in school. Building a model is one way to show what you learned. Before you start, ask your teacher what kind of project they want. Some classes build models. Others make posters, write reports, or create a display about the Native people of the area. Whatever you make, try to tell the whole story of your mission: its church, the people who lived and worked there, and the Native people whose land it was built on.",
+    "plan_steps": [
+      {"title": "Choose your mission.", "text": "Check your teacher's rules for size, materials, and due date."},
+      {"title": "Do your research.", "text": "Look at pictures of your mission's church and read its story. Notice what makes it special, like its bell tower, arches, or the front of the church."},
+      {"title": "Sketch a plan.", "text": "Draw your mission from the front and from above. Mark where the church, bell tower, and courtyard will go."},
+      {"title": "Gather your supplies.", "text": "Use things you already have at home when you can."},
+      {"title": "Build a little at a time.", "text": "Give glue and paint time to dry between steps."}
+    ],
+    "supplies": [
+      "Cardboard: cereal boxes, shipping boxes, or poster board",
+      "A sturdy flat base, like a large piece of cardboard",
+      "White school glue or a glue stick",
+      "Washable paint in white, tan, brown, red-orange, and green, plus paintbrushes",
+      "Craft sticks, toothpicks, or small twigs",
+      "Corrugated cardboard or paper strips for roof tiles",
+      "Construction paper, a pencil, a ruler, and scissors",
+      "Small stones, sand, or dried leaves for the landscape"
+    ],
+    "supplies_note": "Always ask a grown-up before using anything from around the house. If you need something you don't have, ask a grown-up for help.",
+    "safety_items": [
+      {"lead": "Grown-ups only:", "text": "box cutters, craft knives, and hot glue guns."},
+      {"text": "Use kid-safe scissors, and cut away from your body."},
+      {"text": "No candles, matches, or anything with a flame."},
+      {"text": "Use washable paint, and paint in an area that's easy to clean."},
+      {"text": "Wash your hands when you finish."}
+    ],
+    "build_steps": [
+      {"title": "Make the base.", "text": "Paint your base cardboard tan or green for the ground. Let it dry."},
+      {"title": "Build the church.", "text": "Use a box on its side for the long church building. Glue it closed."},
+      {"title": "Add the front of the church.", "text": "Cut a flat piece of cardboard a little taller than the box (ask a grown-up to cut). Glue it to the front. Draw the door and windows."},
+      {"title": "Make the roof.", "text": "Fold a piece of cardboard into a tent shape. Glue on strips of corrugated cardboard, ridges up, and paint them red-orange to look like clay tiles."},
+      {"title": "Add the bell tower or bell wall.", "text": "Look at your mission's picture. Some missions have a tall tower, and some have a flat wall with openings for bells."},
+      {"title": "Add more buildings (optional).", "text": "Many missions had buildings around a square courtyard. You can make them from smaller boxes."},
+      {"title": "Paint.", "text": "Paint the walls white or tan, like adobe. Paint the doors brown. Let everything dry."},
+      {"title": "Finish the landscape.", "text": "Add paths, a garden, and plants. Then set your fact card next to your model."}
+    ],
+    "remember_people": "A mission was more than buildings. Think about adding a small sign or display about the Native people who lived in that area.",
+    "fact_card_labels": ["Mission name", "Founding #", "Year founded", "Founded by", "Named for", "Native people of the area", "One interesting fact", "My name"],
+    "checklist_items": [
+      "I checked my teacher's rules", "I researched my mission", "I sketched a plan", "I gathered supplies",
+      "A grown-up helped with any cutting", "I built the church", "I added the bell tower or bell wall",
+      "I painted and let it dry", "I finished my fact card"
+    ]
+  },
+  "project": {
+    "mission": {"model": "catalog.SacredSitePage", "match_title": "Mission San Diego de Alcalá"},
+    "project_title": "Build This Mission: Mission San Diego de Alcalá",
+    "status": "review_ready",
+    "grade_note": "young builders, with a grown-up helping with any cutting.",
+    "difficulty": "Beginner",
+    "stages_summary": "Plan → Base → Church → Front and buttresses → Roof → Bell wall → Paint → Courtyard and fact card",
+    "project_intro": "Mission San Diego de Alcalá was the first California mission. Its most famous feature is its tall bell wall, called a campanario, which stands right next to the church. Follow these steps to build a simple model of the mission as it looks today.",
+    "historical_vs_restored_note": "The church you see today was rebuilt in stages between 1915 and 1931, following the look of the church finished in 1813. Your model will show the mission as it looks today, not the first buildings from 1769.",
+    "features": [
+      {"title": "The campanario.", "text": "A tall, flat bell wall beside the church, about 46 feet high, with openings that hold five bells. The largest bell, called Mater Dolorosa, weighs about 1,200 pounds."},
+      {"title": "The front of the church.", "text": "A plain white front with two thick supports, called buttresses, added to help the church stand strong."},
+      {"title": "A red clay-tile roof", "text": "over adobe walls."},
+      {"title": "Buildings and gardens", "text": "arranged around a courtyard."}
+    ],
+    "materials": [
+      {"item": "Large flat cardboard base", "quantity": "1 piece, about 18 × 18 inches", "alternative": "Poster board glued to cardboard", "safety_note": ""},
+      {"item": "Small box for the church, like a cereal box", "quantity": "1", "alternative": "Cardboard folded into a box", "safety_note": ""},
+      {"item": "Flat cardboard for the bell wall", "quantity": "1 piece, about 6 × 10 inches", "alternative": "Poster board", "safety_note": "Grown-up cuts the openings"},
+      {"item": "Corrugated cardboard strips", "quantity": "Enough to cover the roof", "alternative": "Paper strips folded like a fan", "safety_note": ""},
+      {"item": "Small \"bells\"", "quantity": "5", "alternative": "Beads, buttons, or paper circles", "safety_note": "Small items aren't safe for little brothers and sisters"},
+      {"item": "Toothpicks or craft sticks", "quantity": "About 10", "alternative": "Twigs", "safety_note": ""},
+      {"item": "White glue", "quantity": "1 bottle", "alternative": "Glue stick for paper parts", "safety_note": ""},
+      {"item": "Washable paint", "quantity": "White, tan, red-orange, brown, green", "alternative": "Markers or crayons", "safety_note": ""},
+      {"item": "Paper", "quantity": "1 sheet for the fact card", "alternative": "Index card", "safety_note": ""}
+    ],
+    "adult_supervision_notes": "A grown-up should do all cutting with a box cutter or craft knife, especially the bell openings in the campanario. No hot glue is needed; white glue works for every step.",
+    "steps": [
+      {"title": "Plan your model.", "instructions": "Look at a photo of Mission San Diego today. Notice where the bell wall stands next to the church. Sketch the church and bell wall from the front."},
+      {"title": "Make the base.", "instructions": "Paint your base tan or green. When it's dry, lightly draw where the church, bell wall, and courtyard will go."},
+      {"title": "Build the church.", "instructions": "Lay a cereal box on its side to make the long church building. Glue it closed."},
+      {"title": "Add the front and buttresses.", "instructions": "Glue a flat piece of cardboard to the front of the box, a little taller than the box. Fold two small strips of cardboard into thick blocks and glue one on each side of the front. These are the buttresses. Draw the door."},
+      {"title": "Make the roof.", "instructions": "Fold cardboard into a tent shape and glue it on top. Cover it with corrugated cardboard strips, ridges up. Paint them red-orange like clay tiles."},
+      {"title": "Build the campanario.", "instructions": "Ask a grown-up to cut the bell-wall cardboard into a tall wall with five openings, copying the arrangement in your photo. Glue a toothpick across the top of each opening and hang one \"bell\" from each. Stand the wall next to the front of the church, with a small folded piece of cardboard glued behind it as a brace."},
+      {"title": "Paint.", "instructions": "Paint the church and bell wall white. Paint the door brown. Let everything dry."},
+      {"title": "Finish the courtyard and fact card.", "instructions": "Add paths and a small garden in the courtyard. Then fill in your fact card and set it next to your model."}
+    ],
+    "finishing_tips": "Look at your photo one more time. Does your bell wall have five openings, arranged like the real one? Is the front of your church plain and white, with a buttress on each side? Those details make your model look like Mission San Diego.",
+    "fact_card_rows": [
+      {"label": "Mission", "value": "Mission San Diego de Alcalá"},
+      {"label": "Founding #", "value": "1"},
+      {"label": "Founded", "value": "July 16, 1769"},
+      {"label": "Founded by", "value": "Saint Junípero Serra"},
+      {"label": "Named for", "value": "Saint Didacus (San Diego) of Alcalá"},
+      {"label": "Native people", "value": "Kumeyaay"},
+      {"label": "Interesting fact", "value": "Its bell wall, called a campanario, is about 46 feet tall and holds five bells."}
+    ],
+    "sources": [
+      {"publisher": "California Missions Foundation", "title": "San Diego de Alcalá", "url": "https://californiamissionsfoundation.org/mission-san-diego-de-alcala/", "note": "campanario 46 feet, five bells, Mater Dolorosa about 1,200 pounds, buttresses, adobe"},
+      {"publisher": "Historical Marker Database", "title": "The Campanario", "url": "https://www.hmdb.org/m.asp?m=15262", "note": "46 feet; rebuilt in stages 1915–1931; buildings first completed 1813"},
+      {"publisher": "Mission San Diego de Alcalá", "title": "Early History", "url": "https://www.missionsandiego.org/early-history", "note": "1813 buttresses, the courtyard quadrangle"}
+    ]
+  }
+}
