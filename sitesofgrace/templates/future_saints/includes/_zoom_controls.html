@@ -1,0 +1,8 @@
+{% comment %}
+  Zoom buttons for a map (shown by future-saints.js; hidden without JavaScript, when the
+  static map and the lists still work). 44px targets with aria-labels.
+{% endcomment %}<div class="fs-zoom-controls" hidden data-fs-zoom-controls>
+  <button type="button" class="fs-zoom-button" data-fs-zoom-in aria-label="Zoom in"><span aria-hidden="true">+</span></button>
+  <button type="button" class="fs-zoom-button" data-fs-zoom-out aria-label="Zoom out"><span aria-hidden="true">&minus;</span></button>
+  <button type="button" class="fs-zoom-button" data-fs-zoom-reset aria-label="Reset the map"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</div>

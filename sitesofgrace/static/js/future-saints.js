@@ -122,6 +122,158 @@
     }
   }
 
+  // ---- Map zoom (the World Discovery Map and the California map): + / − / reset, drag to
+  // pan with a mouse or a finger, pinch on touch, the wheel only once the map has been
+  // clicked or focused (page scrolling is never taken over), and + − arrows 0 while the map
+  // has focus. The stage is scaled and moved; markers are counter-scaled in CSS, so they
+  // keep their size and their true spots. Panning is clamped to the map. Without this the
+  // static map and the lists still work and the controls stay hidden. ----
+  var initZoom = function (vp) {
+    var stage = vp.querySelector(".fs-zoom-stage");
+    var box = vp.parentNode;
+    var max = parseFloat(vp.getAttribute("data-fs-zoom-max")) || 4;
+    var vbw = parseFloat(vp.getAttribute("data-fs-vb-w")) || 1000;
+    var vbh = parseFloat(vp.getAttribute("data-fs-vb-h")) || 1000;
+    var z = 1, tx = 0, ty = 0, armed = false, dragged = false, detailed = false;
+    var pointers = {}, gesture = null;
+    var size = function () { return { w: vp.clientWidth, h: vp.clientHeight }; };
+    var apply = function (animate) {
+      var s = size();
+      z = Math.min(max, Math.max(1, z));
+      tx = Math.min(0, Math.max(s.w - s.w * z, tx));
+      ty = Math.min(0, Math.max(s.h - s.h * z, ty));
+      stage.classList.toggle("is-animating", Boolean(animate) && !reduceMotion);
+      stage.style.setProperty("--z", z);
+      stage.style.setProperty("--tx", tx + "px");
+      stage.style.setProperty("--ty", ty + "px");
+      vp.style.setProperty("--nudge", Math.max(0, Math.min(1, 2 - z)));
+      vp.classList.toggle("is-zoomed", z > 1.001);
+      vp.setAttribute("data-fs-zoom-level", z.toFixed(3));
+      if (z > 2 && !detailed) {
+        // The finer outline (world map: Natural Earth 1:50m), fetched only now.
+        detailed = true;
+        Array.prototype.forEach.call(vp.querySelectorAll("[data-fs-detail]"), function (use) {
+          use.setAttribute("href", use.getAttribute("data-fs-detail"));
+        });
+      }
+    };
+    var zoomAt = function (nz, cx, cy, animate) {
+      nz = Math.min(max, Math.max(1, nz));
+      tx = cx - (cx - tx) * nz / z;
+      ty = cy - (cy - ty) * nz / z;
+      z = nz;
+      apply(animate);
+    };
+    var api = {
+      zoomBy: function (factor, animate) { var s = size(); zoomAt(z * factor, s.w / 2, s.h / 2, animate); },
+      reset: function (animate) { z = 1; tx = 0; ty = 0; apply(animate); },
+      // Fit a box given in map (viewBox) units.
+      fit: function (x1, y1, x2, y2, animate) {
+        var s = size();
+        z = Math.min(max, Math.max(1, Math.min(vbw / (x2 - x1), vbh / (y2 - y1))));
+        tx = s.w / 2 - (x1 + x2) / 2 / vbw * s.w * z;
+        ty = s.h / 2 - (y1 + y2) / 2 / vbh * s.h * z;
+        apply(animate);
+      },
+      // Bring a spot (map units) into view, zooming in to at least minZoom.
+      focus: function (x, y, minZoom) {
+        var s = size();
+        z = Math.min(max, Math.max(z, minZoom || 1));
+        tx = s.w / 2 - x / vbw * s.w * z;
+        ty = s.h / 2 - y / vbh * s.h * z;
+        apply(true);
+      },
+      state: function () { return { z: z, tx: tx, ty: ty }; }
+    };
+    vp.fsZoom = api;
+
+    var controls = box.querySelector("[data-fs-zoom-controls]");
+    if (controls) {
+      controls.querySelector("[data-fs-zoom-in]").addEventListener("click", function () { api.zoomBy(1.5, true); });
+      controls.querySelector("[data-fs-zoom-out]").addEventListener("click", function () { api.zoomBy(1 / 1.5, true); });
+      controls.querySelector("[data-fs-zoom-reset]").addEventListener("click", function () { api.reset(true); });
+      controls.hidden = false;
+    }
+    vp.tabIndex = 0;
+    vp.setAttribute("role", "group");
+
+    // The wheel zooms only after the map has been clicked or focused; otherwise the page scrolls.
+    vp.addEventListener("focusin", function () { armed = true; });
+    vp.addEventListener("focusout", function (event) { if (!vp.contains(event.relatedTarget)) { armed = false; } });
+    document.addEventListener("pointerdown", function (event) { if (!box.contains(event.target)) { armed = false; } });
+    vp.addEventListener("wheel", function (event) {
+      if (!armed) { return; }
+      event.preventDefault();
+      var r = vp.getBoundingClientRect();
+      zoomAt(z * (event.deltaY < 0 ? 1.2 : 1 / 1.2), event.clientX - r.left, event.clientY - r.top);
+    }, { passive: false });
+
+    vp.addEventListener("pointerdown", function (event) {
+      armed = true;
+      pointers[event.pointerId] = { x: event.clientX, y: event.clientY };
+      var ids = Object.keys(pointers);
+      dragged = false;
+      if (ids.length === 2) {
+        var a = pointers[ids[0]], b = pointers[ids[1]];
+        gesture = { pinch: Math.hypot(a.x - b.x, a.y - b.y), z: z };
+      } else {
+        gesture = { x: event.clientX, y: event.clientY, tx: tx, ty: ty };
+      }
+    });
+    vp.addEventListener("pointermove", function (event) {
+      if (!pointers[event.pointerId] || !gesture) { return; }
+      pointers[event.pointerId] = { x: event.clientX, y: event.clientY };
+      var ids = Object.keys(pointers);
+      var r = vp.getBoundingClientRect();
+      if (ids.length === 2 && gesture.pinch) {
+        var a = pointers[ids[0]], b = pointers[ids[1]];
+        dragged = true;
+        zoomAt(gesture.z * Math.hypot(a.x - b.x, a.y - b.y) / gesture.pinch, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top);
+      } else if (ids.length === 1 && gesture.x !== undefined && z > 1.001) {
+        var dx = event.clientX - gesture.x, dy = event.clientY - gesture.y;
+        if (!dragged && Math.hypot(dx, dy) < 5) { return; }
+        if (!dragged) { vp.setPointerCapture(event.pointerId); vp.classList.add("is-dragging"); }
+        dragged = true;
+        tx = gesture.tx + dx;
+        ty = gesture.ty + dy;
+        apply(false);
+      }
+    });
+    var lift = function (event) {
+      delete pointers[event.pointerId];
+      vp.classList.remove("is-dragging");
+      if (!Object.keys(pointers).length) { gesture = null; }
+    };
+    vp.addEventListener("pointerup", lift);
+    vp.addEventListener("pointercancel", lift);
+    // A drag isn't a press: don't select the marker it ended on.
+    vp.addEventListener("click", function (event) {
+      if (dragged) { event.preventDefault(); event.stopPropagation(); dragged = false; }
+    }, true);
+
+    vp.addEventListener("keydown", function (event) {
+      var step = 60, k = event.key;
+      if (k === "+" || k === "=") { api.zoomBy(1.5, true); }
+      else if (k === "-" || k === "_") { api.zoomBy(1 / 1.5, true); }
+      else if (k === "0") { api.reset(true); }
+      else if (k === "ArrowLeft") { tx += step; apply(false); }
+      else if (k === "ArrowRight") { tx -= step; apply(false); }
+      else if (k === "ArrowUp") { ty += step; apply(false); }
+      else if (k === "ArrowDown") { ty -= step; apply(false); }
+      else { return; }
+      event.preventDefault();
+    });
+    window.addEventListener("resize", function () { apply(false); });
+    apply(false);
+    return api;
+  };
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fs-zoom]"), initZoom);
+  var zoomOf = function (el) {
+    var vp = el && el.closest(".fs-map, .fs-wmap");
+    vp = vp && vp.querySelector("[data-fs-zoom]");
+    return vp && vp.fsZoom;
+  };
+
   // ---- Missions hub: select a pin in place, share it as ?mission=<slug>. ----
   // Without this the pins are submit buttons of a GET form and the server
   // renders the selected panel, so nothing here is required.
@@ -135,8 +287,9 @@
     } catch (e) { missions = {}; }
     var pins = Array.prototype.slice.call(map.querySelectorAll("[data-fs-pin]"));
     var part = function (name) { return panel.querySelector("[data-fs-panel-" + name + "]"); };
-    var chooser = map.querySelector("[data-fs-chooser]");
-    var chooserList = map.querySelector("[data-fs-chooser-list]");
+    var mapBox = map.closest(".fs-map");
+    var chooser = mapBox.querySelector("[data-fs-chooser]");
+    var chooserList = mapBox.querySelector("[data-fs-chooser-list]");
     var radius = parseFloat(map.getAttribute("data-fs-pin-radius")) || 24;
     var coarse = window.matchMedia && window.matchMedia("(pointer: coarse)");
 
@@ -184,7 +337,14 @@
         if (event.key === "Escape") { closeChooser(returnTo); }
       };
     };
-    map.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeChooser(pins[0]); });
+    mapBox.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeChooser(pins[0]); });
+
+    // Arriving with ?mission=<slug> (a shared link, or a list item): bring that pin into view.
+    var shared = new URL(window.location.href).searchParams.get("mission");
+    var sharedPin = shared && pins.filter(function (p) { return p.value === shared; })[0];
+    if (sharedPin && zoomOf(map)) {
+      zoomOf(map).focus(parseFloat(sharedPin.getAttribute("data-x")), parseFloat(sharedPin.getAttribute("data-y")), 2);
+    }
 
     map.addEventListener("click", function (event) {
       var pin = event.target.closest("[data-fs-pin]");
@@ -216,14 +376,25 @@
     } catch (e) { stories = {}; }
     var markers = Array.prototype.slice.call(world.querySelectorAll("[data-fs-world-pin]"));
     var cardPart = function (name) { return worldCard.querySelector("[data-fs-card-" + name + "]"); };
-    var worldChooser = world.querySelector("[data-fs-chooser]");
-    var worldChooserList = world.querySelector("[data-fs-chooser-list]");
+    var worldBox = world.closest(".fs-wmap");
+    var worldChooser = worldBox.querySelector("[data-fs-chooser]");
+    var worldChooserList = worldBox.querySelector("[data-fs-chooser-list]");
+    var worldZoom = zoomOf(world);
     var worldRadius = parseFloat(world.getAttribute("data-fs-pin-radius")) || 24;
     var worldCoarse = window.matchMedia && window.matchMedia("(pointer: coarse)");
 
-    var selectStory = function (key) {
+    // Bring a story's marker into view (from the list, ?story= or search; not from a marker
+    // press, which is already in view). Without a marker (not on the map) nothing moves.
+    var showOnMap = function (key) {
+      var marker = markers.filter(function (m) { return m.value === key; })[0];
+      if (marker && worldZoom) {
+        worldZoom.focus(parseFloat(marker.getAttribute("data-x")), parseFloat(marker.getAttribute("data-y")), 2.5);
+      }
+    };
+    var selectStory = function (key, focus) {
       var s = stories[key];
       if (!s) { return; }
+      if (focus) { showOnMap(key); }
       markers.forEach(function (m) { m.setAttribute("aria-pressed", m.value === key ? "true" : "false"); });
       worldCard.className = worldCard.className.replace(/\bfs-wm-[a-z_]+/, "fs-wm-" + s.kind);
       cardPart("type").textContent = s.type_label;
@@ -249,7 +420,39 @@
       worldChooserList.innerHTML = "";
       if (returnTo) { returnTo.focus(); }
     };
-    world.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeWorldChooser(markers[0]); });
+    worldBox.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeWorldChooser(markers[0]); });
+    window.fsSelectStory = selectStory;      // for the map's search box (it selects and zooms)
+
+    // Arriving with ?story=<key>: bring it into view. The list's "Show on the map" links
+    // select in place and zoom instead of reloading.
+    var sharedStory = new URL(window.location.href).searchParams.get("story");
+    if (sharedStory && stories[sharedStory]) { showOnMap(sharedStory); }
+    Array.prototype.forEach.call(document.querySelectorAll(".fs-world-show"), function (link) {
+      link.addEventListener("click", function (event) {
+        var key = new URL(link.href).searchParams.get("story");
+        if (!stories[key]) { return; }
+        event.preventDefault();
+        selectStory(key, true);
+        worldBox.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      });
+    });
+
+    // Region shortcuts: each zooms to a fixed box computed with the same projection.
+    var regions = document.querySelector("[data-fs-regions]");
+    if (regions && worldZoom) {
+      var regionButtons = Array.prototype.slice.call(regions.querySelectorAll("button"));
+      regionButtons.forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function () {
+          regionButtons.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+          var boxValue = b.getAttribute("data-fs-region");
+          if (!boxValue) { worldZoom.reset(true); return; }
+          var v = boxValue.split(",").map(parseFloat);
+          worldZoom.fit(v[0], v[1], v[2], v[3], true);
+        });
+      });
+      regions.hidden = false;
+    }
     worldChooser.addEventListener("keydown", function (event) {
       if (event.key === "Escape") { closeWorldChooser(markers[0]); }
     });

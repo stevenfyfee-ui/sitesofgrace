@@ -84,6 +84,29 @@ CITY_LABELS = [
 ]
 
 
+# Steven's map art (static/future_saints/map-art/, built by tools/build_map_art.py): only the
+# sailing ship and the whale, in open Pacific, as on the world map. (file, lat, lng, width in map
+# units, height/width); a piece placed by map position instead uses lat=None and (x, y) in lng.
+# Each is clear of every pin, badge, city label, leader line, the trail, the compass and the
+# scroll at all six widths (test_maps_art_zoom). Decorative only, aria-hidden. The land pieces
+# (mountains, trees, poppies) stay in map-art/ unused, in case they come back.
+CALIFORNIA_ART = [
+    ("sailing-ship.png", None, (60, 680), 90, 1.0),         # open Pacific
+    ("whale-waves.png", 32.3, -120.3, 120, 0.6),            # open Pacific
+]
+CALIFORNIA_TEXTURE_TILE = 300      # map units per texture tile (1254 px), mirrored 2 x 2
+
+
+def california_art():
+    pieces = []
+    for file, lat, where, width, aspect in CALIFORNIA_ART:
+        cx, cy = where if lat is None else to_viewbox(lat, where)
+        height = width * aspect
+        pieces.append({"file": file, "x": round(cx - width / 2, 1), "y": round(cy - height / 2, 1), "w": width,
+                       "h": round(height, 1)})
+    return pieces
+
+
 def city_labels():
     labels = []
     for city in CITY_LABELS:
@@ -250,6 +273,9 @@ def hub_context(index, request):
         "fs_viewbox": VIEWBOX,
         "fs_pin_radius": PIN_RADIUS_PX,
         "fs_city_labels": city_labels(),
+        "fs_ca_art": california_art(),
+        "fs_texture_tile": CALIFORNIA_TEXTURE_TILE,
+        "fs_texture_tile2": CALIFORNIA_TEXTURE_TILE * 2,
         "fs_trail_points": trail_points(entries),
         "fs_panel_data": panel_data,
         "fs_quiz": index.hub_quiz_data(),

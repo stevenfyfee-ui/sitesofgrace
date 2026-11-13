@@ -1,0 +1,26 @@
+{% load static %}{% comment %}
+  Steven's land and ocean textures as SVG patterns (inside a map's <defs>). The 1254 px
+  textures aren't seamless, so each tile is drawn 2 x 2 with mirrored copies and the edges
+  always meet their own reflection. Usage: with prefix="fs-ca" tile=300 tile2=600 (map units).
+{% endcomment %}<pattern id="{{ prefix }}-land-tex" patternUnits="userSpaceOnUse" width="{{ tile2 }}" height="{{ tile2 }}">
+  <image href="{% static 'future_saints/map-art/land-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}"/>
+  <image href="{% static 'future_saints/map-art/land-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate({{ tile2 }} 0) scale(-1 1)"/>
+  <image href="{% static 'future_saints/map-art/land-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate(0 {{ tile2 }}) scale(1 -1)"/>
+  <image href="{% static 'future_saints/map-art/land-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate({{ tile2 }} {{ tile2 }}) scale(-1 -1)"/>
+</pattern>
+<pattern id="{{ prefix }}-ocean-tex" patternUnits="userSpaceOnUse" width="{{ tile2 }}" height="{{ tile2 }}">
+  <image href="{% static 'future_saints/map-art/ocean-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}"/>
+  <image href="{% static 'future_saints/map-art/ocean-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate({{ tile2 }} 0) scale(-1 1)"/>
+  <image href="{% static 'future_saints/map-art/ocean-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate(0 {{ tile2 }}) scale(1 -1)"/>
+  <image href="{% static 'future_saints/map-art/ocean-texture.jpg' %}" width="{{ tile }}" height="{{ tile }}" transform="translate({{ tile2 }} {{ tile2 }}) scale(-1 -1)"/>
+</pattern>
+<filter id="{{ prefix }}-watercolor" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="7" result="noise"/>
+  <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+  <feGaussianBlur in="wobbly" stdDeviation="1.1"/>
+</filter>
+<filter id="{{ prefix }}-paper" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="grain"/>
+  <feColorMatrix in="grain" type="matrix" values="0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  0 0 0 .07 0"/>
+  <feComposite in2="SourceGraphic" operator="in"/>
+</filter>

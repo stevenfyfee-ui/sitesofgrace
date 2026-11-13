@@ -218,3 +218,101 @@ wider) only. A thin line and a dot anchor it to its true spot.
 | Lanciano | (0, 28) |
 
 These are the smallest offsets that clear every marker. Staff see any new overlap on the map page.
+
+---
+
+# Map art, textures and zoom (both maps)
+
+## Steven's map art
+
+Steven supplied ten pieces. `tools/build_map_art.py <folder>` reads the source folder without
+changing it, picks each file by the number at the end of its name, and writes the results to
+`static/future_saints/map-art/`.
+
+**Textures (1–2).**
+- `land-texture.jpg` and `ocean-texture.jpg`, kept at their own 1254 px.
+- They're JPEG quality 82, about 200 KB each. The source PNGs were about 2.3 MB each, and the
+  textures have no transparency.
+
+**Pieces (3–10).**
+- Mountain range, tall mountain, oak, redwoods, palm, poppies, sailing ship, whale.
+- Each is resized to 2× its largest display size: its width in map units × 0.707 px per unit on the
+  widest map × 4 for California's 4× zoom × 2 for high-density screens.
+- They're saved as 256-colour PNG with transparency, 14–70 KB each.
+- Only the sailing ship and the whale are used. Steven decided before #28 merged to keep land
+  pieces off the maps. The other six files stay in `map-art/` unused, in case they come back; the
+  build script still makes all ten.
+
+**Tiling.** The textures aren't seamless, so each is tiled as a mirrored 2 × 2 pattern: every edge
+meets its own reflection. One tile is 300 map units on California and 250 on the world map, so at
+maximum zoom the texture is upscaled 1.35× and 1.65× respectively: soft, not blocky.
+
+**California.** The land texture is clipped to the outline and the ocean texture to the Pacific; the
+neighbouring states stay plain parchment. Only two pieces, both in open Pacific
+(`missions.CALIFORNIA_ART`):
+
+| Piece | Where | Width (units) |
+|---|---|---|
+| Sailing ship | open Pacific (60, 680) | 90 |
+| Whale | open Pacific, 32.3°N 120.3°W | 120 |
+
+- Neither touches land, a pin, badge, city label, leader line, the trail, the compass or the scroll
+  at any of the six widths (test_maps_art_zoom), so both show on phones too.
+- The art layer is aria-hidden.
+
+**World map.**
+- The same watercolor family: the ocean texture on the water and the land texture clipped to the
+  outline.
+- The same surf, paper rim, outline, paper grain and compass rose as California.
+- Only two pieces, both in open ocean, never on land: the sailing ship (mid-Atlantic, 27°N 45°W) and
+  the whale (South Pacific, 12°S 128°W). Each is clear of every marker and the compass at all six
+  widths.
+- The homepage preview uses the same art.
+
+## Zoom
+
+One component zooms both maps (`future-saints.js`, `initZoom`).
+- **Limits:** 1–6× on the world map, 1–4× on California. Panning is clamped to the map.
+- **Controls:** + / − / reset buttons (44 px, with aria-labels).
+- **Pointer:** drag to pan; pinch on touch.
+- **Wheel:** zooms only after the map has been clicked or focused, so page scrolling is never taken
+  over.
+- **Keyboard,** while the map has focus: + / − to zoom, the arrow keys to pan, 0 to reset.
+- **Markers:** CSS counter-scales them, so they keep their screen size; their true spots never move.
+- **Coastline strokes:** divided by the zoom, so they also keep their screen weight.
+- **Overlap offsets:** the world map's desktop offsets and leader lines fade from 1× to 2×, by which
+  zoom the pins separate.
+
+**Region shortcuts** (world map). Each box is the projected bounds of a latitude/longitude box:
+
+| Region | Latitude | Longitude |
+|---|---|---|
+| Europe | 35–59°N | 11°W–31°E |
+| Holy Land | 30.5–33.6°N | 34.0–36.2°E |
+| The Americas | 56°S–60°N | 168°W–34°W |
+
+"Whole World" resets the map.
+
+**Zooming to a story.** Choosing a story from the list, or arriving with `?story=` (or `?mission=`
+on California), zooms and pans to it. With reduced motion it jumps instead of animating.
+
+**Detail.** The first time the world map passes 2×, it swaps to the Natural Earth **1:50m** outline
+(`world-outline-50m.svg`: simplified at 0.12 units, 532 polygons, 233 KB, about 86 KB gzipped).
+- It's built with `tools/build_world_outline.py --detail <ne_50m_land.geojson>`.
+- Natural Earth is public domain.
+- California's outline (simplified at about 220 m) stays sharp at 4×.
+
+**Without JavaScript,** the static maps and lists still work, and the zoom controls and region
+shortcuts stay hidden.
+
+## Page weight
+
+Measured on the first load at 1440 wide:
+
+| Page | Total | New map art |
+|---|---|---|
+| World Discovery Map | 804 KB | 532 KB, plus 227 KB for the 1:50m outline, only after zooming past 2× |
+| California Missions hub | 865 KB | 532 KB (the textures, ship and whale) |
+| Future Saints homepage | 831 KB | 532 KB |
+
+The CSS and JS grew by 2 KB and 10 KB.
