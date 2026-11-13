@@ -738,7 +738,7 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
 /* City ribbons: 22 viewBox units of text is 11 px only once the map is 500 px wide
    (missions.CITY_LABEL_MIN_MAP_PX); on a narrower map the ribbons, dots and leaders hide. */
 .fs-map { container-type: inline-size; }
-@container (max-width: 499.98px) { .fs-map-cities { display: none; } }
+@container (max-width: 499.98px) { .fs-map-cities, .fs-map-piece--wide { display: none; } }
 
 /* ---------- Phase 4: the World Discovery Map (brief §8; comp 01's map hero style) ---------- */
 /* Marker accents, one token per story type. */
@@ -788,8 +788,10 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
 @media (prefers-reduced-motion: no-preference) { .fs-wm-disc { transition: transform .15s ease; } }
 /* Reviewed offsets apply on the desktop map only; a thin line anchors the marker to its true spot. */
 @media (min-width: 1024px) {
-  .fs-wm-marker.is-offset .fs-wm-pin { transform: translate(var(--dx), var(--dy)); }
-  .fs-wm-marker.is-offset .fs-wm-anchor, .fs-wm-marker.is-offset .fs-wm-leader { display: block; }
+  /* --nudge is 1 at 1x and fades to 0 by 2x (set by the zoom): the pins separate by then. */
+  .fs-wm-marker.is-offset .fs-wm-pin { transform: translate(calc(var(--dx) * var(--nudge, 1)), calc(var(--dy) * var(--nudge, 1))); }
+  .fs-wm-marker.is-offset .fs-wm-anchor, .fs-wm-marker.is-offset .fs-wm-leader { display: block; opacity: var(--nudge, 1); }
+  .fs-wm-marker.is-offset .fs-wm-leader { transform: scale(var(--nudge, 1)); transform-origin: 0 0; }
 }
 
 .fs-world-card-type { margin: 0; text-align: center; }
@@ -813,3 +815,27 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
 .fs-world-preview-icon { color: var(--fs-wm); }
 .fs-world-preview-text { display: grid; gap: .6rem; justify-items: start; }
 @media print { .fs-world .fs-wmap, .fs-world-filters { display: none !important; } }
+
+/* ---------- Map zoom (both maps): a clipped viewport around a transformed stage ---------- */
+.fs-zoom-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: var(--fs-radius); touch-action: pan-y; }
+.fs-zoom-viewport.is-zoomed { touch-action: none; cursor: grab; }
+.fs-zoom-viewport.is-dragging { cursor: grabbing; }
+.fs-zoom-viewport:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 3px; }
+.fs-zoom-stage { position: absolute; inset: 0; transform-origin: 0 0;
+  transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--z, 1)); }
+@media (prefers-reduced-motion: no-preference) { .fs-zoom-stage.is-animating { transition: transform .35s ease; } }
+/* Markers keep their screen size: they are counter-scaled; their true spots never move. */
+.fs-zoom-stage .fs-pin { transform: scale(calc(1 / var(--z, 1))); }
+.fs-zoom-stage .fs-wm-marker { transform: scale(calc(1 / var(--z, 1))); transform-origin: 0 0; }
+.fs-zoom-controls { position: absolute; top: 10px; right: 10px; z-index: 6; display: grid; gap: 6px; }
+.fs-zoom-controls[hidden] { display: none; }
+.fs-zoom-button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 2px solid var(--fs-gold);
+  border-radius: 12px; background: var(--fs-ivory); color: var(--fs-navy); font: 700 1.5rem/1 system-ui, sans-serif; cursor: pointer;
+  box-shadow: 0 2px 6px rgba(3, 37, 83, .18); }
+.fs-zoom-button svg { width: 22px; height: 22px; }
+.fs-zoom-button:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 2px; }
+.fs-world-regions { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: -.25rem 0 1rem; }
+.fs-world-regions[hidden] { display: none; }
+.fs-world-region { min-height: 44px; padding: .35rem .9rem; border: 2px solid var(--fs-blue); border-radius: 999px; background: #fff;
+  color: var(--fs-navy); font: inherit; cursor: pointer; }
+.fs-world-region[aria-pressed="true"] { background: var(--fs-accent-blue); font-weight: 700; }

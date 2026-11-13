@@ -55,6 +55,54 @@ WORLD_MARKER_OFFSETS = {
 }
 
 
+# Decorative pieces on the world map: ONLY in open ocean (never on land, so nothing can be read
+# as a place), clear of every marker and the compass at all six widths (test_world_map).
+# (file, lat, lng, width in map units, height/width)
+WORLD_ART = [
+    ("sailing-ship.png", 27.0, -45.0, 60, 1.0),     # the mid-Atlantic
+    ("whale-waves.png", -12.0, -128.0, 64, 0.6),    # the South Pacific
+]
+WORLD_TEXTURE_TILE = 250          # map units per texture tile (1254 px), mirrored 2 x 2
+WORLD_ZOOM_MAX = 6
+# Zoom shortcuts: (key, label, (south, north), (west, east)); each box is its projected bounds.
+REGIONS = [
+    ("europe", "Europe", (35.0, 59.0), (-11.0, 31.0)),
+    ("holy-land", "Holy Land", (30.5, 33.6), (34.0, 36.2)),
+    ("americas", "The Americas", (-56.0, 60.0), (-168.0, -34.0)),
+]
+
+
+def region_box(south_north, west_east, steps=24):
+    """(x1, y1, x2, y2) in viewBox units: the projected bounds of a latitude/longitude box."""
+    (s, n), (w, e) = south_north, west_east
+    pts = []
+    for i in range(steps + 1):
+        t = i / steps
+        lat, lng = s + (n - s) * t, w + (e - w) * t
+        pts += [world_viewbox(lat, w), world_viewbox(lat, e), world_viewbox(s, lng), world_viewbox(n, lng)]
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def world_regions():
+    return [{"key": key, "label": label, "box": ",".join(f"{v:.1f}" for v in region_box(sn, we))}
+            for key, label, sn, we in REGIONS]
+
+
+def world_art():
+    out = []
+    for file, lat, lng, width, aspect in WORLD_ART:
+        cx, cy = world_viewbox(lat, lng)
+        out.append({"file": file, "x": round(cx - width / 2, 1), "y": round(cy - width * aspect / 2, 1),
+                    "w": width, "h": round(width * aspect, 1)})
+    return out
+
+
+def art_context():
+    """What _world_art.html needs (the map page and the homepage preview)."""
+    return {"fs_world_art": world_art(), "fs_texture_tile": WORLD_TEXTURE_TILE, "fs_texture_tile2": WORLD_TEXTURE_TILE * 2}
+
+
 @lru_cache(maxsize=1)
 def world_outline():
     return json.loads(OUTLINE_FILE.read_text(encoding="utf-8"))
@@ -209,6 +257,8 @@ def world_context(home, request):
     return {
         "fs_world_items": items, "fs_world_selected": selected, "fs_world_groups": groups,
         "fs_world_kinds": KINDS, "fs_world_viewbox": WORLD_VIEWBOX, "fs_world_warnings": warnings,
+        "fs_world_regions": world_regions(), "fs_world_zoom_max": WORLD_ZOOM_MAX,
+        "fs_world_vb_w": WORLD_VIEWBOX_WIDTH, "fs_world_vb_h": WORLD_VIEWBOX_HEIGHT, **art_context(),
         "fs_world_card_data": [
             {"key": i["key"], "kind": i["kind"], "type_label": i["type_label"], "title": i["title"],
              "subtitle": i["subtitle"], "place_line": i["place_line"], "url": i["url"], "link_label": i["link_label"],
@@ -223,4 +273,4 @@ def world_preview(home, request):
         return None
     items, _ = world_items(home, request)
     return {"url": page.get_url(request), "title": page.title, "viewbox": WORLD_VIEWBOX,
-            "items": [i for i in items if i["pinned"]]}
+            "items": [i for i in items if i["pinned"]], **art_context()}

@@ -22,6 +22,10 @@
     {% endfor %}
     <button type="button" class="fs-world-filter fs-world-filter--all" data-fs-filter-all>Show all</button>
   </div>
+  <div class="fs-world-regions" role="group" aria-label="Zoom the map to a region" hidden data-fs-regions>
+    {% for r in fs_world_regions %}<button type="button" class="fs-world-region" data-fs-region="{{ r.box }}">{{ r.label }}</button>{% endfor %}
+    <button type="button" class="fs-world-region" data-fs-region-all>Whole World</button>
+  </div>
 </div>
 
 {% if fs_world_items %}

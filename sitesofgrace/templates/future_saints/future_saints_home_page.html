@@ -65,7 +65,7 @@
 <section class="fs-wrap fs-section" aria-labelledby="fs-world-preview-h">
   <a class="fs-world-preview" href="{{ fs_world_preview.url }}" data-fs-world-preview>
     <svg class="fs-world-preview-map" viewBox="{{ fs_world_preview.viewbox }}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-      {% include "future_saints/includes/_world_art.html" %}
+      {% include "future_saints/includes/_world_art.html" with fs_world_art=fs_world_preview.fs_world_art fs_texture_tile=fs_world_preview.fs_texture_tile fs_texture_tile2=fs_world_preview.fs_texture_tile2 %}
       {% for i in fs_world_preview.items %}
         <g class="fs-wm-{{ i.kind }}" transform="translate({{ i.x|floatformat:1 }} {{ i.y|floatformat:1 }})">
           <circle r="7" class="fs-world-preview-dot"/>
