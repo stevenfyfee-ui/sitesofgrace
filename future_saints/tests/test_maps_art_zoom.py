@@ -10,7 +10,6 @@ from django.conf import settings
 from future_saints.geo import point_in_polygon, to_viewbox, world_viewbox
 from future_saints.missions import (
     BADGE_OFFSETS,
-    CITY_LABEL_MIN_MAP_PX,
     MAP_WIDTHS_PX,
     badge_box,
     california_art,
@@ -50,16 +49,15 @@ class ArtFileTests(MissionsTestCase):
 
 
 class CaliforniaArtTests(MissionsTestCase):
-    def test_each_piece_sits_where_it_belongs_and_clear_of_everything(self):
+    def test_ship_and_whale_in_open_ocean_clear_of_everything(self):
         outline = california_outline()
         pins = {n: to_viewbox(lat, lng) for n, (_, lat, lng, _) in MISSIONS.items()}
         labels = city_labels()
         label_boxes = [(c["x"], c["y"], c["x"] + c["w"], c["y"] + c["h"]) for c in labels]
         leaders = [((c["end_x"], c["end_y"]), (c["dot_x"], c["dot_y"])) for c in labels]
         trail = [(pins[a], pins[b]) for a, b in zip(TRAIL, TRAIL[1:])]
-        wants = {"sailing-ship.png": "ocean", "whale-waves.png": "ocean", "poppies.png": "neighbour"}
         pieces = california_art()
-        self.assertEqual(len(pieces), 9)
+        self.assertEqual([a["file"] for a in pieces], ["sailing-ship.png", "whale-waves.png"], "only the ship and the whale")
         for a in pieces:
             box = (a["x"], a["y"], a["x"] + a["w"], a["y"] + a["h"])
             kinds = set()
@@ -67,7 +65,7 @@ class CaliforniaArtTests(MissionsTestCase):
                 for y in range(int(box[1]), int(box[3]) + 1, 4):
                     kinds.add("land" if any(point_in_polygon(x, y, r) for r in outline["rings"])
                               else "ocean" if point_in_polygon(x, y, outline["ocean"]) else "neighbour")
-            self.assertEqual(kinds, {wants.get(a["file"], "land")}, a["file"])
+            self.assertEqual(kinds, {"ocean"}, a["file"])
             self.assertFalse(any(hit(box, d, 4) for d in DECOR), f"{a['file']}: compass/scroll")
             self.assertFalse(any(hit(box, lb, 4) for lb in label_boxes), f"{a['file']}: a city label")
             self.assertFalse(any(segment_hits(p, q, box) for p, q in leaders), f"{a['file']}: a leader line")
@@ -77,8 +75,6 @@ class CaliforniaArtTests(MissionsTestCase):
                     self.assertFalse(hit(box, (other["x"], other["y"], other["x"] + other["w"], other["y"] + other["h"]), 2),
                                      f"{a['file']} / {other['file']}")
             for width, map_px in MAP_WIDTHS_PX.items():
-                if map_px < CITY_LABEL_MIN_MAP_PX and not a["phones"]:
-                    continue                                   # hidden on a small map
                 s = map_px / 1000
                 px = tuple(v * s for v in box)
                 for n, (x, y) in pins.items():
@@ -88,8 +84,9 @@ class CaliforniaArtTests(MissionsTestCase):
     def test_the_hub_draws_the_art_textures_and_zoom(self):
         self.seed_and_publish()
         html = self.hub_html()
-        self.assertEqual(html.count("<image class=\"fs-map-piece"), 9)
-        self.assertEqual(html.count('class="fs-map-piece fs-map-piece--wide"'), 3, "these hide on a small map")
+        self.assertEqual(html.count('<image class="fs-map-piece"'), 2, "ship and whale, in open ocean only")
+        for gone in ("mountain-range", "tall-mountain", "oak-tree", "redwoods", "palm-tree", "poppies"):
+            self.assertNotIn(gone, html)
         self.assertIn('fill="url(#fs-ca-land-tex)"', html)
         self.assertIn('fill="url(#fs-ca-ocean-tex)"', html)
         self.assertIn('data-fs-zoom data-fs-zoom-max="4"', html)

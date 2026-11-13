@@ -84,33 +84,26 @@ CITY_LABELS = [
 ]
 
 
-# Steven's map art (static/future_saints/map-art/, built by tools/build_map_art.py), placed at
-# real places through the same projection: (file, lat, lng, width in map units, height/width,
-# shown on phones). A piece placed by map position instead uses lat=None and (x, y) in lng.
+# Steven's map art (static/future_saints/map-art/, built by tools/build_map_art.py): only the
+# sailing ship and the whale, in open Pacific, as on the world map. (file, lat, lng, width in map
+# units, height/width); a piece placed by map position instead uses lat=None and (x, y) in lng.
 # Each is clear of every pin, badge, city label, leader line, the trail, the compass and the
-# scroll at 1440/1024/768; the ones also clear at 430/390/360 stay on phones, the rest hide on
-# a map narrower than 500 px (test_missions). Decorative only, aria-hidden.
+# scroll at all six widths (test_maps_art_zoom). Decorative only, aria-hidden. The land pieces
+# (mountains, trees, poppies) stay in map-art/ unused, in case they come back.
 CALIFORNIA_ART = [
-    ("mountain-range.png", 37.2, -119.0, 170, 0.333, False),    # the Sierra Nevada
-    ("tall-mountain.png", 41.409, -122.195, 70, 0.833, True),   # Mount Shasta
-    ("redwoods.png", 40.9, -123.5, 52, 1.248, True),            # the north coast redwoods
-    ("oak-tree.png", 39.6, -122.7, 46, 1.0, True),              # the north Coast Ranges
-    ("oak-tree.png", 35.25, -119.6, 40, 1.0, False),            # the Temblor Range (inner Coast Ranges)
-    ("palm-tree.png", 33.75, -116.3, 34, 1.667, False),         # the Coachella Valley desert
-    ("poppies.png", None, (930, 1050), 110, 0.749, True),       # bottom-right margin
-    ("sailing-ship.png", None, (60, 680), 90, 1.0, True),       # open Pacific
-    ("whale-waves.png", 32.3, -120.3, 120, 0.6, True),          # open Pacific
+    ("sailing-ship.png", None, (60, 680), 90, 1.0),         # open Pacific
+    ("whale-waves.png", 32.3, -120.3, 120, 0.6),            # open Pacific
 ]
 CALIFORNIA_TEXTURE_TILE = 300      # map units per texture tile (1254 px), mirrored 2 x 2
 
 
 def california_art():
     pieces = []
-    for file, lat, where, width, aspect, phones in CALIFORNIA_ART:
+    for file, lat, where, width, aspect in CALIFORNIA_ART:
         cx, cy = where if lat is None else to_viewbox(lat, where)
         height = width * aspect
         pieces.append({"file": file, "x": round(cx - width / 2, 1), "y": round(cy - height / 2, 1), "w": width,
-                       "h": round(height, 1), "phones": phones})
+                       "h": round(height, 1)})
     return pieces
 
 

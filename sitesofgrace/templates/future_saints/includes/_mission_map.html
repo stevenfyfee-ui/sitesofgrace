@@ -3,7 +3,7 @@
   The illustrated California map. Two layers in one fixed viewBox, inside a zoomable stage:
   1. .fs-map-art (aria-hidden): Steven's watercolor textures, the land one clipped to the real
      outline (Census, public domain; projected by future_saints.geo) and the ocean one to the
-     Pacific; the neighbouring states as plain parchment; his map art at real places
+     Pacific; the neighbouring states as plain parchment; his ship and whale in open ocean
      (missions.CALIFORNIA_ART); the dotted trail in the Mission Trail's stop order; four city
      ribbons with leader lines to each city's real position; the compass rose and scroll.
   2. .fs-map-pins: the interactive layer. Each mission is a real submit button of a GET form
@@ -32,9 +32,9 @@
           <use href="#fs-map-ca" fill="url(#fs-ca-land-tex)" filter="url(#fs-ca-watercolor)"/>
           <use href="#fs-map-ca" fill="none" stroke="#8a7550" stroke-width="1.6" style="stroke-width: calc(1.6px / var(--z, 1))" stroke-linejoin="round" opacity=".7"/>
 
-          {# Steven's map art at real places (decorative). Some hide on a small map, where pins crowd. #}
+          {# Steven's map art: the ship and the whale, in open ocean only (decorative). #}
           <g class="fs-map-pieces">
-            {% for a in fs_ca_art %}<image class="fs-map-piece{% if not a.phones %} fs-map-piece--wide{% endif %}" href="{% static 'future_saints/map-art/' %}{{ a.file }}" x="{{ a.x }}" y="{{ a.y }}" width="{{ a.w }}" height="{{ a.h }}" preserveAspectRatio="xMidYMid meet"/>{% endfor %}
+            {% for a in fs_ca_art %}<image class="fs-map-piece" href="{% static 'future_saints/map-art/' %}{{ a.file }}" x="{{ a.x }}" y="{{ a.y }}" width="{{ a.w }}" height="{{ a.h }}" preserveAspectRatio="xMidYMid meet"/>{% endfor %}
           </g>
 
           {# The trail: missions joined in the Mission Trail page's stop order (south to north). #}

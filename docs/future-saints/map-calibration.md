@@ -239,30 +239,25 @@ changing it, picks each file by the number at the end of its name, and writes th
 - Each is resized to 2× its largest display size: its width in map units × 0.707 px per unit on the
   widest map × 4 for California's 4× zoom × 2 for high-density screens.
 - They're saved as 256-colour PNG with transparency, 14–70 KB each.
+- Only the sailing ship and the whale are used. Steven decided before #28 merged to keep land
+  pieces off the maps. The other six files stay in `map-art/` unused, in case they come back; the
+  build script still makes all ten.
 
 **Tiling.** The textures aren't seamless, so each is tiled as a mirrored 2 × 2 pattern: every edge
 meets its own reflection. One tile is 300 map units on California and 250 on the world map, so at
 maximum zoom the texture is upscaled 1.35× and 1.65× respectively: soft, not blocky.
 
 **California.** The land texture is clipped to the outline and the ocean texture to the Pacific; the
-neighbouring states stay plain parchment. The pieces sit at real places through `to_viewbox`
+neighbouring states stay plain parchment. Only two pieces, both in open Pacific
 (`missions.CALIFORNIA_ART`):
 
-| Piece | Where | Width (units) | Phones |
-|---|---|---|---|
-| Mountain range | Sierra Nevada, 37.2°N 119.0°W | 170 | hidden |
-| Tall mountain | Mount Shasta, 41.409°N 122.195°W | 70 | shown |
-| Redwoods | North coast, 40.9°N 123.5°W | 52 | shown |
-| Oak | North Coast Ranges, 39.6°N 122.7°W | 46 | shown |
-| Oak | Temblor Range, 35.25°N 119.6°W | 40 | hidden |
-| Palm | Coachella Valley, 33.75°N 116.3°W | 34 | hidden |
-| Poppies | bottom-right margin (930, 1050) | 110 | shown |
-| Sailing ship | open Pacific (60, 680) | 90 | shown |
-| Whale | open Pacific, 32.3°N 120.3°W | 120 | shown |
+| Piece | Where | Width (units) |
+|---|---|---|
+| Sailing ship | open Pacific (60, 680) | 90 |
+| Whale | open Pacific, 32.3°N 120.3°W | 120 |
 
-- No piece touches a pin, badge, city label, leader line, the trail, the compass or the scroll at
-  1440, 1024 or 768 (test_maps_art_zoom).
-- On a map narrower than 500 px the pins crowd, so the three pieces marked "hidden" hide there.
+- Neither touches land, a pin, badge, city label, leader line, the trail, the compass or the scroll
+  at any of the six widths (test_maps_art_zoom), so both show on phones too.
 - The art layer is aria-hidden.
 
 **World map.**
@@ -317,7 +312,7 @@ Measured on the first load at 1440 wide:
 | Page | Total | New map art |
 |---|---|---|
 | World Discovery Map | 804 KB | 532 KB, plus 227 KB for the 1:50m outline, only after zooming past 2× |
-| California Missions hub | 1,033 KB | 699 KB |
+| California Missions hub | 865 KB | 532 KB (the textures, ship and whale) |
 | Future Saints homepage | 831 KB | 532 KB |
 
 The CSS and JS grew by 2 KB and 10 KB.
