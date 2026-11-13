@@ -1,6 +1,11 @@
 """Build the world land outline for the Future Saints World Discovery Map (run once, by hand).
 
     python tools/build_world_outline.py path/to/ne_110m_land.geojson
+    python tools/build_world_outline.py --detail path/to/ne_50m_land.geojson
+
+The second form builds the zoom-detail outline (Natural Earth 1:50m, finer simplification):
+sitesofgrace/static/future_saints/svg/world-outline-50m.svg, which the World Discovery Map loads
+only the first time it is zoomed past 2x. It writes no JSON (the pins and tests use 1:110m).
 
 Source (public domain): Natural Earth, 1:110m Physical Vectors, Land, version 5.1.2
 https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
@@ -36,6 +41,10 @@ SOURCE = {
 }
 TOLERANCE = 0.4          # viewBox units (1 unit is about 40 km at the equator)
 MIN_AREA = 2.0           # square viewBox units
+DETAIL_TOLERANCE = 0.12  # the 1:50m zoom outline: fine enough at 6x
+DETAIL_MIN_AREA = 0.25
+DETAIL_SOURCE = {**SOURCE, "title": "1:50m Physical Vectors, Land (ne_50m_land), version 5.1.2",
+                 "url": "https://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-land/"}
 
 
 def area(ring):
@@ -64,11 +73,14 @@ def simplify(points, tolerance):
     return [p for p, k in zip(points, keep) if k]
 
 
-def project(ring):
-    return [(round(x, 2), round(y, 2)) for x, y in simplify([world_viewbox(lat, lng) for lng, lat in ring], TOLERANCE)]
+def project(ring, tolerance=TOLERANCE):
+    return [(round(x, 2), round(y, 2)) for x, y in simplify([world_viewbox(lat, lng) for lng, lat in ring], tolerance)]
 
 
-def main(path):
+def main(path, detail=False):
+    """detail=True builds the 1:50m zoom outline (world-outline-50m.svg only, no JSON)."""
+    tolerance, min_area = (DETAIL_TOLERANCE, DETAIL_MIN_AREA) if detail else (TOLERANCE, MIN_AREA)
+    source = DETAIL_SOURCE if detail else SOURCE
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     polygons, trimmed = [], 0
     for feature in data["features"]:
@@ -79,31 +91,36 @@ def main(path):
             if max(lat for _, lat in outer) < WORLD_TRIM_LAT:
                 trimmed += 1
                 continue
-            ring = project(outer)
-            if area(ring) < MIN_AREA:
+            ring = project(outer, tolerance)
+            if area(ring) < min_area:
                 continue
-            holes = [h for h in (project(r) for r in part[1:]) if area(h) >= MIN_AREA]
+            holes = [h for h in (project(r, tolerance) for r in part[1:]) if area(h) >= min_area]
             polygons.append({"outer": ring, "holes": holes})
     polygons.sort(key=lambda p: area(p["outer"]), reverse=True)
     path_d = " ".join("M" + " L".join(f"{x:g},{y:g}" for x, y in r[:-1]) + " Z"
                       for p in polygons for r in [p["outer"], *p["holes"]])
-    out = {"source": SOURCE, "projection": "Equal Earth via future_saints.geo.world_viewbox", "viewBox": WORLD_VIEWBOX,
-           "trimmed_south_of": WORLD_TRIM_LAT, "tolerance_units": TOLERANCE, "min_area_units": MIN_AREA, "polygons": polygons}
-    data_file = ROOT / "future_saints" / "data" / "world_outline.json"
-    data_file.write_text(json.dumps(out, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
-    svg = ROOT / "sitesofgrace" / "static" / "future_saints" / "svg" / "world-outline.svg"
+    svg = ROOT / "sitesofgrace" / "static" / "future_saints" / "svg" / ("world-outline-50m.svg" if detail else "world-outline.svg")
     svg.write_text(
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{WORLD_VIEWBOX}">\n'
-        f"<!-- Future Saints World Discovery Map land outline. {SOURCE['title']}; {SOURCE['licence']}. "
+        f"<!-- Future Saints World Discovery Map land outline. {source['title']}; {source['licence']}. "
         f"Equal Earth; land wholly south of {WORLD_TRIM_LAT:g}° (Antarctica) left out. Built by tools/build_world_outline.py. -->\n"
         f'<defs><path id="fs-world-land" fill-rule="evenodd" d="{path_d}"/></defs>\n</svg>\n',
         encoding="utf-8", newline="\n",
     )
     points = sum(len(p["outer"]) + sum(len(h) for h in p["holes"]) for p in polygons)
     print(f"{len(polygons)} polygon(s), {sum(len(p['holes']) for p in polygons)} hole(s), {points} points; "
-          f"{trimmed} trimmed south of {WORLD_TRIM_LAT:g}°; wrote {data_file.relative_to(ROOT)} and "
-          f"{svg.relative_to(ROOT)} ({svg.stat().st_size} bytes)")
+          f"{trimmed} trimmed south of {WORLD_TRIM_LAT:g}°; wrote {svg.relative_to(ROOT)} ({svg.stat().st_size} bytes)")
+    if detail:
+        return
+    out = {"source": SOURCE, "projection": "Equal Earth via future_saints.geo.world_viewbox", "viewBox": WORLD_VIEWBOX,
+           "trimmed_south_of": WORLD_TRIM_LAT, "tolerance_units": TOLERANCE, "min_area_units": MIN_AREA, "polygons": polygons}
+    data_file = ROOT / "future_saints" / "data" / "world_outline.json"
+    data_file.write_text(json.dumps(out, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
+    print(f"wrote {data_file.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if sys.argv[1] == "--detail":
+        main(sys.argv[2], detail=True)
+    else:
+        main(sys.argv[1])
