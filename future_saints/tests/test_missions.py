@@ -245,7 +245,7 @@ class ProjectionTests(MissionsTestCase):
         self.assertEqual(CITY_LABEL_MIN_MAP_PX, 500)
         css = (Path(settings.BASE_DIR) / "sitesofgrace" / "static" / "css" / "future-saints.css").read_text(encoding="utf-8")
         self.assertIn(".fs-map { container-type: inline-size; }", css)
-        self.assertIn("@container (max-width: 499.98px) { .fs-map-cities { display: none; } }", css)
+        self.assertIn("@container (max-width: 499.98px) { .fs-map-cities, .fs-map-piece--wide { display: none; } }", css)
         self.assertIn(f".fs-map-city-text {{ font: italic 700 {CITY_LABEL_FONT}px", css)
         shown = sorted(w for w, px in MAP_WIDTHS_PX.items() if px >= CITY_LABEL_MIN_MAP_PX)
         self.assertEqual(shown, [768, 1024, 1440], "ribbons show at these QA widths and hide at 430/390/360")
