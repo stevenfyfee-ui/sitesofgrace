@@ -1,0 +1,66 @@
+{% extends "future_saints/base.html" %}
+{% comment %}
+  The World Discovery Map (brief §8; comp 01's map hero is the style). Server-rendered
+  first: the story card shows ?story=<key> (default: the first story in the list), each
+  marker is a submit button of a GET form, and the list below reaches every published
+  story, pinned or not, so the page works without JavaScript. With JavaScript, the filter
+  toggles hide markers and list items together and a marker selects in place.
+  No geolocation, no travel wording.
+{% endcomment %}
+{% block body_class %}fs-world{% endblock %}
+{% block content %}
+<header class="fs-wrap fs-hub-head">
+  <h1 class="fs-hub-title">{{ page.title }}</h1>
+  {% if page.subtitle %}<p class="fs-subheading">{{ page.subtitle }}</p>{% endif %}
+  {% if page.intro %}<p class="fs-prose fs-world-intro">{{ page.intro }}</p>{% endif %}
+</header>
+
+<div class="fs-wrap">
+  <div class="fs-world-filters" role="group" aria-label="Show stories by type" hidden data-fs-world-filters>
+    {% for kind, label, type_label, icon in fs_world_kinds %}
+      <button type="button" class="fs-world-filter fs-wm-{{ kind }}" aria-pressed="true" data-fs-filter="{{ kind }}">{% include "future_saints/includes/_icon.html" with name=icon %}<span>{{ label }}</span></button>
+    {% endfor %}
+    <button type="button" class="fs-world-filter fs-world-filter--all" data-fs-filter-all>Show all</button>
+  </div>
+</div>
+
+{% if fs_world_items %}
+<div class="fs-wrap fs-hub-explore fs-world-explore">
+  {% include "future_saints/includes/_world_map.html" %}
+  {% include "future_saints/includes/_world_card.html" with item=fs_world_selected %}
+</div>
+{% else %}
+<div class="fs-wrap"><p class="fs-coming-soon">Stories are coming soon.</p></div>
+{% endif %}
+
+{% if request.user.is_staff and fs_world_warnings %}
+<div class="fs-wrap">
+  <div class="fs-staff-only" data-fs-world-warnings>
+    <h2>Staff only: stories not on the map, or needing a check</h2>
+    <ul>{% for w in fs_world_warnings %}<li>{{ w }}</li>{% endfor %}</ul>
+  </div>
+</div>
+{% endif %}
+
+<div class="fs-wrap fs-sections">
+  <section id="all-stories" class="fs-section-block" aria-labelledby="all-stories-h">
+    <h2 id="all-stories-h" class="fs-block-title">All the Stories</h2>
+    {% for group in fs_world_groups %}{% if group.items %}
+      <div class="fs-world-group" data-fs-kind="{{ group.kind }}">
+        <h3 class="fs-world-group-title">{{ group.label }}</h3>
+        <ul class="fs-world-list">
+          {% for i in group.items %}
+            <li data-fs-kind="{{ i.kind }}">
+              <a href="{{ i.url }}">{{ i.title }}</a>
+              {% if i.pinned %}<a class="fs-world-show" href="?story={{ i.key }}#story-card" aria-label="Show {{ i.title }} on the map">Show on the map</a>
+              {% elif i.in_callout %}<span class="fs-list-meta">On the map with the California Missions</span>
+              {% else %}<span class="fs-list-meta">Not on the map yet</span>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}{% endfor %}
+  </section>
+</div>
+{% if fs_world_card_data %}{{ fs_world_card_data|json_script:"fs-world-data" }}{% endif %}
+{% endblock %}

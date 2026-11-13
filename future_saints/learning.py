@@ -475,6 +475,13 @@ class SaintLearningPage(LearningPage):
     quote = models.CharField(max_length=300, blank=True, help_text="Only a verifiably sourced quotation.")
     quote_source = models.CharField(max_length=200, blank=True)
     kindness_prompt = models.CharField(max_length=200, blank=True, help_text='"Try a small act of kindness" idea.')
+    map_place = models.ForeignKey(
+        "catalog.SacredSitePage", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        limit_choices_to={"live": True},
+        help_text="World Discovery Map: a place connected to this saint (their shrine, basilica or tomb). "
+                  "Leave empty to use the saint's one principal site; with none, or several, the saint is "
+                  "listed without a pin until you choose one here.",
+    )
 
     content_kind = "saint"
     learning_cards = _cards(
@@ -501,6 +508,7 @@ class SaintLearningPage(LearningPage):
             [FieldPanel("virtues"), FieldPanel("quote"), FieldPanel("quote_source"), FieldPanel("kindness_prompt")],
             heading="Saintly example",
         ),
+        FieldPanel("map_place"),
     ]
 
     class Meta:

@@ -7,10 +7,10 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.db import connection
 from django.test import TestCase, override_settings
-from wagtail.models import Site, WorkflowPage
+from wagtail.models import Page, Revision, Site, WorkflowPage
 
 from catalog.models import SaintPage
-from future_saints.models import FutureSaintsHomePage, FutureSaintsIndexPage
+from future_saints.models import FutureSaintsHomePage, FutureSaintsIndexPage, WorldMapPage
 
 
 class CleanSiteCacheTestCase(TestCase):
@@ -63,8 +63,9 @@ class TreeCommandTests(CleanSiteCacheTestCase):
         text = out.getvalue()
         self.assertIn("Dry run: nothing will be written.", text)
         lines = [line for line in text.splitlines() if line.startswith("Would create (draft):")]
-        self.assertEqual(len(lines), 6)
+        self.assertEqual(len(lines), 7, "home, five indexes, the World Discovery Map")
         self.assertIn("FutureSaintsHomePage", lines[0])
+        self.assertIn("WorldMapPage  title 'World Discovery Map'  slug 'map'  path /home/future-saints/map/", lines[-1])
         self.assertIn("slug 'future-saints'", lines[0])
         for slug in ("saints", "marian-apparitions", "eucharistic-miracles", "california-missions", "holy-land"):
             self.assertTrue(any(f"slug '{slug}'" in line and "parent /home/future-saints/" in line for line in lines[1:]), slug)
@@ -75,16 +76,41 @@ class TreeCommandTests(CleanSiteCacheTestCase):
         after_real_run = counts()
         out = StringIO()
         call_command("create_future_saints_tree", "--dry-run", stdout=out)
-        self.assertIn("already exists", out.getvalue())
+        self.assertIn("Nothing to create", out.getvalue())
         self.assertEqual(counts(), after_real_run)
+
+    def test_an_existing_tree_gets_only_the_missing_map_page(self):
+        """Production today: the home page and five indexes exist (and are live); only the map is new."""
+        call_command("create_future_saints_tree", stdout=StringIO())
+        WorldMapPage.objects.get().delete()
+        home = FutureSaintsHomePage.objects.get()
+        home.save_revision().publish()
+        pages, revisions = Page.objects.count(), Revision.objects.count()
+        out = StringIO()
+        call_command("create_future_saints_tree", "--dry-run", stdout=out)
+        lines = [line for line in out.getvalue().splitlines() if line.startswith("Would create (draft):")]
+        self.assertEqual(lines, ["Would create (draft): WorldMapPage  title 'World Discovery Map'  slug 'map'  "
+                                 "path /home/future-saints/map/  parent /home/future-saints/"])
+        self.assertNotIn("Would set up review", out.getvalue())
+        self.assertEqual((Page.objects.count(), Revision.objects.count()), (pages, revisions))
+        out = StringIO()
+        call_command("create_future_saints_tree", stdout=out)
+        world = WorldMapPage.objects.get()
+        self.assertFalse(world.live, "a draft; an editor publishes it")
+        self.assertEqual(world.get_parent().pk, home.pk)
+        self.assertEqual(Page.objects.count(), pages + 1)
+        home.refresh_from_db()
+        self.assertTrue(home.live)
+        self.assertFalse(home.has_unpublished_changes, "the existing home page isn't touched")
 
     def test_second_run_changes_nothing(self):
         call_command("create_future_saints_tree", stdout=StringIO())
         out = StringIO()
         call_command("create_future_saints_tree", stdout=out)
-        self.assertIn("already exists", out.getvalue())
+        self.assertIn("Nothing to create", out.getvalue())
         self.assertEqual(FutureSaintsHomePage.objects.count(), 1)
         self.assertEqual(FutureSaintsIndexPage.objects.count(), 5)
+        self.assertEqual(WorldMapPage.objects.count(), 1)
 
     def test_index_subject_must_be_unique_under_the_home(self):
         call_command("create_future_saints_tree", stdout=StringIO())

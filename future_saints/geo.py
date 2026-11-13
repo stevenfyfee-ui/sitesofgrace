@@ -11,7 +11,7 @@ meridian 120°W, false easting 0, false northing -4,000,000 m (Snyder,
 "Map Projections: A Working Manual", USGS PP 1395, eqs. 14-1 to 14-19, 3-12).
 Calibration: docs/future-saints/map-calibration.md.
 """
-from math import cos, log, radians, sin, sqrt
+from math import asin, cos, log, radians, sin, sqrt
 
 # GRS80
 A = 6378137.0
@@ -73,3 +73,37 @@ def point_in_polygon(x, y, ring):
             inside = not inside
         j = i
     return inside
+
+
+# --- The World Discovery Map: Equal Earth --------------------------------------------
+# Equal Earth (Šavrič, Patterson & Jenny, 2018, "The Equal Earth map projection", IJGIS
+# 33(3)), on a sphere, central meridian 0°. world_viewbox(lat, lng) places the Natural Earth
+# land outline (tools/build_world_outline.py, once) and every pin (each request) in one
+# fixed viewBox. Antarctica is trimmed: the viewBox stops just below 60°S.
+EE_A1, EE_A2, EE_A3, EE_A4 = 1.340264, -0.081106, 0.000893, 0.003796
+EE_M = sqrt(3) / 2
+
+
+def equal_earth(lat, lng):
+    """(x, y) in Equal Earth's own units (sphere of radius 1), y north-up."""
+    theta = asin(EE_M * sin(radians(float(lat))))
+    t2 = theta * theta
+    t6 = t2 * t2 * t2
+    x = radians(float(lng)) * cos(theta) / (EE_M * (EE_A1 + 3 * EE_A2 * t2 + t6 * (7 * EE_A3 + 9 * EE_A4 * t2)))
+    y = theta * (EE_A1 + EE_A2 * t2 + t6 * (EE_A3 + EE_A4 * t2))
+    return x, y
+
+
+WORLD_VIEWBOX_WIDTH = 1000
+WORLD_VIEWBOX_HEIGHT = 445
+WORLD_VIEWBOX = f"0 0 {WORLD_VIEWBOX_WIDTH} {WORLD_VIEWBOX_HEIGHT}"
+_EE_XMAX = equal_earth(0, 180)[0]
+_EE_YMAX = equal_earth(90, 0)[1]
+WORLD_SCALE = (WORLD_VIEWBOX_WIDTH / 2) / _EE_XMAX       # viewBox units per Equal Earth unit
+WORLD_TRIM_LAT = -60.0                                   # land wholly south of this is left out
+
+
+def world_viewbox(lat, lng):
+    """(x, y) in the world map's viewBox units; y grows downward, as in SVG."""
+    x, y = equal_earth(lat, lng)
+    return WORLD_VIEWBOX_WIDTH / 2 + x * WORLD_SCALE, (_EE_YMAX - y) * WORLD_SCALE

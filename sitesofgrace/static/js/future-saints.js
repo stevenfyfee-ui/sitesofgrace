@@ -203,6 +203,110 @@
     });
   }
 
+  // ---- World Discovery Map: select in place (?story=<key>), the close-marker chooser,
+  // and the type filters (markers and list items hide together). Without this the markers
+  // are submit buttons of a GET form and the list reaches every story. ----
+  var world = document.querySelector("[data-fs-world]");
+  var worldCard = document.querySelector("[data-fs-world-card]");
+  var worldData = document.getElementById("fs-world-data");
+  if (world && worldCard && worldData) {
+    var stories = {};
+    try {
+      JSON.parse(worldData.textContent).forEach(function (s) { stories[s.key] = s; });
+    } catch (e) { stories = {}; }
+    var markers = Array.prototype.slice.call(world.querySelectorAll("[data-fs-world-pin]"));
+    var cardPart = function (name) { return worldCard.querySelector("[data-fs-card-" + name + "]"); };
+    var worldChooser = world.querySelector("[data-fs-chooser]");
+    var worldChooserList = world.querySelector("[data-fs-chooser-list]");
+    var worldRadius = parseFloat(world.getAttribute("data-fs-pin-radius")) || 24;
+    var worldCoarse = window.matchMedia && window.matchMedia("(pointer: coarse)");
+
+    var selectStory = function (key) {
+      var s = stories[key];
+      if (!s) { return; }
+      markers.forEach(function (m) { m.setAttribute("aria-pressed", m.value === key ? "true" : "false"); });
+      worldCard.className = worldCard.className.replace(/\bfs-wm-[a-z_]+/, "fs-wm-" + s.kind);
+      cardPart("type").textContent = s.type_label;
+      cardPart("title").textContent = s.title;
+      cardPart("subtitle").textContent = s.subtitle || "";
+      cardPart("subtitle").hidden = !s.subtitle;
+      cardPart("place-text").textContent = s.place_line || "";
+      cardPart("place").hidden = !s.place_line;
+      cardPart("link").setAttribute("href", s.url);
+      cardPart("link-text").textContent = s.link_label;
+      var use = worldCard.querySelector(".fs-art--placeholder use");
+      if (use) { use.setAttribute("href", "#fs-i-" + s.icon); }
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set("story", key);
+        url.hash = "";
+        window.history.replaceState(null, "", url.toString());
+      }
+    };
+
+    var closeWorldChooser = function (returnTo) {
+      worldChooser.hidden = true;
+      worldChooserList.innerHTML = "";
+      if (returnTo) { returnTo.focus(); }
+    };
+    world.querySelector("[data-fs-chooser-close]").addEventListener("click", function () { closeWorldChooser(markers[0]); });
+    worldChooser.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { closeWorldChooser(markers[0]); }
+    });
+
+    world.addEventListener("click", function (event) {
+      var pin = event.target.closest("[data-fs-world-pin]");
+      if (!pin) { return; }
+      event.preventDefault();
+      if (worldCoarse && worldCoarse.matches && event.detail > 0) {
+        var near = markers.filter(function (m) {
+          if (m.closest("[data-fs-kind]").hidden) { return false; }
+          var r = m.getBoundingClientRect();
+          return Math.hypot(r.left + r.width / 2 - event.clientX, r.top + r.height / 2 - event.clientY) <= worldRadius;
+        });
+        if (near.length > 1) {
+          worldChooserList.innerHTML = "";
+          near.forEach(function (m) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "fs-pin-choice";
+            b.textContent = stories[m.value].title + " (" + stories[m.value].type_label + ")";
+            b.addEventListener("click", function () { selectStory(m.value); closeWorldChooser(m); });
+            worldChooserList.appendChild(b);
+          });
+          worldChooser.hidden = false;
+          worldChooserList.querySelector("button").focus();
+          return;
+        }
+        if (near.length === 1) { pin = near[0]; }
+      }
+      selectStory(pin.value);
+    });
+
+    var filterBar = document.querySelector("[data-fs-world-filters]");
+    if (filterBar) {
+      var toggles = Array.prototype.slice.call(filterBar.querySelectorAll("[data-fs-filter]"));
+      var applyFilters = function () {
+        var on = {};
+        toggles.forEach(function (t) { on[t.getAttribute("data-fs-filter")] = t.getAttribute("aria-pressed") === "true"; });
+        Array.prototype.forEach.call(document.querySelectorAll(".fs-world [data-fs-kind]"), function (el) {
+          el.hidden = !on[el.getAttribute("data-fs-kind")];
+        });
+      };
+      toggles.forEach(function (t) {
+        t.addEventListener("click", function () {
+          t.setAttribute("aria-pressed", t.getAttribute("aria-pressed") === "true" ? "false" : "true");
+          applyFilters();
+        });
+      });
+      filterBar.querySelector("[data-fs-filter-all]").addEventListener("click", function () {
+        toggles.forEach(function (t) { t.setAttribute("aria-pressed", "true"); });
+        applyFilters();
+      });
+      filterBar.hidden = false;
+    }
+  }
+
   // ---- "Find a Mission" lists: tabs when JavaScript is on, three lists when it's off. ----
   Array.prototype.forEach.call(document.querySelectorAll("[data-fs-tabs]"), function (box) {
     var bar = box.querySelector("[data-fs-tab-buttons]");
