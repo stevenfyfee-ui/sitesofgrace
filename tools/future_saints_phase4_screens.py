@@ -37,6 +37,13 @@ def boxes_overlap(a, b):
     return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
 
 
+def discs_touch(a, b, gap=2):
+    """The markers are round: two touch when their circles come within `gap` px (the corners of
+    their square boxes may overlap without the discs touching)."""
+    (ax, ay, ar), (bx, by, br) = [((r[0] + r[2]) / 2, (r[1] + r[3]) / 2, (r[2] - r[0]) / 2) for r in (a, b)]
+    return ((ax - bx) ** 2 + (ay - by) ** 2) ** .5 < ar + br + gap
+
+
 def main():
     base, out = sys.argv[1].rstrip("/"), sys.argv[2]
     comp = sys.argv[3] if len(sys.argv) > 3 else ""
@@ -71,7 +78,7 @@ def main():
             else:
                 check(b["card"][1] >= b["map"][3] - .5, f"map {width}: card below the map")
             if width == 1440:
-                clashes = [(m["key"], n["key"]) for i, m in enumerate(markers) for n in markers[i + 1:] if boxes_overlap(m["box"], n["box"])]
+                clashes = [(m["key"], n["key"]) for i, m in enumerate(markers) for n in markers[i + 1:] if discs_touch(m["box"], n["box"])]
                 check(not clashes, f"map 1440: no two markers overlap {clashes}")
             page.screenshot(path=f"{out}/map-{width}.png", full_page=True)
             ctx.close()
