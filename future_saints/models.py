@@ -129,6 +129,8 @@ class FutureSaintsGateMixin:
         context["fs_world_map_current"] = world is not None and world.pk == self.pk
         context["fs_search_url"] = home.search_url(request) if home else ""
         context["fs_privacy_url"] = live_legal_urls(request).get("privacy-policy", "")
+        note = home.grown_ups_page() if home else None
+        context["fs_grown_ups_url"] = note.get_url(request) if note else ""
         return context
 
     def future_saints_home(self):
@@ -251,7 +253,7 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, RoutablePageMixin, Page):
     )
 
     parent_page_types = ["home.HomePage"]
-    subpage_types = ["future_saints.FutureSaintsIndexPage", "future_saints.WorldMapPage"]
+    subpage_types = ["future_saints.FutureSaintsIndexPage", "future_saints.WorldMapPage", "future_saints.GrownUpsNotePage"]
     max_count = 1
     base_form_class = FutureSaintsHomePageForm
 
@@ -348,6 +350,11 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, RoutablePageMixin, Page):
         from .worldmap import WorldMapPage
 
         return WorldMapPage.objects.child_of(self).live().public().first()
+
+    def grown_ups_page(self):
+        from .grownups import GrownUpsNotePage
+
+        return GrownUpsNotePage.objects.child_of(self).live().public().first()
 
     def saint_of_week_card(self, request, today=None):
         """The scheduled entry whose week (Monday to Sunday, America/Los_Angeles) contains today;
@@ -608,3 +615,6 @@ from .missions import (  # noqa: E402,F401
 
 # Phase 4: the World Discovery Map.
 from .worldmap import WorldMapPage  # noqa: E402,F401
+
+# "A Note for Grown-Ups".
+from .grownups import GrownUpsNotePage  # noqa: E402,F401

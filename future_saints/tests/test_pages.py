@@ -8,7 +8,7 @@ from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
 from catalog.models import SaintPage
-from future_saints.models import WorldMapPage
+from future_saints.models import GrownUpsNotePage, WorldMapPage
 from home.models import LegalPage
 
 from .base import FS_ON, FS_STAFF, FutureSaintsTestCase
@@ -107,20 +107,26 @@ class HomepageTests(FutureSaintsTestCase):
 
 
 class GrownUpsNoteTests(FutureSaintsTestCase):
-    def test_privacy_link_only_when_live_otherwise_staff_chip(self):
-        with FS_STAFF:
-            html = self.html("/future-saints/", self.staff)
-        self.assertNotIn("A note for grown-ups</a>", html)
-        self.assertIn("the Privacy Policy isn't live yet", html)
-        with FS_ON:
-            self.assertNotIn("Privacy Policy isn't live yet", self.html("/future-saints/"))
-
+    def test_note_link_only_when_live_otherwise_staff_chip(self):
+        # The footer links "A Note for Grown-Ups" (/future-saints/for-grown-ups/), not the Privacy
+        # Policy; that page links the Privacy Policy itself (test_grown_ups).
         privacy = LegalPage(title="Privacy Policy", slug="privacy-policy",
                             effective_date=datetime.date(2026, 1, 1), body="<p>Sample (sample).</p>")
         self.home.get_parent().add_child(instance=privacy)
+        with FS_STAFF:
+            html = self.html("/future-saints/", self.staff)
+        self.assertNotIn("A note for grown-ups</a>", html)
+        self.assertIn('the "A Note for Grown-Ups" page isn\'t published yet', html)
+        with FS_ON:
+            self.assertNotIn("isn't published yet", self.html("/future-saints/"))
+
+        note = GrownUpsNotePage.objects.get()
+        note.mailing_address = "PO Box 123 (sample)"
+        note.effective_date = datetime.date(2026, 12, 1)
+        note.save_revision().publish()
         with FS_ON:
             html = self.html("/future-saints/")
-        self.assertIn('href="/privacy-policy/">A note for grown-ups</a>', html)
+        self.assertIn('href="/future-saints/for-grown-ups/">A note for grown-ups</a>', html)
         self.assertIn("Back to Sites of Grace", html)
         self.assertIn("Church status information should be checked against official sources.", html)
 

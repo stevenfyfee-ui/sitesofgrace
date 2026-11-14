@@ -48,7 +48,7 @@ class TreeCommandTests(CleanSiteCacheTestCase):
         self.assertEqual(WorkflowPage.objects.get(page=home).workflow.name, "Future Saints editorial review")
         self.assertIn("Nothing was published", out.getvalue())
 
-    def test_dry_run_lists_six_pages_and_writes_nothing(self):
+    def test_dry_run_lists_every_page_and_writes_nothing(self):
         from django.contrib.auth.models import Group
         from wagtail.models import GroupPagePermission, Page, Revision, Workflow
 
@@ -63,9 +63,11 @@ class TreeCommandTests(CleanSiteCacheTestCase):
         text = out.getvalue()
         self.assertIn("Dry run: nothing will be written.", text)
         lines = [line for line in text.splitlines() if line.startswith("Would create (draft):")]
-        self.assertEqual(len(lines), 7, "home, five indexes, the World Discovery Map")
+        self.assertEqual(len(lines), 8, "home, five indexes, the World Discovery Map, A Note for Grown-Ups")
         self.assertIn("FutureSaintsHomePage", lines[0])
-        self.assertIn("WorldMapPage  title 'World Discovery Map'  slug 'map'  path /home/future-saints/map/", lines[-1])
+        self.assertIn("WorldMapPage  title 'World Discovery Map'  slug 'map'  path /home/future-saints/map/", lines[-2])
+        self.assertIn("GrownUpsNotePage  title 'A Note for Grown-Ups'  slug 'for-grown-ups'  "
+                      "path /home/future-saints/for-grown-ups/", lines[-1])
         self.assertIn("slug 'future-saints'", lines[0])
         for slug in ("saints", "marian-apparitions", "eucharistic-miracles", "california-missions", "holy-land"):
             self.assertTrue(any(f"slug '{slug}'" in line and "parent /home/future-saints/" in line for line in lines[1:]), slug)

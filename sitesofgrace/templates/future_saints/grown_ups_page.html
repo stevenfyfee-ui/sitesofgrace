@@ -1,0 +1,57 @@
+{% extends "future_saints/base.html" %}
+{% comment %}
+  "A Note for Grown-Ups": the approved text in docs/future-saints/content/
+  future-saints-note-for-grown-ups.md, word for word (test_grown_ups checks it). Don't edit the
+  wording here without an approved change to that file. Only [MAILING ADDRESS] and
+  [EFFECTIVE DATE] are fields; the page can't be published while either is blank. The Privacy
+  Policy link goes to the live site-wide Privacy Policy; until it's live, the words show unlinked.
+{% endcomment %}
+{% block body_class %}fs-grown-ups{% endblock %}
+{% block content %}
+<header class="fs-wrap fs-hub-head">
+  <h1 class="fs-hub-title">A Note for Grown-Ups</h1>
+</header>
+
+<div class="fs-wrap fs-grown-ups-note">
+  <div class="fs-prose">
+    <p>Future Saints is the children's learning section of Sites of Grace. It helps kids learn about saints, Mary, Eucharistic miracles, the Holy Land, and the California missions through short stories, timelines, quizzes, and printable research sheets. This note explains how Future Saints works and what it does, and doesn't, do with information.</p>
+
+    <h2>We don't collect personal information from children</h2>
+    <p>Future Saints has <strong>no accounts, sign-ups, comments, chat, photo uploads, contests, or newsletters</strong>. We never ask a child for a name, email address, age, school, location, or anything else about them.</p>
+    <ul>
+      <li><strong>Quizzes</strong> are scored right in your child's web browser. Answers and scores are not saved or sent to us.</li>
+      <li><strong>Search:</strong> suggestions appear as your child types, without sending anything to us. If your child presses the Search button, the search words are sent to our website to show the results, like any web page visit. We don't save searches or connect them to any person.</li>
+      <li><strong>Printing</strong> a research sheet uses your own browser's print feature.</li>
+    </ul>
+
+    <h2>No tracking, ads, or shopping</h2>
+    <p>Future Saints pages:</p>
+    <ul>
+      <li>set <strong>no cookies</strong>;</li>
+      <li>use <strong>no analytics or advertising trackers</strong>;</li>
+      <li>load <strong>no third-party scripts</strong>;</li>
+      <li>show <strong>no ads, affiliate links, product recommendations, or "buy" buttons</strong>.</li>
+    </ul>
+    <p>Our fonts and images are stored on our own website.</p>
+    <p>Like nearly every website, our hosting provider keeps standard technical records of page visits, such as the web address requested and the time, for a short period, to keep the site secure and running. We don't use these records to identify or contact anyone.</p>
+
+    <h2>Links to other websites</h2>
+    <p>Each story lists the <strong>sources</strong> we used, such as Vatican, diocesan, shrine, museum, and Catholic news websites, so parents and teachers can learn more. Those websites are not part of Future Saints and have their own privacy practices. We suggest a grown-up explores them alongside your child.</p>
+
+    <h2>How our stories are written</h2>
+    <p>Our stories are written from a Catholic point of view and checked against trusted sources. A person reviews every page before it's published. We tell history honestly in words suited to children, including hard parts such as illness, persecution, and the harm done to Native peoples during the mission era. Where the Church hasn't made a judgment, or the facts are uncertain, we say so.</p>
+    <p>Sites of Grace is an independent Catholic educational resource. It doesn't speak officially for the Catholic Church, any diocese, or any shrine.</p>
+
+    <h2>Questions or concerns</h2>
+    <p>If you have a question about Future Saints, or think something on a page is wrong, please contact us:</p>
+    <ul>
+      <li>Email: <strong><a href="mailto:support@sitesofgrace.com">support@sitesofgrace.com</a></strong></li>
+      <li>Mail: <strong data-fs-mailing-address>{{ page.mailing_address|linebreaksbr }}</strong></li>
+    </ul>
+    <p>For how the rest of Sites of Grace handles information (including adult accounts on the main site), see our <strong>{% if fs_privacy_url %}<a href="{{ fs_privacy_url }}">Privacy Policy</a>{% else %}Privacy Policy{% endif %}</strong>.</p>
+    {% if not fs_privacy_url and request.user.is_staff %}<p><span class="fs-chip-staff">Staff only: the Privacy Policy isn't live yet, so "Privacy Policy" has no link.</span></p>{% endif %}
+
+    <p><em>Effective <span data-fs-effective-date>{{ page.effective_date|date:"F j, Y" }}</span>.</em></p>
+  </div>
+</div>
+{% endblock %}
