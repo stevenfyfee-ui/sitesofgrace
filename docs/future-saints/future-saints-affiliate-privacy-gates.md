@@ -61,7 +61,8 @@ id 2510) should describe it.
 
 The separate `templates/future_saints/base.html` has: no external host of any kind; no
 `{% csrf_token %}`; no forms except the GET reading-level control (which works as plain links
-without JS); no search; no account, sign-in, newsletter, donate, store, social, comments,
+without JS) and the GET search box; no adult site search (Future Saints has its own kids-safe
+search of published Future Saints pages only: `docs/future-saints/search.md`); no account, sign-in, newsletter, donate, store, social, comments,
 analytics, ads, geolocation, or iframes; self-hosted Lora; same-origin CSS/JS only. A test renders
 every Future Saints page and fails if any of these appear: `tp-em.com`, `fonts.googleapis`,
 `fonts.gstatic`, `esri`, `amazon.`, `amzn`, `affiliate`, `booking`, `/plan/`, `newsletter`,
