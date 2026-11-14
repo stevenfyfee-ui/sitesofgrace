@@ -387,6 +387,9 @@
     // press, which is already in view). Without a marker (not on the map) nothing moves.
     var showOnMap = function (key) {
       var marker = markers.filter(function (m) { return m.value === key; })[0];
+      if (!marker && stories[key] && stories[key].in_callout) {        // a mission: its place is the callout
+        marker = markers.filter(function (m) { return m.value === "california-missions"; })[0];
+      }
       if (marker && worldZoom) {
         worldZoom.focus(parseFloat(marker.getAttribute("data-x")), parseFloat(marker.getAttribute("data-y")), 2.5);
       }
@@ -394,7 +397,12 @@
     var selectStory = function (key, focus) {
       var s = stories[key];
       if (!s) { return; }
-      if (focus) { showOnMap(key); }
+      if (focus) {
+        // From the list or search: a type filtered off is shown again, so the story is visible.
+        var off = document.querySelector('[data-fs-filter="' + s.kind + '"][aria-pressed="false"]');
+        if (off) { off.click(); }
+        showOnMap(key);
+      }
       markers.forEach(function (m) { m.setAttribute("aria-pressed", m.value === key ? "true" : "false"); });
       worldCard.className = worldCard.className.replace(/\bfs-wm-[a-z_]+/, "fs-wm-" + s.kind);
       cardPart("type").textContent = s.type_label;
@@ -534,4 +542,184 @@
     bar.hidden = false;
     show(tabs[0], false);
   });
+
+  // ---- Search (kids-safe): the type-ahead filters the cached index in the browser. Nothing
+  // typed is stored or sent anywhere: no cookies, no storage, no analytics, no query logging.
+  // The same rules as future_saints/search.py: accents and case ignored, every word must match
+  // the start of a word, and a word of 5+ letters may be one letter off. Without this the box
+  // is a plain GET form to the results page. ----
+  var searchForms = document.querySelectorAll("[data-fs-search]");
+  if (searchForms.length) {
+    var fold = function (text) {
+      return (text || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    };
+    var wordsOf = function (text) { return fold(text).match(/[a-z0-9]+/g) || []; };
+    var withinOne = function (a, b) {
+      if (a === b) { return true; }
+      if (Math.abs(a.length - b.length) > 1) { return false; }
+      if (a.length > b.length) { var t = a; a = b; b = t; }
+      var i = 0;
+      while (i < a.length && a[i] === b[i]) { i += 1; }
+      if (a.length === b.length) { return a.slice(i + 1) === b.slice(i + 1); }
+      return a.slice(i) === b.slice(i + 1);
+    };
+    var wordScore = function (q, w) {
+      if (w.indexOf(q) === 0) { return 2; }
+      if (q.length >= 5) {
+        for (var size = q.length - 1; size <= q.length + 1; size += 1) {
+          if (size <= w.length && withinOne(q, w.slice(0, size))) { return 1; }
+        }
+      }
+      return 0;
+    };
+    var FIELDS = [["t", 4], ["p", 2], ["s", 1], ["w", 1], ["i", 1]];
+    var scoreOf = function (entry, queryWords) {
+      var total = 0;
+      for (var n = 0; n < queryWords.length; n += 1) {
+        var best = 0;
+        FIELDS.forEach(function (f) {
+          var value = entry[f[0]] || "";
+          wordsOf(Array.isArray(value) ? value.join(" ") : value).forEach(function (w) {
+            best = Math.max(best, wordScore(queryWords[n], w) * f[1]);
+          });
+        });
+        if (!best) { return 0; }
+        total += best;
+      }
+      return total;
+    };
+    var runSearch = function (entries, query) {
+      var queryWords = wordsOf(query);
+      if (!queryWords.length) { return []; }
+      return entries.map(function (e) { return { e: e, s: scoreOf(e, queryWords) }; })
+        .filter(function (x) { return x.s > 0; })
+        .sort(function (a, b) { return b.s - a.s || (fold(a.e.t) < fold(b.e.t) ? -1 : 1); })
+        .map(function (x) { return x.e; });
+    };
+    var indexes = {};
+    var loadIndex = function (url) {
+      if (!indexes[url]) {
+        indexes[url] = fetch(url, { headers: { Accept: "application/json" } })
+          .then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.json(); })
+          .catch(function () { delete indexes[url]; return null; });
+      }
+      return indexes[url];
+    };
+    var MAX_OPTIONS = 8;
+
+    Array.prototype.forEach.call(searchForms, function (form) {
+      var mode = form.getAttribute("data-fs-search");
+      var input = form.querySelector("[data-fs-search-input]");
+      var list = form.querySelector("[data-fs-search-options]");
+      var status = form.querySelector("[data-fs-search-status]");
+      var note = form.querySelector("[data-fs-search-note]");
+      var indexUrl = form.getAttribute("data-fs-search-index");
+      var data = null, results = [], active = -1, timer = null;
+      input.setAttribute("role", "combobox");
+      input.setAttribute("aria-autocomplete", "list");
+      input.setAttribute("aria-expanded", "false");
+      input.setAttribute("aria-controls", list.id);
+
+      var labels = function () {
+        var map = {};
+        ((data && data.groups) || []).forEach(function (g) { map[g[0]] = g[1]; });
+        return map;
+      };
+      var close = function () {
+        list.hidden = true;
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+        active = -1;
+      };
+      var setActive = function (n) {
+        var options = list.querySelectorAll("[role=option]");
+        active = n;
+        Array.prototype.forEach.call(options, function (o, i) { o.setAttribute("aria-selected", i === n ? "true" : "false"); });
+        if (n >= 0 && options[n]) {
+          input.setAttribute("aria-activedescendant", options[n].id);
+          options[n].scrollIntoView({ block: "nearest" });
+        } else {
+          input.removeAttribute("aria-activedescendant");
+        }
+      };
+      var choose = function (entry) {
+        close();
+        if (mode !== "map") { window.location.href = entry.u; return; }
+        input.value = entry.t;
+        if (entry.m && window.fsSelectStory) {
+          if (note) { note.hidden = true; }
+          window.fsSelectStory(entry.m, true);
+          var box = document.querySelector(".fs-wmap");
+          if (box) { box.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }); }
+        } else if (note) {
+          note.hidden = false;
+        }
+      };
+      var render = function () {
+        var query = input.value;
+        if (note) { note.hidden = true; }
+        if (!data || !wordsOf(query).length) {
+          results = [];
+          list.innerHTML = "";
+          status.textContent = "";
+          close();
+          return;
+        }
+        results = runSearch(data.entries, query);
+        var names = labels();
+        list.innerHTML = "";
+        results.slice(0, MAX_OPTIONS).forEach(function (entry, i) {
+          var li = document.createElement("li");
+          li.id = list.id + "-" + i;
+          li.className = "fs-search-option";
+          li.setAttribute("role", "option");
+          li.setAttribute("aria-selected", "false");
+          var title = document.createElement("span");
+          title.className = "fs-search-option-title";
+          title.textContent = entry.t;
+          var type = document.createElement("span");
+          type.className = "fs-search-option-type";
+          type.textContent = names[entry.k] || "";
+          li.appendChild(title);
+          li.appendChild(type);
+          li.addEventListener("mousedown", function (event) { event.preventDefault(); });
+          li.addEventListener("click", function () { choose(entry); });
+          list.appendChild(li);
+        });
+        var n = results.length;
+        status.textContent = n ? n + (n === 1 ? " story found" : " stories found") : "No stories found. Try another word!";
+        active = -1;
+        input.removeAttribute("aria-activedescendant");
+        list.hidden = n === 0;
+        input.setAttribute("aria-expanded", n ? "true" : "false");
+      };
+      var ready = function () {
+        return loadIndex(indexUrl).then(function (d) { if (d) { data = d; } return data; });
+      };
+
+      input.addEventListener("focus", ready);
+      input.addEventListener("input", function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () { ready().then(render); }, 120);
+      });
+      input.addEventListener("keydown", function (event) {
+        var count = list.querySelectorAll("[role=option]").length;
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          if (!count) { return; }
+          event.preventDefault();
+          if (list.hidden) { list.hidden = false; input.setAttribute("aria-expanded", "true"); }
+          var step = event.key === "ArrowDown" ? 1 : -1;
+          setActive(active < 0 ? (step > 0 ? 0 : count - 1) : (active + step + count) % count);
+        } else if (event.key === "Enter" && active >= 0 && !list.hidden) {
+          event.preventDefault();
+          choose(results[active]);
+        } else if (event.key === "Escape") {
+          if (!list.hidden) { event.preventDefault(); close(); }
+          else if (input.value) { event.preventDefault(); input.value = ""; render(); }
+        }
+      });
+      input.addEventListener("blur", function () { setTimeout(close, 100); });
+      form.setAttribute("data-fs-search-ready", "");
+    });
+  }
 })();

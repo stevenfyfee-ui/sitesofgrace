@@ -262,7 +262,7 @@ def world_context(home, request):
         "fs_world_card_data": [
             {"key": i["key"], "kind": i["kind"], "type_label": i["type_label"], "title": i["title"],
              "subtitle": i["subtitle"], "place_line": i["place_line"], "url": i["url"], "link_label": i["link_label"],
-             "icon": i["icon"]} for i in items],
+             "icon": i["icon"], "in_callout": i["in_callout"]} for i in items],
     }
 
 

@@ -17,10 +17,13 @@
       <a class="fs-lockup" href="{% if fs_home %}{% pageurl fs_home %}{% else %}#content{% endif %}">Future Saints</a>
     </div>
 
-    <button type="button" class="fs-menu-button" data-fs-menu-button aria-expanded="false" aria-controls="fs-nav">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
+    <div class="fs-header-tools">
+      {% if fs_search_url %}<a class="fs-search-link" href="{{ fs_search_url }}" aria-label="Search"{% if fs_search_page %} aria-current="page"{% endif %}>{% include "future_saints/includes/_icon.html" with name="search" %}</a>{% endif %}
+      <button type="button" class="fs-menu-button" data-fs-menu-button aria-expanded="false" aria-controls="fs-nav">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        Menu
+      </button>
+    </div>
 
     {% comment %}
       Icon-over-label section nav (comp 03), the same on every Future Saints
@@ -29,7 +32,7 @@
     <nav id="fs-nav" class="fs-nav" aria-label="Future Saints">
       <ul class="fs-nav-list">
         {% if fs_home %}
-          <li><a class="fs-nav-item" href="{% pageurl fs_home %}"{% if page.pk == fs_home.pk %} aria-current="page"{% endif %}>{% include "future_saints/includes/_icon.html" with name="home" class="fs-nav-icon" %}<span>Home</span></a></li>
+          <li><a class="fs-nav-item" href="{% pageurl fs_home %}"{% if page.pk == fs_home.pk and not fs_search_page %} aria-current="page"{% endif %}>{% include "future_saints/includes/_icon.html" with name="home" class="fs-nav-icon" %}<span>Home</span></a></li>
         {% endif %}
         {% for item in fs_nav %}
           <li><a class="fs-nav-item" href="{{ item.url }}"{% if item.current %} aria-current="{{ item.current }}"{% endif %}>{% include "future_saints/includes/_icon.html" with name=item.icon class="fs-nav-icon" %}<span>{{ item.label }}</span></a></li>

@@ -1,0 +1,61 @@
+{% extends "future_saints/base.html" %}
+{% comment %}
+  The Future Saints results page (/future-saints/search/?q=): server-rendered, so search works
+  without JavaScript; always noindex. Cards grouped by type, in the header nav's order.
+{% endcomment %}
+{% block title %}Search{% endblock %}
+{% block body_class %}fs-search-page{% endblock %}
+{% block breadcrumb %}
+<nav class="fs-wrap fs-breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">{% include "future_saints/includes/_icon.html" with name="home" class="fs-crumb-home" %}Home</a></li>
+    <li><a href="{{ fs_home.url }}">Future Saints</a></li>
+    <li aria-current="page">Search</li>
+  </ol>
+</nav>
+{% endblock %}
+{% block content %}
+<header class="fs-wrap fs-hub-head">
+  <h1 class="fs-hub-title">Search</h1>
+</header>
+<div class="fs-wrap">
+  {% include "future_saints/includes/_search_box.html" with id="fs-page-search" label="Search for a saint, a miracle, or a place" mode="page" value=fs_search_query %}
+</div>
+
+{% if fs_search_query %}
+<div class="fs-wrap fs-sections" data-fs-search-results>
+  {% if fs_search_groups %}
+    <p class="fs-search-count">{{ fs_search_count }} stor{{ fs_search_count|pluralize:"y,ies" }} found</p>
+    {% for group in fs_search_groups %}
+      <section class="fs-section-block fs-search-group" aria-labelledby="fs-sg-{{ group.key }}">
+        <h2 id="fs-sg-{{ group.key }}" class="fs-block-title">{{ group.label }}</h2>
+        <ul class="fs-search-cards">
+          {% for r in group.items %}
+            <li>
+              <a class="fs-search-card" href="{{ r.u }}">
+                <span class="fs-search-card-icon" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name=group.icon %}</span>
+                <span class="fs-search-card-text">
+                  <span class="fs-search-card-title">{{ r.t }}</span>
+                  {% if r.s %}<span class="fs-search-card-line">{{ r.s }}</span>{% endif %}
+                  {% if r.p %}<span class="fs-search-card-place">{% include "future_saints/includes/_icon.html" with name="marker" %}{{ r.p }}</span>{% endif %}
+                </span>
+                <span class="fs-search-card-go" aria-hidden="true">{% include "future_saints/includes/_icon.html" with name="arrow" %}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  {% else %}
+    <div class="fs-search-empty" data-fs-search-empty>
+      <p class="fs-search-empty-text">No stories found. Try another word!</p>
+      {% if fs_search_suggestions %}
+        <ul class="fs-search-suggest">
+          {% for s in fs_search_suggestions %}<li><a href="?q={{ s|urlencode }}">{{ s }}</a></li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

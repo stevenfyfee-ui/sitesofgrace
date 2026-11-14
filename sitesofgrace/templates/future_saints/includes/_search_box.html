@@ -1,0 +1,20 @@
+{% comment %}
+  A Future Saints search box (future_saints.search). Without JavaScript it is a plain GET form to
+  the results page. With JavaScript it becomes a combobox (the ARIA 1.2 pattern): suggestions
+  filter the cached index in the browser as you type, the arrow keys move through them, Enter
+  opens one (or the results page), Escape closes them, and a polite live region says how many
+  stories were found. Nothing typed is stored or sent anywhere except this site's results page.
+  Usage: {% include "future_saints/includes/_search_box.html" with id="fs-home-search" label="…" mode="home" %}
+  mode: "home" or "page" (choosing a suggestion opens the story), "map" (it selects the story on the map).
+{% endcomment %}
+<form class="fs-search fs-search--{{ mode }}" role="search" method="get" action="{{ fs_search_url }}" data-fs-search="{{ mode }}" data-fs-search-index="{{ fs_search_url }}index/">
+  <label class="fs-search-label" for="{{ id }}-q">{{ label }}</label>
+  <div class="fs-search-field">
+    {% include "future_saints/includes/_icon.html" with name="search" class="fs-search-icon" %}
+    <input class="fs-search-input" id="{{ id }}-q" name="q" type="search" value="{{ value|default:"" }}" placeholder="{{ placeholder|default:"Try Carlo, Fátima, or San Diego" }}" maxlength="100" autocomplete="off" autocapitalize="off" spellcheck="false" data-fs-search-input data-fs-search-list="{{ id }}-list">
+    <button type="submit" class="fs-search-go">Search</button>
+  </div>
+  <ul class="fs-search-list" id="{{ id }}-list" role="listbox" aria-label="Stories" hidden data-fs-search-options></ul>
+  <p class="sr-only" aria-live="polite" data-fs-search-status></p>
+  {% if mode == "map" %}<p class="fs-search-note" role="status" hidden data-fs-search-note>This story isn't on the map yet.</p>{% endif %}
+</form>

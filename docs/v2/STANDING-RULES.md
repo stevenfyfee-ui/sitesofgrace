@@ -48,3 +48,14 @@ merged and deployed with that branch's PR (#14). See docs/future-saints/phase1-r
     branch, stop.
 15. Before merging any PR, list its commits (`gh pr view <n> --json commits`). If any commit isn't
     part of that task, stop and tell me.
+
+## Test results and test databases (every session, every task)
+Added 2026-11-13 after PR #28 was merged on test results taken from background-task notifications
+that matched no log; the real runs passed afterwards (1,017 tests, OK). Two runs had also shared one
+test database and overwritten each other.
+
+16. Test results count only when read from the finished log file (or direct command output),
+    never from a notification. Before any push or merge, quote the final "Ran N tests ... OK"
+    line from the log and the time it finished.
+17. Every worktree uses its own test database name (set in its local settings), so parallel runs
+    from different sessions can never share or overwrite a test database.

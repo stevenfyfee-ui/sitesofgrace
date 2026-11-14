@@ -18,10 +18,12 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from modelcluster.fields import ParentalKey
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.template.response import TemplateResponse
 from django.utils.cache import patch_cache_control
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, ObjectList, TabbedInterface
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models import Orderable, Page
 
 from home.legal import live_legal_urls
@@ -125,6 +127,7 @@ class FutureSaintsGateMixin:
         world = home.world_map_page() if home else None
         context["fs_world_map_url"] = world.get_url(request) if world else ""
         context["fs_world_map_current"] = world is not None and world.pk == self.pk
+        context["fs_search_url"] = home.search_url(request) if home else ""
         context["fs_privacy_url"] = live_legal_urls(request).get("privacy-policy", "")
         return context
 
@@ -161,7 +164,7 @@ class FutureSaintsHomePageForm(WagtailAdminPageForm):
         return ok & valid
 
 
-class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
+class FutureSaintsHomePage(FutureSaintsGateMixin, RoutablePageMixin, Page):
     eyebrow = models.CharField(max_length=80, blank=True, default="Sites of Grace | Future Saints")
     headline = models.CharField(max_length=120, blank=True, default="Explore the Wonders of Our Faith!")
     subheading = models.CharField(
@@ -380,6 +383,35 @@ class FutureSaintsHomePage(FutureSaintsGateMixin, Page):
         if page is None:
             return None
         return {"title": page.student_title or page.title, "url": page.get_url(request) + "#quiz"}
+
+    # --- Search (future_saints.search): published Future Saints pages only, nothing stored ---
+    def search_url(self, request=None):
+        return self.get_url(request) + self.reverse_subpage("search_results")
+
+    @path("search/", name="search_results")
+    def search_results(self, request):
+        """The no-JavaScript results page (and where Enter goes): grouped cards, always noindex."""
+        from .search import grouped, search, search_index, suggestions
+
+        query = " ".join(request.GET.get("q", "").split())[:100]
+        index = search_index(self)
+        results = search(index, query)
+        context = FutureSaintsGateMixin.get_context(self, request)
+        context.update({"fs_search_page": True, "fs_noindex": True, "fs_search_query": query,
+                        "fs_search_groups": grouped(results), "fs_search_count": len(results),
+                        "fs_search_suggestions": suggestions(index) if query and not results else []})
+        response = TemplateResponse(request, "future_saints/search_page.html", context)
+        response["X-Robots-Tag"] = "noindex, nofollow"
+        return response
+
+    @path("search/index/", name="search_index")
+    def search_index_json(self, request):
+        """The type-ahead's index: the browser fetches it once and filters it locally."""
+        from .search import GROUPS, search_index
+
+        response = JsonResponse({"groups": GROUPS, "entries": search_index(self)})
+        response["X-Robots-Tag"] = "noindex, nofollow"
+        return response
 
     def get_context(self, request, *args, **kwargs):
         from .worldmap import world_preview
