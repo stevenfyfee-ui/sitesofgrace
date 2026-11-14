@@ -97,6 +97,9 @@ CALIFORNIA_ART = [
 CALIFORNIA_TEXTURE_TILE = 300      # map units per texture tile (1254 px), mirrored 2 x 2
 
 
+PANEL_ART_SPEC = "fill-1600x900"          # the hub panel's picture (_art_frame.html, variant "feature")
+
+
 def california_art():
     pieces = []
     for file, lat, where, width, aspect in CALIFORNIA_ART:
@@ -221,7 +224,7 @@ class HubQuizChoice(Orderable):
 
 def hub_context(index, request):
     """Everything the California Missions hub template needs. Pins come from canonical lat/lng."""
-    from .learning import MissionLearningPage
+    from .learning import MissionLearningPage, art_json
 
     entries = list(index.mission_hub_entries.select_related("canonical").order_by("founding_number"))
     stories = {
@@ -251,6 +254,7 @@ def hub_context(index, request):
             "subtitle": story.subtitle if story else "",
             "intro": story.intro if story else "",
             "project_url": (story.get_url(request) + "#build") if project else "",
+            "art": story.card_art() if story else None,
         })
     wanted = request.GET.get("mission", "")
     selected = next((m for m in missions if m["slug"] == wanted), None) or (missions[0] if missions else None)
@@ -260,7 +264,7 @@ def hub_context(index, request):
     panel_data = [
         {"slug": m["slug"], "number": m["number"], "name": m["name"], "founded": m["founded"],
          "subtitle": m["subtitle"], "intro": expand_db_html(m["intro"]) if m["intro"] else "", "story_url": m["story_url"],
-         "project_url": m["project_url"]}
+         "project_url": m["project_url"], "art": art_json(m["art"], PANEL_ART_SPEC)}
         for m in missions
     ]
     return {

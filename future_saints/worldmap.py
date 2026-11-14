@@ -43,6 +43,7 @@ SITE_KINDS = {"marian_apparition", "eucharistic_miracle", "holy_land"}
 CALLOUT_KEY = "california-missions"
 CALIFORNIA = (37.2, -119.6)               # the callout's spot: central California
 MARKER_PX = 34                            # the drawn marker disc (CSS .fs-wm-disc)
+CARD_ART_SPEC = "fill-800x600"            # the story card's picture (_art_frame.html, variant "thumb")
 DESKTOP_MAP_PX = 691.2                    # the map's width at 1440 (panel beside it), as on the missions hub
 # Reviewed offsets (CSS px, desktop >= 1024 only) for markers that would overlap at 1440.
 # Keyed by the place a marker sits on (the sacred site's exact title, or the callout's key),
@@ -190,11 +191,11 @@ def world_items(home, request):
                 place_line, country = f"A place connected to {title}: {site.title}", (site.country or "").strip()
         if site is not None:
             x, y = world_viewbox(site.latitude, site.longitude)
-        items.append(_item(kind, page.slug, title, page.subtitle, page.get_url(request), page.art()["thumbnail"],
+        items.append(_item(kind, page.slug, title, page.subtitle, page.get_url(request), page.card_art(),
                            place_line, country, x, y, "Read the Story", place=site.title if site else ""))
     for page in missions:
         items.append(_item("california_mission", page.slug, page.student_title or page.title, page.subtitle,
-                           page.get_url(request), page.art()["thumbnail"], "California, United States",
+                           page.get_url(request), page.card_art(), "California, United States",
                            "United States", None, None, "Read the Story", in_callout=True))
     if missions and hub_url:
         n = len(missions)
@@ -245,6 +246,8 @@ def overlapping(items, map_px=DESKTOP_MAP_PX):
 
 
 def world_context(home, request):
+    from .learning import art_json
+
     items, warnings = world_items(home, request) if home else ([], [])
     wanted = request.GET.get("story", "")
     selected = next((i for i in items if i["key"] == wanted), None) or (items[0] if items else None)
@@ -262,7 +265,8 @@ def world_context(home, request):
         "fs_world_card_data": [
             {"key": i["key"], "kind": i["kind"], "type_label": i["type_label"], "title": i["title"],
              "subtitle": i["subtitle"], "place_line": i["place_line"], "url": i["url"], "link_label": i["link_label"],
-             "icon": i["icon"], "in_callout": i["in_callout"]} for i in items],
+             "icon": i["icon"], "in_callout": i["in_callout"], "art": art_json(i["art"], CARD_ART_SPEC)}
+            for i in items],
     }
 
 

@@ -1,7 +1,8 @@
 {% comment %}
   The story card (beside the map at >=1024, below it on smaller screens; never over it).
   Server-rendered for ?story=<key> (default: the first story in the list); future-saints.js
-  swaps the same fields in place from #fs-world-data.
+  swaps the same fields in place from #fs-world-data, the picture included (the story's
+  thumbnail, else its hero, else the placeholder frame: never the previous story's picture).
 {% endcomment %}
 <aside id="story-card" class="fs-mission-panel fs-world-card fs-wm-{{ item.kind }}" aria-labelledby="fs-card-title" data-fs-world-card>
   {% include "future_saints/includes/_art_frame.html" with art=item.art variant="thumb" slot="story thumbnail" icon=item.icon %}

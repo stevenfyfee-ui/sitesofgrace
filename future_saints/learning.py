@@ -107,6 +107,16 @@ def _text(value):
     return str(value or "").strip()
 
 
+def art_json(art, spec):
+    """A picture for a card the browser swaps in place (the world map card, the missions hub
+    panel): {src, width, height, alt}, or None for the placeholder frame. `spec` is the same
+    rendition the server-rendered card uses (_art_frame.html), so both show the same image."""
+    if art is None:
+        return None
+    rendition = art["image"].get_rendition(spec)
+    return {"src": rendition.url, "width": rendition.width, "height": rendition.height, "alt": art["alt"]}
+
+
 def _canonical_value(source, canonical):
     """The live canonical value behind a Quick Fact, or "" (row hidden)."""
     if canonical is None or not canonical.live:
@@ -344,6 +354,12 @@ class LearningPage(FutureSaintsGateMixin, Page):
             "context": _art(self.context_illustration, self.context_illustration_alt),
             "thumbnail": _art(self.index_thumbnail, self.index_thumbnail_alt),
         }
+
+    def card_art(self):
+        """The picture for this story on a selection card (the world map card, the missions hub
+        panel): the index thumbnail, else the hero illustration, else None (the placeholder)."""
+        art = self.art()
+        return art["thumbnail"] or art["hero"]
 
     def cards(self):
         """The four learning cards under the title."""
