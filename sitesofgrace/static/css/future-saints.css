@@ -793,6 +793,15 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
   .fs-wm-marker.is-offset .fs-wm-anchor, .fs-wm-marker.is-offset .fs-wm-leader { display: block; opacity: var(--nudge, 1); }
   .fs-wm-marker.is-offset .fs-wm-leader { transform: scale(var(--nudge, 1)); transform-origin: 0 0; }
 }
+/* With JavaScript the markers that would touch are spread for the map as drawn, at every width
+   and zoom (future-saints.js); the line and dot keep each one tied to its true spot. */
+.fs-wmap-pins.is-spread .fs-wm-marker.is-offset .fs-wm-pin { transform: translate(var(--dx), var(--dy)); }
+.fs-wmap-pins.is-spread .fs-wm-marker.is-offset .fs-wm-anchor,
+.fs-wmap-pins.is-spread .fs-wm-marker.is-offset .fs-wm-leader { display: block; opacity: 1; }
+.fs-wmap-pins.is-spread .fs-wm-marker.is-offset .fs-wm-leader { transform: none; }
+.fs-wmap-pins.is-spread .fs-wm-marker:not(.is-offset) .fs-wm-pin { transform: none; }
+.fs-wmap-pins.is-spread .fs-wm-marker:not(.is-offset) .fs-wm-anchor,
+.fs-wmap-pins.is-spread .fs-wm-marker:not(.is-offset) .fs-wm-leader { display: none; }
 
 .fs-world-card-type { margin: 0; text-align: center; }
 .fs-world-card-type span { display: inline-block; padding: .1rem .7rem; border-radius: 999px; font-weight: 700; font-size: .95rem;

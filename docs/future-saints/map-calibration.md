@@ -211,6 +211,25 @@ needing a map place.
 there, a reviewed offset in `worldmap.WORLD_MARKER_OFFSETS` moves the marker on desktop (1024 and
 wider) only. A thin line and a dot anchor it to its true spot.
 
+**Spreading (with JavaScript), since the map card fix.** The fixed offsets only suited the 1440 map.
+Assisi and Lanciano are about 5 map units apart:
+
+- at 1440 the selected Carlo disc (scaled 1.12) left about 2 px to Lanciano;
+- at 1024 the discs overlapped;
+- at 390 (no offsets) they sat 1.9 px apart;
+- the offsets faded out by 2× zoom, while these two only separate on their own near 9×.
+
+`future-saints.js` now spreads the markers that would touch, for the map as it is drawn. It reruns
+after every layout, zoom, resize and filter change.
+
+- **Spacing:** each pair ends at least 39 px apart, centre to centre. That is a 2 px gap between
+  the selected disc and another, plus 1 px for rounding.
+- **True spots:** each moved marker keeps a dot and a thin line to its true spot, which never moves.
+- **Without JavaScript:** the reviewed offsets below still apply on the desktop map.
+
+`tools/future_saints_card_screens.py` checks that no two discs touch at 1440, 1024 and 390, at
+1×, 1.5×, 2×, 3× and 6×, and that every true spot is unchanged.
+
 | Story | Offset (px) |
 |---|---|
 | Lourdes | (−16, 0) |

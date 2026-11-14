@@ -149,6 +149,7 @@
       vp.style.setProperty("--nudge", Math.max(0, Math.min(1, 2 - z)));
       vp.classList.toggle("is-zoomed", z > 1.001);
       vp.setAttribute("data-fs-zoom-level", z.toFixed(3));
+      vp.dispatchEvent(new CustomEvent("fs-zoom"));
       if (z > 2 && !detailed) {
         // The finer outline (world map: Natural Earth 1:50m), fetched only now.
         detailed = true;
@@ -274,6 +275,35 @@
     return vp && vp.fsZoom;
   };
 
+  // ---- A selection card's picture (the world map card, the missions hub panel): on every
+  // selection the card shows that story's picture ({src, width, height, alt} from the page's
+  // JSON: its thumbnail, else its hero) or the placeholder frame, never the previous picture.
+  // The staff-only "Art needed" label is kept on the placeholder. ----
+  var swapArt = function (card, art, variant, icon) {
+    var old = card.querySelector(".fs-art");
+    if (!old) { return; }
+    var node;
+    if (art) {
+      node = document.createElement("figure");
+      node.className = "fs-art fs-art--" + variant;
+      var img = document.createElement("img");
+      img.src = art.src;
+      img.width = art.width;
+      img.height = art.height;
+      img.alt = art.alt || "";
+      node.appendChild(img);
+    } else {
+      node = document.createElement("div");
+      node.className = "fs-art fs-art--" + variant + " fs-art--placeholder";
+      node.setAttribute("aria-hidden", "true");
+      node.innerHTML = '<svg class="fs-icon fs-art-mark" aria-hidden="true" focusable="false"><use href="#fs-i-' +
+        (icon || "mark") + '"></use></svg>';
+      var slot = card.querySelector(".fs-art-slot");
+      if (slot) { node.appendChild(slot.cloneNode(true)); }
+    }
+    old.parentNode.replaceChild(node, old);
+  };
+
   // ---- Missions hub: select a pin in place, share it as ?mission=<slug>. ----
   // Without this the pins are submit buttons of a GET form and the server
   // renders the selected panel, so nothing here is required.
@@ -308,6 +338,7 @@
       part("read").setAttribute("href", m.story_url || "#");
       part("build").hidden = !m.project_url;
       part("build").setAttribute("href", m.project_url || "#");
+      swapArt(panel, m.art, "feature", "mission");
       if (window.history && window.history.replaceState) {
         var url = new URL(window.location.href);
         url.searchParams.set("mission", slug);
@@ -394,9 +425,10 @@
         worldZoom.focus(parseFloat(marker.getAttribute("data-x")), parseFloat(marker.getAttribute("data-y")), 2.5);
       }
     };
+    // Returns whether the story has a place on the map (its own marker or the California callout).
     var selectStory = function (key, focus) {
       var s = stories[key];
-      if (!s) { return; }
+      if (!s) { return false; }
       if (focus) {
         // From the list or search: a type filtered off is shown again, so the story is visible.
         var off = document.querySelector('[data-fs-filter="' + s.kind + '"][aria-pressed="false"]');
@@ -413,15 +445,67 @@
       cardPart("place").hidden = !s.place_line;
       cardPart("link").setAttribute("href", s.url);
       cardPart("link-text").textContent = s.link_label;
-      var use = worldCard.querySelector(".fs-art--placeholder use");
-      if (use) { use.setAttribute("href", "#fs-i-" + s.icon); }
+      swapArt(worldCard, s.art, "thumb", s.icon);
       if (window.history && window.history.replaceState) {
         var url = new URL(window.location.href);
         url.searchParams.set("story", key);
         url.hash = "";
         window.history.replaceState(null, "", url.toString());
       }
+      return markers.some(function (m) { return m.value === key; }) || Boolean(s.in_callout);
     };
+
+    // Markers that would touch are moved apart just enough (on every layout, zoom, resize and
+    // filter change), each with a dot and a thin line to its true spot, which never moves. The
+    // positions come from each marker's map units, the map's drawn size and the zoom, so this
+    // works at every width and zoom (the server's reviewed offsets are the no-JavaScript
+    // fallback on the desktop map). SPREAD_PX, centre to centre, keeps at least a 2px gap between
+    // the selected disc (34px scaled 1.12, so 19px radius) and another (17px radius), with 1px to
+    // spare for rounding.
+    var SPREAD_PX = 39;
+    var worldVp = world.closest("[data-fs-zoom]");
+    var spreadMarkers = function () {
+      if (!worldVp) { return; }
+      var w = worldVp.clientWidth, h = worldVp.clientHeight;
+      var vbw = parseFloat(worldVp.getAttribute("data-fs-vb-w")) || 1000;
+      var vbh = parseFloat(worldVp.getAttribute("data-fs-vb-h")) || 1000;
+      var z = worldZoom ? worldZoom.state().z : 1;
+      var pts = markers.map(function (m) {
+        return { el: m.closest(".fs-wm-marker"), x: parseFloat(m.getAttribute("data-x")) / vbw * w * z,
+                 y: parseFloat(m.getAttribute("data-y")) / vbh * h * z, dx: 0, dy: 0 };
+      }).filter(function (p) { return !p.el.hidden; });
+      for (var round = 0; round < 80; round += 1) {
+        var moved = false;
+        for (var i = 0; i < pts.length; i += 1) {
+          for (var j = i + 1; j < pts.length; j += 1) {
+            var a = pts[i], b = pts[j];
+            var ddx = (b.x + b.dx) - (a.x + a.dx), ddy = (b.y + b.dy) - (a.y + a.dy);
+            var d = Math.sqrt(ddx * ddx + ddy * ddy);
+            if (d >= SPREAD_PX) { continue; }
+            if (d < 0.01) { ddx = 0; ddy = 1; d = 1; }
+            var push = (SPREAD_PX - d) / 2 + 0.1;
+            a.dx -= ddx / d * push; a.dy -= ddy / d * push;
+            b.dx += ddx / d * push; b.dy += ddy / d * push;
+            moved = true;
+          }
+        }
+        if (!moved) { break; }
+      }
+      markers.forEach(function (m) {
+        var el = m.closest(".fs-wm-marker");
+        var p = pts.filter(function (q) { return q.el === el; })[0] || { dx: 0, dy: 0 };
+        var dx = Math.round(p.dx * 10) / 10, dy = Math.round(p.dy * 10) / 10;
+        el.style.setProperty("--dx", dx + "px");
+        el.style.setProperty("--dy", dy + "px");
+        el.classList.toggle("is-offset", Math.abs(dx) + Math.abs(dy) > 0.5);
+        var line = el.querySelector(".fs-wm-leader line");
+        if (line) { line.setAttribute("x2", dx); line.setAttribute("y2", dy); }
+      });
+      world.classList.add("is-spread");
+    };
+    if (worldVp) { worldVp.addEventListener("fs-zoom", spreadMarkers); }
+    window.addEventListener("resize", spreadMarkers);
+    spreadMarkers();
 
     var closeWorldChooser = function (returnTo) {
       worldChooser.hidden = true;
@@ -503,6 +587,7 @@
         Array.prototype.forEach.call(document.querySelectorAll(".fs-world [data-fs-kind]"), function (el) {
           el.hidden = !on[el.getAttribute("data-fs-kind")];
         });
+        spreadMarkers();
       };
       toggles.forEach(function (t) {
         t.addEventListener("click", function () {
@@ -647,8 +732,8 @@
         if (mode !== "map") { window.location.href = entry.u; return; }
         input.value = entry.t;
         if (entry.m && window.fsSelectStory) {
-          if (note) { note.hidden = true; }
-          window.fsSelectStory(entry.m, true);
+          var placed = window.fsSelectStory(entry.m, true);     // the card shows the story either way
+          if (note) { note.hidden = placed; }
           var box = document.querySelector(".fs-wmap");
           if (box) { box.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }); }
         } else if (note) {

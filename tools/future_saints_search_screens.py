@@ -107,14 +107,24 @@ def main():
         page.evaluate("() => document.querySelector('.fs-search--map').scrollIntoView({block: 'start'})")
         page.wait_for_timeout(300)
         page.screenshot(path=f"{out}/map-search-1440.png")
-        box.fill("")
-        box.type("carlo", delay=50)
-        page.wait_for_selector("#fs-map-search-list:not([hidden]) [role=option]")
-        page.wait_for_timeout(200)
-        page.locator("#fs-map-search-list [role=option]").first.click()
-        page.wait_for_timeout(300)
-        note = page.locator("[data-fs-search-note]")
-        check(note.is_visible() and note.inner_text() == "This story isn't on the map yet.", "map: a story with no pin says so")
+        # A story that really has no pin: listed on the map page, but with no marker of its own and
+        # not in the California callout (read from the page, never assumed).
+        no_pin = page.evaluate("""() => JSON.parse(document.getElementById('fs-world-data').textContent).filter(s =>
+            !s.in_callout && !document.querySelector('[data-fs-world-pin][value="' + s.key + '"]'))""")
+        if not no_pin:
+            check(False, "map: a story with no pin opens its card and says so (no such story in the data)")
+        else:
+            story = no_pin[0]
+            box.fill("")
+            box.type(story["title"][:20], delay=30)
+            page.wait_for_selector("#fs-map-search-list:not([hidden]) [role=option]")
+            page.wait_for_timeout(200)
+            page.locator("#fs-map-search-list [role=option]", has_text=story["title"]).first.click()
+            page.wait_for_timeout(300)
+            note = page.locator("[data-fs-search-note]")
+            check(note.is_visible() and note.inner_text() == "This story isn't on the map yet."
+                  and page.locator("[data-fs-card-title]").inner_text() == story["title"],
+                  f"map: a story with no pin ({story['title']}) opens its card and says so")
         page.evaluate("() => document.querySelector('.fs-search--map').scrollIntoView({block: 'start'})")
         page.screenshot(path=f"{out}/map-search-not-on-map-1440.png", clip={"x": 0, "y": 0, "width": 1440, "height": 420})
         box.fill("")

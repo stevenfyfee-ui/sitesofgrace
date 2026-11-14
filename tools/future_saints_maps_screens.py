@@ -175,7 +175,10 @@ def run_after(browser, base, out, check):
     page.locator("#world-map").scroll_into_view_if_needed()
     page.evaluate("() => document.querySelector('#world-map [data-fs-zoom]').fsZoom.zoomBy(1.4)")
     page.wait_for_timeout(300)
-    a, b = page.evaluate(MARKER_JS, lourdes)["spot"], page.evaluate(MARKER_JS, lanciano)["spot"]
+    # Close markers are spread apart (each tied to its true spot); a tap between two drawn discs,
+    # within the touch radius of both, asks which story.
+    disc = "k => { const r = document.querySelector('[data-fs-world-pin][value=\"' + k + '\"] .fs-wm-disc').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }"
+    a, b = page.evaluate(disc, lourdes), page.evaluate(disc, lanciano)
     page.mouse.click((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
     page.wait_for_timeout(300)
     check(page.is_visible("#world-map [data-fs-chooser]"), "touch: Which story? still opens when zoomed")

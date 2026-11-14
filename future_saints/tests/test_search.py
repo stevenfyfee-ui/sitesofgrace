@@ -92,7 +92,7 @@ class ScopeTests(SearchTestCase):
         self.root.add_child(instance=no_place)
         self.story(SaintLearningPage, "saint", "saint-nowhere", "Saint Nowhere", no_place)
         keys = {e["t"]: e["m"] for e in self.index()}
-        self.assertEqual(keys["Saint Nowhere"], "", "no pin: the map says it isn't on the map yet")
+        self.assertEqual(keys["Saint Nowhere"], "saint-nowhere", "no pin: its card shows, with the not-on-the-map note")
         self.assertEqual(keys["Mission San Diego de Alcalá"], "mission-san-diego-de-alcala", "a mission: in the callout")
         self.assertEqual(keys[self.pages["san_diego"].get_parent().title], CALLOUT_KEY)
 

@@ -2,12 +2,13 @@
 {% comment %}
   The selected mission (comp 02's right-hand card; below the map on narrow
   screens, never over it). Server-rendered for ?mission=<slug> (default #1);
-  future-saints.js swaps the same fields in place from #fs-mission-data.
+  future-saints.js swaps the same fields in place from #fs-mission-data, the
+  picture included (the story's thumbnail, else its hero, else the placeholder).
   A published story adds its subtitle, intro and "Read & Learn"; "Build This
   Mission" shows only when that mission's project is published.
 {% endcomment %}
 <aside id="mission-panel" class="fs-mission-panel" aria-labelledby="fs-panel-name" data-fs-panel>
-  {% include "future_saints/includes/_art_frame.html" with art=None variant="feature" slot="mission illustration" icon="mission" %}
+  {% include "future_saints/includes/_art_frame.html" with art=m.art variant="feature" slot="mission illustration" icon="mission" %}
   <div class="fs-mission-panel-body" aria-live="polite">
     <h2 id="fs-panel-name" class="fs-mission-panel-name" data-fs-panel-name>{{ m.name }}</h2>
     <p class="fs-mission-panel-meta">
