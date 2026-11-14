@@ -24,6 +24,8 @@ Per page:
   QuickFact inherit keys, icon names to the model's icons, story_label to the saint choice,
   short kind names to the model's content_kind, "type_specific" keys to the type's fields, and
   each Bible reference split into book / chapter / verses that read back as the same text.
+- --review-note "text" sets the internal review_note on every page in the file (it is never
+  shown on the site); without it, review_note is left as it is.
 """
 import glob
 import json
@@ -138,11 +140,20 @@ class Command(BaseCommand):
         parser.add_argument("--dry-run", action="store_true", help="Validate and report; write nothing.")
         parser.add_argument("--verify", action="store_true",
                             help="Compare each page's latest revision with the file; write nothing.")
+        parser.add_argument("--review-note",
+                            help="Internal review note set on every page in the file (never shown on the site).")
 
     # --- entry ---------------------------------------------------------------
     def handle(self, *args, **options):
         if options["dry_run"] and options["verify"]:
             raise CommandError("Use --dry-run or --verify, not both.")
+        self.review_note = options.get("review_note")
+        if self.review_note is not None:
+            limit = SaintLearningPage._meta.get_field("review_note").max_length
+            if not self.review_note.strip():
+                raise CommandError("--review-note can't be empty.")
+            if len(self.review_note) > limit:
+                raise CommandError(f"--review-note is {len(self.review_note)} characters; review_note allows {limit}.")
         matches = sorted(glob.glob(options["path"]))
         if len(matches) != 1:
             raise CommandError(f"{options['path']!r} matches {len(matches)} files; it must match exactly one.")
@@ -226,6 +237,8 @@ class Command(BaseCommand):
         if not STORY_WORDS[0] <= story_words <= STORY_WORDS[1]:
             warnings.append(f"story is {story_words} words (target {STORY_WORDS[0]}–{STORY_WORDS[1]})")
         scalars["canonical_id"] = canonical.pk
+        if self.review_note is not None:
+            scalars["review_note"] = self.review_note
         return {
             "row": row, "model": model, "parent": parent, "canonical": canonical, "hint_note": hint_note,
             "scalars": scalars, "children": children, "warnings": warnings,
@@ -513,6 +526,7 @@ class Command(BaseCommand):
             scalars["founding_date_display"] = page.founding_date_display or ""
             scalars["founding_source_note"] = page.founding_source_note or ""
         scalars["canonical_id"] = page.canonical_id
+        scalars["review_note"] = page.review_note or ""
         children = {
             "quick_facts": [{"icon": q.icon, "label": q.label, "inherit": q.inherit, "value": q.value}
                             for q in self._ordered(page.quick_facts.all())],
@@ -601,6 +615,8 @@ class Command(BaseCommand):
                 live = _canonical_value(f["inherit"], p["canonical"])
                 shown = f"{live!r} (from the canonical page)" if live else f"{f['value']!r} (fallback_value; canonical field empty)"
                 self.stdout.write(f"  quick fact {f['label']!r} inherits {f['inherit']}: shows {shown}")
+        if "review_note" in s:
+            self.stdout.write(f"  review note: {s['review_note']!r}")
         for w in p["warnings"]:
             self.stdout.write(self.style.WARNING(f"  warning: {w}"))
 

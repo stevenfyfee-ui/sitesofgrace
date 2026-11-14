@@ -226,6 +226,7 @@ class LearningPage(FutureSaintsGateMixin, Page):
     show_on_homepage = models.BooleanField(default=False)
     featured_sort_order = models.PositiveSmallIntegerField(null=True, blank=True)
     last_source_reviewed_at = models.DateField(null=True, blank=True)
+    review_note = models.CharField(max_length=255, blank=True, help_text="Internal review note only — never shown on the site.")
 
     parent_page_types = ["future_saints.FutureSaintsIndexPage"]
     subpage_types = []
@@ -265,7 +266,8 @@ class LearningPage(FutureSaintsGateMixin, Page):
     ]
     promote_panels = Page.promote_panels + [
         MultiFieldPanel(
-            [FieldPanel("show_on_homepage"), FieldPanel("featured_sort_order"), FieldPanel("last_source_reviewed_at")],
+            [FieldPanel("show_on_homepage"), FieldPanel("featured_sort_order"), FieldPanel("last_source_reviewed_at"),
+             FieldPanel("review_note")],
             heading="Future Saints editorial",
         ),
     ]
@@ -417,7 +419,7 @@ class SourceLink(Orderable):
     title = models.CharField(max_length=200)
     url = models.URLField(max_length=500, blank=True)
     publisher = models.CharField(max_length=120, blank=True)
-    note = models.CharField(max_length=255, blank=True, help_text="What this source supports.")
+    note = models.CharField(max_length=500, blank=True, help_text="What this source supports.")
 
     panels = ["title", "url", "publisher", "note"]
 
