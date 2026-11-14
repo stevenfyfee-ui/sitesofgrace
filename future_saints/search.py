@@ -155,7 +155,7 @@ def _short_name(page):
 
 def build_index(home):
     """[{t, k, s, p, w, i, u, m, n}]: title, group key, subtitle, place, words, intro sentence,
-    url, map key (the World Discovery Map story to select, "" when it isn't on the map) and the
+    url, map key (the World Discovery Map story to select, "" with no map page) and the
     short name used for the empty state's suggestions."""
     from .learning import LearningPage
     from .missions import MissionProjectsGuidePage
@@ -164,17 +164,19 @@ def build_index(home):
 
     if home is None or not home.live:
         return []
-    on_map = set()
+    # Every story the World Discovery Map page lists can be selected there (its card shows); one
+    # with no pin also gets "This story isn't on the map yet." (future-saints.js decides).
+    listed = set()
     if WorldMapPage.objects.child_of(home).live().public().exists():
-        on_map = {i["key"] for i in world_items(home, None)[0] if i["pinned"] or i["in_callout"]}
-    callout = CALLOUT_KEY if CALLOUT_KEY in on_map else ""
+        listed = {i["key"] for i in world_items(home, None)[0]}
+    callout = CALLOUT_KEY if CALLOUT_KEY in listed else ""
     entries = []
     for page in LearningPage.objects.descendant_of(home).live().public().specific().prefetch_related("words"):
         place, url = _place(page), page.get_url(None)
         entries.append({
             "t": page.student_title or page.title, "k": page.content_kind, "s": page.subtitle, "p": place,
             "w": [w.word for w in page.words.all() if w.word], "i": first_sentence(page.intro), "u": url,
-            "m": page.slug if page.slug in on_map else "", "n": _short_name(page),
+            "m": page.slug if page.slug in listed else "", "n": _short_name(page),
         })
         project = page.published_project() if page.content_kind == "california_mission" else None
         if project is not None:

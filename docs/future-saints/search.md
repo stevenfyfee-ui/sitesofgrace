@@ -30,7 +30,7 @@ One small JSON list, one entry per page:
 | `w` | The Words to Know words |
 | `i` | The first sentence of the intro |
 | `u` | URL |
-| `m` | The World Discovery Map story to select (`""` when it isn't on the map) |
+| `m` | The World Discovery Map story to select (`""` when there's no map page) |
 | `n` | Short name, for the empty state's suggestions |
 
 - It is cached for 10 minutes and dropped on every publish or unpublish of a Future Saints page, or of
