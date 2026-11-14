@@ -1,0 +1,2546 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-12",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "peter",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Peter",
+        "production_id_hint": 1047
+      },
+      "student_title": "Saint Peter",
+      "subtitle": "A fisherman whom Jesus chose to lead his Church.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus; died about the year 64"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee, by the Sea of Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Leading the apostles as the first pope"
+        }
+      ],
+      "intro": "Peter was a fisherman named Simon. One day Jesus called him to leave his nets and follow him. Jesus gave him a new name, Peter, which means \"rock,\" and chose him to lead the Church. Peter was brave, but he also made big mistakes. Jesus forgave him and trusted him again. Catholics honor Peter as the first pope.",
+      "story_paragraphs": [
+        "Peter's first name was Simon. He and his brother Andrew were fishermen on the Sea of Galilee.",
+        "One day, Jesus walked along the shore and saw the two brothers casting a net into the water. He said to them, \"Come after me, and I will make you fishers of men.\" At once they left their nets and followed him.",
+        "Jesus gave Simon a new name. He called him Cephas, a word that means \"rock.\" In our language, that name is Peter.",
+        "Later, Jesus asked his disciples, \"Who do you say that I am?\" Simon Peter answered, \"You are the Messiah, the Son of the living God.\" Jesus told him, \"You are Peter, and upon this rock I will build my church.\" He also said, \"I will give you the keys to the kingdom of heaven.\"",
+        "Peter loved Jesus, but he was not perfect. On the night Jesus was arrested, Peter was afraid. Three times, he said he did not even know Jesus.",
+        "After Jesus rose from the dead, he met his disciples by the sea and shared breakfast with them. Then he asked Peter three times, \"Do you love me?\" Each time Peter answered yes. Jesus told him, \"Feed my sheep.\" Jesus was asking Peter to take care of his people.",
+        "On the day of Pentecost, the Holy Spirit came upon the disciples. Peter stood up and spoke boldly to the crowd about Jesus. About three thousand people were baptized that day. Later, when Peter was put in prison for his faith, an angel led him out.",
+        "According to tradition, Peter went to the city of Rome and led the Church there. Around the year 64, he was killed for his faith in Jesus. Saint Peter's Basilica in Rome is said to be built over his grave. Catholics honor Peter as the first pope."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus calls Simon and his brother Andrew to leave their fishing nets and follow him."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Jesus gives Simon a new name: Peter, the \"rock.\""
+        },
+        {
+          "date_display": "Later",
+          "text": "Peter says, \"You are the Messiah.\" Jesus promises to build his Church on this rock."
+        },
+        {
+          "date_display": "The night Jesus was arrested",
+          "text": "Peter says three times that he does not know Jesus."
+        },
+        {
+          "date_display": "After Easter",
+          "text": "Jesus asks Peter three times, \"Do you love me?\" and tells him, \"Feed my sheep.\""
+        },
+        {
+          "date_display": "Pentecost",
+          "text": "Peter speaks to the crowd, and about three thousand people are baptized."
+        },
+        {
+          "date_display": "About the year 64",
+          "text": "Peter dies for his faith in Rome, according to tradition."
+        }
+      ],
+      "fun_facts": [
+        "Peter's name was Simon before Jesus gave him a new one.",
+        "\"Peter\" means \"rock.\"",
+        "Peter's brother Andrew was an apostle too. Andrew was the one who first brought him to Jesus.",
+        "After Easter, Peter and his friends caught 153 large fish when Jesus told them where to cast their net.",
+        "Peter shares his feast day, June 29, with Saint Paul."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus."
+        },
+        {
+          "word": "Messiah",
+          "definition": "The Savior God promised to send. Christians believe Jesus is the Messiah."
+        },
+        {
+          "word": "Pentecost",
+          "definition": "The day the Holy Spirit came upon the disciples, fifty days after Easter."
+        },
+        {
+          "word": "Pope",
+          "definition": "The leader of the Catholic Church on earth and the bishop of Rome."
+        }
+      ],
+      "think_about_it": "Peter made a big mistake, and Jesus forgave him and still trusted him. What does that tell you about Jesus?",
+      "reflection_question": "Jesus asked Peter, \"Do you love me?\" How would you answer Jesus? How can you show it?",
+      "kindness_prompt": "Jesus told Peter, \"Feed my sheep.\" Take care of someone today: help a younger child, or share your snack with a friend.",
+      "quiz": [
+        {
+          "prompt": "What was Peter's job before he followed Jesus?",
+          "choices": [
+            {
+              "text": "Carpenter"
+            },
+            {
+              "text": "Fisherman",
+              "correct": true
+            },
+            {
+              "text": "Tax collector"
+            },
+            {
+              "text": "Shepherd"
+            }
+          ],
+          "explanation": "Peter and his brother Andrew were fishermen on the Sea of Galilee."
+        },
+        {
+          "prompt": "What does the name \"Peter\" mean?",
+          "choices": [
+            {
+              "text": "Light"
+            },
+            {
+              "text": "Fish"
+            },
+            {
+              "text": "Rock",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus called Simon \"Cephas,\" which means \"rock.\" In our language that name is Peter."
+        },
+        {
+          "prompt": "What did Peter say when Jesus asked, \"Who do you say that I am?\"",
+          "choices": [
+            {
+              "text": "\"You are the Messiah, the Son of the living God.\"",
+              "correct": true
+            },
+            {
+              "text": "\"You are a great teacher.\""
+            },
+            {
+              "text": "\"I do not know.\""
+            }
+          ],
+          "explanation": "Peter said, \"You are the Messiah, the Son of the living God.\""
+        },
+        {
+          "prompt": "What did Jesus tell Peter after asking, \"Do you love me?\"",
+          "choices": [
+            {
+              "text": "\"Go back to fishing.\""
+            },
+            {
+              "text": "\"Feed my sheep.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Build a boat.\""
+            }
+          ],
+          "explanation": "Jesus told Peter, \"Feed my sheep.\" He was asking Peter to take care of his people."
+        },
+        {
+          "prompt": "What do Catholics honor Peter as?",
+          "choices": [
+            {
+              "text": "The first king"
+            },
+            {
+              "text": "The first fisherman"
+            },
+            {
+              "text": "The first pope",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus chose Peter to lead the Church, and Catholics honor him as the first pope."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Matthew 4:18–20",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/matthew/4",
+          "note": "the call of Simon and Andrew and Jesus's words"
+        },
+        {
+          "title": "Matthew 16:13–19",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/matthew/16",
+          "note": "Peter's answer, the rock, the keys"
+        },
+        {
+          "title": "John 1:40–42",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/1",
+          "note": "Andrew brings Simon to Jesus; the name Cephas"
+        },
+        {
+          "title": "John 21:1–17",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/21",
+          "note": "breakfast by the sea, the 153 fish, \"Feed my sheep\""
+        },
+        {
+          "title": "Acts 2",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/2",
+          "note": "Pentecost, Peter's speech, about three thousand baptized"
+        },
+        {
+          "title": "Acts 12:11–17",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/12",
+          "note": "the angel and the prison"
+        },
+        {
+          "title": "St. Peter the Apostle",
+          "publisher": "Britannica (summary)",
+          "url": "https://britannica.com/summary/Saint-Peter-the-Apostle",
+          "note": "the name Simon, Cephas means \"rock,\" the three denials, Rome by tradition, died about 64, the basilica over his grave, first pope"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "paul",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Paul",
+        "production_id_hint": 1042
+      },
+      "student_title": "Saint Paul",
+      "subtitle": "Once an enemy of Christians, he met Jesus and carried the Good News across the world.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century; died about the year 67"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Tarsus, in what is now Turkey"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Traveling far to share the Gospel and writing letters found in the Bible"
+        }
+      ],
+      "intro": "Paul was first called Saul. He did not believe in Jesus, and he tried to stop the people who did. Then, on a road to the city of Damascus, Jesus spoke to him, and Saul's whole life changed. He became one of the greatest missionaries ever. He traveled from city to city telling people about Jesus, and his letters are part of the Bible.",
+      "story_paragraphs": [
+        "Paul was born in a city called Tarsus, in the land that is now Turkey. His name at first was Saul. He was Jewish, and he studied hard to become a teacher of his faith. He earned his living by making tents.",
+        "Saul thought the followers of Jesus were wrong. He went looking for them so he could have them arrested.",
+        "One day, Saul was traveling to the city of Damascus to arrest Christians there. Suddenly a light from the sky flashed around him. He fell to the ground and heard a voice say, \"Saul, Saul, why are you persecuting me?\" Saul asked, \"Who are you, sir?\" The voice answered, \"I am Jesus, whom you are persecuting.\"",
+        "When Saul stood up, he could not see. His companions led him by the hand into Damascus. For three days, he was blind, and he did not eat or drink.",
+        "Then the Lord sent a Christian named Ananias to him. Ananias laid his hands on Saul and called him \"Saul, my brother.\" At once, something like scales fell from Saul's eyes, and he could see again. He was baptized. Right away, he began telling everyone that Jesus is the Son of God.",
+        "Saul became known as Paul. From the city of Antioch, he set out on long journeys to tell people about Jesus, especially people who were not Jewish. He started communities of Christians in many cities. When he could not be with them, he wrote them letters. Those letters are now part of the Bible.",
+        "Paul's work was hard and dangerous. In Jerusalem, a crowd turned against him, and he was arrested and kept in prison for two years.",
+        "Paul died in Rome around the year 67. Tradition says he was killed for his faith in Jesus. Near the end of his life, one of his letters says, \"I have competed well; I have finished the race; I have kept the faith.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "Early in the first century",
+          "text": "Saul is born in Tarsus."
+        },
+        {
+          "date_display": "As a young man",
+          "text": "Saul tries to stop the followers of Jesus."
+        },
+        {
+          "date_display": "On the road to Damascus",
+          "text": "Jesus speaks to Saul, and Saul is blind for three days."
+        },
+        {
+          "date_display": "Three days later",
+          "text": "Ananias visits Saul. Saul can see again and is baptized."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "Now called Paul, he travels far to tell people about Jesus and writes letters to the new churches."
+        },
+        {
+          "date_display": "Later",
+          "text": "Paul is arrested in Jerusalem and kept in prison for two years."
+        },
+        {
+          "date_display": "About the year 67",
+          "text": "Paul dies in Rome."
+        }
+      ],
+      "fun_facts": [
+        "Paul was first called Saul.",
+        "Paul made tents for a living.",
+        "Paul's letters are the oldest Christian writings we have.",
+        "Paul was blind for three days after he met Jesus on the road.",
+        "The Church celebrates the day Paul turned to Jesus every year on January 25."
+      ],
+      "words_to_know": [
+        {
+          "word": "Persecute",
+          "definition": "To hurt or trouble people because of what they believe."
+        },
+        {
+          "word": "Conversion",
+          "definition": "Turning away from sin and toward God."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Gospel",
+          "definition": "The Good News about Jesus. Also, one of the four books of the Bible that tell about his life."
+        },
+        {
+          "word": "Letter",
+          "definition": "In the Bible, a message written by an apostle to teach and encourage a group of Christians."
+        }
+      ],
+      "think_about_it": "Saul was doing wrong, and Jesus still called him. Is anyone too far from God to change?",
+      "reflection_question": "Paul wrote, \"I have kept the faith.\" What helps you keep your faith when things are hard?",
+      "kindness_prompt": "Paul wrote letters to cheer on his friends. Write a kind note or draw a card for someone who needs encouragement.",
+      "quiz": [
+        {
+          "prompt": "What was Paul's name before he was called Paul?",
+          "choices": [
+            {
+              "text": "Simon"
+            },
+            {
+              "text": "Saul",
+              "correct": true
+            },
+            {
+              "text": "Levi"
+            },
+            {
+              "text": "Mark"
+            }
+          ],
+          "explanation": "Paul was first called Saul. He was born in the city of Tarsus."
+        },
+        {
+          "prompt": "Where was Saul going when Jesus spoke to him?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Bethlehem"
+            },
+            {
+              "text": "Damascus",
+              "correct": true
+            }
+          ],
+          "explanation": "Saul was on the road to Damascus when a light flashed around him and he heard the voice of Jesus."
+        },
+        {
+          "prompt": "What happened to Saul after he saw the light?",
+          "choices": [
+            {
+              "text": "He could not see for three days.",
+              "correct": true
+            },
+            {
+              "text": "He ran away."
+            },
+            {
+              "text": "He fell asleep for a week."
+            }
+          ],
+          "explanation": "Saul was blind for three days, until Ananias came and laid hands on him."
+        },
+        {
+          "prompt": "What did Paul do when he could not be with his Christian friends?",
+          "choices": [
+            {
+              "text": "He forgot about them."
+            },
+            {
+              "text": "He wrote them letters.",
+              "correct": true
+            },
+            {
+              "text": "He sent them gifts of gold."
+            }
+          ],
+          "explanation": "Paul wrote letters to teach and encourage the new churches. Those letters are now part of the Bible."
+        },
+        {
+          "prompt": "What was Paul's job for earning a living?",
+          "choices": [
+            {
+              "text": "Fisherman"
+            },
+            {
+              "text": "Carpenter"
+            },
+            {
+              "text": "Tentmaker",
+              "correct": true
+            }
+          ],
+          "explanation": "Paul earned his living by making tents."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 9:1–20",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/9",
+          "note": "Saul's plan, the light, the words of Jesus, three days of blindness, Ananias, baptism, preaching at once"
+        },
+        {
+          "title": "2 Timothy 4:7",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/2timothy/4",
+          "note": "\"I have competed well...\""
+        },
+        {
+          "title": "St. Paul the Apostle",
+          "publisher": "Britannica (summary)",
+          "url": "https://www.britannica.com/summary/Saint-Paul-the-Apostle",
+          "note": "the name Saul, Tarsus, trained as a rabbi, tentmaker, persecuting Christians, Antioch, preaching to Gentiles, arrest in Jerusalem and two years in prison, the first Christian theological writings, died in Rome about 67"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "john-the-baptist",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. John the Baptist",
+        "production_id_hint": 995
+      },
+      "student_title": "Saint John the Baptist",
+      "subtitle": "The cousin of Jesus who told everyone to get ready, because the Savior was coming.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "The hill country of Judea, in the Holy Land"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 24"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Preparing the way for Jesus and baptizing him"
+        }
+      ],
+      "intro": "John the Baptist had one great job: to get people ready for Jesus. He lived in the desert, wore clothes made of camel's hair, and ate locusts and wild honey. Crowds came to hear him. He told them to be sorry for their sins, and he baptized them in the Jordan River. One day, Jesus himself came to be baptized by John.",
+      "story_paragraphs": [
+        "John's parents were Zechariah and Elizabeth. They were good people, but they were old, and they had no children. Elizabeth was a relative of Mary, the Mother of Jesus.",
+        "One day, Zechariah was serving in the Temple when the angel Gabriel appeared to him. The angel said, \"Do not be afraid, Zechariah, because your prayer has been heard. Your wife Elizabeth will bear you a son, and you shall name him John.\"",
+        "Zechariah found this hard to believe. Because he doubted, he was not able to speak until the baby came.",
+        "When the baby was born, the neighbors wanted to name him Zechariah, after his father. But Elizabeth said, \"No. He will be called John.\" Zechariah asked for a tablet and wrote, \"John is his name.\" At once he could speak again, and he praised God.",
+        "When John grew up, he lived in the desert. He wore clothing made of camel's hair with a leather belt, and he ate locusts and wild honey. He told the people to be sorry for their sins and to change their lives. Crowds came to him, and he baptized them in the Jordan River.",
+        "John knew he was not the Savior. He said, \"One mightier than I is coming after me.\"",
+        "One day, Jesus came from Nazareth and was baptized by John in the Jordan. A voice came from the heavens: \"You are my beloved Son; with you I am well pleased.\" Later, when John saw Jesus coming, he told the people, \"Behold, the Lamb of God, who takes away the sin of the world.\"",
+        "John always told the truth, even to powerful people. He told King Herod that it was wrong for him to take his brother's wife. Herod had John put in prison, and later he had him killed. John's friends came and laid his body in a tomb."
+      ],
+      "timeline": [
+        {
+          "date_display": "Before John's birth",
+          "text": "The angel Gabriel tells Zechariah that he and Elizabeth will have a son."
+        },
+        {
+          "date_display": "John's birth",
+          "text": "Zechariah writes, \"John is his name,\" and can speak again."
+        },
+        {
+          "date_display": "As a grown man",
+          "text": "John lives in the desert and preaches by the Jordan River."
+        },
+        {
+          "date_display": "One day at the Jordan",
+          "text": "John baptizes Jesus."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "John calls Jesus \"the Lamb of God.\""
+        },
+        {
+          "date_display": "Later",
+          "text": "King Herod puts John in prison and has him killed."
+        }
+      ],
+      "fun_facts": [
+        "John wore clothes made of camel's hair and ate locusts and wild honey.",
+        "John's mother, Elizabeth, was a relative of Mary, so John and Jesus were family.",
+        "John's father could not speak until the day John was named.",
+        "The Church celebrates John's birthday on June 24, six months before Christmas.",
+        "At Mass, we still say John's words: \"Behold, the Lamb of God.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Baptize",
+          "definition": "To wash with water as a sign of turning to God. In the sacrament of Baptism, we become children of God."
+        },
+        {
+          "word": "Repent",
+          "definition": "To be sorry for sin and to turn back to God."
+        },
+        {
+          "word": "Prophet",
+          "definition": "A person God chooses to speak his message to the people."
+        },
+        {
+          "word": "Locust",
+          "definition": "An insect like a large grasshopper."
+        },
+        {
+          "word": "Lamb of God",
+          "definition": "A name for Jesus, who gave his life for us."
+        }
+      ],
+      "think_about_it": "John told the truth, even when it was dangerous. When is it hard for you to tell the truth?",
+      "reflection_question": "John's job was to help people get ready for Jesus. How can you get your heart ready for Jesus?",
+      "kindness_prompt": "John pointed people toward Jesus instead of himself. Today, let someone else go first or get the credit.",
+      "quiz": [
+        {
+          "prompt": "Who were John's parents?",
+          "choices": [
+            {
+              "text": "Mary and Joseph"
+            },
+            {
+              "text": "Zechariah and Elizabeth",
+              "correct": true
+            },
+            {
+              "text": "Joachim and Anne"
+            }
+          ],
+          "explanation": "John's parents were Zechariah and Elizabeth. Elizabeth was a relative of Mary."
+        },
+        {
+          "prompt": "What did John eat in the desert?",
+          "choices": [
+            {
+              "text": "Bread and fish"
+            },
+            {
+              "text": "Figs and dates"
+            },
+            {
+              "text": "Locusts and wild honey",
+              "correct": true
+            }
+          ],
+          "explanation": "John wore camel's hair and ate locusts and wild honey."
+        },
+        {
+          "prompt": "Where did John baptize people?",
+          "choices": [
+            {
+              "text": "In the Jordan River",
+              "correct": true
+            },
+            {
+              "text": "In the Sea of Galilee"
+            },
+            {
+              "text": "In a well"
+            },
+            {
+              "text": "In the Temple"
+            }
+          ],
+          "explanation": "Crowds came to John, and he baptized them in the Jordan River."
+        },
+        {
+          "prompt": "What did John call Jesus?",
+          "choices": [
+            {
+              "text": "The Good Shepherd"
+            },
+            {
+              "text": "The Lamb of God",
+              "correct": true
+            },
+            {
+              "text": "The King of Rome"
+            }
+          ],
+          "explanation": "John said, \"Behold, the Lamb of God, who takes away the sin of the world.\""
+        },
+        {
+          "prompt": "What did Zechariah write on the tablet?",
+          "choices": [
+            {
+              "text": "\"Praise God.\""
+            },
+            {
+              "text": "\"I cannot speak.\""
+            },
+            {
+              "text": "\"John is his name.\"",
+              "correct": true
+            }
+          ],
+          "explanation": "When Zechariah wrote, \"John is his name,\" he was able to speak again."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 1",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/1",
+          "note": "Zechariah and Elizabeth, Gabriel's words, Zechariah unable to speak, the naming, Elizabeth as Mary's relative, John in the desert"
+        },
+        {
+          "title": "Mark 1:4–11",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/1",
+          "note": "his preaching, the Jordan, camel's hair, locusts and wild honey, \"One mightier than I,\" the baptism of Jesus and the voice"
+        },
+        {
+          "title": "John 1:29",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/1",
+          "note": "\"Behold, the Lamb of God\""
+        },
+        {
+          "title": "Mark 6:17–29",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/6",
+          "note": "Herod, the prison, John's death and burial"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "mary-magdalene",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Mary Magdalen",
+        "production_id_hint": 1027
+      },
+      "student_title": "Saint Mary Magdalene",
+      "subtitle": "A faithful friend of Jesus and the first person to see him risen on Easter morning.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Magdala, by the Sea of Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 22"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being the first to see the risen Jesus"
+        }
+      ],
+      "intro": "Mary Magdalene was one of the women who followed Jesus and helped him. She stayed near him even when he was dying on the cross. On Easter morning, she went to his tomb while it was still dark. There, the risen Jesus called her by name. Then he sent her to tell the apostles the best news ever: \"I have seen the Lord.\"",
+      "story_paragraphs": [
+        "Mary Magdalene's name tells us where she came from. She was from Magdala, a town on the shore of the Sea of Galilee. She is also called Mary of Magdala.",
+        "The Gospel of Luke tells us that Jesus healed Mary. She had suffered very much, and Jesus set her free. After that, she followed him.",
+        "Mary traveled with Jesus and the twelve apostles as he went from town to town preaching. She was one of a group of women who took care of them, using what they owned to pay for what was needed.",
+        "When Jesus was arrested and crucified, many of his friends ran away. Mary Magdalene did not. She stood by the cross with Mary, the Mother of Jesus.",
+        "Early on Sunday morning, while it was still dark, Mary Magdalene went to the tomb. The body of Jesus was not there. She ran to tell Peter and another disciple. They came and looked, and then they went home.",
+        "But Mary stayed outside the tomb, crying. She saw two angels in white. Then she turned around and saw a man standing there. She thought he was the gardener.",
+        "The man said to her, \"Mary!\" At that moment, she knew him. It was Jesus, alive! She answered, \"Rabbouni,\" which means \"Teacher.\" Jesus sent her to tell his disciples. Mary went and said to them, \"I have seen the Lord.\"",
+        "Because she was sent to bring the news of Easter to the apostles, Mary Magdalene has been called the \"Apostle to the Apostles.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus heals Mary of Magdala, and she follows him."
+        },
+        {
+          "date_display": "The years of Jesus's preaching",
+          "text": "Mary travels with Jesus and the apostles and helps care for them."
+        },
+        {
+          "date_display": "Good Friday",
+          "text": "Mary stands by the cross of Jesus."
+        },
+        {
+          "date_display": "Easter morning",
+          "text": "Mary goes to the tomb while it is still dark and finds it empty."
+        },
+        {
+          "date_display": "Later that morning",
+          "text": "The risen Jesus calls her by name and sends her to tell the disciples."
+        },
+        {
+          "date_display": "2016",
+          "text": "Pope Francis raises her day, July 22, to a feast."
+        }
+      ],
+      "fun_facts": [
+        "\"Magdalene\" means \"from Magdala,\" a town by the Sea of Galilee.",
+        "At first, Mary thought the risen Jesus was the gardener.",
+        "Mary knew Jesus when he said her name.",
+        "Mary called Jesus \"Rabbouni,\" which means \"Teacher.\"",
+        "Mary Magdalene has been called the \"Apostle to the Apostles.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus."
+        },
+        {
+          "word": "Tomb",
+          "definition": "A place where a person who has died is buried."
+        },
+        {
+          "word": "Resurrection",
+          "definition": "Jesus rising from the dead on the third day."
+        },
+        {
+          "word": "Rabbouni",
+          "definition": "A word that means \"Teacher.\""
+        },
+        {
+          "word": "Apostle",
+          "definition": "A person who is sent. The twelve apostles were sent by Jesus to lead his Church."
+        }
+      ],
+      "think_about_it": "Mary Magdalene stayed with Jesus when others ran away. What does it mean to be a faithful friend?",
+      "reflection_question": "Jesus called Mary by her name. Jesus knows your name too. What would you like to say to him?",
+      "kindness_prompt": "Mary ran to share good news. Share some good news today: tell someone something good about them.",
+      "quiz": [
+        {
+          "prompt": "Where was Mary Magdalene from?",
+          "choices": [
+            {
+              "text": "Bethlehem"
+            },
+            {
+              "text": "Nazareth"
+            },
+            {
+              "text": "Magdala",
+              "correct": true
+            },
+            {
+              "text": "Rome"
+            }
+          ],
+          "explanation": "\"Magdalene\" means \"from Magdala,\" a town by the Sea of Galilee."
+        },
+        {
+          "prompt": "Where was Mary Magdalene when Jesus was on the cross?",
+          "choices": [
+            {
+              "text": "Standing by the cross",
+              "correct": true
+            },
+            {
+              "text": "Far away in another town"
+            },
+            {
+              "text": "Hiding at home"
+            }
+          ],
+          "explanation": "Mary Magdalene stood by the cross with Mary, the Mother of Jesus."
+        },
+        {
+          "prompt": "Who did Mary think Jesus was at first on Easter morning?",
+          "choices": [
+            {
+              "text": "A soldier"
+            },
+            {
+              "text": "The gardener",
+              "correct": true
+            },
+            {
+              "text": "An angel"
+            }
+          ],
+          "explanation": "Mary did not know him at first. She thought he was the gardener."
+        },
+        {
+          "prompt": "How did Mary know it was Jesus?",
+          "choices": [
+            {
+              "text": "He showed her a sign in the sky."
+            },
+            {
+              "text": "Peter told her."
+            },
+            {
+              "text": "He said her name.",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus said, \"Mary!\" and she knew him at once."
+        },
+        {
+          "prompt": "What did Mary tell the disciples?",
+          "choices": [
+            {
+              "text": "\"The tomb is locked.\""
+            },
+            {
+              "text": "\"I have seen the Lord.\"",
+              "correct": true
+            },
+            {
+              "text": "\"We must leave the city.\""
+            }
+          ],
+          "explanation": "Jesus sent Mary to the disciples, and she told them, \"I have seen the Lord.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 8:1–3",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/8",
+          "note": "Mary called Magdalene, healed by Jesus, traveling with him and the Twelve, the women who provided for them"
+        },
+        {
+          "title": "John 19:25",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/19",
+          "note": "Mary of Magdala at the cross with the Mother of Jesus"
+        },
+        {
+          "title": "John 20:1–18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/20",
+          "note": "the tomb while it was still dark, Peter and the other disciple, the angels, the gardener, \"Mary!\", \"Rabbouni,\" \"I have seen the Lord\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "michael-the-archangel",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Michael",
+        "production_id_hint": 1034
+      },
+      "student_title": "Saint Michael the Archangel",
+      "subtitle": "The great angel who defends God's people against evil.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "star",
+          "label": "Who",
+          "value": "An archangel, one of God's greatest angels"
+        },
+        {
+          "icon": "scroll",
+          "label": "In the Bible",
+          "value": "The books of Daniel and Revelation"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Defending God's people and leading the angels against evil"
+        }
+      ],
+      "intro": "Saint Michael is not a person who once lived on earth. He is an angel, a spirit created by God. The Bible calls him a great prince and the guardian of God's people. In the last book of the Bible, Michael and his angels fight against the devil and win. His name asks a question: \"Who is like God?\" The answer is no one.",
+      "story_paragraphs": [
+        "Most saints were people who lived on earth, loved God, and are now with him in heaven. Saint Michael is different. He is an angel. Angels are spirits created by God. They do not have bodies like ours, and they are not born and do not die. They serve God and bring his help to people.",
+        "The Bible gives the names of only three angels: Michael, Gabriel, and Raphael. They are called archangels.",
+        "Michael's name comes from the Hebrew language. It means \"Who is like God?\" No one is like God, and that is the point. The devil wanted to put himself in God's place. Michael's very name says that God alone is God.",
+        "In the Old Testament, the Book of Daniel calls Michael \"the great prince, guardian of your people.\" God's people trusted that Michael was watching over them.",
+        "In the last book of the Bible, the Book of Revelation, Saint John describes a great battle. \"Then war broke out in heaven; Michael and his angels battled against the dragon.\" The dragon is a name for the devil. The dragon and its angels fought back, but they did not win, and they were thrown out of heaven.",
+        "Because of this, Christians have always asked Saint Michael to protect them from evil. In pictures and statues, he is often shown as a strong angel in armor, holding a sword, with the dragon under his feet.",
+        "Many people pray a short prayer to Saint Michael, asking him to defend them. Pope Leo XIII wrote that prayer in 1886.",
+        "Long ago, the Church kept a feast for Saint Michael on September 29. Since 1969, that day has honored all three archangels together. Saint Michael is a patron saint of soldiers and police officers, who work to keep others safe."
+      ],
+      "timeline": [
+        {
+          "date_display": "The Old Testament",
+          "text": "The Book of Daniel calls Michael \"the great prince, guardian of your people.\""
+        },
+        {
+          "date_display": "The New Testament",
+          "text": "The Book of Revelation tells of Michael and his angels defeating the dragon."
+        },
+        {
+          "date_display": "The early centuries",
+          "text": "Christians begin to honor Saint Michael and ask for his protection."
+        },
+        {
+          "date_display": "1886",
+          "text": "Pope Leo XIII writes the Prayer to Saint Michael."
+        },
+        {
+          "date_display": "1969",
+          "text": "September 29 becomes the feast of all three archangels together."
+        }
+      ],
+      "fun_facts": [
+        "Michael's name means \"Who is like God?\"",
+        "Only three angels are named in the Bible: Michael, Gabriel, and Raphael.",
+        "In art, Saint Michael is usually shown with armor and a sword.",
+        "Saint Michael is a patron saint of soldiers and police officers.",
+        "The feast of the archangels, September 29, has an old name: Michaelmas."
+      ],
+      "words_to_know": [
+        {
+          "word": "Angel",
+          "definition": "A spirit created by God to serve him and to help people. Angels do not have bodies."
+        },
+        {
+          "word": "Archangel",
+          "definition": "One of God's great angels, sent for the most important jobs."
+        },
+        {
+          "word": "Guardian",
+          "definition": "Someone who watches over and protects others."
+        },
+        {
+          "word": "Revelation",
+          "definition": "The last book of the Bible."
+        },
+        {
+          "word": "Evil",
+          "definition": "What is against God and against what is good."
+        }
+      ],
+      "think_about_it": "Michael's name asks, \"Who is like God?\" What makes God greater than anyone or anything else?",
+      "reflection_question": "God sends his angels to help and protect us. When have you felt that God was taking care of you?",
+      "kindness_prompt": "Saint Michael defends others. If you see someone being picked on, stand beside them or get a grown-up to help.",
+      "quiz": [
+        {
+          "prompt": "What is Saint Michael?",
+          "choices": [
+            {
+              "text": "A king"
+            },
+            {
+              "text": "A fisherman"
+            },
+            {
+              "text": "An archangel",
+              "correct": true
+            },
+            {
+              "text": "A prophet"
+            }
+          ],
+          "explanation": "Saint Michael is an archangel, a spirit created by God."
+        },
+        {
+          "prompt": "What does Michael's name mean?",
+          "choices": [
+            {
+              "text": "\"Who is like God?\"",
+              "correct": true
+            },
+            {
+              "text": "\"God heals\""
+            },
+            {
+              "text": "\"Gift of God\""
+            }
+          ],
+          "explanation": "Michael's name is a question, \"Who is like God?\" The answer is that no one is."
+        },
+        {
+          "prompt": "Whom does Michael fight in the Book of Revelation?",
+          "choices": [
+            {
+              "text": "A lion"
+            },
+            {
+              "text": "The dragon, which is the devil",
+              "correct": true
+            },
+            {
+              "text": "A giant"
+            }
+          ],
+          "explanation": "Revelation says, \"Michael and his angels battled against the dragon.\" The dragon did not win."
+        },
+        {
+          "prompt": "How many angels are named in the Bible?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Three",
+              "correct": true
+            },
+            {
+              "text": "Twelve"
+            }
+          ],
+          "explanation": "The Bible names three angels: Michael, Gabriel, and Raphael."
+        },
+        {
+          "prompt": "Why do people pray to Saint Michael?",
+          "choices": [
+            {
+              "text": "To find lost things"
+            },
+            {
+              "text": "For good weather"
+            },
+            {
+              "text": "To ask for protection from evil",
+              "correct": true
+            }
+          ],
+          "explanation": "Christians ask Saint Michael to defend them against evil."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Daniel 12:1",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/daniel/12",
+          "note": "\"Michael, the great prince, guardian of your people\""
+        },
+        {
+          "title": "Revelation 12:7–9",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/revelation/12",
+          "note": "the war in heaven, Michael and his angels, the dragon thrown down"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "gabriel-the-archangel",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Gabriel",
+        "production_id_hint": 957
+      },
+      "student_title": "Saint Gabriel the Archangel",
+      "subtitle": "God's messenger, who told Mary that she would be the Mother of Jesus.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "star",
+          "label": "Who",
+          "value": "An archangel, one of God's greatest angels"
+        },
+        {
+          "icon": "scroll",
+          "label": "In the Bible",
+          "value": "The Book of Daniel and the Gospel of Luke"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Bringing God's message to Mary"
+        }
+      ],
+      "intro": "Saint Gabriel is an angel, a spirit created by God. In the Bible, God sends Gabriel to carry his most important messages. Gabriel told a priest named Zechariah that he would have a son, John the Baptist. Then Gabriel was sent to a young woman named Mary, in the town of Nazareth, to tell her that she would be the Mother of God's Son.",
+      "story_paragraphs": [
+        "Saint Gabriel is not a person who lived on earth. He is an angel. Angels are spirits created by God. They serve God and carry his messages. Gabriel is one of only three angels named in the Bible.",
+        "The name Gabriel means \"God is my strength.\"",
+        "Gabriel first appears in the Old Testament. A holy man named Daniel was praying when Gabriel came to him. The angel said, \"Daniel, I have now come to give you understanding.\" He told Daniel that God had heard his prayer.",
+        "Many years later, God sent Gabriel to the Temple in Jerusalem. A priest named Zechariah was serving there. He and his wife Elizabeth were old and had no children. Gabriel told him they would have a son and should name him John. Zechariah could hardly believe it. The angel answered, \"I am Gabriel, who stand before God. I was sent to speak to you and to announce to you this good news.\"",
+        "Six months later came Gabriel's greatest message. God sent him to a town in Galilee called Nazareth, to a young woman named Mary. Gabriel said to her, \"Hail, favored one! The Lord is with you.\"",
+        "Mary was troubled and wondered what this greeting meant. The angel said, \"Do not be afraid, Mary, for you have found favor with God.\" He told her that she would have a son and name him Jesus, and that he would be called the Son of the Most High. Gabriel also said, \"Nothing will be impossible for God.\"",
+        "Mary answered, \"Behold, I am the handmaid of the Lord. May it be done to me according to your word.\" Then the angel left her.",
+        "This moment is called the Annunciation. Every time we pray the Hail Mary, we begin with the greeting Gabriel brought to Mary."
+      ],
+      "timeline": [
+        {
+          "date_display": "The Old Testament",
+          "text": "Gabriel comes to Daniel while he is praying and helps him understand."
+        },
+        {
+          "date_display": "Before John the Baptist's birth",
+          "text": "Gabriel tells Zechariah that he and Elizabeth will have a son named John."
+        },
+        {
+          "date_display": "Six months later",
+          "text": "Gabriel tells Mary in Nazareth that she will be the Mother of Jesus."
+        },
+        {
+          "date_display": "1951",
+          "text": "Pope Pius XII names Gabriel the patron of people who work in communications."
+        },
+        {
+          "date_display": "1969",
+          "text": "September 29 becomes the feast of all three archangels together."
+        }
+      ],
+      "fun_facts": [
+        "Gabriel's name means \"God is my strength.\"",
+        "The Hail Mary prayer begins with Gabriel's greeting to Mary.",
+        "Gabriel told two families that a baby was coming: John the Baptist and Jesus.",
+        "Gabriel told Mary, \"Nothing will be impossible for God.\"",
+        "Because he carried God's messages, Gabriel is a patron saint of messengers and mail carriers."
+      ],
+      "words_to_know": [
+        {
+          "word": "Angel",
+          "definition": "A spirit created by God to serve him and to help people. Angels do not have bodies."
+        },
+        {
+          "word": "Archangel",
+          "definition": "One of God's great angels, sent for the most important jobs."
+        },
+        {
+          "word": "Messenger",
+          "definition": "Someone who carries a message from one person to another."
+        },
+        {
+          "word": "Annunciation",
+          "definition": "The day the angel Gabriel told Mary that she would be the Mother of Jesus."
+        },
+        {
+          "word": "Handmaid",
+          "definition": "A woman who serves. Mary called herself the handmaid, or servant, of the Lord."
+        }
+      ],
+      "think_about_it": "Mary was troubled at first, and then she said yes to God. What helps you say yes to something good when you feel unsure?",
+      "reflection_question": "Gabriel said, \"Nothing will be impossible for God.\" What is something hard that you want to bring to God in prayer?",
+      "kindness_prompt": "Gabriel carried good news. Carry a kind message today: tell someone \"thank you\" or \"I'm glad you're my friend.\"",
+      "quiz": [
+        {
+          "prompt": "What is Gabriel's special job in the Bible?",
+          "choices": [
+            {
+              "text": "Soldier"
+            },
+            {
+              "text": "Messenger",
+              "correct": true
+            },
+            {
+              "text": "Builder"
+            },
+            {
+              "text": "Shepherd"
+            }
+          ],
+          "explanation": "God sends Gabriel to carry his most important messages."
+        },
+        {
+          "prompt": "To what town was Gabriel sent to find Mary?",
+          "choices": [
+            {
+              "text": "Bethlehem"
+            },
+            {
+              "text": "Jerusalem"
+            },
+            {
+              "text": "Nazareth",
+              "correct": true
+            }
+          ],
+          "explanation": "God sent Gabriel to a town in Galilee called Nazareth."
+        },
+        {
+          "prompt": "What did Gabriel tell Zechariah?",
+          "choices": [
+            {
+              "text": "That he and Elizabeth would have a son named John",
+              "correct": true
+            },
+            {
+              "text": "That he should build a boat"
+            },
+            {
+              "text": "That he should move to Egypt"
+            }
+          ],
+          "explanation": "Gabriel told Zechariah that his wife Elizabeth would have a son, John the Baptist."
+        },
+        {
+          "prompt": "What did Mary answer the angel?",
+          "choices": [
+            {
+              "text": "\"I am too busy.\""
+            },
+            {
+              "text": "\"May it be done to me according to your word.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Please ask someone else.\""
+            }
+          ],
+          "explanation": "Mary said, \"Behold, I am the handmaid of the Lord. May it be done to me according to your word.\""
+        },
+        {
+          "prompt": "Which prayer begins with Gabriel's greeting to Mary?",
+          "choices": [
+            {
+              "text": "The Our Father"
+            },
+            {
+              "text": "The Glory Be"
+            },
+            {
+              "text": "The Hail Mary",
+              "correct": true
+            }
+          ],
+          "explanation": "The Hail Mary begins with the greeting the angel Gabriel brought to Mary."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 1:11–38",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/1",
+          "note": "Gabriel and Zechariah, \"I am Gabriel,\" the sixth month, Nazareth, the greeting, \"Do not be afraid, Mary,\" the promise of Jesus, \"nothing will be impossible for God,\" Mary's answer"
+        },
+        {
+          "title": "Daniel 9:20–23",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/daniel/9",
+          "note": "Gabriel comes to Daniel at prayer, \"I have now come to give you understanding\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "raphael-the-archangel",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Raphael",
+        "production_id_hint": 1062
+      },
+      "student_title": "Saint Raphael the Archangel",
+      "subtitle": "The angel God sent to guide a young traveler and heal his family.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "star",
+          "label": "Who",
+          "value": "An archangel, one of God's greatest angels"
+        },
+        {
+          "icon": "scroll",
+          "label": "In the Bible",
+          "value": "The Book of Tobit"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Guiding travelers and bringing God's healing"
+        }
+      ],
+      "intro": "Saint Raphael is an angel, a spirit created by God. His name means \"God heals.\" The Bible tells his story in the Book of Tobit. There, God sends Raphael to travel with a young man named Tobiah on a long and dangerous trip. Raphael looks like an ordinary traveler. Only at the end does the family learn that an angel has been with them all along.",
+      "story_paragraphs": [
+        "Saint Raphael is an angel, not a person who lived on earth. He is one of only three angels named in the Bible. His story is told in the Old Testament, in the Book of Tobit.",
+        "Tobit was a good man who had become blind. Long before, he had left some money with a relative in a faraway land called Media. Now he needed it. He asked his son, Tobiah, to go and bring it back.",
+        "Tobiah needed someone to show him the way. He went out and found a young man who said he knew all the roads. The young man said his name was Azariah. Tobiah did not know it, but this was the angel Raphael.",
+        "So the two set out together, and Tobiah's dog followed along behind them.",
+        "One evening, Tobiah went down to wash his feet in the Tigris River. A large fish leaped out of the water at him! The angel called, \"Grab the fish and hold on to it!\" Tobiah pulled it up on the shore. Raphael told him to save some parts of the fish, because they could be used as medicine.",
+        "On the journey, Raphael also helped Tobiah meet and marry a young woman named Sarah, who had suffered many sorrows. With the angel's help, her troubles ended.",
+        "At last they came home. Raphael told Tobiah to put the medicine from the fish on his father's eyes. Tobiah did, and his father could see again. Tobit hugged his son and cried, \"I can see you, son, the light of my eyes!\"",
+        "Then the traveler told them the truth. \"I am Raphael, one of the seven angels who stand and serve before the Glory of the Lord.\" Tobit and Tobiah fell to the ground in fear. But Raphael said, \"Do not fear; peace be with you! Bless God now and forever.\" Then he returned to God."
+      ],
+      "timeline": [
+        {
+          "date_display": "The beginning of the story",
+          "text": "Blind Tobit sends his son Tobiah on a long journey."
+        },
+        {
+          "date_display": "Setting out",
+          "text": "Raphael, calling himself Azariah, becomes Tobiah's guide. The dog comes along."
+        },
+        {
+          "date_display": "At the Tigris River",
+          "text": "A large fish leaps at Tobiah, and Raphael tells him to catch it."
+        },
+        {
+          "date_display": "On the journey",
+          "text": "Raphael helps Tobiah marry Sarah."
+        },
+        {
+          "date_display": "Coming home",
+          "text": "Tobiah puts the medicine on his father's eyes, and Tobit can see."
+        },
+        {
+          "date_display": "The end of the story",
+          "text": "The guide says, \"I am Raphael,\" and returns to God."
+        }
+      ],
+      "fun_facts": [
+        "Raphael's name means \"God heals.\"",
+        "A dog went along on the journey with Tobiah and the angel.",
+        "Raphael used the name Azariah so the family would not know he was an angel.",
+        "Raphael is a patron saint of travelers.",
+        "Raphael is also a patron saint of people who are blind or sick, and of those who care for them."
+      ],
+      "words_to_know": [
+        {
+          "word": "Angel",
+          "definition": "A spirit created by God to serve him and to help people. Angels do not have bodies."
+        },
+        {
+          "word": "Archangel",
+          "definition": "One of God's great angels, sent for the most important jobs."
+        },
+        {
+          "word": "Journey",
+          "definition": "A long trip from one place to another."
+        },
+        {
+          "word": "Guide",
+          "definition": "Someone who shows the way."
+        },
+        {
+          "word": "Heal",
+          "definition": "To make a sick or hurt person well again."
+        }
+      ],
+      "think_about_it": "Tobiah did not know an angel was walking beside him. How might God be helping you in ways you do not notice?",
+      "reflection_question": "Raphael told the family to bless God and thank him. What are three things you can thank God for today?",
+      "kindness_prompt": "Raphael helped someone find the way. Help someone who is new or lost today: show them where to go, or walk with them.",
+      "quiz": [
+        {
+          "prompt": "What does Raphael's name mean?",
+          "choices": [
+            {
+              "text": "\"Who is like God?\""
+            },
+            {
+              "text": "\"God heals\"",
+              "correct": true
+            },
+            {
+              "text": "\"God is my strength\""
+            }
+          ],
+          "explanation": "Raphael's name means \"God heals,\" and healing is at the heart of his story."
+        },
+        {
+          "prompt": "In which book of the Bible is Raphael's story told?",
+          "choices": [
+            {
+              "text": "Genesis"
+            },
+            {
+              "text": "The Gospel of Luke"
+            },
+            {
+              "text": "The Book of Tobit",
+              "correct": true
+            },
+            {
+              "text": "Revelation"
+            }
+          ],
+          "explanation": "Raphael's story is in the Book of Tobit, in the Old Testament."
+        },
+        {
+          "prompt": "What animal followed Tobiah and the angel on their journey?",
+          "choices": [
+            {
+              "text": "A dog",
+              "correct": true
+            },
+            {
+              "text": "A donkey"
+            },
+            {
+              "text": "A lamb"
+            }
+          ],
+          "explanation": "The Bible says that Tobiah's dog followed along with them."
+        },
+        {
+          "prompt": "What leaped out of the river at Tobiah?",
+          "choices": [
+            {
+              "text": "A frog"
+            },
+            {
+              "text": "A large fish",
+              "correct": true
+            },
+            {
+              "text": "A snake"
+            }
+          ],
+          "explanation": "A large fish leaped out of the Tigris River, and Raphael told Tobiah to catch it."
+        },
+        {
+          "prompt": "What happened when Tobiah put the medicine on his father's eyes?",
+          "choices": [
+            {
+              "text": "Nothing happened."
+            },
+            {
+              "text": "His father fell asleep."
+            },
+            {
+              "text": "His father could see again.",
+              "correct": true
+            }
+          ],
+          "explanation": "Tobit could see again, and he cried, \"I can see you, son, the light of my eyes!\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Tobit 5",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/tobit/5",
+          "note": "blind Tobit, the money in Media, Tobiah finding a guide who is the angel Raphael, the name Azariah"
+        },
+        {
+          "title": "Tobit 6",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/tobit/6",
+          "note": "the dog, the fish in the Tigris, the angel's words, the fish as medicine, Sarah"
+        },
+        {
+          "title": "Tobit 11",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/tobit/11",
+          "note": "the dog again, the medicine on Tobit's eyes, \"I can see you, son\""
+        },
+        {
+          "title": "Tobit 12:11–22",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/tobit/12",
+          "note": "\"I am Raphael,\" their fear, \"Do not fear; peace be with you!\", his return to God"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "joachim-and-anne",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "Sts. Joachim and Ann",
+        "production_id_hint": 980
+      },
+      "student_title": "Saints Joachim and Anne",
+      "subtitle": "Honored as the parents of Mary and the grandparents of Jesus.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "value": "Before the birth of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Nazareth, according to tradition"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 26"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being the parents of Mary and the grandparents of Jesus"
+        }
+      ],
+      "intro": "Mary, the Mother of Jesus, had a mother and father who raised her to love God. Christians have called them Joachim and Anne for a very long time. The Bible does not tell us about them. Their names and their story come from a very old tradition. The Church honors them as the grandparents of Jesus and as patron saints of all grandparents.",
+      "story_paragraphs": [
+        "Have you ever wondered who Jesus's grandparents were? Mary, his mother, had parents who cared for her and taught her to pray. The Church honors them as Saints Joachim and Anne.",
+        "The Bible does not tell us anything about Mary's parents. It does not even give their names. What we know comes from tradition. Their names and their story are found in a book written about 150 years after the time of Jesus. That book is not part of the Bible, and we cannot be sure the details happened just as it tells them.",
+        "Here is the story that has been handed down. Joachim and Anne lived in Nazareth. They loved God, but they had grown old without having any children, and this made them very sad.",
+        "Joachim went out into the countryside alone to pray. At home, Anne prayed too. She promised that if God gave her a child, she would give that child back to God to serve him.",
+        "Then an angel came to each of them with wonderful news. Anne would have a baby, and the child would be very special.",
+        "Joachim and Anne had a daughter, and they named her Mary. The story says that when Mary was three years old, her parents brought her to the Temple in Jerusalem to be raised there, just as Anne had promised.",
+        "Whatever the details were, one thing is certain. Mary had parents who loved her, and she grew up to say yes to God with her whole heart. That is why the Church honors Joachim and Anne.",
+        "Christians were building churches in honor of Saint Anne by the 500s. Today, Joachim and Anne share one feast day, July 26. They are the patron saints of grandparents."
+      ],
+      "timeline": [
+        {
+          "date_display": "Before the birth of Jesus",
+          "text": "According to tradition, Joachim and Anne pray for a child, and Mary is born."
+        },
+        {
+          "date_display": "About the year 150",
+          "text": "The story of Joachim and Anne is written down."
+        },
+        {
+          "date_display": "The 500s",
+          "text": "Christians are building churches in honor of Saint Anne."
+        },
+        {
+          "date_display": "The 1400s",
+          "text": "Devotion to Saint Joachim spreads in Europe."
+        },
+        {
+          "date_display": "1969",
+          "text": "Joachim and Anne are given one feast day together, July 26."
+        }
+      ],
+      "fun_facts": [
+        "Joachim and Anne are the grandparents of Jesus.",
+        "Their names are not in the Bible. They come from a very old tradition.",
+        "The name Anne comes from the Hebrew name Hannah, which means \"grace.\"",
+        "Saints Joachim and Anne are the patron saints of grandparents.",
+        "Saint Anne is a patron saint of Canada and of Brittany, a part of France."
+      ],
+      "words_to_know": [
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        },
+        {
+          "word": "Grandparents",
+          "definition": "The mother and father of your mother or father."
+        },
+        {
+          "word": "Temple",
+          "definition": "The great house of prayer in Jerusalem in the time of Jesus."
+        },
+        {
+          "word": "Devout",
+          "definition": "Loving God and faithful in prayer."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays in a special way for a place or a group of people."
+        }
+      ],
+      "think_about_it": "Mary learned to love God from her parents. Who has helped you learn about God?",
+      "reflection_question": "Joachim and Anne waited and prayed for a long time. What is something you are waiting for? How can you pray while you wait?",
+      "kindness_prompt": "Joachim and Anne are the patron saints of grandparents. Call, visit, or make a card for a grandparent or an older person you know.",
+      "quiz": [
+        {
+          "prompt": "Who was the daughter of Joachim and Anne?",
+          "choices": [
+            {
+              "text": "Elizabeth"
+            },
+            {
+              "text": "Mary",
+              "correct": true
+            },
+            {
+              "text": "Martha"
+            },
+            {
+              "text": "Ruth"
+            }
+          ],
+          "explanation": "Joachim and Anne are honored as the parents of Mary, the Mother of Jesus."
+        },
+        {
+          "prompt": "How are Joachim and Anne related to Jesus?",
+          "choices": [
+            {
+              "text": "They are his aunt and uncle."
+            },
+            {
+              "text": "They are his cousins."
+            },
+            {
+              "text": "They are his grandparents.",
+              "correct": true
+            }
+          ],
+          "explanation": "They were the parents of Mary, so they are the grandparents of Jesus."
+        },
+        {
+          "prompt": "Where do the names Joachim and Anne come from?",
+          "choices": [
+            {
+              "text": "The Gospel of Luke"
+            },
+            {
+              "text": "A very old tradition, not the Bible",
+              "correct": true
+            },
+            {
+              "text": "A letter of Saint Paul"
+            }
+          ],
+          "explanation": "The Bible does not name Mary's parents. Their names come from an old book that is not part of the Bible."
+        },
+        {
+          "prompt": "In the story, what did Joachim and Anne pray for?",
+          "choices": [
+            {
+              "text": "A child",
+              "correct": true
+            },
+            {
+              "text": "A bigger house"
+            },
+            {
+              "text": "Rain for their crops"
+            }
+          ],
+          "explanation": "They had grown old without children, and they prayed for a child."
+        },
+        {
+          "prompt": "Whom do Joachim and Anne pray for in a special way as patron saints?",
+          "choices": [
+            {
+              "text": "Sailors"
+            },
+            {
+              "text": "Soldiers"
+            },
+            {
+              "text": "Grandparents",
+              "correct": true
+            }
+          ],
+          "explanation": "Saints Joachim and Anne are the patron saints of grandparents."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saints Anne and Joachim",
+          "publisher": "Britannica",
+          "url": "https://britannica.com/biography/Saints-Anne-and-Joachim",
+          "note": "the 2nd-century Protevangelium of James as the source, Nazareth, devout and childless, Joachim praying in the countryside, Anne's promise, the angel, Mary's birth and going to the Temple at three, churches from the 6th century, Joachim's devotion in the 15th century, July 26, patrons of grandparents, Anne patron of Brittany and Canada"
+        },
+        {
+          "title": "St. Anne, Mother of the Blessed Virgin",
+          "publisher": "EWTN (from Lives of Saints, John J. Crawley & Co.)",
+          "url": "https://www.ewtn.com/catholicism/library/st-anne-mother-of-the-blessed-virgin-5188",
+          "note": "Anne not named in the New Testament, the second-century source, her prayer and promise, the meaning of the name Anne, July 26"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "luke",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Luke",
+        "production_id_hint": 1016
+      },
+      "student_title": "Saint Luke",
+      "subtitle": "A doctor and friend of Saint Paul who wrote down the story of Jesus with great care.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Antioch in Syria, according to tradition"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 18"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Writing the Gospel of Luke and the Acts of the Apostles"
+        }
+      ],
+      "intro": "Luke was a doctor who lived in the time of the apostles. He became a Christian and a faithful friend of Saint Paul. Luke wrote two books of the Bible: a Gospel about the life of Jesus, and the Acts of the Apostles, about the first Christians. Many of the stories we love best, like the Christmas story, come to us from Saint Luke.",
+      "story_paragraphs": [
+        "Luke lived in the first century, the time of the apostles. He was a doctor. The Bible tells us this in a letter of Saint Paul, where Luke is described as a physician, which is another word for doctor.",
+        "Luke was not one of the twelve apostles, and he probably never met Jesus. An old tradition says he came from the city of Antioch, in Syria, and that he was not Jewish. He learned about Jesus from the first Christians.",
+        "Luke became a close friend and helper of Saint Paul. He stayed with Paul even in hard times. Near the end of Paul's life, when Paul was a prisoner, a letter says, \"Luke is the only one with me.\"",
+        "Luke wanted people to know for certain what Jesus had said and done. So he talked with people who had been there from the beginning. He begins his Gospel by saying that he wrote it down \"after investigating everything accurately anew,\" and that he put it \"in an orderly sequence.\"",
+        "Luke's Gospel gives us stories that are not found in any of the others. Only Luke tells how the angel Gabriel came to Mary. Only Luke tells about the shepherds who visited the baby Jesus on the first Christmas. Two of the best-known stories Jesus told, the Good Samaritan and the Prodigal Son, are found only in Luke's Gospel too. Again and again, Luke shows how kind and forgiving God is.",
+        "Luke also wrote a second book, the Acts of the Apostles. It tells what happened after Jesus returned to heaven: how the Holy Spirit came, and how the apostles carried the Good News from Jerusalem all the way to Rome.",
+        "We do not know much about the rest of Luke's life. Because he was a doctor, he is the patron saint of doctors. An old story says he painted a picture of Mary, so he is the patron saint of artists as well."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first century",
+          "text": "Luke, a doctor, becomes a Christian."
+        },
+        {
+          "date_display": "The time of the apostles",
+          "text": "Luke travels and works with Saint Paul."
+        },
+        {
+          "date_display": "Near the end of Paul's life",
+          "text": "A letter says, \"Luke is the only one with me.\""
+        },
+        {
+          "date_display": "Later in the first century",
+          "text": "Luke writes his Gospel and the Acts of the Apostles."
+        },
+        {
+          "date_display": "Every year on October 18",
+          "text": "The Church celebrates the feast of Saint Luke."
+        }
+      ],
+      "fun_facts": [
+        "Luke was a doctor.",
+        "Luke wrote two books of the Bible: the Gospel of Luke and the Acts of the Apostles.",
+        "The story of the shepherds on the first Christmas comes from Luke's Gospel.",
+        "In art, Luke's sign is an ox with wings.",
+        "Luke is the patron saint of doctors and of artists."
+      ],
+      "words_to_know": [
+        {
+          "word": "Gospel",
+          "definition": "One of the four books of the Bible that tell about the life of Jesus."
+        },
+        {
+          "word": "Evangelist",
+          "definition": "A writer of one of the four Gospels: Matthew, Mark, Luke, or John."
+        },
+        {
+          "word": "Physician",
+          "definition": "A doctor."
+        },
+        {
+          "word": "Acts of the Apostles",
+          "definition": "The book of the Bible that tells about the first Christians after Jesus returned to heaven."
+        },
+        {
+          "word": "Parable",
+          "definition": "A short story Jesus told to teach a lesson about God."
+        }
+      ],
+      "think_about_it": "Luke used his gifts, careful listening and writing, to tell people about Jesus. What gifts do you have that could help others know Jesus?",
+      "reflection_question": "Luke stayed with Paul when Paul was in trouble. Who needs you to stay beside them right now?",
+      "kindness_prompt": "Luke was a doctor who cared for the sick. Do something kind for someone who is sick or hurt: bring them water, a blanket, or a get-well card.",
+      "quiz": [
+        {
+          "prompt": "What was Luke's job?",
+          "choices": [
+            {
+              "text": "Fisherman"
+            },
+            {
+              "text": "Tax collector"
+            },
+            {
+              "text": "Doctor",
+              "correct": true
+            },
+            {
+              "text": "Soldier"
+            }
+          ],
+          "explanation": "The Bible describes Luke as a physician, which means doctor."
+        },
+        {
+          "prompt": "Which apostle was Luke a close friend and helper of?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint Paul",
+              "correct": true
+            },
+            {
+              "text": "Saint Thomas"
+            }
+          ],
+          "explanation": "Luke was a close friend of Saint Paul. A letter says, \"Luke is the only one with me.\""
+        },
+        {
+          "prompt": "How many books of the Bible did Luke write?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Two",
+              "correct": true
+            },
+            {
+              "text": "Ten"
+            }
+          ],
+          "explanation": "Luke wrote the Gospel of Luke and the Acts of the Apostles."
+        },
+        {
+          "prompt": "Which of these stories is found only in Luke's Gospel?",
+          "choices": [
+            {
+              "text": "The shepherds visiting the baby Jesus",
+              "correct": true
+            },
+            {
+              "text": "Noah and the ark"
+            },
+            {
+              "text": "David and Goliath"
+            }
+          ],
+          "explanation": "Only Luke tells about the shepherds on the first Christmas."
+        },
+        {
+          "prompt": "How did Luke get ready to write his Gospel?",
+          "choices": [
+            {
+              "text": "He guessed what happened."
+            },
+            {
+              "text": "He copied one old book."
+            },
+            {
+              "text": "He looked into everything carefully.",
+              "correct": true
+            }
+          ],
+          "explanation": "Luke says he wrote \"after investigating everything accurately anew.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 1",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/1",
+          "note": "the opening of his Gospel and its words; the angel Gabriel and Mary"
+        },
+        {
+          "title": "Colossians 4, note on verse 14",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/colossians/4",
+          "note": "Luke described as a medical doctor; traditionally the author of the third Gospel"
+        },
+        {
+          "title": "2 Timothy 4:11",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/2timothy/4",
+          "note": "\"Luke is the only one with me\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "matthew",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Matthew",
+        "production_id_hint": 1030
+      },
+      "student_title": "Saint Matthew",
+      "subtitle": "A tax collector who got up and followed Jesus the moment he was called.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 21"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Leaving everything to follow Jesus; the first Gospel bears his name"
+        }
+      ],
+      "intro": "Matthew was a tax collector. In his day, most people did not like tax collectors at all. One day, Jesus walked past the place where Matthew worked and said two words: \"Follow me.\" Matthew got up and followed him. He became one of the twelve apostles. The first of the four Gospels in the Bible carries his name.",
+      "story_paragraphs": [
+        "Matthew lived in Galilee in the time of Jesus. He had another name, too. The Gospels of Mark and Luke call him Levi.",
+        "Matthew's job was collecting taxes. Taxes are money that people must pay to their rulers. In those days, the land of Jesus was ruled by the Romans, and tax collectors gathered money for them. Many tax collectors also cheated and took extra for themselves. So most people did not like or trust them.",
+        "One day, Matthew was sitting at his work, at a place called the customs post. Jesus walked by and saw him. Jesus said, \"Follow me.\" And Matthew got up and followed him. He left his old life behind.",
+        "Then there was a big dinner at the house, and Jesus came. Many other tax collectors and people known as sinners came too. They sat down to eat with Jesus and his disciples.",
+        "Some religious leaders, called Pharisees, saw this and did not like it. They asked the disciples, \"Why does your teacher eat with tax collectors and sinners?\"",
+        "Jesus heard them. He said, \"Those who are well do not need a physician, but the sick do.\" A physician is a doctor. Jesus meant that he had come to help the people who needed him most. He added, \"I did not come to call the righteous but sinners.\"",
+        "Matthew became one of the twelve apostles. He was with Jesus as he taught and healed. After Jesus rose from the dead and returned to heaven, Matthew helped spread the Good News.",
+        "From early times, Christians have connected Matthew with the Gospel that comes first in the New Testament. It includes the Sermon on the Mount, where Jesus teaches the Our Father. We do not know for certain where Matthew went later or how he died. Different old stories tell it in different ways."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Matthew works as a tax collector in Galilee."
+        },
+        {
+          "date_display": "One day",
+          "text": "Jesus says, \"Follow me,\" and Matthew gets up and follows him."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Jesus eats dinner with tax collectors and sinners."
+        },
+        {
+          "date_display": "The years of Jesus's preaching",
+          "text": "Matthew is one of the twelve apostles."
+        },
+        {
+          "date_display": "After Jesus returns to heaven",
+          "text": "Matthew helps spread the Good News."
+        },
+        {
+          "date_display": "Every year on September 21",
+          "text": "The Church celebrates the feast of Saint Matthew."
+        }
+      ],
+      "fun_facts": [
+        "Matthew was also called Levi.",
+        "Jesus called Matthew with just two words: \"Follow me.\"",
+        "The Gospel of Matthew is the first book of the New Testament.",
+        "In art, Matthew's sign is a man with wings.",
+        "Matthew is the patron saint of accountants and bankers, people who work with money."
+      ],
+      "words_to_know": [
+        {
+          "word": "Tax collector",
+          "definition": "A person who gathers the money people must pay to their rulers."
+        },
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Pharisees",
+          "definition": "A group of religious leaders in the time of Jesus who were very strict about following the rules."
+        },
+        {
+          "word": "Sinner",
+          "definition": "A person who has done something wrong against God or others. Everyone is a sinner and needs God's mercy."
+        },
+        {
+          "word": "Physician",
+          "definition": "A doctor."
+        }
+      ],
+      "think_about_it": "Other people looked down on Matthew, but Jesus chose him. Whom do people leave out today? How does Jesus see them?",
+      "reflection_question": "Matthew got up right away when Jesus called. What is Jesus asking you to do today?",
+      "kindness_prompt": "Jesus ate with people others stayed away from. At lunch, sit with someone who is sitting alone.",
+      "quiz": [
+        {
+          "prompt": "What was Matthew's job before he followed Jesus?",
+          "choices": [
+            {
+              "text": "Fisherman"
+            },
+            {
+              "text": "Tax collector",
+              "correct": true
+            },
+            {
+              "text": "Doctor"
+            },
+            {
+              "text": "Carpenter"
+            }
+          ],
+          "explanation": "Matthew was a tax collector, a job most people did not like."
+        },
+        {
+          "prompt": "What did Jesus say to Matthew?",
+          "choices": [
+            {
+              "text": "\"Go home.\""
+            },
+            {
+              "text": "\"Give me your money.\""
+            },
+            {
+              "text": "\"Follow me.\"",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus said, \"Follow me,\" and Matthew got up and followed him."
+        },
+        {
+          "prompt": "What other name did Matthew have?",
+          "choices": [
+            {
+              "text": "Levi",
+              "correct": true
+            },
+            {
+              "text": "Saul"
+            },
+            {
+              "text": "Simon"
+            }
+          ],
+          "explanation": "The Gospels of Mark and Luke call Matthew by the name Levi."
+        },
+        {
+          "prompt": "Why were the Pharisees upset?",
+          "choices": [
+            {
+              "text": "Jesus was late for dinner."
+            },
+            {
+              "text": "Jesus ate with tax collectors and sinners.",
+              "correct": true
+            },
+            {
+              "text": "Jesus would not eat at all."
+            }
+          ],
+          "explanation": "The Pharisees asked, \"Why does your teacher eat with tax collectors and sinners?\""
+        },
+        {
+          "prompt": "What did Jesus mean when he said sick people need a doctor?",
+          "choices": [
+            {
+              "text": "Everyone at the dinner had a cold."
+            },
+            {
+              "text": "Matthew should become a doctor."
+            },
+            {
+              "text": "He came to help the people who need him most.",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus said, \"I did not come to call the righteous but sinners.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Matthew 9:9–13",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/matthew/9",
+          "note": "the customs post, \"Follow me,\" the dinner, the Pharisees' question, Jesus's answer"
+        },
+        {
+          "title": "Mark 2:13–17",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/2",
+          "note": "the same event, with the name Levi"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "mark",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Mark",
+        "production_id_hint": 1021
+      },
+      "student_title": "Saint Mark",
+      "subtitle": "A young helper of the apostles who wrote down the story of Jesus.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Jerusalem"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "April 25"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Writing the Gospel of Mark"
+        }
+      ],
+      "intro": "Mark was a young man in Jerusalem when the Church was just beginning. The first Christians met to pray in his mother's house. Mark traveled with Saint Paul and Saint Barnabas, and later he worked closely with Saint Peter. He wrote one of the four Gospels. It is the shortest Gospel, and many think it was the first one written.",
+      "story_paragraphs": [
+        "Mark is also called John Mark in the Bible. He lived in Jerusalem with his mother, whose name was Mary. The first Christians often gathered in her house to pray.",
+        "One night, something amazing happened there. Saint Peter had been put in prison, and the Christians were praying for him at the house. An angel led Peter out of the prison, and he came straight to their door and knocked. A servant girl named Rhoda heard his voice. She was so happy that she forgot to open the gate! She ran inside to tell everyone, while Peter kept knocking.",
+        "As a young man, Mark went with Saint Paul and Saint Barnabas to help them on a missionary trip. But partway through the first journey, Mark turned back and went home. Later, Paul and Barnabas disagreed about whether to take him along again.",
+        "That was not the end of Mark's story. He kept serving, and the friendship was mended. Years later, when Paul was a prisoner, a letter asks, \"Get Mark and bring him with you, for he is helpful to me in the ministry.\"",
+        "Mark was especially close to Saint Peter. In one of his letters, Peter calls him \"Mark, my son.\"",
+        "A very early Christian writer said that Mark was Peter's helper and that he wrote down carefully what Peter taught about Jesus. That is how we have the Gospel of Mark. It is the shortest of the four Gospels. It moves quickly, and it shows how Jesus gave his life out of love for us.",
+        "An old tradition says that Mark later carried the Good News to Egypt and began the Church in the great city of Alexandria, and that he died there for his faith. Christians in Egypt still honor him as their first leader."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first years of the Church",
+          "text": "Christians gather to pray in the house of Mark's mother in Jerusalem."
+        },
+        {
+          "date_display": "One night",
+          "text": "Peter, freed from prison by an angel, knocks at the gate of the house."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Mark sets out with Paul and Barnabas, then turns back."
+        },
+        {
+          "date_display": "Years later",
+          "text": "A letter from prison says Mark \"is helpful to me in the ministry.\""
+        },
+        {
+          "date_display": "Later in the first century",
+          "text": "Mark writes his Gospel from the teaching of Peter."
+        },
+        {
+          "date_display": "About the year 68",
+          "text": "According to tradition, Mark dies for his faith in Alexandria, Egypt."
+        }
+      ],
+      "fun_facts": [
+        "Mark is called John Mark in the Bible.",
+        "When Peter knocked at the gate, the servant girl Rhoda was so happy that she forgot to let him in.",
+        "Mark's Gospel is the shortest of the four.",
+        "In art, Mark's sign is a lion with wings.",
+        "Mark is the patron saint of the city of Venice, in Italy."
+      ],
+      "words_to_know": [
+        {
+          "word": "Gospel",
+          "definition": "One of the four books of the Bible that tell about the life of Jesus."
+        },
+        {
+          "word": "Evangelist",
+          "definition": "A writer of one of the four Gospels: Matthew, Mark, Luke, or John."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Ministry",
+          "definition": "The work of serving God and God's people."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        }
+      ],
+      "think_about_it": "Mark gave up and went home once, and later he became a great helper. What can you do after you give up on something?",
+      "reflection_question": "Paul gave Mark a second chance. Who needs a second chance from you?",
+      "kindness_prompt": "Mark's family opened their home to others. Welcome someone today: invite a friend to play, or share your things gladly.",
+      "quiz": [
+        {
+          "prompt": "Where did the first Christians gather to pray in Jerusalem?",
+          "choices": [
+            {
+              "text": "In a palace"
+            },
+            {
+              "text": "In the house of Mark's mother",
+              "correct": true
+            },
+            {
+              "text": "On a ship"
+            }
+          ],
+          "explanation": "The Bible says many people were gathered in prayer at the house of Mary, the mother of John who is called Mark."
+        },
+        {
+          "prompt": "Who knocked at the gate after an angel freed him from prison?",
+          "choices": [
+            {
+              "text": "Saint Paul"
+            },
+            {
+              "text": "Saint Luke"
+            },
+            {
+              "text": "Saint Peter",
+              "correct": true
+            }
+          ],
+          "explanation": "Peter came to the house and knocked. Rhoda was so happy that she forgot to open the gate."
+        },
+        {
+          "prompt": "What did Mark do on his first missionary trip?",
+          "choices": [
+            {
+              "text": "He turned back and went home.",
+              "correct": true
+            },
+            {
+              "text": "He became a king."
+            },
+            {
+              "text": "He built a church in Rome."
+            }
+          ],
+          "explanation": "Mark turned back partway through the trip. Later he became a trusted helper."
+        },
+        {
+          "prompt": "What did Peter call Mark?",
+          "choices": [
+            {
+              "text": "\"My teacher\""
+            },
+            {
+              "text": "\"My son\"",
+              "correct": true
+            },
+            {
+              "text": "\"My brother\""
+            }
+          ],
+          "explanation": "In one of his letters, Peter calls him \"Mark, my son.\""
+        },
+        {
+          "prompt": "What is special about Mark's Gospel?",
+          "choices": [
+            {
+              "text": "It is the longest."
+            },
+            {
+              "text": "It was written by a king."
+            },
+            {
+              "text": "It is the shortest of the four.",
+              "correct": true
+            }
+          ],
+          "explanation": "Mark's Gospel is the shortest, and many think it was the first one written."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 12:11–17, 25",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/12",
+          "note": "Peter freed by an angel, the house of Mary the mother of John called Mark, the prayer gathering, Rhoda, Mark going with Barnabas and Saul"
+        },
+        {
+          "title": "2 Timothy 4:11",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/2timothy/4",
+          "note": "\"Get Mark and bring him with you...\""
+        },
+        {
+          "title": "1 Peter 5:13",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/1peter/5",
+          "note": "\"Mark, my son\""
+        },
+        {
+          "title": "Colossians 4, note on verse 10",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/colossians/4",
+          "note": "Mark, called John Mark in Acts, traditionally the author of the second Gospel"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "john-the-apostle",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. John",
+        "production_id_hint": 981
+      },
+      "student_title": "Saint John the Apostle",
+      "subtitle": "A fisherman who became one of Jesus's closest friends and took care of Mary.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus; died about the year 100"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee, by the Sea of Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "December 27"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being a close friend of Jesus and teaching that God is love"
+        }
+      ],
+      "intro": "John was a fisherman. He and his brother James were mending their nets when Jesus called them, and they left everything to follow him. John became one of Jesus's closest friends. He stood by the cross when Jesus died, and Jesus asked him to take care of his mother, Mary. Christians honor John as the writer of the fourth Gospel.",
+      "story_paragraphs": [
+        "John and his brother James were fishermen on the Sea of Galilee. Their father's name was Zebedee. One day, the two brothers were in a boat with their father, mending their nets. Jesus walked by and called them. Right away, they left their father in the boat and followed Jesus.",
+        "John became one of the twelve apostles. He, his brother James, and Peter were often the ones closest to Jesus at the most important moments.",
+        "The fourth Gospel speaks of \"the disciple whom Jesus loved.\" From early times, Christians have believed that this disciple was John.",
+        "When Jesus was dying on the cross, most of his friends had run away. But that disciple was there, standing beside Mary, the Mother of Jesus. Jesus looked at his mother and said, \"Woman, behold, your son.\" Then he said to the disciple, \"Behold, your mother.\" From that hour, the disciple took Mary into his home and cared for her.",
+        "On Easter morning, Mary Magdalene came running with news that the tomb was open. Peter and the other disciple ran to see. The other disciple ran faster and got there first. He looked into the empty tomb, and he believed.",
+        "Later, some of the disciples were fishing when a man called to them from the shore. It was this disciple who knew him first and said, \"It is the Lord.\"",
+        "After Jesus returned to heaven, John worked alongside Peter, preaching and healing. Tradition says that he later lived in the city of Ephesus and grew very old there. A story from the early Church says that when he was too old to preach, he would simply say, \"Little children, love one another.\"",
+        "John is honored as the writer of the fourth Gospel, three letters, and the Book of Revelation. Tradition says he died peacefully around the year 100."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus calls John and his brother James from their father's fishing boat."
+        },
+        {
+          "date_display": "The years of Jesus's preaching",
+          "text": "John is one of the twelve apostles and one of Jesus's closest friends."
+        },
+        {
+          "date_display": "Good Friday",
+          "text": "At the cross, Jesus gives Mary and the beloved disciple to each other."
+        },
+        {
+          "date_display": "Easter morning",
+          "text": "The beloved disciple runs to the tomb, sees, and believes."
+        },
+        {
+          "date_display": "After Jesus returns to heaven",
+          "text": "John preaches alongside Peter."
+        },
+        {
+          "date_display": "About the year 100",
+          "text": "According to tradition, John dies in Ephesus as a very old man."
+        }
+      ],
+      "fun_facts": [
+        "John's brother James was an apostle too.",
+        "On Easter morning, the beloved disciple ran faster than Peter and reached the tomb first.",
+        "Jesus asked the beloved disciple to care for his mother, Mary.",
+        "In art, John's sign is an eagle.",
+        "The Church celebrates John's feast on December 27, two days after Christmas."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus."
+        },
+        {
+          "word": "Gospel",
+          "definition": "One of the four books of the Bible that tell about the life of Jesus."
+        },
+        {
+          "word": "Evangelist",
+          "definition": "A writer of one of the four Gospels: Matthew, Mark, Luke, or John."
+        },
+        {
+          "word": "Behold",
+          "definition": "An old word that means \"look\" or \"see.\""
+        }
+      ],
+      "think_about_it": "John stayed at the cross when it was frightening to be there. What makes a friend stay when things are hard?",
+      "reflection_question": "Jesus gave his mother to the beloved disciple, and to all of us. How can you welcome Mary into your life?",
+      "kindness_prompt": "John's message was \"love one another.\" Choose one person in your family and do something loving for them today.",
+      "quiz": [
+        {
+          "prompt": "What were John and his brother James doing when Jesus called them?",
+          "choices": [
+            {
+              "text": "Building a house"
+            },
+            {
+              "text": "Mending their fishing nets",
+              "correct": true
+            },
+            {
+              "text": "Collecting taxes"
+            },
+            {
+              "text": "Watching sheep"
+            }
+          ],
+          "explanation": "John and James were in a boat with their father, Zebedee, mending their nets."
+        },
+        {
+          "prompt": "Whom did Jesus ask the beloved disciple to take care of?",
+          "choices": [
+            {
+              "text": "Mary, his mother",
+              "correct": true
+            },
+            {
+              "text": "Peter"
+            },
+            {
+              "text": "The Temple"
+            }
+          ],
+          "explanation": "From the cross, Jesus said to the disciple, \"Behold, your mother,\" and the disciple took her into his home."
+        },
+        {
+          "prompt": "Who reached the tomb first on Easter morning?",
+          "choices": [
+            {
+              "text": "Peter"
+            },
+            {
+              "text": "The other disciple, who ran faster",
+              "correct": true
+            },
+            {
+              "text": "A soldier"
+            }
+          ],
+          "explanation": "The Gospel says the other disciple ran faster than Peter and arrived at the tomb first."
+        },
+        {
+          "prompt": "What is John's sign in art?",
+          "choices": [
+            {
+              "text": "A lion"
+            },
+            {
+              "text": "An ox"
+            },
+            {
+              "text": "An eagle",
+              "correct": true
+            }
+          ],
+          "explanation": "Each Gospel writer has a sign. John's is the eagle."
+        },
+        {
+          "prompt": "What did the old story say John kept telling people?",
+          "choices": [
+            {
+              "text": "\"Go fishing.\""
+            },
+            {
+              "text": "\"Love one another.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Build bigger boats.\""
+            }
+          ],
+          "explanation": "A story from the early Church says he would repeat, \"Little children, love one another.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mark 1:19–20",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/1",
+          "note": "James and John, sons of Zebedee, mending their nets; leaving their father in the boat"
+        },
+        {
+          "title": "John 19:25–27",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/19",
+          "note": "the cross, \"Woman, behold, your son,\" \"Behold, your mother,\" taking her into his home"
+        },
+        {
+          "title": "John 20:1–8",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/20",
+          "note": "Mary of Magdala's news, the two disciples running, the other disciple arriving first, seeing and believing"
+        },
+        {
+          "title": "John 21:1–14",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/21",
+          "note": "the disciples fishing and the beloved disciple recognizing the Lord"
+        }
+      ]
+    }
+  ]
+}

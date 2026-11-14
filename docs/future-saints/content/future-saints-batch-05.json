@@ -1,0 +1,2520 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-12",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "andrew",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Andrew",
+        "production_id_hint": 889
+      },
+      "student_title": "Saint Andrew",
+      "subtitle": "The fisherman who met Jesus and ran to bring his brother.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Bethsaida, in Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "November 30"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Bringing people to Jesus, starting with his brother Peter"
+        }
+      ],
+      "intro": "Andrew was a fisherman and the brother of Simon Peter. He was one of the very first people to follow Jesus. As soon as he met Jesus, he hurried to find his brother and said, \"We have found the Messiah.\" Then he brought Peter to Jesus. All through the Gospels, Andrew keeps doing the same thing: bringing people to Jesus.",
+      "story_paragraphs": [
+        "Andrew came from Bethsaida, a town in Galilee. He and his brother Simon were fishermen.",
+        "Before he met Jesus, Andrew was a follower of John the Baptist. One day, John saw Jesus walking by and said, \"Behold, the Lamb of God.\" Andrew and another disciple heard this, and they followed Jesus.",
+        "Jesus turned and asked them, \"What are you looking for?\" They asked where he was staying. He said, \"Come, and you will see.\" So they went and spent the rest of the day with him.",
+        "Andrew could not keep the news to himself. The first thing he did was find his brother Simon. He told him, \"We have found the Messiah.\" Then he brought Simon to Jesus. Jesus gave Simon a new name, Peter.",
+        "Later, the two brothers were casting their net into the sea when Jesus called to them, \"Come after me, and I will make you fishers of men.\" They left their nets and followed him. Andrew became one of the twelve apostles.",
+        "One day, a huge crowd came to hear Jesus, about five thousand people, and they were hungry. It was Andrew who noticed a boy in the crowd. He told Jesus, \"There is a boy here who has five barley loaves and two fish; but what good are these for so many?\" Jesus took the loaves and the fish, gave thanks, and fed everyone. There were twelve baskets left over.",
+        "The Bible does not tell us what Andrew did after Jesus returned to heaven. Old tradition says he carried the Good News to lands around the Black Sea and to Greece, and that he died for his faith in the Greek city of Patras.",
+        "Because he was one of the first to follow Jesus, Christians in the East call Andrew \"the First-Called.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Andrew, a fisherman, becomes a follower of John the Baptist."
+        },
+        {
+          "date_display": "One day",
+          "text": "John points to Jesus, and Andrew follows him and spends the day with him."
+        },
+        {
+          "date_display": "The same day",
+          "text": "Andrew finds his brother Simon and brings him to Jesus."
+        },
+        {
+          "date_display": "Later",
+          "text": "Jesus calls the two brothers to leave their nets and become \"fishers of men.\""
+        },
+        {
+          "date_display": "One day in Galilee",
+          "text": "Andrew brings Jesus a boy with five loaves and two fish."
+        },
+        {
+          "date_display": "About the year 60",
+          "text": "According to tradition, Andrew dies for his faith in Patras, Greece."
+        }
+      ],
+      "fun_facts": [
+        "Andrew was the brother of Saint Peter.",
+        "Andrew was a follower of John the Baptist before he followed Jesus.",
+        "Christians in the East call Andrew \"the First-Called.\"",
+        "Andrew is a patron saint of Scotland. The white X on Scotland's flag is called Saint Andrew's cross.",
+        "Andrew is also a patron saint of Greece and of fishermen."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus."
+        },
+        {
+          "word": "Messiah",
+          "definition": "The Savior God promised to send. Christians believe Jesus is the Messiah."
+        },
+        {
+          "word": "Lamb of God",
+          "definition": "A name for Jesus, who gave his life for us."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        }
+      ],
+      "think_about_it": "The first thing Andrew did was tell his brother about Jesus. Who is someone you could tell about Jesus?",
+      "reflection_question": "Andrew noticed a boy with a small lunch, and Jesus used it to feed thousands. What small thing can you offer Jesus?",
+      "kindness_prompt": "Andrew brought people to Jesus. Invite a friend or family member to pray with you today, even one short prayer.",
+      "quiz": [
+        {
+          "prompt": "Who was Andrew's brother?",
+          "choices": [
+            {
+              "text": "John"
+            },
+            {
+              "text": "Simon Peter",
+              "correct": true
+            },
+            {
+              "text": "Matthew"
+            },
+            {
+              "text": "Thomas"
+            }
+          ],
+          "explanation": "Andrew was the brother of Simon Peter. Both were fishermen."
+        },
+        {
+          "prompt": "Whom did Andrew follow before he met Jesus?",
+          "choices": [
+            {
+              "text": "John the Baptist",
+              "correct": true
+            },
+            {
+              "text": "King Herod"
+            },
+            {
+              "text": "A Roman soldier"
+            }
+          ],
+          "explanation": "Andrew was a follower of John the Baptist, who pointed him to Jesus."
+        },
+        {
+          "prompt": "What did Andrew tell his brother?",
+          "choices": [
+            {
+              "text": "\"Let's go fishing.\""
+            },
+            {
+              "text": "\"We have found the Messiah.\"",
+              "correct": true
+            },
+            {
+              "text": "\"It is time to go home.\""
+            }
+          ],
+          "explanation": "Andrew found Simon, told him, \"We have found the Messiah,\" and brought him to Jesus."
+        },
+        {
+          "prompt": "What did the boy Andrew found have with him?",
+          "choices": [
+            {
+              "text": "A basket of figs"
+            },
+            {
+              "text": "Twelve fish"
+            },
+            {
+              "text": "Five barley loaves and two fish",
+              "correct": true
+            }
+          ],
+          "explanation": "Andrew told Jesus about a boy with five barley loaves and two fish, and Jesus fed about five thousand people."
+        },
+        {
+          "prompt": "What do Christians in the East call Andrew?",
+          "choices": [
+            {
+              "text": "The Rock"
+            },
+            {
+              "text": "The First-Called",
+              "correct": true
+            },
+            {
+              "text": "The Twin"
+            }
+          ],
+          "explanation": "Andrew was among the very first to follow Jesus, so he is called \"the First-Called.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 1:35–44",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/1",
+          "note": "John the Baptist's words, Andrew following Jesus, \"Come, and you will see,\" finding Simon, \"We have found the Messiah,\" Bethsaida as the town of Andrew and Peter"
+        },
+        {
+          "title": "Mark 1:16–18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/1",
+          "note": "Simon and Andrew casting their nets, \"fishers of men\""
+        },
+        {
+          "title": "John 6:5–13",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/6",
+          "note": "the boy with five barley loaves and two fish, about five thousand people, twelve baskets"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "james-the-greater",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. James (Son of Zebedee)",
+        "production_id_hint": 975
+      },
+      "student_title": "Saint James the Greater",
+      "subtitle": "A fisherman, the brother of John, and the first apostle to give his life for Jesus.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus; died about the year 44"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee, by the Sea of Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 25"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being one of Jesus's closest friends and the first apostle to be martyred"
+        }
+      ],
+      "intro": "James and his brother John were fishermen. When Jesus called them, they left their boat and their father and followed him. Jesus gave the two brothers a nickname: \"sons of thunder.\" James was one of the three apostles closest to Jesus. He was also the first of the twelve apostles to die for his faith.",
+      "story_paragraphs": [
+        "James was a fisherman on the Sea of Galilee. His father was named Zebedee, and his brother was John.",
+        "One day, James and John were in their boat, mending their nets. Jesus walked along the shore and called them. They left their father Zebedee in the boat with the hired men, and they followed Jesus.",
+        "Jesus chose twelve of his followers to be apostles, and James was one of them. Jesus gave James and John a special name. He called them Boanerges, which means \"sons of thunder.\" Perhaps it was because the brothers had loud, bold hearts.",
+        "There were two apostles named James. This James is called \"the Greater\" so people can tell them apart.",
+        "James, his brother John, and Peter were often the three apostles nearest to Jesus at the most important moments of his life.",
+        "James had a lot to learn. He and his brother once hoped for the best places next to Jesus in his kingdom. Jesus asked them if they could share in his suffering. He taught his friends that being great means serving others.",
+        "After Jesus rose from the dead and returned to heaven, James helped lead the first Christians in Jerusalem. It was a dangerous time. The Bible tells us that King Herod began to harm members of the Church, and he had James, the brother of John, killed. This happened about the year 44. James was the first of the twelve apostles to die for Jesus.",
+        "A much later tradition, loved in the country of Spain, says that James once preached there, and that his body was carried to Spain after he died. Historians cannot be sure this is so. But for more than a thousand years, people have honored Saint James in the Spanish city of Santiago de Compostela. He is the patron saint of Spain."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus calls James and John from their father's fishing boat."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Jesus chooses James as one of the twelve apostles and calls the brothers \"sons of thunder.\""
+        },
+        {
+          "date_display": "The years of Jesus's preaching",
+          "text": "James is one of the three apostles closest to Jesus."
+        },
+        {
+          "date_display": "After Jesus returns to heaven",
+          "text": "James helps lead the first Christians in Jerusalem."
+        },
+        {
+          "date_display": "About the year 44",
+          "text": "King Herod has James killed. He is the first apostle to die for Jesus."
+        },
+        {
+          "date_display": "The 800s",
+          "text": "People in Spain begin to honor a tomb as the tomb of Saint James."
+        }
+      ],
+      "fun_facts": [
+        "Jesus called James and John \"sons of thunder.\"",
+        "James's brother was Saint John the Apostle.",
+        "James is called \"the Greater\" because there was another apostle named James.",
+        "\"Santiago\" is Spanish for \"Saint James.\"",
+        "A scallop shell is a sign of Saint James."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is killed for believing in Jesus."
+        },
+        {
+          "word": "Nickname",
+          "definition": "A special extra name given to someone."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays in a special way for a place or a group of people."
+        }
+      ],
+      "think_about_it": "James wanted an important place, and Jesus taught him that being great means serving. How can you be \"great\" by serving someone?",
+      "reflection_question": "James left his boat right away when Jesus called. What might Jesus be calling you to do?",
+      "kindness_prompt": "Jesus taught James to serve. Today, serve someone at home first: pour their drink, carry their things, or let them choose.",
+      "quiz": [
+        {
+          "prompt": "What were James and John doing when Jesus called them?",
+          "choices": [
+            {
+              "text": "Planting a field"
+            },
+            {
+              "text": "Mending their fishing nets",
+              "correct": true
+            },
+            {
+              "text": "Building a house"
+            },
+            {
+              "text": "Counting money"
+            }
+          ],
+          "explanation": "James and John were in their boat mending their nets when Jesus called them."
+        },
+        {
+          "prompt": "What nickname did Jesus give James and John?",
+          "choices": [
+            {
+              "text": "Sons of light"
+            },
+            {
+              "text": "Sons of the sea"
+            },
+            {
+              "text": "Sons of thunder",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus called them Boanerges, which means \"sons of thunder.\""
+        },
+        {
+          "prompt": "Why is this James called \"the Greater\"?",
+          "choices": [
+            {
+              "text": "To tell him apart from another apostle named James",
+              "correct": true
+            },
+            {
+              "text": "Because he was a king"
+            },
+            {
+              "text": "Because he was the tallest person in Galilee"
+            }
+          ],
+          "explanation": "Two of the twelve apostles were named James, so this one is called \"the Greater.\""
+        },
+        {
+          "prompt": "What is special about how James's life ended?",
+          "choices": [
+            {
+              "text": "He lived longer than anyone."
+            },
+            {
+              "text": "He was the first apostle to die for Jesus.",
+              "correct": true
+            },
+            {
+              "text": "He became a fisherman again."
+            }
+          ],
+          "explanation": "King Herod had James killed about the year 44. He was the first of the twelve apostles to be martyred."
+        },
+        {
+          "prompt": "Which country honors James as its patron saint?",
+          "choices": [
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Poland"
+            },
+            {
+              "text": "Spain",
+              "correct": true
+            }
+          ],
+          "explanation": "Saint James is the patron saint of Spain, where he is honored at Santiago de Compostela."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mark 1:19–20",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/1",
+          "note": "James and John mending nets, leaving Zebedee and the hired men"
+        },
+        {
+          "title": "Mark 3:13–19",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/3",
+          "note": "the Twelve, \"Boanerges, that is, sons of thunder,\" the second James"
+        },
+        {
+          "title": "Acts 12:1–2",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/12",
+          "note": "King Herod harming the Church and having James, the brother of John, killed"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "thomas",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Thomas",
+        "production_id_hint": 1079
+      },
+      "student_title": "Saint Thomas",
+      "subtitle": "The apostle who doubted, then believed, and said, \"My Lord and my God!\"",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His doubt, and then his great words of faith"
+        }
+      ],
+      "intro": "Thomas was one of the twelve apostles. He is often called \"Doubting Thomas,\" because he would not believe Jesus had risen until he saw him with his own eyes. But when Jesus came and stood in front of him, Thomas spoke some of the greatest words of faith in the whole Bible: \"My Lord and my God!\"",
+      "story_paragraphs": [
+        "Thomas was one of the twelve apostles Jesus chose. The Gospel of John tells us he was also called Didymus, which means \"the twin.\"",
+        "Thomas was brave. Once, Jesus wanted to go to a place where his enemies were waiting. The other disciples were afraid. Thomas said to them, \"Let us also go to die with him.\" He was ready to stay with Jesus no matter what.",
+        "Thomas was also honest. At the Last Supper, Jesus told his friends that he was going to prepare a place for them. Thomas spoke up: \"Master, we do not know where you are going; how can we know the way?\" Jesus answered, \"I am the way and the truth and the life.\"",
+        "Then came the hardest days. Jesus died on the cross. On Easter evening, the disciples were together behind locked doors. Suddenly Jesus stood among them and said, \"Peace be with you.\" He showed them his hands and his side, and they were filled with joy.",
+        "But Thomas was not there. When the others told him, \"We have seen the Lord,\" he could not believe it. He said, \"Unless I see the mark of the nails in his hands and put my finger into the nailmarks and put my hand into his side, I will not believe.\"",
+        "A week later, the disciples were together again, and this time Thomas was with them. The doors were locked. Jesus came and stood among them and said, \"Peace be with you.\" Then he turned to Thomas. \"Put your finger here and see my hands,\" he said. \"Do not be unbelieving, but believe.\"",
+        "Thomas answered, \"My Lord and my God!\" Jesus said to him, \"Have you come to believe because you have seen me? Blessed are those who have not seen and have believed.\" Those words are for us.",
+        "A strong and very old tradition says that Thomas later traveled far to the east, all the way to India, to tell people about Jesus."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus chooses Thomas as one of the twelve apostles."
+        },
+        {
+          "date_display": "On the way to Bethany",
+          "text": "Thomas says, \"Let us also go to die with him.\""
+        },
+        {
+          "date_display": "The Last Supper",
+          "text": "Thomas asks how they can know the way. Jesus says, \"I am the way.\""
+        },
+        {
+          "date_display": "Easter evening",
+          "text": "Jesus appears to the disciples, but Thomas is not there."
+        },
+        {
+          "date_display": "A week later",
+          "text": "Thomas sees Jesus and says, \"My Lord and my God!\""
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "According to tradition, Thomas carries the Good News to India."
+        }
+      ],
+      "fun_facts": [
+        "Thomas was also called Didymus, which means \"the twin.\"",
+        "People still say \"Doubting Thomas\" for someone who needs to see something to believe it.",
+        "Thomas's question led Jesus to say, \"I am the way and the truth and the life.\"",
+        "Christians in India have honored Thomas as the one who brought them the faith since ancient times.",
+        "Thomas is a patron saint of India."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Doubt",
+          "definition": "Not being sure whether something is true."
+        },
+        {
+          "word": "Believe",
+          "definition": "To trust that something is true, even when you cannot see it."
+        },
+        {
+          "word": "Blessed",
+          "definition": "Happy and close to God."
+        },
+        {
+          "word": "Resurrection",
+          "definition": "Jesus rising from the dead on the third day."
+        }
+      ],
+      "think_about_it": "Jesus was not angry at Thomas for doubting. He came back and helped him believe. What does that show you about Jesus?",
+      "reflection_question": "Jesus said, \"Blessed are those who have not seen and have believed.\" What helps you believe in Jesus, even though you cannot see him?",
+      "kindness_prompt": "Thomas asked honest questions. If a friend is confused or has a question, listen patiently and help them find the answer.",
+      "quiz": [
+        {
+          "prompt": "What does Thomas's other name, Didymus, mean?",
+          "choices": [
+            {
+              "text": "The rock"
+            },
+            {
+              "text": "The twin",
+              "correct": true
+            },
+            {
+              "text": "The fisherman"
+            },
+            {
+              "text": "The teacher"
+            }
+          ],
+          "explanation": "The Gospel of John says Thomas was called Didymus, which means \"the twin.\""
+        },
+        {
+          "prompt": "Where was Thomas when Jesus first appeared on Easter evening?",
+          "choices": [
+            {
+              "text": "Standing next to Jesus"
+            },
+            {
+              "text": "Asleep in the room"
+            },
+            {
+              "text": "He was not there.",
+              "correct": true
+            }
+          ],
+          "explanation": "Thomas was not with the other disciples when Jesus came the first time."
+        },
+        {
+          "prompt": "What did Thomas say he needed before he would believe?",
+          "choices": [
+            {
+              "text": "To see and touch the marks of the nails",
+              "correct": true
+            },
+            {
+              "text": "A letter from Peter"
+            },
+            {
+              "text": "A sign in the sky"
+            }
+          ],
+          "explanation": "Thomas said he would not believe unless he saw the mark of the nails and touched Jesus's wounds."
+        },
+        {
+          "prompt": "What did Thomas say when he saw Jesus?",
+          "choices": [
+            {
+              "text": "\"I was right.\""
+            },
+            {
+              "text": "\"My Lord and my God!\"",
+              "correct": true
+            },
+            {
+              "text": "\"Who are you?\""
+            }
+          ],
+          "explanation": "When Jesus stood before him, Thomas said, \"My Lord and my God!\""
+        },
+        {
+          "prompt": "Whom did Jesus call blessed?",
+          "choices": [
+            {
+              "text": "Those who are never afraid"
+            },
+            {
+              "text": "Those who are very strong"
+            },
+            {
+              "text": "Those who have not seen and have believed",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus said, \"Blessed are those who have not seen and have believed.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 11:16",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/11",
+          "note": "Thomas, called Didymus; \"Let us also go to die with him\""
+        },
+        {
+          "title": "John 14:5–6",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/14",
+          "note": "Thomas's question; \"I am the way and the truth and the life\""
+        },
+        {
+          "title": "John 20:19–29",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/20",
+          "note": "Easter evening, Thomas absent, his words, a week later, \"My Lord and my God!\", \"Blessed are those...\""
+        },
+        {
+          "title": "Mark 3:18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/3",
+          "note": "Thomas among the Twelve"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "philip-and-james",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "Sts. Philip and James",
+        "production_id_hint": 1055
+      },
+      "student_title": "Saints Philip and James",
+      "subtitle": "Two of the twelve apostles, honored together on one feast day.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee; Philip came from Bethsaida"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "May 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Following Jesus as two of his twelve apostles"
+        }
+      ],
+      "intro": "Philip and James were two of the twelve apostles. Philip was called by Jesus with two simple words, \"Follow me,\" and he quickly brought a friend to meet Jesus too. James is sometimes called \"James the Less.\" We know very little about him, but Jesus chose him, and he said yes. The Church honors these two apostles together on May 3.",
+      "story_paragraphs": [
+        "When Jesus chose twelve men to be his apostles, Philip and James were both on the list. The Church remembers them on the same day.",
+        "Philip came from Bethsaida, the same town as the brothers Peter and Andrew. One day, Jesus found Philip and said to him, \"Follow me.\" And Philip did.",
+        "Philip was so glad that he went straight to his friend Nathanael. He told him they had found the one the prophets had written about: Jesus, from the town of Nazareth. Nathanael was not impressed. He asked, \"Can anything good come from Nazareth?\" Philip did not argue. He just said, \"Come and see.\"",
+        "Later, a huge crowd followed Jesus, and they were hungry. Jesus asked Philip, \"Where can we buy enough food for them to eat?\" Jesus was testing him. Philip answered that even two hundred days' pay would not buy enough. Then Jesus fed the whole crowd with five loaves and two fish.",
+        "At the Last Supper, Philip made a request. \"Master, show us the Father, and that will be enough for us.\" Jesus answered, \"Whoever has seen me has seen the Father.\" When we look at Jesus, we see what God is like.",
+        "The other apostle in this pair is James, the son of Alphaeus. He is often called \"James the Less,\" so that people will not mix him up with the other apostle James, the brother of John. The Bible lists him among the Twelve but tells us almost nothing else about him. He followed Jesus faithfully and quietly.",
+        "After Jesus returned to heaven, the apostles went out to share the Good News. Tradition says Philip preached in the land that is now Turkey.",
+        "Why are Philip and James honored together? Long ago, in the 500s, their relics were brought to the same church in Rome. Christians have celebrated them on one day ever since."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Jesus says to Philip, \"Follow me.\""
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Philip tells Nathanael, \"Come and see.\""
+        },
+        {
+          "date_display": "Later",
+          "text": "Jesus chooses Philip and James, son of Alphaeus, as two of the twelve apostles."
+        },
+        {
+          "date_display": "The Last Supper",
+          "text": "Philip asks to see the Father. Jesus says, \"Whoever has seen me has seen the Father.\""
+        },
+        {
+          "date_display": "After Jesus returns to heaven",
+          "text": "The apostles go out to share the Good News."
+        },
+        {
+          "date_display": "The 500s",
+          "text": "The relics of Philip and James are placed in the same church in Rome."
+        }
+      ],
+      "fun_facts": [
+        "Philip came from Bethsaida, the same town as Peter and Andrew.",
+        "When his friend doubted, Philip simply said, \"Come and see.\"",
+        "There were two apostles named James. This one is called \"James the Less.\"",
+        "Philip and James share a feast day because their relics were placed in the same church.",
+        "Philip and James are the patron saints of the country of Uruguay."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Prophet",
+          "definition": "A person God chooses to speak his message to the people."
+        },
+        {
+          "word": "Relic",
+          "definition": "Something holy that is kept and honored, like the remains of a saint or an object connected to one."
+        },
+        {
+          "word": "Feast day",
+          "definition": "The day each year when the Church honors a saint."
+        },
+        {
+          "word": "Faithful",
+          "definition": "Staying true to God and to your promises."
+        }
+      ],
+      "think_about_it": "We know almost nothing about James the Less, yet he is a great saint. Do you have to be famous to be important to God?",
+      "reflection_question": "Philip said, \"Come and see.\" How could you invite someone to come and see what Jesus is like?",
+      "kindness_prompt": "Like James, do something good that no one will notice: tidy a shared space, or help without being asked.",
+      "quiz": [
+        {
+          "prompt": "What two words did Jesus say to call Philip?",
+          "choices": [
+            {
+              "text": "\"Go home.\""
+            },
+            {
+              "text": "\"Follow me.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Be quiet.\""
+            },
+            {
+              "text": "\"Sit down.\""
+            }
+          ],
+          "explanation": "Jesus found Philip and said to him, \"Follow me.\""
+        },
+        {
+          "prompt": "What did Philip say when Nathanael doubted?",
+          "choices": [
+            {
+              "text": "\"You are wrong.\""
+            },
+            {
+              "text": "\"Never mind.\""
+            },
+            {
+              "text": "\"Come and see.\"",
+              "correct": true
+            }
+          ],
+          "explanation": "Philip did not argue. He invited Nathanael to \"Come and see.\""
+        },
+        {
+          "prompt": "What did Jesus tell Philip at the Last Supper?",
+          "choices": [
+            {
+              "text": "\"Whoever has seen me has seen the Father.\"",
+              "correct": true
+            },
+            {
+              "text": "\"You must leave now.\""
+            },
+            {
+              "text": "\"Bring more bread.\""
+            }
+          ],
+          "explanation": "Philip asked to see the Father, and Jesus answered, \"Whoever has seen me has seen the Father.\""
+        },
+        {
+          "prompt": "Why is one apostle called \"James the Less\"?",
+          "choices": [
+            {
+              "text": "Because he ate less"
+            },
+            {
+              "text": "To tell him apart from the other apostle named James",
+              "correct": true
+            },
+            {
+              "text": "Because he was the youngest child"
+            }
+          ],
+          "explanation": "Two apostles were named James. \"The Less\" helps people tell them apart."
+        },
+        {
+          "prompt": "Why do Philip and James share a feast day?",
+          "choices": [
+            {
+              "text": "They were brothers."
+            },
+            {
+              "text": "They were born on the same day."
+            },
+            {
+              "text": "Their relics were placed in the same church in Rome.",
+              "correct": true
+            }
+          ],
+          "explanation": "Their relics were brought to the same church in Rome in the 500s, and they have been honored together ever since."
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 1:43–46",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/1",
+          "note": "\"Follow me,\" Bethsaida, Philip and Nathanael, \"Come and see\""
+        },
+        {
+          "title": "John 6:5–7",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/6",
+          "note": "Jesus tests Philip about feeding the crowd"
+        },
+        {
+          "title": "John 14:8–9",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/14",
+          "note": "Philip's request and Jesus's answer"
+        },
+        {
+          "title": "Mark 3:18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/3",
+          "note": "Philip and James the son of Alphaeus among the Twelve"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "bartholomew",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Bartholomew",
+        "production_id_hint": 907
+      },
+      "student_title": "Saint Bartholomew",
+      "subtitle": "An honest man whom Jesus saw under a fig tree and called to be an apostle.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "August 24"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His honest heart and his faith in Jesus"
+        }
+      ],
+      "intro": "Bartholomew was one of the twelve apostles. A very old tradition says he is the same person the Gospel of John calls Nathanael. At first, Nathanael did not think anyone important could come from the little town of Nazareth. Then he met Jesus. Jesus already knew him, and Nathanael believed. Jesus called him a man with no dishonesty in him.",
+      "story_paragraphs": [
+        "The name Bartholomew appears in the Bible's lists of the twelve apostles. The name means \"son of Tolmai.\" The lists do not tell us anything more about him.",
+        "But a very old tradition in the Church says that Bartholomew had another name: Nathanael. The Gospel of John tells a wonderful story about Nathanael, and Christians have long believed it is the story of how Bartholomew met Jesus.",
+        "Nathanael had a friend named Philip. One day, Philip came to him with exciting news. He said they had found the one Moses and the prophets wrote about: Jesus, from the town of Nazareth.",
+        "Nazareth was a small, ordinary town. Nathanael asked, \"Can anything good come from Nazareth?\" Philip answered, \"Come and see.\"",
+        "So Nathanael went. As he walked up, Jesus said, \"Here is a true Israelite. There is no duplicity in him.\" Duplicity means being dishonest or two-faced. Jesus was saying that Nathanael was an honest man who said what he really thought.",
+        "Nathanael was surprised. \"How do you know me?\" he asked. Jesus answered, \"Before Philip called you, I saw you under the fig tree.\" Nathanael was amazed that Jesus had seen him and known him. He said, \"Rabbi, you are the Son of God; you are the King of Israel.\"",
+        "Jesus told him this was only the beginning. \"You will see greater things than this,\" he said. And he did. As one of the twelve apostles, Bartholomew stayed with Jesus, heard him teach, and saw him risen from the dead.",
+        "The Bible does not tell us what Bartholomew did afterward. Old traditions say he traveled far to share the Good News, and the strongest tradition says he brought the faith to the land of Armenia. The Church in Armenia honors him as one of its founders. Tradition also says he gave his life for Jesus."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Philip tells his friend Nathanael about Jesus of Nazareth."
+        },
+        {
+          "date_display": "The same day",
+          "text": "Jesus says he saw Nathanael under the fig tree, and Nathanael believes."
+        },
+        {
+          "date_display": "Later",
+          "text": "Jesus chooses Bartholomew as one of the twelve apostles."
+        },
+        {
+          "date_display": "After Easter",
+          "text": "Bartholomew sees the risen Jesus with the other apostles."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "According to tradition, Bartholomew carries the Good News to Armenia."
+        }
+      ],
+      "fun_facts": [
+        "The name Bartholomew means \"son of Tolmai.\"",
+        "A very old tradition says Bartholomew and Nathanael are the same person.",
+        "Jesus saw Nathanael under a fig tree before they ever met.",
+        "Jesus praised Nathanael for being honest.",
+        "Bartholomew is a patron saint of Armenia."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Duplicity",
+          "definition": "Being dishonest or two-faced."
+        },
+        {
+          "word": "Israelite",
+          "definition": "A member of God's people, Israel."
+        },
+        {
+          "word": "Rabbi",
+          "definition": "A Jewish word for \"teacher.\""
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        }
+      ],
+      "think_about_it": "Jesus praised Nathanael for being honest. Why is it important to be honest, even when it is not easy?",
+      "reflection_question": "Jesus saw Nathanael under the fig tree before they met. Jesus sees and knows you, too. How does that make you feel?",
+      "kindness_prompt": "Be like Philip today. If you know about something good, invite a friend to \"come and see.\"",
+      "quiz": [
+        {
+          "prompt": "What other name does tradition give to Bartholomew?",
+          "choices": [
+            {
+              "text": "Levi"
+            },
+            {
+              "text": "Nathanael",
+              "correct": true
+            },
+            {
+              "text": "Simon"
+            },
+            {
+              "text": "Saul"
+            }
+          ],
+          "explanation": "A very old tradition says Bartholomew is the same person the Gospel of John calls Nathanael."
+        },
+        {
+          "prompt": "What did Nathanael ask when he heard about Jesus?",
+          "choices": [
+            {
+              "text": "\"Can anything good come from Nazareth?\"",
+              "correct": true
+            },
+            {
+              "text": "\"Where is Bethlehem?\""
+            },
+            {
+              "text": "\"Is he a fisherman?\""
+            }
+          ],
+          "explanation": "Nathanael did not think anyone important could come from little Nazareth."
+        },
+        {
+          "prompt": "Where did Jesus say he had seen Nathanael?",
+          "choices": [
+            {
+              "text": "In a boat"
+            },
+            {
+              "text": "In the Temple"
+            },
+            {
+              "text": "Under the fig tree",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus said, \"Before Philip called you, I saw you under the fig tree.\""
+        },
+        {
+          "prompt": "What did Jesus say about Nathanael?",
+          "choices": [
+            {
+              "text": "That he was very rich"
+            },
+            {
+              "text": "That he was honest, with no duplicity in him",
+              "correct": true
+            },
+            {
+              "text": "That he was a great fisherman"
+            }
+          ],
+          "explanation": "Jesus said, \"Here is a true Israelite. There is no duplicity in him.\""
+        },
+        {
+          "prompt": "What did Nathanael say to Jesus?",
+          "choices": [
+            {
+              "text": "\"You are a carpenter.\""
+            },
+            {
+              "text": "\"You are from Nazareth.\""
+            },
+            {
+              "text": "\"You are the Son of God.\"",
+              "correct": true
+            }
+          ],
+          "explanation": "Nathanael said, \"Rabbi, you are the Son of God; you are the King of Israel.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 1:45–51",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/1",
+          "note": "Philip and Nathanael, Nazareth, \"Come and see,\" \"no duplicity,\" the fig tree, Nathanael's words, \"greater things\""
+        },
+        {
+          "title": "Mark 3:18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/3",
+          "note": "Bartholomew among the Twelve"
+        },
+        {
+          "title": "Luke 6:14",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/6",
+          "note": "Bartholomew listed beside Philip among the Twelve"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "simon-and-jude",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "Sts. Simon and Jude",
+        "production_id_hint": 1072
+      },
+      "student_title": "Saints Simon and Jude",
+      "subtitle": "Two quiet apostles who followed Jesus faithfully and are honored together.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "The Holy Land"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 28"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Following Jesus as two of his twelve apostles"
+        }
+      ],
+      "intro": "Simon and Jude were two of the twelve apostles. The Bible tells us very little about them. Simon was called \"the Zealot.\" Jude is also called Thaddeus. They were not famous like Peter or John, but Jesus chose them, and they stayed faithful to him. Today many people ask Saint Jude to pray for them when they are in great need.",
+      "story_paragraphs": [
+        "One night, Jesus went up a mountain and prayed to God until morning. When day came, he called his disciples together and chose twelve of them. He named them apostles. Near the end of the list are two names side by side: Simon and Jude.",
+        "There were two apostles named Simon. One was Simon Peter. The other is the Simon we honor today. The Bible calls him \"Simon who was called a Zealot.\" A zealot is a person who cares about something with all his heart. Simon cared deeply about his people and their faith.",
+        "Jude has more than one name in the Bible. He is called Thaddeus, and he is also called \"Judas the son of James.\" He is not the same person as Judas Iscariot, the one who turned against Jesus. The Gospel of John is careful to say \"Judas, not the Iscariot.\"",
+        "We hear Jude speak only once. At the Last Supper, Jesus was telling his friends that he would show himself to those who love him. Jude asked a question. He wanted to know why Jesus would show himself to them and not to the whole world. Jesus answered by speaking about love: whoever loves him will keep his word.",
+        "One short letter in the New Testament is called the Letter of Jude. Christians have traditionally said it came from this apostle.",
+        "That is nearly all the Bible tells us. Simon and Jude were with Jesus through his teaching, his death, and his rising. They received the Holy Spirit at Pentecost with the others.",
+        "What happened next is known only from tradition. Old stories say Simon and Jude traveled far to tell people about Jesus, that they worked together in the land of Persia, and that they died there for their faith. That is why they share one feast day.",
+        "Today, people all over the world ask Saint Jude to pray for them when a problem seems hopeless."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "After a night of prayer, Jesus chooses the twelve apostles, including Simon and Jude."
+        },
+        {
+          "date_display": "The Last Supper",
+          "text": "Jude asks Jesus a question, and Jesus answers by speaking about love."
+        },
+        {
+          "date_display": "Pentecost",
+          "text": "Simon and Jude receive the Holy Spirit with the other apostles."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "According to tradition, they share the Good News together in Persia."
+        },
+        {
+          "date_display": "Every year on October 28",
+          "text": "The Church honors Saints Simon and Jude together."
+        }
+      ],
+      "fun_facts": [
+        "Two of the twelve apostles were named Simon: Simon Peter and Simon the Zealot.",
+        "Jude is also called Thaddeus.",
+        "The Gospel of John makes sure to say that Jude is \"not the Iscariot.\"",
+        "The Letter of Jude is one of the shortest books in the Bible.",
+        "Saint Jude is known as the patron saint of hopeless causes."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Zealot",
+          "definition": "A person who cares about something with all his heart."
+        },
+        {
+          "word": "Pentecost",
+          "definition": "The day the Holy Spirit came upon the disciples, fifty days after Easter."
+        },
+        {
+          "word": "Faithful",
+          "definition": "Staying true to God and to your promises."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        }
+      ],
+      "think_about_it": "Simon and Jude are not famous, but Jesus chose them. Does someone have to be well known to do great things for God?",
+      "reflection_question": "People ask Saint Jude to pray when things seem hopeless. What is something hard that you want to ask God's help with?",
+      "kindness_prompt": "Simon and Jude worked as a team. Team up with someone today to do a job that helps your family or your class.",
+      "quiz": [
+        {
+          "prompt": "What was the apostle Simon called?",
+          "choices": [
+            {
+              "text": "The Rock"
+            },
+            {
+              "text": "The Zealot",
+              "correct": true
+            },
+            {
+              "text": "The Twin"
+            },
+            {
+              "text": "The Baptist"
+            }
+          ],
+          "explanation": "The Bible calls him \"Simon who was called a Zealot.\""
+        },
+        {
+          "prompt": "What is another name for the apostle Jude?",
+          "choices": [
+            {
+              "text": "Nathanael"
+            },
+            {
+              "text": "Levi"
+            },
+            {
+              "text": "Thaddeus",
+              "correct": true
+            }
+          ],
+          "explanation": "Jude is also called Thaddeus in the Bible."
+        },
+        {
+          "prompt": "What did Jesus do the night before he chose the twelve apostles?",
+          "choices": [
+            {
+              "text": "He prayed all night.",
+              "correct": true
+            },
+            {
+              "text": "He went fishing."
+            },
+            {
+              "text": "He walked to Jerusalem."
+            }
+          ],
+          "explanation": "Jesus went up a mountain and spent the night in prayer before choosing the Twelve."
+        },
+        {
+          "prompt": "When does Jude speak in the Gospels?",
+          "choices": [
+            {
+              "text": "At the wedding at Cana"
+            },
+            {
+              "text": "At the Last Supper",
+              "correct": true
+            },
+            {
+              "text": "At the Jordan River"
+            }
+          ],
+          "explanation": "At the Last Supper, Jude asked Jesus a question about why he would show himself to them."
+        },
+        {
+          "prompt": "What do many people ask Saint Jude to pray for?",
+          "choices": [
+            {
+              "text": "Sunny weather"
+            },
+            {
+              "text": "Lost keys"
+            },
+            {
+              "text": "Help when a problem seems hopeless",
+              "correct": true
+            }
+          ],
+          "explanation": "Saint Jude is known as the patron saint of hopeless causes."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 6:12–16",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/6",
+          "note": "Jesus's night of prayer, choosing the Twelve, \"Simon who was called a Zealot,\" \"Judas the son of James\""
+        },
+        {
+          "title": "Mark 3:18",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/mark/3",
+          "note": "the names Thaddeus and \"Simon the Cananean\" among the Twelve"
+        },
+        {
+          "title": "John 14:22",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/14",
+          "note": "\"Judas, not the Iscariot,\" and his question"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "matthias",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Matthias",
+        "production_id_hint": 1031
+      },
+      "student_title": "Saint Matthias",
+      "subtitle": "The faithful follower who was chosen to take the empty place among the twelve apostles.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "The Holy Land"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "May 14"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being chosen as the twelfth apostle"
+        }
+      ],
+      "intro": "Matthias followed Jesus from the very beginning, though the Gospels never mention his name. After Jesus returned to heaven, there were only eleven apostles, because Judas was gone. The first Christians prayed and asked God to show them who should take that place. The one who was chosen was Matthias. He became the twelfth apostle.",
+      "story_paragraphs": [
+        "Jesus chose twelve apostles. But one of them, Judas Iscariot, turned against Jesus and handed him over to his enemies. After that, Judas was gone, and only eleven apostles were left.",
+        "Jesus rose from the dead, and forty days later he returned to heaven. His followers stayed together in Jerusalem, praying. There were about 120 of them.",
+        "One day, Peter stood up to speak. He said that someone needed to take the empty place among the apostles. Peter explained what kind of person it should be. It had to be one of the men who had been with them the whole time, from the day John baptized Jesus until the day Jesus was taken up to heaven. That person would join the apostles in telling the world that Jesus is risen.",
+        "Two men were put forward. One was Joseph, who was called Barsabbas. The other was Matthias.",
+        "Both were good men who had followed Jesus faithfully. How could the group choose? They did not argue or vote for their favorite. They prayed. They asked the Lord, who knows every heart, to show them which one he had chosen.",
+        "Then they cast lots. Casting lots was a way of choosing in Bible times, a little like drawing a name. The Bible says, \"The lot fell upon Matthias, and he was counted with the eleven apostles.\" A few days later came Pentecost. The Holy Spirit came upon the apostles, and Matthias was with them.",
+        "Think about what this tells us. Matthias had been following Jesus all along, for years. He was not one of the famous ones, and nobody had written down his name. But he had been faithful the whole time, and God knew it.",
+        "The Bible does not tell us anything more about Matthias. Later traditions tell different stories about where he preached, and none of them is certain."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Matthias follows Jesus from the time of his baptism by John."
+        },
+        {
+          "date_display": "After Easter",
+          "text": "Jesus returns to heaven, and his followers pray together in Jerusalem."
+        },
+        {
+          "date_display": "A few days later",
+          "text": "Peter says someone must take the empty place among the apostles."
+        },
+        {
+          "date_display": "The same day",
+          "text": "After prayer, the lot falls on Matthias, and he becomes the twelfth apostle."
+        },
+        {
+          "date_display": "Pentecost",
+          "text": "Matthias receives the Holy Spirit with the other apostles."
+        }
+      ],
+      "fun_facts": [
+        "Matthias is the only one of the Twelve who was chosen after Jesus returned to heaven.",
+        "The Gospels never mention Matthias by name, yet he had followed Jesus from the beginning.",
+        "About 120 followers of Jesus were gathered when Matthias was chosen.",
+        "The other man put forward was Joseph, called Barsabbas.",
+        "The feast of Saint Matthias is May 14, close to the time of year when he was chosen."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Cast lots",
+          "definition": "A way of choosing in Bible times, a little like drawing a name."
+        },
+        {
+          "word": "Witness",
+          "definition": "A person who saw something happen and can tell about it."
+        },
+        {
+          "word": "Pentecost",
+          "definition": "The day the Holy Spirit came upon the disciples, fifty days after Easter."
+        },
+        {
+          "word": "Faithful",
+          "definition": "Staying true to God and to your promises."
+        }
+      ],
+      "think_about_it": "Matthias followed Jesus for years without being noticed. Why does it matter to be faithful even when no one is watching?",
+      "reflection_question": "Before they chose, the first Christians prayed. What decision do you want to pray about?",
+      "kindness_prompt": "Matthias stepped in where he was needed. Look for a job that needs doing today, and step in to help.",
+      "quiz": [
+        {
+          "prompt": "Whose place among the apostles did Matthias take?",
+          "choices": [
+            {
+              "text": "Peter's"
+            },
+            {
+              "text": "Judas's",
+              "correct": true
+            },
+            {
+              "text": "John's"
+            },
+            {
+              "text": "Thomas's"
+            }
+          ],
+          "explanation": "After Judas was gone, there were only eleven apostles. Matthias was chosen to take that place."
+        },
+        {
+          "prompt": "Who stood up and said someone must be chosen?",
+          "choices": [
+            {
+              "text": "Peter",
+              "correct": true
+            },
+            {
+              "text": "Paul"
+            },
+            {
+              "text": "Luke"
+            }
+          ],
+          "explanation": "Peter stood up among the followers and explained what kind of person should be chosen."
+        },
+        {
+          "prompt": "What did the followers of Jesus do before they chose?",
+          "choices": [
+            {
+              "text": "They argued."
+            },
+            {
+              "text": "They had a race."
+            },
+            {
+              "text": "They prayed.",
+              "correct": true
+            }
+          ],
+          "explanation": "They asked the Lord, who knows every heart, to show them which man he had chosen."
+        },
+        {
+          "prompt": "What kind of person did Peter say it had to be?",
+          "choices": [
+            {
+              "text": "Someone very rich"
+            },
+            {
+              "text": "Someone who had been with them the whole time",
+              "correct": true
+            },
+            {
+              "text": "Someone from a faraway country"
+            }
+          ],
+          "explanation": "It had to be someone who had been with them from Jesus's baptism until he was taken up to heaven."
+        },
+        {
+          "prompt": "How many apostles were there after Matthias was chosen?",
+          "choices": [
+            {
+              "text": "Ten"
+            },
+            {
+              "text": "Eleven"
+            },
+            {
+              "text": "Twelve",
+              "correct": true
+            }
+          ],
+          "explanation": "Matthias \"was counted with the eleven apostles,\" making twelve again."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 1:15–26",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/1",
+          "note": "Peter's speech, about 120 people, the requirement, Joseph called Barsabbas and Matthias, the prayer, the lots, \"the lot fell upon Matthias\""
+        },
+        {
+          "title": "Acts 2:1–4",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/2",
+          "note": "Pentecost"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "barnabas",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Barnabas",
+        "production_id_hint": 906
+      },
+      "student_title": "Saint Barnabas",
+      "subtitle": "The \"son of encouragement,\" who believed in people and gave them a second chance.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "The island of Cyprus"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 11"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Encouraging others and helping Saint Paul begin his work"
+        }
+      ],
+      "intro": "Barnabas was one of the first Christians. His real name was Joseph, but the apostles gave him a new one: Barnabas, which means \"son of encouragement.\" He lived up to it. When everyone was afraid of Saul, Barnabas stood up for him. When young Mark failed, Barnabas gave him another chance. He helped other people become who God wanted them to be.",
+      "story_paragraphs": [
+        "Barnabas was born on the island of Cyprus. His name was Joseph. But the apostles gave him a new name, Barnabas, which means \"son of encouragement.\" To encourage means to give someone courage and hope.",
+        "The first Christians in Jerusalem shared everything they had, so that no one among them was in need. Barnabas owned a piece of land. He sold it, brought the money, and gave it to the apostles to help the poor.",
+        "Then a man named Saul came to Jerusalem. Saul had once hunted down Christians. Now he said he believed in Jesus. The disciples were all afraid of him. They did not believe he had really changed.",
+        "Barnabas did. He took Saul to the apostles and told them how Saul had seen the Lord and had spoken boldly about Jesus. Because of Barnabas, Saul was welcomed. Saul would become the great Saint Paul.",
+        "Later, the Church sent Barnabas to the city of Antioch, where many new people were coming to believe. He was glad at what he saw, and he encouraged them all to stay faithful. The Bible says of him, \"He was a good man, filled with the holy Spirit and faith.\"",
+        "There was so much to do that Barnabas went to find Saul and brought him to Antioch to help. They taught there together for a whole year. It was in Antioch that the followers of Jesus were first called Christians.",
+        "Barnabas and Paul then set out on a long journey to tell people about Jesus. A young helper named John Mark went with them, but he left and went home.",
+        "When it was time for another journey, Barnabas wanted to bring Mark again. Paul said no. They disagreed so strongly that they went separate ways. Barnabas took Mark and sailed to Cyprus. Barnabas was right to give Mark another chance. Mark later became a trusted helper, and he wrote one of the four Gospels."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first years of the Church",
+          "text": "Barnabas sells his land and gives the money to the apostles for the poor."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Barnabas stands up for Saul when the disciples are afraid of him."
+        },
+        {
+          "date_display": "Later",
+          "text": "The Church sends Barnabas to Antioch, and he brings Saul to help."
+        },
+        {
+          "date_display": "A year in Antioch",
+          "text": "Barnabas and Saul teach, and the disciples are first called Christians."
+        },
+        {
+          "date_display": "The first journey",
+          "text": "Barnabas and Paul travel to tell people about Jesus."
+        },
+        {
+          "date_display": "Afterward",
+          "text": "Barnabas gives Mark a second chance and takes him to Cyprus."
+        }
+      ],
+      "fun_facts": [
+        "Barnabas's real name was Joseph.",
+        "\"Barnabas\" means \"son of encouragement.\"",
+        "The word \"Christians\" was first used in Antioch, where Barnabas taught.",
+        "Barnabas is called an apostle, even though he was not one of the Twelve.",
+        "Barnabas is the patron saint of the island of Cyprus, where he was born."
+      ],
+      "words_to_know": [
+        {
+          "word": "Encourage",
+          "definition": "To give someone courage and hope."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus."
+        },
+        {
+          "word": "Christian",
+          "definition": "A follower of Jesus Christ."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Second chance",
+          "definition": "Another try after a mistake."
+        }
+      ],
+      "think_about_it": "Barnabas believed Saul had changed when no one else did. Why is it important to believe that people can change?",
+      "reflection_question": "Barnabas gave Mark a second chance. Who has given you a second chance? Who needs one from you?",
+      "kindness_prompt": "Be a \"son or daughter of encouragement\" today. Tell someone, \"You can do it,\" or, \"I'm proud of you.\"",
+      "quiz": [
+        {
+          "prompt": "What does the name \"Barnabas\" mean?",
+          "choices": [
+            {
+              "text": "Rock"
+            },
+            {
+              "text": "Son of encouragement",
+              "correct": true
+            },
+            {
+              "text": "The twin"
+            },
+            {
+              "text": "Gift of God"
+            }
+          ],
+          "explanation": "The apostles gave Joseph the name Barnabas, which means \"son of encouragement.\""
+        },
+        {
+          "prompt": "What did Barnabas do with the land he owned?",
+          "choices": [
+            {
+              "text": "He sold it and gave the money to the apostles.",
+              "correct": true
+            },
+            {
+              "text": "He built a palace on it."
+            },
+            {
+              "text": "He hid it."
+            }
+          ],
+          "explanation": "Barnabas sold his land and brought the money to the apostles to help people in need."
+        },
+        {
+          "prompt": "Whom did Barnabas stand up for when others were afraid?",
+          "choices": [
+            {
+              "text": "Peter"
+            },
+            {
+              "text": "Herod"
+            },
+            {
+              "text": "Saul",
+              "correct": true
+            }
+          ],
+          "explanation": "The disciples were afraid of Saul, but Barnabas took him to the apostles."
+        },
+        {
+          "prompt": "Where were the followers of Jesus first called Christians?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Antioch",
+              "correct": true
+            },
+            {
+              "text": "Bethlehem"
+            }
+          ],
+          "explanation": "The Bible says it was in Antioch that the disciples were first called Christians."
+        },
+        {
+          "prompt": "To whom did Barnabas give a second chance?",
+          "choices": [
+            {
+              "text": "Judas"
+            },
+            {
+              "text": "Stephen"
+            },
+            {
+              "text": "Mark",
+              "correct": true
+            }
+          ],
+          "explanation": "Barnabas took Mark with him again after Mark had left an earlier journey. Mark later wrote a Gospel."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 4:32–37",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/4",
+          "note": "the community sharing, Joseph named Barnabas, \"son of encouragement,\" born on Cyprus, selling his property"
+        },
+        {
+          "title": "Acts 9:26–28",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/9",
+          "note": "the disciples afraid of Saul; Barnabas brings him to the apostles"
+        },
+        {
+          "title": "Acts 11:19–26",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/11",
+          "note": "Barnabas sent to Antioch, \"a good man,\" finding Saul in Tarsus, a whole year, \"first called Christians\""
+        },
+        {
+          "title": "Acts 15:36–41",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/15",
+          "note": "the disagreement over John Mark; Barnabas and Mark sail to Cyprus"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "stephen",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Stephen",
+        "production_id_hint": 1075
+      },
+      "student_title": "Saint Stephen",
+      "subtitle": "One of the first deacons, and the first person to give his life for Jesus.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century; died about the year 34"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Jerusalem"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "December 26"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Serving the poor, and forgiving those who killed him"
+        }
+      ],
+      "intro": "Stephen lived in Jerusalem in the first days of the Church. He was one of seven men chosen to make sure that poor widows had enough to eat. He also spoke boldly about Jesus. Some people grew so angry that they killed him. As he was dying, Stephen prayed for them. He was the first Christian to die for his faith.",
+      "story_paragraphs": [
+        "After Jesus returned to heaven, more and more people in Jerusalem came to believe in him. The Christians shared their food and took care of one another.",
+        "But a problem came up. Some of the widows, women whose husbands had died, were being left out when food was given out each day.",
+        "The twelve apostles wanted to fix this. They also needed to keep praying and teaching. So they asked the community to choose seven good men, \"filled with the Spirit and wisdom,\" to take charge of this work. The first one chosen was Stephen, \"a man filled with faith and the holy Spirit.\" The apostles prayed and laid their hands on the seven. The Church remembers these men as the first deacons.",
+        "Stephen did more than serve meals. The Bible says he was \"filled with grace and power,\" and he did great wonders among the people. He spoke about Jesus with so much wisdom that those who argued with him could not answer.",
+        "Some men became angry. They told lies about Stephen and brought him before the council of leaders. As everyone stared at him, they saw that his face was like the face of an angel.",
+        "Stephen told them the long story of God's people. Then he looked up and said, \"Behold, I see the heavens opened and the Son of Man standing at the right hand of God.\" The crowd would not listen. They rushed at him, dragged him out of the city, and threw stones at him.",
+        "Stephen prayed, \"Lord Jesus, receive my spirit.\" Then he knelt down and cried out, \"Lord, do not hold this sin against them.\" With those words, he died. He had forgiven them, just as Jesus forgave from the cross.",
+        "A young man named Saul was standing there, watching over the coats of the men who threw the stones. One day, Saul would meet Jesus and become Saint Paul."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first days of the Church",
+          "text": "Some widows are being left out when food is shared."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Stephen is chosen as one of seven men to serve. The apostles lay hands on them."
+        },
+        {
+          "date_display": "The days that follow",
+          "text": "Stephen does great wonders and speaks boldly about Jesus."
+        },
+        {
+          "date_display": "Later",
+          "text": "Stephen is brought before the council, and his face is like the face of an angel."
+        },
+        {
+          "date_display": "About the year 34",
+          "text": "Stephen is killed. He dies praying for those who hurt him."
+        },
+        {
+          "date_display": "Every year on December 26",
+          "text": "The Church honors Saint Stephen the day after Christmas."
+        }
+      ],
+      "fun_facts": [
+        "Stephen is called the first martyr.",
+        "Stephen was one of the first seven deacons.",
+        "The Bible says Stephen's face looked like the face of an angel.",
+        "Saint Stephen's feast day is December 26, the day after Christmas.",
+        "Stephen is the patron saint of deacons."
+      ],
+      "words_to_know": [
+        {
+          "word": "Deacon",
+          "definition": "A man ordained to serve the Church, especially by helping people in need."
+        },
+        {
+          "word": "Widow",
+          "definition": "A woman whose husband has died."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is killed for believing in Jesus."
+        },
+        {
+          "word": "Council",
+          "definition": "A group of leaders who meet to make decisions."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To let go of anger toward someone who hurt you and to wish them good."
+        }
+      ],
+      "think_about_it": "Stephen prayed for the people who were hurting him. Why do you think he was able to do that?",
+      "reflection_question": "Stephen's first job was making sure no one was left out. Who gets left out where you are? What can you do about it?",
+      "kindness_prompt": "Stephen made sure everyone was fed. Help serve a meal today: set the table, pass the food, or share your lunch with someone.",
+      "quiz": [
+        {
+          "prompt": "What was the first job Stephen was chosen for?",
+          "choices": [
+            {
+              "text": "Building a church"
+            },
+            {
+              "text": "Making sure the widows had food",
+              "correct": true
+            },
+            {
+              "text": "Writing a Gospel"
+            },
+            {
+              "text": "Sailing to Rome"
+            }
+          ],
+          "explanation": "Stephen was one of seven men chosen to make sure the widows were not left out when food was shared."
+        },
+        {
+          "prompt": "How many men were chosen with Stephen?",
+          "choices": [
+            {
+              "text": "Three"
+            },
+            {
+              "text": "Twelve"
+            },
+            {
+              "text": "Seven",
+              "correct": true
+            }
+          ],
+          "explanation": "The community chose seven good men, and Stephen was the first one named."
+        },
+        {
+          "prompt": "What did people see when they looked at Stephen's face?",
+          "choices": [
+            {
+              "text": "It was like the face of an angel.",
+              "correct": true
+            },
+            {
+              "text": "It was very angry."
+            },
+            {
+              "text": "It was covered."
+            }
+          ],
+          "explanation": "The Bible says his face was like the face of an angel."
+        },
+        {
+          "prompt": "What did Stephen pray for the people who were killing him?",
+          "choices": [
+            {
+              "text": "That they would be punished"
+            },
+            {
+              "text": "That God would not hold this sin against them",
+              "correct": true
+            },
+            {
+              "text": "That they would run away"
+            }
+          ],
+          "explanation": "Stephen cried out, \"Lord, do not hold this sin against them.\""
+        },
+        {
+          "prompt": "Who was the young man watching over the coats?",
+          "choices": [
+            {
+              "text": "Mark"
+            },
+            {
+              "text": "Timothy"
+            },
+            {
+              "text": "Saul, who later became Saint Paul",
+              "correct": true
+            }
+          ],
+          "explanation": "The witnesses laid their cloaks at the feet of a young man named Saul."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 6:1–15",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/6",
+          "note": "the widows, the seven, \"filled with the Spirit and wisdom,\" Stephen chosen, the laying on of hands, his wonders and wisdom, the council, the face of an angel"
+        },
+        {
+          "title": "Acts 7:54–60",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/7",
+          "note": "the heavens opened, the crowd, the stoning, his two prayers, Saul and the cloaks"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "timothy",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Timothy",
+        "production_id_hint": 1084
+      },
+      "student_title": "Saint Timothy",
+      "subtitle": "A young helper of Saint Paul, who learned his faith from his mother and grandmother.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Lystra, in what is now Turkey"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 26"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Helping Saint Paul and leading the Church while he was still young"
+        }
+      ],
+      "intro": "Timothy grew up in a town called Lystra. His mother, Eunice, and his grandmother, Lois, taught him to love God. When Saint Paul came to town, he saw how good and faithful Timothy was, and he asked the young man to travel with him. Timothy became one of Paul's most trusted helpers. Two letters in the Bible are written to him.",
+      "story_paragraphs": [
+        "Timothy lived in the town of Lystra, in the land that is now Turkey. His father was Greek. His mother was Jewish, and she had become a believer in Jesus.",
+        "Timothy first learned about God at home. His mother's name was Eunice, and his grandmother's name was Lois. Years later, a letter to Timothy remembers his \"sincere faith that first lived in your grandmother Lois and in your mother Eunice.\"",
+        "When Saint Paul came to Lystra on one of his journeys, he met Timothy. The Christians in Lystra and in a nearby town all \"spoke highly of him.\" Paul wanted Timothy to come along with him. So Timothy left home and set out with Paul.",
+        "They traveled from city to city. Everywhere they went, the churches grew stronger in faith, and more people came to believe.",
+        "Timothy became like a son to Paul. Paul trusted him with hard jobs. When Paul could not visit a group of new Christians himself, he sent Timothy to teach them and cheer them on.",
+        "Later, Timothy was given the care of the Christians in the great city of Ephesus. Early tradition honors him as the first bishop there.",
+        "Timothy was young for such a big job, and it seems he was sometimes shy. The Bible has two letters written to help him. One of them says, \"Let no one have contempt for your youth, but set an example for those who believe, in speech, conduct, love, faith, and purity.\" In other words: do not let anyone look down on you because you are young. Show everyone how to live by the way you speak and act.",
+        "Another letter reminds Timothy that God did not give us a spirit of fear, but of power and love. Timothy stayed faithful for the rest of his life. He shares a feast day with another of Paul's helpers, Saint Titus, on January 26."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first century",
+          "text": "Timothy grows up in Lystra, learning the faith from Eunice and Lois."
+        },
+        {
+          "date_display": "Paul's second journey",
+          "text": "Paul meets Timothy and asks him to travel with him."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "Timothy travels with Paul and is sent to help new groups of Christians."
+        },
+        {
+          "date_display": "Later",
+          "text": "Timothy cares for the Church in Ephesus."
+        },
+        {
+          "date_display": "Near the end of Paul's life",
+          "text": "Letters are written to guide and encourage Timothy."
+        },
+        {
+          "date_display": "Every year on January 26",
+          "text": "The Church honors Saints Timothy and Titus together."
+        }
+      ],
+      "fun_facts": [
+        "The Bible tells us the names of Timothy's mother and grandmother: Eunice and Lois.",
+        "Timothy's father was Greek, and his mother was Jewish.",
+        "Two books of the Bible are letters written to Timothy.",
+        "Timothy was told not to let anyone look down on him for being young.",
+        "Timothy's feast day, January 26, comes the day after the feast of the Conversion of Saint Paul."
+      ],
+      "words_to_know": [
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Christians in an area."
+        },
+        {
+          "word": "Sincere",
+          "definition": "Real and honest, not pretend."
+        },
+        {
+          "word": "Contempt",
+          "definition": "Looking down on someone as if they do not matter."
+        },
+        {
+          "word": "Conduct",
+          "definition": "The way a person acts."
+        },
+        {
+          "word": "Example",
+          "definition": "Someone whose actions show others what to do."
+        }
+      ],
+      "think_about_it": "Timothy was told to be an example, even though he was young. How can you be a good example to others?",
+      "reflection_question": "Timothy learned his faith from his mother and grandmother. Who is teaching you about God? Have you thanked them?",
+      "kindness_prompt": "Be an example today in how you speak. Use only kind words, and see if others follow.",
+      "quiz": [
+        {
+          "prompt": "Who first taught Timothy about God?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "His mother and grandmother",
+              "correct": true
+            },
+            {
+              "text": "A Roman soldier"
+            },
+            {
+              "text": "King Herod"
+            }
+          ],
+          "explanation": "Timothy's faith \"first lived in\" his grandmother Lois and his mother Eunice."
+        },
+        {
+          "prompt": "What were the names of Timothy's mother and grandmother?",
+          "choices": [
+            {
+              "text": "Eunice and Lois",
+              "correct": true
+            },
+            {
+              "text": "Mary and Martha"
+            },
+            {
+              "text": "Elizabeth and Anne"
+            }
+          ],
+          "explanation": "His mother was Eunice, and his grandmother was Lois."
+        },
+        {
+          "prompt": "Which saint asked Timothy to travel with him?",
+          "choices": [
+            {
+              "text": "Saint John"
+            },
+            {
+              "text": "Saint Matthew"
+            },
+            {
+              "text": "Saint Paul",
+              "correct": true
+            }
+          ],
+          "explanation": "Paul met Timothy at Lystra and wanted him to come along on his journeys."
+        },
+        {
+          "prompt": "What did the letter tell Timothy about being young?",
+          "choices": [
+            {
+              "text": "To wait until he was older"
+            },
+            {
+              "text": "Not to let anyone look down on him, and to set an example",
+              "correct": true
+            },
+            {
+              "text": "To stay home"
+            }
+          ],
+          "explanation": "\"Let no one have contempt for your youth, but set an example for those who believe.\""
+        },
+        {
+          "prompt": "In what city did Timothy care for the Church?",
+          "choices": [
+            {
+              "text": "Jerusalem"
+            },
+            {
+              "text": "Ephesus",
+              "correct": true
+            },
+            {
+              "text": "Rome"
+            }
+          ],
+          "explanation": "Timothy was given the care of the Christians in Ephesus. Tradition honors him as its first bishop."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Acts 16:1–5",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/acts/16",
+          "note": "Timothy at Lystra, his Jewish mother and Greek father, \"spoke highly of him,\" Paul wanting him to come along, the churches growing"
+        },
+        {
+          "title": "2 Timothy 1:5–7",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/2timothy/1",
+          "note": "Lois and Eunice; a spirit of power and love, not of fear"
+        },
+        {
+          "title": "1 Timothy 4:12",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/1timothy/4",
+          "note": "\"Let no one have contempt for your youth...\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "titus",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Titus",
+        "production_id_hint": 1085
+      },
+      "student_title": "Saint Titus",
+      "subtitle": "A trusted helper of Saint Paul who brought peace and put things in order.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the first century"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Unknown; he served on the island of Crete"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 26"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Helping Saint Paul and leading the Church on the island of Crete"
+        }
+      ],
+      "intro": "Titus was one of Saint Paul's closest helpers. He was not Jewish, and he came to believe in Jesus through the first Christians. Paul sent Titus on some of his hardest jobs, because Titus knew how to make peace when people were upset. Later, Paul left him on the island of Crete to lead the Church there. One letter in the Bible is written to him.",
+      "story_paragraphs": [
+        "Titus lived in the first century, in the time of the apostles. He was a Gentile, which means he was not Jewish. He became a Christian and a close friend and helper of Saint Paul.",
+        "A letter in the Bible begins with a warm greeting from Paul \"to Titus, my true child in our common faith.\" Paul was not Titus's father. He meant that he loved Titus like a son, because they shared the same faith in Jesus.",
+        "In those early days, the Christians had a big question to settle. Did people who were not Jewish have to follow all the Jewish laws before they could follow Jesus? Paul brought Titus with him to Jerusalem when the leaders met to talk about it. The leaders agreed that Titus could be a Christian just as he was.",
+        "Paul trusted Titus with difficult jobs. One of the hardest was in the Greek city of Corinth. The Christians there had been quarreling, and they had hurt Paul's feelings. Paul sent Titus to help.",
+        "Paul waited and worried. He wrote that he was troubled on every side. Then Titus came back with good news. The people of Corinth were sorry, and they wanted to make things right. Paul wrote, \"God, who encourages the downcast, encouraged us by the arrival of Titus.\" Titus was happy too. His heart went out to the people of Corinth.",
+        "Later, Paul gave Titus a new job on Crete, a large island in the sea. The Church there was just beginning. Paul wrote to him, \"I left you in Crete so that you might set right what remains to be done.\" Titus was to choose good leaders for every town and to teach the people well.",
+        "Because of this, tradition honors Titus as the first bishop of Crete. It is said that he led the Church there until he was an old man and died in peace. He is the patron saint of Crete."
+      ],
+      "timeline": [
+        {
+          "date_display": "The first century",
+          "text": "Titus, who is not Jewish, becomes a Christian and a helper of Paul."
+        },
+        {
+          "date_display": "The meeting in Jerusalem",
+          "text": "Paul brings Titus along, and the leaders accept him as he is."
+        },
+        {
+          "date_display": "Later",
+          "text": "Paul sends Titus to make peace among the Christians of Corinth."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Titus returns with good news, and Paul is filled with joy."
+        },
+        {
+          "date_display": "Later still",
+          "text": "Paul leaves Titus on the island of Crete to lead the Church there."
+        },
+        {
+          "date_display": "Every year on January 26",
+          "text": "The Church honors Saints Timothy and Titus together."
+        }
+      ],
+      "fun_facts": [
+        "One book of the Bible is a letter written to Titus.",
+        "Paul called Titus \"my true child in our common faith.\"",
+        "Titus was a peacemaker who helped people who were quarreling become friends again.",
+        "Tradition honors Titus as the first bishop of the island of Crete.",
+        "Titus shares his feast day, January 26, with Saint Timothy."
+      ],
+      "words_to_know": [
+        {
+          "word": "Gentile",
+          "definition": "A person who is not Jewish."
+        },
+        {
+          "word": "Peacemaker",
+          "definition": "Someone who helps people stop fighting and be friends again."
+        },
+        {
+          "word": "Downcast",
+          "definition": "Sad and discouraged."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Christians in an area."
+        },
+        {
+          "word": "Island",
+          "definition": "Land with water all around it."
+        }
+      ],
+      "think_about_it": "Paul sent Titus when people were upset, because Titus knew how to make peace. What does a peacemaker do?",
+      "reflection_question": "Titus's good news made Paul glad when he was worried. Who needs to hear good news or a kind word from you?",
+      "kindness_prompt": "Be a peacemaker like Titus. If you see two people arguing, help them listen to each other, or be the first to say sorry.",
+      "quiz": [
+        {
+          "prompt": "Which apostle was Titus a close helper of?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint Paul",
+              "correct": true
+            },
+            {
+              "text": "Saint Andrew"
+            },
+            {
+              "text": "Saint Thomas"
+            }
+          ],
+          "explanation": "Titus was one of Paul's closest helpers. Paul called him \"my true child in our common faith.\""
+        },
+        {
+          "prompt": "What does \"Gentile\" mean?",
+          "choices": [
+            {
+              "text": "A fisherman"
+            },
+            {
+              "text": "A soldier"
+            },
+            {
+              "text": "A person who is not Jewish",
+              "correct": true
+            }
+          ],
+          "explanation": "Titus was a Gentile, which means he was not Jewish."
+        },
+        {
+          "prompt": "Why did Paul send Titus to Corinth?",
+          "choices": [
+            {
+              "text": "To help make peace",
+              "correct": true
+            },
+            {
+              "text": "To find a ship"
+            },
+            {
+              "text": "To build a temple"
+            }
+          ],
+          "explanation": "The Christians in Corinth had been quarreling, and Paul sent Titus to help."
+        },
+        {
+          "prompt": "How did Paul feel when Titus came back?",
+          "choices": [
+            {
+              "text": "Angry"
+            },
+            {
+              "text": "Encouraged and glad",
+              "correct": true
+            },
+            {
+              "text": "Bored"
+            }
+          ],
+          "explanation": "Paul wrote that God \"encouraged us by the arrival of Titus.\""
+        },
+        {
+          "prompt": "On what island did Paul leave Titus to lead the Church?",
+          "choices": [
+            {
+              "text": "Cyprus"
+            },
+            {
+              "text": "Sicily"
+            },
+            {
+              "text": "Crete",
+              "correct": true
+            }
+          ],
+          "explanation": "Paul wrote, \"I left you in Crete so that you might set right what remains to be done.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Titus 1:1–5",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/titus/1",
+          "note": "\"my true child in our common faith,\" \"I left you in Crete...,\" choosing leaders in every town"
+        },
+        {
+          "title": "2 Corinthians 7:5–15",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/2corinthians/7",
+          "note": "Paul's troubles, the arrival of Titus, the Corinthians' sorrow and eagerness, Titus's joy and affection for them"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "martha",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Martha",
+        "production_id_hint": 1022
+      },
+      "student_title": "Saint Martha",
+      "subtitle": "A friend of Jesus who welcomed him into her home and believed in him with all her heart.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Bethany, a village near Jerusalem"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 29"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Welcoming Jesus and serving others"
+        }
+      ],
+      "intro": "Martha lived in the village of Bethany with her sister Mary and her brother Lazarus. Jesus was their close friend. Martha loved to welcome him and cook for him. Once she got so busy that she grew upset, and Jesus gently helped her see what matters most. Later, when her brother died, Martha showed how strong her faith in Jesus was.",
+      "story_paragraphs": [
+        "Martha lived in Bethany, a village about two miles from Jerusalem. She shared a home with her sister, Mary, and her brother, Lazarus. The Bible tells us, \"Jesus loved Martha and her sister and Lazarus.\"",
+        "One day, Jesus came to their village, and Martha welcomed him into her home. She wanted everything to be just right for her guest. There was so much to do! But her sister Mary sat down at Jesus's feet and listened to him speak.",
+        "Martha grew upset. She came to Jesus and said, \"Lord, do you not care that my sister has left me by myself to do the serving? Tell her to help me.\"",
+        "Jesus answered her kindly. \"Martha, Martha, you are anxious and worried about many things. There is need of only one thing. Mary has chosen the better part.\" Jesus was not scolding Martha for working hard. He was reminding her that being with him comes first.",
+        "Some time later, Lazarus became very sick. The sisters sent a message to Jesus. But by the time Jesus arrived, Lazarus had died and had been in the tomb for four days.",
+        "When Martha heard that Jesus was coming, she went out to meet him. She said, \"Lord, if you had been here, my brother would not have died. But even now I know that whatever you ask of God, God will give you.\"",
+        "Jesus told her, \"I am the resurrection and the life; whoever believes in me, even if he dies, will live.\" Then he asked, \"Do you believe this?\" Martha answered, \"Yes, Lord. I have come to believe that you are the Messiah, the Son of God.\"",
+        "Then Jesus went to the tomb. He had the stone taken away, and he called out in a loud voice, \"Lazarus, come out!\" And Lazarus came out, alive. Martha is the patron saint of cooks and of everyone who welcomes guests."
+      ],
+      "timeline": [
+        {
+          "date_display": "The time of Jesus",
+          "text": "Martha lives in Bethany with her sister Mary and her brother Lazarus."
+        },
+        {
+          "date_display": "One day",
+          "text": "Martha welcomes Jesus into her home, and he tells her what matters most."
+        },
+        {
+          "date_display": "Later",
+          "text": "Lazarus becomes sick, and the sisters send word to Jesus."
+        },
+        {
+          "date_display": "Four days after Lazarus dies",
+          "text": "Martha goes out to meet Jesus and says she believes he is the Messiah."
+        },
+        {
+          "date_display": "The same day",
+          "text": "Jesus calls Lazarus out of the tomb, alive."
+        },
+        {
+          "date_display": "2021",
+          "text": "Pope Francis makes July 29 the feast of Martha, Mary, and Lazarus together."
+        }
+      ],
+      "fun_facts": [
+        "Martha's sister was Mary of Bethany, and her brother was Lazarus.",
+        "The Bible says that Jesus loved Martha, Mary, and Lazarus.",
+        "Jesus said Martha's name twice: \"Martha, Martha.\"",
+        "Bethany, where Martha lived, was only about two miles from Jerusalem.",
+        "Martha is the patron saint of cooks."
+      ],
+      "words_to_know": [
+        {
+          "word": "Anxious",
+          "definition": "Worried and upset."
+        },
+        {
+          "word": "Hospitality",
+          "definition": "Welcoming guests and taking good care of them."
+        },
+        {
+          "word": "Tomb",
+          "definition": "A place where a person who has died is buried."
+        },
+        {
+          "word": "Resurrection",
+          "definition": "Rising from the dead. Jesus rose on Easter, and he promises new life to those who believe."
+        },
+        {
+          "word": "Messiah",
+          "definition": "The Savior God promised to send. Christians believe Jesus is the Messiah."
+        }
+      ],
+      "think_about_it": "Martha was so busy doing good things that she got upset. How can you tell when you need to slow down and spend time with Jesus?",
+      "reflection_question": "Jesus asked Martha, \"Do you believe this?\" What do you believe about Jesus?",
+      "kindness_prompt": "Martha welcomed guests. Help get ready for a meal or a visitor today, and do it cheerfully.",
+      "quiz": [
+        {
+          "prompt": "Who were Martha's sister and brother?",
+          "choices": [
+            {
+              "text": "Elizabeth and John"
+            },
+            {
+              "text": "Mary and Lazarus",
+              "correct": true
+            },
+            {
+              "text": "Anne and Joachim"
+            },
+            {
+              "text": "Lois and Timothy"
+            }
+          ],
+          "explanation": "Martha lived in Bethany with her sister Mary and her brother Lazarus."
+        },
+        {
+          "prompt": "What was Mary doing while Martha was busy serving?",
+          "choices": [
+            {
+              "text": "Sleeping"
+            },
+            {
+              "text": "Cooking"
+            },
+            {
+              "text": "Sitting at Jesus's feet and listening",
+              "correct": true
+            }
+          ],
+          "explanation": "Mary sat beside the Lord at his feet, listening to him speak."
+        },
+        {
+          "prompt": "What did Jesus tell Martha?",
+          "choices": [
+            {
+              "text": "That she was anxious and worried about many things",
+              "correct": true
+            },
+            {
+              "text": "That she should cook more"
+            },
+            {
+              "text": "That she should leave the house"
+            }
+          ],
+          "explanation": "Jesus said, \"Martha, Martha, you are anxious and worried about many things. There is need of only one thing.\""
+        },
+        {
+          "prompt": "What did Martha say she believed about Jesus?",
+          "choices": [
+            {
+              "text": "That he was a good cook"
+            },
+            {
+              "text": "That he is the Messiah, the Son of God",
+              "correct": true
+            },
+            {
+              "text": "That he was a king of Rome"
+            }
+          ],
+          "explanation": "Martha said, \"I have come to believe that you are the Messiah, the Son of God.\""
+        },
+        {
+          "prompt": "What did Jesus say at the tomb?",
+          "choices": [
+            {
+              "text": "\"Martha, come here!\""
+            },
+            {
+              "text": "\"Close the door!\""
+            },
+            {
+              "text": "\"Lazarus, come out!\"",
+              "correct": true
+            }
+          ],
+          "explanation": "Jesus called out in a loud voice, \"Lazarus, come out!\" and Lazarus came out alive."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 10:38–42",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/luke/10",
+          "note": "Martha welcomes Jesus, Mary at his feet, Martha's complaint, Jesus's answer"
+        },
+        {
+          "title": "John 11:1–44",
+          "publisher": "USCCB Bible",
+          "url": "https://bible.usccb.org/bible/john/11",
+          "note": "Bethany, \"Jesus loved Martha and her sister and Lazarus,\" the message, four days, Martha's words, \"I am the resurrection and the life,\" her answer, \"Lazarus, come out!\""
+        }
+      ]
+    }
+  ]
+}

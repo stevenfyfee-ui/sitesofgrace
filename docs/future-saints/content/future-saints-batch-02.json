@@ -1,0 +1,1968 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-12",
+  "pages": [
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-guadalupe",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Guadalupe",
+        "production_id_hint": 1092
+      },
+      "student_title": "Our Lady of Guadalupe",
+      "subtitle": "Mary appeared to a humble Native man in Mexico and left her image on his cloak.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "December 9–12, 1531"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Tepeyac Hill, in what is now Mexico City"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Saint Juan Diego"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Honored by the Church for centuries, with her own feast day on December 12"
+        }
+      ],
+      "intro": "In December 1531, a Native man named Juan Diego was walking to Mass near Mexico City. On a hill called Tepeyac, Mary appeared to him and asked for a church to be built there. The bishop asked for a sign. Juan Diego brought him roses in his cloak, and an image of Mary appeared on the cloth. People still honor that image today.",
+      "story_paragraphs": [
+        "Almost 500 years ago, a Native man named Juan Diego lived near the place we now call Mexico City. He and his wife had been baptized a few years earlier.",
+        "According to tradition, Juan Diego was walking to Mass on December 9, 1531. As he crossed a hill called Tepeyac, Mary appeared to him. She asked him to go to the bishop and ask for a church to be built on that hill.",
+        "Juan Diego went to the bishop, Juan de Zumárraga. The bishop was not sure what to think. Mary told Juan Diego to go back and try again. The next day, the bishop asked for a sign to show that the message was true.",
+        "Then Juan Diego's uncle, Juan Bernardino, became very sick. On December 12, Juan Diego went to find a priest for him. Mary appeared again. She told Juan Diego that his uncle would get well. Then she told him to gather roses from the hill and carry them to the bishop.",
+        "It was winter, yet roses were blooming there. They were a kind that grew in Castile, the part of Spain the bishop came from. Juan Diego gathered them in his cloak, which was called a tilma.",
+        "When Juan Diego opened his tilma in front of the bishop, the roses fell out. On the inside of the cloak was an image of Mary. The bishop ordered a church to be built on Tepeyac Hill. The story also says that Mary appeared to Juan Bernardino, and he became well again.",
+        "Juan Diego spent the rest of his life in a small home beside the church. The image on his tilma is still kept in the Basilica of Our Lady of Guadalupe in Mexico City.",
+        "Over the centuries, love for Our Lady of Guadalupe spread across Mexico and far beyond. In 1754, Pope Benedict XIV gave her a feast day, December 12. Later popes named her the patroness of Latin America and of all the Americas."
+      ],
+      "timeline": [
+        {
+          "date_display": "December 9, 1531",
+          "text": "Mary appears to Juan Diego on Tepeyac Hill and asks for a church."
+        },
+        {
+          "date_display": "December 10, 1531",
+          "text": "The bishop asks Juan Diego for a sign."
+        },
+        {
+          "date_display": "December 12, 1531",
+          "text": "Juan Diego gathers roses in his tilma. When he opens it for the bishop, an image of Mary is seen on the cloth."
+        },
+        {
+          "date_display": "By 1556",
+          "text": "People are praying at a chapel on Tepeyac Hill."
+        },
+        {
+          "date_display": "1754",
+          "text": "Pope Benedict XIV gives Our Lady of Guadalupe a feast day, December 12."
+        },
+        {
+          "date_display": "1910",
+          "text": "Pope Pius X names her patroness of Latin America."
+        },
+        {
+          "date_display": "July 31, 2002",
+          "text": "Pope John Paul II declares Juan Diego a saint."
+        }
+      ],
+      "fun_facts": [
+        "Mary appeared to Juan Diego four times in four days.",
+        "The roses Juan Diego found were blooming in winter.",
+        "A tilma is the traditional cloak worn by Juan Diego's people.",
+        "The Church celebrates Our Lady of Guadalupe every year on December 12.",
+        "Our Lady of Guadalupe is honored as the patroness of the Americas."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Tilma",
+          "definition": "A cloak worn by Native people in Mexico in Juan Diego's time."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Catholics in an area."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        },
+        {
+          "word": "Patroness",
+          "definition": "A holy woman, like Mary, who watches over a place or a group of people with her prayers."
+        }
+      ],
+      "think_about_it": "Juan Diego was not rich or powerful, yet Mary chose him to carry her message. What does that tell you about how God sees people?",
+      "reflection_question": "Juan Diego went back to the bishop even after it did not go well the first time. What good thing is worth trying again in your life?",
+      "type_specific": {
+        "who_saw_her": "Juan Diego saw and spoke with Mary on Tepeyac Hill. The story says Mary also appeared to his sick uncle, Juan Bernardino.",
+        "marys_message": "Mary asked for a church to be built on Tepeyac Hill. She sent Juan Diego to the bishop more than once, and she promised him that his sick uncle would get well.",
+        "prayer": "Our Lady of Guadalupe, pray for us.",
+        "church_recognition": "The Church has honored Our Lady of Guadalupe for centuries. In 1754, Pope Benedict XIV gave her a feast day and a special Mass on December 12. Pope Pius X named her patroness of Latin America in 1910, and Pope John Paul II named her patroness of the Americas. In 2002, he declared Juan Diego a saint. Catholics are not required to believe in any particular apparition, but this one has a very special place in the life of the Church."
+      },
+      "quiz": [
+        {
+          "prompt": "On what hill did Mary appear to Juan Diego?",
+          "choices": [
+            {
+              "text": "Mount Sinai"
+            },
+            {
+              "text": "Tepeyac Hill",
+              "correct": true
+            },
+            {
+              "text": "Calvary"
+            },
+            {
+              "text": "Mount Carmel"
+            }
+          ],
+          "explanation": "Mary appeared to Juan Diego on Tepeyac Hill, in what is now Mexico City."
+        },
+        {
+          "prompt": "What did Mary ask for?",
+          "choices": [
+            {
+              "text": "A garden"
+            },
+            {
+              "text": "A church to be built on the hill",
+              "correct": true
+            },
+            {
+              "text": "A long journey"
+            }
+          ],
+          "explanation": "Mary asked Juan Diego to tell the bishop that she wanted a church built on Tepeyac Hill."
+        },
+        {
+          "prompt": "What sign did Juan Diego carry to the bishop?",
+          "choices": [
+            {
+              "text": "Roses in his cloak",
+              "correct": true
+            },
+            {
+              "text": "A golden cup"
+            },
+            {
+              "text": "A letter"
+            },
+            {
+              "text": "A basket of bread"
+            }
+          ],
+          "explanation": "Juan Diego gathered roses that were blooming in winter and carried them in his tilma."
+        },
+        {
+          "prompt": "What was seen on Juan Diego's tilma?",
+          "choices": [
+            {
+              "text": "A map"
+            },
+            {
+              "text": "A poem"
+            },
+            {
+              "text": "An image of Mary",
+              "correct": true
+            }
+          ],
+          "explanation": "When Juan Diego opened his tilma, the roses fell out, and an image of Mary was on the cloth."
+        },
+        {
+          "prompt": "When is the feast of Our Lady of Guadalupe?",
+          "choices": [
+            {
+              "text": "May 13"
+            },
+            {
+              "text": "February 11"
+            },
+            {
+              "text": "December 12",
+              "correct": true
+            },
+            {
+              "text": "August 15"
+            }
+          ],
+          "explanation": "The Church celebrates Our Lady of Guadalupe on December 12, the day Juan Diego brought the roses to the bishop."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Our Lady of Guadalupe",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/topic/Our-Lady-of-Guadalupe-patron-saint-of-Mexico",
+          "note": "four appearances December 9–12, the bishop's request on December 10, roses of Castile, the image, Juan Bernardino, the chapel by 1556, 1754, 1910, patroness of the Americas"
+        },
+        {
+          "title": "St. Juan Diego",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Juan-Diego",
+          "note": "walking to Mass, the uncle, life beside the church, the tilma in the basilica, canonization date"
+        },
+        {
+          "title": "Juan Diego Cuauhtlatoatzin (1474–1548)",
+          "publisher": "Holy See (Spanish biography, vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020731_juan-diego_sp.html",
+          "note": "Bishop Juan de Zumárraga, baptism with his wife, the tilma"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-fatima",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Fatima",
+        "production_id_hint": 1093
+      },
+      "student_title": "Our Lady of Fatima",
+      "subtitle": "Mary appeared to three shepherd children in Portugal and asked the world to pray for peace.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "May 13 – October 13, 1917"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Fatima, Portugal"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Lúcia dos Santos and her cousins, Saints Francisco and Jacinta Marto"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Declared worthy of belief by the local bishop in 1930"
+        }
+      ],
+      "intro": "In 1917, three children were watching their families' sheep near the village of Fatima, in Portugal. A lady brighter than the sun appeared to them. She came six times and asked them to pray the Rosary every day for peace. On her last visit, she said, \"I am the Lady of the Rosary.\" Two of the children, Francisco and Jacinta, are now saints.",
+      "story_paragraphs": [
+        "In 1917, a terrible war was being fought across Europe. In the little village of Aljustrel, near Fatima in Portugal, three children took care of their families' sheep. Lúcia was 10 years old. Her cousins, Francisco and Jacinta Marto, were 8 and 7.",
+        "On May 13, 1917, the children were with their sheep at a place called the Cova da Iria. Suddenly they saw a lady dressed in white, standing above a small oak tree. Lúcia later said she was \"brighter than the sun.\" When Lúcia asked where she was from, the lady answered, \"I am from Heaven.\"",
+        "The lady asked the children to come back on the 13th day of each month for six months. She told them, \"Pray the Rosary every day, in order to obtain peace for the world, and the end of the war.\"",
+        "The children kept coming, and more and more people came with them. Not everyone believed them. On August 13, a local official took the three children away and kept them for two days, so they missed the meeting. The lady appeared to them a few days later, on August 19, at a place called Valinhos.",
+        "On October 13, a huge crowd gathered at the Cova da Iria, at least 50,000 people. The lady told the children, \"I am the Lady of the Rosary.\" She asked people to stop offending God. A newspaper reported that the sun seemed to \"dance\" in the sky that day.",
+        "Soon after, a sickness called influenza spread through the country. Francisco died on April 4, 1919. Jacinta died on February 20, 1920. Lúcia became a religious sister. She lived a long life of prayer and died in 2005.",
+        "The bishop studied what had happened. On October 13, 1930, he declared the children's visions worthy of belief. On May 13, 2017, one hundred years after the first apparition, Pope Francis declared Francisco and Jacinta saints at Fatima."
+      ],
+      "timeline": [
+        {
+          "date_display": "1916",
+          "text": "An angel appears to the three children three times and teaches them to pray."
+        },
+        {
+          "date_display": "May 13, 1917",
+          "text": "A lady brighter than the sun appears to the children at the Cova da Iria."
+        },
+        {
+          "date_display": "August 13–19, 1917",
+          "text": "A local official keeps the children for two days. The lady appears to them on August 19 at Valinhos."
+        },
+        {
+          "date_display": "October 13, 1917",
+          "text": "The lady says, \"I am the Lady of the Rosary.\" A huge crowd is there."
+        },
+        {
+          "date_display": "April 4, 1919",
+          "text": "Francisco dies."
+        },
+        {
+          "date_display": "February 20, 1920",
+          "text": "Jacinta dies."
+        },
+        {
+          "date_display": "October 13, 1930",
+          "text": "The bishop declares the visions worthy of belief."
+        },
+        {
+          "date_display": "May 13, 2017",
+          "text": "Pope Francis declares Francisco and Jacinta saints."
+        }
+      ],
+      "fun_facts": [
+        "Lúcia was the cousin of Francisco and Jacinta, who were brother and sister.",
+        "All three children saw the lady. Lúcia was the one who spoke with her.",
+        "In 1916, the year before, an angel told the children, \"Do not be afraid. I am the Angel of Peace. Pray with me.\"",
+        "The lady came on the 13th of the month five times. In August, she came on the 19th.",
+        "Lúcia lived to be 97 years old.",
+        "The Church celebrates Our Lady of Fatima every year on May 13."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we pray the Hail Mary and think about events in the lives of Jesus and Mary."
+        },
+        {
+          "word": "Shepherd",
+          "definition": "A person who takes care of sheep."
+        },
+        {
+          "word": "Sacrifice",
+          "definition": "Giving up something, or doing something hard, out of love for God and others."
+        },
+        {
+          "word": "Canonize",
+          "definition": "When the Pope officially declares that someone is a saint."
+        }
+      ],
+      "think_about_it": "Mary asked three children to pray for peace in the whole world. Do you think the prayers of children matter? Why?",
+      "reflection_question": "Mary asked for prayer every day. What is one prayer you can pray each day this week for peace?",
+      "type_specific": {
+        "who_saw_her": "Three children saw the lady: Lúcia dos Santos and her cousins, Francisco and Jacinta Marto. Lúcia could see, hear, and speak with her. Jacinta could see and hear her. Francisco could see her but did not hear her words.",
+        "marys_message": "Mary asked people to pray the Rosary every day for peace in the world. She asked them to pray and make sacrifices for sinners, and to stop offending God.",
+        "prayer": "Our Lady of Fatima, pray for us.",
+        "church_recognition": "After years of study, the Bishop of Leiria declared on October 13, 1930, that the children's visions were worthy of belief. Popes have prayed at Fatima, and in 2017 Pope Francis declared Francisco and Jacinta saints there. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Fatima."
+      },
+      "quiz": [
+        {
+          "prompt": "How many children saw the lady at Fatima?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Two"
+            },
+            {
+              "text": "Three",
+              "correct": true
+            },
+            {
+              "text": "Five"
+            }
+          ],
+          "explanation": "Three children saw her: Lúcia and her cousins, Francisco and Jacinta."
+        },
+        {
+          "prompt": "What were the children doing when the lady first appeared?",
+          "choices": [
+            {
+              "text": "Taking care of sheep",
+              "correct": true
+            },
+            {
+              "text": "Walking to school"
+            },
+            {
+              "text": "Fishing"
+            }
+          ],
+          "explanation": "The children were watching their families' sheep at the Cova da Iria on May 13, 1917."
+        },
+        {
+          "prompt": "What did the lady ask the children to pray every day?",
+          "choices": [
+            {
+              "text": "A new song"
+            },
+            {
+              "text": "The Rosary",
+              "correct": true
+            },
+            {
+              "text": "A poem"
+            }
+          ],
+          "explanation": "She said, \"Pray the Rosary every day, in order to obtain peace for the world, and the end of the war.\""
+        },
+        {
+          "prompt": "What name did the lady give on October 13?",
+          "choices": [
+            {
+              "text": "The Queen of Portugal"
+            },
+            {
+              "text": "The Lady of the Mountain"
+            },
+            {
+              "text": "The Lady of the Rosary",
+              "correct": true
+            }
+          ],
+          "explanation": "On her last visit, she said, \"I am the Lady of the Rosary.\""
+        },
+        {
+          "prompt": "Which two of the children are now saints?",
+          "choices": [
+            {
+              "text": "Lúcia and Francisco"
+            },
+            {
+              "text": "Francisco and Jacinta",
+              "correct": true
+            },
+            {
+              "text": "Lúcia and Jacinta"
+            }
+          ],
+          "explanation": "Pope Francis declared Francisco and Jacinta Marto saints on May 13, 2017."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Narrative of the Apparitions",
+          "publisher": "Shrine of Fatima",
+          "url": "https://fatima.pt/en/pages/narrative-of-the-apparitions-",
+          "note": "the six dates, the Cova da Iria and Valinhos, the lady's words, the angel in 1916, crowd of 50,000–70,000 on October 13"
+        },
+        {
+          "title": "Chronology of the three seers",
+          "publisher": "Shrine of Fatima",
+          "url": "https://www.fatima.pt/en/pages/chronology-of-the-three-seers",
+          "note": "births in Aljustrel, the August 13–15 detention, the newspaper report of the sun, deaths, the 1930 declaration, Lúcia's death in 2005"
+        },
+        {
+          "title": "Three Shepherds",
+          "publisher": "Shrine of Fatima",
+          "url": "https://www.papa2017.fatima.pt/en/pages/three-sheperds",
+          "note": "cousins and siblings, who could see, hear and speak, tending the flock, influenza"
+        },
+        {
+          "title": "The True Story of Fatima",
+          "publisher": "Fr. John de Marchi (EWTN)",
+          "url": "https://www.ewtn.com/catholicism/library/true-story-of-fatima-5915",
+          "note": "the lady \"brighter than the sun\" above a small oak tree"
+        },
+        {
+          "title": "Homily at the canonization of Francisco and Jacinta Marto, May 13, 2017 (vatican.va)",
+          "publisher": "Pope Francis",
+          "url": "https://www.vatican.va/content/francesco/en/homilies/2017/documents/papa-francesco_20170513_omelia-pellegrinaggio-fatima.html",
+          "note": "date, place, 100th anniversary"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-the-miraculous-medal",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "The Chapel of Our Lady of the Miraculous Medal",
+        "production_id_hint": 1095
+      },
+      "student_title": "Our Lady of the Miraculous Medal",
+      "subtitle": "In a chapel in Paris, Mary showed a young sister a medal to share with the world.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "July 18 and November 27, 1830"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "A convent chapel on the Rue du Bac in Paris, France"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Saint Catherine Labouré, age 24"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "The medal was made with the Church's approval in 1832"
+        }
+      ],
+      "intro": "In 1830, a young sister named Catherine Labouré was living in a convent in Paris, France. One night, Mary appeared to her in the chapel. A few months later, Mary appeared again and showed her a medal to be made and shared. Catherine kept her part in the story secret for 46 years. Today, people all over the world wear the Miraculous Medal.",
+      "story_paragraphs": [
+        "Catherine Labouré was born on May 2, 1806, in a village in France. Her mother died when Catherine was nine years old. When she grew up, Catherine chose to become a religious sister. On April 21, 1830, she joined the Daughters of Charity at their house on a street in Paris called the Rue du Bac.",
+        "On the night of July 18, 1830, a child's voice woke Catherine and led her to the chapel. There she saw Mary, seated in a chair. Mary told her, \"My child, the good God wishes to charge you with a mission.\"",
+        "On November 27, 1830, during evening prayer in the chapel, Catherine saw Mary again. This time, Mary was standing on a globe, and rays of light streamed from rings on her fingers.",
+        "Around Mary, Catherine saw words in the shape of an oval: \"O Mary conceived without sin, pray for us who have recourse to thee.\" Then Catherine was shown the back of the medal. She saw the letter M with a cross above it, two hearts, and twelve stars. She heard the words, \"Have a medal struck after this model.\" To strike a medal means to make it out of metal.",
+        "Catherine told only one person, her priest, Father Aladel. With the Church's approval, the first medals were made in 1832 and given out in Paris. So many people said they received help from God while wearing it that they began calling it the \"Miraculous Medal.\"",
+        "Catherine never told the other sisters that she was the one who had seen Mary. For 46 years, she quietly cared for elderly and poor people. Only in 1876, shortly before she died, did she tell her superior. Catherine died on December 31, 1876.",
+        "Pope Pius XII declared Catherine a saint on July 27, 1947."
+      ],
+      "timeline": [
+        {
+          "date_display": "May 2, 1806",
+          "text": "Catherine Labouré is born in France."
+        },
+        {
+          "date_display": "April 21, 1830",
+          "text": "Catherine joins the Daughters of Charity on the Rue du Bac in Paris."
+        },
+        {
+          "date_display": "July 18, 1830",
+          "text": "Mary appears to Catherine in the chapel at night."
+        },
+        {
+          "date_display": "November 27, 1830",
+          "text": "Mary shows Catherine the front and back of a medal."
+        },
+        {
+          "date_display": "1832",
+          "text": "The first medals are made and given out in Paris."
+        },
+        {
+          "date_display": "December 31, 1876",
+          "text": "Catherine dies after 46 years of serving elderly and poor people."
+        },
+        {
+          "date_display": "July 27, 1947",
+          "text": "Pope Pius XII declares Catherine a saint."
+        }
+      ],
+      "fun_facts": [
+        "The year 1830 is on the Miraculous Medal.",
+        "The back of the medal shows the letter M, a cross, two hearts, and twelve stars.",
+        "Catherine kept her secret for 46 years.",
+        "People gave the medal the name \"Miraculous\" because of the help they said they received.",
+        "The medal is not magic or a good-luck charm. It is a reminder to trust God and to ask for Mary's prayers."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Medal",
+          "definition": "A small, flat piece of metal with a holy picture on it, often worn on a chain."
+        },
+        {
+          "word": "Convent",
+          "definition": "A home where religious sisters live and pray together."
+        },
+        {
+          "word": "Chapel",
+          "definition": "A small church, or a room set apart for prayer."
+        },
+        {
+          "word": "Recourse",
+          "definition": "Turning to someone for help. To \"have recourse\" to Mary means to ask for her prayers."
+        }
+      ],
+      "think_about_it": "Catherine did something important and never asked for attention. Why do you think she kept it secret?",
+      "reflection_question": "The prayer on the medal asks Mary to pray for us. What would you like to ask Mary to pray for today?",
+      "type_specific": {
+        "who_saw_her": "Only Catherine Labouré saw Mary. She was 24 years old and new to the convent. She told her priest, Father Aladel, and kept it secret from almost everyone else for the rest of her life.",
+        "marys_message": "Mary asked for a medal to be made and shared. The prayer on it asks Mary, who was conceived without sin, to pray for everyone who turns to her for help.",
+        "prayer": "O Mary, conceived without sin, pray for us who have recourse to thee.",
+        "church_recognition": "The first Miraculous Medals were made in 1832 with the Church's approval. In 1836, a Church inquiry in Paris studied the medal and gave a favorable judgment. In 1947, Pope Pius XII declared Catherine Labouré a saint. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of the Miraculous Medal."
+      },
+      "quiz": [
+        {
+          "prompt": "In what city did Mary appear to Catherine Labouré?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Lourdes"
+            },
+            {
+              "text": "Paris",
+              "correct": true
+            },
+            {
+              "text": "Lisbon"
+            }
+          ],
+          "explanation": "Mary appeared to Catherine in the convent chapel on the Rue du Bac in Paris, France."
+        },
+        {
+          "prompt": "What did Mary ask Catherine to have made?",
+          "choices": [
+            {
+              "text": "A statue"
+            },
+            {
+              "text": "A medal",
+              "correct": true
+            },
+            {
+              "text": "A painting"
+            }
+          ],
+          "explanation": "Catherine heard the words, \"Have a medal struck after this model.\""
+        },
+        {
+          "prompt": "What letter is on the back of the medal?",
+          "choices": [
+            {
+              "text": "The letter J"
+            },
+            {
+              "text": "The letter C"
+            },
+            {
+              "text": "The letter M",
+              "correct": true
+            }
+          ],
+          "explanation": "The back shows the letter M with a cross above it, along with two hearts and twelve stars."
+        },
+        {
+          "prompt": "How long did Catherine keep her secret?",
+          "choices": [
+            {
+              "text": "One week"
+            },
+            {
+              "text": "Two years"
+            },
+            {
+              "text": "46 years",
+              "correct": true
+            },
+            {
+              "text": "She told everyone right away"
+            }
+          ],
+          "explanation": "Catherine told her priest, but the other sisters did not know until 1876, shortly before she died."
+        },
+        {
+          "prompt": "Why did people start calling it the \"Miraculous Medal\"?",
+          "choices": [
+            {
+              "text": "Many people said they received help from God while wearing it.",
+              "correct": true
+            },
+            {
+              "text": "It was made of gold."
+            },
+            {
+              "text": "It could glow in the dark."
+            }
+          ],
+          "explanation": "The name came from the people who wore the medal and reported blessings in their lives."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Catherine Labouré",
+          "publisher": "Daughters of Charity of Saint Vincent de Paul",
+          "url": "https://filles-de-la-charite.org/en/family/saint-catherine-laboure/",
+          "note": "birth, mother's death at nine, April 21, 1830, the two apparition dates, 46 years of service, death, canonization"
+        },
+        {
+          "title": "The Miraculous Medal Story",
+          "publisher": "Association of the Miraculous Medal (Congregation of the Mission)",
+          "url": "https://www.amm.org/AboutAMM/Miraculous%20Medal%20Story.aspx",
+          "note": "the child's voice, Mary seated, Mary's words, the globe and rays, the inscription, the back of the medal, first medals in 1832, the 1836 inquiry, why \"Miraculous,\" not a charm, telling her superior in 1876"
+        },
+        {
+          "title": "Our Lady of the Miraculous Medal",
+          "publisher": "VincentWiki",
+          "url": "https://wiki.famvin.org/en/Our_Lady_of_the_Miraculous_Medal",
+          "note": "Father Aladel, the M and two hearts, her long silence"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-knock",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Knock",
+        "production_id_hint": 1094
+      },
+      "student_title": "Our Lady of Knock",
+      "subtitle": "On a rainy evening in Ireland, fifteen people saw Mary, Saint Joseph, and Saint John beside their village church.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "The evening of August 21, 1879"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Knock, in the west of Ireland"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Fifteen people from the village"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Church inquiries found the witnesses trustworthy"
+        }
+      ],
+      "intro": "On a rainy evening in 1879, people in the Irish village of Knock saw something wonderful at the end wall of their church. Mary was there, with Saint Joseph and Saint John. Beside them was an altar with a lamb and a cross. Fifteen people watched for about two hours. No one in the vision spoke a single word.",
+      "story_paragraphs": [
+        "Knock is a small village in the west of Ireland. In 1879, the people there were poor, and life was hard. On the evening of August 21, 1879, rain was pouring down. Some villagers noticed figures standing at the gable of the parish church. A gable is the end wall of a building, the part that comes to a point under the roof.",
+        "The people came closer. They saw Mary, wearing a white cloak and a crown. Saint Joseph stood on her right, dressed in white. On her other side was Saint John the Evangelist, one of the twelve apostles and the writer of a Gospel.",
+        "Beside the three figures was an altar. On the altar stood a lamb, with a cross behind it, and angels were around it. In the Bible, Jesus is called the Lamb of God.",
+        "More neighbors came, until fifteen people were watching. They stayed for about two hours in the rain. No one in the vision spoke. One of the witnesses was an 11-year-old boy named Patrick Hill. He said, \"They said nothing, but as we approached, they seemed to go back a little towards the gable.\" He also said the figures looked \"full and round as if they had a body and were alive.\"",
+        "A few weeks later, in October 1879, the archbishop sent three priests to question the witnesses. They reported that the testimony of all, taken as a whole, was \"trustworthy and satisfactory.\"",
+        "In 1936, the Church asked again. One of the last witnesses, Mary Byrne O'Connell, was old and sick in bed. She swore that what she had told as a young woman was true. She died six weeks later.",
+        "Pope John Paul II came to pray at Knock in 1979, one hundred years after the apparition. In 2021, Pope Francis gave Knock a special title: an International Eucharistic and Marian Shrine."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 21, 1879",
+          "text": "Fifteen people see Mary, Saint Joseph, Saint John, and a lamb on an altar at the church in Knock."
+        },
+        {
+          "date_display": "October 1879",
+          "text": "Three priests question the witnesses and find them trustworthy."
+        },
+        {
+          "date_display": "1936",
+          "text": "Mary Byrne O'Connell, one of the last witnesses, swears again that her story is true."
+        },
+        {
+          "date_display": "September 30, 1979",
+          "text": "Pope John Paul II prays at Knock and gives the shrine a Golden Rose."
+        },
+        {
+          "date_display": "March 19, 2021",
+          "text": "Pope Francis names Knock an International Eucharistic and Marian Shrine."
+        }
+      ],
+      "fun_facts": [
+        "No words were spoken at Knock. The vision was completely silent.",
+        "The witnesses stood in the pouring rain for about two hours.",
+        "Three saints appeared together: Mary, Saint Joseph, and Saint John the Evangelist.",
+        "One witness, Patrick Hill, was 11 years old.",
+        "The youngest witness, John Curry, later moved to New York.",
+        "Pope John Paul II gave Knock a Golden Rose, a special gift from the Pope."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Gable",
+          "definition": "The end wall of a building, the part that comes to a point under the roof."
+        },
+        {
+          "word": "Witness",
+          "definition": "A person who saw something happen and can tell about it."
+        },
+        {
+          "word": "Lamb of God",
+          "definition": "A name for Jesus, who gave his life for us."
+        },
+        {
+          "word": "Shrine",
+          "definition": "A holy place where people come to pray."
+        }
+      ],
+      "think_about_it": "Mary did not say anything at Knock. How can someone show love without using words?",
+      "reflection_question": "The people of Knock stayed in the rain to pray. When is it hard for you to stay and pray, and what could help?",
+      "type_specific": {
+        "who_saw_her": "Fifteen people from the village saw the vision together. They were questioned one by one in 1879. One of them was 11-year-old Patrick Hill.",
+        "marys_message": "Mary did not speak at Knock. The vision itself was the message: Mary, Saint Joseph, and Saint John stood beside an altar with the Lamb of God, who is Jesus.",
+        "prayer": "Our Lady of Knock, pray for us.",
+        "church_recognition": "In 1879, priests sent by the archbishop questioned the witnesses and found their testimony \"trustworthy and satisfactory.\" A second inquiry in 1936 heard the last living witnesses. Popes have prayed at Knock, and in 2021 Pope Francis named it an International Eucharistic and Marian Shrine. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Knock."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Knock?",
+          "choices": [
+            {
+              "text": "France"
+            },
+            {
+              "text": "Ireland",
+              "correct": true
+            },
+            {
+              "text": "Portugal"
+            },
+            {
+              "text": "Mexico"
+            }
+          ],
+          "explanation": "Knock is a village in the west of Ireland."
+        },
+        {
+          "prompt": "Who appeared with Mary at Knock?",
+          "choices": [
+            {
+              "text": "Saint Peter and Saint Paul"
+            },
+            {
+              "text": "Saint Joseph and Saint John",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick and Saint Brigid"
+            }
+          ],
+          "explanation": "Saint Joseph and Saint John the Evangelist stood with Mary at the end wall of the church."
+        },
+        {
+          "prompt": "What stood on the altar?",
+          "choices": [
+            {
+              "text": "A lamb",
+              "correct": true
+            },
+            {
+              "text": "A book"
+            },
+            {
+              "text": "A candle"
+            },
+            {
+              "text": "A basket of bread"
+            }
+          ],
+          "explanation": "A lamb stood on the altar with a cross behind it. Jesus is called the Lamb of God."
+        },
+        {
+          "prompt": "What did Mary say at Knock?",
+          "choices": [
+            {
+              "text": "\"Pray the Rosary.\""
+            },
+            {
+              "text": "\"Build a chapel.\""
+            },
+            {
+              "text": "Nothing. The vision was silent.",
+              "correct": true
+            }
+          ],
+          "explanation": "No one in the vision spoke. Patrick Hill said, \"They said nothing.\""
+        },
+        {
+          "prompt": "How many people saw the vision?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Three"
+            },
+            {
+              "text": "Fifteen",
+              "correct": true
+            },
+            {
+              "text": "One hundred"
+            }
+          ],
+          "explanation": "Fifteen people from the village watched for about two hours."
+        }
+      ],
+      "sources": [
+        {
+          "title": "About Knock Shrine",
+          "publisher": "Knock Shrine",
+          "url": "https://www.knockshrine.ie/?p=32283",
+          "note": "date, the gable, the figures, the lamb, cross and angels, about two hours, fifteen witnesses, Patrick Hill's words, the 1879 inquiry, the 1936 testimony, John Curry, the 1979 visit and Golden Rose, March 19, 2021"
+        },
+        {
+          "title": "The Knock Shrine in Ireland",
+          "publisher": "Vatican News (2018)",
+          "url": "https://vaticannews.va/en/pope/news/2018-08/apostolic-journey-ireland-knock-shrine0.html",
+          "note": "pouring rain, Mary's white cloak and crown, Saint Joseph in white on her right, the 1879 commission, John Paul II's visit, John Curry in New York"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-la-salette",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of La Salette",
+        "production_id_hint": 1096
+      },
+      "student_title": "Our Lady of La Salette",
+      "subtitle": "High in the mountains of France, two children met a beautiful lady who was crying.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "September 19, 1846"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "A mountain near the village of La Salette, France"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Maximin Giraud, age 11, and Mélanie Calvat, age 14"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1851"
+        }
+      ],
+      "intro": "On September 19, 1846, two children were watching cows on a mountain in France. They saw a bright light, and inside it a beautiful lady, sitting with her face in her hands. She was crying. She told the children that people had forgotten God, and she asked everyone to pray and to come back to him. Then she rose into the air and was gone.",
+      "story_paragraphs": [
+        "Maximin Giraud was 11 years old, and Mélanie Calvat was 14. They lived in the mountains of France, near a village called La Salette. Their job was to watch over cows as they grazed.",
+        "On Saturday, September 19, 1846, the two children were high on the mountain with their herds. Suddenly they saw a ball of light, as bright as if the sun had fallen to the ground.",
+        "Inside the light sat a lady. Her elbows rested on her knees, and her face was in her hands. She was crying. Then she stood up and said, \"Come closer, my children; don't be afraid. I am here to tell you great news.\"",
+        "The lady was tall and shining. She wore a long dress, an apron, and a shawl. Roses were around her head, her shawl, and her feet. On a chain around her neck hung a crucifix. Next to the figure of Jesus were a hammer and a pair of pincers, the tool used to pull out nails.",
+        "The lady cried the whole time she spoke. She was sad because people were working on Sundays instead of going to Mass, and because they used her Son's name in angry words. She asked the children if they said their prayers. \"Hardly ever,\" they answered. She told them to pray every morning and every night.",
+        "She warned that hard times and hunger were coming. But she also gave hope. If people turned back to God, she said, there would be plenty of food again. The lady began speaking in French. When she saw that the children did not understand, she spoke in the local language they used at home.",
+        "Her last words were, \"Well, my children, you will make this known to all my people.\" Then she walked up the path, rose into the air, and disappeared into the light. The children told what they had seen. The bishop studied it carefully for five years. In 1851, he declared that the apparition \"bears within itself all the characteristics of truth.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "September 19, 1846",
+          "text": "Maximin and Mélanie see a crying lady in a ball of light on the mountain."
+        },
+        {
+          "date_display": "1846–1851",
+          "text": "The Bishop of Grenoble has the children's story studied carefully."
+        },
+        {
+          "date_display": "1851",
+          "text": "The bishop declares that the apparition is true."
+        },
+        {
+          "date_display": "May 25, 1852",
+          "text": "The first stone of a church is laid on the mountain."
+        },
+        {
+          "date_display": "March 1, 1875",
+          "text": "Maximin dies in his home village of Corps."
+        },
+        {
+          "date_display": "December 15, 1904",
+          "text": "Mélanie dies in Italy."
+        }
+      ],
+      "fun_facts": [
+        "Mary appeared at La Salette only once.",
+        "Mary spoke to the children in two languages: French and the local language of their mountains.",
+        "Roses were around Mary's head, her shawl, and her feet.",
+        "The crucifix Mary wore had a hammer on one side and pincers on the other.",
+        "The mountain where she appeared is about 6,000 feet high."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Crucifix",
+          "definition": "A cross with the figure of Jesus on it."
+        },
+        {
+          "word": "Pincers",
+          "definition": "A tool for gripping and pulling things, such as nails."
+        },
+        {
+          "word": "Conversion",
+          "definition": "Turning away from sin and back to God."
+        },
+        {
+          "word": "Herd",
+          "definition": "A group of animals, such as cows, that are kept together."
+        }
+      ],
+      "think_about_it": "Mary was crying because people had forgotten God. What are some ways people forget God today?",
+      "reflection_question": "Mary asked the children if they prayed, and they told the truth: \"Hardly ever.\" How would you answer her? What is one time each day you could pray?",
+      "type_specific": {
+        "who_saw_her": "Two children saw and heard the lady: Maximin Giraud, who was 11, and Mélanie Calvat, who was 14. They were alone on the mountain with their cows.",
+        "marys_message": "Mary asked people to come back to God. She asked them to pray every morning and night, to go to Mass on Sunday, and to speak the name of Jesus with respect.",
+        "prayer": "Our Lady of La Salette, pray for us.",
+        "church_recognition": "After a careful study, Bishop Philibert de Bruillard of Grenoble declared in 1851 that the apparition \"bears within itself all the characteristics of truth.\" He allowed people to honor Our Lady of La Salette, and a church was built on the mountain. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of La Salette."
+      },
+      "quiz": [
+        {
+          "prompt": "What were the children doing on the mountain?",
+          "choices": [
+            {
+              "text": "Picking flowers"
+            },
+            {
+              "text": "Watching over cows",
+              "correct": true
+            },
+            {
+              "text": "Walking to school"
+            }
+          ],
+          "explanation": "Maximin and Mélanie were watching their herds on the mountain near La Salette."
+        },
+        {
+          "prompt": "What was the lady doing when the children first saw her?",
+          "choices": [
+            {
+              "text": "Singing"
+            },
+            {
+              "text": "Sleeping"
+            },
+            {
+              "text": "Crying",
+              "correct": true
+            },
+            {
+              "text": "Reading"
+            }
+          ],
+          "explanation": "She was sitting with her face in her hands, crying."
+        },
+        {
+          "prompt": "What hung from the chain around the lady's neck?",
+          "choices": [
+            {
+              "text": "A crucifix",
+              "correct": true
+            },
+            {
+              "text": "A key"
+            },
+            {
+              "text": "A bell"
+            }
+          ],
+          "explanation": "She wore a crucifix. Next to the figure of Jesus were a hammer and a pair of pincers."
+        },
+        {
+          "prompt": "How often did the lady tell the children to pray?",
+          "choices": [
+            {
+              "text": "Once a year"
+            },
+            {
+              "text": "Only on Sundays"
+            },
+            {
+              "text": "Every morning and every night",
+              "correct": true
+            }
+          ],
+          "explanation": "The children said they hardly ever prayed. She told them to pray every morning and every night."
+        },
+        {
+          "prompt": "What did the bishop decide in 1851?",
+          "choices": [
+            {
+              "text": "That the children had made it up"
+            },
+            {
+              "text": "That the apparition was true",
+              "correct": true
+            },
+            {
+              "text": "That no one should talk about it"
+            }
+          ],
+          "explanation": "After five years of study, the bishop declared that the apparition \"bears within itself all the characteristics of truth.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Apparition",
+          "publisher": "Missionaries of Our Lady of La Salette",
+          "url": "https://lasalette.info/mission/apparition",
+          "note": "date, the children and their ages, the light, the lady's posture, clothing and crucifix, her words, French and dialect, her message, her departure, the 1851 pastoral letter and its quote"
+        },
+        {
+          "title": "La Salette",
+          "publisher": "Catholic Encyclopedia (New Advent)",
+          "url": "https://www.newadvent.org/cathen/09008b.htm",
+          "note": "the mountain's height, the bishop's commission, the 1851 approval, the first stone in 1852, the deaths of Maximin and Mélanie"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-good-help",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Good Help (Champion)",
+        "production_id_hint": 1100
+      },
+      "student_title": "Our Lady of Good Help",
+      "subtitle": "In the woods of Wisconsin, Mary asked a young woman to teach children about God.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "October 1859"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Champion, Wisconsin, in the United States"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Adele Brise, age 28"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 2010"
+        }
+      ],
+      "intro": "In 1859, a young woman named Adele Brise was walking through the woods in Wisconsin. A lady dressed in shining white appeared between two trees. She said she was the Queen of Heaven. She asked Adele to pray for sinners and to teach the children about God. Adele spent the rest of her life doing just that. This is the first approved apparition of Mary in the United States.",
+      "story_paragraphs": [
+        "Adele Brise was born on January 30, 1831, in the country of Belgium. When she was a young child, she lost the sight of one eye. In 1855, her family crossed the ocean to start a new life in Wisconsin, in the United States. Their new home was in the woods, and the nearest church was 11 miles away.",
+        "One day in early October 1859, Adele was walking through the woods. She saw a lady in white standing between two trees. Then the lady was gone. Adele did not know what to think.",
+        "On Sunday, October 9, Adele was on her way to Mass. She saw the lady again, between the same two trees. After Mass, Adele walked home with two companions, and the lady appeared a third time.",
+        "The lady was dressed in dazzling white, with a yellow sash around her waist and a crown of stars around her head. This time Adele asked, \"In God's name, who are you, and what do you want of me?\"",
+        "The lady answered, \"I am the Queen of Heaven who prays for the conversion of sinners, and I wish you to do the same.\" Then she gave Adele a job: \"Gather the children in this wild country and teach them what they should know for salvation.\" She added, \"Go and fear nothing, I will help you.\"",
+        "Adele obeyed. She went from house to house, walking as far as 50 miles, to teach children how to pray and to know and love God. Later, other women joined her. With help from her Belgian neighbors, a school, a chapel, and a convent were built near the place where Mary had appeared.",
+        "In October 1871, a terrible fire swept through the forests of Wisconsin. Adele and many neighbors gathered at the chapel grounds and walked around them, praying through the night. Rain came early in the morning, and the chapel grounds were not burned.",
+        "Adele died on July 5, 1896. On December 8, 2010, Bishop David Ricken declared the apparitions worthy of belief."
+      ],
+      "timeline": [
+        {
+          "date_display": "January 30, 1831",
+          "text": "Adele Brise is born in Belgium."
+        },
+        {
+          "date_display": "1855",
+          "text": "Adele's family moves to Wisconsin."
+        },
+        {
+          "date_display": "October 1859",
+          "text": "Mary appears to Adele three times and asks her to teach the children."
+        },
+        {
+          "date_display": "October 1871",
+          "text": "During a great fire, people pray all night at the chapel grounds, and the grounds are not burned."
+        },
+        {
+          "date_display": "1885",
+          "text": "A school, a chapel, and a convent are built."
+        },
+        {
+          "date_display": "July 5, 1896",
+          "text": "Adele dies."
+        },
+        {
+          "date_display": "December 8, 2010",
+          "text": "Bishop David Ricken approves the apparitions."
+        }
+      ],
+      "fun_facts": [
+        "This is the first and only approved apparition of Mary in the United States.",
+        "Mary wore a crown of stars and a yellow sash.",
+        "Adele walked as far as 50 miles to teach children in their homes.",
+        "Adele could see with only one eye.",
+        "The rain that ended the fire danger came on October 9, exactly 12 years after Mary appeared."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Immigrant",
+          "definition": "A person who moves to a new country to live."
+        },
+        {
+          "word": "Conversion",
+          "definition": "Turning away from sin and back to God."
+        },
+        {
+          "word": "Salvation",
+          "definition": "Being saved by God to live with him forever."
+        },
+        {
+          "word": "Sash",
+          "definition": "A long strip of cloth worn around the waist."
+        }
+      ],
+      "think_about_it": "Mary gave Adele a job that took her whole life. What is a job God might be giving you right now, even though you are young?",
+      "reflection_question": "Mary told Adele, \"Go and fear nothing, I will help you.\" What is something good you are afraid to try? Who can you ask for help?",
+      "type_specific": {
+        "who_saw_her": "Adele Brise saw and spoke with the lady. She was a 28-year-old immigrant from Belgium. Two companions were walking with her at the third apparition.",
+        "marys_message": "Mary asked Adele to pray for sinners and to gather the children and teach them about God. She promised, \"Go and fear nothing, I will help you.\"",
+        "prayer": "Our Lady of Good Help, pray for us.",
+        "church_recognition": "In 2009, Bishop David Ricken of Green Bay began a careful study of what Adele had reported. On December 8, 2010, he declared that the apparitions are \"worthy of belief\" by Catholics, although no one is required to believe in them. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Good Help."
+      },
+      "quiz": [
+        {
+          "prompt": "In what state did Mary appear to Adele Brise?",
+          "choices": [
+            {
+              "text": "Texas"
+            },
+            {
+              "text": "New York"
+            },
+            {
+              "text": "Wisconsin",
+              "correct": true
+            },
+            {
+              "text": "California"
+            }
+          ],
+          "explanation": "Mary appeared to Adele near what is now Champion, Wisconsin."
+        },
+        {
+          "prompt": "What did the lady call herself?",
+          "choices": [
+            {
+              "text": "The Queen of Heaven",
+              "correct": true
+            },
+            {
+              "text": "The Lady of the Lake"
+            },
+            {
+              "text": "The Star of the Sea"
+            }
+          ],
+          "explanation": "She said, \"I am the Queen of Heaven who prays for the conversion of sinners.\""
+        },
+        {
+          "prompt": "What job did Mary give Adele?",
+          "choices": [
+            {
+              "text": "To build a ship"
+            },
+            {
+              "text": "To gather the children and teach them about God",
+              "correct": true
+            },
+            {
+              "text": "To plant a garden"
+            }
+          ],
+          "explanation": "Mary said, \"Gather the children in this wild country and teach them what they should know for salvation.\""
+        },
+        {
+          "prompt": "How did Adele do her job at first?",
+          "choices": [
+            {
+              "text": "She wrote a book."
+            },
+            {
+              "text": "She sent letters."
+            },
+            {
+              "text": "She walked from house to house.",
+              "correct": true
+            }
+          ],
+          "explanation": "Adele walked as far as 50 miles to teach children in their homes."
+        },
+        {
+          "prompt": "What makes this apparition special in the United States?",
+          "choices": [
+            {
+              "text": "It is the oldest church."
+            },
+            {
+              "text": "It is the first approved apparition of Mary in the country.",
+              "correct": true
+            },
+            {
+              "text": "It happened in a big city."
+            }
+          ],
+          "explanation": "In 2010, Bishop Ricken approved it, making it the first approved apparition of Mary in the United States."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Bishop Ricken Approves Marian Apparitions at Shrine of Our Lady of Good Help",
+          "publisher": "Diocese of Green Bay (December 8, 2010)",
+          "url": "https://www.gbdioc.org/mission-teams-offices/resource-support-mission-team/office-of-communications-marketing/press-releases/worthy-of-belief",
+          "note": "three appearances in October 1859, the lady in dazzling white, the 1871 fire and the prayer walk, the decree and its \"worthy of belief\" wording, first in the United States"
+        },
+        {
+          "title": "history brochure",
+          "publisher": "National Shrine of Our Lady of Champion",
+          "url": "https://championshrine.org/wp-content/uploads/2022/07/2215636-History-Brochure_final.pdf",
+          "note": "Adele's birth, her eye, 1855, 11 miles to church, October 9, the two companions, the sash and crown, the exact dialogue, 50 miles on foot, 1885 buildings, rain on October 9, her death, the 2009 study"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-banneux",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Banneux",
+        "production_id_hint": 1099
+      },
+      "student_title": "Our Lady of Banneux",
+      "subtitle": "On winter nights in Belgium, Mary came to a poor family's garden and called herself the Virgin of the Poor.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "January 15 – March 2, 1933"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Banneux, Belgium"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Mariette Beco, age 11"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1949"
+        }
+      ],
+      "intro": "In the winter of 1933, an 11-year-old girl named Mariette Beco lived with her family in a small house near Banneux, Belgium. One evening, she saw a lady standing in the garden. The lady came eight times. She led Mariette to a spring of water and said, \"I am the Virgin of the Poor.\" She asked for a little chapel and for much prayer.",
+      "story_paragraphs": [
+        "Mariette Beco was born on March 25, 1921. She was the oldest of seven children. Her family lived in a small house near the village of Banneux, in Belgium, and they did not have much.",
+        "On Sunday evening, January 15, 1933, Mariette saw a lady standing in the garden. The lady waved for her to come. But Mariette's mother would not let her go outside.",
+        "Three days later, the lady came again. This time Mariette went out. The lady led her along the road to a small spring of water and said that the spring was set apart for her.",
+        "The next evening, Mariette asked, \"Who are you, beautiful lady?\" The lady answered, \"I am the Virgin of the Poor.\" Then she said the spring was \"for all Nations… to relieve the sick.\"",
+        "On January 20, Mariette asked what the lady wanted. She said, \"I would like a little chapel.\" For three weeks, the lady did not come. Mariette kept going out to the garden to pray in the cold. On February 11, the lady came back. She said, \"I come to relieve suffering.\"",
+        "A priest had told Mariette to ask for a sign. When she did, the lady answered, \"Believe in me, I will believe in you.\" Again and again, she asked Mariette to pray a lot.",
+        "On March 2, the lady came for the last time. She said, \"I am the Mother of the Saviour, Mother of God. Pray a lot.\" She laid her hands on Mariette and said goodbye. That summer, the little chapel the lady had asked for was built. The bishop studied what had happened for many years. On August 22, 1949, Bishop Kerkhofs of Liège declared that Mary had truly appeared at Banneux."
+      ],
+      "timeline": [
+        {
+          "date_display": "March 25, 1921",
+          "text": "Mariette Beco is born."
+        },
+        {
+          "date_display": "January 15, 1933",
+          "text": "Mariette sees a lady in the garden for the first time."
+        },
+        {
+          "date_display": "January 18, 1933",
+          "text": "The lady leads Mariette to a spring."
+        },
+        {
+          "date_display": "January 19, 1933",
+          "text": "The lady says, \"I am the Virgin of the Poor.\""
+        },
+        {
+          "date_display": "January 20, 1933",
+          "text": "The lady asks for a little chapel."
+        },
+        {
+          "date_display": "March 2, 1933",
+          "text": "The lady comes for the eighth and last time."
+        },
+        {
+          "date_display": "Summer 1933",
+          "text": "The Chapel of the Apparitions is built."
+        },
+        {
+          "date_display": "August 22, 1949",
+          "text": "Bishop Kerkhofs declares that Mary truly appeared at Banneux."
+        }
+      ],
+      "fun_facts": [
+        "Mary appeared at Banneux eight times, always in the evening.",
+        "Mariette was the oldest of seven children.",
+        "Mary gave herself a special name at Banneux: the Virgin of the Poor.",
+        "Mariette did not know the word \"relieve,\" but she could tell it meant something good.",
+        "The little chapel Mary asked for was built the same year."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Spring",
+          "definition": "A place where water comes up out of the ground."
+        },
+        {
+          "word": "Relieve",
+          "definition": "To make pain or trouble less."
+        },
+        {
+          "word": "Chapel",
+          "definition": "A small church, or a room set apart for prayer."
+        },
+        {
+          "word": "Nations",
+          "definition": "The countries and peoples of the world."
+        }
+      ],
+      "think_about_it": "Mary called herself the Virgin of the Poor. Why do you think she chose that name?",
+      "reflection_question": "Mary said, \"I come to relieve suffering.\" Who do you know that is sick or sad? How can you pray for them or help them?",
+      "type_specific": {
+        "who_saw_her": "Only Mariette Beco saw the lady. She was 11 years old and the oldest child in her family.",
+        "marys_message": "Mary called herself the Virgin of the Poor. She said she came to relieve suffering, and that the spring was for all nations and for the sick. She asked for a little chapel, and she asked Mariette to pray a lot.",
+        "prayer": "Virgin of the Poor, pray for us.",
+        "church_recognition": "The Church studied Banneux for many years. On August 22, 1949, Bishop Kerkhofs of Liège wrote that he truly believed \"that the Blessed Virgin appeared and spoke in Banneux,\" and he recognized all eight apparitions. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Banneux."
+      },
+      "quiz": [
+        {
+          "prompt": "How old was Mariette when she saw the lady?",
+          "choices": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "11",
+              "correct": true
+            },
+            {
+              "text": "16"
+            },
+            {
+              "text": "25"
+            }
+          ],
+          "explanation": "Mariette Beco was 11 years old in January 1933."
+        },
+        {
+          "prompt": "What name did the lady give herself?",
+          "choices": [
+            {
+              "text": "The Queen of Belgium"
+            },
+            {
+              "text": "The Virgin of the Poor",
+              "correct": true
+            },
+            {
+              "text": "The Lady of the Snow"
+            }
+          ],
+          "explanation": "When Mariette asked who she was, the lady answered, \"I am the Virgin of the Poor.\""
+        },
+        {
+          "prompt": "Where did the lady lead Mariette?",
+          "choices": [
+            {
+              "text": "To a spring of water",
+              "correct": true
+            },
+            {
+              "text": "To a tall tower"
+            },
+            {
+              "text": "To the sea"
+            }
+          ],
+          "explanation": "The lady led Mariette along the road to a small spring. She said it was for all nations and for the sick."
+        },
+        {
+          "prompt": "What did the lady ask to have built?",
+          "choices": [
+            {
+              "text": "A big castle"
+            },
+            {
+              "text": "A bridge"
+            },
+            {
+              "text": "A little chapel",
+              "correct": true
+            }
+          ],
+          "explanation": "On January 20, the lady said, \"I would like a little chapel.\" It was built that summer."
+        },
+        {
+          "prompt": "How many times did the lady appear to Mariette?",
+          "choices": [
+            {
+              "text": "Once"
+            },
+            {
+              "text": "Three times"
+            },
+            {
+              "text": "Eight times",
+              "correct": true
+            },
+            {
+              "text": "Eighteen times"
+            }
+          ],
+          "explanation": "The lady appeared eight times between January 15 and March 2, 1933."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The apparitions (1933)",
+          "publisher": "Sanctuary of Banneux Notre-Dame",
+          "url": "https://banneux-nd.be/en/wp-json/wp/v2/pages/2287",
+          "note": "Mariette's birth and family, each of the eight evenings and the lady's words, the chapel built in summer 1933"
+        },
+        {
+          "title": "Recognition of apparitions",
+          "publisher": "Sanctuary of Banneux Notre-Dame",
+          "url": "https://banneux-nd.be/en/?p=15502",
+          "note": "the eight dates, the 1942 and 1947 steps, the August 22, 1949 letter and its quote"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-beauraing",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Beauraing",
+        "production_id_hint": 1098
+      },
+      "student_title": "Our Lady of Beauraing",
+      "subtitle": "Five children in Belgium saw Mary 33 times, and she showed them her heart of gold.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "November 29, 1932 – January 3, 1933"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Beauraing, Belgium"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Five children from two families"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1949"
+        }
+      ],
+      "intro": "In the winter of 1932, five children in the town of Beauraing, Belgium, saw a lady in white near their school. She came back 33 times. She asked them to be good and to pray. Near the end, the children saw her heart shining like gold. On her last visit, she said, \"I am the Mother of God, the Queen of heaven.\"",
+      "story_paragraphs": [
+        "Beauraing is a town in Belgium. In 1932, five children from two families lived there. In the Voisin family were Fernande, who was 15, Gilberte, who was 13, and Albert, who was 11. In the Degeimbre family were Andrée, who was 14, and her little sister Gilberte, who was 9.",
+        "On the evening of November 29, 1932, four of the children walked to a school run by religious sisters to meet Gilberte Voisin. As they waited, Albert pointed toward a railroad bridge near the school. A lady in white was there, and she seemed to be walking in the air. The children ran home, amazed.",
+        "They came back the next evenings, and the lady came too. Most of the time, she appeared in the school garden, near a hawthorn tree. She wore a long white dress, and rays of light shone like a crown around her head. When she came, the children dropped to their knees.",
+        "Albert asked her, \"Are you the Immaculate Virgin?\" The lady smiled and nodded. Then he asked, \"What do you want?\" She answered, \"Always be good.\"",
+        "At first, the head sister of the school did not believe the children, and she locked the garden gate. Doctors came to watch and test the children. More and more people came, too.",
+        "On December 17, the lady asked for a chapel to be built. From December 29 on, the children saw her heart shining as if it were made of gold. That is why she is called the Virgin of the Golden Heart.",
+        "The last apparition was on January 3, 1933. About 20,000 people were there. The lady said, \"I will convert sinners. I am the Mother of God, the Queen of heaven.\" To Fernande she said, \"Do you love my Son? Do you love me? Then sacrifice yourself for me.\"",
+        "The bishop studied everything for years. On July 2, 1949, the Bishop of Namur approved the apparitions."
+      ],
+      "timeline": [
+        {
+          "date_display": "November 29, 1932",
+          "text": "The children first see a lady in white near the railroad bridge."
+        },
+        {
+          "date_display": "December 1932",
+          "text": "The lady appears again and again in the school garden, near a hawthorn tree."
+        },
+        {
+          "date_display": "December 17, 1932",
+          "text": "The lady asks for a chapel."
+        },
+        {
+          "date_display": "December 29, 1932",
+          "text": "The children begin to see her golden heart."
+        },
+        {
+          "date_display": "January 3, 1933",
+          "text": "The lady appears for the 33rd and last time."
+        },
+        {
+          "date_display": "1943",
+          "text": "The bishop allows people to honor Our Lady of Beauraing."
+        },
+        {
+          "date_display": "July 2, 1949",
+          "text": "The Bishop of Namur approves the apparitions."
+        }
+      ],
+      "fun_facts": [
+        "Mary appeared at Beauraing 33 times in just over a month.",
+        "Two of the five children were named Gilberte.",
+        "Mary is called the Virgin of the Golden Heart because of what the children saw.",
+        "The youngest of the five, Gilberte Degeimbre, lived to be 91 years old.",
+        "Pope John Paul II came to pray at Beauraing in 1985."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Immaculate",
+          "definition": "Completely free from sin. Mary is called the Immaculate Virgin."
+        },
+        {
+          "word": "Hawthorn",
+          "definition": "A small tree with thorns on its branches."
+        },
+        {
+          "word": "Convert",
+          "definition": "To turn away from sin and back to God."
+        },
+        {
+          "word": "Sacrifice",
+          "definition": "Giving up something, or doing something hard, out of love for God and others."
+        }
+      ],
+      "think_about_it": "Mary's first request to the children was simple: \"Always be good.\" What does being good look like at home and at school?",
+      "reflection_question": "Mary asked Fernande, \"Do you love my Son? Do you love me?\" How would you answer? What is one way you can show it this week?",
+      "type_specific": {
+        "who_saw_her": "Five children saw the lady: Fernande, Gilberte, and Albert Voisin, and Andrée and Gilberte Degeimbre. They were between 9 and 15 years old.",
+        "marys_message": "Mary asked the children to \"always be good\" and to pray. She asked for a chapel. She promised, \"I will convert sinners,\" and she showed the children her golden heart.",
+        "prayer": "Our Lady of Beauraing, Virgin of the Golden Heart, pray for us.",
+        "church_recognition": "In 1943, the bishop allowed people to honor Our Lady of Beauraing. On July 2, 1949, Bishop Charue of Namur approved the apparitions. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Beauraing."
+      },
+      "quiz": [
+        {
+          "prompt": "How many children saw the lady at Beauraing?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Three"
+            },
+            {
+              "text": "Five",
+              "correct": true
+            },
+            {
+              "text": "Twelve"
+            }
+          ],
+          "explanation": "Five children from two families, the Voisins and the Degeimbres, saw the lady."
+        },
+        {
+          "prompt": "What did the lady answer when Albert asked what she wanted?",
+          "choices": [
+            {
+              "text": "\"Always be good.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Bring me flowers.\""
+            },
+            {
+              "text": "\"Go home.\""
+            }
+          ],
+          "explanation": "Albert asked, \"What do you want?\" The lady answered, \"Always be good.\""
+        },
+        {
+          "prompt": "What did the children see near the end of the apparitions?",
+          "choices": [
+            {
+              "text": "A golden crown on the ground"
+            },
+            {
+              "text": "Her heart shining like gold",
+              "correct": true
+            },
+            {
+              "text": "A silver star in the tree"
+            }
+          ],
+          "explanation": "From December 29 on, the children saw her heart shining as if it were made of gold."
+        },
+        {
+          "prompt": "How many times did the lady appear?",
+          "choices": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "8"
+            },
+            {
+              "text": "18"
+            },
+            {
+              "text": "33",
+              "correct": true
+            }
+          ],
+          "explanation": "The lady appeared 33 times between November 29, 1932, and January 3, 1933."
+        },
+        {
+          "prompt": "What did the lady say on her last visit?",
+          "choices": [
+            {
+              "text": "\"I am the Lady of the Rosary.\""
+            },
+            {
+              "text": "\"I am the Mother of God, the Queen of heaven.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I am the Virgin of the Poor.\""
+            }
+          ],
+          "explanation": "On January 3, 1933, she said, \"I will convert sinners. I am the Mother of God, the Queen of heaven.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "The 'Golden Heart' Apparition of Our Lady of Beauraing",
+          "publisher": "National Catholic Register (Patti Maguire Armstrong)",
+          "url": "https://www.ncregister.com/blog/the-golden-heart-apparition-of-our-lady-of-beauraing",
+          "note": "the five children and their ages, November 29, the school and the railroad viaduct, 33 apparitions, the exact words, the locked gate, the doctors, 20,000 people, July 2, 1949, Gilberte Degeimbre's death at 91"
+        },
+        {
+          "title": "Beauraing: The Virgin with the Golden Heart",
+          "publisher": "Marie de Nazareth",
+          "url": "https://www.mariedenazareth.com/en/marian-encyclopedia/mary-fills-the-world/europe/belgium/beauraing-the-virgin-with-the-golden-heart",
+          "note": "family names, the hawthorn tree, her white dress and the rays of light, December 17 chapel request, December 29 golden heart, 1943 and Bishop Charue in 1949, John Paul II's visit on May 18, 1985"
+        },
+        {
+          "title": "What happened on 29 November 1932 in Beauraing?",
+          "publisher": "Beauraing Tourist Office",
+          "url": "https://beauraingtourisme.be/en/?p=7665",
+          "note": "the lady \"walking in the air,\" 33 apparitions, recognition in 1949"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-kibeho",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Kibeho",
+        "production_id_hint": 1103
+      },
+      "student_title": "Our Lady of Kibeho",
+      "subtitle": "Mary appeared to three students in Rwanda and called her children to pray, to love, and to forgive.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "Beginning November 28, 1981"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Kibeho, Rwanda, in Africa"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Three students: Alphonsine, Nathalie, and Marie Claire"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 2001"
+        }
+      ],
+      "intro": "Kibeho is a village in Rwanda, a country in Africa. On November 28, 1981, a 16-year-old student named Alphonsine saw a beautiful lady at her school. The lady called herself the Mother of the Word. Soon two more students saw her too. Mary asked everyone to turn back to God, to pray, and to love one another. In 2001, the bishop said that Mary truly appeared there.",
+      "story_paragraphs": [
+        "Kibeho is a small village in the hills of Rwanda, a country in Africa. In 1981, there was a school for girls there.",
+        "On November 28, 1981, a 16-year-old student named Alphonsine Mumureke was at the school when she saw a lady. The lady told her, in Alphonsine's own language, \"Ndi Nyina wa Jambo.\" That means, \"I am the Mother of the Word.\" The Word is a name for Jesus, so this is another way of saying \"Mother of God.\"",
+        "At first, many of the other students and teachers did not believe Alphonsine. Then, on January 12, 1982, a 17-year-old student named Nathalie Mukamazimpaka saw the lady too. On March 2, a third student, Marie Claire Mukangango, who was 21, also saw her.",
+        "Mary told the girls they did not need to be afraid of their mother. She asked people to change their hearts and turn back to God. She asked them to pray, especially the Rosary, to be humble, to love their neighbors, and to forgive. She also asked for a chapel to be built.",
+        "Mary taught Marie Claire a special prayer called the Rosary of the Seven Sorrows. It remembers seven sad times in Mary's life.",
+        "On August 15, 1982, something different happened. The girls saw Mary crying, and they saw frightening things. They cried too.",
+        "Twelve years later, in 1994, a terrible time came to Rwanda. In just a few months, a great many people were killed. It is called a genocide. Many people died at Kibeho, too. The bishop later wrote that what the girls saw in 1982 seemed to have been a warning.",
+        "The Church studied the apparitions for twenty years. Doctors and experts in the faith questioned the three young women. On June 29, 2001, Bishop Augustin Misago declared, \"Yes, the Virgin Mary appeared at Kibeho on November 28th, 1981 and in the months that followed.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "November 28, 1981",
+          "text": "Mary appears to Alphonsine Mumureke at her school in Kibeho."
+        },
+        {
+          "date_display": "January 12, 1982",
+          "text": "Nathalie Mukamazimpaka sees Mary for the first time."
+        },
+        {
+          "date_display": "March 2, 1982",
+          "text": "Marie Claire Mukangango sees Mary for the first time."
+        },
+        {
+          "date_display": "August 15, 1982",
+          "text": "The girls see Mary crying."
+        },
+        {
+          "date_display": "1988",
+          "text": "The bishop allows people to gather and pray at Kibeho."
+        },
+        {
+          "date_display": "1994",
+          "text": "A genocide brings great suffering to Rwanda, and to Kibeho."
+        },
+        {
+          "date_display": "June 29, 2001",
+          "text": "Bishop Augustin Misago declares that Mary appeared at Kibeho."
+        }
+      ],
+      "fun_facts": [
+        "At Kibeho, Mary called herself \"Nyina wa Jambo,\" which means \"Mother of the Word.\"",
+        "Mary spoke to the girls in their own language.",
+        "All three girls were students at the same school.",
+        "Mary taught the Rosary of the Seven Sorrows at Kibeho.",
+        "The holy place at Kibeho is called the Shrine of Our Lady of Sorrows."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "The Word",
+          "definition": "A name for Jesus, the Son of God, used in the Bible."
+        },
+        {
+          "word": "Humble",
+          "definition": "Not bragging or putting yourself first."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To let go of anger toward someone who hurt you and to wish them good."
+        },
+        {
+          "word": "Genocide",
+          "definition": "A terrible crime in which many people are killed because of the group they belong to."
+        }
+      ],
+      "think_about_it": "Mary asked the people of Kibeho to love their neighbors and to forgive. Why is forgiving so important for peace?",
+      "reflection_question": "Mary told the girls they did not need to be afraid of their mother. What would you like to tell Mary, your mother in heaven?",
+      "type_specific": {
+        "who_saw_her": "Three students saw Mary: Alphonsine Mumureke, Nathalie Mukamazimpaka, and Marie Claire Mukangango. Other people later said they saw visions too, but the Church recognized only these three.",
+        "marys_message": "Mary asked people to turn back to God with all their hearts. She asked them to pray, especially the Rosary, to be humble, to love their neighbors, and to forgive.",
+        "prayer": "Our Lady of Kibeho, Mother of the Word, pray for us.",
+        "church_recognition": "After twenty years of study, Bishop Augustin Misago of Gikongoro declared on June 29, 2001: \"Yes, the Virgin Mary appeared at Kibeho on November 28th, 1981 and in the months that followed.\" He recognized the visions of the first three students only. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Kibeho."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Kibeho?",
+          "choices": [
+            {
+              "text": "Kenya"
+            },
+            {
+              "text": "Rwanda",
+              "correct": true
+            },
+            {
+              "text": "Egypt"
+            },
+            {
+              "text": "Brazil"
+            }
+          ],
+          "explanation": "Kibeho is a village in Rwanda, a country in Africa."
+        },
+        {
+          "prompt": "What did Mary call herself at Kibeho?",
+          "choices": [
+            {
+              "text": "The Lady of the Hills"
+            },
+            {
+              "text": "The Queen of Africa"
+            },
+            {
+              "text": "The Mother of the Word",
+              "correct": true
+            }
+          ],
+          "explanation": "She said, \"Ndi Nyina wa Jambo,\" which means \"I am the Mother of the Word.\""
+        },
+        {
+          "prompt": "Where was Alphonsine when she first saw Mary?",
+          "choices": [
+            {
+              "text": "At her school",
+              "correct": true
+            },
+            {
+              "text": "On a boat"
+            },
+            {
+              "text": "In a market"
+            }
+          ],
+          "explanation": "Alphonsine was a student at the school in Kibeho when she first saw Mary on November 28, 1981."
+        },
+        {
+          "prompt": "How many students did the Church recognize as having seen Mary?",
+          "choices": [
+            {
+              "text": "One"
+            },
+            {
+              "text": "Three",
+              "correct": true
+            },
+            {
+              "text": "Seven"
+            },
+            {
+              "text": "Twenty"
+            }
+          ],
+          "explanation": "The Church recognized three: Alphonsine, Nathalie, and Marie Claire."
+        },
+        {
+          "prompt": "Which of these did Mary ask people to do?",
+          "choices": [
+            {
+              "text": "Build a tall tower"
+            },
+            {
+              "text": "Move far away"
+            },
+            {
+              "text": "Pray, love their neighbors, and forgive",
+              "correct": true
+            }
+          ],
+          "explanation": "Mary asked people to turn back to God, to pray, to be humble, to love their neighbors, and to forgive."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Declaration on the Apparitions of Kibeho, June 29, 2001",
+          "publisher": "Bishop Augustin Misago (EWTN)",
+          "url": "https://www.ewtn.com/catholicism/library/declaration-apparitions-of-kibeho-21169",
+          "note": "the three recognized visionaries, \"Nyina wa Jambo\" and its meaning, the commissions, the judgment and its quote, the request for a chapel, the Rosary of the Seven Sorrows, August 15, 1982, the 1988 approval of public prayer, the 1994 killings at Kibeho, the shrine's name"
+        },
+        {
+          "title": "report on Kibeho",
+          "publisher": "Agenzia Fides (Holy See mission news agency)",
+          "url": "https://www.fides.org/en/news/10928",
+          "note": "ages 16, 17 and 21, the three starting dates, \"Ndi Nyina wa Jambo,\" \"you need not be afraid of your mother,\" the call to prayer, humility, love and forgiveness, twenty years of study, four other claimed visionaries not recognized"
+        }
+      ]
+    }
+  ]
+}

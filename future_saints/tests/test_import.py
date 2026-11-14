@@ -2,7 +2,8 @@
 with a draft, every validation failure, canonical 0/1/many matches, HTML
 escaping, idempotency, --dry-run and --verify. Runs on a copy of the approved
 Carlo JSON whose canonical match_title points at a fixture saint (Carlo isn't
-in the local database)."""
+in the local database). BatchFileTests run content batch 04 unchanged (twelve
+pages in one file) against fixture saints titled like the canonical pages."""
 import copy
 import json
 import os
@@ -21,6 +22,7 @@ from future_saints.models import FutureSaintsIndexPage, SaintLearningPage
 from .base import FS_ON, FutureSaintsTestCase
 
 APPROVED = Path(settings.BASE_DIR) / "docs" / "future-saints" / "content" / "carlo-acutis.json"
+BATCH_04 = Path(settings.BASE_DIR) / "docs" / "future-saints" / "content" / "future-saints-batch-04.json"
 FIXTURE_TITLE = "Fixture Saint for Import Tests"
 
 
@@ -236,3 +238,78 @@ class RenderingTests(ImportTestCase):
         self.assertNotIn("October 12", html.split('id="fs-print-sheet"')[0].split("Quick Facts")[1].split("</aside>")[0])
         self.assertLess(html.index('id="reflection"'), html.index('id="kindness"'))
         self.assertIn("Try a small act of kindness", html)
+
+
+class BatchFileTests(FutureSaintsTestCase):
+    """One file, many pages: every page is planned and written on its own."""
+    NOTE = "Imported from content batch 04 on 2026-11-12. Text review by Steven pending."
+
+    def setUp(self):
+        super().setUp()
+        self.data = json.loads(BATCH_04.read_text(encoding="utf-8"))
+        for i, row in enumerate(self.data["pages"]):
+            title = row["canonical"]["match_title"]
+            self.home.get_parent().add_child(instance=SaintPage(title=title, slug=f"fixture-batch-saint-{i}"))
+
+    def run_import(self, *flags):
+        out = StringIO()
+        call_command("import_learning_pages", str(BATCH_04), *flags, stdout=out)
+        return out.getvalue()
+
+    def test_every_page_in_the_file_becomes_a_draft_with_the_review_note(self):
+        out = self.run_import("--review-note", self.NOTE)
+        self.assertIn("Changed: 12 (created 12, updated 0); unchanged 0; skipped 0; failed 0.", out)
+        slugs = [row["slug"] for row in self.data["pages"]]
+        pages = {p.slug: p for p in SaintLearningPage.objects.filter(slug__in=slugs)}
+        self.assertEqual(sorted(pages), sorted(slugs))
+        for slug, page in pages.items():
+            self.assertFalse(page.live, slug)
+            self.assertEqual(page.review_note, self.NOTE, slug)
+            self.assertFalse(WorkflowState.objects.filter(object_id=str(page.pk)).exists(), slug)
+        self.assertIn("Verify: 0 differences.", self.run_import("--verify", "--review-note", self.NOTE))
+        self.assertIn("unchanged 12", self.run_import("--review-note", self.NOTE))
+
+    def test_a_source_note_longer_than_255_characters_imports_unchanged(self):
+        row = next(r for r in self.data["pages"] if r["slug"] == "joachim-and-anne")
+        self.assertGreater(len(row["sources"][0]["note"]), 255)
+        self.run_import()
+        page = SaintLearningPage.objects.get(slug="joachim-and-anne")
+        self.assertEqual(page.sources.order_by("sort_order").first().note, row["sources"][0]["note"])
+
+    def test_without_review_note_the_field_is_left_alone(self):
+        self.run_import("--review-note", self.NOTE)
+        out = self.run_import()
+        self.assertIn("unchanged 12", out)
+        self.assertEqual(SaintLearningPage.objects.get(slug="peter").review_note, self.NOTE)
+
+    def test_review_note_is_never_shown(self):
+        self.run_import("--review-note", self.NOTE)
+        page = SaintLearningPage.objects.get(slug="peter")
+        page.save_revision().publish()
+        with FS_ON:
+            html = self.html(page.url)
+        self.assertNotIn("Text review by Steven pending", html)
+
+    def test_quick_facts_render_the_labels_the_file_gives(self):
+        self.run_import()
+        rows = {}
+        for slug in ("michael-the-archangel", "joachim-and-anne"):
+            page = SaintLearningPage.objects.get(slug=slug)
+            page.save_revision().publish()
+            rows[slug] = page
+        with FS_ON:
+            michael = self.html(rows["michael-the-archangel"].url)
+            joachim = self.html(rows["joachim-and-anne"].url)
+        card = lambda html: html.split('id="fs-qf-title"')[1].split("</aside>")[0]
+        self.assertIn("Who:</dt>", card(michael))
+        self.assertIn("In the Bible:</dt>", card(michael))
+        self.assertIn("The books of Daniel and Revelation", card(michael))
+        self.assertIn("September 29", card(michael), "inherited feast day falls back: the fixture has none")
+        self.assertNotIn("Lived:</dt>", card(michael))
+        self.assertIn("Lived:</dt>", card(joachim))
+        self.assertIn("Before the birth of Jesus", card(joachim))
+        self.assertIn("Nazareth, according to tradition", card(joachim))
+
+    def test_review_note_too_long_is_refused(self):
+        with self.assertRaises(CommandError):
+            self.run_import("--dry-run", "--review-note", "x" * 256)
