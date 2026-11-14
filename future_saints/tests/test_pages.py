@@ -55,7 +55,11 @@ class HomepageTests(FutureSaintsTestCase):
         for marker in ("grades 2", "grades 4", "explorer", "researcher", "choose your adventure",
                        "data-fs-level", "reading level"):
             self.assertNotIn(marker, html)
-        self.assertNotIn("<form", html)
+        # The only form is the search box (PR B); the old reading-level control never comes back.
+        forms = re.findall(r"<form[^>]*>", html)
+        self.assertEqual(len(forms), 1)
+        self.assertIn('role="search"', forms[0])
+        self.assertNotIn('name="level"', html)
         self.assertNotIn("<script>", ignored, "an old ?level= link is ignored, never echoed")
 
     def test_menu_disclosure_markup(self):
