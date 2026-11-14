@@ -14,8 +14,8 @@ edit and publish only inside /future-saints/) and a "Future Saints editorial
 review" workflow on the subtree, using Wagtail's built-in moderation.
 
 Idempotent: it creates only what's missing (the home page, any of the five
-indexes, and the World Discovery Map at /future-saints/map/), each as an
-unpublished draft, and links a new index to its homepage card only if that card
+indexes, the World Discovery Map at /future-saints/map/ and "A Note for
+Grown-Ups" at /future-saints/for-grown-ups/), each as an unpublished draft, and links a new index to its homepage card only if that card
 is empty. Existing pages are never changed. A run with nothing missing writes
 nothing. The review group and workflow are set up only with a new home page.
 
@@ -29,12 +29,14 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from wagtail.models import GroupApprovalTask, GroupPagePermission, Page, Site, Workflow, WorkflowPage, WorkflowTask
 
-from future_saints.models import FutureSaintsHomePage, FutureSaintsIndexPage, WorldMapPage
+from future_saints.models import FutureSaintsHomePage, FutureSaintsIndexPage, GrownUpsNotePage, WorldMapPage
 from home.models import HomePage
 
 HOME_SLUG = "future-saints"
 MAP_SLUG = "map"
 MAP_TITLE = "World Discovery Map"
+NOTE_SLUG = "for-grown-ups"
+NOTE_TITLE = "A Note for Grown-Ups"
 REVIEW_GROUP = "Future Saints reviewers"
 WORKFLOW_NAME = "Future Saints editorial review"
 
@@ -49,7 +51,8 @@ INDEXES = [
 
 
 class Command(BaseCommand):
-    help = "Create the missing Future Saints pages (home, five indexes, World Discovery Map) as unpublished drafts."
+    help = ("Create the missing Future Saints pages (home, five indexes, World Discovery Map, A Note for Grown-Ups) "
+            "as unpublished drafts.")
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -104,6 +107,14 @@ class Command(BaseCommand):
                     world = WorldMapPage(title=MAP_TITLE, slug=MAP_SLUG, live=False, show_in_menus=False)
                     fs_home.add_child(instance=world)
                     world.save_revision()
+
+            if NOTE_SLUG not in children and not (fs_home and fs_home.pk and GrownUpsNotePage.objects.child_of(fs_home).exists()):
+                created.append(f"GrownUpsNotePage  title '{NOTE_TITLE}'  slug '{NOTE_SLUG}'  path {fs_path}{NOTE_SLUG}/  "
+                               f"parent {fs_path}  (mailing address and effective date blank: can't be published yet)")
+                if not dry_run:
+                    note = GrownUpsNotePage(title=NOTE_TITLE, slug=NOTE_SLUG, live=False, show_in_menus=False)
+                    fs_home.add_child(instance=note)
+                    note.save_revision()
 
             if not dry_run and linked:
                 fs_home.save()
