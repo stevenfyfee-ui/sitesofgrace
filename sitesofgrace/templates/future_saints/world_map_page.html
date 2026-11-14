@@ -16,6 +16,7 @@
 </header>
 
 <div class="fs-wrap">
+  {% if fs_search_url and fs_world_items %}{% include "future_saints/includes/_search_box.html" with id="fs-map-search" label="Search for a saint, a miracle, or a place" mode="map" %}{% endif %}
   <div class="fs-world-filters" role="group" aria-label="Show stories by type" hidden data-fs-world-filters>
     {% for kind, label, type_label, icon in fs_world_kinds %}
       <button type="button" class="fs-world-filter fs-wm-{{ kind }}" aria-pressed="true" data-fs-filter="{{ kind }}">{% include "future_saints/includes/_icon.html" with name=icon %}<span>{{ label }}</span></button>

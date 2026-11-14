@@ -1,8 +1,9 @@
 {% load static wagtailcore_tags legal_tags %}<!DOCTYPE html>
 {% comment %}
   The Future Saints base. It does NOT extend the adult base.html: no third-party
-  hosts, no {% csrf_token %} (no cookie for anonymous visitors), no search,
-  account, sign-in, newsletter, donate, store or social links.
+  hosts, no {% csrf_token %} (no cookie for anonymous visitors), no adult site search
+  (its own kids-safe search is future_saints.search), no account, sign-in, newsletter,
+  donate, store or social links.
   See docs/future-saints/future-saints-affiliate-privacy-gates.md.
 {% endcomment %}
 <html lang="en">

@@ -13,6 +13,12 @@
   {% include "future_saints/includes/_art_frame.html" with art=page.hero_art variant="hero" slot="homepage hero" %}
 </section>
 
+{% if fs_search_url %}
+<div class="fs-wrap fs-home-search">
+  {% include "future_saints/includes/_search_box.html" with id="fs-home-search" label="Search for a saint, a miracle, or a place" mode="home" %}
+</div>
+{% endif %}
+
 <section class="fs-wrap" id="fs-subjects" aria-labelledby="fs-subjects-heading">
   <h2 id="fs-subjects-heading" class="sr-only">Explore by subject</h2>
   <ul class="fs-cards fs-cards--four" data-fs-subject-cards>
