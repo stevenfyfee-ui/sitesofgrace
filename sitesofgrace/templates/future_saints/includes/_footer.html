@@ -1,10 +1,10 @@
 <footer class="fs-footer">
   <div class="fs-wrap fs-footer-inner">
     <ul class="fs-footer-links">
-      {% if fs_privacy_url %}
-        <li><a href="{{ fs_privacy_url }}">A note for grown-ups</a></li>
+      {% if fs_grown_ups_url %}
+        <li><a href="{{ fs_grown_ups_url }}">A note for grown-ups</a></li>
       {% elif request.user.is_staff %}
-        <li><span class="fs-chip-staff">Staff only: the Privacy Policy isn't live yet, so "A note for grown-ups" has no link.</span></li>
+        <li><span class="fs-chip-staff">Staff only: the "A Note for Grown-Ups" page isn't published yet, so "A note for grown-ups" has no link.</span></li>
       {% endif %}
       <li><a href="/">Back to Sites of Grace</a></li>
     </ul>
