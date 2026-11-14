@@ -1,0 +1,2565 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-12",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "joseph",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Joseph",
+        "production_id_hint": 1000
+      },
+      "student_title": "Saint Joseph",
+      "subtitle": "The quiet carpenter God chose to care for Jesus and Mary.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the time of Jesus (1st century)"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Nazareth, in Galilee"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "March 19"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for Jesus and Mary"
+        }
+      ],
+      "intro": "Joseph was a carpenter who lived in the town of Nazareth about 2,000 years ago. God chose him for a very special job: to be the husband of Mary and to care for Jesus as a father on earth. Joseph listened when God spoke to him, and he kept his family safe. Today he is the patron saint of the whole Church.",
+      "story_paragraphs": [
+        "Almost everything we know about Joseph comes from the Bible, from the Gospels of Matthew and Luke. Joseph came from the family of the great King David. He lived and worked in the town of Nazareth as a carpenter.",
+        "Joseph was going to marry a young woman named Mary. Then he learned that Mary was going to have a baby. Joseph was a good and fair man, and he did not know what to do. In a dream, an angel told him not to be afraid. The child was from the Holy Spirit. So Joseph took Mary as his wife.",
+        "Jesus was born in the town of Bethlehem. Wise men called the Magi came to honor him there.",
+        "Soon there was danger. A king named Herod wanted to harm the child. An angel warned Joseph, and he took Mary and Jesus far away to the land of Egypt, where they would be safe.",
+        "After King Herod died, an angel told Joseph it was time to go home. Joseph brought his family back and settled in Nazareth. There he taught Jesus his own work, carpentry.",
+        "When Jesus was 12 years old, the family went to the Temple in Jerusalem. On the way home, Mary and Joseph could not find Jesus. They searched and searched. At last they found him in the Temple. That is the last time the Bible tells us about Joseph.",
+        "Joseph probably died before Jesus began teaching and healing. An old tradition says that Jesus and Mary were beside him when he died. That is why people ask Saint Joseph to pray for those who are dying.",
+        "Christians have honored Joseph more and more over the centuries. In 1870, Pope Pius IX named him the patron saint of the whole Church."
+      ],
+      "timeline": [
+        {
+          "date_display": "Before Jesus was born",
+          "text": "An angel tells Joseph in a dream to take Mary as his wife."
+        },
+        {
+          "date_display": "The first Christmas",
+          "text": "Jesus is born in Bethlehem."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Warned by an angel, Joseph takes Mary and Jesus to Egypt to keep them safe."
+        },
+        {
+          "date_display": "After King Herod dies",
+          "text": "Joseph brings his family home to Nazareth."
+        },
+        {
+          "date_display": "When Jesus is 12",
+          "text": "Mary and Joseph find Jesus in the Temple in Jerusalem."
+        },
+        {
+          "date_display": "1870",
+          "text": "Pope Pius IX names Joseph the patron saint of the whole Church."
+        },
+        {
+          "date_display": "1955",
+          "text": "Pope Pius XII begins the feast of Saint Joseph the Worker on May 1."
+        }
+      ],
+      "fun_facts": [
+        "Joseph came from the family of King David.",
+        "Joseph taught Jesus how to be a carpenter.",
+        "Saint Joseph has two feast days: March 19 and May 1.",
+        "In 1889, Pope Leo XIII named Joseph the patron saint of fathers and workers.",
+        "Joseph is a patron saint of Canada, Mexico, and Belgium.",
+        "Since 2013, Saint Joseph's name is said in the main prayers of the Mass."
+      ],
+      "words_to_know": [
+        {
+          "word": "Carpenter",
+          "definition": "A person who builds and fixes things made of wood."
+        },
+        {
+          "word": "Gospel",
+          "definition": "One of the four books of the Bible that tell about the life of Jesus."
+        },
+        {
+          "word": "Magi",
+          "definition": "Wise men who traveled from far away to honor the baby Jesus."
+        },
+        {
+          "word": "Temple",
+          "definition": "The great house of prayer in Jerusalem in the time of Jesus."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays in a special way for a place or a group of people."
+        }
+      ],
+      "think_about_it": "Joseph did not always understand God's plan, but he trusted and obeyed. When is it hard for you to trust?",
+      "reflection_question": "Joseph took care of Jesus and Mary every day. Who takes care of you? How can you thank them?",
+      "kindness_prompt": "Like Joseph, help quietly. Do a job at home today without being asked, and without needing anyone to notice.",
+      "quiz": [
+        {
+          "prompt": "What was Joseph's work?",
+          "choices": [
+            {
+              "text": "Fisherman"
+            },
+            {
+              "text": "Carpenter",
+              "correct": true
+            },
+            {
+              "text": "Shepherd"
+            },
+            {
+              "text": "Soldier"
+            }
+          ],
+          "explanation": "Joseph lived and worked in Nazareth as a carpenter, and he taught Jesus his work."
+        },
+        {
+          "prompt": "How did God speak to Joseph?",
+          "choices": [
+            {
+              "text": "In a letter"
+            },
+            {
+              "text": "Through a king"
+            },
+            {
+              "text": "Through an angel in a dream",
+              "correct": true
+            }
+          ],
+          "explanation": "An angel spoke to Joseph in a dream and told him to take Mary as his wife."
+        },
+        {
+          "prompt": "Where did Joseph take Mary and Jesus to keep them safe?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Egypt",
+              "correct": true
+            },
+            {
+              "text": "Greece"
+            }
+          ],
+          "explanation": "An angel warned Joseph about King Herod, so he took his family to Egypt."
+        },
+        {
+          "prompt": "Where did Mary and Joseph find Jesus when he was 12?",
+          "choices": [
+            {
+              "text": "In the Temple",
+              "correct": true
+            },
+            {
+              "text": "In a boat"
+            },
+            {
+              "text": "In the carpenter shop"
+            },
+            {
+              "text": "In Bethlehem"
+            }
+          ],
+          "explanation": "After searching, Mary and Joseph found Jesus in the Temple in Jerusalem."
+        },
+        {
+          "prompt": "What did Pope Pius IX name Joseph in 1870?",
+          "choices": [
+            {
+              "text": "The first pope"
+            },
+            {
+              "text": "Patron saint of the whole Church",
+              "correct": true
+            },
+            {
+              "text": "King of Nazareth"
+            }
+          ],
+          "explanation": "In 1870, Pope Pius IX named Saint Joseph the patron of the universal Church, which means the whole Church."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Joseph",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Joseph",
+          "note": "the Gospels of Matthew and Luke, the house of David, the angel's messages, Bethlehem and the Magi, Egypt, Nazareth, carpentry, the Temple, his death before Jesus's public ministry, 1870, 1955, patron of Mexico, Canada and Belgium"
+        },
+        {
+          "title": "19 March: Saint Joseph",
+          "publisher": "Vatican City State",
+          "url": "https://vaticanstate.va/en/state-and-government/general-informations/saint-of-the-day/1652-19-march-saint-joseph-spouse-of-the-blessed-virgin-mary-and-patron-saint-of-the-universal-church.html",
+          "note": "carpenter in Nazareth, the dream, Jesus at age 12, the tradition about his death, Leo XIII in 1889, the 2013 decree"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "clare-of-assisi",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Clare",
+        "production_id_hint": 931
+      },
+      "student_title": "Saint Clare of Assisi",
+      "subtitle": "A young noblewoman who gave up riches to follow Jesus, as her friend Francis did.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1194–1253"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Assisi, Italy"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "August 11"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Starting the Poor Clares and living simply for God"
+        }
+      ],
+      "intro": "Clare grew up in a rich and important family in Assisi, Italy. When she was 18, she left it all behind to follow Jesus in the simple way that Saint Francis taught. Other women joined her. They became known as the Poor Clares. For more than 40 years, Clare lived at a little church called San Damiano, praying and caring for her sisters.",
+      "story_paragraphs": [
+        "Clare was born in Assisi, Italy, in 1193 or 1194. Her family was rich and noble, which means they were among the most important people in town.",
+        "In Assisi, a young man named Francis had given up everything to live like Jesus. Clare wanted to follow Jesus in the same way.",
+        "On the evening of Palm Sunday, when Clare was 18, she left her family's home with a friend named Bona. They went to a little church called the Portiuncula, where Francis and his brothers were waiting. There, Francis cut off Clare's long hair, and she put on a rough, plain dress. It was a sign that she now belonged to God alone.",
+        "Soon Clare and her first companions settled beside the small church of San Damiano. They owned nothing and spent their days in prayer and work. More women came to join them. Their community became known as the Poor Clares.",
+        "Clare asked the Pope for something unusual. She did not ask for money or land. She asked for the right to own nothing at all, so that she and her sisters would depend only on God. This was called the \"Privilege of Poverty.\"",
+        "Clare was the leader of the sisters, but she served them. She took care of the sisters who were sick. She was also the first woman in the history of the Church to write a rule of life and send it to the Pope for his approval.",
+        "Twice, soldiers came to attack the convent. Each time, Clare held up the Blessed Sacrament and prayed, and the soldiers went away.",
+        "Clare lived at San Damiano for more than 40 years. She died on August 11, 1253. Just two years later, in 1255, Pope Alexander IV declared her a saint."
+      ],
+      "timeline": [
+        {
+          "date_display": "1193 or 1194",
+          "text": "Clare is born into a noble family in Assisi, Italy."
+        },
+        {
+          "date_display": "Palm Sunday, about 1211",
+          "text": "At 18, Clare leaves home. Francis cuts her hair at the Portiuncula."
+        },
+        {
+          "date_display": "Soon after",
+          "text": "Clare and her companions settle at San Damiano."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "Clare receives the \"Privilege of Poverty\" and writes a rule for her sisters."
+        },
+        {
+          "date_display": "August 11, 1253",
+          "text": "Clare dies at San Damiano."
+        },
+        {
+          "date_display": "1255",
+          "text": "Pope Alexander IV declares Clare a saint."
+        },
+        {
+          "date_display": "1958",
+          "text": "Pope Pius XII names Clare the patron saint of television."
+        }
+      ],
+      "fun_facts": [
+        "Clare was the first woman in the Church's history to write a rule of life for the Pope to approve.",
+        "Clare is the patron saint of television. A story says that when she was too sick to go to Christmas Mass, she saw and heard it from her bed, far away.",
+        "Clare wrote letters to Agnes of Prague, the daughter of a king, who also became a Poor Clare.",
+        "Clare is also a patron saint of people who do embroidery.",
+        "Clare lived at San Damiano for more than 40 years."
+      ],
+      "words_to_know": [
+        {
+          "word": "Noble",
+          "definition": "Belonging to a rich and powerful family long ago."
+        },
+        {
+          "word": "Poor Clares",
+          "definition": "The religious sisters who follow the way of life Saint Clare began."
+        },
+        {
+          "word": "Convent",
+          "definition": "A home where religious sisters live and pray together."
+        },
+        {
+          "word": "Blessed Sacrament",
+          "definition": "Jesus truly present in the Eucharist, the consecrated Host."
+        },
+        {
+          "word": "Rule",
+          "definition": "A written guide for how the members of a religious community promise to live."
+        }
+      ],
+      "think_about_it": "Clare had fine things, and she chose to give them up. What do you think she gained?",
+      "reflection_question": "Clare trusted God to give her and her sisters what they needed. What do you need to trust God with today?",
+      "kindness_prompt": "Clare cared for her sisters when they were sick. Make a card or do something helpful for someone who is not feeling well.",
+      "quiz": [
+        {
+          "prompt": "In what town was Clare born?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Padua"
+            },
+            {
+              "text": "Assisi",
+              "correct": true
+            },
+            {
+              "text": "Lisbon"
+            }
+          ],
+          "explanation": "Clare was born in Assisi, Italy, the same town as Saint Francis."
+        },
+        {
+          "prompt": "How old was Clare when she left home to follow Jesus?",
+          "choices": [
+            {
+              "text": "8"
+            },
+            {
+              "text": "18",
+              "correct": true
+            },
+            {
+              "text": "40"
+            }
+          ],
+          "explanation": "Clare left home on the evening of Palm Sunday when she was 18."
+        },
+        {
+          "prompt": "What did Francis do as a sign that Clare belonged to God?",
+          "choices": [
+            {
+              "text": "He gave her a crown."
+            },
+            {
+              "text": "He cut off her long hair.",
+              "correct": true
+            },
+            {
+              "text": "He gave her a horse."
+            }
+          ],
+          "explanation": "At the Portiuncula, Francis cut off Clare's hair, and she put on a rough, plain dress."
+        },
+        {
+          "prompt": "What did Clare ask the Pope for?",
+          "choices": [
+            {
+              "text": "A big castle"
+            },
+            {
+              "text": "Gold for the convent"
+            },
+            {
+              "text": "The right to own nothing",
+              "correct": true
+            }
+          ],
+          "explanation": "Clare asked for the \"Privilege of Poverty,\" so she and her sisters would depend only on God."
+        },
+        {
+          "prompt": "What are the sisters who follow Clare's way of life called?",
+          "choices": [
+            {
+              "text": "The Poor Clares",
+              "correct": true
+            },
+            {
+              "text": "The Sisters of Mercy"
+            },
+            {
+              "text": "The Carmelites"
+            }
+          ],
+          "explanation": "The community Clare began at San Damiano became known as the Poor Clares."
+        }
+      ],
+      "sources": [
+        {
+          "title": "General Audience of September 15, 2010 (vatican.va)",
+          "publisher": "Pope Benedict XVI",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100915.html",
+          "note": "born 1193, noble family, Palm Sunday at 18, Bona, the Portiuncula, her hair, San Damiano for more than 40 years, the Privilege of Poverty, caring for sick sisters, first woman to write a rule, the soldiers and the Blessed Sacrament, Agnes of Prague, death in 1253, canonized 1255"
+        },
+        {
+          "title": "St. Clare of Assisi",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/print/article/119776",
+          "note": "born July 16, 1194, founder of the Poor Clares, died August 11, 1253, patron of television in 1958 and why, patron of embroiderers"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "anthony-of-padua",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Anthony of Padua",
+        "production_id_hint": 899
+      },
+      "student_title": "Saint Anthony of Padua",
+      "subtitle": "A Franciscan friar whose preaching helped many people come back to God.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1195–1231"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Lisbon, Portugal"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 13"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His preaching and teaching, and prayers for lost things"
+        }
+      ],
+      "intro": "Anthony was born in Portugal about 800 years ago. He wanted to be a missionary in a faraway land, but sickness and a storm changed his plans. He landed in Italy instead. There, people discovered that he was a wonderful preacher. Crowds came to hear him explain the Gospel. Today many people ask Saint Anthony to pray when something is lost.",
+      "story_paragraphs": [
+        "Anthony was born around 1195 in Lisbon, the capital city of Portugal. His family was wealthy. His parents named him Fernando.",
+        "When Fernando was a teenager, he joined a group of priests who lived and prayed together. He studied the Bible for many years.",
+        "In 1220, something changed his life. The bodies of five Franciscan friars were brought to his city. They had been killed in Morocco for preaching about Jesus. Fernando was so moved by their courage that he became a Franciscan too. He took a new name, Anthony.",
+        "Anthony set out for Morocco to be a missionary. But he became very sick and had to turn back. Then a storm blew his ship off course. Instead of reaching Portugal, he landed on the island of Sicily, in Italy.",
+        "In 1221, Anthony went to a great meeting of the Franciscans in Assisi. There he met Saint Francis. Afterward, Anthony went to live quietly in a small friary. Hardly anyone knew how much he had learned.",
+        "One day, Anthony was asked to preach at a special Mass. Everyone was amazed. He spoke so clearly and knew the Bible so well that his leaders sent him out to preach. Saint Francis himself wrote to him, \"I would like you to teach the brethren theology.\" Theology is the study of God.",
+        "Anthony preached in Italy and France. Many people who had left the Church came back after hearing him. He also taught other friars, and he spoke up for the poor.",
+        "Anthony died on June 13, 1231, near the city of Padua, Italy. He was only about 36 years old. Pope Gregory IX declared him a saint the very next year. In 1946, Pope Pius XII named him a Doctor of the Church."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 1195",
+          "text": "Anthony is born in Lisbon, Portugal, and named Fernando."
+        },
+        {
+          "date_display": "1210",
+          "text": "Fernando joins a community of priests."
+        },
+        {
+          "date_display": "1220",
+          "text": "Moved by five Franciscan martyrs, he becomes a Franciscan and takes the name Anthony."
+        },
+        {
+          "date_display": "1221",
+          "text": "Anthony meets Saint Francis at a gathering in Assisi."
+        },
+        {
+          "date_display": "The 1220s",
+          "text": "Anthony preaches and teaches in Italy and France."
+        },
+        {
+          "date_display": "June 13, 1231",
+          "text": "Anthony dies near Padua, Italy."
+        },
+        {
+          "date_display": "1232",
+          "text": "Pope Gregory IX declares Anthony a saint."
+        },
+        {
+          "date_display": "1946",
+          "text": "Pope Pius XII names Anthony a Doctor of the Church."
+        }
+      ],
+      "fun_facts": [
+        "Anthony's name at birth was Fernando.",
+        "Anthony was from Portugal, but he is named for Padua, the Italian city where he is buried.",
+        "People ask Saint Anthony to pray when something is lost. An old story says a book of psalms that had been taken from him was brought back after he prayed.",
+        "In paintings, Anthony is often shown holding the Child Jesus, a book, or a lily.",
+        "Anthony was declared a saint only a year after he died.",
+        "Both Portugal and the city of Padua call Anthony their patron saint."
+      ],
+      "words_to_know": [
+        {
+          "word": "Friar",
+          "definition": "A man who belongs to a religious family like the Franciscans. The word means \"brother.\""
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is killed for believing in Jesus."
+        },
+        {
+          "word": "Preach",
+          "definition": "To teach people about God, often by giving a talk at Mass."
+        },
+        {
+          "word": "Doctor of the Church",
+          "definition": "A title the Church gives to a saint whose teaching helps everyone understand the faith."
+        }
+      ],
+      "think_about_it": "Anthony's plans fell apart, and God led him somewhere better. Has a change of plans ever turned out well for you?",
+      "reflection_question": "Anthony used his gift for speaking to help people know God. What gift has God given you, and how could you use it?",
+      "kindness_prompt": "Saint Anthony is known for helping find what is lost. Help someone look for something they have lost, or return something you have found.",
+      "quiz": [
+        {
+          "prompt": "In what country was Anthony born?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Portugal",
+              "correct": true
+            },
+            {
+              "text": "France"
+            },
+            {
+              "text": "Morocco"
+            }
+          ],
+          "explanation": "Anthony was born in Lisbon, Portugal. He is called \"of Padua\" because he is buried in Padua, Italy."
+        },
+        {
+          "prompt": "What was Anthony's name before he became a Franciscan?",
+          "choices": [
+            {
+              "text": "Fernando",
+              "correct": true
+            },
+            {
+              "text": "Francesco"
+            },
+            {
+              "text": "Giovanni"
+            }
+          ],
+          "explanation": "His parents named him Fernando. He took the name Anthony when he became a Franciscan."
+        },
+        {
+          "prompt": "Why did Anthony land in Italy?",
+          "choices": [
+            {
+              "text": "He was looking for gold."
+            },
+            {
+              "text": "A storm blew his ship off course.",
+              "correct": true
+            },
+            {
+              "text": "He was visiting family."
+            }
+          ],
+          "explanation": "Anthony was sailing home sick from Morocco when a storm blew his ship to Sicily."
+        },
+        {
+          "prompt": "What gift did people discover Anthony had?",
+          "choices": [
+            {
+              "text": "Painting"
+            },
+            {
+              "text": "Building"
+            },
+            {
+              "text": "Preaching",
+              "correct": true
+            }
+          ],
+          "explanation": "When Anthony was asked to preach at a special Mass, everyone was amazed, and he was sent out to preach."
+        },
+        {
+          "prompt": "What do many people ask Saint Anthony to pray for?",
+          "choices": [
+            {
+              "text": "Good weather"
+            },
+            {
+              "text": "Help finding lost things",
+              "correct": true
+            },
+            {
+              "text": "Winning games"
+            }
+          ],
+          "explanation": "Saint Anthony is known as the patron saint of lost things."
+        }
+      ],
+      "sources": [
+        {
+          "title": "General Audience of February 10, 2010 (vatican.va)",
+          "publisher": "Pope Benedict XVI",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100210.html",
+          "note": "birth, the name Fernando, the five martyrs in 1220, the name Anthony, Morocco and illness, Assisi in 1221 and meeting Francis, the quiet friary at Forlì, the ordination sermon, Francis's letter and its quote, preaching in Italy and France, death, canonized 1232, Doctor in 1946"
+        },
+        {
+          "title": "St. Anthony of Padua",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/print/article/27415",
+          "note": "wealthy family, 1210, the ship blown to Sicily, teaching, \"patron of the poor,\" buried in Padua, the lost-psalter legend, how he is shown in art, patron of Portugal and Padua"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "maximilian-kolbe",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Maximilian Kolbe",
+        "production_id_hint": 1032
+      },
+      "student_title": "Saint Maximilian Kolbe",
+      "subtitle": "A priest who loved Mary and gave his life to save another man.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1894–1941"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Zduńska Wola, Poland"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "August 14"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Giving his life in place of another prisoner"
+        }
+      ],
+      "intro": "Maximilian Kolbe was a Franciscan priest from Poland who loved Mary, the Mother of Jesus. He started magazines and built a huge friary to tell people about her. During a terrible war, he was sent to a prison camp. When a guard chose a husband and father to die, Father Kolbe stepped forward and offered to take the man's place.",
+      "story_paragraphs": [
+        "Maximilian Kolbe was born on January 8, 1894, in the town of Zduńska Wola, in Poland. His parents named him Raymond, and they taught him to love Mary, the Mother of Jesus.",
+        "When Raymond was 12, he said that Mary came to him. He later explained, \"I asked the Mother of God what was to become of me. Then she came to me holding two crowns: one white, the other red.\" The white crown stood for a pure heart. The red crown stood for giving his life for Jesus. Raymond said he would accept them both.",
+        "Soon afterward, Raymond and his older brother joined the Franciscans. He was given a new name, Maximilian. He studied in Rome and became a priest in 1918.",
+        "Father Kolbe wanted the whole world to know and love Mary. In 1917, he had started a group to spread devotion to her. He began a magazine. Then, in 1927, he built a new friary near the city of Warsaw. He called it Niepokalanów, which means \"City of the Immaculate.\" About 700 friars and workers came to live and work there.",
+        "In 1930, Father Kolbe and four other friars traveled all the way to Japan. They started a friary in the city of Nagasaki. After a few years, poor health sent him back to Poland.",
+        "In 1939, a great war began, and the army of Nazi Germany took over Poland. Father Kolbe helped people who had to flee their homes, including Jewish families. In February 1941, he was arrested and sent to a prison camp called Auschwitz.",
+        "That summer, a prisoner escaped. To punish everyone, the guards picked ten men to die. One of them, Franciszek Gajowniczek, had a wife and young children. Father Kolbe offered to take his place, and the guards agreed.",
+        "Father Kolbe was killed on August 14, 1941. Franciszek lived through the war. In 1982, he was there when Pope John Paul II declared Maximilian Kolbe a saint."
+      ],
+      "timeline": [
+        {
+          "date_display": "January 8, 1894",
+          "text": "Raymond Kolbe is born in Zduńska Wola, Poland."
+        },
+        {
+          "date_display": "About 1906",
+          "text": "At age 12, he says Mary offers him two crowns, white and red."
+        },
+        {
+          "date_display": "1917",
+          "text": "He starts a group to spread love for Mary."
+        },
+        {
+          "date_display": "1918",
+          "text": "He is ordained a priest."
+        },
+        {
+          "date_display": "1927",
+          "text": "He builds Niepokalanów, the \"City of the Immaculate,\" in Poland."
+        },
+        {
+          "date_display": "April 24, 1930",
+          "text": "Father Kolbe and four friars arrive in Nagasaki, Japan."
+        },
+        {
+          "date_display": "August 14, 1941",
+          "text": "Father Kolbe dies at Auschwitz after taking another man's place."
+        },
+        {
+          "date_display": "October 10, 1982",
+          "text": "Pope John Paul II declares him a saint."
+        }
+      ],
+      "fun_facts": [
+        "Maximilian's name at birth was Raymond.",
+        "He named his friary Niepokalanów, which means \"City of the Immaculate.\"",
+        "About 700 friars and workers lived and worked at Niepokalanów.",
+        "He traveled across the world to start a friary in Nagasaki, Japan.",
+        "The man he saved, Franciszek Gajowniczek, was there on the day he was declared a saint."
+      ],
+      "words_to_know": [
+        {
+          "word": "Friary",
+          "definition": "A house where friars live and pray together."
+        },
+        {
+          "word": "Immaculate",
+          "definition": "Completely free from sin. Mary is called the Immaculate."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is killed for believing in Jesus or for loving others as Jesus taught."
+        },
+        {
+          "word": "Prison camp",
+          "definition": "A place where people are locked up and guarded, often in terrible conditions."
+        },
+        {
+          "word": "Sacrifice",
+          "definition": "Giving up something, even something very great, out of love for God and others."
+        }
+      ],
+      "think_about_it": "Father Kolbe gave his life for someone he hardly knew. Jesus said there is no greater love than to give your life for a friend. What smaller things can you give up for others?",
+      "reflection_question": "Maximilian trusted Mary his whole life. How can you ask Mary to help you love Jesus more?",
+      "kindness_prompt": "Take someone else's place in a small way today. Offer to do a chore that belongs to your brother, sister, or classmate.",
+      "quiz": [
+        {
+          "prompt": "In what country was Maximilian Kolbe born?",
+          "choices": [
+            {
+              "text": "Germany"
+            },
+            {
+              "text": "Japan"
+            },
+            {
+              "text": "Poland",
+              "correct": true
+            },
+            {
+              "text": "Italy"
+            }
+          ],
+          "explanation": "He was born in Zduńska Wola, Poland, on January 8, 1894."
+        },
+        {
+          "prompt": "What two colors were the crowns Mary offered him?",
+          "choices": [
+            {
+              "text": "Blue and gold"
+            },
+            {
+              "text": "White and red",
+              "correct": true
+            },
+            {
+              "text": "Green and silver"
+            }
+          ],
+          "explanation": "He said Mary held two crowns, one white and one red, and he accepted both."
+        },
+        {
+          "prompt": "What does \"Niepokalanów\" mean?",
+          "choices": [
+            {
+              "text": "City of the Immaculate",
+              "correct": true
+            },
+            {
+              "text": "House of Bread"
+            },
+            {
+              "text": "Mountain of Peace"
+            }
+          ],
+          "explanation": "Father Kolbe built the friary in 1927 and named it for Mary, the Immaculate."
+        },
+        {
+          "prompt": "To what faraway country did Father Kolbe travel to start a friary?",
+          "choices": [
+            {
+              "text": "Brazil"
+            },
+            {
+              "text": "Egypt"
+            },
+            {
+              "text": "Japan",
+              "correct": true
+            }
+          ],
+          "explanation": "In 1930, he and four other friars started a friary in Nagasaki, Japan."
+        },
+        {
+          "prompt": "What did Father Kolbe do at Auschwitz?",
+          "choices": [
+            {
+              "text": "He escaped."
+            },
+            {
+              "text": "He offered to die in place of another man.",
+              "correct": true
+            },
+            {
+              "text": "He built a church."
+            }
+          ],
+          "explanation": "When a husband and father was chosen to die, Father Kolbe offered to take his place."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Maksymilian Maria Kolbe",
+          "publisher": "Britannica",
+          "url": "https://britannica.com/biography/Saint-Maksymilian-Maria-Kolbe",
+          "note": "birth, joining the Franciscans with his brother, Rome, 1917, ordained 1918, the magazine, Niepokalanów in 1927 with about 700 friars and workers, the 1939 arrest, aiding Jewish refugees, February 1941, Auschwitz, the ten men, Gajowniczek, death on August 14, 1941, 1971 and 1982"
+        },
+        {
+          "title": "St. Maximilian Kolbe",
+          "publisher": "Franciscan Media (Brian Jordan, OFM)",
+          "url": "https://www.franciscanmedia.org/?p=6492",
+          "note": "the name Raymond, his parents and Mary, the two crowns and his words, \"City of the Immaculate,\" Nagasaki on April 24, 1930, poor health, late July 1941, canonized October 10, 1982"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "josephine-bakhita",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Josephine Bakhita",
+        "production_id_hint": 1003
+      },
+      "student_title": "Saint Josephine Bakhita",
+      "subtitle": "Stolen from her home as a child, she found freedom, faith, and a heart full of forgiveness.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1869–1947"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Darfur, in Sudan, Africa"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "February 8"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her forgiveness and her joyful trust in God"
+        }
+      ],
+      "intro": "Josephine Bakhita was born in Sudan, a country in Africa. When she was a little girl, she was kidnapped and sold as a slave. After many years of suffering, she was taken to Italy. There she learned about God, became free, and was baptized. She became a religious sister, loved by everyone for her gentle smile. She forgave the people who had hurt her.",
+      "story_paragraphs": [
+        "Bakhita was born around 1869 in a village in Darfur, a part of Sudan, in Africa.",
+        "When she was about nine years old, men who sold people as slaves kidnapped her. She was so frightened that she forgot her own name. The kidnappers called her Bakhita, which means \"fortunate.\"",
+        "For years, Bakhita was sold from one owner to another in the slave markets of two cities, El Obeid and Khartoum. She was treated very cruelly. Slavery is a great wrong, and no person should ever be owned by another.",
+        "At last, in Khartoum, an Italian official named Callisto Legnani bought her. For the first time since she was taken, someone treated her kindly. When he went home to Italy in 1884, Bakhita went too. In Italy, she lived with a family called the Michielis and took care of their little daughter.",
+        "In 1888, Bakhita and the little girl stayed for some months with the Canossian Sisters in the city of Venice. There Bakhita learned about God. She had wondered about him for a long time. She said, \"Seeing the sun, the moon and the stars, I said to myself: Who could be the Master of these beautiful things?\"",
+        "When the family came to take her back, Bakhita chose to stay with the sisters. Under the law of Italy, she was free to decide. On January 9, 1890, she was baptized and given the name Josephine. She said with joy, \"Here, I became a daughter of God!\"",
+        "On December 8, 1896, Josephine became a Canossian Sister. She lived for about 50 years in the town of Schio. She cooked, sewed, and answered the door. People loved her gentle smile and her goodness.",
+        "Josephine forgave the men who had kidnapped and hurt her. She died on February 8, 1947. Pope John Paul II declared her a saint on October 1, 2000."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 1869",
+          "text": "Bakhita is born in Darfur, Sudan."
+        },
+        {
+          "date_display": "About 1878",
+          "text": "At about age nine, she is kidnapped and sold as a slave."
+        },
+        {
+          "date_display": "1884",
+          "text": "She is taken to Italy."
+        },
+        {
+          "date_display": "1888",
+          "text": "She stays with the Canossian Sisters in Venice and learns about God."
+        },
+        {
+          "date_display": "January 9, 1890",
+          "text": "She is baptized and receives the name Josephine."
+        },
+        {
+          "date_display": "December 8, 1896",
+          "text": "She becomes a Canossian Sister."
+        },
+        {
+          "date_display": "February 8, 1947",
+          "text": "Sister Josephine dies in Schio, Italy."
+        },
+        {
+          "date_display": "October 1, 2000",
+          "text": "Pope John Paul II declares her a saint."
+        }
+      ],
+      "fun_facts": [
+        "\"Bakhita\" means \"fortunate.\"",
+        "As a girl, Bakhita looked at the sun, moon, and stars and wondered who had made them.",
+        "Sister Josephine often kissed the baptismal font, the place where she was baptized.",
+        "The people of Schio lovingly called her \"Mother Moretta,\" which means \"our Black Mother.\"",
+        "Her last words were, \"Our Lady! Our Lady!\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Slave",
+          "definition": "A person who is owned by someone else and forced to work without freedom. Slavery is a great wrong."
+        },
+        {
+          "word": "Kidnap",
+          "definition": "To take a person away by force."
+        },
+        {
+          "word": "Baptism",
+          "definition": "The sacrament that makes a person a member of the Church and a child of God."
+        },
+        {
+          "word": "Baptismal font",
+          "definition": "The basin of water in a church where people are baptized."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To let go of anger toward someone who hurt you and to wish them good."
+        }
+      ],
+      "think_about_it": "Josephine forgave people who had been very cruel to her. Why do you think she was able to forgive?",
+      "reflection_question": "Josephine called God \"the Master\" who made the sun, the moon, and the stars. What in creation makes you think of God?",
+      "kindness_prompt": "Josephine welcomed everyone who came to the door with a smile. Greet the people you meet today with a smile and a kind word.",
+      "quiz": [
+        {
+          "prompt": "On what continent was Bakhita born?",
+          "choices": [
+            {
+              "text": "Europe"
+            },
+            {
+              "text": "Asia"
+            },
+            {
+              "text": "Africa",
+              "correct": true
+            },
+            {
+              "text": "South America"
+            }
+          ],
+          "explanation": "Bakhita was born in Darfur, a part of Sudan, in Africa."
+        },
+        {
+          "prompt": "What does the name \"Bakhita\" mean?",
+          "choices": [
+            {
+              "text": "Fortunate",
+              "correct": true
+            },
+            {
+              "text": "Brave"
+            },
+            {
+              "text": "Quiet"
+            }
+          ],
+          "explanation": "Her kidnappers gave her the name Bakhita, which means \"fortunate.\""
+        },
+        {
+          "prompt": "What did Bakhita wonder about when she looked at the sky?",
+          "choices": [
+            {
+              "text": "How far away the stars were"
+            },
+            {
+              "text": "Who the Master of these beautiful things could be",
+              "correct": true
+            },
+            {
+              "text": "When it would rain"
+            }
+          ],
+          "explanation": "Seeing the sun, the moon and the stars, she wondered who could be the Master of them all."
+        },
+        {
+          "prompt": "What name was Bakhita given at her baptism?",
+          "choices": [
+            {
+              "text": "Mary"
+            },
+            {
+              "text": "Clare"
+            },
+            {
+              "text": "Josephine",
+              "correct": true
+            }
+          ],
+          "explanation": "She was baptized on January 9, 1890, and given the name Josephine."
+        },
+        {
+          "prompt": "What did Josephine do about the people who had hurt her?",
+          "choices": [
+            {
+              "text": "She tried to find and punish them."
+            },
+            {
+              "text": "She forgave them.",
+              "correct": true
+            },
+            {
+              "text": "She never thought about them."
+            }
+          ],
+          "explanation": "Josephine forgave the men who had kidnapped and hurt her."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Josephine Bakhita (1869–1947)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20001001_giuseppina-bakhita_en.html",
+          "note": "born in Sudan, forgetting her name, \"Bakhita,\" the markets of El Obeid and Khartoum, Callisto Legnani, the Michieli family and their daughter, the Canossian Sisters, free under Italian law, baptism, the two quotes, December 8, 1896, Schio, her work, \"Mother Moretta,\" her last words, death"
+        },
+        {
+          "title": "St. Josephine Bakhita, Virgin",
+          "publisher": "Vatican News",
+          "url": "https://vaticannews.va/en/saints/02/08/st--josephine-bakhita--virgin.html",
+          "note": "Darfur, age nine, Italy in 1884, the sisters in 1888, her gentle smile, her forgiveness"
+        },
+        {
+          "title": "Homily at the canonization of October 1, 2000 (vatican.va)",
+          "publisher": "Pope John Paul II",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+          "note": "date of her canonization"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "katharine-drexel",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Katharine Drexel",
+        "production_id_hint": 1009
+      },
+      "student_title": "Saint Katharine Drexel",
+      "subtitle": "A rich American who gave away her fortune, and her whole life, to build schools for children others had left out.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1858–1955"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Philadelphia, Pennsylvania"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "March 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Building schools for Native American and African American children"
+        }
+      ],
+      "intro": "Katharine Drexel grew up in one of the richest families in America. She saw that many Native American and African American children had no good schools. She asked the Pope to send missionaries to help them. He asked her to become one herself. So Katharine became a religious sister and spent her fortune, and her whole life, building schools and missions across the country.",
+      "story_paragraphs": [
+        "Katharine Drexel was born on November 26, 1858, in Philadelphia, Pennsylvania. Her father, Francis, was a very rich banker. Her mother died soon after Katharine was born, and her father later married a kind woman named Emma.",
+        "Katharine's parents taught their daughters that their money was only \"loaned to them\" by God and was meant to be shared. Twice a week, the family opened their home and gave food, clothing, and rent money to people in need.",
+        "In 1884, Katharine traveled to the western part of the United States with her father. She saw Native American families living in great poverty. She never forgot it.",
+        "The next year, her father died. He left a huge fortune to Katharine and her two sisters. The sisters began giving money to missions and schools. In January 1887, Katharine visited Pope Leo XIII in Rome. She asked him to send more missionaries to help Native Americans. The Pope answered, \"But why not be a missionary yourself, my child?\"",
+        "Katharine thought and prayed. In 1889, she entered a convent to learn how to be a sister. On February 12, 1891, she made her vows and began a new religious family, the Sisters of the Blessed Sacrament. They would serve Native American and African American people.",
+        "At that time, many people treated Black and Native American families unfairly, and some were angry at Mother Katharine for helping them. Once, someone smashed every window in one of her new schools. She kept going.",
+        "Mother Katharine and her sisters started nearly 60 schools and missions. In 1925, she founded Xavier University in New Orleans, a Catholic university for African American students.",
+        "In 1935, Mother Katharine had a serious heart attack. She spent her last years quietly in prayer. She died on March 3, 1955, at the age of 96. Pope John Paul II declared her a saint on October 1, 2000."
+      ],
+      "timeline": [
+        {
+          "date_display": "November 26, 1858",
+          "text": "Katharine Drexel is born in Philadelphia."
+        },
+        {
+          "date_display": "1884",
+          "text": "She travels west and sees Native American families living in poverty."
+        },
+        {
+          "date_display": "January 1887",
+          "text": "Pope Leo XIII asks her, \"Why not be a missionary yourself?\""
+        },
+        {
+          "date_display": "February 12, 1891",
+          "text": "She makes her vows and begins the Sisters of the Blessed Sacrament."
+        },
+        {
+          "date_display": "1925",
+          "text": "She founds Xavier University in New Orleans."
+        },
+        {
+          "date_display": "1935",
+          "text": "After a heart attack, she begins a quiet life of prayer."
+        },
+        {
+          "date_display": "March 3, 1955",
+          "text": "Mother Katharine dies at age 96."
+        },
+        {
+          "date_display": "October 1, 2000",
+          "text": "Pope John Paul II declares her a saint."
+        }
+      ],
+      "fun_facts": [
+        "Katharine was the second saint who was born in the United States.",
+        "She spent about 20 million dollars of her own money on schools and missions.",
+        "A newspaper headline said, \"Miss Drexel Enters a Catholic Convent—Gives Up Seven Million.\"",
+        "When she could no longer walk well, she used a plain wooden chair with wheels added to it.",
+        "Katharine lived to be 96 years old."
+      ],
+      "words_to_know": [
+        {
+          "word": "Fortune",
+          "definition": "A very large amount of money."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Mission",
+          "definition": "A place where missionaries live, teach, and serve the people nearby."
+        },
+        {
+          "word": "Vows",
+          "definition": "Special promises a person makes to God."
+        },
+        {
+          "word": "Unfair",
+          "definition": "Not treating people equally or rightly."
+        }
+      ],
+      "think_about_it": "Katharine could have kept her money and lived in comfort. Why do you think she gave it all away?",
+      "reflection_question": "The Pope asked Katharine, \"Why not be a missionary yourself?\" What is a problem you wish someone would fix? What small part could you do yourself?",
+      "kindness_prompt": "Katharine's family shared what they had every week. Choose something of your own, like a book or a toy, to give to someone who needs it.",
+      "quiz": [
+        {
+          "prompt": "In what city was Katharine Drexel born?",
+          "choices": [
+            {
+              "text": "New York"
+            },
+            {
+              "text": "New Orleans"
+            },
+            {
+              "text": "Philadelphia",
+              "correct": true
+            },
+            {
+              "text": "Boston"
+            }
+          ],
+          "explanation": "Katharine was born in Philadelphia, Pennsylvania, on November 26, 1858."
+        },
+        {
+          "prompt": "What did Katharine's parents teach about their money?",
+          "choices": [
+            {
+              "text": "It should be hidden."
+            },
+            {
+              "text": "It was loaned by God and meant to be shared.",
+              "correct": true
+            },
+            {
+              "text": "It should be spent on fine things."
+            }
+          ],
+          "explanation": "Her parents taught that their wealth was only loaned to them and was to be shared with others."
+        },
+        {
+          "prompt": "What did Pope Leo XIII ask Katharine?",
+          "choices": [
+            {
+              "text": "\"Why not build a castle?\""
+            },
+            {
+              "text": "\"Why not be a missionary yourself?\"",
+              "correct": true
+            },
+            {
+              "text": "\"Why not go home?\""
+            }
+          ],
+          "explanation": "Katharine asked the Pope to send missionaries. He asked her to become one herself."
+        },
+        {
+          "prompt": "Whom did Katharine and her sisters serve?",
+          "choices": [
+            {
+              "text": "Native American and African American people",
+              "correct": true
+            },
+            {
+              "text": "Only kings and queens"
+            },
+            {
+              "text": "Only sailors"
+            }
+          ],
+          "explanation": "The Sisters of the Blessed Sacrament started nearly 60 schools and missions for Native American and African American people."
+        },
+        {
+          "prompt": "What university did Katharine found in 1925?",
+          "choices": [
+            {
+              "text": "Notre Dame"
+            },
+            {
+              "text": "Harvard"
+            },
+            {
+              "text": "Xavier University",
+              "correct": true
+            }
+          ],
+          "explanation": "She founded Xavier University in New Orleans, a Catholic university for African American students."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Katharine Drexel (1858–1955)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20001001_katharine-drexel_en.html",
+          "note": "birth, her father, wealth \"loaned to them,\" Pope Leo XIII, February 12, 1891, nearly 60 schools and missions, Xavier University in 1925, her last years of illness, death"
+        },
+        {
+          "title": "The Legacy of Saint Katharine Drexel",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/?p=6736",
+          "note": "her mother's death, Emma, giving from their home twice a week, the 1884 trip, her father's death and the fortune, January 1887 and the Pope's exact words, the convent in 1889, the smashed windows, 20 million dollars, the headline, the 1935 heart attack and the wheeled chair, age 96, second American-born saint, New Orleans"
+        },
+        {
+          "title": "Homily at the canonization of October 1, 2000 (vatican.va)",
+          "publisher": "Pope John Paul II",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+          "note": "date of her canonization, her work against racism"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "martin-de-porres",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Martin de Porres",
+        "production_id_hint": 1025
+      },
+      "student_title": "Saint Martin de Porres",
+      "subtitle": "A humble brother in Peru who cared for the sick, the poor, and even stray animals.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1579–1639"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Lima, Peru"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "November 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for sick and poor people of every background"
+        }
+      ],
+      "intro": "Martin de Porres was born in Lima, Peru, more than 400 years ago. His mother was a free Black woman, and his father was a Spanish nobleman. Many people looked down on Martin because of who his parents were. He answered with kindness. As a Dominican brother, he cared for the sick, fed the hungry, started a school for poor children, and was gentle with animals.",
+      "story_paragraphs": [
+        "Martin de Porres was born on December 9, 1579, in Lima, the capital city of Peru, in South America. His father, Juan de Porres, was a Spanish nobleman. His mother was a free Black woman who had once been a slave. Martin had a sister.",
+        "Martin's father left the family, and Martin grew up poor. In those days, many people treated a child like Martin unfairly because his parents came from different races.",
+        "As a boy, Martin went to work for a barber. Long ago, barbers did more than cut hair. They also cared for sick people. Martin learned how to treat wounds and give medicine.",
+        "When Martin was 15, he went to live at a Dominican friary in Lima. At first he was only a helper, doing the humblest jobs, such as cleaning. It was not the custom then to accept a man of mixed race as a brother. But the friars saw Martin's goodness, and in time they welcomed him as a full brother.",
+        "Brother Martin took care of the sick friars in the infirmary, a room for people who are ill. He also worked in the kitchen and the laundry. He gave food and money to people in need. He cared for Africans who had just been brought to Peru as slaves, and for Native people. He raised money so that poor young women could marry.",
+        "Martin also started a school in Lima for children who were orphans or had been abandoned. It was one of the first schools for poor children in the Americas.",
+        "Martin was kind to animals, too. He cared for stray cats and dogs. Once he nursed a badly hurt dog until it was well. He was even gentle with the mice in the kitchen.",
+        "Martin died on the evening of November 3, 1639. The whole city honored him. Pope John XXIII declared him a saint on May 6, 1962."
+      ],
+      "timeline": [
+        {
+          "date_display": "December 9, 1579",
+          "text": "Martin is born in Lima, Peru."
+        },
+        {
+          "date_display": "About 1594",
+          "text": "At 15, Martin goes to live at the Dominican friary as a helper."
+        },
+        {
+          "date_display": "The early 1600s",
+          "text": "The Dominicans welcome Martin as a full brother."
+        },
+        {
+          "date_display": "The years that follow",
+          "text": "Martin cares for the sick and the poor and starts a school for orphans."
+        },
+        {
+          "date_display": "November 3, 1639",
+          "text": "Martin dies in Lima."
+        },
+        {
+          "date_display": "1837",
+          "text": "Pope Gregory XVI names Martin \"Blessed.\""
+        },
+        {
+          "date_display": "May 6, 1962",
+          "text": "Pope John XXIII declares Martin a saint."
+        }
+      ],
+      "fun_facts": [
+        "In pictures, Martin is often shown with a dog or a mouse.",
+        "Martin was friends with two other saints from Lima: Saint Rose of Lima and Saint John Macías.",
+        "Martin learned to care for the sick while working for a barber.",
+        "Martin is the patron saint of barbers.",
+        "Martin is also a patron saint of social justice and of people of mixed race."
+      ],
+      "words_to_know": [
+        {
+          "word": "Dominican",
+          "definition": "A member of the religious family begun by Saint Dominic."
+        },
+        {
+          "word": "Friary",
+          "definition": "A house where friars live and pray together."
+        },
+        {
+          "word": "Infirmary",
+          "definition": "A room or building where sick people are cared for."
+        },
+        {
+          "word": "Orphan",
+          "definition": "A child whose parents have died."
+        },
+        {
+          "word": "Humble",
+          "definition": "Not bragging or putting yourself first."
+        }
+      ],
+      "think_about_it": "People treated Martin unfairly, and he answered by caring for everyone. How do you treat people who are different from you?",
+      "reflection_question": "Martin did the humblest jobs with great love. What ordinary job can you do with love today?",
+      "kindness_prompt": "Like Martin, be kind to an animal today. Feed a pet, fill a bird feeder, or be gentle with a creature you find outside.",
+      "quiz": [
+        {
+          "prompt": "In what city was Martin de Porres born?",
+          "choices": [
+            {
+              "text": "Madrid"
+            },
+            {
+              "text": "Lima",
+              "correct": true
+            },
+            {
+              "text": "Mexico City"
+            },
+            {
+              "text": "Rome"
+            }
+          ],
+          "explanation": "Martin was born in Lima, Peru, on December 9, 1579."
+        },
+        {
+          "prompt": "What did Martin learn while working for a barber?",
+          "choices": [
+            {
+              "text": "How to sail"
+            },
+            {
+              "text": "How to paint"
+            },
+            {
+              "text": "How to care for sick people",
+              "correct": true
+            }
+          ],
+          "explanation": "Long ago, barbers also cared for the sick. Martin learned to treat wounds and give medicine."
+        },
+        {
+          "prompt": "What kind of jobs did Martin do when he first came to the friary?",
+          "choices": [
+            {
+              "text": "The humblest jobs, such as cleaning",
+              "correct": true
+            },
+            {
+              "text": "He was the leader."
+            },
+            {
+              "text": "He taught at the university."
+            }
+          ],
+          "explanation": "At first, Martin was a helper who did the humblest jobs. Later he became a full brother."
+        },
+        {
+          "prompt": "What did Martin start for orphans and abandoned children?",
+          "choices": [
+            {
+              "text": "A bakery"
+            },
+            {
+              "text": "A school",
+              "correct": true
+            },
+            {
+              "text": "A farm"
+            }
+          ],
+          "explanation": "Martin started a school in Lima, one of the first schools for poor children in the Americas."
+        },
+        {
+          "prompt": "Which animals is Martin often shown with in pictures?",
+          "choices": [
+            {
+              "text": "A lion and a lamb"
+            },
+            {
+              "text": "A horse and an eagle"
+            },
+            {
+              "text": "A dog or a mouse",
+              "correct": true
+            }
+          ],
+          "explanation": "Martin was kind to stray dogs and cats, and even to the mice in the kitchen."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Martín de Porres",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/print/article/470763",
+          "note": "birth year, his parents, poverty, his father leaving, the barber-surgeon, age 15, the custom against accepting him, the infirmary, kitchen and laundry, alms, enslaved Africans, dowries, the school, animals, Rose of Lima, his funeral, 1837, 1962, patronages"
+        },
+        {
+          "title": "November 3: Saint Martin de Porres",
+          "publisher": "Vatican City State",
+          "url": "https://vaticanstate.va/en/state-and-government/general-informations/saint-of-the-day/2962-november-3-saint-martin-de-porres.html",
+          "note": "December 9, 1579, Juan de Porres, his mother a former slave, his sister, entering at 15 as a helper, full lay brother in 1603, Indigenous people, the College of the Holy Cross for orphaned or abandoned children, the wounded dog, John Macías, the evening of November 3, May 6, 1962, patron of barbers"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "john-bosco",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. John Bosco",
+        "production_id_hint": 983
+      },
+      "student_title": "Saint John Bosco",
+      "subtitle": "A priest who became a father, teacher, and friend to boys who had no one.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1815–1888"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Becchi, near Turin, Italy"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 31"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Teaching and caring for young people"
+        }
+      ],
+      "intro": "John Bosco was born on a small farm in Italy. When he was nine, he had a dream that showed him his life's work: helping young people. He became a priest in the city of Turin. There he gave poor boys a place to play, learn, pray, and train for a job. People called him Don Bosco. Today the Salesians carry on his work all over the world.",
+      "story_paragraphs": [
+        "John Bosco was born on August 16, 1815, at a place called Becchi, in northern Italy. His father died before John was two years old. His mother, Margaret, raised him and taught him to love God.",
+        "When John was nine, he had a dream he never forgot. It showed him that God wanted him to spend his life helping young people. Even as a boy, John gathered other children for games, and he mixed in prayers and lessons about God.",
+        "John became a priest in June 1841, in the city of Turin. People called him Don Bosco. \"Don\" is a title for a priest in Italy.",
+        "In Turin, Don Bosco met many boys who were poor and alone. They had no school, no work, and no one to guide them. He began gathering them on Sundays to play, learn, and pray. He called this gathering the Oratory.",
+        "In the spring of 1846, the Oratory found a home in a part of Turin called Valdocco. Don Bosco added a place for boys to live, and classrooms. Then he opened workshops where boys could learn a trade: tailoring, bookbinding, carpentry, printing, and metalwork.",
+        "Don Bosco had his own way of teaching. He did not believe in harsh punishments. He guided young people with reason, with faith, and with loving kindness. He told them, \"It is enough that you are young for me to love you very much.\"",
+        "On December 18, 1859, Don Bosco and eighteen young men began a new religious family to carry on this work. They are called the Salesians, after Saint Francis de Sales. In 1872, with Saint Mary Mazzarello, he began a family of sisters to help girls. In 1875, he sent the first Salesian missionaries to Argentina.",
+        "Don Bosco died on January 31, 1888. He was declared a saint on April 1, 1934."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 16, 1815",
+          "text": "John Bosco is born at Becchi, in northern Italy."
+        },
+        {
+          "date_display": "About 1824",
+          "text": "At age nine, John has a dream that shows him his life's work."
+        },
+        {
+          "date_display": "June 1841",
+          "text": "John is ordained a priest in Turin."
+        },
+        {
+          "date_display": "Spring 1846",
+          "text": "The Oratory settles at Valdocco."
+        },
+        {
+          "date_display": "December 18, 1859",
+          "text": "Don Bosco begins the Salesians with eighteen young men."
+        },
+        {
+          "date_display": "August 5, 1872",
+          "text": "With Mary Mazzarello, he begins the Salesian Sisters."
+        },
+        {
+          "date_display": "January 31, 1888",
+          "text": "Don Bosco dies in Turin."
+        },
+        {
+          "date_display": "April 1, 1934",
+          "text": "Don Bosco is declared a saint."
+        }
+      ],
+      "fun_facts": [
+        "One of Don Bosco's students, Dominic Savio, also became a saint.",
+        "Don Bosco's workshops taught boys to be tailors, bookbinders, carpenters, printers, and metalworkers.",
+        "Don Bosco's mother is called \"Mamma Margaret.\" The Church has given her the title \"Venerable.\"",
+        "Pope John Paul II called Don Bosco the \"Father and Teacher of Youth.\"",
+        "The Salesians are named for Saint Francis de Sales."
+      ],
+      "words_to_know": [
+        {
+          "word": "Oratory",
+          "definition": "Don Bosco's name for his gathering place, where boys could play, learn, and pray."
+        },
+        {
+          "word": "Trade",
+          "definition": "A job that takes special skill and training, such as carpentry or printing."
+        },
+        {
+          "word": "Workshop",
+          "definition": "A place where people make or fix things and learn a trade."
+        },
+        {
+          "word": "Salesians",
+          "definition": "The religious family Don Bosco began to teach and care for young people."
+        },
+        {
+          "word": "Ordained",
+          "definition": "Made a priest by a bishop."
+        }
+      ],
+      "think_about_it": "Don Bosco believed kindness teaches better than punishment. Who has taught you something with kindness?",
+      "reflection_question": "God showed John his life's work when he was only nine. What do you think God might want you to do with your life?",
+      "kindness_prompt": "Don Bosco welcomed boys who had no one. Invite someone who is often alone to join your game today.",
+      "quiz": [
+        {
+          "prompt": "How old was John Bosco when he had his special dream?",
+          "choices": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "9",
+              "correct": true
+            },
+            {
+              "text": "19"
+            },
+            {
+              "text": "40"
+            }
+          ],
+          "explanation": "At age nine, John had a dream that showed him he should spend his life helping young people."
+        },
+        {
+          "prompt": "What was the Oratory?",
+          "choices": [
+            {
+              "text": "A ship"
+            },
+            {
+              "text": "A place for boys to play, learn, and pray",
+              "correct": true
+            },
+            {
+              "text": "A mountain"
+            }
+          ],
+          "explanation": "Don Bosco gathered poor boys to play, learn, and pray. He called the gathering the Oratory."
+        },
+        {
+          "prompt": "Why did Don Bosco open workshops?",
+          "choices": [
+            {
+              "text": "So boys could learn a trade",
+              "correct": true
+            },
+            {
+              "text": "To build toys to sell"
+            },
+            {
+              "text": "To make statues"
+            }
+          ],
+          "explanation": "In the workshops, boys learned trades such as tailoring, carpentry, and printing."
+        },
+        {
+          "prompt": "How did Don Bosco guide young people?",
+          "choices": [
+            {
+              "text": "With harsh punishments"
+            },
+            {
+              "text": "By ignoring them"
+            },
+            {
+              "text": "With reason, faith, and loving kindness",
+              "correct": true
+            }
+          ],
+          "explanation": "Don Bosco's way of teaching was built on reason, religion, and loving kindness."
+        },
+        {
+          "prompt": "What is the religious family Don Bosco began called?",
+          "choices": [
+            {
+              "text": "The Franciscans"
+            },
+            {
+              "text": "The Salesians",
+              "correct": true
+            },
+            {
+              "text": "The Dominicans"
+            }
+          ],
+          "explanation": "Don Bosco began the Salesians in 1859. They are named after Saint Francis de Sales."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint John Bosco",
+          "publisher": "Salesians of Don Bosco (sdb.org)",
+          "url": "https://www.sdb.org/en/Salesian_Holiness/Saints/John_Bosco",
+          "note": "birth at Becchi, his father's death in 1817, Margaret Occhiena, the dream, ordained June 1841 in Turin, Valdocco in spring 1846, the home and classrooms, the workshops and their years, December 18, 1859 and the eighteen, August 5, 1872, Argentina in 1875, Dominic Savio, the \"young\" quote, death, beatified and canonized dates"
+        },
+        {
+          "title": "About St. John Bosco",
+          "publisher": "Salesian Missions",
+          "url": "https://salesianmissions.org/about-us/who-we-are/about-st-john-bosco/",
+          "note": "his mother teaching him the faith, games mixed with prayer, the dream at nine, the Oratory under Saint Francis de Sales, \"reason, religion, and loving kindness,\" the Salesian Sisters with Mary Mazzarello, canonized April 1, 1934, \"Father and Teacher of Youth\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "padre-pio",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Pio of Pietrelcina (Padre Pio)",
+        "production_id_hint": 1057
+      },
+      "student_title": "Saint Pio of Pietrelcina",
+      "subtitle": "Known as Padre Pio, a humble friar who spent his life praying and helping people come back to God.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1887–1968"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Pietrelcina, Italy"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 23"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Prayer, hearing confessions, and care for the sick"
+        }
+      ],
+      "intro": "Padre Pio was a Capuchin friar and priest who lived in a small town in Italy. \"Padre\" means \"Father.\" He spent many hours each day praying and hearing confessions. People came from far away to ask for his help. He also built a hospital for the sick. He said of himself, \"I only want to be a poor friar who prays.\"",
+      "story_paragraphs": [
+        "Padre Pio was born on May 25, 1887, in Pietrelcina, a small town in southern Italy. His parents, Grazio and Maria Giuseppa Forgione, named him Francesco.",
+        "When Francesco was 15, he joined the Capuchins, a branch of the Franciscan family. He was given a new name, Brother Pio. On August 10, 1910, he was ordained a priest. From then on, people called him Padre Pio.",
+        "Padre Pio was often sick, and for several years he had to live at home with his family. In September 1916, he was sent to a friary in a mountain town called San Giovanni Rotondo. He stayed there for the rest of his life.",
+        "On September 20, 1918, wounds like the wounds of Jesus on the cross appeared on Padre Pio's body. They are called the stigmata. They stayed for 50 years, and they caused him pain.",
+        "News of the wounds spread. Crowds began to come. Leaders of the Church wanted to be careful, so they studied Padre Pio closely. For some years, they did not allow him to say Mass in public or to hear confessions. This was very hard for him, but he obeyed humbly and did not complain. Later, the limits were lifted.",
+        "For more than fifty years, Padre Pio welcomed the people who came to him. He heard confessions from morning until night, helping people tell God they were sorry and begin again. He spent much of the day, and a large part of the night, in prayer. He said, \"In books we seek God, in prayer we find him. Prayer is the key which opens God's heart.\"",
+        "Padre Pio also cared about people who were sick. With gifts from many helpers, he built a hospital. It opened on May 5, 1956. Its name means \"Home for the Relief of Suffering.\"",
+        "Padre Pio died on September 23, 1968, at age 81. Pope John Paul II declared him a saint on June 16, 2002."
+      ],
+      "timeline": [
+        {
+          "date_display": "May 25, 1887",
+          "text": "Francesco Forgione is born in Pietrelcina, Italy."
+        },
+        {
+          "date_display": "January 1903",
+          "text": "At 15, he joins the Capuchins and becomes Brother Pio."
+        },
+        {
+          "date_display": "August 10, 1910",
+          "text": "He is ordained a priest."
+        },
+        {
+          "date_display": "September 1916",
+          "text": "He is sent to San Giovanni Rotondo, where he will live the rest of his life."
+        },
+        {
+          "date_display": "September 20, 1918",
+          "text": "The stigmata appear on his body."
+        },
+        {
+          "date_display": "May 5, 1956",
+          "text": "His hospital, the Home for the Relief of Suffering, opens."
+        },
+        {
+          "date_display": "September 23, 1968",
+          "text": "Padre Pio dies at age 81."
+        },
+        {
+          "date_display": "June 16, 2002",
+          "text": "Pope John Paul II declares him a saint."
+        }
+      ],
+      "fun_facts": [
+        "Padre Pio's name at birth was Francesco, the Italian form of Francis.",
+        "\"Padre\" is the Italian word for \"Father.\"",
+        "Padre Pio lived in the same friary for more than fifty years.",
+        "He said, \"I only want to be a poor friar who prays.\"",
+        "Pope Paul VI said Padre Pio heard confessions \"from dawn to dusk.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Capuchin",
+          "definition": "A member of one branch of the Franciscan family. Capuchins wear brown robes with a hood."
+        },
+        {
+          "word": "Friar",
+          "definition": "A man who belongs to a religious family like the Franciscans. The word means \"brother.\""
+        },
+        {
+          "word": "Confession",
+          "definition": "The sacrament in which we tell our sins to a priest and receive God's forgiveness."
+        },
+        {
+          "word": "Stigmata",
+          "definition": "Wounds like the wounds Jesus received on the cross."
+        },
+        {
+          "word": "Obey",
+          "definition": "To do what you are asked by someone who has the right to ask it."
+        }
+      ],
+      "think_about_it": "Padre Pio obeyed, even when he was treated unfairly. Why can it be hard to obey when you think something is not fair?",
+      "reflection_question": "Padre Pio said that prayer is the key that opens God's heart. When is your favorite time to pray?",
+      "kindness_prompt": "Padre Pio built a hospital because he cared about the sick. Say a prayer today for someone who is sick, and tell them you are praying for them.",
+      "quiz": [
+        {
+          "prompt": "What does \"Padre\" mean?",
+          "choices": [
+            {
+              "text": "Brother"
+            },
+            {
+              "text": "Father",
+              "correct": true
+            },
+            {
+              "text": "Teacher"
+            },
+            {
+              "text": "Friend"
+            }
+          ],
+          "explanation": "\"Padre\" is the Italian word for \"Father,\" a title for a priest."
+        },
+        {
+          "prompt": "What religious family did Padre Pio join at age 15?",
+          "choices": [
+            {
+              "text": "The Dominicans"
+            },
+            {
+              "text": "The Salesians"
+            },
+            {
+              "text": "The Capuchins",
+              "correct": true
+            }
+          ],
+          "explanation": "He joined the Capuchins, a branch of the Franciscan family, and became Brother Pio."
+        },
+        {
+          "prompt": "What did Padre Pio do when Church leaders limited his work?",
+          "choices": [
+            {
+              "text": "He obeyed humbly.",
+              "correct": true
+            },
+            {
+              "text": "He ran away."
+            },
+            {
+              "text": "He started his own church."
+            }
+          ],
+          "explanation": "The limits were very hard for him, but he obeyed and did not complain. Later they were lifted."
+        },
+        {
+          "prompt": "What did Padre Pio build for people who were sick?",
+          "choices": [
+            {
+              "text": "A school"
+            },
+            {
+              "text": "A bridge"
+            },
+            {
+              "text": "A hospital",
+              "correct": true
+            }
+          ],
+          "explanation": "His hospital, the Home for the Relief of Suffering, opened on May 5, 1956."
+        },
+        {
+          "prompt": "What did Padre Pio say he wanted to be?",
+          "choices": [
+            {
+              "text": "A famous preacher"
+            },
+            {
+              "text": "A poor friar who prays",
+              "correct": true
+            },
+            {
+              "text": "A great builder"
+            }
+          ],
+          "explanation": "He said, \"I only want to be a poor friar who prays.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "Padre Pio da Pietrelcina (1887–1968)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020616_padre-pio_en.html",
+          "note": "birth, parents, the name Francesco, joining at Morcone in January 1903, Brother Pio, ordination, poor health and years at home, San Giovanni Rotondo from September 1916, \"investigations and restrictions\" and his obedience, more than fifty years, prayer by day and night, both quotes, Paul VI's words, the hospital, death at 81, beatified 1999, canonization"
+        },
+        {
+          "title": "Highlights of Padre Pio's Life",
+          "publisher": "EWTN",
+          "url": "https://www.ewtn.com/catholicism/library/highlights-of-padre-pios-life-13814",
+          "note": "age 15, September 20, 1918 and fifty years, the limits of 1922 and 1931, the reversal in 1933"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "faustina-kowalska",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Faustina",
+        "production_id_hint": 950
+      },
+      "student_title": "Saint Faustina Kowalska",
+      "subtitle": "A humble sister from Poland who told the world about the mercy of Jesus.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1905–1938"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Głogowiec, Poland"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 5"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Sharing the message of Divine Mercy"
+        }
+      ],
+      "intro": "Faustina Kowalska grew up on a poor farm in Poland and went to school for only three years. She became a religious sister and worked as a cook, a gardener, and a doorkeeper. She wrote in her diary that Jesus asked her to tell the whole world about his mercy. Her message can be said in five words: \"Jesus, I trust in You.\"",
+      "story_paragraphs": [
+        "Faustina was born on August 25, 1905, in the village of Głogowiec, in Poland. Her parents named her Helena. She was the third of ten children, and her family were poor farmers.",
+        "When Helena was seven years old, she first felt that God was calling her to belong to him in a special way. She went to school for only three years. At 16, she left home to work as a housekeeper so she could help her parents.",
+        "Helena wanted to become a religious sister, but at first her parents said no. Then, she said, she saw Jesus suffering, and she knew she must not wait any longer. In August 1925, she entered the Sisters of Our Lady of Mercy. She was given a new name, Sister Mary Faustina.",
+        "For thirteen years, Sister Faustina lived in several convents in Poland and nearby. Her jobs were simple. She was a cook, a gardener, and a doorkeeper. Few people knew what was happening in her prayer.",
+        "Sister Faustina wrote in her diary that on February 22, 1931, she saw Jesus. Two rays of light came from his heart, one red and one pale. She wrote that he told her, \"Paint an image according to the model you see, with these words written: Jesus, I trust in You.\"",
+        "Mercy means God's love that forgives. Sister Faustina wrote that Jesus wanted everyone to know that his mercy is greater than any sin, and that people should trust him and be merciful to one another. She also wrote down a prayer called the Chaplet of Divine Mercy.",
+        "The priests who guided Sister Faustina asked her to write everything in a diary. Today that diary is read in many languages.",
+        "Sister Faustina became sick with tuberculosis, a serious illness of the lungs. She died in Kraków on October 5, 1938, when she was only 33. Pope John Paul II declared her a saint on April 30, 2000."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 25, 1905",
+          "text": "Helena Kowalska is born in Głogowiec, Poland."
+        },
+        {
+          "date_display": "About 1912",
+          "text": "At age seven, Helena first feels God calling her."
+        },
+        {
+          "date_display": "August 1925",
+          "text": "She enters the convent and becomes Sister Mary Faustina."
+        },
+        {
+          "date_display": "February 22, 1931",
+          "text": "She writes that Jesus asks for an image with the words \"Jesus, I trust in You.\""
+        },
+        {
+          "date_display": "October 5, 1938",
+          "text": "Sister Faustina dies in Kraków at age 33."
+        },
+        {
+          "date_display": "April 18, 1993",
+          "text": "Pope John Paul II names her \"Blessed.\""
+        },
+        {
+          "date_display": "April 30, 2000",
+          "text": "Pope John Paul II declares her a saint and begins Divine Mercy Sunday."
+        }
+      ],
+      "fun_facts": [
+        "Faustina's name at birth was Helena.",
+        "She was the third of ten children.",
+        "Divine Mercy Sunday is the first Sunday after Easter.",
+        "The Hour of Mercy is three o'clock in the afternoon, the hour Jesus died on the cross.",
+        "Faustina went to school for only three years, yet her diary is read all over the world."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mercy",
+          "definition": "God's love that forgives. We show mercy when we forgive and help others."
+        },
+        {
+          "word": "Divine",
+          "definition": "Belonging to God."
+        },
+        {
+          "word": "Chaplet",
+          "definition": "A set of prayers, often prayed on beads."
+        },
+        {
+          "word": "Diary",
+          "definition": "A book in which a person writes about each day."
+        },
+        {
+          "word": "Trust",
+          "definition": "To believe that someone is good and will take care of you."
+        }
+      ],
+      "think_about_it": "Faustina's message is \"Jesus, I trust in You.\" What does it mean to trust someone?",
+      "reflection_question": "Jesus asks us to show mercy to others. Who needs your forgiveness or your help right now?",
+      "kindness_prompt": "Mercy means forgiving. If someone has upset you, forgive them today, and do one kind thing for them.",
+      "quiz": [
+        {
+          "prompt": "In what country was Faustina born?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "France"
+            },
+            {
+              "text": "Poland",
+              "correct": true
+            },
+            {
+              "text": "Spain"
+            }
+          ],
+          "explanation": "Faustina was born in the village of Głogowiec, Poland, on August 25, 1905."
+        },
+        {
+          "prompt": "What jobs did Sister Faustina do in the convent?",
+          "choices": [
+            {
+              "text": "Cook, gardener, and doorkeeper",
+              "correct": true
+            },
+            {
+              "text": "Teacher and doctor"
+            },
+            {
+              "text": "Painter and singer"
+            }
+          ],
+          "explanation": "Her jobs were simple: she was a cook, a gardener, and a doorkeeper."
+        },
+        {
+          "prompt": "What words did Faustina write that Jesus wanted on the image?",
+          "choices": [
+            {
+              "text": "\"Peace on earth\""
+            },
+            {
+              "text": "\"Jesus, I trust in You\"",
+              "correct": true
+            },
+            {
+              "text": "\"Come, follow me\""
+            }
+          ],
+          "explanation": "She wrote that Jesus asked for an image with the words \"Jesus, I trust in You.\""
+        },
+        {
+          "prompt": "What does \"mercy\" mean?",
+          "choices": [
+            {
+              "text": "Being very strong"
+            },
+            {
+              "text": "Being very smart"
+            },
+            {
+              "text": "God's love that forgives",
+              "correct": true
+            }
+          ],
+          "explanation": "Mercy is God's love that forgives. We show mercy when we forgive and help others."
+        },
+        {
+          "prompt": "When is Divine Mercy Sunday?",
+          "choices": [
+            {
+              "text": "The Sunday before Christmas"
+            },
+            {
+              "text": "The first Sunday after Easter",
+              "correct": true
+            },
+            {
+              "text": "The first Sunday of the year"
+            }
+          ],
+          "explanation": "Pope John Paul II began Divine Mercy Sunday in 2000. It is the first Sunday after Easter."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mary Faustina Kowalska (1905–1938)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20000430_faustina_en.html",
+          "note": "birth, the name Helena, third of ten, poor farming family, three years of school, the call at seven, housekeeper at 16, her parents' refusal, the vision of the suffering Christ, the convent in 1925, thirteen years, her jobs, the image and its words, the Chaplet, the Feast and the Hour of Mercy, the diary, tuberculosis, death at 33, 1993"
+        },
+        {
+          "title": "St. Faustina Kowalska",
+          "publisher": "Vatican News",
+          "url": "https://vaticannews.va/en/saints/10/05/st--faustina-kowalska.html",
+          "note": "February 22, 1931, the two rays, the words of Jesus as she recorded them, her confessors and the diary, canonized April 30, 2000, Divine Mercy Sunday"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "damien-of-molokai",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Damien de Veuster of Moloka’i",
+        "production_id_hint": 942
+      },
+      "student_title": "Saint Damien of Molokai",
+      "subtitle": "A priest who went to live with sick people everyone else was afraid of, and became one of them.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1840–1889"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Tremelo, Belgium; served in Hawaii"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "May 10"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for people with leprosy on the island of Molokai"
+        }
+      ],
+      "intro": "Father Damien was a priest from Belgium who became a missionary in Hawaii. In those days, people who had a disease called leprosy were sent away to live on a lonely piece of land on the island of Molokai. Father Damien asked to go and live with them. He stayed for 16 years, caring for them like a father, until he died of the same disease.",
+      "story_paragraphs": [
+        "Damien was born on January 3, 1840, in the village of Tremelo, in Belgium. His parents named him Jozef, and his family called him Jef. He was one of seven children.",
+        "In 1859, Jozef joined a religious family called the Congregation of the Sacred Hearts. He took the name Damien. His brother belonged to the same religious family and was chosen to be a missionary in Hawaii. But his brother became sick, and Damien asked to go in his place.",
+        "Damien arrived in Honolulu, Hawaii, on March 19, 1864. Two months later, he was ordained a priest.",
+        "At that time, there was no cure for a disease called leprosy. People were very afraid of catching it. The government of Hawaii sent everyone who had it to live at Kalaupapa, a piece of land on the island of Molokai, with the sea on three sides and tall cliffs behind. They had to leave their families, and most never saw them again.",
+        "In 1873, Father Damien asked his bishop for permission to go and live there. On May 10, 1873, he set out. More than 800 people were living at Kalaupapa. The bishop told them that Father Damien would be a father to them.",
+        "There was a great deal to do. Father Damien built and repaired houses with his own hands. He helped the people plant crops and start schools. He cared for the sick with his own hands. When someone died, he built the coffin and dug the grave himself.",
+        "In December 1884, Father Damien learned that he had caught leprosy too. He kept working as long as he could. In his last years, others came to help, including Mother Marianne Cope and her sisters and a man named Joseph Dutton.",
+        "Father Damien died on April 15, 1889. He was 49 years old. He was declared a saint on October 11, 2009."
+      ],
+      "timeline": [
+        {
+          "date_display": "January 3, 1840",
+          "text": "Jozef De Veuster is born in Tremelo, Belgium."
+        },
+        {
+          "date_display": "1859",
+          "text": "He joins the Congregation of the Sacred Hearts and takes the name Damien."
+        },
+        {
+          "date_display": "March 19, 1864",
+          "text": "Damien arrives in Honolulu, Hawaii, in place of his sick brother."
+        },
+        {
+          "date_display": "May 21, 1864",
+          "text": "Damien is ordained a priest."
+        },
+        {
+          "date_display": "May 10, 1873",
+          "text": "Father Damien goes to live with the people at Kalaupapa, on Molokai."
+        },
+        {
+          "date_display": "December 1884",
+          "text": "Father Damien learns that he has leprosy."
+        },
+        {
+          "date_display": "April 15, 1889",
+          "text": "Father Damien dies at age 49."
+        },
+        {
+          "date_display": "October 11, 2009",
+          "text": "Father Damien is declared a saint."
+        }
+      ],
+      "fun_facts": [
+        "Damien's family called him Jef.",
+        "Damien went to Hawaii because his brother was too sick to go.",
+        "Father Damien was a good carpenter and built many houses himself.",
+        "Mother Marianne Cope, who came to help him, is now a saint too.",
+        "Father Damien lived among the people of Kalaupapa for 16 years."
+      ],
+      "words_to_know": [
+        {
+          "word": "Leprosy",
+          "definition": "A serious disease that harms the skin and nerves. Today it is called Hansen's disease, and doctors can cure it."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Volunteer",
+          "definition": "A person who offers to do a job without being made to."
+        },
+        {
+          "word": "Coffin",
+          "definition": "A box in which a person who has died is buried."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Catholics in an area."
+        }
+      ],
+      "think_about_it": "Other people were afraid to go near the sick people of Molokai. Father Damien moved in with them. What does that tell you about love?",
+      "reflection_question": "Is there someone at your school or in your neighborhood whom others stay away from? How could you be a friend to that person?",
+      "kindness_prompt": "Father Damien went toward people others avoided. Sit with or talk to someone today who is usually left alone.",
+      "quiz": [
+        {
+          "prompt": "In what country was Father Damien born?",
+          "choices": [
+            {
+              "text": "Belgium",
+              "correct": true
+            },
+            {
+              "text": "Hawaii"
+            },
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Peru"
+            }
+          ],
+          "explanation": "Damien was born in Tremelo, Belgium, on January 3, 1840."
+        },
+        {
+          "prompt": "Why did Damien go to Hawaii?",
+          "choices": [
+            {
+              "text": "He was looking for gold."
+            },
+            {
+              "text": "His brother was sick, and Damien went in his place.",
+              "correct": true
+            },
+            {
+              "text": "His family moved there."
+            }
+          ],
+          "explanation": "Damien's brother was chosen to go but became sick, so Damien asked to go instead."
+        },
+        {
+          "prompt": "Who lived at Kalaupapa on the island of Molokai?",
+          "choices": [
+            {
+              "text": "Soldiers"
+            },
+            {
+              "text": "Fishermen"
+            },
+            {
+              "text": "People who had leprosy",
+              "correct": true
+            }
+          ],
+          "explanation": "The government sent everyone who had leprosy to live at Kalaupapa, away from their families."
+        },
+        {
+          "prompt": "What did Father Damien do at Kalaupapa?",
+          "choices": [
+            {
+              "text": "He stayed one week and left."
+            },
+            {
+              "text": "He built houses and cared for the sick with his own hands.",
+              "correct": true
+            },
+            {
+              "text": "He only wrote letters."
+            }
+          ],
+          "explanation": "Father Damien built and repaired houses, cared for the sick with his own hands, and even built coffins and dug graves."
+        },
+        {
+          "prompt": "How long did Father Damien live among the people of Kalaupapa?",
+          "choices": [
+            {
+              "text": "16 days"
+            },
+            {
+              "text": "16 months"
+            },
+            {
+              "text": "16 years",
+              "correct": true
+            }
+          ],
+          "explanation": "Father Damien stayed for 16 years, until his death in 1889."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Jozef Damien De Veuster (1840–1889)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/2009/ns_lit_doc_20091011_de-veuster_en.html",
+          "note": "birth, \"Jef,\" 1859 and the name Damien, his brother's illness, arrival and ordination dates, the government's order, May 10, 1873, the first of four volunteers, 1884, death at 49 after 16 years"
+        },
+        {
+          "title": "St Damien de Veuster",
+          "publisher": "Charles Paolino, L'Osservatore Romano, October 14, 2009 (EWTN)",
+          "url": "https://www.ewtn.com/catholicism/library/st-damien-de-veuster-5420",
+          "note": "one of seven children, asking the bishop in 1873, 816 people, \"a father to you,\" building and repairing houses, crops and schools, treating the sick with his own hands, coffins and graves, December 1884, Marianne Cope and Joseph Dutton, declared a saint on October 11, 2009"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "andre-bessette",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. André Bessette",
+        "production_id_hint": 892
+      },
+      "student_title": "Saint André Bessette",
+      "subtitle": "A humble doorkeeper in Canada who welcomed thousands and led them to Saint Joseph.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1845–1937"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Mont-Saint-Grégoire, Quebec, Canada"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 6"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Praying with the sick and his love for Saint Joseph"
+        }
+      ],
+      "intro": "Brother André was a small, sickly man from Canada who could barely read. His job was to answer the door at a school in Montreal. He did it for about 40 years. Sick and worried people came to see him, and he prayed with them to Saint Joseph. When Brother André died, more than a million people came to say goodbye.",
+      "story_paragraphs": [
+        "André was born on August 9, 1845, in a village near Montreal, in Canada. His parents named him Alfred. He was so weak as a baby that he was baptized the very next day. He was the ninth of thirteen children.",
+        "Alfred's father cut wood and built things for a living. When Alfred was nine, his father was killed when a tree fell on him. Two years later, his mother died of an illness. At 12 years old, Alfred was an orphan. An aunt and uncle took him in.",
+        "Alfred was often sick, and he had almost no schooling. He tried many jobs: farm worker, baker's helper, shoemaker. When he was 18, he went to the United States and worked in cotton mills for about four years.",
+        "Back in Canada, a priest saw how deeply Alfred prayed. He encouraged him to join the Congregation of Holy Cross, a religious family of priests and brothers. Alfred arrived in 1870, when he was 25. He took the name Brother André.",
+        "The brothers almost sent him away because his health was so poor. But the bishop of Montreal spoke up for him, and he was allowed to stay.",
+        "Brother André was given the job of doorkeeper at a boys' school. He also cleaned, ran errands, cut the students' hair, and cared for them when they were sick. He liked to joke, \"My superiors showed me the door, and there I stayed for forty years.\"",
+        "People who were sick or sad began coming to the door to ask for his prayers. Brother André loved Saint Joseph. He prayed with the visitors and gave them medals of Saint Joseph. Many said they were healed. Brother André always said that he did not heal anyone. It was Saint Joseph who prayed for them.",
+        "In 1904, Brother André built a small chapel to honor Saint Joseph on the hill across from the school. Over the years, it grew into a great church. Brother André died on January 6, 1937. Pope Benedict XVI declared him a saint on October 17, 2010."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 9, 1845",
+          "text": "Alfred Bessette is born near Montreal, Canada."
+        },
+        {
+          "date_display": "1857",
+          "text": "At age 12, Alfred becomes an orphan."
+        },
+        {
+          "date_display": "1863",
+          "text": "Alfred goes to work in cotton mills in the United States."
+        },
+        {
+          "date_display": "1870",
+          "text": "Alfred joins the Congregation of Holy Cross and becomes Brother André."
+        },
+        {
+          "date_display": "October 16, 1904",
+          "text": "Brother André's first small chapel to Saint Joseph opens."
+        },
+        {
+          "date_display": "January 6, 1937",
+          "text": "Brother André dies in Montreal."
+        },
+        {
+          "date_display": "May 23, 1982",
+          "text": "Pope John Paul II names him \"Blessed.\""
+        },
+        {
+          "date_display": "October 17, 2010",
+          "text": "Pope Benedict XVI declares him a saint."
+        }
+      ],
+      "fun_facts": [
+        "Brother André's name at birth was Alfred.",
+        "He chose the name André to honor the priest who helped him, Father André Provençal.",
+        "He was a doorkeeper for about 40 years.",
+        "Brother André lived to be 91 years old, even though he was sickly all his life.",
+        "So many people wrote to him that he received 200 to 300 letters every day.",
+        "More than a million people came to honor him after he died."
+      ],
+      "words_to_know": [
+        {
+          "word": "Doorkeeper",
+          "definition": "A person whose job is to answer the door and welcome visitors."
+        },
+        {
+          "word": "Orphan",
+          "definition": "A child whose parents have died."
+        },
+        {
+          "word": "Brother",
+          "definition": "A man who belongs to a religious family and makes vows to God, but is not a priest."
+        },
+        {
+          "word": "Chapel",
+          "definition": "A small church, or a room set apart for prayer."
+        },
+        {
+          "word": "Humble",
+          "definition": "Not bragging or putting yourself first."
+        }
+      ],
+      "think_about_it": "Brother André had a simple job, and God used it to help thousands of people. What simple jobs do you have? How could God use them?",
+      "reflection_question": "When people thanked Brother André, he pointed to Saint Joseph. When someone praises you, how can you remember to thank God?",
+      "kindness_prompt": "Be a doorkeeper today. Hold the door for others, and greet each person with a smile.",
+      "quiz": [
+        {
+          "prompt": "In what country was Brother André born?",
+          "choices": [
+            {
+              "text": "France"
+            },
+            {
+              "text": "Canada",
+              "correct": true
+            },
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Mexico"
+            }
+          ],
+          "explanation": "Brother André was born near Montreal, Canada, on August 9, 1845."
+        },
+        {
+          "prompt": "What was Brother André's job at the school?",
+          "choices": [
+            {
+              "text": "Principal"
+            },
+            {
+              "text": "Cook"
+            },
+            {
+              "text": "Doorkeeper",
+              "correct": true
+            }
+          ],
+          "explanation": "Brother André answered the door at a boys' school for about 40 years."
+        },
+        {
+          "prompt": "Which saint did Brother André love and pray to?",
+          "choices": [
+            {
+              "text": "Saint Joseph",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick"
+            },
+            {
+              "text": "Saint Nicholas"
+            }
+          ],
+          "explanation": "Brother André loved Saint Joseph and asked him to pray for the sick people who came to the door."
+        },
+        {
+          "prompt": "What did Brother André say when people were healed?",
+          "choices": [
+            {
+              "text": "\"I am a great healer.\""
+            },
+            {
+              "text": "That he did not heal anyone, and Saint Joseph prayed for them",
+              "correct": true
+            },
+            {
+              "text": "\"It was only luck.\""
+            }
+          ],
+          "explanation": "Brother André always said he did not heal anyone. He gave the thanks to Saint Joseph and to God."
+        },
+        {
+          "prompt": "What did Brother André build in 1904?",
+          "choices": [
+            {
+              "text": "A school"
+            },
+            {
+              "text": "A small chapel to honor Saint Joseph",
+              "correct": true
+            },
+            {
+              "text": "A hospital"
+            }
+          ],
+          "explanation": "His small chapel opened on October 16, 1904. Over the years, it grew into a great church."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Bessette, Alfred, named Brother André",
+          "publisher": "Dictionary of Canadian Biography",
+          "url": "https://www.biographi.ca/en/bio/bessette_alfred_16E.html",
+          "note": "birth, baptized the next day, ninth of thirteen, his father's trades and death in 1855, his mother's death in 1857, the aunt and uncle, his jobs, New England in 1863, return in 1867, Father André Provençal, arrival in 1870 and the name André, doorman until 1909 and his other duties, medals of Saint Joseph, October 16, 1904, 200 to 300 letters a day, more than a million people, 1982 and 2010"
+        },
+        {
+          "title": "St. André Bessette",
+          "publisher": "Vatican News",
+          "url": "https://vaticannews.va/en/saints/01/06/st--andre-bessette.html",
+          "note": "orphaned at twelve, poor health, could not read, age 25, nearly turned away and the bishop's help, about 40 years at the door and his joke, his love for Saint Joseph, saying he did not heal, the 1904 chapel across from the school, a million people"
+        }
+      ]
+    }
+  ]
+}

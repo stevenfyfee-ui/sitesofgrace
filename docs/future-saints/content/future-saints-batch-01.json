@@ -1,0 +1,1794 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-12",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "francis-of-assisi",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Francis of Assisi",
+        "production_id_hint": 953
+      },
+      "student_title": "Saint Francis of Assisi",
+      "subtitle": "A rich young man who gave up everything to follow Jesus and care for the poor.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1181–1226"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Assisi, Italy"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 4"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Living simply, serving the poor, and praising God for all creation"
+        }
+      ],
+      "intro": "Francis was born into a rich family in Assisi, Italy, more than 800 years ago. As a young man, he dreamed of becoming a knight. Then he gave everything away to live like Jesus, poor and close to people in need. Other men joined him, and they became known as the Franciscans. Francis praised God for the sun, the moon, and every living creature.",
+      "story_paragraphs": [
+        "Francis was born in the town of Assisi, Italy, in 1181 or 1182. His father, Pietro, was a rich cloth merchant. The baby was baptized Giovanni, but his father called him Francesco, and that is the name we remember. Young Francis had a carefree life and dreamed of becoming a knight.",
+        "In 1202, Francis fought in a war between Assisi and the nearby city of Perugia. He was captured and held as a prisoner for almost a year. After he was freed, he became very sick. Slowly, Francis began to change. One day he met a man with leprosy, a disease that people feared. Francis gave him money and kissed his hand.",
+        "Around 1205, Francis was praying in a small, broken-down church called San Damiano. There he heard Jesus speak to him from the cross: \"Go, Francis, and repair my Church in ruins.\"",
+        "Francis's father was angry that his son gave so much to the poor. In front of the bishop of Assisi, Francis gave back everything he had from his father, even his clothes. From then on, he owned nothing. He begged for what he needed and preached about turning back to God.",
+        "Soon other men joined him. In 1209, Francis wrote a simple rule of life for them. He led twelve followers to Rome, and Pope Innocent III gave his approval. They became known as the Friars Minor, or Franciscans. In 1212, a young noblewoman named Clare joined Francis, and a community for women began.",
+        "In 1219, during a war, Francis traveled to Egypt and walked into the camp of the Muslim sultan, al-Kamil, to speak with him. At Christmas in 1223, in the town of Greccio, Francis asked a friend to prepare a manger with hay, an ox, and a donkey, so people could picture the night Jesus was born.",
+        "Francis called all creatures his brothers and sisters. In 1224, while praying at a quiet place called La Verna, he received the stigmata, wounds like the wounds of Jesus. In his last years, Francis was very sick and had lost much of his sight.",
+        "Francis died on the evening of October 3, 1226, at a little chapel called the Portiuncula. Two years later, Pope Gregory IX declared him a saint."
+      ],
+      "timeline": [
+        {
+          "date_display": "1181 or 1182",
+          "text": "Francis is born in Assisi, Italy."
+        },
+        {
+          "date_display": "1202",
+          "text": "Francis fights in a war with the city of Perugia and is held prisoner for almost a year."
+        },
+        {
+          "date_display": "About 1205",
+          "text": "While Francis prays at San Damiano, he hears Jesus ask him to repair his Church."
+        },
+        {
+          "date_display": "1209–1210",
+          "text": "Francis writes a simple rule of life. He and twelve followers go to Rome, and Pope Innocent III approves their way of life."
+        },
+        {
+          "date_display": "1219",
+          "text": "Francis travels to Egypt and speaks with the sultan al-Kamil."
+        },
+        {
+          "date_display": "Christmas 1223",
+          "text": "In Greccio, Francis has a manger prepared with hay, an ox, and a donkey."
+        },
+        {
+          "date_display": "1224",
+          "text": "Francis receives the stigmata at La Verna."
+        },
+        {
+          "date_display": "October 3, 1226",
+          "text": "Francis dies at the Portiuncula. Pope Gregory IX declares him a saint two years later."
+        }
+      ],
+      "fun_facts": [
+        "Francis was baptized with the name Giovanni. \"Francesco\" was the name his father gave him afterward.",
+        "At Greccio in 1223, there were no statues in the manger scene. The people who came took part in it themselves.",
+        "Francis wrote a song called the Canticle of the Creatures. In it, he praises God for \"Brother Sun\" and \"Sister Moon.\"",
+        "Old stories tell of Francis preaching to the birds and making peace between a wolf and the town of Gubbio.",
+        "In 1979, Pope John Paul II named Francis the patron saint of ecology, which is the care of nature.",
+        "Francis is one of the patron saints of Italy."
+      ],
+      "words_to_know": [
+        {
+          "word": "Friar",
+          "definition": "A man who belongs to a religious family like the Franciscans. The word means \"brother.\""
+        },
+        {
+          "word": "Leprosy",
+          "definition": "A serious disease that harms the skin. Long ago, people with leprosy were often kept away from everyone else."
+        },
+        {
+          "word": "Rule",
+          "definition": "A written guide for how the members of a religious community promise to live."
+        },
+        {
+          "word": "Stigmata",
+          "definition": "Wounds like the wounds Jesus received on the cross."
+        },
+        {
+          "word": "Canticle",
+          "definition": "A song or poem that praises God."
+        }
+      ],
+      "think_about_it": "Francis gave up his riches to follow Jesus. What is something you could share to help someone else?",
+      "reflection_question": "Francis praised God for the sun, the moon, and all creatures. What part of God's creation are you most thankful for?",
+      "kindness_prompt": "Like Francis, care for God's creation today. Water a plant, be gentle with an animal, or pick up litter with a grown-up.",
+      "quiz": [
+        {
+          "prompt": "In what town was Francis born?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Assisi",
+              "correct": true
+            },
+            {
+              "text": "Greccio"
+            },
+            {
+              "text": "Perugia"
+            }
+          ],
+          "explanation": "Francis was born in Assisi, Italy, in 1181 or 1182."
+        },
+        {
+          "prompt": "What did Francis hear Jesus say at San Damiano?",
+          "choices": [
+            {
+              "text": "\"Go and become a knight.\""
+            },
+            {
+              "text": "\"Go, Francis, and repair my Church in ruins.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Go and sail to Egypt.\""
+            }
+          ],
+          "explanation": "While praying in the little church of San Damiano, Francis heard Jesus ask him to repair his Church."
+        },
+        {
+          "prompt": "What did Francis do with the things he had from his father?",
+          "choices": [
+            {
+              "text": "He traded them for a horse."
+            },
+            {
+              "text": "He hid them."
+            },
+            {
+              "text": "He gave them all back.",
+              "correct": true
+            }
+          ],
+          "explanation": "In front of the bishop, Francis gave everything back to his father, even his clothes, and chose to own nothing."
+        },
+        {
+          "prompt": "What did Francis have prepared in Greccio at Christmas in 1223?",
+          "choices": [
+            {
+              "text": "A big feast"
+            },
+            {
+              "text": "A manger with hay, an ox, and a donkey",
+              "correct": true
+            },
+            {
+              "text": "A new church"
+            },
+            {
+              "text": "A school"
+            }
+          ],
+          "explanation": "Francis wanted people to picture the night Jesus was born, so he asked a friend to prepare a manger scene."
+        },
+        {
+          "prompt": "What did Francis call the sun in his famous song?",
+          "choices": [
+            {
+              "text": "King Sun"
+            },
+            {
+              "text": "Father Sun"
+            },
+            {
+              "text": "Brother Sun",
+              "correct": true
+            }
+          ],
+          "explanation": "Francis called all creatures his brothers and sisters. His Canticle of the Creatures praises God for \"Brother Sun\" and \"Sister Moon.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "General Audience of January 27, 2010 (vatican.va)",
+          "publisher": "Pope Benedict XVI",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100127.html",
+          "note": "birth, father, prisoner at 20, San Damiano and its quote, the bishop, 1219 sultan, La Verna 1224, death at the Portiuncula, canonized two years later by Gregory IX"
+        },
+        {
+          "title": "St. Francis of Assisi",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Francis-of-Assisi",
+          "note": "the name Giovanni, 1202 war and prison, the leper, canonization date, patron of ecology 1979, patron of Italy"
+        },
+        {
+          "title": "St. Francis of Assisi: The Franciscan rule",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Francis-of-Assisi/The-Franciscan-rule",
+          "note": "1209 rule, twelve followers, Innocent III, Clare in 1212, Egypt 1219, \"brothers and sisters,\" birds, the wolf of Gubbio, Brother Sun and Sister Moon"
+        },
+        {
+          "title": "apostolic letter Admirabile signum (2019, vatican.va)",
+          "publisher": "Pope Francis",
+          "url": "https://www.vatican.va/content/francesco/en/apost_letters/documents/papa-francesco-lettera-ap_20191201_admirabile-signum.html",
+          "note": "Greccio 1223: the friend, the manger, hay, ox and donkey, no statues"
+        },
+        {
+          "title": "Saint Francis of Assisi",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-francis-of-assisi/",
+          "note": "begging, \"half blind and seriously ill\" in his last years, patronage list"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "therese-of-lisieux",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Thérèse of Lisieux (Little Flower of Jesus)",
+        "production_id_hint": 1083
+      },
+      "student_title": "Saint Thérèse of Lisieux",
+      "subtitle": "A young sister who showed that small things done with great love matter to God.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1873–1897"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Alençon and Lisieux, France"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 1"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her \"little way\" of trust and love"
+        }
+      ],
+      "intro": "Thérèse Martin grew up in France in a family that loved God. When she was only 15, she became a Carmelite sister in the town of Lisieux. She did not do anything famous. Instead, she offered small, everyday things to Jesus with great love. She called this her \"little way.\" Thérèse died when she was just 24, and the Church honors her as a great teacher.",
+      "story_paragraphs": [
+        "Thérèse Martin was born on January 2, 1873, in Alençon, France. Her parents were Louis and Zélie Martin. Thérèse was the youngest in the family, and she had four older sisters.",
+        "When Thérèse was four years old, her mother died. The family moved to the town of Lisieux. A few years later, Thérèse became seriously ill. On Pentecost in 1883, she was healed, and she thanked Mary for praying for her.",
+        "Thérèse wanted to give her whole life to God as a Carmelite sister, like her older sisters Pauline and Marie. Carmelites live in a convent and spend their days in prayer. But Thérèse was told she was too young. On November 20, 1887, during a trip to Rome, she asked Pope Leo XIII himself to let her enter at age 15.",
+        "On April 9, 1888, Thérèse entered the Carmelite convent in Lisieux. She was 15 years old. She became Sister Thérèse of the Child Jesus and the Holy Face. Two years later, she made her vows, her promises to God.",
+        "Thérèse found a simple way to grow close to God. She trusted him the way a small child trusts a loving parent, and she offered him little sacrifices each day. She called it the \"little way.\" She said it was \"the way of trust and absolute surrender.\" She taught it to the newest sisters.",
+        "The leaders of the convent asked Thérèse to write down the story of her life, and she began in 1895.",
+        "Then Thérèse became sick with tuberculosis, a serious illness of the lungs. During this time she wrote in a letter, \"I am not dying, I am entering life.\" Thérèse died on September 30, 1897. She was 24 years old. Her last words were, \"My God, I love you!\"",
+        "In 1898, her writings were printed as a book called Story of a Soul. Pope Pius XI declared her a saint on May 17, 1925. In 1997, Pope John Paul II named her a Doctor of the Church, a title for saints whose teaching helps the whole Church."
+      ],
+      "timeline": [
+        {
+          "date_display": "January 2, 1873",
+          "text": "Thérèse is born in Alençon, France."
+        },
+        {
+          "date_display": "August 28, 1877",
+          "text": "Her mother, Zélie, dies. The family moves to Lisieux."
+        },
+        {
+          "date_display": "May 8, 1884",
+          "text": "Thérèse receives her First Holy Communion."
+        },
+        {
+          "date_display": "November 20, 1887",
+          "text": "Thérèse asks Pope Leo XIII to let her become a Carmelite at age 15."
+        },
+        {
+          "date_display": "April 9, 1888",
+          "text": "Thérèse enters the Carmelite convent in Lisieux."
+        },
+        {
+          "date_display": "September 8, 1890",
+          "text": "Thérèse makes her vows as a Carmelite sister."
+        },
+        {
+          "date_display": "September 30, 1897",
+          "text": "Thérèse dies at age 24."
+        },
+        {
+          "date_display": "May 17, 1925",
+          "text": "Pope Pius XI declares Thérèse a saint."
+        }
+      ],
+      "fun_facts": [
+        "All four of Thérèse's older sisters became nuns too.",
+        "In 1927, the Church named Thérèse a patron saint of missions, together with Saint Francis Xavier.",
+        "Thérèse is the youngest person ever named a Doctor of the Church.",
+        "Her parents, Louis and Zélie, were declared saints together in 2015. They were the first married couple to be made saints at the same time.",
+        "Mother Teresa of Calcutta chose the name Teresa in honor of Thérèse."
+      ],
+      "words_to_know": [
+        {
+          "word": "Carmelite",
+          "definition": "A member of a religious family whose life is centered on prayer."
+        },
+        {
+          "word": "Convent",
+          "definition": "A home where religious sisters live and pray together."
+        },
+        {
+          "word": "Vows",
+          "definition": "Special promises a person makes to God."
+        },
+        {
+          "word": "Tuberculosis",
+          "definition": "A serious illness that most often harms the lungs."
+        },
+        {
+          "word": "Doctor of the Church",
+          "definition": "A title the Church gives to a saint whose teaching helps everyone understand the faith."
+        }
+      ],
+      "think_about_it": "Thérèse did small things with great love. What is one small thing you can do with great love today?",
+      "reflection_question": "Thérèse trusted God the way a child trusts a loving parent. What would you like to trust God with this week?",
+      "kindness_prompt": "Do one small, hidden act of kindness today, like a chore no one asked you to do. Keep it a secret between you and God.",
+      "quiz": [
+        {
+          "prompt": "How old was Thérèse when she entered the Carmelite convent?",
+          "choices": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "15",
+              "correct": true
+            },
+            {
+              "text": "24"
+            },
+            {
+              "text": "40"
+            }
+          ],
+          "explanation": "Thérèse entered the Carmelite convent in Lisieux on April 9, 1888, when she was 15 years old."
+        },
+        {
+          "prompt": "What did Thérèse call her way of growing close to God?",
+          "choices": [
+            {
+              "text": "The long road"
+            },
+            {
+              "text": "The little way",
+              "correct": true
+            },
+            {
+              "text": "The secret garden"
+            }
+          ],
+          "explanation": "Thérèse called it the \"little way\": trusting God like a child and offering him small things with love."
+        },
+        {
+          "prompt": "Whom did Thérèse ask for permission to become a Carmelite at 15?",
+          "choices": [
+            {
+              "text": "Pope Leo XIII",
+              "correct": true
+            },
+            {
+              "text": "The king of France"
+            },
+            {
+              "text": "Her teacher"
+            },
+            {
+              "text": "Saint Francis Xavier"
+            }
+          ],
+          "explanation": "On a trip to Rome in November 1887, Thérèse asked Pope Leo XIII himself."
+        },
+        {
+          "prompt": "What is the name of the book made from Thérèse's writings?",
+          "choices": [
+            {
+              "text": "The Little Flower Garden"
+            },
+            {
+              "text": "Letters from Lisieux"
+            },
+            {
+              "text": "Story of a Soul",
+              "correct": true
+            }
+          ],
+          "explanation": "Thérèse's story of her life was printed in 1898 as Story of a Soul."
+        },
+        {
+          "prompt": "What title did Pope John Paul II give Thérèse in 1997?",
+          "choices": [
+            {
+              "text": "Queen of France"
+            },
+            {
+              "text": "Doctor of the Church",
+              "correct": true
+            },
+            {
+              "text": "Patron of sailors"
+            }
+          ],
+          "explanation": "A Doctor of the Church is a saint whose teaching helps the whole Church. Thérèse is the youngest person to receive the title."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Thérèse of the Child Jesus and the Holy Face",
+          "publisher": "Holy See (1997 biography, vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19101997_stherese_en.html",
+          "note": "all dates, Pauline and Marie, the 1883 healing, Leo XIII, the manuscripts, the two quotes, canonization, patron of missions 1927"
+        },
+        {
+          "title": "St. Thérèse of Lisieux",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/print/article/591284",
+          "note": "four elder sisters all nuns, the \"little way\" quote, Story of a Soul 1898 and why it was written, tuberculosis, Doctor of the Church 1997, youngest Doctor, parents canonized 2015"
+        },
+        {
+          "title": "St. Thérèse of the Child Jesus",
+          "publisher": "Vatican News",
+          "url": "https://vaticannews.va/en/saints/10/01/st--therese-of-the-child-jesus--carmelite---virgin-doctor-of-the.html",
+          "note": "mother died when she was four, her religious name, tuberculosis, small sacrifices"
+        },
+        {
+          "title": "Mother Teresa of Calcutta (1910–1997)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20031019_madre-teresa_en.html",
+          "note": "Mother Teresa's name taken after Thérèse"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "juan-diego",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Juan Diego",
+        "production_id_hint": 1004
+      },
+      "student_title": "Saint Juan Diego",
+      "subtitle": "A humble Native man from Mexico who carried Mary's message to his bishop.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1474–1548"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Cuautitlán, Mexico"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "December 9"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Bringing Our Lady of Guadalupe's message to the bishop"
+        }
+      ],
+      "intro": "Juan Diego was a Native man who lived in Mexico about 500 years ago. In December 1531, on a hill called Tepeyac, Mary appeared to him and asked for a church to be built there. The bishop asked for a sign. Juan Diego brought him roses in his cloak, and an image of Mary appeared on the cloth. That image is still honored today.",
+      "story_paragraphs": [
+        "Juan Diego was born in 1474 in Cuautitlán, in the land we now call Mexico. His Native name was Cuauhtlatoatzin, which means \"the Talking Eagle.\" He belonged to the Chichimeca people.",
+        "In 1524, Franciscan missionaries came to Mexico to teach people about Jesus. Juan Diego and his wife, María Lucía, were among the first Native people there to be baptized. María Lucía died in 1529.",
+        "According to the tradition handed down for almost 500 years, Juan Diego was walking to Mass on December 9, 1531. As he crossed a hill called Tepeyac, Mary appeared to him. She asked him to go to the bishop and ask for a church to be built on the hill.",
+        "Juan Diego went to Bishop Juan de Zumárraga. The bishop listened and asked him questions. Then he asked for a sign to show that the message was true.",
+        "Soon after, Juan Diego's uncle, Juan Bernardino, became very sick. On December 12, Juan Diego went looking for a priest to help him. Mary appeared again. She told Juan Diego that his uncle would get well. Then she told him to gather the flowers he would find on the hill and take them to the bishop. It was winter, yet roses were blooming there. Juan Diego carried them in his cloak, called a tilma.",
+        "Juan Diego opened his tilma in front of the bishop. The roses fell out, and an image of Mary could be seen on the cloth. The bishop ordered a church to be built on Tepeyac Hill.",
+        "Juan Diego spent the rest of his life in a small home beside that church. He lived simply and cared for the pilgrims who came to pray. He died in 1548.",
+        "Pope John Paul II declared Juan Diego a saint on July 31, 2002. He was the first Indigenous person of the Americas to be made a saint. His tilma, with the image of Our Lady of Guadalupe, is still kept in her basilica in Mexico City."
+      ],
+      "timeline": [
+        {
+          "date_display": "1474",
+          "text": "Juan Diego is born in Cuautitlán, Mexico."
+        },
+        {
+          "date_display": "After 1524",
+          "text": "Juan Diego and his wife, María Lucía, are baptized."
+        },
+        {
+          "date_display": "1529",
+          "text": "María Lucía dies."
+        },
+        {
+          "date_display": "December 9, 1531",
+          "text": "Mary appears to Juan Diego on Tepeyac Hill and asks for a church."
+        },
+        {
+          "date_display": "December 12, 1531",
+          "text": "Juan Diego gathers roses in his tilma. When he opens it for the bishop, an image of Mary is seen on the cloth."
+        },
+        {
+          "date_display": "1548",
+          "text": "Juan Diego dies after years of caring for pilgrims beside the church."
+        },
+        {
+          "date_display": "May 6, 1990",
+          "text": "Pope John Paul II names Juan Diego \"Blessed.\""
+        },
+        {
+          "date_display": "July 31, 2002",
+          "text": "Pope John Paul II declares Juan Diego a saint."
+        }
+      ],
+      "fun_facts": [
+        "Juan Diego's Native name, Cuauhtlatoatzin, means \"the Talking Eagle.\"",
+        "A tilma is the traditional cloak worn by Juan Diego's people.",
+        "The roses Juan Diego found were blooming in winter.",
+        "Juan Diego lived in a small home right beside the church on Tepeyac Hill.",
+        "Juan Diego was the first Indigenous person of the Americas to be made a saint.",
+        "His feast day, December 9, is the date Mary first appeared to him."
+      ],
+      "words_to_know": [
+        {
+          "word": "Tilma",
+          "definition": "A cloak worn by Native people in Mexico in Juan Diego's time."
+        },
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Catholics in an area."
+        },
+        {
+          "word": "Pilgrim",
+          "definition": "A person who travels to a holy place to pray."
+        },
+        {
+          "word": "Indigenous",
+          "definition": "The first peoples of a land. Indigenous peoples lived in the Americas long before Europeans arrived."
+        }
+      ],
+      "think_about_it": "Juan Diego kept going back to the bishop, even when it was hard. When have you needed courage to do the right thing?",
+      "reflection_question": "Mary chose a humble man to carry her message. How can you say \"yes\" when God asks you to help?",
+      "kindness_prompt": "Juan Diego welcomed people who came to pray. Welcome someone today: say hello to a new classmate or a new family at church.",
+      "quiz": [
+        {
+          "prompt": "What does Juan Diego's Native name mean?",
+          "choices": [
+            {
+              "text": "The Morning Star"
+            },
+            {
+              "text": "The Talking Eagle",
+              "correct": true
+            },
+            {
+              "text": "The Quiet River"
+            },
+            {
+              "text": "The Brave Deer"
+            }
+          ],
+          "explanation": "His name, Cuauhtlatoatzin, means \"the Talking Eagle.\""
+        },
+        {
+          "prompt": "Where did Mary appear to Juan Diego?",
+          "choices": [
+            {
+              "text": "In a cave"
+            },
+            {
+              "text": "Beside a river"
+            },
+            {
+              "text": "On Tepeyac Hill",
+              "correct": true
+            }
+          ],
+          "explanation": "Mary appeared to Juan Diego on Tepeyac Hill in December 1531."
+        },
+        {
+          "prompt": "What did Mary ask for?",
+          "choices": [
+            {
+              "text": "A church to be built on the hill",
+              "correct": true
+            },
+            {
+              "text": "A new road"
+            },
+            {
+              "text": "A big feast"
+            }
+          ],
+          "explanation": "Mary asked Juan Diego to go to the bishop and ask for a church to be built on Tepeyac Hill."
+        },
+        {
+          "prompt": "What did Juan Diego carry to the bishop in his tilma?",
+          "choices": [
+            {
+              "text": "Bread"
+            },
+            {
+              "text": "Gold coins"
+            },
+            {
+              "text": "Roses",
+              "correct": true
+            },
+            {
+              "text": "A letter"
+            }
+          ],
+          "explanation": "Juan Diego gathered roses that were blooming in winter. When he opened his tilma, an image of Mary was seen on the cloth."
+        },
+        {
+          "prompt": "Who declared Juan Diego a saint in 2002?",
+          "choices": [
+            {
+              "text": "Pope Francis"
+            },
+            {
+              "text": "Pope John Paul II",
+              "correct": true
+            },
+            {
+              "text": "Bishop Zumárraga"
+            }
+          ],
+          "explanation": "Pope John Paul II declared Juan Diego a saint on July 31, 2002."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Juan Diego",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Juan-Diego",
+          "note": "birth, \"the Talking Eagle,\" walking to Mass, the uncle, roses in winter, the image, life beside the church, 1990 and 2002 dates, first Indigenous saint of the Americas, feast day"
+        },
+        {
+          "title": "Juan Diego Cuauhtlatoatzin (1474–1548)",
+          "publisher": "Holy See (Spanish biography, vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020731_juan-diego_sp.html",
+          "note": "Chichimeca people, Franciscans in 1524, María Lucía and 1529, Bishop Zumárraga, the bishop's questions and request for proof, flowers, the tilma, death in 1548, beatification"
+        },
+        {
+          "title": "December 9: Saint Juan Diego Cuauhtlatoatzin",
+          "publisher": "Vatican City State",
+          "url": "https://vaticanstate.va/en/state-and-government/general-informations/saint-of-the-day/3196-december-9-saint-juan-diego-cuauhtlatoatzin.html",
+          "note": "tilma as the traditional cloak of his people, the home beside the chapel, welcoming pilgrims"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "kateri-tekakwitha",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Kateri Tekakwitha",
+        "production_id_hint": 1008
+      },
+      "student_title": "Saint Kateri Tekakwitha",
+      "subtitle": "A young Mohawk woman who followed Jesus with courage.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1656–1680"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Ossernenon, a Mohawk village in what is now New York"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "July 14"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her courage and her life of prayer"
+        }
+      ],
+      "intro": "Kateri Tekakwitha was a Mohawk woman born in 1656 in what is now the state of New York. When she was four, a sickness called smallpox took her family and left her with scars and weak eyes. At age 20, she chose to be baptized. Later she traveled a long way to a Christian village in Canada, where she gave her days to prayer.",
+      "story_paragraphs": [
+        "Tekakwitha was born in 1656 in Ossernenon, a Mohawk village in what is now the state of New York. Her father was a Mohawk chief. Her mother was an Algonquin woman and a Christian.",
+        "Those were hard years for her people. When Tekakwitha was about four, a sickness called smallpox spread through the village. Her mother, her father, and her little brother all died. Tekakwitha lived, but the sickness left scars on her face and hurt her eyes. Her uncle, a village chief, took her in.",
+        "In 1666, French soldiers burned the Mohawk villages. The people built a new village across the river. The next year, three Jesuit priests came to stay for a few days, and Tekakwitha helped take care of them.",
+        "Tekakwitha grew up skilled at beadwork and basket weaving. Her family expected her to marry, but she wished to stay unmarried. Later, a priest named Father Jacques de Lamberville taught her about the Catholic faith. On Easter Sunday in 1676, when she was 20, she was baptized. She was given the name Catherine. In the Mohawk language, the name is Kateri.",
+        "Her uncle was against the Christian faith. After her baptism, some people in the village treated Kateri cruelly, and she was even threatened. In the fall of 1677, she left with three other Native Christians. They traveled a very long way to the Mission of Saint Francis Xavier, near the city of Montreal in Canada.",
+        "At the mission, Kateri received her First Holy Communion on Christmas Day, 1677. She went to Mass every day and gave much of her time to prayer. On March 25, 1679, she made a promise to belong to Jesus alone for the rest of her life.",
+        "Kateri became very sick. She died on April 17, 1680, when she was about 24 years old, saying the names of Jesus and Mary. A priest who was there wrote that her scarred face became beautiful soon after she died.",
+        "Pope Benedict XVI declared Kateri a saint on October 21, 2012. She is the first Indigenous woman of North America to be named a saint."
+      ],
+      "timeline": [
+        {
+          "date_display": "1656",
+          "text": "Tekakwitha is born in the Mohawk village of Ossernenon."
+        },
+        {
+          "date_display": "1660",
+          "text": "Smallpox takes her parents and her brother. It leaves her with scars and weak eyes."
+        },
+        {
+          "date_display": "1666",
+          "text": "French soldiers burn the Mohawk villages. Her people rebuild across the river."
+        },
+        {
+          "date_display": "Easter 1676",
+          "text": "Tekakwitha is baptized at age 20 and receives the name Catherine, or Kateri."
+        },
+        {
+          "date_display": "Fall 1677",
+          "text": "Kateri travels to the Mission of Saint Francis Xavier in Canada."
+        },
+        {
+          "date_display": "Christmas 1677",
+          "text": "Kateri receives her First Holy Communion."
+        },
+        {
+          "date_display": "April 17, 1680",
+          "text": "Kateri dies at about age 24."
+        },
+        {
+          "date_display": "October 21, 2012",
+          "text": "Pope Benedict XVI declares Kateri a saint."
+        }
+      ],
+      "fun_facts": [
+        "Kateri is the Mohawk form of the name Catherine.",
+        "Kateri was skilled at beadwork and basket weaving.",
+        "People have called Kateri the \"Lily of the Mohawks\" for a very long time.",
+        "Kateri has two feast days: July 14 in the United States and April 17 in Canada.",
+        "The Mohawk people's name for themselves is Kanyen'kehà:ka.",
+        "Pope John Paul II named Kateri \"Blessed\" in 1980."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mohawk",
+          "definition": "A Native nation whose homeland is in what is now New York. Mohawk communities live in the United States and Canada today."
+        },
+        {
+          "word": "Smallpox",
+          "definition": "A dangerous sickness that spread from person to person long ago. It often left scars on the skin."
+        },
+        {
+          "word": "Baptism",
+          "definition": "The sacrament that makes a person a member of the Church and a child of God."
+        },
+        {
+          "word": "Mission",
+          "definition": "A place where missionaries lived and taught the Catholic faith."
+        },
+        {
+          "word": "Jesuit",
+          "definition": "A priest or brother who belongs to a religious family called the Society of Jesus."
+        }
+      ],
+      "think_about_it": "Kateri stayed true to her faith, even when others were unkind to her. What helps you do what is right when it is hard?",
+      "reflection_question": "Kateri loved to spend quiet time with God. Where is a quiet place you can pray?",
+      "kindness_prompt": "Kateri knew how it felt to be treated unkindly. If you see someone being teased or left out, be the one who is kind to them.",
+      "quiz": [
+        {
+          "prompt": "To which Native nation did Kateri's father belong?",
+          "choices": [
+            {
+              "text": "Mohawk",
+              "correct": true
+            },
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Navajo"
+            },
+            {
+              "text": "Cherokee"
+            }
+          ],
+          "explanation": "Kateri's father was a Mohawk chief. Her mother was an Algonquin woman and a Christian."
+        },
+        {
+          "prompt": "What sickness took Kateri's family when she was about four?",
+          "choices": [
+            {
+              "text": "Measles"
+            },
+            {
+              "text": "Smallpox",
+              "correct": true
+            },
+            {
+              "text": "The flu"
+            }
+          ],
+          "explanation": "Smallpox took her parents and her brother. It left Kateri with scars and weak eyes."
+        },
+        {
+          "prompt": "What name was Kateri given at her baptism?",
+          "choices": [
+            {
+              "text": "Mary"
+            },
+            {
+              "text": "Clare"
+            },
+            {
+              "text": "Catherine",
+              "correct": true
+            },
+            {
+              "text": "Anne"
+            }
+          ],
+          "explanation": "She was baptized Catherine on Easter Sunday in 1676. In the Mohawk language, the name is Kateri."
+        },
+        {
+          "prompt": "Where did Kateri travel in 1677?",
+          "choices": [
+            {
+              "text": "To Rome"
+            },
+            {
+              "text": "To a Christian mission near Montreal, Canada",
+              "correct": true
+            },
+            {
+              "text": "To Mexico"
+            }
+          ],
+          "explanation": "Kateri traveled a very long way to the Mission of Saint Francis Xavier, near Montreal."
+        },
+        {
+          "prompt": "In what year was Kateri declared a saint?",
+          "choices": [
+            {
+              "text": "1680"
+            },
+            {
+              "text": "1980"
+            },
+            {
+              "text": "2012",
+              "correct": true
+            }
+          ],
+          "explanation": "Pope Benedict XVI declared Kateri a saint on October 21, 2012. She had been named \"Blessed\" in 1980."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Tekakwitha",
+          "publisher": "Dictionary of Canadian Biography",
+          "url": "https://www.biographi.ca/en/bio/tekakwitha_1E.html",
+          "note": "birth, her mother, 1660 smallpox, the uncle, 1666, the 1667 Jesuit visit, Lamberville, baptism, persecution, the 1677 journey, First Communion, the 1679 promise, death, the priest's account, \"Lily of the Mohawks\""
+        },
+        {
+          "title": "Kateri Tekakwitha",
+          "publisher": "The Canadian Encyclopedia",
+          "url": "https://thecanadianencyclopedia.ca/article/tekakwitha-kateri",
+          "note": "Kateri as the Mohawk form of Catherine, baptized at 20, the Kanyen'kehà:ka name, two feast days, 1980 and 2012, \"first Indigenous woman in North America\""
+        },
+        {
+          "title": "Homily for the canonizations of October 21, 2012 (vatican.va)",
+          "publisher": "Pope Benedict XVI",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/homilies/2012/documents/hf_ben-xvi_hom_20121021_canonizzazioni.html",
+          "note": "Mohawk father, Christian Algonquin mother, baptized at 20, the mission near Montreal, daily Mass and prayer, died at 24"
+        },
+        {
+          "title": "St. Kateri",
+          "publisher": "Saint Kateri Tekakwitha National Shrine and Historic Site",
+          "url": "https://www.katerishrine.org/st-kateri",
+          "note": "her father a chief, beadwork and basket weaving, wishing to stay unmarried, First Communion on Christmas Day"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "mother-teresa-of-calcutta",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Mother Teresa of Calcutta",
+        "production_id_hint": 1036
+      },
+      "student_title": "Saint Teresa of Calcutta",
+      "subtitle": "Known around the world as Mother Teresa, she gave her life to caring for the poorest of the poor.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1910–1997"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Skopje (now in North Macedonia); served in Calcutta, India"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 5"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for the poorest of the poor"
+        }
+      ],
+      "intro": "Mother Teresa was a Catholic sister who spent most of her life in Calcutta, a big city in India. She left her work as a school principal to live among the poorest people in the city. She cared for people who had no one else to care for them. Other women joined her, and they became the Missionaries of Charity. In 2016, Pope Francis declared her a saint.",
+      "story_paragraphs": [
+        "Mother Teresa was born on August 26, 1910, in the city of Skopje. Her name was Gonxha Agnes Bojaxhiu, and she was the youngest child in her family. When she was about eight years old, her father died suddenly, and life became harder for the family.",
+        "At age 18, Agnes left home to become a missionary. In September 1928, she joined the Sisters of Loreto in Ireland. A few months later she traveled to India, and she arrived in Calcutta on January 6, 1929. She took a new name, Sister Teresa, after Saint Thérèse of Lisieux.",
+        "For many years, Sister Teresa taught at Saint Mary's School for girls in Calcutta. In 1944, she became the principal.",
+        "On September 10, 1946, Sister Teresa was riding a train to the town of Darjeeling. On that trip, she felt Jesus calling her to leave the convent school and serve the poorest people. She called it her \"call within a call.\"",
+        "On August 17, 1948, she put on a simple white sari with a blue border and walked out into the city. She started an outdoor school for children in the poorest neighborhoods, called slums. She cared for people who were sick, hungry, and alone.",
+        "Other women came to help. On October 7, 1950, her new religious family, the Missionaries of Charity, officially began. Their work was to love and care for people nobody else was ready to look after. The sisters spread to many countries. In 1979, Mother Teresa was given the Nobel Peace Prize.",
+        "Mother Teresa also carried a hidden sorrow. For many years, when she prayed, she felt as if God were far away. She called it \"the darkness.\" She kept praying and serving anyway.",
+        "Mother Teresa died on September 5, 1997. By that year, there were nearly 4,000 Missionaries of Charity sisters, serving in 123 countries. On September 4, 2016, Pope Francis declared her a saint in St. Peter's Square in Rome."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 26, 1910",
+          "text": "Gonxha Agnes Bojaxhiu is born in Skopje."
+        },
+        {
+          "date_display": "September 1928",
+          "text": "At age 18, Agnes leaves home and joins the Sisters of Loreto in Ireland."
+        },
+        {
+          "date_display": "January 6, 1929",
+          "text": "She arrives in Calcutta, India."
+        },
+        {
+          "date_display": "September 10, 1946",
+          "text": "On a train to Darjeeling, Sister Teresa feels Jesus calling her to serve the poorest people."
+        },
+        {
+          "date_display": "August 17, 1948",
+          "text": "She puts on a white sari with a blue border and begins her work in the slums."
+        },
+        {
+          "date_display": "October 7, 1950",
+          "text": "The Missionaries of Charity officially begin."
+        },
+        {
+          "date_display": "1979",
+          "text": "Mother Teresa is given the Nobel Peace Prize."
+        },
+        {
+          "date_display": "September 5, 1997",
+          "text": "Mother Teresa dies. Pope Francis declares her a saint on September 4, 2016."
+        }
+      ],
+      "fun_facts": [
+        "Mother Teresa chose her name in honor of Saint Thérèse of Lisieux.",
+        "She wore a white sari with a blue border.",
+        "Before she worked in the slums, she was a school principal.",
+        "She once said, \"By blood, I am Albanian. By citizenship, an Indian. By faith, I am a Catholic nun.\"",
+        "Pope Francis recalled that she liked to say, \"Perhaps I don't speak their language, but I can smile.\"",
+        "When he declared her a saint, Pope Francis said people would likely keep calling her \"Mother Teresa,\" because she feels so close to us."
+      ],
+      "words_to_know": [
+        {
+          "word": "Missionary",
+          "definition": "A person who goes out to share the faith and serve people, often far from home."
+        },
+        {
+          "word": "Sari",
+          "definition": "A long piece of cloth that many women in India wrap and wear as a dress."
+        },
+        {
+          "word": "Slum",
+          "definition": "A very poor, crowded part of a city where people often lack good homes, clean water, and food."
+        },
+        {
+          "word": "Charity",
+          "definition": "Love for God and for other people, shown by helping those in need."
+        },
+        {
+          "word": "Nobel Peace Prize",
+          "definition": "A famous award given each year to someone who has worked for peace and the good of others."
+        }
+      ],
+      "think_about_it": "Mother Teresa noticed the people everyone else passed by. Who around you might feel unnoticed or alone?",
+      "reflection_question": "Mother Teresa kept praying, even when God felt far away. What can you do when praying feels hard?",
+      "kindness_prompt": "Mother Teresa knew that a smile is a gift. Smile at someone who looks sad or lonely today, and say something kind.",
+      "quiz": [
+        {
+          "prompt": "In what city did Mother Teresa spend most of her life?",
+          "choices": [
+            {
+              "text": "Rome, Italy"
+            },
+            {
+              "text": "Calcutta, India",
+              "correct": true
+            },
+            {
+              "text": "Dublin, Ireland"
+            },
+            {
+              "text": "Paris, France"
+            }
+          ],
+          "explanation": "Mother Teresa arrived in Calcutta in 1929 and spent most of her life serving people there."
+        },
+        {
+          "prompt": "After which saint did Mother Teresa choose her name?",
+          "choices": [
+            {
+              "text": "Saint Clare"
+            },
+            {
+              "text": "Saint Kateri"
+            },
+            {
+              "text": "Saint Thérèse of Lisieux",
+              "correct": true
+            }
+          ],
+          "explanation": "She took the name Teresa after Saint Thérèse of Lisieux."
+        },
+        {
+          "prompt": "Where was Sister Teresa when she felt her \"call within a call\"?",
+          "choices": [
+            {
+              "text": "On a train",
+              "correct": true
+            },
+            {
+              "text": "On a ship"
+            },
+            {
+              "text": "In a hospital"
+            },
+            {
+              "text": "At a market"
+            }
+          ],
+          "explanation": "On September 10, 1946, on a train to Darjeeling, she felt Jesus calling her to serve the poorest people."
+        },
+        {
+          "prompt": "What is the name of the religious family Mother Teresa started?",
+          "choices": [
+            {
+              "text": "The Sisters of Loreto"
+            },
+            {
+              "text": "The Missionaries of Charity",
+              "correct": true
+            },
+            {
+              "text": "The Franciscans"
+            }
+          ],
+          "explanation": "The Missionaries of Charity officially began on October 7, 1950. Before that, she belonged to the Sisters of Loreto."
+        },
+        {
+          "prompt": "What award was Mother Teresa given in 1979?",
+          "choices": [
+            {
+              "text": "A gold medal for running"
+            },
+            {
+              "text": "The Nobel Peace Prize",
+              "correct": true
+            },
+            {
+              "text": "A prize for cooking"
+            }
+          ],
+          "explanation": "Mother Teresa was given the Nobel Peace Prize in 1979 for her work with people in need."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mother Teresa of Calcutta (1910–1997)",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20031019_madre-teresa_en.html",
+          "note": "birth, family, father's death, Loreto, arrival in India, her name, Saint Mary's and 1944, the 1946 train, the sari and August 17, 1948, October 7, 1950, Nobel 1979, \"the darkness,\" the 1997 numbers, the \"By blood\" quote"
+        },
+        {
+          "title": "Mother Teresa: Biographical",
+          "publisher": "The Nobel Prize",
+          "url": "https://www.nobelprize.org/prizes/peace/1979/teresa/biographical",
+          "note": "the outdoor school in the slums, the order's task of caring for people nobody else would look after, death date"
+        },
+        {
+          "title": "Homily for the canonization of Mother Teresa, September 4, 2016 (vatican.va)",
+          "publisher": "Pope Francis",
+          "url": "https://www.vatican.va/content/francesco/en/homilies/2016/documents/papa-francesco_20160904_omelia-canonizzazione-madre-teresa.html",
+          "note": "date and place of the canonization, the smile quote, still calling her \"Mother Teresa\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "patrick",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Patrick",
+        "production_id_hint": 1041
+      },
+      "student_title": "Saint Patrick",
+      "subtitle": "A boy taken from his home who later went back to share the faith with the people of Ireland.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the 400s (exact years unknown)"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Roman Britain; served in Ireland"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "March 17"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Sharing the Christian faith across Ireland"
+        }
+      ],
+      "intro": "Patrick lived about 1,600 years ago. When he was about 16, raiders took him from his home in Britain and sold him as a slave in Ireland. For six years he watched over sheep and prayed. After he escaped, he chose to go back to Ireland as a bishop to teach the people about Jesus. Today he is the patron saint of Ireland.",
+      "story_paragraphs": [
+        "Patrick was born in Britain when it was part of the Roman Empire. His father, Calpornius, was a deacon, and his grandfather, Potitus, was a priest. We know these things because Patrick wrote about his own life. His story begins with the words, \"My name is Patrick.\"",
+        "When Patrick was about 16, raiders from Ireland attacked his home. They carried him across the sea and sold him as a slave. For six years, Patrick worked in Ireland taking care of sheep.",
+        "Patrick was far from home, and he turned to God. He wrote that he prayed up to one hundred times in a day, and almost as many times at night.",
+        "One night in a dream, Patrick heard a voice say, \"Look – your ship is ready.\" He ran away from the man who held him as a slave. He traveled about two hundred miles to reach the ship. After a hard journey, Patrick finally came home to his family.",
+        "Later, Patrick had another dream. A man named Victoricus came from Ireland carrying many letters. As Patrick read one, he seemed to hear the voice of the Irish people calling, \"We beg you, holy boy, to come and walk again among us.\"",
+        "Patrick prepared for years, and he was made a bishop. Around the year 432, he went back to Ireland, the land where he had been a slave. For about thirty years, he taught people about Jesus and baptized them.",
+        "Patrick also stood up for people who were hurt. When soldiers attacked Irish Christians and carried some of them off as slaves, Patrick wrote a strong letter against it.",
+        "It is said that Patrick died at a place called Saul, in what is now Northern Ireland. Later, people told many legends about him. One says he used a three-leaf plant, the shamrock, to teach about the Holy Trinity. Another says he drove all the snakes out of Ireland."
+      ],
+      "timeline": [
+        {
+          "date_display": "Late 300s or early 400s",
+          "text": "Patrick is born in Roman Britain. No one knows the exact year."
+        },
+        {
+          "date_display": "About age 16",
+          "text": "Raiders take Patrick to Ireland and sell him as a slave."
+        },
+        {
+          "date_display": "Six years later",
+          "text": "After a dream, Patrick escapes and travels about two hundred miles to a ship."
+        },
+        {
+          "date_display": "Some years later",
+          "text": "In a dream, Patrick hears the Irish people asking him to come back."
+        },
+        {
+          "date_display": "About 432",
+          "text": "Patrick returns to Ireland as a bishop."
+        },
+        {
+          "date_display": "The next 30 years or so",
+          "text": "Patrick teaches and baptizes people across Ireland."
+        },
+        {
+          "date_display": "March 17",
+          "text": "The Church celebrates the feast of Saint Patrick every year."
+        }
+      ],
+      "fun_facts": [
+        "Patrick was not born in Ireland. He was born in Britain.",
+        "Two of Patrick's own writings still exist: the story of his life, called the Confessio, and a letter.",
+        "As a young shepherd, Patrick prayed up to one hundred times a day.",
+        "Patrick traveled about two hundred miles to reach the ship that took him away from Ireland.",
+        "The story of Patrick and the shamrock is a legend, and so is the story about the snakes."
+      ],
+      "words_to_know": [
+        {
+          "word": "Raiders",
+          "definition": "People who attack a place suddenly to steal things or carry people away."
+        },
+        {
+          "word": "Slave",
+          "definition": "A person who is owned by someone else and forced to work without freedom. Slavery is a great wrong."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Christians in an area."
+        },
+        {
+          "word": "Legend",
+          "definition": "An old story that many people tell, which may not have happened just the way it is told."
+        },
+        {
+          "word": "Trinity",
+          "definition": "The Christian belief that there is one God in three Persons: the Father, the Son, and the Holy Spirit."
+        }
+      ],
+      "think_about_it": "Patrick went back to help the people of the land where he had been a slave. Why do you think he chose to return?",
+      "reflection_question": "Patrick prayed many times a day when he was lonely and afraid. When do you most want to talk to God?",
+      "kindness_prompt": "Patrick chose kindness toward people who had hurt him. Is there someone you need to forgive? Do one kind thing for that person.",
+      "quiz": [
+        {
+          "prompt": "Where was Patrick born?",
+          "choices": [
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Britain",
+              "correct": true
+            },
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "France"
+            }
+          ],
+          "explanation": "Patrick was born in Britain when it was part of the Roman Empire. He was taken to Ireland when he was about 16."
+        },
+        {
+          "prompt": "What work did Patrick do as a slave in Ireland?",
+          "choices": [
+            {
+              "text": "He took care of sheep.",
+              "correct": true
+            },
+            {
+              "text": "He built ships."
+            },
+            {
+              "text": "He cooked for a king."
+            }
+          ],
+          "explanation": "For six years, Patrick worked in Ireland taking care of sheep."
+        },
+        {
+          "prompt": "What did the voice in Patrick's dream tell him?",
+          "choices": [
+            {
+              "text": "\"Stay where you are.\""
+            },
+            {
+              "text": "\"Look – your ship is ready.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Climb the mountain.\""
+            }
+          ],
+          "explanation": "After hearing these words in a dream, Patrick escaped and traveled about two hundred miles to a ship."
+        },
+        {
+          "prompt": "Why did Patrick go back to Ireland?",
+          "choices": [
+            {
+              "text": "To find treasure"
+            },
+            {
+              "text": "To become a king"
+            },
+            {
+              "text": "To teach the people about Jesus",
+              "correct": true
+            }
+          ],
+          "explanation": "Patrick returned as a bishop around the year 432 and spent about thirty years teaching and baptizing."
+        },
+        {
+          "prompt": "Which of these is a legend about Patrick?",
+          "choices": [
+            {
+              "text": "He wrote about his own life."
+            },
+            {
+              "text": "He was taken from his home at about 16."
+            },
+            {
+              "text": "He drove all the snakes out of Ireland.",
+              "correct": true
+            }
+          ],
+          "explanation": "Historians call the snake story a legend. The other two facts come from Patrick's own writings."
+        }
+      ],
+      "sources": [
+        {
+          "title": "English translation by Pádraig McCarthy (Royal Irish Academy, confessio.ie)",
+          "publisher": "Saint Patrick's Confessio",
+          "url": "https://confessio.ie/etexts/confessio_english",
+          "note": "his own words: \"My name is Patrick,\" his father and grandfather, age sixteen, the sheep, one hundred prayers, the ship and two hundred miles, Victoricus, \"We beg you, holy boy\""
+        },
+        {
+          "title": "St. Patrick",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Patrick",
+          "note": "Roman Britain, six years, the escape and hard journey home, bishop and missionary, the letter about Irish Christians, Saul, the shamrock and snakes as legends, patron of Ireland, birth year unknown"
+        },
+        {
+          "title": "St. Patrick",
+          "publisher": "EWTN",
+          "url": "https://www.ewtn.com/learn/saints/patrick",
+          "note": "return as bishop \"around 432,\" about thirty years of mission, years of preparation"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "nicholas",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Nicholas",
+        "production_id_hint": 1038
+      },
+      "student_title": "Saint Nicholas",
+      "subtitle": "A kind bishop from long ago whose secret gifts are still remembered every December.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "the 300s (exact years unknown)"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Myra, in what is now Turkey"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "December 6"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Generosity to people in need"
+        }
+      ],
+      "intro": "Saint Nicholas was a bishop who lived about 1,700 years ago in Myra, a town in the land we now call Turkey. We know very little about his life for certain. But for hundreds of years, people have told stories about his kindness, especially about the secret gifts he gave to people in need. Those stories even helped shape the story of Santa Claus.",
+      "story_paragraphs": [
+        "Saint Nicholas lived so long ago that almost no records of his life remain. Historians say the one thing we can be fairly sure of is that he was the bishop of Myra in the 300s. Myra was a town in what is now the country of Turkey. Everything else comes from tradition, which means stories handed down over many years.",
+        "According to tradition, Nicholas was born in a seaport town called Patara. His parents were wealthy, and they raised him to love God. They died in an epidemic, a sickness that spread to many people, while Nicholas was still young. The stories say Nicholas used all the money they left him to help people who were poor, sick, or suffering.",
+        "Nicholas became the bishop of Myra while he was still a young man. In those days, the Roman emperor Diocletian was arresting Christians. Tradition says Nicholas was put in prison for his faith and was set free under the next emperor, Constantine.",
+        "The most famous story about Nicholas tells of a poor man with three daughters. The father had no money for a dowry, which a young woman needed in order to marry. Without it, the daughters faced a very hard life. On three different nights, a bag of gold was tossed through an open window. The story says the gold landed in stockings or shoes left by the fire to dry.",
+        "Other stories tell of Nicholas praying during a storm at sea until the waves grew calm. That is why sailors ask for his prayers.",
+        "Nicholas was buried in his church at Myra. In 1087, Italian sailors carried his remains to the city of Bari, Italy, where they are still kept.",
+        "In Holland, people called him Sinterklaas. Dutch families brought their stories about him to America in the 1600s. There, the name slowly turned into \"Santa Claus.\" In many countries, children still receive small gifts on Saint Nicholas Day, December 6."
+      ],
+      "timeline": [
+        {
+          "date_display": "The 200s",
+          "text": "According to tradition, Nicholas is born in the seaport of Patara."
+        },
+        {
+          "date_display": "Early 300s",
+          "text": "Nicholas serves as bishop of Myra. Tradition says he is put in prison for his faith and later set free."
+        },
+        {
+          "date_display": "December 6",
+          "text": "Tradition holds that Nicholas died on this day. It became his feast."
+        },
+        {
+          "date_display": "The 500s",
+          "text": "His tomb in Myra is well known, and a church is built in his honor in the great city of Constantinople."
+        },
+        {
+          "date_display": "1087",
+          "text": "Italian sailors carry his remains from Myra to Bari, Italy."
+        },
+        {
+          "date_display": "The 1600s",
+          "text": "Dutch settlers bring the stories of Sinterklaas to America."
+        },
+        {
+          "date_display": "The 1800s",
+          "text": "The American picture of Santa Claus takes shape."
+        }
+      ],
+      "fun_facts": [
+        "The name \"Santa Claus\" comes from Sinterklaas, the Dutch name for Saint Nicholas.",
+        "In the old story, the bags of gold landed in stockings or shoes drying by the fire.",
+        "In the Netherlands, children leave carrots and hay in their shoes for Saint Nicholas's horse.",
+        "Saint Nicholas is honored as a patron saint of children and of sailors.",
+        "Greece and Russia both honor Saint Nicholas as a patron saint."
+      ],
+      "words_to_know": [
+        {
+          "word": "Bishop",
+          "definition": "A leader in the Church who cares for all the Christians in an area."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        },
+        {
+          "word": "Epidemic",
+          "definition": "A sickness that spreads to many people in a short time."
+        },
+        {
+          "word": "Dowry",
+          "definition": "Money or goods a bride's family gave when she married, a custom in some times and places."
+        },
+        {
+          "word": "Generous",
+          "definition": "Happy to give and share with others."
+        }
+      ],
+      "think_about_it": "In the stories, Nicholas gave his gifts in secret. Why might someone want to give without being noticed?",
+      "reflection_question": "Nicholas shared what he had with people in need. What do you have that you could share?",
+      "kindness_prompt": "Be a secret giver like Saint Nicholas. Do something kind for someone in your family today without telling them it was you.",
+      "quiz": [
+        {
+          "prompt": "Where was Nicholas a bishop?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Myra",
+              "correct": true
+            },
+            {
+              "text": "Bari"
+            },
+            {
+              "text": "Assisi"
+            }
+          ],
+          "explanation": "Nicholas was the bishop of Myra, a town in what is now Turkey."
+        },
+        {
+          "prompt": "In the famous story, what was tossed through the window?",
+          "choices": [
+            {
+              "text": "Loaves of bread"
+            },
+            {
+              "text": "Warm blankets"
+            },
+            {
+              "text": "Bags of gold",
+              "correct": true
+            }
+          ],
+          "explanation": "The story tells of three bags of gold given in secret to help a poor man's three daughters."
+        },
+        {
+          "prompt": "How much do historians know for certain about Nicholas's life?",
+          "choices": [
+            {
+              "text": "Almost everything"
+            },
+            {
+              "text": "Very little",
+              "correct": true
+            },
+            {
+              "text": "Nothing at all, not even where he was bishop"
+            }
+          ],
+          "explanation": "Historians are fairly sure he was bishop of Myra in the 300s. Most other details come from tradition."
+        },
+        {
+          "prompt": "Where are Saint Nicholas's remains kept today?",
+          "choices": [
+            {
+              "text": "Bari, Italy",
+              "correct": true
+            },
+            {
+              "text": "Paris, France"
+            },
+            {
+              "text": "New York"
+            }
+          ],
+          "explanation": "In 1087, Italian sailors carried his remains from Myra to Bari, Italy."
+        },
+        {
+          "prompt": "Which name comes from the Dutch name for Saint Nicholas?",
+          "choices": [
+            {
+              "text": "Father Time"
+            },
+            {
+              "text": "Santa Claus",
+              "correct": true
+            },
+            {
+              "text": "Jack Frost"
+            }
+          ],
+          "explanation": "The Dutch called him Sinterklaas. In America, the name slowly turned into \"Santa Claus.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Nicholas",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Nicholas",
+          "note": "how little is certain, Myra in the 300s, Patara by tradition, prison under Diocletian and release under Constantine, the dowry story, burial at Myra and the 500s, Bari 1087, patronages, Sinterklaas, the 1600s and 1800s, gifts on December 6"
+        },
+        {
+          "title": "Who is St. Nicholas?",
+          "publisher": "St. Nicholas Center",
+          "url": "https://www.stnicholascenter.org/who-is-st-nicholas",
+          "note": "wealthy parents and the epidemic, his inheritance, bishop while young, the gold landing in stockings or shoes, the storm at sea, carrots and hay, December 6 as the day he died"
+        },
+        {
+          "title": "Saint Nicholas of Myra, Bishop, Confessor",
+          "publisher": "EWTN (from Lives of Saints, John J. Crawley & Co.)",
+          "url": "https://www.ewtn.com/catholicism/library/saint-nicholas-of-myra-bishop-confessor-5701",
+          "note": "only \"bishop of Myra in the fourth century\" is certain; the rest is tradition; Bari 1087; Dutch settlers"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "john-paul-ii",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. John Paul II",
+        "production_id_hint": 994
+      },
+      "student_title": "Saint John Paul II",
+      "subtitle": "A boy from Poland who became pope and told the whole world, \"Do not be afraid!\"",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1920–2005"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Wadowice, Poland"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 22"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Serving as pope for more than 26 years and bringing the faith to people all over the world"
+        }
+      ],
+      "intro": "Karol Wojtyła grew up in a small town in Poland. By the time he was 20, he had lost his mother, his brother, and his father. During a terrible war, he studied in secret to become a priest. In 1978, he was chosen as pope and took the name John Paul II. He visited 129 countries and told people everywhere, \"Do not be afraid!\"",
+      "story_paragraphs": [
+        "Karol Wojtyła was born on May 18, 1920, in Wadowice, Poland. He was the youngest of three children. His friends called him Lolek.",
+        "Karol knew sadness early in his life. His mother died in 1929, when he was eight. His older brother, Edmund, who was a doctor, died in 1932. His father died in 1941. At age 20, Karol had lost his whole family.",
+        "In 1938, Karol began studying at the university in the city of Kraków. He loved acting in plays. But in 1939, the army of Nazi Germany took over Poland and closed the university. To earn a living, and to keep from being sent away to Germany, Karol worked in a stone quarry and then in a chemical factory.",
+        "In 1942, Karol felt God calling him to be a priest. The seminary, a school for future priests, had to meet in secret. He also helped run a secret theater. Karol was ordained a priest on November 1, 1946. Father Karol became a teacher, then a bishop in 1958, the archbishop of Kraków in 1964, and a cardinal in 1967.",
+        "On October 16, 1978, the cardinals elected him pope. He took the name John Paul II. He was the first pope from outside Italy in 455 years. As he began, he told the world, \"Do not be afraid!\"",
+        "Pope John Paul II made 104 trips outside Italy and visited 129 countries. He started World Youth Day, a great gathering for young people.",
+        "On May 13, 1981, a man shot the Pope in St. Peter's Square. John Paul II survived. In 1983, he went to the prison to visit the man who had shot him, and he forgave him.",
+        "John Paul II died on April 2, 2005. Pope Francis declared him a saint on April 27, 2014, together with Pope John XXIII."
+      ],
+      "timeline": [
+        {
+          "date_display": "May 18, 1920",
+          "text": "Karol Wojtyła is born in Wadowice, Poland."
+        },
+        {
+          "date_display": "1939",
+          "text": "Nazi Germany takes over Poland and closes Karol's university. He goes to work in a quarry."
+        },
+        {
+          "date_display": "1942",
+          "text": "Karol begins studying in secret to become a priest."
+        },
+        {
+          "date_display": "November 1, 1946",
+          "text": "Karol is ordained a priest in Kraków."
+        },
+        {
+          "date_display": "October 16, 1978",
+          "text": "Cardinal Wojtyła is elected pope and takes the name John Paul II."
+        },
+        {
+          "date_display": "May 13, 1981",
+          "text": "The Pope is shot in St. Peter's Square. He later forgives the man who shot him."
+        },
+        {
+          "date_display": "April 2, 2005",
+          "text": "John Paul II dies at the Vatican."
+        },
+        {
+          "date_display": "April 27, 2014",
+          "text": "Pope Francis declares John Paul II a saint."
+        }
+      ],
+      "fun_facts": [
+        "When he was a boy, his friends called him Lolek.",
+        "He loved acting, and during the war he helped run a secret theater.",
+        "He liked to go hiking with young people.",
+        "As pope, he visited 129 countries.",
+        "He was the first pope from outside Italy in 455 years.",
+        "As pope, he declared 482 people saints."
+      ],
+      "words_to_know": [
+        {
+          "word": "Pope",
+          "definition": "The leader of the Catholic Church on earth and the bishop of Rome."
+        },
+        {
+          "word": "Seminary",
+          "definition": "A school where men study and pray to become priests."
+        },
+        {
+          "word": "Quarry",
+          "definition": "A place where stone is cut out of the ground."
+        },
+        {
+          "word": "Cardinal",
+          "definition": "A Church leader chosen by the pope. Cardinals help the pope, and they elect the next pope."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To let go of anger toward someone who hurt you and to wish them good."
+        }
+      ],
+      "think_about_it": "John Paul II forgave the man who hurt him. Why is forgiving someone hard, and why is it good?",
+      "reflection_question": "John Paul II told the world, \"Do not be afraid!\" What is something you would like to ask Jesus to help you be brave about?",
+      "kindness_prompt": "Like John Paul II, be a peacemaker. If you have had an argument with someone, be the first to say, \"I'm sorry\" or \"I forgive you.\"",
+      "quiz": [
+        {
+          "prompt": "In what country was John Paul II born?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Poland",
+              "correct": true
+            },
+            {
+              "text": "Germany"
+            },
+            {
+              "text": "Spain"
+            }
+          ],
+          "explanation": "Karol Wojtyła was born in Wadowice, Poland, on May 18, 1920."
+        },
+        {
+          "prompt": "Where did Karol work during the war?",
+          "choices": [
+            {
+              "text": "On a fishing boat"
+            },
+            {
+              "text": "In a stone quarry and a chemical factory",
+              "correct": true
+            },
+            {
+              "text": "In a bakery"
+            }
+          ],
+          "explanation": "After the university was closed, Karol worked in a quarry and then in a chemical factory."
+        },
+        {
+          "prompt": "Why did Karol study to be a priest in secret?",
+          "choices": [
+            {
+              "text": "Poland had been taken over, and the seminary had to stay hidden.",
+              "correct": true
+            },
+            {
+              "text": "He wanted to surprise his friends."
+            },
+            {
+              "text": "The seminary was too far away."
+            }
+          ],
+          "explanation": "During the war, the seminary in Kraków had to meet in secret."
+        },
+        {
+          "prompt": "What did John Paul II tell the world as he began as pope?",
+          "choices": [
+            {
+              "text": "\"Hurry up!\""
+            },
+            {
+              "text": "\"Stay home!\""
+            },
+            {
+              "text": "\"Do not be afraid!\"",
+              "correct": true
+            }
+          ],
+          "explanation": "He began his time as pope in 1978 with the words, \"Do not be afraid!\""
+        },
+        {
+          "prompt": "What did John Paul II do for the man who shot him?",
+          "choices": [
+            {
+              "text": "He never spoke of him."
+            },
+            {
+              "text": "He visited him in prison and forgave him.",
+              "correct": true
+            },
+            {
+              "text": "He asked for him to be punished more."
+            }
+          ],
+          "explanation": "In 1983, the Pope visited the man in prison and forgave him."
+        }
+      ],
+      "sources": [
+        {
+          "title": "John Paul II: Biography",
+          "publisher": "Holy See (vatican.va)",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/biografia/documents/hf_jp-ii_spe_20190722_biografia.html",
+          "note": "birth, family deaths in 1929, 1932 and 1941, university, 1939, quarry and factory, the secret seminary and theater, ordination, 1958, 1964, 1967, election, 104 journeys, 482 saints, forgiving his attacker, death, 2011 and 2014"
+        },
+        {
+          "title": "Biography",
+          "publisher": "Saint John Paul II National Shrine",
+          "url": "https://www.jp2shrine.org/about/jp2-bio/",
+          "note": "\"Lolek,\" acting, hiking, \"Do not be afraid!\", May 13, 1981, the 1983 prison visit, World Youth Day, 129 countries"
+        },
+        {
+          "title": "Saint John Paul II summary",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/summary/Saint-John-Paul-II",
+          "note": "first non-Italian pope in 455 years, shot in St. Peter's Square in 1981 and forgave, feast day October 22"
+        }
+      ]
+    }
+  ]
+}
