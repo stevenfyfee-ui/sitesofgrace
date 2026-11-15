@@ -26,6 +26,9 @@ Per page:
   each Bible reference split into book / chapter / verses that read back as the same text.
 - --review-note "text" sets the internal review_note on every page in the file (it is never
   shown on the site); without it, review_note is left as it is.
+- A year-only founding_date ("1776", when the sources disagree on the day) is stored as an
+  empty date; founding_date_display and founding_source_note carry it as given. No month or
+  day is ever invented, and --verify counts the empty date as a match.
 """
 import glob
 import json
@@ -101,6 +104,7 @@ TYPE_FIELDS = {
 }
 # Types with a free-text story heading (empty shows "The Story").
 FREE_STORY_LABEL = (HolyLandLearningPage, MissionLearningPage)
+YEAR_ONLY = re.compile(r"^\d{4}$")
 BIBLE_REFERENCE = re.compile(r"^(?P<book>.+?) (?P<chapter>\d+)(?::(?P<verses>.+))?$")
 
 PAGE_KEYS = {
@@ -459,9 +463,10 @@ class Command(BaseCommand):
         scalars["founding_number"] = number
         raw = row.get("founding_date") or ""
         try:
-            scalars["founding_date"] = date.fromisoformat(raw) if raw else None
+            # A year only (the day isn't agreed): an empty date; the display text keeps the year.
+            scalars["founding_date"] = date.fromisoformat(raw) if raw and not YEAR_ONLY.match(str(raw)) else None
         except (TypeError, ValueError):
-            errors.append(f"founding_date must be an ISO date like 1769-07-16 (got {raw!r})")
+            errors.append(f"founding_date must be an ISO date like 1769-07-16, or a year like 1776 (got {raw!r})")
         for key in ("founding_date_display", "founding_source_note"):
             value = row.get(key) or ""
             if not isinstance(value, str):
@@ -607,7 +612,12 @@ class Command(BaseCommand):
         if p["model"] in FREE_STORY_LABEL:
             self.stdout.write(f"  story heading: {(s.get('story_label') or 'The Story')!r}")
         if p["model"] is MissionLearningPage:
-            self.stdout.write(f"  founding: #{s['founding_number']}, {s['founding_date']} ({s['founding_date_display']!r})")
+            raw = p["row"].get("founding_date") or ""
+            if YEAR_ONLY.match(str(raw)):
+                self.stdout.write(f"  founding: #{s['founding_number']}, date EMPTY (the file gives the year only, {raw!r}), "
+                                  f"display {s['founding_date_display']!r}")
+            else:
+                self.stdout.write(f"  founding: #{s['founding_number']}, {s['founding_date']} ({s['founding_date_display']!r})")
         icons = ", ".join(f"{f['label']}={f['icon']}" for f in c["quick_facts"])
         self.stdout.write(f"  quick fact icons: {icons}")
         for f in c["quick_facts"]:
