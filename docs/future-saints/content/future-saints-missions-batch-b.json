@@ -1,0 +1,1250 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-14",
+  "pages": [
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-juan-capistrano",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Basilica San Juan Capistrano",
+        "production_id_hint": 1218
+      },
+      "student_title": "Mission San Juan Capistrano",
+      "subtitle": "The seventh California mission, known for its ruined stone church and its swallows, built on the homeland of the Acjachemen people.",
+      "story_label": "The Mission Story",
+      "founding_number": 7,
+      "founding_date": "1776-11-01",
+      "founding_date_display": "1776",
+      "founding_source_note": "Mission San Juan Capistrano, \"History\"; California Missions Foundation, \"San Juan Capistrano.\" The display shows the year only, as the CSV and hub do.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "7 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "1776"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint John of Capistrano"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Acjachemen (also called Juaneño)"
+        }
+      ],
+      "intro": "Mission San Juan Capistrano was the seventh California mission. Saint Junípero Serra founded it in 1776 on the homeland of the Acjachemen people. It is famous for the ruins of a great stone church and for the swallows that fly back every spring. Its story also holds sadness. The Acjachemen lost their villages and their freedom, and an earthquake took many lives.",
+      "story_paragraphs": [
+        "The Acjachemen (say it ah-HAWSH-eh-men) people have lived in the land now called Orange County for as long as 10,000 years. One of their main villages, Putuidem, stood close to where the mission is now. Families lived in houses covered with bark or reeds. Acorns and seeds made up more than half of their food.",
+        "In October 1775, Father Fermín Lasuén came to start a mission here. About a week later, news came of an attack on the mission at San Diego. The priests buried the mission bells and hurried away.",
+        "On November 1, 1776, Father Junípero Serra came back. The bells were dug up and hung from a tree, and the mission began again. It was the seventh California mission. It was named for Saint John of Capistrano, a Franciscan priest from Italy.",
+        "Soon a small adobe church was built. Today it is called the Serra Chapel. It is the last mission church still standing in which Father Serra celebrated Mass.",
+        "The Acjachemen were brought into the mission, and the Spanish gave them a new name, Juaneños. A tribal member named Jerry Nieblas says that one of his ancestors, Maria Bernarda Chigilia, lived at Putuidem. In 1776, she was taken from her land and not allowed to go back. At the mission, Native people worked making leather, soap, candles, and iron tools. Many grew sick and died.",
+        "In 1797, work began on a huge stone church with seven domes and a tall bell tower. It was finished in 1806. Then, in December 1812, an earthquake struck, and the church fell. Forty people were killed. The church was never rebuilt.",
+        "In 1845, the governor sold the mission to his brother-in-law. In 1865, President Abraham Lincoln gave it back to the Church. A priest named St. John O'Sullivan came in 1910 and spent many years repairing it.",
+        "The Acjachemen people are still here. Today, they teach their children their language and stories at a village park called Putuidem."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1776",
+          "text": "The Acjachemen people live in villages such as Putuidem."
+        },
+        {
+          "date_display": "October 1775",
+          "text": "Father Lasuén starts a mission, but it is left after about a week."
+        },
+        {
+          "date_display": "November 1, 1776",
+          "text": "Saint Junípero Serra founds the mission again. It is the seventh California mission."
+        },
+        {
+          "date_display": "1806",
+          "text": "The Great Stone Church is finished after nine years of work."
+        },
+        {
+          "date_display": "December 1812",
+          "text": "An earthquake knocks down the Great Stone Church. Forty people are killed."
+        },
+        {
+          "date_display": "1845",
+          "text": "The governor sells the mission to his brother-in-law."
+        },
+        {
+          "date_display": "1865",
+          "text": "President Abraham Lincoln returns the mission to the Church."
+        },
+        {
+          "date_display": "1910",
+          "text": "Father St. John O'Sullivan arrives and begins many years of repairs."
+        }
+      ],
+      "fun_facts": [
+        "Swallows fly back to the mission each spring, around March 19, and build mud nests on the old walls.",
+        "The swallows spend the winter about 6,000 miles away, in Argentina.",
+        "When the mission began in 1776, its bells were dug up from the ground and hung from a tree.",
+        "The Great Stone Church had seven domes.",
+        "Four bells from the fallen church still hang in the mission's bell wall."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Acjachemen",
+          "definition": "The Native people whose homeland is in what is now Orange County. The Spanish called them Juaneños."
+        },
+        {
+          "word": "Ruins",
+          "definition": "What is left of a building after it has fallen down."
+        },
+        {
+          "word": "Swallow",
+          "definition": "A small bird with pointed wings that builds its nest out of mud."
+        },
+        {
+          "word": "Earthquake",
+          "definition": "A sudden shaking of the ground."
+        }
+      ],
+      "think_about_it": "Maria Bernarda Chigilia was taken from her village and not allowed to go back. What would you miss most if you could never go home again?",
+      "reflection_question": "The Acjachemen are teaching their children the words of their ancestors. Who teaches you the stories of your family?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Acjachemen people. Before the mission, they lived in villages along the creeks and rivers of what is now Orange County. Each village led itself. People hunted, fished, and gathered acorns and seeds. When the mission came, the Acjachemen were baptized and given the name Juaneño, after the mission. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. The mission's own history says that about 65,000 Native people lived along the California coast in 1770, and that only about 17,000 were still living in 1830. Today, the tribe is called the Juaneño Band of Mission Indians, Acjachemen Nation. An elder named Joyce Perry teaches her granddaughter the Acjachemen words for the sun, the moon, the ocean, and the stars.",
+        "mission_life": "This was a busy mission. Workers tanned cattle hides into leather and melted fat to make soap and candles. They made shoes, hats, and blankets, pressed olives for oil, and grew grapes. The mission was the first in California to make iron from rock in hot furnaces. Its ranches covered most of what is now Orange County. The Acjachemen did this work because they had to. Their own way of life, in their own villages, had been taken from them.",
+        "architecture": "Two churches tell this mission's story. The Serra Chapel is a long, narrow adobe church from mission days. It was close to falling down by the 1890s and was repaired between 1910 and 1924. Its golden altar is very old, but it came from Spain in the 1920s. The Great Stone Church was made of yellow sandstone, with seven domes and a bell tower 120 feet tall. The broken walls you can see are the real ruins from 1812. They have never been rebuilt. Four bells saved from the tower hang in a low bell wall built in 1813. Many of the workshops in the courtyard are modern copies."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "3rd"
+            },
+            {
+              "text": "7th",
+              "correct": true
+            },
+            {
+              "text": "15th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Juan Capistrano, founded for good on November 1, 1776, was the seventh of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Acjachemen",
+              "correct": true
+            },
+            {
+              "text": "Esselen"
+            }
+          ],
+          "explanation": "The Acjachemen people have lived in what is now Orange County for as long as 10,000 years. They are still here today."
+        },
+        {
+          "prompt": "What happened to the Great Stone Church in 1812?",
+          "choices": [
+            {
+              "text": "It burned"
+            },
+            {
+              "text": "It fell in an earthquake",
+              "correct": true
+            },
+            {
+              "text": "It was moved"
+            }
+          ],
+          "explanation": "In December 1812, an earthquake knocked down the church and killed forty people. Its ruins still stand."
+        },
+        {
+          "prompt": "Which birds return to the mission every spring?",
+          "choices": [
+            {
+              "text": "Eagles"
+            },
+            {
+              "text": "Pelicans"
+            },
+            {
+              "text": "Swallows",
+              "correct": true
+            },
+            {
+              "text": "Owls"
+            }
+          ],
+          "explanation": "Swallows come back around March 19 each year and build mud nests on the old mission walls."
+        },
+        {
+          "prompt": "Why was the first try at founding the mission given up in 1775?",
+          "choices": [
+            {
+              "text": "News came of an attack on the mission at San Diego",
+              "correct": true
+            },
+            {
+              "text": "A flood washed the site away"
+            },
+            {
+              "text": "The priests ran out of bells"
+            }
+          ],
+          "explanation": "Father Lasuén began the mission in October 1775, but about a week later the priests buried the bells and left. Father Serra came back in 1776."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Mission San Juan Capistrano",
+          "url": "https://www.missionsjc.com/history/",
+          "note": "the 1775 start and why it was left; November 1, 1776; \"Acjachemen (Ah-HAWSH-eh-men)\"; Serra Chapel; the 1812 collapse; 65,000 and 17,000; the 1845 sale; Lincoln in 1865; Father O'Sullivan, 1910–1933; the swallows"
+        },
+        {
+          "title": "Orange County's Acjachemen Nation Maps 10,000 Years of History for Its First Digital Archive",
+          "publisher": "Laila Freeman, Culture OC (2026), quoting Acjachemen elder Joyce Perry",
+          "url": "https://cultureoc.org/orange-countys-acjachemen-nation-maps-10-000-years-of-history-for-its-first-digital-archive/",
+          "note": "as long as 10,000 years; Putuidem; \"captivity at the Mission\"; teaching words to her granddaughter; Putuidem Village park"
+        },
+        {
+          "title": "New tribal village, cultural center in San Juan Capistrano will honor Native American tribe",
+          "publisher": "ABC7 Los Angeles (2019), quoting tribal member Jerry Nieblas",
+          "url": "https://abc7.com/timely-indian-native-american-juaneno/5721035/",
+          "note": "Maria Bernarda Chigilia of Putuidem, removed in 1776 and not allowed to return"
+        },
+        {
+          "title": "Juaneño",
+          "publisher": "EBSCO Research Starters",
+          "url": "https://www.ebsco.com/research-starters/social-sciences-and-humanities/juaneno",
+          "note": "the name Acjachemen and the mission name Juaneño; self-governing villages; acorns and seeds; the tribe today"
+        },
+        {
+          "title": "San Juan Capistrano",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-juan-capistrano/",
+          "note": "Lasuén, October 30, 1775; Serra, November 1, 1776; St. John of Capistrano; stone church begun 1797; first iron from ore"
+        },
+        {
+          "title": "Mission San Juan Capistrano",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanjuancapistrano.html",
+          "note": "the buried bells; stone church finished 1806, its domes and tower; the 1813 bell wall; hides, soap, candles and other workshops; the ranches; repairs to Serra Chapel; what is rebuilt"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-santa-clara-de-asis",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Santa Clara de Asís",
+        "production_id_hint": 1316
+      },
+      "student_title": "Mission Santa Clara de Asís",
+      "subtitle": "The eighth California mission, built on the Ohlone homeland called Thámien. Today it stands in the middle of a university.",
+      "story_label": "The Mission Story",
+      "founding_number": 8,
+      "founding_date": "1777-01-12",
+      "founding_date_display": "January 12, 1777",
+      "founding_source_note": "Santa Clara University, \"History of the Mission\"; Toucan Valley fact card for Mission Santa Clara.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "8 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "January 12, 1777"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Tomás de la Peña, sent by Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Clare of Assisi"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Thámien Ohlone (later also Yokuts and Miwok)"
+        }
+      ],
+      "intro": "Mission Santa Clara de Asís was the eighth California mission. It was founded in 1777 on the homeland of the Ohlone people, in a place they called Thámien. It was the first mission named for a woman saint. The mission had to be rebuilt many times. More than 7,500 Native people are buried there. Today, it is the church of Santa Clara University.",
+      "story_paragraphs": [
+        "Before the Spanish came, about 10,000 Native people lived around the south end of San Francisco Bay, in as many as 40 separate tribes. One group of villages, home to about 300 to 500 people, stood in a place called Thámien. The people who come from them today call themselves Ohlone.",
+        "On January 12, 1777, a mission was founded beside the Guadalupe River. Father Junípero Serra had sent a priest named Tomás de la Peña, who set up a wooden cross. It was the eighth California mission. It was named for Saint Clare of Assisi, a friend of Saint Francis.",
+        "The river soon flooded, so the mission moved to higher ground. Later, earthquakes knocked down its churches. In all, five churches were built. The fifth was finished in 1825.",
+        "Mission life was very hard for the Ohlone. Santa Clara University says that they were forced to work long hours, plowing fields and digging ditches. The priests did not let them keep many of their customs. Some people went on speaking their language and holding their ceremonies in secret.",
+        "Many people died of sickness. As the years went by, Yokuts and Miwok people from far-off valleys and hills were brought to the mission too. By 1834, more than half the people there were Yokuts. More than 7,500 Native people are buried at the mission.",
+        "In 1836, the government took the mission away from the Church. In 1851, priests called Jesuits turned the old mission into a college. It became Santa Clara University.",
+        "In 1926, a fire destroyed the church of 1825. A new church was built by 1929 to look like the old one. It is made of concrete instead of adobe.",
+        "Today, the mission church stands at the center of the university. As the university says, \"The Ohlone are here, still.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1777",
+          "text": "Ohlone people live in the villages of Thámien and all around the bay."
+        },
+        {
+          "date_display": "January 12, 1777",
+          "text": "The mission is founded beside the Guadalupe River. It is the eighth California mission."
+        },
+        {
+          "date_display": "1779",
+          "text": "After a flood, the mission moves to higher ground."
+        },
+        {
+          "date_display": "1818",
+          "text": "An earthquake destroys the church."
+        },
+        {
+          "date_display": "1825",
+          "text": "The fifth church is finished."
+        },
+        {
+          "date_display": "1836",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1851",
+          "text": "Jesuit priests start a college at the mission."
+        },
+        {
+          "date_display": "1926",
+          "text": "A fire destroys the church. A new one is built by 1929."
+        }
+      ],
+      "fun_facts": [
+        "Santa Clara was the first California mission named for a woman saint.",
+        "The mission had five different churches.",
+        "The mission became the first college in the new state of California.",
+        "A road called The Alameda once had three rows of willow trees along it.",
+        "Students saved a large crucifix from the fire of 1926."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Ohlone",
+          "definition": "The Native peoples of the San Francisco Bay and Monterey Bay areas."
+        },
+        {
+          "word": "Thámien",
+          "definition": "The Ohlone name for the place where Mission Santa Clara and its university now stand."
+        },
+        {
+          "word": "Jesuit",
+          "definition": "A member of a group of Catholic priests and brothers known for running schools."
+        },
+        {
+          "word": "University",
+          "definition": "A school where grown-ups study after high school."
+        }
+      ],
+      "think_about_it": "Some Ohlone people kept speaking their language and holding their ceremonies in secret. Why do you think they took that risk?",
+      "reflection_question": "The tribe gave a river its old name back. Why do the names of places matter to the people who live there?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands in Thámien, the homeland of one group of Ohlone people. Their villages shared one language with their neighbors around the bay. Native people built the mission buildings and did the farming and other work, and they were not free to refuse. Mission life also brought strict rules, sickness, and the loss of land, language, and freedom. In all, about 6,400 Native people were baptized here. About 4,450 of them were Ohlone, about 1,460 were Yokuts, and about 450 were Miwok. When the missions closed, few Native people were given any land. The Muwekma Ohlone Tribe of the San Francisco Bay Area is made up of families who come from the people of this mission and its neighbors. The tribe has given the Guadalupe River its Ohlone name again: Thámien Rúmmey.",
+        "mission_life": "At one time, more than 1,200 Native workers lived at the mission. They plowed, planted, dug ditches to water the fields, and cared for cattle and sheep. A priest named Magín Catalá lived here for 36 years. The mission also built a wide road to the nearby town of San José, with three rows of willow trees for shade. It was called The Alameda, and a street with that name is still there.",
+        "architecture": "The church you see today is not from mission days. It was built in the 1920s, after the fire, out of concrete and steel. It copies the shape of the 1825 adobe church, with one bell tower, but it is twice as wide. A few real pieces of the old mission are left. A long adobe wall from the 1820s still stands nearby. A large wooden cross on a stand in front of the church is said to hold the cross set up in 1777. One of the bells sent by the King of Spain in 1799 lived through the fire. Inside is a crucifix that students carried out of the burning church."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "2nd"
+            },
+            {
+              "text": "5th"
+            },
+            {
+              "text": "8th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission Santa Clara de Asís, founded on January 12, 1777, was the eighth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Ohlone",
+              "correct": true
+            },
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Kumeyaay"
+            }
+          ],
+          "explanation": "The mission was built in Thámien, an Ohlone homeland. Later, Yokuts and Miwok people were brought there too."
+        },
+        {
+          "prompt": "Who is the mission named for?",
+          "choices": [
+            {
+              "text": "Saint Barbara"
+            },
+            {
+              "text": "Saint Clare of Assisi",
+              "correct": true
+            },
+            {
+              "text": "Saint Anne"
+            }
+          ],
+          "explanation": "Saint Clare was a friend of Saint Francis of Assisi. Santa Clara was the first California mission named for a woman saint."
+        },
+        {
+          "prompt": "What happened to the mission church in 1926?",
+          "choices": [
+            {
+              "text": "A flood washed it away"
+            },
+            {
+              "text": "An earthquake knocked it down"
+            },
+            {
+              "text": "A fire destroyed it",
+              "correct": true
+            }
+          ],
+          "explanation": "A fire destroyed the 1825 church in 1926. The church that stands today was built afterward to look like it."
+        },
+        {
+          "prompt": "What is at the old mission today?",
+          "choices": [
+            {
+              "text": "A fort"
+            },
+            {
+              "text": "A university",
+              "correct": true
+            },
+            {
+              "text": "A train station"
+            },
+            {
+              "text": "A farm"
+            }
+          ],
+          "explanation": "Jesuit priests started a college at the mission in 1851. It became Santa Clara University, and the mission church is at its center."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History of the Mission",
+          "publisher": "Santa Clara University",
+          "url": "https://www.scu.edu/missionchurch/history-of-the-mission",
+          "note": "January 12, 1777; Guadalupe River; St. Clare, first mission named for a woman; 10,000 people in up to 40 tribes; Thamien; the college in 1851; the 1926 fire; the concrete church; the adobe wall and the crucifix"
+        },
+        {
+          "title": "What is the role of Mission Santa Clara in Ohlone history?",
+          "publisher": "Santa Clara University, Ohlone Heritage Hub",
+          "url": "https://www.scu.edu/community-heritage-lab/ohlone-heritage-hub/what-is-the-role-of-mission-santa-clara-in-ohlone-history-/",
+          "note": "forced work; customs prohibited; practices kept in secret; more than 7,500 burials; little land given; \"The Ohlone are here, still\"; quotes Gloria Gomez of the Muwekma Ohlone Tribe"
+        },
+        {
+          "title": "Whose land is this anyway?",
+          "publisher": "Santa Clara University, Ohlone Heritage Hub",
+          "url": "https://www.scu.edu/community-heritage-lab/ohlone-heritage-hub/whose-land-is-this-anyway-/",
+          "note": "Thámien; several villages and 300 to 500 people; Native people built the mission and were its workforce; the Muwekma Ohlone Tribe"
+        },
+        {
+          "title": "Muwekma Ohlone Tribal Greeting and Background History",
+          "publisher": "Alan Leventhal with the Muwekma Tribal Council",
+          "url": "https://muwekma.org/assets/pdf/Muwekma-Ohone-Tribal-Greeting-and-Background-History.pdf",
+          "note": "the tribe's descent from the Bay Area missions; the Thámien tribe; the river renamed Thámien Rúmmey"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "the Tamien local tribe; 6,369 baptisms by language group; Yokuts more than half by 1834"
+        },
+        {
+          "title": "Mission Santa Clara de Asís",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/santaclara.html",
+          "note": "Father de la Peña and the cross; the moves of 1779 and 1781; the 1818 earthquake; the fifth church, 1825; 1836; rebuilt 1929; 1,200 workers; Father Catalá; The Alameda; the 1799 bells"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-buenaventura",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Buenaventura",
+        "production_id_hint": 1317
+      },
+      "student_title": "Mission San Buenaventura",
+      "subtitle": "The ninth California mission and the last one Saint Junípero Serra founded, built by the sea on the homeland of the Chumash people.",
+      "story_label": "The Mission Story",
+      "founding_number": 9,
+      "founding_date": "1782-03-31",
+      "founding_date_display": "March 31, 1782",
+      "founding_source_note": "Mission Basilica San Buenaventura, \"History\"; Toucan Valley fact card for Mission San Buenaventura.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "9 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "March 31, 1782"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Bonaventure"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Chumash"
+        }
+      ],
+      "intro": "Mission San Buenaventura was the ninth California mission. Saint Junípero Serra founded it on Easter Sunday in 1782. It was the last mission he started before he died. The mission stands near the ocean on the homeland of the Chumash people, who were skilled boat builders. The Chumash built the mission and its long water channel. Sickness later took most of their people.",
+      "story_paragraphs": [
+        "The Chumash people once numbered in the tens of thousands. Their homeland reached along the coast from Malibu to Paso Robles. They lived in round houses made of willow branches. They were the finest boat builders among the Native peoples of California. They made canoes out of wooden planks and sealed them with tar.",
+        "On Easter Sunday, March 31, 1782, Father Junípero Serra raised a cross near the beach and founded Mission San Buenaventura. It was the ninth California mission, and the last one he founded. He named it for Saint Bonaventure and left a priest named Pedro Cambón in charge.",
+        "Chumash workers built the first church quickly, but it burned down. A bigger church of stone and adobe was started in the 1790s. It took many years, and it was finished in 1809.",
+        "Between 1805 and 1815, the Chumash also built a water channel about seven miles long. It carried water from the river to the mission. With that water, the mission grew orchards and gardens. An English sea captain named George Vancouver called them the finest he had seen.",
+        "In 1812, earthquakes and a great wave from the sea struck the coast. The priests and the Chumash had to leave the mission for a while and live farther from shore.",
+        "The years of the missions were years of great loss for the Chumash. Sicknesses from Europe spread from person to person. The Santa Ynez Band of Chumash Indians says that about 22,000 Chumash lived in their homeland before the Spanish came. By 1831, the missions listed only 2,788.",
+        "In the 1830s, the government took the mission away from the Church. President Abraham Lincoln returned it in 1862. In 2020, Pope Francis named the church a basilica.",
+        "Chumash people still live in their homeland today. They are keeping their culture and their language alive."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1782",
+          "text": "The Chumash people live along the coast and build plank canoes."
+        },
+        {
+          "date_display": "March 31, 1782",
+          "text": "Saint Junípero Serra founds the mission on Easter Sunday. It is the ninth California mission."
+        },
+        {
+          "date_display": "1809",
+          "text": "The church of stone and adobe is finished."
+        },
+        {
+          "date_display": "1805–1815",
+          "text": "The Chumash build a water channel about seven miles long."
+        },
+        {
+          "date_display": "1812",
+          "text": "Earthquakes and a great wave force everyone to leave for a time."
+        },
+        {
+          "date_display": "1862",
+          "text": "President Abraham Lincoln returns the mission to the Church."
+        },
+        {
+          "date_display": "1956–1957",
+          "text": "Workers bring the inside of the church back to the way it once looked."
+        },
+        {
+          "date_display": "2020",
+          "text": "Pope Francis names the church a basilica."
+        }
+      ],
+      "fun_facts": [
+        "This was the last mission founded by Saint Junípero Serra.",
+        "The mission was founded on Easter Sunday.",
+        "The mission has two bells made of wood. They are the only ones of their kind known in California.",
+        "The mission once grew bananas.",
+        "The Chumash sealed their plank canoes with tar."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Chumash",
+          "definition": "The Native people of the coast from Malibu to Paso Robles and the land behind it."
+        },
+        {
+          "word": "Aqueduct",
+          "definition": "A channel or pipe built to carry water from one place to another."
+        },
+        {
+          "word": "Orchard",
+          "definition": "A field of fruit trees."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        }
+      ],
+      "think_about_it": "The Chumash built the mission's water channel, church, and gardens. Who should be remembered when we admire an old building?",
+      "reflection_question": "Sickness took most of the Chumash people, yet their families are still here. What helps a people stay strong through very hard times?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Chumash people. Many elders say the name Chumash means \"bead maker\" or \"seashell people.\" As many as 50 people could live in one of their large round houses. They fished, hunted, gathered plants, and stored food for winter. They held ceremonies at harvest time. The Chumash built this mission and its water channel. Mission life also brought forced work, strict rules, and the loss of land and freedom, and sickness killed most of the people. After the missions closed, most Chumash who stayed nearby worked on farms and ranches. Today, the Chumash are still here. One band of Chumash families in this area is called the Barbareño/Ventureño Band of Mission Indians.",
+        "mission_life": "Water made this mission rich. The channel filled a stone tank, and from there water ran to the orchards, vineyards, and fields of grain. The mission grew pears and even warm-weather fruits like bananas. Chumash workers did the building, farming, and herding. An early report says that many Chumash here chose to stay in their own homes near the mission instead of moving inside it.",
+        "architecture": "The church is made of stone and adobe, with walls more than six feet thick. It is the same church that was finished in 1809. After the earthquake of 1812 knocked down the bell tower, the tower was rebuilt with a thick stone support. In 1893, a priest changed the inside to make it look modern. He covered the old painted designs, the tile floor, and the wooden ceiling. In the 1950s, workers uncovered the floor and ceiling and made the windows their old size again. The church is the only building left from the mission. The mission also has two rare bells made of wood."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "6th"
+            },
+            {
+              "text": "9th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Buenaventura, founded on March 31, 1782, was the ninth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Chumash",
+              "correct": true
+            },
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The Chumash people have lived on this coast since long before the Spanish came, and they still live there today."
+        },
+        {
+          "prompt": "What was special about this mission and Father Serra?",
+          "choices": [
+            {
+              "text": "He was born there"
+            },
+            {
+              "text": "It was the last mission he founded",
+              "correct": true
+            },
+            {
+              "text": "He never saw it"
+            }
+          ],
+          "explanation": "Father Serra founded nine missions. San Buenaventura, in 1782, was the last one."
+        },
+        {
+          "prompt": "What did the Chumash build to bring water to the mission?",
+          "choices": [
+            {
+              "text": "A windmill"
+            },
+            {
+              "text": "A well a mile deep"
+            },
+            {
+              "text": "A water channel about seven miles long",
+              "correct": true
+            }
+          ],
+          "explanation": "Between 1805 and 1815, the Chumash built a channel called an aqueduct that carried water from the river."
+        },
+        {
+          "prompt": "What kind of boats did the Chumash make?",
+          "choices": [
+            {
+              "text": "Rafts of logs"
+            },
+            {
+              "text": "Canoes of wooden planks sealed with tar",
+              "correct": true
+            },
+            {
+              "text": "Sailing ships"
+            }
+          ],
+          "explanation": "The Chumash were the finest boat builders among the Native peoples of California. They made plank canoes and sealed them with tar."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Mission Basilica San Buenaventura",
+          "url": "https://sanbuenaventuramission.org/history",
+          "note": "Easter Sunday, March 31, 1782; Father Cambón; the last mission Serra founded; the first church burned; church finished 1809; the seven-mile aqueduct built by Chumash, 1805–1815; the 1812 earthquakes and wave; Vancouver; Lincoln, 1862; 1893 and 1956–57; basilica, 2020"
+        },
+        {
+          "title": "Chumash: First People of the Land",
+          "publisher": "Mission Basilica San Buenaventura; text used with permission of the Santa Ynez Band of Chumash Indians",
+          "url": "https://sanbuenaventuramission.org/chumash--first-people-of-the-land",
+          "note": "tens of thousands; Malibu to Paso Robles; \"bead maker\" or \"seashell people\"; boat builders and tar; willow houses for up to 50; ceremonies; disease; the Barbareño/Ventureño Band"
+        },
+        {
+          "title": "History",
+          "publisher": "Santa Ynez Band of Chumash Indians",
+          "url": "https://chumash.gov/chumash-history",
+          "note": "7,000 square miles; about 22,000 people before the Spanish; 2,788 by 1831; farm and ranch work after the missions; culture and Samala language today"
+        },
+        {
+          "title": "Mission San Buenaventura",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanbuenaventura.html",
+          "note": "St. Bonaventure; Chumash workers; Chumash staying in their own homes; stone and adobe, wall thickness; the rebuilt tower; reservoirs and tank; pears and bananas; wooden bells; the 1893 changes and later repairs"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-santa-barbara",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Santa Bárbara",
+        "production_id_hint": 1318
+      },
+      "student_title": "Mission Santa Bárbara",
+      "subtitle": "The tenth California mission, called the \"Queen of the Missions,\" built on the homeland of the Chumash people.",
+      "story_label": "The Mission Story",
+      "founding_number": 10,
+      "founding_date": "1786-12-04",
+      "founding_date_display": "December 4, 1786",
+      "founding_source_note": "California Missions Foundation, \"Santa Bárbara\"; Toucan Valley fact card for Mission Santa Barbara.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "10 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "December 4, 1786"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Barbara"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Chumash"
+        }
+      ],
+      "intro": "Mission Santa Bárbara was the tenth California mission. Father Fermín Lasuén founded it in 1786 on the homeland of the Chumash people. It is the only California mission with two matching bell towers, and people call it the \"Queen of the Missions.\" The Chumash built it. In 1824, Chumash people at this mission and two others rose up against the soldiers.",
+      "story_paragraphs": [
+        "The Chumash have lived along the Santa Barbara coast for thousands of years. They built round houses shaped like half an orange and covered them with reeds. They paddled plank canoes called tomols out to the islands. Acorns were their most important plant food, and they ate fish and shellfish from the sea. For money, they used strings of small beads cut from shells.",
+        "Father Junípero Serra wanted a mission here, but he died before it could begin. On December 4, 1786, the feast day of Saint Barbara, Father Fermín Lasuén founded Mission Santa Bárbara. It was the tenth California mission.",
+        "The Chumash built the mission's buildings. They also built dams, stone channels, and tanks that brought water down from a creek. Many Chumash families lived in about 250 small adobe houses beside the mission.",
+        "In 1812, an earthquake badly damaged the church. A new church of stone was built from 1815 to 1820. Its front was copied from a very old book about Roman buildings in the mission library. A second bell tower was added in 1831.",
+        "Life at the mission was hard. Sickness spread, food and supplies ran short, and the Chumash had to feed and support the soldiers as well as themselves.",
+        "In February 1824, a soldier at nearby Mission Santa Inés whipped a Chumash man. That was the last straw. Chumash people at three missions, Santa Inés, La Purísima, and Santa Bárbara, took up arms. The struggle lasted for months. At least 43 Native people and 8 settlers died.",
+        "In 1835, the government took the mission lands away. The Franciscan priests stayed, and they have never left. About 4,000 Chumash people are buried at the mission.",
+        "An earthquake damaged the church again in 1925, and it was repaired by 1927. Chumash people still live in the Santa Barbara area today and gather each year to remember their ancestors of 1824."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1786",
+          "text": "The Chumash people live in towns along the coast and on the islands."
+        },
+        {
+          "date_display": "December 4, 1786",
+          "text": "Father Fermín Lasuén founds the mission. It is the tenth California mission."
+        },
+        {
+          "date_display": "1812",
+          "text": "An earthquake damages the church."
+        },
+        {
+          "date_display": "1815–1820",
+          "text": "The stone church that stands today is built."
+        },
+        {
+          "date_display": "February 1824",
+          "text": "Chumash people at three missions rise up against the soldiers."
+        },
+        {
+          "date_display": "1831",
+          "text": "The second bell tower is added."
+        },
+        {
+          "date_display": "1835",
+          "text": "The government takes the mission lands away. The Franciscans stay."
+        },
+        {
+          "date_display": "1925",
+          "text": "An earthquake damages the church. It is repaired by 1927."
+        }
+      ],
+      "fun_facts": [
+        "Santa Bárbara is the only California mission with two matching bell towers.",
+        "The front of the church was copied from a book about Roman buildings written more than 2,000 years ago.",
+        "The water in the mission fountain once poured from a spout carved like a bear.",
+        "Franciscans have lived and worked at this mission ever since it was founded.",
+        "The Chumash word for their plank canoe is \"tomol.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Chumash",
+          "definition": "The Native people of the coast from Malibu to Paso Robles and the land behind it."
+        },
+        {
+          "word": "Tomol",
+          "definition": "A Chumash canoe made of wooden planks, used on the ocean."
+        },
+        {
+          "word": "Franciscan",
+          "definition": "A member of the religious family started by Saint Francis of Assisi. The priests at the California missions were Franciscans."
+        },
+        {
+          "word": "Uprising",
+          "definition": "A time when people rise up and fight against those who rule them."
+        }
+      ],
+      "think_about_it": "In 1824, the Chumash decided they had been treated unfairly for too long. What are good ways to stand up when something is not fair?",
+      "reflection_question": "Chumash families still gather to say the names of their ancestors. Whose name would you want people to remember, and why?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Chumash people. Before the missions, two out of three Chumash lived near the coast, in towns led by chiefs. People on the islands made shell bead money and traded it to the mainland. The Chumash wove baskets so tight they could hold water. When the mission came, many Chumash were baptized and moved beside it. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. In 1824, the Chumash resisted. A Chumash woman named Marianne Parra says she grew up knowing that story her whole life. Each year, she and a Chumash elder, Ernestine Ygnacio-DeSoto, hold a ceremony to remember the ancestors and say their names.",
+        "mission_life": "Water ran through the middle of mission life. It flowed from the dams to a fountain in front of the church. From the fountain it filled a long stone pool where the women washed clothes. Chumash workers farmed, herded animals, and built with adobe and stone. In 1818, about 150 mission workers were trained to help guard the coast when a pirate ship was near. For many years, the mission was also a school for young men studying to be Franciscan priests.",
+        "architecture": "The stone church has a front that looks like an ancient Roman temple, with tall columns. Above it rise two matching bell towers, each 87 feet tall. No other California mission has two towers like these. The church is the one finished in 1820, but it has been repaired many times. The earthquake of 1925 broke the towers and walls, and they were fixed by 1927. The towers were made stronger with steel and concrete in 1948. The stone fountain and washing pool in front are from mission days."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "4th"
+            },
+            {
+              "text": "8th"
+            },
+            {
+              "text": "10th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission Santa Bárbara, founded on December 4, 1786, was the tenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Chumash",
+              "correct": true
+            },
+            {
+              "text": "Acjachemen"
+            },
+            {
+              "text": "Ohlone"
+            }
+          ],
+          "explanation": "The Chumash people have lived on the Santa Barbara coast for thousands of years, and they live there today."
+        },
+        {
+          "prompt": "Who founded the mission?",
+          "choices": [
+            {
+              "text": "Saint Junípero Serra"
+            },
+            {
+              "text": "Father Fermín Lasuén",
+              "correct": true
+            },
+            {
+              "text": "Captain George Vancouver"
+            }
+          ],
+          "explanation": "Father Serra had hoped to start this mission, but he died first. Father Lasuén founded it in 1786."
+        },
+        {
+          "prompt": "What makes this mission's church different from all the others?",
+          "choices": [
+            {
+              "text": "It is made of wood"
+            },
+            {
+              "text": "It has no bells"
+            },
+            {
+              "text": "It has two matching bell towers",
+              "correct": true
+            }
+          ],
+          "explanation": "Mission Santa Bárbara is the only California mission with twin bell towers."
+        },
+        {
+          "prompt": "What happened in February 1824?",
+          "choices": [
+            {
+              "text": "Chumash people at three missions rose up against the soldiers",
+              "correct": true
+            },
+            {
+              "text": "The mission moved to an island"
+            },
+            {
+              "text": "A fire burned the church"
+            }
+          ],
+          "explanation": "After a soldier whipped a Chumash man at Mission Santa Inés, Chumash people at three missions took up arms. The struggle lasted for months."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Chumash Life: Daily Life",
+          "publisher": "Santa Barbara Museum of Natural History",
+          "url": "https://www.sbnature.org/collections-research/anthropology/chumash-life/daily-life",
+          "note": "round houses \"like half an orange\"; tomols; acorns, fish and shellfish; shell bead money made on the islands; watertight baskets"
+        },
+        {
+          "title": "Reflecting on the 1824 Chumash Uprising in History and Conversation",
+          "publisher": "Santa Barbara Museum of Natural History (2024)",
+          "url": "https://www.sbnature.org/publications/definitive/126/reflecting-on-the-1824-chumash-uprising-in-history-and-conversation",
+          "note": "February 1824; three missions; the causes; the flogging at Santa Inés; at least 43 Native people and 8 Californios; Marianne Parra and Ernestine Ygnacio-DeSoto"
+        },
+        {
+          "title": "Chumash Life: Timeline",
+          "publisher": "Santa Barbara Museum of Natural History",
+          "url": "https://sbnature.org/collections-research/anthropology/chumash-life/timeline",
+          "note": "thousands of years in the region; two-thirds of the Chumash near the coast"
+        },
+        {
+          "title": "History",
+          "publisher": "Santa Ynez Band of Chumash Indians",
+          "url": "https://chumash.gov/chumash-history",
+          "note": "chiefs; the Chumash homeland; disease and the fall in numbers"
+        },
+        {
+          "title": "Santa Bárbara",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-santa-barbara/",
+          "note": "December 4, 1786; Lasuén; Serra's plan; \"Queen of the Missions\"; twin towers, second in 1831; 4,000 Chumash buried; Franciscans there since the founding"
+        },
+        {
+          "title": "Mission Santa Barbara",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/santabarbara.html",
+          "note": "feast of St. Barbara; Chumash builders and 250 houses; dams, channels, fountain and pool; 1812; church of 1815–1820 and the Roman book; towers 87 feet; 1818; 1835; 1925–1927; 1948; the school"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-la-purisima-concepcion",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission La Purísima Concepción",
+        "production_id_hint": 1319
+      },
+      "student_title": "Mission La Purísima Concepción",
+      "subtitle": "The eleventh California mission, destroyed by an earthquake and rebuilt twice, on the homeland of the Chumash people.",
+      "story_label": "The Mission Story",
+      "founding_number": 11,
+      "founding_date": "1787-12-08",
+      "founding_date_display": "December 8, 1787",
+      "founding_source_note": "California State Parks, \"Community Through Survival: La Purísima Mission State Historic Park\"; Toucan Valley fact card for Mission La Purísima Concepción.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "11 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "December 8, 1787"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Mary, the Immaculate Conception"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Chumash"
+        }
+      ],
+      "intro": "Mission La Purísima Concepción was the eleventh California mission. Father Fermín Lasuén founded it in 1787 on the homeland of the Chumash people. An earthquake destroyed it in 1812, and it was built again in a new place. In 1824, the Chumash took over the mission for about a month. Today, it is a state park where the whole mission has been rebuilt.",
+      "story_paragraphs": [
+        "The Chumash people have lived on this part of the California coast for thousands of years. They fished, hunted, gathered acorns, and built canoes out of wooden planks.",
+        "On December 8, 1787, Father Fermín Lasuén founded Mission La Purísima Concepción. Its name honors Mary, the mother of Jesus. It was the eleventh California mission. The first mission stood where the town of Lompoc is today, and it grew there for about 25 years.",
+        "In 1812, a great earthquake struck. Then came more shaking and a flood. Every building was ruined. The priest in charge, Father Mariano Payeras, asked to move the mission to a valley about four miles away. Building began there in 1813.",
+        "The new mission looked different. The buildings stood in one long line instead of around a square. That may have been so people could get out fast in an earthquake.",
+        "Life was hard for the Chumash at the mission. A state park guide says that sickness was everywhere and many people died. The work grew heavier, too, because the soldiers were not being paid and the mission had to supply them.",
+        "In February 1824, a soldier at nearby Mission Santa Inés whipped a Chumash man. The Chumash rose up. At La Purísima, they sent the soldiers and their families away and ran the mission themselves for about a month. Then more soldiers came from Monterey, pulling cannons. After a battle at the mission, the soldiers took it back.",
+        "In 1834, the government took the mission away from the Church. The buildings were left empty and slowly fell apart, until only pieces of the walls were left.",
+        "In 1934, about 200 young men from a government work program called the Civilian Conservation Corps began to rebuild the mission. They made adobe bricks by hand, the old way. The work took seven years. Today, the mission is a state historic park, and Chumash people still live in their homeland."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1787",
+          "text": "The Chumash people live along the coast and in the valleys nearby."
+        },
+        {
+          "date_display": "December 8, 1787",
+          "text": "Father Fermín Lasuén founds the mission. It is the eleventh California mission."
+        },
+        {
+          "date_display": "1812",
+          "text": "An earthquake and a flood destroy the mission."
+        },
+        {
+          "date_display": "1813",
+          "text": "Building begins at a new place about four miles away."
+        },
+        {
+          "date_display": "February 1824",
+          "text": "The Chumash rise up and hold the mission for about a month."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1934",
+          "text": "Young workers begin to rebuild the ruined mission."
+        },
+        {
+          "date_display": "December 7, 1941",
+          "text": "The rebuilt mission opens as a state historic park."
+        }
+      ],
+      "fun_facts": [
+        "The mission's buildings stand in one long line instead of around a square.",
+        "The second mission was built in a valley called the Canyon of the Watercress.",
+        "The mission was best known for its wool blankets.",
+        "About 200 young men rebuilt the mission in the 1930s, making adobe bricks by hand.",
+        "The mission's three bells were made in Peru."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Chumash",
+          "definition": "The Native people of the coast from Malibu to Paso Robles and the land behind it."
+        },
+        {
+          "word": "Immaculate Conception",
+          "definition": "The Church's teaching that Mary was free from sin from the first moment of her life."
+        },
+        {
+          "word": "Adobe",
+          "definition": "Bricks made of mud and straw, dried in the sun."
+        },
+        {
+          "word": "Rebuild",
+          "definition": "To build something again after it has been ruined."
+        }
+      ],
+      "think_about_it": "Almost everything at this mission was rebuilt long after the first one fell down. Is a rebuilt place still a good way to learn about the past? Why or why not?",
+      "reflection_question": "The Chumash are keeping their Samala language strong for the children to come. What would you like to pass on to children who are younger than you?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Chumash people. The Santa Ynez Band of Chumash Indians says that Chumash society had chiefs, healers, and skilled craftspeople, and that women could be chiefs and priests. The Chumash painted colorful pictures on the walls of caves. When the mission came, many Chumash were baptized. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. In 1824, the Chumash resisted and held this mission for about a month. In that uprising, at least 43 Native people and 8 settlers died at the three missions that took part. Today, the Santa Ynez Band of Chumash Indians lives nearby. They are working to keep their culture and their language, called Samala, strong for the children to come.",
+        "mission_life": "La Purísima was a working ranch as well as a church. It had more than 20,000 cattle, sheep, and other animals. Workers stored hides and animal fat to trade, boiled soap in big tubs, and wove wool into blankets. The blankets were what the mission was best known for. There were workshops for blacksmiths, carpenters, potters, and leather workers. Chumash people did nearly all of this work.",
+        "architecture": "Almost everything at La Purísima today was rebuilt in the 1930s. A state park guide puts it plainly: \"Everything you see around you has been reconstructed.\" Only broken pieces of the old adobe walls were left, and the builders kept those pieces inside the new walls. The bell wall is a copy of the one at Mission Santa Inés, because no one had a picture of the first one. A few things are from mission days. The three bronze bells were made in Lima, Peru, in 1817 and 1818. Part of a tile floor is old, too. The long, straight line of buildings follows the plan of 1813."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "5th"
+            },
+            {
+              "text": "9th"
+            },
+            {
+              "text": "11th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission La Purísima Concepción, founded on December 8, 1787, was the eleventh of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Chumash",
+              "correct": true
+            }
+          ],
+          "explanation": "The mission was built on the homeland of the Chumash people. The Santa Ynez Band of Chumash Indians lives nearby today."
+        },
+        {
+          "prompt": "What destroyed the first mission in 1812?",
+          "choices": [
+            {
+              "text": "A fire"
+            },
+            {
+              "text": "An earthquake and a flood",
+              "correct": true
+            },
+            {
+              "text": "A storm at sea"
+            }
+          ],
+          "explanation": "A great earthquake, more shaking, and a flood ruined every building. The mission was rebuilt about four miles away."
+        },
+        {
+          "prompt": "How are this mission's buildings arranged?",
+          "choices": [
+            {
+              "text": "In a circle"
+            },
+            {
+              "text": "Around a square"
+            },
+            {
+              "text": "In one long line",
+              "correct": true
+            }
+          ],
+          "explanation": "Most missions were built around a square courtyard. At La Purísima, the buildings stand in a line."
+        },
+        {
+          "prompt": "Who rebuilt the ruined mission in the 1930s?",
+          "choices": [
+            {
+              "text": "Spanish soldiers"
+            },
+            {
+              "text": "Young men in a government work program",
+              "correct": true
+            },
+            {
+              "text": "Gold miners"
+            }
+          ],
+          "explanation": "About 200 young men of the Civilian Conservation Corps rebuilt the mission between 1934 and 1941."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Community Through Survival: La Purísima Mission State Historic Park",
+          "publisher": "California State Parks (video transcript, 2004)",
+          "url": "https://demo2.parks.ca.gov/pages/735/files/transcriptlapurisimashptour.pdf",
+          "note": "December 8, 1787, in today's Lompoc; about 25 years; the 1812 earthquake; Father Payeras; rebuilding from 1813; the line of buildings; sickness; the 1824 revolt, its causes and the month; 1834; the 1930s rebuilding; \"Everything you see around you has been reconstructed\"; the old tile floor"
+        },
+        {
+          "title": "History",
+          "publisher": "Santa Ynez Band of Chumash Indians",
+          "url": "https://chumash.gov/chumash-history",
+          "note": "the Chumash homeland; chiefs, priests and crafters; women as chiefs and priests; cave paintings; disease; culture and the Samala language today"
+        },
+        {
+          "title": "Reflecting on the 1824 Chumash Uprising in History and Conversation",
+          "publisher": "Santa Barbara Museum of Natural History (2024)",
+          "url": "https://www.sbnature.org/publications/definitive/126/reflecting-on-the-1824-chumash-uprising-in-history-and-conversation",
+          "note": "February 1824; three missions; at least 43 Native people and 8 Californios died"
+        },
+        {
+          "title": "Chumash Life: Daily Life",
+          "publisher": "Santa Barbara Museum of Natural History",
+          "url": "https://www.sbnature.org/collections-research/anthropology/chumash-life/daily-life",
+          "note": "fishing, hunting, acorns, plank canoes"
+        },
+        {
+          "title": "Mission La Purísima Concepción",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/lapurisimaconcepcion.html",
+          "note": "Lasuén; the full name and its meaning; the flood; four miles; Canyon of the Watercress; livestock, hides, soap, blankets and workshops; the CCC, 200 men, 1934–1941; December 7, 1941; wall fragments; the bell wall; the Lima bells"
+        }
+      ]
+    }
+  ]
+}
