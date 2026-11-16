@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags support_tags v2_tags %}
+{% load static wagtailcore_tags wagtailimages_tags support_tags v2_tags future_saints_tags %}
 
 {% block body_class %}home{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
@@ -38,7 +38,8 @@
     {% endfor %}
   </div>
 </section>
-{% endif %}
+{% endif %}{# The Future Saints banner: home/includes/_future_saints_banner.html. Kept on this line so the page is byte-identical when it is off. #}{% future_saints_banner page as fs_banner %}{% if fs_banner %}
+{% include "home/includes/_future_saints_banner.html" %}{% endif %}
 
 {% v2_enabled as v2 %}{% if v2 %}{% include "home/v2/_bands.html" %}{% else %}{# ---------- Pilgrim band: Sites & Saints / Journey / Today in the Church ---------- #}
 <section class="pilgrim-band">

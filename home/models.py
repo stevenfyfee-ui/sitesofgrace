@@ -219,6 +219,42 @@ class HomePage(Page):
         max_length=120, blank=True, default="Feasts coming up, and where to keep them",
     )
 
+    # --- Future Saints banner (below the feature cards; only when Future Saints is live for the
+    # request -- future_saints_tags.future_saints_banner). A blank text falls back to its default.
+    fs_banner_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        help_text="Optional. Without it the banner shows a simple drawn frame.",
+    )
+    fs_banner_image_alt = models.CharField(
+        max_length=200, blank=True, help_text="Describe the picture. Leave empty if it is only decoration.",
+    )
+    fs_banner_title = models.CharField(max_length=60, blank=True, default="Future Saints")
+    fs_banner_tagline = models.CharField(max_length=80, blank=True, default="Catholic Faith & Holy Places for Kids")
+    fs_banner_feature_1 = models.CharField(
+        max_length=60, blank=True, default="Saint Stories for Kids", help_text="Links to the Saints index.",
+    )
+    fs_banner_feature_2 = models.CharField(
+        max_length=60, blank=True, default="Holy Places Around the World", help_text="Links to the World Discovery Map.",
+    )
+    fs_banner_feature_3 = models.CharField(
+        max_length=60, blank=True, default="Fun Faith Activities", help_text="Links to the mission projects guide.",
+    )
+    fs_banner_feature_4 = models.CharField(
+        max_length=60, blank=True, default="For Parents, Teachers & Homeschool",
+        help_text='Links to "A Note for Grown-Ups" once that page is live; plain text until then.',
+    )
+    fs_banner_heading = models.CharField(
+        max_length=120, blank=True, default="A fun, faith-filled place for Catholic kids (Grades 2–5)!",
+    )
+    fs_banner_text = models.TextField(
+        blank=True,
+        default=(
+            "Discover amazing saints, holy places, and true stories of faith, with maps, quizzes, "
+            "printables, and resources for parents, teachers, and homeschool families."
+        ),
+    )
+    fs_banner_button_label = models.CharField(max_length=40, blank=True, default="Visit Future Saints →")
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -233,6 +269,22 @@ class HomePage(Page):
             heading="Hero",
         ),
         InlinePanel("feature_cards", heading="Feature cards", max_num=8),
+        MultiFieldPanel(
+            [
+                FieldPanel("fs_banner_image"),
+                FieldPanel("fs_banner_image_alt"),
+                FieldPanel("fs_banner_title"),
+                FieldPanel("fs_banner_tagline"),
+                FieldPanel("fs_banner_feature_1"),
+                FieldPanel("fs_banner_feature_2"),
+                FieldPanel("fs_banner_feature_3"),
+                FieldPanel("fs_banner_feature_4"),
+                FieldPanel("fs_banner_heading"),
+                FieldPanel("fs_banner_text"),
+                FieldPanel("fs_banner_button_label"),
+            ],
+            heading="Future Saints banner",
+        ),
         MultiFieldPanel(
             [
                 FieldPanel("featured_sites_heading"),
@@ -290,6 +342,17 @@ class HomePage(Page):
             classname="collapsed",
         ),
     ]
+
+    FS_BANNER_TEXTS = ("title", "tagline", "feature_1", "feature_2", "feature_3", "feature_4", "heading", "text",
+                       "button_label")
+
+    def fs_banner_texts(self):
+        """The Future Saints banner's texts by short name; a blank field shows its default."""
+        texts = {}
+        for name in self.FS_BANNER_TEXTS:
+            field = f"fs_banner_{name}"
+            texts[name] = getattr(self, field) or self._meta.get_field(field).default
+        return texts
 
     max_count = 1
     subpage_types = ["home.AboutPage", "home.MapPage", "home.StandardPage", "home.StorePage", "home.SupportPage", "home.ContactPage", "blog.BlogIndexPage", "destinations.DestinationIndexPage"]

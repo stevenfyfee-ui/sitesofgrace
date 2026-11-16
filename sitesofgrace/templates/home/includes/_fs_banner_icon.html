@@ -1,0 +1,10 @@
+{% comment %}
+  The Future Saints banner's icons, in the Future Saints sprite's style (future_saints/includes/
+  _sprite.html: viewBox 0 0 32 32, stroke 2, round caps and joins; sized and colored by CSS).
+  icon="book|marker" copy the sprite's drawings; "palette" and "group" are drawn for the banner.
+{% endcomment %}
+{% if icon == "book" %}<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8c4-1 8 0 12 3 4-3 8-4 12-3v17c-4-1-8 0-12 3-4-3-8-4-12-3z"/><path d="M16 11v17"/></g></svg>
+{% elif icon == "marker" %}<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 29s9-8.5 9-15a9 9 0 10-18 0c0 6.5 9 15 9 15z"/><circle cx="16" cy="14" r="3"/></g></svg>
+{% elif icon == "palette" %}<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4C9.4 4 4 9.2 4 15.6 4 22.4 9.4 28 15.4 28c1.7 0 2.8-1.1 2.8-2.5 0-1.5-1.2-2.1-1.2-3.5 0-1.5 1.2-2.5 2.8-2.5h3.6c3 0 4.6-2.3 4.6-5.2C28 8.7 22.6 4 16 4z"/><circle cx="10" cy="15" r="1.6"/><circle cx="12.5" cy="9.5" r="1.6"/><circle cx="18.5" cy="8.5" r="1.6"/><circle cx="23" cy="12.5" r="1.6"/></g></svg>
+{% elif icon == "group" %}<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="3.8"/><path d="M9 26c0-4.2 3.1-7.4 7-7.4s7 3.2 7 7.4"/><circle cx="7" cy="13" r="2.8"/><path d="M2.5 24c0-3.2 2-5.6 4.6-5.6 1 0 1.9.3 2.6.8"/><circle cx="25" cy="13" r="2.8"/><path d="M29.5 24c0-3.2-2-5.6-4.6-5.6-1 0-1.9.3-2.6.8"/></g></svg>
+{% endif %}

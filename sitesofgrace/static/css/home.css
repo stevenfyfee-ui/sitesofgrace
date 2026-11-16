@@ -45,6 +45,94 @@
 .tertiary { font-family: var(--sans); font-weight: 600; font-size: 13.5px; color: var(--blue); }
 .tertiary:hover { color: var(--gold); }
 
+/* ---------- Future Saints banner (home/includes/_future_saints_banner.html) ----------
+   Only when Future Saints is live for the request. Desktop, as Steven's mockup: the picture fills
+   the card's left side edge to edge | title, ribbon, features with dividers | heading, text,
+   button. 900px and under: picture on top, then one column, features 2x2, full-width button.
+   The button's deep purple is the mockup's color; white on it is about 10:1. */
+/* The Future Saints brand heading face (Lora 700, self-hosted and renamed; see
+   static/fonts/future-saints/README.md), the same as the Future Saints header lockup. */
+@font-face {
+  font-family: "Future Saints Serif";
+  src: url("../fonts/future-saints/fs-serif-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+.fs-promo { --fs-purple: #4B2E83; padding: 0 0 60px; }
+.fs-promo-card {
+  display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 28px; align-items: center; overflow: hidden;
+  border: 2px solid rgba(199, 154, 66, .75); border-radius: 22px;
+  background: linear-gradient(180deg, #FFFEFB 0%, #FCF8F1 100%);
+  box-shadow: 0 10px 30px rgba(3, 37, 83, .06);
+}
+.fs-promo-art { align-self: stretch; min-height: 230px; }
+.fs-promo-art img, .fs-promo-frame { display: block; width: 100%; height: 100%; }
+.fs-promo-art img { object-fit: cover; }
+.fs-promo-frame {
+  display: grid; place-items: center; color: var(--gold);
+  background: linear-gradient(180deg, #E9F0F6 0%, var(--ivory) 55%, var(--parchment) 100%);
+}
+.fs-promo-frame svg { width: 46%; max-width: 170px; height: auto; }
+.fs-promo-brand { text-align: center; padding: 22px 0; }
+.fs-promo-title {
+  display: inline-flex; align-items: center; gap: 10px; margin: 0;
+  font-family: "Future Saints Serif", Georgia, serif; font-weight: 700;
+  font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; color: var(--navy);
+}
+.fs-promo-sparkle {
+  width: 22px; height: 22px; flex: none;
+  fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round;
+}
+.fs-promo-ribbon { margin: 10px 0 18px; }
+/* A gently arched gold band with notched ends (the shape is the background, so the text stays level). */
+.fs-promo-ribbon span {
+  display: inline-block; padding: 9px 34px 11px;
+  color: var(--navy); font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: .02em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23C79A42' d='M0 9Q100 -3 200 9L193 22 200 35Q100 23 0 35L7 22Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.fs-promo-features {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.fs-promo-features li + li { border-left: 1px solid var(--gold-soft); }
+.fs-promo-feature {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  min-height: 44px; padding: 2px 6px; border-radius: 10px;
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; line-height: 1.3;
+  color: var(--navy); text-decoration: none;
+}
+a.fs-promo-feature:hover { color: var(--fs-purple); }
+.fs-promo-icon { display: grid; place-items: center; color: var(--gold); }
+.fs-promo-icon svg { width: 30px; height: 30px; }
+.fs-promo-pitch { padding: 22px 28px 22px 0; }
+.fs-promo-heading {
+  margin: 0 0 8px; font-family: var(--sans); font-weight: 700;
+  font-size: 20px; line-height: 1.3; color: var(--navy);
+}
+.fs-promo-text { margin: 0 0 16px; font-family: var(--sans); font-size: 14px; line-height: 1.55; color: #33405a; }
+.fs-promo-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 46px; padding: 0 24px; border-radius: 999px;
+  background: var(--fs-purple); color: #fff;
+  font-family: var(--sans); font-weight: 600; font-size: 15px; text-decoration: none;
+}
+.fs-promo-btn-icon { display: grid; place-items: center; }
+.fs-promo-btn-icon svg { width: 24px; height: 24px; }
+.fs-promo-btn:hover { filter: brightness(1.12); }
+.fs-promo-btn:focus-visible, a.fs-promo-feature:focus-visible {
+  outline: 3px solid var(--fs-purple); outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .fs-promo-card { grid-template-columns: 1fr; gap: 0; text-align: center; }
+  .fs-promo-art { min-height: 0; aspect-ratio: 16 / 9; }
+  .fs-promo-brand { padding: 22px 18px 6px; }
+  .fs-promo-ribbon span { padding: 9px 24px 11px; font-size: 13px; letter-spacing: 0; }
+  .fs-promo-features { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  .fs-promo-features li:nth-child(3) { border-left: 0; }
+  .fs-promo-pitch { padding: 18px 18px 22px; }
+  .fs-promo-btn { display: flex; width: 100%; }
+}
+
 /* ---------- Pilgrim band (Destinations / Journey / Today in the Church) ---------- */
 .pilgrim-band { padding: 8px 0 60px; }
 .pilgrim-band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }

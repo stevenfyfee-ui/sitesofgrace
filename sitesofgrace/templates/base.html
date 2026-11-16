@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags support_tags legal_tags future_saints_tags %}
+{% load static wagtailcore_tags wagtailimages_tags menu_tags pilgrim_tags support_tags legal_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,8 +55,7 @@
       {% main_menu max_levels=2 template="menus/mobile_menu.html" sub_menu_template="menus/mobile_sub_menu.html" %}
       {% if request.user.is_authenticated %}{% include "includes/_account_menu.html" with variant="mobile-signout" %}{% endif %}
     </div>
-  </header>{# The "Future Saints — for Kids" strip: includes/_future_saints_strip.html. Kept on this line so the page is byte-identical when it is off. #}{% future_saints_menu_url as fs_strip_url %}{% if fs_strip_url %}
-  {% include "includes/_future_saints_strip.html" %}{% endif %}
+  </header>
 
   <main id="content">
     {% block content %}{% endblock %}
