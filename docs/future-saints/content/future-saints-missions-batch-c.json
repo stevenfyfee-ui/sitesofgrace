@@ -1,0 +1,1244 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-14",
+  "pages": [
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-santa-cruz",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Santa Cruz",
+        "production_id_hint": 1320
+      },
+      "student_title": "Mission Santa Cruz",
+      "subtitle": "The twelfth California mission, named for the Holy Cross, built on the homeland of the Ohlone people near Monterey Bay.",
+      "story_label": "The Mission Story",
+      "founding_number": 12,
+      "founding_date": "1791-08-28",
+      "founding_date_display": "August 28, 1791",
+      "founding_source_note": "California State Parks, Santa Cruz Mission State Historic Park brochure; California Missions Foundation, \"Santa Cruz.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "12 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "August 28, 1791"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "The Holy Cross"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Ohlone (Awaswas speakers); later also Yokuts"
+        }
+      ],
+      "intro": "Mission Santa Cruz was the twelfth California mission. Father Fermín Lasuén founded it in 1791 on the homeland of the Ohlone people, near Monterey Bay. Its name means \"Holy Cross.\" This mission had many troubles, and almost all of it is gone today. One adobe building is left. It is the only home for Native families still standing at any California mission.",
+      "story_paragraphs": [
+        "The land around the north side of Monterey Bay is an Ohlone homeland. The people lived in small tribes, each with its own land. Their houses were round and covered with tule reeds. They moved with the seasons to fish, hunt, and gather food, and they burned the grasslands with care to help new plants grow. Their language is called Awaswas today.",
+        "On August 28, 1791, Father Fermín Lasuén founded Mission Santa Cruz near the mouth of a river. It was the twelfth California mission. Most missions are named for saints, but this one is named for the Holy Cross.",
+        "That first winter, the river flooded, so the mission moved to higher ground. A church was finished there in 1794.",
+        "Life at the mission was very hard. California State Parks says that sickness spread among the Native people, and that many ran away or rebelled against the hard work and the strange food. When fewer local people were left, the priests brought in others by force. Many of them were Yokuts people from a valley far to the east.",
+        "In December 1793, people from a tribe called the Quiroste attacked the mission. Years later, some Native people at the mission killed a priest who was known for beating them.",
+        "The mission had other troubles too. A new town was built just across the river, and its settlers took mission land and goods. In 1818, everyone fled because a pirate ship was near. The pirate never came, but people from the town robbed the empty mission.",
+        "In 1834, the government took the mission away from the Church. Only about 150 Native people still lived there. The bell tower fell in 1840, and an earthquake knocked down the church in 1857.",
+        "Today, a small copy of the church stands near the old place. The families of the people of this mission are still here. Many belong to the Amah Mutsun Tribal Band."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1791",
+          "text": "Ohlone people who speak Awaswas live around the north side of Monterey Bay."
+        },
+        {
+          "date_display": "August 28, 1791",
+          "text": "Father Fermín Lasuén founds the mission. It is the twelfth California mission."
+        },
+        {
+          "date_display": "December 1793",
+          "text": "People of the Quiroste tribe attack the mission."
+        },
+        {
+          "date_display": "1794",
+          "text": "The mission church is finished on higher ground."
+        },
+        {
+          "date_display": "1818",
+          "text": "Everyone flees a pirate ship, and people from the town rob the mission."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1857",
+          "text": "An earthquake knocks down the church."
+        },
+        {
+          "date_display": "1931",
+          "text": "A small copy of the church is built."
+        }
+      ],
+      "fun_facts": [
+        "\"Santa Cruz\" means \"Holy Cross\" in Spanish.",
+        "Most California missions are named for saints. This one is not.",
+        "The church that stands today is a copy, less than half the size of the first one.",
+        "The old adobe building is the only home for Native families still standing at any California mission.",
+        "Scientists learned who had lived in the adobe by digging in the ground around it."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Ohlone",
+          "definition": "The Native peoples of the San Francisco Bay and Monterey Bay areas."
+        },
+        {
+          "word": "Awaswas",
+          "definition": "The Ohlone language spoken around Santa Cruz."
+        },
+        {
+          "word": "Tule",
+          "definition": "A tall reed that grows in wet places. Native peoples used it for houses, mats, and boats."
+        },
+        {
+          "word": "Replica",
+          "definition": "A copy of something, made to look like the real thing."
+        }
+      ],
+      "think_about_it": "For a long time, people thought soldiers had lived in the old adobe. Why does it matter to find out who really lived there?",
+      "reflection_question": "Many people ran away from this mission. What does that tell you about how they felt?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of Ohlone people who spoke the Awaswas language. The local tribe by the river was the Uypi. Others nearby were the Aptos, Sayanta, and Cotoni. About 1,150 Awaswas-speaking people were baptized here, and about 540 Yokuts. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. People resisted by running away and sometimes by fighting. By 1834, only 58 of the Awaswas speakers were left at the mission. The Amah Mutsun Tribal Band is made up of the families of people taken to this mission and to Mission San Juan Bautista. The tribe says soldiers took people from their villages and that children were separated from their parents.",
+        "mission_life": "Native people did the work of the mission. They built with adobe, farmed, and cared for the animals. From about 1824, some Native families lived in a long adobe building with a row of small rooms. For many years people thought it had been a house for soldiers. Then scientists dug there and learned that Native families had lived in it.",
+        "architecture": "Almost nothing is left of the mission church. It fell in the earthquake of 1857. The small church that stands today was built in 1931 as a copy, and it is less than half the size of the first one. The real treasure is the long adobe building from 1824, now part of a state park. It is the only building from the mission that is still standing. A stone bowl for baptisms, carved from local sandstone, is also from mission days. So are some statues and paintings kept in the little church."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "6th"
+            },
+            {
+              "text": "12th",
+              "correct": true
+            },
+            {
+              "text": "18th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission Santa Cruz, founded on August 28, 1791, was the twelfth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Ohlone",
+              "correct": true
+            },
+            {
+              "text": "Kumeyaay"
+            }
+          ],
+          "explanation": "The mission was built on the homeland of Ohlone people who spoke the Awaswas language. Yokuts people were brought there later."
+        },
+        {
+          "prompt": "What does \"Santa Cruz\" mean?",
+          "choices": [
+            {
+              "text": "Saint Christopher"
+            },
+            {
+              "text": "Holy Cross",
+              "correct": true
+            },
+            {
+              "text": "Safe Harbor"
+            }
+          ],
+          "explanation": "Unlike most missions, Santa Cruz is not named for a saint. It is named for the Holy Cross."
+        },
+        {
+          "prompt": "What happened to the mission church in 1857?",
+          "choices": [
+            {
+              "text": "An earthquake knocked it down",
+              "correct": true
+            },
+            {
+              "text": "Pirates burned it"
+            },
+            {
+              "text": "It was moved to a museum"
+            }
+          ],
+          "explanation": "The bell tower fell in 1840, and an earthquake knocked down the rest of the church in 1857."
+        },
+        {
+          "prompt": "Who lived in the long adobe building that still stands?",
+          "choices": [
+            {
+              "text": "Soldiers"
+            },
+            {
+              "text": "The governor"
+            },
+            {
+              "text": "Native families",
+              "correct": true
+            }
+          ],
+          "explanation": "People once thought it was for soldiers. Scientists who dug there learned that Native families had lived in it."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Santa Cruz Mission State Historic Park brochure (2015)",
+          "publisher": "California State Parks",
+          "url": "https://www.parks.ca.gov/pages/548/files/SantaCruzMissionSHPFinalWebLayout012116.pdf",
+          "note": "Ohlone tribes, tule houses, seasons, burning; August 28, 1791; the flood and move; disease; running away and rebelling; recruiting \"by force\"; the town across the river; 1834; 1840; January 9, 1857; the adobe as the only original building; the replica"
+        },
+        {
+          "title": "History",
+          "publisher": "Amah Mutsun Tribal Band",
+          "url": "https://amahmutsun.org/history",
+          "note": "the tribe descends from people of Missions San Juan Bautista and Santa Cruz (Awaswas); people removed by soldiers; children separated; languages and ceremonies banned; the tribe today"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "Uypi, Aptos, Sayanta, Cotoni; the Quiroste attack of December 1793; 1,154 Awaswas and 539 Yokuts baptisms; 152 people in 1834, 58 of them Awaswas speakers"
+        },
+        {
+          "title": "Mission Santa Cruz",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/santacruz.html",
+          "note": "Lasuén; the Holy Cross; church dedicated 1794; the settlers; the 1818 scare and looting; the 1824 adobe and the archaeology; the 1931 replica \"less than half size\"; the font, statues and paintings"
+        },
+        {
+          "title": "Mission Santa Cruz",
+          "publisher": "Tricia Weber, Californias-Missions.org",
+          "url": "https://californias-missions.org/individual/mission_santa_cruz.htm",
+          "note": "Ohlone and Yokut; the priest \"known to beat neophytes\" and his killing"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-nuestra-senora-de-la-soledad",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Nuestra Señora de la Soledad",
+        "production_id_hint": 1321
+      },
+      "student_title": "Mission Nuestra Señora de la Soledad",
+      "subtitle": "The thirteenth California mission, a lonely place in a windy valley, on the homeland of the Esselen and Chalon peoples.",
+      "story_label": "The Mission Story",
+      "founding_number": 13,
+      "founding_date": "1791-10-09",
+      "founding_date_display": "October 9, 1791",
+      "founding_source_note": "California Office of Historic Preservation, Landmark No. 233; Toucan Valley fact card for Mission Nuestra Señora de la Soledad.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "13 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "October 9, 1791"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Mary, Our Lady of Solitude"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Esselen and Chalon (Ohlone); later also Yokuts"
+        }
+      ],
+      "intro": "Mission Nuestra Señora de la Soledad was the thirteenth California mission. Father Fermín Lasuén founded it in 1791 in the Salinas Valley, on the homeland of the Esselen and Chalon peoples. \"Soledad\" means solitude, or being alone. Floods and sickness struck this mission again and again. It fell into ruins, and only a small chapel has been rebuilt.",
+      "story_paragraphs": [
+        "Two Native peoples lived in and around this part of the Salinas Valley. The Esselen lived to the west, toward the mountains and the sea. The Chalon, who are one of the Ohlone peoples, lived to the east. The mission was built on the land of an Esselen tribe.",
+        "Spanish travelers first passed this way in 1769. An old story says they asked some Native people their name, and the answer sounded to them like the Spanish word \"soledad.\" The valley seemed empty and lonely to the Spanish, so the name stayed.",
+        "On October 9, 1791, Father Fermín Lasuén founded the mission. He named it for Mary, Our Lady of Solitude. It was the thirteenth California mission.",
+        "Esselen and Chalon people from more than 70 villages were brought into the mission in its first years. Later, Yokuts people came from a valley far to the east. Native workers built a channel about five miles long to bring river water to the fields. The mission raised thousands of cattle and sheep.",
+        "But Soledad was a hard place to live. The Esselen Tribe says that at the missions, families were separated and people could not speak their own languages. Sickness came often. Then came the floods. The river washed away the church in 1824. Floods wrecked the mission again in 1828 and in 1832. After the flood of 1828, a sickness killed many of the Native people.",
+        "Most priests did not stay long. One who did was Father Vicente Sarría, who stayed with the people even after the government took the mission away in 1834. When he died in 1835, most of the people left.",
+        "The mission was sold in 1846, and even its roof tiles were sold. Rain slowly melted the adobe walls into piles of dirt.",
+        "In the 1950s, a group called the Native Daughters of the Golden West rebuilt the small chapel. The Esselen and Chalon peoples are still here. Their tribes are still working for their people today."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1791",
+          "text": "The Esselen and Chalon peoples live in and around the Salinas Valley."
+        },
+        {
+          "date_display": "October 9, 1791",
+          "text": "Father Fermín Lasuén founds the mission. It is the thirteenth California mission."
+        },
+        {
+          "date_display": "1824",
+          "text": "The river floods and destroys the church."
+        },
+        {
+          "date_display": "1828",
+          "text": "Another flood wrecks the mission, and sickness follows."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1835",
+          "text": "Father Sarría dies, and most of the people leave."
+        },
+        {
+          "date_display": "1846",
+          "text": "The mission is sold, and its roof tiles are sold too."
+        },
+        {
+          "date_display": "1954–1955",
+          "text": "The small chapel is rebuilt."
+        }
+      ],
+      "fun_facts": [
+        "\"Soledad\" is the Spanish word for solitude, or being alone.",
+        "The mission once had about 6,400 sheep.",
+        "Floods wrecked the mission three times in nine years.",
+        "The new adobe bricks for the chapel were made from the dirt of the old walls.",
+        "The mission's old bell was made in Mexico more than 200 years ago."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Esselen",
+          "definition": "A Native people of the mountains, coast, and valley south of Monterey Bay."
+        },
+        {
+          "word": "Chalon",
+          "definition": "One of the Ohlone peoples, whose homeland is on the east side of the Salinas Valley."
+        },
+        {
+          "word": "Solitude",
+          "definition": "Being alone or far from other people."
+        },
+        {
+          "word": "Ruins",
+          "definition": "What is left of a building after it has fallen down."
+        }
+      ],
+      "think_about_it": "The Spanish thought this valley was empty and lonely, but people had lived there for a very long time. Why might the same place seem so different to different people?",
+      "reflection_question": "Father Sarría stayed with the people when others left. What does it mean to stay with someone in hard times?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Esselen people, close to the land of the Chalon. The Chalon are one of the Ohlone peoples. In all, about 790 Chalon people, 320 Esselen people, and 580 Yokuts people were baptized here. Mission life brought forced work, strict rules, sickness, and the loss of land, language, and freedom. By 1834, about 350 Native people were left. Two tribes today count the people of this mission among their ancestors. The Esselen Tribe of Monterey County says its people were taken to three missions, and Soledad was one of them. The Ohlone Costanoan Esselen Nation includes families who come from the Chalon and from Mission Soledad.",
+        "mission_life": "Soledad was a farm mission. It had about 6,000 cattle and 6,400 sheep. Workers grew wheat, corn, beans, and peas, and they tended a vineyard of about 20 acres. Native people did the farming, herding, and building. The damp, windy weather made many people ill. The mission was so far from anywhere that about 30 priests served there over the years, and most asked to leave after a year or less.",
+        "architecture": "There is very little to see from mission days. By the 1950s, only a few walls at one corner of the chapel were standing. The chapel you see now was rebuilt in 1954 and 1955. The new adobe bricks were made from the dirt of the old melted walls. A second building beside it was rebuilt in 1963. The rest of the mission is still a field of low adobe ruins. Some real things from the old mission are kept there. They include the mission bell, which was made in Mexico in the 1790s, and a set of fourteen old paintings called the Stations of the Cross."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "3rd"
+            },
+            {
+              "text": "10th"
+            },
+            {
+              "text": "13th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission Nuestra Señora de la Soledad, founded on October 9, 1791, was the thirteenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native peoples' homelands are at and near the mission?",
+          "choices": [
+            {
+              "text": "Tongva and Chumash"
+            },
+            {
+              "text": "Esselen and Chalon",
+              "correct": true
+            },
+            {
+              "text": "Kumeyaay and Acjachemen"
+            }
+          ],
+          "explanation": "The mission was built on Esselen land, close to the land of the Chalon, who are one of the Ohlone peoples."
+        },
+        {
+          "prompt": "What does the word \"soledad\" mean?",
+          "choices": [
+            {
+              "text": "Sunshine"
+            },
+            {
+              "text": "Soldier"
+            },
+            {
+              "text": "Solitude, or being alone",
+              "correct": true
+            }
+          ],
+          "explanation": "The mission is named for Mary under the title Our Lady of Solitude. The valley seemed lonely to the Spanish."
+        },
+        {
+          "prompt": "What wrecked the mission again and again?",
+          "choices": [
+            {
+              "text": "Fires"
+            },
+            {
+              "text": "Floods",
+              "correct": true
+            },
+            {
+              "text": "Pirates"
+            },
+            {
+              "text": "Snow"
+            }
+          ],
+          "explanation": "The river flooded in 1824, 1828, and 1832, destroying the church and other buildings."
+        },
+        {
+          "prompt": "What were the new chapel's adobe bricks made from?",
+          "choices": [
+            {
+              "text": "Sand from the beach"
+            },
+            {
+              "text": "Red clay from Mexico"
+            },
+            {
+              "text": "The dirt of the old melted walls",
+              "correct": true
+            }
+          ],
+          "explanation": "When the chapel was rebuilt in the 1950s, the builders made new adobe bricks from what was left of the old ones."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "founded on the land of the Esselen-speaking Eslenajan tribe; 74 home villages; 791 Chalon, 320 Esselen and 582 Yokuts baptisms; 350 people in 1834"
+        },
+        {
+          "title": "Our History",
+          "publisher": "Esselen Tribe of Monterey County",
+          "url": "https://www.esselentribe.org/history",
+          "note": "the Esselen homeland; people taken to three missions, including Soledad; families separated; languages not allowed"
+        },
+        {
+          "title": "Official tribal website",
+          "publisher": "Ohlone Costanoan Esselen Nation",
+          "url": "https://ohlonecostanoanesselennation.org/",
+          "note": "the Nation's families include Esselen, Chalon and Soledad Mission descendants"
+        },
+        {
+          "title": "Mission Nuestra Señora de la Soledad",
+          "publisher": "California Office of Historic Preservation, Landmark No. 233",
+          "url": "https://ohp.parks.ca.gov/ListedResources/Detail/233",
+          "note": "October 9, 1791; Lasuén; Father Sarría to 1835; ruins; chapel rebuilt and dedicated October 1955 by the Native Daughters of the Golden West"
+        },
+        {
+          "title": "Nuestra Señora de La Soledad",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-la-soledad/",
+          "note": "Our Lady of Solitude; the floods; the epidemic after 1828; Sarría's death and people leaving; livestock; the original Stations of the Cross and bell"
+        },
+        {
+          "title": "Mission Nuestra Señora de la Soledad",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/nuestrasenora.html",
+          "note": "1769; the name; the five-mile water channel; floods of 1824, 1828 and 1832; crops and vineyard; sickness and climate; 1834 and 1846; ruins by the 1950s; rebuilding from 1954 with adobe from the old walls; the 1963 wing; the 1790s bell"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-jose",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San José",
+        "production_id_hint": 1322
+      },
+      "student_title": "Mission San José",
+      "subtitle": "The fourteenth California mission, known for its music, built at the Ohlone village of Oroysom on the east side of San Francisco Bay.",
+      "story_label": "The Mission Story",
+      "founding_number": 14,
+      "founding_date": "1797-06-11",
+      "founding_date_display": "June 11, 1797",
+      "founding_source_note": "St. Joseph Parish, Mission San José, \"The Story of Mission San Jose\"; California Missions Foundation, \"Mission San José.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "14 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "June 11, 1797"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Joseph"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Ohlone; later also Miwok, Yokuts, and others"
+        }
+      ],
+      "intro": "Mission San José was the fourteenth California mission. Father Fermín Lasuén founded it in 1797 at an Ohlone village called Oroysom, east of San Francisco Bay. It grew into one of the biggest missions, with people from many tribes. It was famous for its choir and orchestra. Its story also includes sickness, lost freedom, and a leader named Estanislao who fought back.",
+      "story_paragraphs": [
+        "Ohlone people have lived on the east side of San Francisco Bay for thousands of years. One of their villages was called Oroysom. It belonged to a tribe known as the Alson.",
+        "On June 11, 1797, Father Fermín Lasuén founded Mission San José at Oroysom. It was the fourteenth California mission, and it was named for Saint Joseph. Within three years, several hundred Ohlone people were living there.",
+        "As time went on, people from many other tribes were brought to the mission. They came from the hills, the great river delta, and the wide valley to the east. Most were Miwok and Yokuts. Nine different language groups lived together there. By 1824, the mission held about 1,800 people.",
+        "A priest named Narciso Durán came in 1806 and stayed 27 years. He loved music. He taught Native people to make and play instruments, and he started a choir and an orchestra with thirty players. The mission owned twenty violins.",
+        "Still, mission life was hard. People had to work for the mission and obey its rules, and they were not free to go home. In the spring of 1806, measles spread through the mission and many people died.",
+        "In 1828, a Yokuts man named Estanislao left the mission and led his people in fighting back. Many others ran away to join him. Soldiers were sent against them several times before the fighting ended in 1829.",
+        "In 1836, the government took the mission away from the Church. During the Gold Rush, the old mission became a store for miners. Then, in 1868, a great earthquake knocked down the adobe church.",
+        "From 1982 to 1985, the church was built again to look as it did in mission days. Ohlone people still live around the bay. The Muwekma Ohlone Tribe is made up of families who come from this mission and its neighbors."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1797",
+          "text": "Ohlone people live in villages such as Oroysom, east of San Francisco Bay."
+        },
+        {
+          "date_display": "June 11, 1797",
+          "text": "Father Fermín Lasuén founds the mission. It is the fourteenth California mission."
+        },
+        {
+          "date_display": "1806",
+          "text": "Father Narciso Durán arrives. Measles strikes the mission that spring."
+        },
+        {
+          "date_display": "1809",
+          "text": "The adobe church is dedicated."
+        },
+        {
+          "date_display": "1828–1829",
+          "text": "Estanislao leads people in fighting back against the missions."
+        },
+        {
+          "date_display": "1836",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "October 21, 1868",
+          "text": "An earthquake destroys the adobe church."
+        },
+        {
+          "date_display": "1982–1985",
+          "text": "The church is built again to look like the old one."
+        }
+      ],
+      "fun_facts": [
+        "The mission had an orchestra with thirty players.",
+        "In 1832, the mission owned twenty violins.",
+        "During the Gold Rush, the mission was a store where miners got supplies.",
+        "All four of the mission's old bells are back in the church.",
+        "The mission is in the city of Fremont. It is not in the city of San José."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Ohlone",
+          "definition": "The Native peoples of the San Francisco Bay and Monterey Bay areas."
+        },
+        {
+          "word": "Orchestra",
+          "definition": "A large group of people playing musical instruments together."
+        },
+        {
+          "word": "Measles",
+          "definition": "A sickness that spreads easily from person to person. It was new and very deadly to Native Californians."
+        },
+        {
+          "word": "Replica",
+          "definition": "A copy of something, made to look like the real thing."
+        }
+      ],
+      "think_about_it": "People at the mission played beautiful music, and they were also not free to leave. How can both of those things be true at the same time?",
+      "reflection_question": "Nine different language groups lived together at this mission. What helps people who are very different learn to live together?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands at Oroysom, a village of the Ohlone people. Ohlone tribes nearby included the Alson, Tuibun, and Causen. In all, about 6,400 Native people were baptized at Mission San José. About 2,500 were Plains Miwok, about 1,300 were Ohlone, and about 1,200 were Yokuts. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. Some people resisted, as Estanislao and his followers did. By 1834, only 139 Ohlone people were among the 1,800 at the mission. The Muwekma Ohlone Tribe says its families lived on after the missions in small communities in the East Bay, and that they kept their ties and traditions. The word \"Muwekma\" means \"the people.\"",
+        "mission_life": "San José was the most successful mission in the north in the size of its farms. By 1832, it had 24,000 animals. Native workers ran a flour mill, a soap works, and a place for making leather. They learned carpentry, rope making, weaving, sewing, and shoemaking. Music was part of every week. In 1832, the mission's list of belongings included 20 violins, 4 bass viols, a drum, and 26 band uniforms.",
+        "architecture": "The church you see today is a copy. The adobe church of 1809 fell in the earthquake of 1868, and a wooden church stood in its place for about a hundred years. The copy was built from 1982 to 1985 on the old foundations, using adobe and old building ways as much as possible. Its plain front and thick walls look the way the 1809 church did. One long adobe building is real. It was part of the priests' house, it lived through the earthquake, and it is now the museum. The four mission bells are the real ones, and some old floor tiles were found when workers dug at the site."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "4th"
+            },
+            {
+              "text": "9th"
+            },
+            {
+              "text": "14th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San José, founded on June 11, 1797, was the fourteenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's village stood where the mission was built?",
+          "choices": [
+            {
+              "text": "Ohlone",
+              "correct": true
+            },
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The mission was founded at the Ohlone village of Oroysom. Later, Miwok, Yokuts, and other peoples were brought there too."
+        },
+        {
+          "prompt": "What was the mission famous for?",
+          "choices": [
+            {
+              "text": "Its tall towers"
+            },
+            {
+              "text": "Its choir and orchestra",
+              "correct": true
+            },
+            {
+              "text": "Its fishing boats"
+            }
+          ],
+          "explanation": "Father Narciso Durán taught music and started a choir and an orchestra with thirty players."
+        },
+        {
+          "prompt": "Who was Estanislao?",
+          "choices": [
+            {
+              "text": "A Spanish governor"
+            },
+            {
+              "text": "A bell maker"
+            },
+            {
+              "text": "A Yokuts man who led people in fighting back",
+              "correct": true
+            }
+          ],
+          "explanation": "In 1828, Estanislao left the mission and led his people against it. The fighting ended in 1829."
+        },
+        {
+          "prompt": "What happened to the adobe church in 1868?",
+          "choices": [
+            {
+              "text": "It burned down"
+            },
+            {
+              "text": "An earthquake destroyed it",
+              "correct": true
+            },
+            {
+              "text": "It was sold to miners"
+            }
+          ],
+          "explanation": "A great earthquake on October 21, 1868, knocked down the church of 1809. The church there today was built in the 1980s to look like it."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Story of Mission San Jose",
+          "publisher": "St. Joseph Parish, Mission San José",
+          "url": "https://www.saintjosephmsj.org/mission-history/",
+          "note": "June 11, 1797; Lasuén; the Ohlone village of Oroysom; several hundred Ohlone in three years; the 1809 church; the 1868 earthquake; the surviving wing and museum; rebuilding 1982–1985"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "Alson, Tuibun, Causen; nine language groups; 6,427 baptisms by group; the 1806 measles; 1,806 people in 1824; Estanislao, 1828–1829; 139 Bay Ohlone in 1834"
+        },
+        {
+          "title": "Muwekma Ohlone Tribal Greeting and Background History",
+          "publisher": "Alan Leventhal with the Muwekma Tribal Council",
+          "url": "https://muwekma.org/assets/pdf/Muwekma-Ohone-Tribal-Greeting-and-Background-History.pdf",
+          "note": "descent from Missions San Francisco, Santa Clara and San José; thousands of years; East Bay communities after the missions; \"Muwekma\" means \"the people\""
+        },
+        {
+          "title": "Mission San José",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-jose/",
+          "note": "St. Joseph; Father Durán, 27 years, choir and thirty-piece orchestra; Estanislao's 1828 uprising and the military expeditions; the surviving wing; the 1985 replica"
+        },
+        {
+          "title": "Mission San José",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanjose.html",
+          "note": "Durán from 1806; instruments and the 1832 inventory; trades taught; livestock, mill, soap works and tannery; 1836; the Gold Rush trading post; October 21, 1868; the wooden church; the 1982–1985 replica; the four original bells; floor tiles"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-juan-bautista",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Juan Bautista",
+        "production_id_hint": 1323
+      },
+      "student_title": "Mission San Juan Bautista",
+      "subtitle": "The fifteenth California mission, with the widest church of them all, built on the homeland of the Mutsun people beside an earthquake fault.",
+      "story_label": "The Mission Story",
+      "founding_number": 15,
+      "founding_date": "1797-06-24",
+      "founding_date_display": "June 24, 1797",
+      "founding_source_note": "Old Mission San Juan Bautista, \"History\"; California State Parks, San Juan Bautista State Historic Park brochure.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "15 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "June 24, 1797"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint John the Baptist"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Mutsun (Ohlone); later also Yokuts"
+        }
+      ],
+      "intro": "Mission San Juan Bautista was the fifteenth California mission. Father Fermín Lasuén founded it in 1797 on the homeland of the Mutsun people. Its church is the widest of all the mission churches, and it sits right beside a famous earthquake fault. The mission was known for its music. For the Mutsun, it brought the loss of their villages, their language, and many lives.",
+      "story_paragraphs": [
+        "For thousands of years, the Mutsun people have lived in a valley they call Popeloutchom. They had twenty to thirty villages along the rivers. Their homes were round and covered with tule reeds. Each fall, they burned the land with care so that food plants would grow well. No other people spoke their language.",
+        "On June 24, 1797, Father Fermín Lasuén founded Mission San Juan Bautista. That day is the feast of Saint John the Baptist, and the mission was named for him. It was the fifteenth California mission.",
+        "In 1800, the ground shook as many as six times a day for nineteen days. The mission stands beside a long crack in the earth called the San Andreas Fault.",
+        "A big new church was begun in 1803 and finished in 1812. It has three long aisles side by side, which makes it the widest mission church. A sailor from Boston named Thomas Doak painted the wall behind the altar. All he asked for was a place to stay and food to eat.",
+        "Mutsun people made the adobe bricks, built the buildings, grew the crops, and cared for the animals. The Amah Mutsun Tribal Band says that soldiers took people from their villages and that children were separated from their parents. People were punished for speaking Mutsun or holding their ceremonies. Sicknesses like smallpox and measles killed many. Later, Yokuts people from a valley to the east were brought to the mission too.",
+        "A priest named Estévan Tápis taught music. He wrote the notes very large on sheepskin so a whole choir could read them at once. People called this place the \"Mission of Music.\"",
+        "In 1835, the government took the mission lands away, but the church never closed. More than 4,000 people are buried in its cemetery.",
+        "In the early 1900s, a Mutsun woman named Ascencion Solorsano helped keep her people's ways alive. She shared the Mutsun language with a visitor who wrote it down. Today, the Amah Mutsun Tribal Band has nearly 600 members."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1797",
+          "text": "The Mutsun people live in twenty to thirty villages in and around the valley of Popeloutchom."
+        },
+        {
+          "date_display": "June 24, 1797",
+          "text": "Father Fermín Lasuén founds the mission. It is the fifteenth California mission."
+        },
+        {
+          "date_display": "1800",
+          "text": "Earthquakes shake the mission for nineteen days."
+        },
+        {
+          "date_display": "June 23, 1812",
+          "text": "The large church with three aisles is dedicated."
+        },
+        {
+          "date_display": "1835",
+          "text": "The government takes the mission lands away. The church stays open."
+        },
+        {
+          "date_display": "1906",
+          "text": "A great earthquake knocks down the side walls of the church."
+        },
+        {
+          "date_display": "1976",
+          "text": "The side walls are rebuilt, and the church has three aisles again."
+        },
+        {
+          "date_display": "2012",
+          "text": "The bishop of Monterey and the Amah Mutsun gather at the mission for a Mass of Reconciliation."
+        }
+      ],
+      "fun_facts": [
+        "This is the widest of all the California mission churches.",
+        "The mission stands right beside the San Andreas Fault.",
+        "Some of the floor tiles have animal paw prints in them.",
+        "A sailor painted the wall behind the altar in return for food and a place to stay.",
+        "The mission has had a pastor every year since it was founded."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Mutsun",
+          "definition": "The Native people of the San Juan Valley and the land around it. The Mutsun are one of the Ohlone peoples."
+        },
+        {
+          "word": "Fault",
+          "definition": "A long crack deep in the earth where earthquakes happen."
+        },
+        {
+          "word": "Aisle",
+          "definition": "A long walkway inside a church, with seats or columns beside it."
+        },
+        {
+          "word": "Reconciliation",
+          "definition": "Making peace after a wrong has been done."
+        }
+      ],
+      "think_about_it": "The bishop came to say he was sorry for things that happened long before he was born. Why might an apology still matter after so many years?",
+      "reflection_question": "Ascencion Solorsano shared her language so it would not be lost. What can you do to help keep something good from being forgotten?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands in Popeloutchom, the homeland of the Mutsun people. A Mutsun village stood where the town is today. Each village had round tule houses, storehouses for food, and a sweat house. The people made tule boats and fine baskets. When the mission came, about 1,500 Mutsun people and 1,200 Yokuts people were baptized. Mission life brought forced work, strict rules, sickness, and the loss of land, language, and freedom. The Amah Mutsun Tribal Band says that two Mutsun tribes, the Ausaima and the Orestac, fought against the Spanish. By 1834, more Yokuts than Mutsun people lived at the mission. In 2012, the Catholic bishop of Monterey came to the mission for a special Mass with the tribe, to say he was sorry for what happened in mission days.",
+        "mission_life": "The mission grew olives and wheat and raised sheep and cattle for wool, hides, and fat. It had 36 acres of pear and apple trees. Music filled the church, with singers reading from Father Tápis's big books. Another priest, Felipe Arroyo de la Cuesta, learned to speak seven Native languages and wrote down their words. All of the daily work was done by Native people, who were not free to leave.",
+        "architecture": "The church is 188 feet long and 72 feet wide. It was built with three aisles, but after several earthquakes the priest had the arches along the sides filled in to make the walls stronger. In the great earthquake of 1906, the side walls fell. They were rebuilt in 1976, and the arches were opened again, so the church has three aisles as it did in 1812. The middle of the church, the painted wall behind the altar, and many of the floor tiles are from mission days. Some tiles have the paw prints of animals that walked on them while the clay was wet. The bell wall beside the church was added in 1976."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "5th"
+            },
+            {
+              "text": "11th"
+            },
+            {
+              "text": "15th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Juan Bautista, founded on June 24, 1797, was the fifteenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Mutsun",
+              "correct": true
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Acjachemen"
+            }
+          ],
+          "explanation": "The mission was built in Popeloutchom, the homeland of the Mutsun people. The Amah Mutsun Tribal Band are their families today."
+        },
+        {
+          "prompt": "What is special about the mission church?",
+          "choices": [
+            {
+              "text": "It is round"
+            },
+            {
+              "text": "It has three aisles and is the widest mission church",
+              "correct": true
+            },
+            {
+              "text": "It is built of redwood logs"
+            }
+          ],
+          "explanation": "The church was built with three long aisles side by side, which makes it wider than any other California mission church."
+        },
+        {
+          "prompt": "What is the San Andreas Fault?",
+          "choices": [
+            {
+              "text": "A river near the mission"
+            },
+            {
+              "text": "A kind of bell"
+            },
+            {
+              "text": "A long crack in the earth where earthquakes happen",
+              "correct": true
+            }
+          ],
+          "explanation": "The mission stands right beside the San Andreas Fault. Earthquakes have shaken it many times."
+        },
+        {
+          "prompt": "Why was this place called the \"Mission of Music\"?",
+          "choices": [
+            {
+              "text": "A priest taught music and wrote big books for the choir",
+              "correct": true
+            },
+            {
+              "text": "The bells played songs by themselves"
+            },
+            {
+              "text": "Birds sang in the church"
+            }
+          ],
+          "explanation": "Father Estévan Tápis taught music and wrote the notes large on sheepskin so that a whole choir could read them."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Amah Mutsun Tribal Band",
+          "url": "https://amahmutsun.org/history",
+          "note": "thousands of years in the San Juan Valley; 20 to 30 villages; the Mutsun language; fall burning; tule houses and boats; baskets; people removed by soldiers; children separated; Mutsun and ceremonies banned and punished; smallpox and measles; the Ausaima and Orestac; Ascencion Solorsano; nearly 600 members"
+        },
+        {
+          "title": "San Juan Bautista State Historic Park brochure (2016)",
+          "publisher": "California State Parks",
+          "url": "https://demo2.parks.ca.gov/pages/563/files/SanJuanBautistaSHPFinalWebLayout092316.pdf",
+          "note": "Popeloutchom; the Mutsun village at the town site; tule homes, granaries and sweat house; Mutsun labor; Yokuts brought from far away; June 24, 1797; the 1800 earthquakes; the fault"
+        },
+        {
+          "title": "History",
+          "publisher": "Old Mission San Juan Bautista",
+          "url": "https://oldmissionsjb.org/history",
+          "note": "cornerstone 1803; dedicated June 23, 1812; three aisles, the widest; Thomas Doak; Father Tapis and the \"Mission of Music\"; over 4,000 buried; the 1906 walls and 1976; unbroken line of pastors; tiles with animal prints; 1835"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "1,504 Mutsun and 1,209 Yokuts baptisms; Yokuts the larger group by 1834"
+        },
+        {
+          "title": "Historic Mass of Reconciliation: Mission San Juan Bautista",
+          "publisher": "Amah Mutsun Tribal Band (2012)",
+          "url": "https://amahmutsun.org/archives/529",
+          "note": "December 22, 2012; Bishop Richard Garcia of Monterey; Chairman Valentin Lopez's words"
+        },
+        {
+          "title": "Mission San Juan Bautista",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanjuanbautista.html",
+          "note": "feast of St. John the Baptist; church size; the filled arches; Arroyo de la Cuesta and seven dialects; Tápis and the sheepskin notes; orchards; the 1976 bell wall"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-miguel-arcangel",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Miguel Arcángel",
+        "production_id_hint": 1324
+      },
+      "student_title": "Mission San Miguel Arcángel",
+      "subtitle": "The sixteenth California mission, whose church walls still show the paintings Salinan artists made 200 years ago.",
+      "story_label": "The Mission Story",
+      "founding_number": 16,
+      "founding_date": "1797-07-25",
+      "founding_date_display": "July 25, 1797",
+      "founding_source_note": "Mission San Miguel Arcángel, \"History\"; National Park Service, \"Mission San Miguel Arcàngel, CA.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "16 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "July 25, 1797"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Michael the Archangel"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Salinan"
+        }
+      ],
+      "intro": "Mission San Miguel Arcángel was the sixteenth California mission. Father Fermín Lasuén founded it in 1797 beside a large village of the Salinan people. Its church is famous because the paintings on its walls have never been painted over. Salinan artists helped make them about 200 years ago. The mission's story also includes hard work, sickness, and the loss of the Salinan language.",
+      "story_paragraphs": [
+        "The Salinan people have lived for a very long time in the valleys and hills of what are now Monterey and San Luis Obispo Counties. They built villages beside rivers and streams. They gathered acorns, hunted deer and rabbits, and wove baskets so tight that they could cook in them with hot stones.",
+        "By 1797, the missions to the north and south were a long way apart. On July 25, 1797, Father Fermín Lasuén founded Mission San Miguel Arcángel between them, next to a large Salinan village. It was the sixteenth California mission. It was named for Saint Michael the Archangel.",
+        "The first priest was Buenaventura Sitjar. He had lived among Salinan people at Mission San Antonio for 25 years and spoke their language well. Salinan children were baptized on the very first day.",
+        "In 1806, a fire burned the church, other buildings, and the stored food. Over the next ten years, Salinan workers made thousands of roof tiles and adobe bricks for a new church. It was finished in 1818. By then, more than 1,000 Salinan people lived and worked at the mission.",
+        "Then came the painting. An artist named Esteban Munras planned bright pictures and patterns for the walls. Salinan people painted them with him, and the work was done by 1821.",
+        "Mission life was hard for the Salinan. They had to work for the mission and live by its rules. A Salinan elder named Suzanne Pierce Taylor writes that people had to speak Spanish, and that after a few generations their own language was almost forgotten. Many people died. About 2,000 Native people are buried in the mission cemetery.",
+        "In 1834, the government took the mission away from the Church. A few years later, only about 30 Salinan people were still there. The buildings were sold in 1846 and returned to the Church in 1859.",
+        "In December 2003, an earthquake cracked the old walls. The church was repaired and opened again in 2009. Today, the Salinan people are working to bring back their language and culture."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1797",
+          "text": "The Salinan people live in villages beside the rivers and streams of this region."
+        },
+        {
+          "date_display": "July 25, 1797",
+          "text": "Father Fermín Lasuén founds the mission. It is the sixteenth California mission."
+        },
+        {
+          "date_display": "1806",
+          "text": "A fire destroys the church and the stored food."
+        },
+        {
+          "date_display": "1818",
+          "text": "The new adobe church is finished."
+        },
+        {
+          "date_display": "1821",
+          "text": "Salinan artists and Esteban Munras finish the wall paintings."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "December 22, 2003",
+          "text": "An earthquake badly cracks the mission walls."
+        },
+        {
+          "date_display": "2009",
+          "text": "The repaired church opens again."
+        }
+      ],
+      "fun_facts": [
+        "The paintings inside the church have never been painted over.",
+        "Salinan artists helped paint the church walls.",
+        "The arches along the mission's walkway are not all the same size.",
+        "A painted eye with golden rays looks out from the wall behind the altar.",
+        "The mission is named for Saint Michael, the leader of God's angels."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Salinan",
+          "definition": "The Native people whose homeland includes parts of Monterey and San Luis Obispo Counties."
+        },
+        {
+          "word": "Archangel",
+          "definition": "A leader among the angels. Michael is an archangel."
+        },
+        {
+          "word": "Mural",
+          "definition": "A picture painted right onto a wall."
+        },
+        {
+          "word": "Adobe",
+          "definition": "Bricks made of mud and straw, dried in the sun."
+        }
+      ],
+      "think_about_it": "The Salinan artists' paintings are still on the walls, but we do not know the artists' names. How can we honor people whose names we do not know?",
+      "reflection_question": "A Salinan elder says of her people, \"We are here.\" Why is it important to remember that Native peoples are part of today, and not only of long ago?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Salinan people. The Salinan near this mission spoke their own form of the language, a little different from the one spoken at Mission San Antonio. Villages were led by a headman, and people made choices by talking until everyone agreed. Yokuts people from the east had long come to this valley to trade, and some Yokuts were baptized at the mission too. Mission life brought forced work, strict rules, sickness, and the loss of land, language, and freedom. A Salinan elder writes, \"We do not look the same, dress the same, live the same or speak the same, but we are here.\"",
+        "mission_life": "After the fire of 1806, making tiles and bricks became a big part of the work. Salinan workers also farmed and cared for animals on mission lands that reached many miles in every direction. A priest named Juan Martín led the mission through its busiest years. A road called El Camino Real ran right past the mission and the Salinan village beside it.",
+        "architecture": "From the outside, the church is plain, with adobe walls six feet thick. Along the front of the mission is a long covered walkway with arches. The arches are not all the same size and shape, and no other mission has a walkway like that. Inside is the surprise. The walls are covered with painted pictures and patterns. Behind the altar, a painted eye shines out from golden rays. These paintings are the real ones from the 1820s. They have never been painted over. The church itself is the one finished in 1818. After the earthquake of 2003, it was made stronger and repaired."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "6th"
+            },
+            {
+              "text": "12th"
+            },
+            {
+              "text": "16th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Miguel Arcángel, founded on July 25, 1797, was the sixteenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Salinan",
+              "correct": true
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The mission was founded next to a large Salinan village. The Salinan people are still here today."
+        },
+        {
+          "prompt": "What is special about the paintings inside the church?",
+          "choices": [
+            {
+              "text": "They are made of gold"
+            },
+            {
+              "text": "They have never been painted over",
+              "correct": true
+            },
+            {
+              "text": "They were painted last year"
+            }
+          ],
+          "explanation": "Salinan people painted the walls with the artist Esteban Munras by 1821. The same paintings are there today."
+        },
+        {
+          "prompt": "What destroyed the first church in 1806?",
+          "choices": [
+            {
+              "text": "A flood"
+            },
+            {
+              "text": "An earthquake"
+            },
+            {
+              "text": "A fire",
+              "correct": true
+            }
+          ],
+          "explanation": "A fire burned the church, other buildings, and the stored food. A new church was finished in 1818."
+        },
+        {
+          "prompt": "Who helped paint the church walls?",
+          "choices": [
+            {
+              "text": "Soldiers from Monterey"
+            },
+            {
+              "text": "Salinan people",
+              "correct": true
+            },
+            {
+              "text": "Sailors from Boston"
+            }
+          ],
+          "explanation": "The artist Esteban Munras planned the designs, and Salinan people of the mission painted them with him."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Mission San Miguel Arcángel",
+          "url": "https://missionsanmiguel.com/history/past2.html",
+          "note": "July 25, 1797; Lasuén and Sitjar; the large Salinan village; the 1806 fire; more than 1,000 people; Padre Juan Martín; frescoes by Munras, 1821; 1834; about 30 people by 1841; sold 1846; returned 1859; walls with \"little or no restoration\""
+        },
+        {
+          "title": "The Salinans",
+          "publisher": "Suzanne Pierce Taylor (Salinan elder), sponsored by the Salinan Tribal Council; Mission San Miguel website",
+          "url": "https://www.missionsanmiguel.com/history/salinans.html",
+          "note": "homeland; villages and headmen; acorns, game and cooking baskets; the Migueleño form of the language; Yokuts trade and baptisms; loss of language; \"we are here\"; the work to rebuild language and culture"
+        },
+        {
+          "title": "Mission San Miguel Arcàngel, CA",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/articles/000/mission-san-miguel-arcàngel-ca.htm",
+          "note": "Sitjar's 25 years at San Antonio; Salinan children baptized the first day; tiles and adobe blocks; church of 1816–1818; murals painted with the help of Salinan people by 1821 and never repainted; the mission lands; El Camino Real"
+        },
+        {
+          "title": "San Miguel Arcángel",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-miguel/",
+          "note": "the gap between missions; walls six feet thick; \"never been repainted\"; about 2,000 buried; the earthquake of December 22, 2003; reopening on October 2, 2009"
+        },
+        {
+          "title": "Mission San Miguel Arcángel",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanmiguelarcangel.html",
+          "note": "St. Michael; Sitjar \"spoke the native dialect fluently\"; Munras \"taught Salinan Indians to create murals\"; the all-seeing eye; arches not uniform in size and shape"
+        }
+      ]
+    }
+  ]
+}

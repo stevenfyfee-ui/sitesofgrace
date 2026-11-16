@@ -1,0 +1,1209 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-14",
+  "pages": [
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-fernando-rey-de-espana",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Fernando Rey de España",
+        "production_id_hint": 1325
+      },
+      "student_title": "Mission San Fernando Rey de España",
+      "subtitle": "The seventeenth California mission, known for its long building of arches, built at the Native village of Achoicominga.",
+      "story_label": "The Mission Story",
+      "founding_number": 17,
+      "founding_date": "1797-09-08",
+      "founding_date_display": "September 8, 1797",
+      "founding_source_note": "Fernandeño Tataviam Band of Mission Indians, \"History\"; California Missions Foundation, \"San Fernando Rey.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "17 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "September 8, 1797"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Ferdinand, King of Spain"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Fernandeño (Tataviam and neighboring peoples)"
+        }
+      ],
+      "intro": "Mission San Fernando Rey de España was the seventeenth California mission. Father Fermín Lasuén founded it in 1797 at a Native village called Achoicominga, north of Los Angeles. The mission is known for its Long Building, with a row of arches. The Native people who were brought there came from many villages. They lost their freedom and, later, all of their land.",
+      "story_paragraphs": [
+        "Long before the mission, Native people lived in villages across four valleys north of Los Angeles. Each village led itself, with its own leaders and its own land. People married into other villages, so many of them spoke more than one language. One group of villages is known as the Tataviam.",
+        "On September 8, 1797, Father Fermín Lasuén founded Mission San Fernando Rey de España at the village of Achoicominga. It was the seventeenth California mission. It was named for Saint Ferdinand, a king of Spain who lived long ago.",
+        "People from many villages and several nations were brought to the mission. The Spanish called all of them Fernandeños, after the mission. Their tribe today, the Fernandeño Tataviam Band of Mission Indians, says the mission enslaved more than 3,000 of their ancestors.",
+        "The tribe says that families were separated and holy places were destroyed. People needed a priest's permission to leave, and they were punished for breaking the rules. Many died from sickness and hunger. Even so, people went on holding their ceremonies and respecting their own village leaders.",
+        "The mission grew rich from their work. It had 21,000 animals and 32,000 grapevines. From 1810 to 1822, workers built the Long Building, where the priests lived and travelers could rest.",
+        "In 1834, the government took the mission away from the Church. In the 1840s, some Fernandeño families were given ranch land by the Mexican government. They had about one tenth of the valley. But after California joined the United States, they lost that land in the courts. By 1900, they had none left.",
+        "The old adobe church was damaged by earthquakes, and in 1971 an earthquake ruined it. A copy was built in 1974.",
+        "Today, the Fernandeño Tataviam Band has more than 900 members. Most still live in their homeland, and the tribe works to care for its land and culture."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1797",
+          "text": "Native people live in villages across four valleys north of Los Angeles."
+        },
+        {
+          "date_display": "September 8, 1797",
+          "text": "Father Fermín Lasuén founds the mission at Achoicominga. It is the seventeenth California mission."
+        },
+        {
+          "date_display": "1806",
+          "text": "The adobe church is finished."
+        },
+        {
+          "date_display": "1810–1822",
+          "text": "The Long Building is built."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1842",
+          "text": "Gold is found in a mission field."
+        },
+        {
+          "date_display": "1971",
+          "text": "An earthquake ruins the old church. A copy is built in 1974."
+        }
+      ],
+      "fun_facts": [
+        "The Long Building is 243 feet long, almost as long as a football field.",
+        "Gold was found at this mission six years before the Gold Rush began.",
+        "The mission once had 32,000 grapevines.",
+        "The mission has a fountain shaped like a star.",
+        "Tujunga, Topanga, and Pacoima are city place names that come from Native village names."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Fernandeño",
+          "definition": "The name the Spanish gave to the Native people of Mission San Fernando. Their tribe today is the Fernandeño Tataviam Band of Mission Indians."
+        },
+        {
+          "word": "Village",
+          "definition": "A small community where families live together."
+        },
+        {
+          "word": "Blacksmith",
+          "definition": "A worker who heats iron and hammers it into tools and other things."
+        },
+        {
+          "word": "Replica",
+          "definition": "A copy of something, made to look like the real thing."
+        }
+      ],
+      "think_about_it": "Many street and city names near this mission come from Native villages. What can a place name tell you about who lived there first?",
+      "reflection_question": "The Fernandeño people lost their land, but they kept their families and ceremonies. What matters most to keep when other things are taken away?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission was built at Achoicominga, a Native village. The people brought to the mission came from the San Fernando, Santa Clarita, Simi, and Antelope Valleys. They included the Tataviam, some Chumash, and several other groups. Before the mission, there was no single chief over everyone. Each family line governed itself. The tribe says the mission meant enslavement, the breaking up of families, sickness, hunger, and the loss of land and freedom. Many place names in the valley today come from Native village names, such as Tujunga, Topanga, Cahuenga, and Pacoima. Three family lines lived through those years. Their descendants make up the Fernandeño Tataviam Band of Mission Indians. A park in the city of San Fernando honors one of their leaders, Captain Rogerio Rocha, who was forced off his land.",
+        "mission_life": "San Fernando was a ranch, a farm, and a workshop. Native workers made leather, saddles, shoes, candles, and soap. They pressed olives, made wine, wove cloth, and ground flour. The mission's blacksmiths were known for fine ironwork, and its goods were sold in the town of Los Angeles. In 1842, bits of gold were found stuck to an onion pulled from a mission field. That was six years before the famous Gold Rush.",
+        "architecture": "The Long Building is the real treasure here. It is 243 feet long and two stories tall, with a covered walkway of arches along the front. It is the largest building left from mission days here, and it has been called the largest adobe building in California. It has been repaired several times, most recently after an earthquake in 1994, when steel bars were put inside the walls. The church is different. The old church was finished in 1806, but the one you see is a copy built in 1974. A star-shaped fountain from the mission's old water system still stands across from the Long Building."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "7th"
+            },
+            {
+              "text": "12th"
+            },
+            {
+              "text": "17th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Fernando Rey de España, founded on September 8, 1797, was the seventeenth of the 21 California missions."
+        },
+        {
+          "prompt": "What did the Spanish call the Native people of this mission?",
+          "choices": [
+            {
+              "text": "Gabrielinos"
+            },
+            {
+              "text": "Fernandeños",
+              "correct": true
+            },
+            {
+              "text": "Luiseños"
+            },
+            {
+              "text": "Juaneños"
+            }
+          ],
+          "explanation": "People from many villages were brought to the mission, and the Spanish called them all Fernandeños. Their tribe today is the Fernandeño Tataviam Band of Mission Indians."
+        },
+        {
+          "prompt": "What is the mission's most famous building?",
+          "choices": [
+            {
+              "text": "A tall stone tower"
+            },
+            {
+              "text": "The Long Building with its row of arches",
+              "correct": true
+            },
+            {
+              "text": "A lighthouse"
+            }
+          ],
+          "explanation": "The Long Building is 243 feet long and two stories tall. It is the largest building left from mission days here."
+        },
+        {
+          "prompt": "What was found in a mission field in 1842?",
+          "choices": [
+            {
+              "text": "A buried bell"
+            },
+            {
+              "text": "Dinosaur bones"
+            },
+            {
+              "text": "Gold",
+              "correct": true
+            }
+          ],
+          "explanation": "Bits of gold were found stuck to an onion pulled from a mission field, six years before the Gold Rush."
+        },
+        {
+          "prompt": "Is the church at the mission today the first one?",
+          "choices": [
+            {
+              "text": "Yes, it is from 1806"
+            },
+            {
+              "text": "No, it is a copy built in 1974",
+              "correct": true
+            },
+            {
+              "text": "No, it was moved from Spain"
+            }
+          ],
+          "explanation": "An earthquake in 1971 ruined the old adobe church. A copy was built in 1974."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Fernandeño Tataviam Band of Mission Indians",
+          "url": "https://www.tataviam-nsn.us/heritage/history/",
+          "note": "villages in four valleys; self-governing villages; the name Tataviam; September 8, 1797; \"enslaved ~3,000+ ancestors\"; families separated; permission to leave and punishment; ceremonies continued; land grants of the 1840s; the court cases; no land by 1900; three lineages, 900+ people"
+        },
+        {
+          "title": "Fernandeño Tataviam Band of Mission Indians",
+          "publisher": "California Native American Heritage Commission, Tribal Atlas (text from the Tribe)",
+          "url": "https://nahc.ca.gov/cp/tribal-atlas-pages/fernandeno-tataviam-band-of-mission-indians",
+          "note": "Achoicominga; the peoples called Fernandeño; lineages; place names; Captain Rogerio Rocha and the park"
+        },
+        {
+          "title": "San Fernando Rey",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-fernando-rey/",
+          "note": "September 8, 1797; Lasuén; St. Ferdinand III; the long building finished 1822; the fountain"
+        },
+        {
+          "title": "Mission San Fernando Rey de España",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanfernandorey.html",
+          "note": "Ferdinand III, King of Spain; church of 1806; Long Building 1810–1822 and its size; livestock, vines and workshops; gold in 1842; 1834; earthquakes of 1971 and 1994; the 1974 replica; the star fountain"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-luis-rey-de-francia",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Luis Rey de Francia",
+        "production_id_hint": 1326
+      },
+      "student_title": "Mission San Luis Rey de Francia",
+      "subtitle": "The eighteenth California mission and the largest of them all, built on the homeland of the Payómkawichum, or Luiseño, people.",
+      "story_label": "The Mission Story",
+      "founding_number": 18,
+      "founding_date": "1798-06-13",
+      "founding_date_display": "June 13, 1798",
+      "founding_source_note": "California Missions Foundation, \"San Luis Rey de Francía\"; Toucan Valley fact card for Mission San Luis Rey de Francia.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "18 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "June 13, 1798"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Fermín Lasuén"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Louis, King of France"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Payómkawichum (Luiseño)"
+        }
+      ],
+      "intro": "Mission San Luis Rey de Francia was the eighteenth California mission. Father Fermín Lasuén founded it in 1798 on the homeland of the Payómkawichum people, whom the Spanish called Luiseños. It became the largest of all the missions and was called the \"King of the Missions.\" The people who built it lost thousands of lives to sickness. They had to keep their language alive in secret.",
+      "story_paragraphs": [
+        "The people of this land call themselves Payómkawichum. The name means \"the People of the West.\" They have lived here for more than 10,000 years. They governed themselves, cared for the plants and animals through the seasons, and made stone tools, baskets, and pottery. They traded with other peoples along trails across Southern California. Their stories taught children how to live well.",
+        "On June 13, 1798, Father Fermín Lasuén founded Mission San Luis Rey de Francia. It was the eighteenth California mission. It was named for Saint Louis, a king of France who lived in the 1200s.",
+        "Lasuén put a priest named Antonio Peyri in charge. Father Peyri stayed for 34 years. The Spanish began calling the people San Luiseños, and later just Luiseños.",
+        "The mission grew larger than any other. By 1825, 2,869 Native people lived there. They cared for about 50,000 animals. From 1811 to 1815, Native workers did most of the hard labor of building a great church shaped like a cross.",
+        "The Pechanga Band of Indians tells what this time was like for their ancestors. The new foods were not as healthy as their own. Smallpox, measles, and other sicknesses spread. Within a few decades, several thousand Payómkawichum had died. Strict rules kept people apart by age and by whether they were boys or girls. Stories and ceremonies were lost, and the people spoke their own language only in secret.",
+        "In 1834, the government took the mission away from the Church. The people who were still living went back to small villages or started new ones. Later, soldiers camped in the empty mission, and the church dome fell in.",
+        "In 1892, Franciscan priests came back and began to rebuild, led by Father Joseph O'Keefe.",
+        "Today, the Payómkawichum are still here, in seven bands. One of them, the Pechanga Band, was forced from its village in 1875 and now lives on its own reservation nearby."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1798",
+          "text": "The Payómkawichum live in their homeland for more than 10,000 years."
+        },
+        {
+          "date_display": "June 13, 1798",
+          "text": "Father Fermín Lasuén founds the mission. It is the eighteenth California mission."
+        },
+        {
+          "date_display": "1811–1815",
+          "text": "The great church shaped like a cross is built."
+        },
+        {
+          "date_display": "1825",
+          "text": "The mission has 2,869 Native people, the most of any mission."
+        },
+        {
+          "date_display": "1830",
+          "text": "A pepper tree is planted that still grows today."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1875",
+          "text": "The Payómkawichum of Temecula are forced from their village."
+        },
+        {
+          "date_display": "1892",
+          "text": "Franciscan priests return and begin to rebuild the mission."
+        }
+      ],
+      "fun_facts": [
+        "San Luis Rey was the largest of the 21 California missions.",
+        "It is called the \"King of the Missions.\"",
+        "The church has a wooden dome. No other California mission has one.",
+        "A pepper tree planted at the mission in 1830 is the oldest one in California.",
+        "The mission is named for a king of France."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Payómkawichum",
+          "definition": "\"The People of the West.\" It is the name the Luiseño people call themselves."
+        },
+        {
+          "word": "Luiseño",
+          "definition": "The name the Spanish gave to the Payómkawichum, after Mission San Luis Rey."
+        },
+        {
+          "word": "Dome",
+          "definition": "A rounded roof shaped like half a ball."
+        },
+        {
+          "word": "Reservation",
+          "definition": "Land set aside for a Native tribe to live on and govern."
+        }
+      ],
+      "think_about_it": "The Payómkawichum spoke their language only in secret so it would not be lost. Why would people work so hard to keep a language?",
+      "reflection_question": "Before the mission, the Payómkawichum made sure everyone had food and a home. How can you help make sure no one around you is left out?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Payómkawichum, \"the People of the West.\" The Spanish name for them, Luiseño, comes from the mission. Before the mission, their way of life made sure that everyone had food and a place to live. Native people built the mission and did its work. Mission life brought strict rules, sickness, and the loss of land, language, and freedom. Several thousand people died. After the missions closed, things did not get easier. In 1875, ranchers and a sheriff's men forced the Payómkawichum of Temecula out of their village. Many moved to a valley beside a spring called Pecháa'a, which gave the Pechanga Band its name. In the mission cemetery, a memorial put up in 1830 honors the Luiseño people.",
+        "mission_life": "San Luis Rey was like a small town. Its main square of buildings was about 500 feet on each side. In front of the mission, wide steps led down to a sunken garden and a large open-air laundry, where spring water flowed and women washed clothes. In 1830, all the unmarried women had to live in sleeping rooms on one side of the square. Native workers farmed, herded, and built. Father Peyri planted the first pepper trees in California here, and one from 1830 is still growing.",
+        "architecture": "The church is the one built from 1811 to 1815. Its walls are adobe on the inside and fired brick on the outside, and they are five feet thick. The church is shaped like a cross, and over the middle is a wooden dome with windows that let in light. No other California mission has a dome like it. One bell tower, 75 feet tall, stands at a corner. A second tower was planned but never built. The dome fell in during the years the mission stood empty and was rebuilt in the 1890s. The painted designs on the walls inside are from mission days, though they have been painted over. Only twelve of the 32 arches along the front are left."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "8th"
+            },
+            {
+              "text": "13th"
+            },
+            {
+              "text": "18th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Luis Rey de Francia, founded on June 13, 1798, was the eighteenth of the 21 California missions."
+        },
+        {
+          "prompt": "What do the Native people of this land call themselves?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Payómkawichum",
+              "correct": true
+            },
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Salinan"
+            }
+          ],
+          "explanation": "Payómkawichum means \"the People of the West.\" The Spanish called them Luiseños, after the mission."
+        },
+        {
+          "prompt": "Why is San Luis Rey called the \"King of the Missions\"?",
+          "choices": [
+            {
+              "text": "A king lived there"
+            },
+            {
+              "text": "It was the largest mission",
+              "correct": true
+            },
+            {
+              "text": "It was the oldest mission"
+            }
+          ],
+          "explanation": "San Luis Rey was the largest of the 21 missions. In 1825, 2,869 Native people lived there."
+        },
+        {
+          "prompt": "What is on top of the church that no other California mission has?",
+          "choices": [
+            {
+              "text": "A clock"
+            },
+            {
+              "text": "A gold cross"
+            },
+            {
+              "text": "A wooden dome",
+              "correct": true
+            }
+          ],
+          "explanation": "A wooden dome with windows sits over the middle of the cross-shaped church."
+        },
+        {
+          "prompt": "How did the Payómkawichum keep their language during mission times?",
+          "choices": [
+            {
+              "text": "They spoke it in secret",
+              "correct": true
+            },
+            {
+              "text": "They wrote it in books"
+            },
+            {
+              "text": "The priests taught it in school"
+            }
+          ],
+          "explanation": "The Pechanga Band of Indians says that stories and ceremonies were lost, and the language was used only in secret."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Pechanga Band of Indians",
+          "url": "https://pechanga-nsn.gov/index.php/history",
+          "note": "Payómkawichum, \"the People of the West\"; more than 10,000 years; seven bands; life before the mission; the names San Luiseño and Luiseño; diet, disease and several thousand deaths; rules by age and gender; language in secret; after 1834; the 1875 eviction; Pecháa'a; the reservation"
+        },
+        {
+          "title": "San Luis Rey Mission Church",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/places/san-luis-rey-mission-church-oceanside-california.htm",
+          "note": "Lasuén, 1798; about 50,000 livestock; church of 1811–1815; Native workers did most of the labor; walls; the 75-foot tower and the tower never built; the dome; soldiers; the return in 1892 and Father O'Keefe"
+        },
+        {
+          "title": "Historic Features",
+          "publisher": "Mission San Luis Rey",
+          "url": "https://www.sanluisrey.org/museum/historic-features",
+          "note": "largest of the 21 missions; the only wooden dome; original wall designs painted over; the laundry; the 1830 pepper tree and Father Peyri; the 1830 Indian Memorial; dormitories; 12 of 32 arches; the 500-foot quadrangle"
+        },
+        {
+          "title": "San Luis Rey de Francía",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-luis-rey/",
+          "note": "June 13, 1798; St. Louis IX, King of France; 2,869 people in 1825; the cross-shaped church and dome"
+        },
+        {
+          "title": "Mission San Luis Rey de Francia",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanluisrey.html",
+          "note": "Father Peyri's 34 years; \"King of the Missions\"; Luiseños helped build the church; the sunken garden and laundry; 1834; the fallen dome; rebuilding from 1893"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-santa-ines",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission Santa Inés",
+        "production_id_hint": 1327
+      },
+      "student_title": "Mission Santa Inés",
+      "subtitle": "The nineteenth California mission, built in a valley of the Chumash people, where the Chumash uprising of 1824 began.",
+      "story_label": "The Mission Story",
+      "founding_number": 19,
+      "founding_date": "1804-09-17",
+      "founding_date_display": "September 17, 1804",
+      "founding_source_note": "National Park Service, \"Mission Santa Inés, CA\"; Toucan Valley fact card for Mission Santa Inés.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "19 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "September 17, 1804"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Estévan Tápis"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Agnes"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Chumash"
+        }
+      ],
+      "intro": "Mission Santa Inés was the nineteenth California mission. Father Estévan Tápis founded it in 1804 in a valley of the Chumash people, between two older missions. It is named for Saint Agnes. In 1824, a soldier beat a Chumash man here, and the Chumash rose up at three missions. Today, the Santa Ynez Band of Chumash Indians lives close by and teaches its language to its children.",
+      "story_paragraphs": [
+        "The Chumash have lived in the valleys and along the coast of this region for thousands of years. Their homeland covered about 7,000 square miles. Their society had chiefs, healers, and skilled craftspeople, and women could be leaders too.",
+        "By 1804, the two missions nearest this valley were crowded. So, on September 17, 1804, Father Estévan Tápis founded a new mission halfway between them. About 200 people came to the first Mass. He named the mission for Saint Agnes, a brave Roman girl who died for her faith long ago. It was the nineteenth California mission. By the end of that year, 112 Chumash people had been baptized. At its largest, in 1816, the mission had 786 Native people.",
+        "In 1812, an earthquake destroyed most of the church. A new church was dedicated on July 4, 1817. It still stands. Workers also laid clay pipes under the ground to bring water from the mountains several miles away.",
+        "After Mexico became free from Spain in 1821, things grew worse for the Chumash. They were made to work for the soldiers and were given only promises of pay.",
+        "In February 1824, a soldier at Santa Inés beat a Chumash man. The Chumash had had enough. They fought back, and fires burned many of the mission buildings. The uprising spread quickly to Mission La Purísima and Mission Santa Bárbara. It went on for several months. Peace came when the governor pardoned the Chumash who had taken part.",
+        "In the 1830s, the government took the mission away from the Church, and most of the Chumash left. Later, the first school in California for training priests opened here.",
+        "By 1900, the mission was falling apart. A priest named Alexander Buckler spent twenty years cleaning and repairing it.",
+        "The Santa Ynez Band of Chumash Indians lives nearby today. In 2008, the tribe started a program to teach Samala, its language. There is now a Samala dictionary."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1804",
+          "text": "The Chumash people live in this valley and along the coast."
+        },
+        {
+          "date_display": "September 17, 1804",
+          "text": "Father Estévan Tápis founds the mission. It is the nineteenth California mission."
+        },
+        {
+          "date_display": "1812",
+          "text": "An earthquake destroys most of the church."
+        },
+        {
+          "date_display": "July 4, 1817",
+          "text": "The new church is dedicated. It still stands today."
+        },
+        {
+          "date_display": "February 1824",
+          "text": "A soldier beats a Chumash man, and the Chumash uprising begins here."
+        },
+        {
+          "date_display": "1836",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1904",
+          "text": "Father Alexander Buckler begins twenty years of repairs."
+        },
+        {
+          "date_display": "2008",
+          "text": "The Santa Ynez Band of Chumash Indians starts its Samala language program."
+        }
+      ],
+      "fun_facts": [
+        "\"Santa Inés\" is Spanish for Saint Agnes.",
+        "The mission's mill was built by a man who had sailed with a pirate.",
+        "Water came to the mission through clay pipes buried under the ground.",
+        "Chumash craftsmen here made saddles trimmed with silver.",
+        "The church was dedicated on the Fourth of July in 1817."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Chumash",
+          "definition": "The Native people of the coast from Malibu to Paso Robles and the land behind it."
+        },
+        {
+          "word": "Samala",
+          "definition": "The Chumash language of the Santa Ynez Valley."
+        },
+        {
+          "word": "Uprising",
+          "definition": "A time when people rise up and fight against those who rule them."
+        },
+        {
+          "word": "Pardon",
+          "definition": "To forgive someone and not punish them."
+        }
+      ],
+      "think_about_it": "The Chumash were made to work for soldiers and were paid only in promises. Why is it wrong to make people work without fair pay?",
+      "reflection_question": "The Santa Ynez Chumash are teaching Samala to their children. If you could learn any language to feel closer to your family's past, which would it be?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Chumash people. The Chumash of this valley speak a language called Samala. When the mission came, many were baptized and brought to live there. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. The Santa Ynez Band says that sickness from Europe was the main reason the number of Chumash fell so far, from about 22,000 before the Spanish came to fewer than 3,000 at the missions by 1831. In 1824, the Chumash resisted, starting here. Today, the Santa Ynez Band of Chumash Indians has a reservation near the mission. The tribe teaches basket weaving, old recipes, archery, and the Samala language. It says, \"We have survived and thrived because of our strength as a tribe.\"",
+        "mission_life": "Chumash workers here were known for their leather and metal work. They made saddles trimmed with silver and candlesticks of copper and silver. Water from the mountains filled two large tanks and turned the wheels of a mill that ground corn and wheat. The mill was built in 1820 by Joseph Chapman, a sailor who had once come to California with a pirate. The mission was also a place of teaching, and it was sometimes called the \"Mission of the Passes.\"",
+        "architecture": "The adobe church is the one dedicated in 1817, and the long building beside it is from mission days too. Much of the inside is the way it was. The tile floor is old, and so is a bowl for baptisms made of copper and zinc by Native craftsmen. The walls were painted in 1825 with designs you can still see. The bell wall is not the first one. It fell down in 1911 and was rebuilt in a new shape. Later repairs in the 1940s and 1950s gave it back its old look. Only some of the arches along the front are from mission days. Eight of them were rebuilt in 1989."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "9th"
+            },
+            {
+              "text": "14th"
+            },
+            {
+              "text": "19th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission Santa Inés, founded on September 17, 1804, was the nineteenth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Chumash",
+              "correct": true
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The mission was built in a Chumash valley. The Santa Ynez Band of Chumash Indians lives nearby today."
+        },
+        {
+          "prompt": "Who is the mission named for?",
+          "choices": [
+            {
+              "text": "Saint Agnes",
+              "correct": true
+            },
+            {
+              "text": "Saint Anne"
+            },
+            {
+              "text": "Saint Elizabeth"
+            }
+          ],
+          "explanation": "\"Santa Inés\" is Spanish for Saint Agnes, a Roman girl who died for her faith."
+        },
+        {
+          "prompt": "What started the Chumash uprising of 1824?",
+          "choices": [
+            {
+              "text": "An earthquake"
+            },
+            {
+              "text": "A soldier beat a Chumash man",
+              "correct": true
+            },
+            {
+              "text": "A ship was lost at sea"
+            }
+          ],
+          "explanation": "The Chumash had been made to work for the soldiers without real pay. When a soldier beat a Chumash man at Santa Inés, they rose up at three missions."
+        },
+        {
+          "prompt": "What is Samala?",
+          "choices": [
+            {
+              "text": "A kind of basket"
+            },
+            {
+              "text": "A river"
+            },
+            {
+              "text": "The Chumash language of this valley",
+              "correct": true
+            }
+          ],
+          "explanation": "The Santa Ynez Band of Chumash Indians started a program in 2008 to teach Samala, and there is now a Samala dictionary."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mission Santa Inés, CA",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/articles/000/mission-santa-in%C3%A9s-ca.htm",
+          "note": "September 17, 1804; Father Tápis; between two crowded missions; 200 at the Mass; 112 baptisms in 1804; 786 people in 1816; the 1812 earthquake; church of July 4, 1817; work for the army paid in IOUs; the beating and the 1824 revolt; the pardon; the first seminary; what survives; arches rebuilt 1989"
+        },
+        {
+          "title": "History",
+          "publisher": "Santa Ynez Band of Chumash Indians",
+          "url": "https://chumash.gov/chumash-history",
+          "note": "7,000 square miles; chiefs, priests and crafters; women leaders; about 22,000 people; 2,788 by 1831; disease; the Samala language"
+        },
+        {
+          "title": "Culture",
+          "publisher": "Santa Ynez Band of Chumash Indians",
+          "url": "https://chumash.gov/culture",
+          "note": "the language program begun in 2008; the Samala-English Dictionary; basket weaving, recipes, archery; \"We have survived and thrived...\""
+        },
+        {
+          "title": "Chumash Life: Timeline",
+          "publisher": "Santa Barbara Museum of Natural History",
+          "url": "https://sbnature.org/collections-research/anthropology/chumash-life/timeline",
+          "note": "thousands of years in the region"
+        },
+        {
+          "title": "Mission Santa Inés",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/santaines.html",
+          "note": "St. Agnes; \"Mission of the Passes\"; leather and metal work; clay pipes, reservoirs and the 1820 mill; Joseph Chapman; 1836; Father Buckler from 1904; the bell wall, 1911 and later; the floor, font and 1825 wall designs"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-rafael-arcangel",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Rafael Arcángel",
+        "production_id_hint": 1328
+      },
+      "student_title": "Mission San Rafael Arcángel",
+      "subtitle": "The twentieth California mission, begun as a place for the sick, on the homeland of the Coast Miwok people.",
+      "story_label": "The Mission Story",
+      "founding_number": 20,
+      "founding_date": "1817-12-14",
+      "founding_date_display": "December 14, 1817",
+      "founding_source_note": "Toucan Valley fact card for Mission San Rafael Arcángel; Randall Milliken, National Park Service Coast Miwok report (December 1817).",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "20 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "December 14, 1817"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Vicente de Sarría"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "The Archangel Raphael"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Coast Miwok; later also Pomo"
+        }
+      ],
+      "intro": "Mission San Rafael Arcángel was the twentieth California mission. It was founded in 1817 on the homeland of the Coast Miwok people, north of San Francisco Bay. It began as a hospital for sick Native people from Mission Dolores, so it was named for the angel of healing. Nothing is left of the old mission buildings. The Coast Miwok people, though, are still here.",
+      "story_paragraphs": [
+        "The Coast Miwok people have lived north of San Francisco Bay for a very long time. Their villages had names such as Olompali, Petaluma, and Olema. In 1579, sailors on an English ship wrote about meeting them. That is the oldest written record of the Coast Miwok.",
+        "When Mission Dolores was built in San Francisco, many Coast Miwok people were taken there. The weather at Dolores was cold, damp, and foggy. Sickness spread, and people who fell ill did not get better.",
+        "So, on December 14, 1817, Father Vicente de Sarría founded a new place across the bay, where it was sunny and warm. It was meant to be a hospital for Mission Dolores. A priest who knew something about medicine, Luis Gil y Taboada, was put in charge. The new mission was named for the Archangel Raphael, an angel known for good health and healing.",
+        "The sick did grow stronger there. In 1822, San Rafael became a full mission of its own. It was the twentieth California mission.",
+        "Many Coast Miwok people lived at San Rafael. From 1820 on, Pomo people from the north were brought there too, and soon more Pomo than Coast Miwok were being baptized. By 1828, more than 1,000 people lived at the mission.",
+        "Their tribe today, the Federated Indians of Graton Rancheria, says that the missions used its ancestors as workers. It says that the loss of their homelands, sickness from Europe, bad treatment, and enslavement caused their numbers to fall.",
+        "In 1834, San Rafael was taken away from the Church. General Mariano Vallejo was put in charge, and he moved the mission's animals and fruit trees to his own ranches. The mission was left empty in 1842, and in 1861 the old church was torn down.",
+        "In 1949, a small chapel was built near the old place to remember the mission. The Coast Miwok had no land of their own for many years. In 2000, the United States government once again recognized their tribe."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1817",
+          "text": "The Coast Miwok people live in villages north of San Francisco Bay."
+        },
+        {
+          "date_display": "December 14, 1817",
+          "text": "The mission is founded as a hospital for sick people from Mission Dolores."
+        },
+        {
+          "date_display": "1822",
+          "text": "San Rafael becomes a full mission, the twentieth in California."
+        },
+        {
+          "date_display": "1828",
+          "text": "More than 1,000 people live at the mission."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1861",
+          "text": "The old mission church is torn down."
+        },
+        {
+          "date_display": "1949",
+          "text": "A small chapel is built as a copy of the mission church."
+        },
+        {
+          "date_display": "2000",
+          "text": "The United States again recognizes the Federated Indians of Graton Rancheria."
+        }
+      ],
+      "fun_facts": [
+        "San Rafael began as a hospital, the first mission started to help the sick get well.",
+        "The Archangel Raphael is honored as an angel of good health.",
+        "The first mission church had no bell tower. Its bells hung from a wooden frame.",
+        "The Marin Peninsula is named for a Coast Miwok man.",
+        "San Rafael is one of three California missions named for angels."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Coast Miwok",
+          "definition": "The Native people whose homeland is north of San Francisco Bay, in what are now Marin and Sonoma Counties."
+        },
+        {
+          "word": "Hospital",
+          "definition": "A place where sick people are cared for."
+        },
+        {
+          "word": "Archangel",
+          "definition": "A leader among the angels. Raphael is an archangel."
+        },
+        {
+          "word": "Replica",
+          "definition": "A copy of something, made to look like the real thing."
+        }
+      ],
+      "think_about_it": "Many people became sick at Mission Dolores because they were made to live crowded together in a cold, damp place. What do people need in order to stay healthy?",
+      "reflection_question": "The Coast Miwok went many years with no land of their own, and they stayed together as a people. What holds a family or a community together?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Coast Miwok people. About 725 Coast Miwok people and about 780 Pomo people were baptized at San Rafael. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. When the mission closed, many Pomo families went back north. About 500 Native people settled on land at a place called Nicasio, but that land was taken from them bit by bit. A Coast Miwok man named Camilo Ynitia won a land grant at Olompali, the village of his people. A Coast Miwok man called Marin was baptized at Mission Dolores in 1801. The Marin Peninsula is named for him. Today, the Coast Miwok and Southern Pomo are joined in one tribe, the Federated Indians of Graton Rancheria. They have written a dictionary of the Coast Miwok language.",
+        "mission_life": "San Rafael was first of all a place to rest and get well. A cluster of Native houses stood around the main mission building. The sunny hills were good for farming and fruit trees. A priest named Juan Amorós led the mission after it became independent. Native people did the farming, herding, and building. The mission also helped Spain, and later Mexico, keep watch on the Russian traders who had a fort farther up the coast.",
+        "architecture": "Nothing is left of the first mission. Its simple church had no bell tower. The bells hung from a plain wooden frame outside the door. That church was torn down in 1861. The chapel you see today was built in 1949 as a copy, and it even faces a different way. The first church looked toward the bay, and the copy looks toward the hills. The copy has a star-shaped window over the door. People now think the real mission church almost surely did not have one. The idea came from an artist who drew the mission for a postcard long after it was gone."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "5th"
+            },
+            {
+              "text": "10th"
+            },
+            {
+              "text": "15th"
+            },
+            {
+              "text": "20th",
+              "correct": true
+            }
+          ],
+          "explanation": "Mission San Rafael Arcángel, founded on December 14, 1817, was the twentieth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Coast Miwok",
+              "correct": true
+            },
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Salinan"
+            }
+          ],
+          "explanation": "The mission was built on the homeland of the Coast Miwok people. Pomo people from the north were brought there later."
+        },
+        {
+          "prompt": "Why was the mission started?",
+          "choices": [
+            {
+              "text": "To build ships"
+            },
+            {
+              "text": "To be a hospital for sick people from Mission Dolores",
+              "correct": true
+            },
+            {
+              "text": "To guard a gold mine"
+            }
+          ],
+          "explanation": "People were not getting well in the cold, foggy weather at Mission Dolores, so a hospital was started in a sunnier place."
+        },
+        {
+          "prompt": "Why was the mission named for the Archangel Raphael?",
+          "choices": [
+            {
+              "text": "He was a soldier"
+            },
+            {
+              "text": "He was a king"
+            },
+            {
+              "text": "He is the angel of healing",
+              "correct": true
+            }
+          ],
+          "explanation": "The Archangel Raphael is honored as an angel of good health, which fit a mission that began as a hospital."
+        },
+        {
+          "prompt": "How much of the first mission is left today?",
+          "choices": [
+            {
+              "text": "All of it"
+            },
+            {
+              "text": "Only the bell tower"
+            },
+            {
+              "text": "Nothing",
+              "correct": true
+            }
+          ],
+          "explanation": "The old church was torn down in 1861. The chapel there today is a copy built in 1949."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Federated Indians of Graton Rancheria",
+          "url": "https://gratonrancheria.com/culture/history/",
+          "note": "a federation of Coast Miwok and Southern Pomo; the 1579 record; missions \"used Indians... as their labor source\"; \"loss of homelands, European disease, mistreatment, and enslavement\"; Nicasio; Camilo Ynitia and Olompali; landless; recognition restored in 2000; the Coast Miwok dictionary"
+        },
+        {
+          "title": "Ethnohistory and Ethnogeography of the Coast Miwok and Their Neighbors, 1783–1840",
+          "publisher": "Randall Milliken, National Park Service, Golden Gate NRA (2009)",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/2009-Final-Coast-Miwok-Report.pdf",
+          "note": "founded December 1817 as an outstation of Mission Dolores; village names; 725 Coast Miwok and 784 Pomo baptisms; Pomo the majority of baptisms from 1822; Pomo families returning north; Marin, baptized 1801"
+        },
+        {
+          "title": "Mission San Rafael Arcángel",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanrafaelarcangel.html",
+          "note": "December 14, 1817; Father Sarría; Father Gil y Taboada; the Archangel Raphael; hospital of Mission Dolores and the weather; the Russians; full mission 1822, Father Amorós; over 1,000 people in 1828; 1834 and Vallejo; 1842; 1861; the 1949 chapel; the bells; the star window"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-francisco-solano",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Francisco Solano",
+        "production_id_hint": 1329
+      },
+      "student_title": "Mission San Francisco Solano",
+      "subtitle": "The twenty-first and last California mission, the farthest north, built on the homeland of the Coast Miwok people in Sonoma.",
+      "story_label": "The Mission Story",
+      "founding_number": 21,
+      "founding_date": "1823-07-04",
+      "founding_date_display": "July 4, 1823",
+      "founding_source_note": "California State Parks, Sonoma State Historic Park brochure; California Missions Foundation, \"San Francisco Solano.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "21 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "July 4, 1823"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father José Altimira"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Francis Solano"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Coast Miwok, Patwin, Wappo, and Pomo"
+        }
+      ],
+      "intro": "Mission San Francisco Solano was the twenty-first and last California mission. Father José Altimira founded it in 1823 in the Sonoma Valley, on the homeland of the Coast Miwok people. It is the farthest north of all the missions, and the only one started after Mexico became free from Spain. It lasted just eleven years. Nearly 900 Native people are buried there.",
+      "story_paragraphs": [
+        "The Sonoma Valley is the homeland of a group of Coast Miwok people called the Chocuyen. Other Native nations lived close by: the Patwin to the east, the Wappo to the north, and the Pomo beyond them.",
+        "In 1823, a young priest at Mission Dolores named José Altimira had a plan. He wanted to close Mission Dolores and Mission San Rafael and move everyone to a new mission in the warm Sonoma Valley. The governor liked the idea. He was worried about the Russian traders who had built a fort on the coast to the north.",
+        "On July 4, 1823, Father Altimira chose a place and blessed it. He started building before the head of the missions had said yes. In the end, the two older missions stayed open, and the new one became the twenty-first mission. It was named for Saint Francis Solano, a Spanish missionary who worked in Peru.",
+        "The first church was made of wood and mud. It was dedicated in 1824, and the first baptisms were held that day. In 1826, a fire destroyed it. A priest named Buenaventura Fortuni came to take Altimira's place, and he rebuilt with adobe.",
+        "People from many Native nations were baptized at the mission and used as its workers. By about 1832, nearly 1,000 Native people lived there. They farmed and herded on about 10,000 acres. Their tribe today says that the loss of their homelands, sickness, bad treatment, and enslavement caused their numbers to fall.",
+        "In 1834, after only eleven years, the government closed the mission. General Mariano Vallejo was put in charge. He laid out the town of Sonoma in front of the mission and moved many of the Native workers to his own ranches. The mission church soon fell down. In 1840, Vallejo built a small chapel for the town. That chapel is the one standing today.",
+        "In 1999, a monument was put up beside the chapel to honor the 896 Native people who are buried there. The Coast Miwok and Southern Pomo people are still here, joined together as the Federated Indians of Graton Rancheria."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1823",
+          "text": "Coast Miwok people live in the Sonoma Valley, with Patwin, Wappo, and Pomo neighbors."
+        },
+        {
+          "date_display": "July 4, 1823",
+          "text": "Father José Altimira founds the mission. It is the twenty-first and last California mission."
+        },
+        {
+          "date_display": "1824",
+          "text": "The first church is dedicated, and the first baptisms are held."
+        },
+        {
+          "date_display": "1826",
+          "text": "A fire destroys the church. Father Fortuni rebuilds with adobe."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government closes the mission after eleven years."
+        },
+        {
+          "date_display": "1840",
+          "text": "General Vallejo builds the chapel that stands today."
+        },
+        {
+          "date_display": "1906",
+          "text": "A great earthquake badly damages the buildings."
+        },
+        {
+          "date_display": "1999",
+          "text": "A monument is put up to honor the 896 Native people buried at the mission."
+        }
+      ],
+      "fun_facts": [
+        "This was the last of the 21 California missions, and the farthest north.",
+        "It is the only California mission founded after Mexico became free from Spain.",
+        "The mission was founded on the Fourth of July.",
+        "Russian traders sent gifts for the mission's first church.",
+        "The priests' house is the oldest building in the town of Sonoma."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Coast Miwok",
+          "definition": "The Native people whose homeland is north of San Francisco Bay, in what are now Marin and Sonoma Counties."
+        },
+        {
+          "word": "Nation",
+          "definition": "A people with their own land, language, and leaders."
+        },
+        {
+          "word": "Monument",
+          "definition": "Something built to help people remember a person or an event."
+        },
+        {
+          "word": "Chapel",
+          "definition": "A small church."
+        }
+      ],
+      "think_about_it": "The monument at this mission honors 896 Native people. Why do you think it took until 1999 for a monument to be built?",
+      "reflection_question": "This was the last mission. Now that you know the story of all 21, what is one thing you want to remember about the Native peoples of California?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission was built on Coast Miwok land, but people from several nations were brought to it. Coast Miwok, Lake Miwok, Pomo, Patwin, and Wappo people were all baptized here. By the time the mission closed, most of the people there spoke Patwin, and the next largest group spoke Wappo. Mission life brought forced work, strict rules, sickness, and the loss of land and freedom. Some nations fought to keep their freedom. After 1835, soldiers rode out from Sonoma more than 100 times against the Wappo and their neighbors, who rose up again and again. Many Coast Miwok people who lived through the mission years went to work on General Vallejo's ranch. Today, the Coast Miwok and Southern Pomo are one tribe, the Federated Indians of Graton Rancheria. The United States recognized the tribe again in 2000.",
+        "mission_life": "In its few years, the mission grew crops and raised animals on about 10,000 acres. The Coast Miwok people who lived there were known as skilled weavers of cloth. When the first church was dedicated in 1824, the Russians at the fort sent gifts for it. Native people did the farming, herding, weaving, and building. After the mission closed, many of them had to work on the ranches of the men who now held the land.",
+        "architecture": "The long, low adobe building beside the chapel is the oldest building in Sonoma. It was the priests' house, and it is the only part of the mission that is left from mission days. It once had 27 rooms, and now it has five. Even this building was partly rebuilt after years of neglect. The chapel is not the mission church. General Vallejo built it in 1840, after the mission had closed. The great earthquake of 1906 badly damaged the buildings, and they were repaired between 1911 and 1913. Today the mission is part of a state historic park."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "12th"
+            },
+            {
+              "text": "20th"
+            },
+            {
+              "text": "21st",
+              "correct": true
+            }
+          ],
+          "explanation": "Mission San Francisco Solano, founded on July 4, 1823, was the twenty-first and last California mission."
+        },
+        {
+          "prompt": "Whose homeland is the Sonoma Valley, where the mission was built?",
+          "choices": [
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Coast Miwok",
+              "correct": true
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Kumeyaay"
+            }
+          ],
+          "explanation": "The mission was built on Coast Miwok land. Patwin, Wappo, and Pomo people were brought there too."
+        },
+        {
+          "prompt": "What makes this mission different from the other twenty?",
+          "choices": [
+            {
+              "text": "It was built on an island"
+            },
+            {
+              "text": "It was founded after Mexico became free from Spain",
+              "correct": true
+            },
+            {
+              "text": "It was built of stone"
+            }
+          ],
+          "explanation": "The other missions were founded while Spain ruled California. This one was founded in 1823, under Mexico."
+        },
+        {
+          "prompt": "How long did the mission last before the government closed it?",
+          "choices": [
+            {
+              "text": "One year"
+            },
+            {
+              "text": "Eleven years",
+              "correct": true
+            },
+            {
+              "text": "Sixty years"
+            }
+          ],
+          "explanation": "The mission was founded in 1823 and closed in 1834."
+        },
+        {
+          "prompt": "What does the monument beside the chapel honor?",
+          "choices": [
+            {
+              "text": "The soldiers of Sonoma"
+            },
+            {
+              "text": "The first governor"
+            },
+            {
+              "text": "The 896 Native people buried at the mission",
+              "correct": true
+            }
+          ],
+          "explanation": "The monument was put up in 1999 to honor the Native people who are buried there."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Sonoma State Historic Park brochure (2016)",
+          "publisher": "California State Parks",
+          "url": "https://demo2.parks.ca.gov/pages/479/files/SonomaSHPFinalWebLayout051916.pdf",
+          "note": "Coast and Lake Miwok, Pomo, Patwin and Wappo baptized and \"used as a labor source\"; July 4, 1823; first baptisms April 4, 1824; nearly 1,000 people and 10,000 acres about 1832; more than 100 military expeditions; 1834; the church's collapse; the 1840 chapel; the 1999 monument to 896 people; the Padres' Quarters"
+        },
+        {
+          "title": "History",
+          "publisher": "Federated Indians of Graton Rancheria",
+          "url": "https://gratonrancheria.com/culture/history/",
+          "note": "Coast Miwok and Southern Pomo; the three missions that used their ancestors as labor; \"loss of homelands, European disease, mistreatment, and enslavement\"; servitude on the ranchos; recognition restored in 2000"
+        },
+        {
+          "title": "Ethnohistory and Ethnogeography of the Coast Miwok and Their Neighbors, 1783–1840",
+          "publisher": "Randall Milliken, National Park Service, Golden Gate NRA (2009)",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/2009-Final-Coast-Miwok-Report.pdf",
+          "note": "founded on the lands of the Chocuyen Coast Miwok; mostly Patwin speakers, then Wappo, by the time it closed; survivors at Vallejo's Rancho Petaluma"
+        },
+        {
+          "title": "San Francisco Solano",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-francisco-solano/",
+          "note": "July 4, 1823; Father Altimira and his plan; the only mission founded after Mexico's independence; the 1906 earthquake"
+        },
+        {
+          "title": "Mission San Francisco Solano",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanfranciscosolano.html",
+          "note": "St. Francis Solano; the most northern mission; building without approval; the Russians and their gifts; the 1826 fire and Father Fortuni; Coast Miwok weavers; Vallejo and the town, 1834–1835; the 1840 chapel; 1906; repairs 1911–1913; the padres' wing, 27 rooms and five"
+        }
+      ]
+    }
+  ]
+}

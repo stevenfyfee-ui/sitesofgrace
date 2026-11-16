@@ -1,0 +1,1264 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-14",
+  "pages": [
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-carlos-borromeo-de-carmelo",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Carlos Borromeo de Carmelo (Carmel Mission)",
+        "production_id_hint": 1311
+      },
+      "student_title": "Mission San Carlos Borromeo de Carmelo",
+      "subtitle": "The second California mission, built on the homeland of the Rumsen and Esselen peoples. Saint Junípero Serra lived and is buried here.",
+      "story_label": "The Mission Story",
+      "founding_number": 2,
+      "founding_date": "1770-06-03",
+      "founding_date_display": "June 3, 1770",
+      "founding_source_note": "Society of Architectural Historians, SAH Archipedia, \"Carmel Mission\"; Toucan Valley fact card for Mission San Carlos Borromeo.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "2 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "June 3, 1770"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Charles Borromeo"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Rumsen (Ohlone) and Esselen"
+        }
+      ],
+      "intro": "Mission San Carlos Borromeo de Carmelo is often called Carmel Mission. Saint Junípero Serra founded it in 1770. It was the second California mission and the main office for all the others. It stands on the homeland of the Rumsen and Esselen peoples. Its story includes faith and a beautiful stone church. It also includes sickness and great loss for the Native people who lived there.",
+      "story_paragraphs": [
+        "Long before the Spanish came, the Rumsen people lived around Monterey Bay and the Carmel River. Their neighbors, the Esselen, lived in the mountains and along the rocky coast to the south. The Esselen Tribe says its people have lived there for more than 6,000 years.",
+        "On June 3, 1770, Father Junípero Serra founded Mission San Carlos Borromeo next to the Spanish fort at Monterey. It was the second California mission. About a year later, he moved it about five miles south, near the Carmel River. The new place had fresh water all year and better land for farming.",
+        "Serra made Carmel his home. From there he led all the California missions. He died at the mission on August 28, 1784, and was buried in the church.",
+        "Rumsen and Esselen people were brought into the mission and baptized. By the end of 1778, the five Rumsen villages nearby were empty. Mission life was very hard. People had to work for the mission and follow its rules. The Esselen Tribe says families were separated, and people were not allowed to speak their own languages or keep their traditions.",
+        "Sickness spread quickly at the mission. A measles outbreak in 1806 was one of the worst. In 1795, about 876 Native people lived there. By 1834, only 188 were left.",
+        "Father Fermín Lasuén led the missions after Serra. He had a new church built of stone. A master stonemason named Manuel Ruiz led the work, and the church was dedicated in 1797.",
+        "In 1834, the Mexican government took the missions away from the Church. The buildings stood empty, and in the early 1850s the church roof fell in. In 1884, a priest named Angelo Casanova gave the church a new roof. In the 1930s, a builder named Harry Downie began careful repairs that lasted for many years.",
+        "Today, the mission is a parish church and a basilica. The Rumsen and Esselen people are still here too. Their tribes are working to bring back their languages and to care for their homelands."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1770",
+          "text": "The Rumsen and Esselen peoples live around Monterey Bay, the Carmel River, and the mountains to the south."
+        },
+        {
+          "date_display": "June 3, 1770",
+          "text": "Saint Junípero Serra founds the mission at Monterey. It is the second California mission."
+        },
+        {
+          "date_display": "1771",
+          "text": "The mission moves about five miles south, near the Carmel River."
+        },
+        {
+          "date_display": "August 28, 1784",
+          "text": "Father Serra dies at the mission and is buried in the church."
+        },
+        {
+          "date_display": "1797",
+          "text": "The stone church is dedicated."
+        },
+        {
+          "date_display": "1834",
+          "text": "The Mexican government takes the mission away from the Church. Only 188 Native people still live there."
+        },
+        {
+          "date_display": "1884",
+          "text": "Father Angelo Casanova puts a new roof on the ruined church."
+        },
+        {
+          "date_display": "1930s",
+          "text": "Harry Downie begins many years of careful repairs."
+        }
+      ],
+      "fun_facts": [
+        "The church's two bell towers do not match. Only the bigger one has a dome.",
+        "The window over the front door is often called the \"star window.\"",
+        "The mission is named for Saint Charles Borromeo, an archbishop of Milan, Italy, who lived in the 1500s.",
+        "The mission library once held about 1,500 books. Some of Father Serra's own books are still there.",
+        "Pope John Paul II visited the mission in 1987."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Rumsen",
+          "definition": "One of the Native peoples of the Monterey and Carmel area. The Rumsen are one of the Ohlone peoples."
+        },
+        {
+          "word": "Esselen",
+          "definition": "The Native people of the mountains and coast south of Carmel."
+        },
+        {
+          "word": "Headquarters",
+          "definition": "The main office, where the leader of a group lives and works."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        }
+      ],
+      "think_about_it": "The stone church at Carmel is beautiful, and the story of the people who lived there is sad in many ways. Why is it important to remember both?",
+      "reflection_question": "The Rumsen and Esselen peoples are working to bring back their languages. What is something from your own family that you would want to keep and pass on?",
+      "type_specific": {
+        "native_peoples_and_history": "Two Native peoples lived at this mission. The Rumsen, who are one of the Ohlone peoples, came from villages such as Achasta, near Monterey and the Carmel River. The Esselen came from the mountains and coast to the south. By 1794, about three out of four people at the mission were Rumsen, and one out of four was Esselen. Mission life brought forced work, strict rules, sickness, and the loss of land, language, and freedom. Some people resisted. In 1779, a mission leader named Baltazar ran away and gathered others to stand against the mission. Several tribes today come from the families of the people of this mission. They include the Ohlone Costanoan Esselen Nation, the Esselen Tribe of Monterey County, and the Costanoan Rumsen Carmel Tribe.",
+        "mission_life": "Carmel was the headquarters of the California missions for more than 30 years, so letters, reports, and visitors came here from all the other missions. The mission kept a library of about 1,500 books. Beside the church stood a school, workshops, sleeping rooms, and storehouses for grain. The Rumsen and Esselen people who lived at the mission did the daily work. For them, this was a very different life from the one their families had known.",
+        "architecture": "The church is built of brown sandstone, with walls about five feet thick. It has two bell towers that do not match. The bigger one has a rounded dome on top. Over the front door is a window shaped like a star. Inside, the ceiling curves in a tall arch. Not everything you see is from the 1790s. The roof fell in during the 1850s. The tile roof and curved wooden ceiling were rebuilt in the 1930s, and most of the buildings around the courtyard were rebuilt on the old foundations. The stone walls and towers are from the first church."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "2nd",
+              "correct": true
+            },
+            {
+              "text": "6th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Carlos Borromeo, founded on June 3, 1770, was the second of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native peoples' homeland is this mission built on?",
+          "choices": [
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Rumsen and Esselen",
+              "correct": true
+            },
+            {
+              "text": "Chumash"
+            }
+          ],
+          "explanation": "The Rumsen lived around Monterey Bay and the Carmel River, and the Esselen lived in the mountains and coast to the south."
+        },
+        {
+          "prompt": "Why was the mission moved to Carmel?",
+          "choices": [
+            {
+              "text": "A fire burned the first church"
+            },
+            {
+              "text": "Carmel had fresh water all year and better farmland",
+              "correct": true
+            },
+            {
+              "text": "The ocean flooded Monterey"
+            }
+          ],
+          "explanation": "About a year after the founding, Father Serra moved the mission about five miles south, near the Carmel River."
+        },
+        {
+          "prompt": "Who is buried in the mission church?",
+          "choices": [
+            {
+              "text": "Saint Charles Borromeo"
+            },
+            {
+              "text": "Harry Downie"
+            },
+            {
+              "text": "Saint Junípero Serra",
+              "correct": true
+            }
+          ],
+          "explanation": "Father Serra lived at Carmel and led the missions from there. He died on August 28, 1784, and was buried in the church."
+        },
+        {
+          "prompt": "What is special about the church's two bell towers?",
+          "choices": [
+            {
+              "text": "They do not match",
+              "correct": true
+            },
+            {
+              "text": "They are made of wood"
+            },
+            {
+              "text": "They are the tallest in California"
+            }
+          ],
+          "explanation": "One tower is bigger than the other, and only the bigger one has a dome on top."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Carmel Mission",
+          "publisher": "Society of Architectural Historians (SAH Archipedia)",
+          "url": "https://sah-archipedia.org/node/83324",
+          "note": "founding June 3, 1770; the move; headquarters for 32 years; Serra's burial; stonemason Manuel Estevan Ruiz; church of 1793–1797, sandstone, five-foot walls, towers, dome, window; 876 people in 1795; 1834; roof collapse 1851; 1884 roof; Downie 1931–1936; what is rebuilt"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "Achasta; five Rumsen villages empty by 1778; Baltazar, 1779; Esselen baptisms from 1775; three-fourths Rumsen in 1794; 1806 measles; 188 people in 1834"
+        },
+        {
+          "title": "Our History",
+          "publisher": "Esselen Tribe of Monterey County",
+          "url": "https://www.esselentribe.org/history",
+          "note": "more than 6,000 years; the homeland; people taken to three missions; families separated; languages and traditions not allowed"
+        },
+        {
+          "title": "Official tribal website",
+          "publisher": "Ohlone Costanoan Esselen Nation",
+          "url": "https://ohlonecostanoanesselennation.org/",
+          "note": "the tribe today; its members descend from the people of Mission San Carlos"
+        },
+        {
+          "title": "History",
+          "publisher": "Costanoan Rumsen Carmel Tribe",
+          "url": "https://www.costanoanrumsen.org/history.html",
+          "note": "the tribe today; \"enslavement under the mission system\"; work to reclaim culture, language and land"
+        },
+        {
+          "title": "Mission San Carlos Borromeo del Río Carmelo",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sancarlosborromeo.html",
+          "note": "named for St. Charles Borromeo; Serra's death date; star window; unmatched towers; library; Casanova's roof; Downie; 1987 papal visit"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-antonio-de-padua",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Antonio de Padua",
+        "production_id_hint": 1312
+      },
+      "student_title": "Mission San Antonio de Padua",
+      "subtitle": "The third California mission, founded in a quiet valley of oak trees on the homeland of the Salinan people.",
+      "story_label": "The Mission Story",
+      "founding_number": 3,
+      "founding_date": "1771-07-14",
+      "founding_date_display": "July 14, 1771",
+      "founding_source_note": "Mission San Antonio de Padua, \"History\"; Monterey County Historical Society, \"Mission San Antonio de Padua.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "3 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "July 14, 1771"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Anthony of Padua"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Salinan"
+        }
+      ],
+      "intro": "Mission San Antonio de Padua was the third California mission. Saint Junípero Serra founded it in 1771 in a valley full of oak trees. This land is the homeland of the Salinan people. The mission became known for its clever water system and its mill. Its story also includes hunger, sickness, and the loss of language and freedom for the Salinan people.",
+      "story_paragraphs": [
+        "For a very long time, the Salinan people have lived in the valleys, hills, and coast of what are now Monterey and San Luis Obispo Counties. They built villages beside rivers and streams. Acorns were one of their most important foods. They burned the brush under the oak trees so the acorns would be easy to find in the fall.",
+        "On July 14, 1771, Father Junípero Serra came to this valley with two other priests, Miguel Pieras and Buenaventura Sitjar. They hung the mission bells on the branch of an oak tree. Serra named the new mission for Saint Anthony of Padua. Then he went on his way, and the two priests stayed to build.",
+        "In 1773, the mission moved farther up the valley, because the first spot did not have enough water. A Salinan elder writes that in that same year, a very old Salinan woman came to the mission and asked to be baptized. She was given the name Agata Maria.",
+        "The mission grew. By 1776, about 500 people lived there. Workers built dams on the river and sent the water through ditches and clay pipes to the fields. In 1806, they finished a mill where rushing water turned a wheel to grind grain. A large new church was built from 1810 to 1813.",
+        "Mission life was hard for the Salinan people. They had to work for the mission and live by its rules. A Salinan elder named Suzanne Pierce Taylor writes that the mission system broke the careful way her people had always shared the land's food, so hunger became more common when rain did not come. People had to speak Spanish, and after a few generations the Salinan language was almost forgotten. New sicknesses spread through the missions, and many Native people died.",
+        "In 1834, the government took the mission away from the Church. The last priest died in 1882, and the empty buildings began to fall down.",
+        "People started to rebuild the mission in 1903, and a Salinan family, the Encinales, helped. The mission was rebuilt again beginning in 1948. Today, the Salinan people are still here, working to bring back their language and culture."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1771",
+          "text": "The Salinan people live in villages beside the rivers and streams of this region."
+        },
+        {
+          "date_display": "July 14, 1771",
+          "text": "Saint Junípero Serra founds the mission and hangs its bells on an oak tree. It is the third California mission."
+        },
+        {
+          "date_display": "1773",
+          "text": "The mission moves farther up the valley to find better water."
+        },
+        {
+          "date_display": "1806",
+          "text": "A mill powered by water is finished."
+        },
+        {
+          "date_display": "1810–1813",
+          "text": "The large church is built."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1882",
+          "text": "The last priest dies, and the mission is left empty."
+        },
+        {
+          "date_display": "1948",
+          "text": "Workers begin to rebuild the church and the buildings around the courtyard."
+        }
+      ],
+      "fun_facts": [
+        "The first mission bells here were hung on the branch of an oak tree.",
+        "The valley was called the Valley of the Oaks.",
+        "Water turned the wheel of the mission's mill to grind grain into flour.",
+        "The mission once had more than 800 horses.",
+        "The Salinan people used flat pink, blue, or white beads on a string as money for trading."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Salinan",
+          "definition": "The Native people whose homeland includes parts of Monterey and San Luis Obispo Counties."
+        },
+        {
+          "word": "Acorn",
+          "definition": "The nut of an oak tree. Many Native peoples of California ground acorns into food."
+        },
+        {
+          "word": "Mill",
+          "definition": "A building with a machine that grinds grain into flour."
+        },
+        {
+          "word": "Adobe",
+          "definition": "Bricks made of mud and straw, dried in the sun."
+        }
+      ],
+      "think_about_it": "The Salinan people had to speak Spanish at the mission, and their own language was almost forgotten. Why does a language matter so much to a people?",
+      "reflection_question": "A Salinan elder says of her people, \"We are here.\" How can you show respect for people who lived on the land before you?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Salinan people. The Salinan spoke three forms of their language. One was spoken on the coast, one near this mission, and one near Mission San Miguel. They lived in villages led by a headman, and they made choices by talking until everyone agreed. They wove baskets so tight that they could cook in them with hot stones. When the mission came, many Salinan people were baptized. Mission life also brought forced work, strict rules, hunger, sickness, and the loss of land, language, and freedom. A Salinan elder writes, \"We do not look the same, dress the same, live the same or speak the same, but we are here.\"",
+        "mission_life": "People at the mission grew wheat, grapes, and olives, and they raised cattle and horses. At one time the mission had more than 800 horses. Water from the river was used for the fields, for washing, and for the mill that ground grain into flour. The mission bells told everyone when to pray, work, and eat. Salinan people did the farming, building, and herding. Some lived and worked at ranches far from the church.",
+        "architecture": "The church is about 200 feet long, with adobe walls about six feet thick at the bottom. In front of the church is a wall of fired brick with arched openings for three bells. A curved brick passage joins this bell wall to the church door. Very little of what you see is from mission days. By the early 1900s the church was a ruin. Starting in 1948, the church and the buildings around the courtyard were rebuilt, with new adobe bricks made from the dirt of the old fallen walls. Parts of the old water system can still be seen near the mission."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "3rd",
+              "correct": true
+            },
+            {
+              "text": "9th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Antonio de Padua, founded on July 14, 1771, was the third of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Ohlone"
+            },
+            {
+              "text": "Salinan",
+              "correct": true
+            }
+          ],
+          "explanation": "The mission was built on the homeland of the Salinan people, who are still here today."
+        },
+        {
+          "prompt": "Where were the first mission bells hung?",
+          "choices": [
+            {
+              "text": "In a stone tower"
+            },
+            {
+              "text": "On the branch of an oak tree",
+              "correct": true
+            },
+            {
+              "text": "On a ship"
+            }
+          ],
+          "explanation": "When the mission was founded in 1771, the priests hung the bells on an oak tree in the valley."
+        },
+        {
+          "prompt": "What turned the wheel of the mission's mill?",
+          "choices": [
+            {
+              "text": "Wind"
+            },
+            {
+              "text": "Horses"
+            },
+            {
+              "text": "Water",
+              "correct": true
+            }
+          ],
+          "explanation": "Water from the river was brought to the mission, and in 1806 a mill powered by water was finished."
+        },
+        {
+          "prompt": "What was one of the most important Salinan foods?",
+          "choices": [
+            {
+              "text": "Rice"
+            },
+            {
+              "text": "Acorns",
+              "correct": true
+            },
+            {
+              "text": "Bananas"
+            },
+            {
+              "text": "Corn chips"
+            }
+          ],
+          "explanation": "The Salinan people gathered acorns from the oak trees and ground them to make food."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Mission San Antonio de Padua",
+          "url": "https://www.missionsanantonio.net/history",
+          "note": "July 14, 1771; Serra, Pieras and Sitjar; bells on the oak; the 1773 move for water; 1806 mill; church 1810–1813; 1834; 1882; the Encinales family and the 1903–08 rebuilding"
+        },
+        {
+          "title": "The Salinans",
+          "publisher": "Suzanne Pierce Taylor (Salinan elder), sponsored by the Salinan Tribal Council; Mission San Miguel website",
+          "url": "https://www.missionsanmiguel.com/history/salinans.html",
+          "note": "homeland; three dialects; villages and headmen; acorns and burning; cooking baskets; bead money; Agata Maria in 1773; loss of language; hunger; \"we are here\""
+        },
+        {
+          "title": "Mission San Antonio de Padua",
+          "publisher": "Monterey County Historical Society, Gary S. Breschini",
+          "url": "https://mchsmuseum.com/missionsant.html",
+          "note": "founding date; the move; 500 people by 1776; ditches; Salinan workers; ranches"
+        },
+        {
+          "title": "Mission San Antonio de Padua",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanantonio.html",
+          "note": "named for St. Anthony of Padua; dams and clay pipes; bell wall and brick passage; church size; 800 horses; crops; the 1948 rebuilding with new adobe bricks"
+        },
+        {
+          "title": "Mission Cemetery",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mli/cemetery.html",
+          "note": "measles and smallpox spreading through the missions"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-gabriel-arcangel",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Gabriel Arcángel",
+        "production_id_hint": 1313
+      },
+      "student_title": "Mission San Gabriel Arcángel",
+      "subtitle": "The fourth California mission, built on the homeland of the Tongva people near what is now Los Angeles.",
+      "story_label": "The Mission Story",
+      "founding_number": 4,
+      "founding_date": "1771-09-08",
+      "founding_date_display": "September 8, 1771",
+      "founding_source_note": "Los Angeles Conservancy, \"Mission San Gabriel Arcángel\"; California Missions Foundation, \"Mission San Gabriel.\"",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "4 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "September 8, 1771"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Fathers Pedro Cambón and Angel Somera, sent by Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "The Archangel Gabriel"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Tongva (also called Gabrielino)"
+        }
+      ],
+      "intro": "Mission San Gabriel Arcángel was the fourth California mission. Two priests sent by Saint Junípero Serra founded it in 1771. It stands on the homeland of the Tongva people, the first people of the Los Angeles area. The mission grew large and rich in crops. For the Tongva, it also brought forced work, sickness, and the loss of their land. Some of them fought back.",
+      "story_paragraphs": [
+        "The Tongva people are the first people of the Los Angeles area and four islands off its coast. Their nation says its history there goes back about 8,000 years. Around 1770, about 5,000 Tongva lived in more than fifty villages.",
+        "On September 8, 1771, two priests named Pedro Cambón and Angel Somera founded Mission San Gabriel Arcángel. Father Serra had sent them. It was the fourth California mission. The first spot was near a river, and it flooded again and again. In 1775, the mission moved to higher ground, where it stands today. That place was the Tongva village of Toviscanga.",
+        "In 1781, a group of settlers walked from the mission to start a new town nearby. That town became the city of Los Angeles.",
+        "The mission grew quickly. Tongva people from many villages were brought there and baptized. They were made to build the mission, plant the fields, and care for the animals. The National Park Service says they faced violence, too much work, sickness, and too little food. They were not free to hold their own ceremonies and dances.",
+        "In 1785, some Tongva decided to fight back. A man named Nicolás José, who lived at the mission, made a plan with a young woman named Toypurina. She was a respected leader from the village of Japchivit. She asked as many as eight villages to join. On the night of October 25, they came to the mission, but someone had warned the soldiers. The soldiers were waiting, and the leaders were caught.",
+        "At her trial, Toypurina said she was angry with the priests and the others at the mission because they were living on her people's land. She was sent far away to live at another mission and never came home.",
+        "A new church of stone and brick was finished in 1805. In 1834, the government took the mission away from the Church.",
+        "In July 2020, a fire destroyed the church roof. The church was repaired and opened again in 2023. Today, the Tongva people still live in the Los Angeles area."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1771",
+          "text": "The Tongva people live in more than fifty villages across the Los Angeles area and nearby islands."
+        },
+        {
+          "date_display": "September 8, 1771",
+          "text": "Fathers Pedro Cambón and Angel Somera found the mission. It is the fourth California mission."
+        },
+        {
+          "date_display": "1775",
+          "text": "The mission moves to higher ground to get away from floods."
+        },
+        {
+          "date_display": "1781",
+          "text": "Settlers walk from the mission to start the town of Los Angeles."
+        },
+        {
+          "date_display": "October 25, 1785",
+          "text": "Toypurina, Nicolás José, and people from several villages try to drive out the mission. Soldiers stop them."
+        },
+        {
+          "date_display": "1805",
+          "text": "The church of stone and brick is finished."
+        },
+        {
+          "date_display": "1812",
+          "text": "An earthquake knocks down the bell tower."
+        },
+        {
+          "date_display": "July 11, 2020",
+          "text": "A fire destroys the church roof. The church opens again in 2023."
+        }
+      ],
+      "fun_facts": [
+        "The mission is named for the Archangel Gabriel, the angel who brought God's message to Mary.",
+        "The settlers who started the city of Los Angeles set out from this mission in 1781.",
+        "The bell wall holds six bells. The oldest was made in Mexico City in 1795.",
+        "The church looks a little like a famous cathedral in Córdoba, Spain.",
+        "The mission was called the \"Pride of the Missions.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Tongva",
+          "definition": "The Native people whose homeland is the Los Angeles area and four nearby islands."
+        },
+        {
+          "word": "Archangel",
+          "definition": "A leader among the angels. Gabriel is an archangel."
+        },
+        {
+          "word": "Buttress",
+          "definition": "A thick support built against a wall to keep it strong."
+        },
+        {
+          "word": "Resist",
+          "definition": "To stand against something you believe is wrong."
+        }
+      ],
+      "think_about_it": "Toypurina said she was angry because strangers were living on her people's land. How would you feel if someone took your home and told you how to live?",
+      "reflection_question": "The mission now has a wall with the names of the Native people who were baptized there. Why does it matter to remember people by name?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Tongva people. The Spanish called them Gabrielinos, after the mission. Before the mission, the Tongva lived in many separate villages, each with its own leaders. Their homeland covered more than a million acres. The Gabrielino/Tongva Nation says the mission brought \"enslavement and abuse of our ancestors.\" People were made to work, many died from sickness, and the Tongva lost their land. Some resisted, as Toypurina and Nicolás José did in 1785. About 6,000 Native people are buried in the mission cemetery. A wall at the mission now lists the names of 7,054 Native people who were baptized there. Today, Tongva people still live in and around Los Angeles and keep their culture alive.",
+        "mission_life": "San Gabriel was called the \"Pride of the Missions\" because it grew so much food. Its fields grew more wheat than any other mission, and it had large vineyards of grapes. Tongva workers also made soap, leather, and cloth, and the mission sent soap to other missions. Bells told everyone when to pray, work, and eat. The Tongva did this work because they had to. Their own way of life, in their own villages, had been taken from them.",
+        "architecture": "The church does not look like the other mission churches. A priest named Antonio Cruzado planned it. He came from Córdoba, Spain, and the church looks a little like the great cathedral there. Its long side wall has tall supports called buttresses, with pointed caps on top, and long, narrow windows. The walls are stone below and fired brick above. The first bell tower fell in an earthquake in 1812. A bell wall with six bells was finished in 1828. The walls and bell wall are from mission days. The roof and wooden ceiling are new. They were rebuilt after the fire of 2020."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "2nd"
+            },
+            {
+              "text": "4th",
+              "correct": true
+            },
+            {
+              "text": "12th"
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Gabriel Arcángel, founded on September 8, 1771, was the fourth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Tongva",
+              "correct": true
+            },
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Esselen"
+            },
+            {
+              "text": "Kumeyaay"
+            }
+          ],
+          "explanation": "The mission was built on the homeland of the Tongva people, the first people of the Los Angeles area."
+        },
+        {
+          "prompt": "Why did the mission move in 1775?",
+          "choices": [
+            {
+              "text": "A fire burned it down"
+            },
+            {
+              "text": "The first spot kept flooding",
+              "correct": true
+            },
+            {
+              "text": "The bells were too loud"
+            }
+          ],
+          "explanation": "The first mission site was near a river that flooded, so the mission moved to higher ground."
+        },
+        {
+          "prompt": "Who was Toypurina?",
+          "choices": [
+            {
+              "text": "A Spanish soldier"
+            },
+            {
+              "text": "A mission bell maker"
+            },
+            {
+              "text": "A Tongva woman who helped lead a plan to resist the mission",
+              "correct": true
+            }
+          ],
+          "explanation": "In 1785, Toypurina and Nicolás José led people from several villages against the mission. She said she was angry because the Spanish were living on her people's land."
+        },
+        {
+          "prompt": "Which city was started by settlers who set out from this mission?",
+          "choices": [
+            {
+              "text": "San Diego"
+            },
+            {
+              "text": "Los Angeles",
+              "correct": true
+            },
+            {
+              "text": "San Francisco"
+            },
+            {
+              "text": "Monterey"
+            }
+          ],
+          "explanation": "In 1781, a group of settlers walked from Mission San Gabriel to start the town that became Los Angeles."
+        }
+      ],
+      "sources": [
+        {
+          "title": "History",
+          "publisher": "Gabrielino/Tongva Nation",
+          "url": "https://gabrielinotongva.org/history/",
+          "note": "homeland of the Los Angeles Basin and four islands; history back to 6000 BC; more than 1.5 million acres; the 1771 mission and \"enslavement and abuse of our ancestors\"; Toypurina's 1785 uprising and exile; the nation today"
+        },
+        {
+          "title": "Mission San Gabriel Archangel",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/places/mission-san-gabriel-archangel.htm",
+          "note": "the first site and 1775 move; Gabrieleno labor; violence, overwork, disease, malnutrition and religious persecution; the 1785 rebellion; settlers leaving for Los Angeles in 1781; the Córdoba design"
+        },
+        {
+          "title": "Toypurina: A Legend Etched in the Landscape of Los Angeles",
+          "publisher": "Maria John, PBS SoCal",
+          "url": "https://pbssocal.org/history-society/toypurina-a-legend-etched-in-the-landscape-of-los-angeles",
+          "note": "about 5,000 people in more than fifty communities; Nicolás José; October 25, 1785; the ban on dances; her words as the soldier wrote them down, from historian Steven Hackel's study of the trial record"
+        },
+        {
+          "title": "Toypurina: Resistance at Mission San Gabriel",
+          "publisher": "Museum of Indigenous People",
+          "url": "https://www.museumofindigenouspeople.org/post/toypurina-resistance-at-mission-san-gabriel",
+          "note": "Japchivit; up to eight villages; the soldiers warned; her exile and later life"
+        },
+        {
+          "title": "Mission San Gabriel Arcángel",
+          "publisher": "Los Angeles Conservancy",
+          "url": "https://www.laconservancy.org/learn/historic-places/mission-san-gabriel-arcangel/",
+          "note": "September 8, 1771; the Tongva village of Toviscanga; forced labor; Cruzado; church finished 1805; buttresses, windows, six-bell wall; the 2020 fire and what was lost"
+        },
+        {
+          "title": "Mission San Gabriel Arcángel",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sangabrielarcangel.html",
+          "note": "Fathers Cambón and Somera; the Archangel Gabriel; stone and brick walls; 1812 earthquake; 1828 bell wall and its bells; wheat, vineyards and soap; 1834"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-luis-obispo-de-tolosa",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Luis Obispo de Tolosa",
+        "production_id_hint": 1314
+      },
+      "student_title": "Mission San Luis Obispo de Tolosa",
+      "subtitle": "The fifth California mission, founded in the Valley of the Bears on the homeland of the Northern Chumash people.",
+      "story_label": "The Mission Story",
+      "founding_number": 5,
+      "founding_date": "1772-09-01",
+      "founding_date_display": "September 1, 1772",
+      "founding_source_note": "California Missions Foundation, \"Mission San Luis Obispo\"; Toucan Valley fact card for Mission San Luis Obispo.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "5 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "September 1, 1772"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Saint Junípero Serra"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Louis, Bishop of Toulouse"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Northern Chumash"
+        }
+      ],
+      "intro": "Mission San Luis Obispo de Tolosa was the fifth California mission. Saint Junípero Serra founded it in 1772 near a place the Spanish called the Valley of the Bears. This land is the homeland of the Northern Chumash people, who have lived here for more than 10,000 years. The mission is known for its red roof tiles. Its story also includes loss for the Chumash people.",
+      "story_paragraphs": [
+        "The Northern Chumash people have lived along this part of the California coast for more than 10,000 years. They had villages from the ocean to the hills. One village, called tiłhini, stood where the city of San Luis Obispo is now. Its name means \"place of the full moon.\"",
+        "In 1769, Spanish explorers passed through a nearby valley and saw grizzly bears. They named it the Valley of the Bears. Three years later, the first missions were running out of food. In the summer of 1772, hunters came back to this valley and sent bear meat to the hungry missions. They also traded meat with the local people for seeds to eat.",
+        "Father Junípero Serra decided this was a good place for a mission. On September 1, 1772, he founded Mission San Luis Obispo de Tolosa. It was the fifth California mission. He left the next day, and a priest named José Cavaller stayed to build it.",
+        "The first buildings had roofs made of dry reeds. In 1776, a burning arrow landed on a roof, and fire destroyed many buildings. So the priests began making roof tiles out of baked clay, which cannot catch fire. Red clay tiles became a famous part of the California missions.",
+        "Many Chumash people were baptized and came to live at the mission. By 1804, 832 lived there. Their lives changed completely. They had to work for the mission and follow its rules, and they were no longer free to live in their own villages in their own way. New sicknesses spread through the missions, and many Native people died.",
+        "The church that stands today was built from 1792 to 1794. In 1835, the government took the mission away from the Church, and ten years later the mission lands were sold.",
+        "In the 1880s, the old church was covered with wooden boards so it would look like churches in the eastern United States. In the 1930s, a priest named John Harnett took the boards off and rebuilt the bell tower.",
+        "Today, the mission is a parish church. The Northern Chumash people still live in their homeland, and they are singing their old songs again."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1772",
+          "text": "The Northern Chumash people live in villages from the coast to the hills."
+        },
+        {
+          "date_display": "1769",
+          "text": "Spanish explorers see grizzly bears and name the Valley of the Bears."
+        },
+        {
+          "date_display": "September 1, 1772",
+          "text": "Saint Junípero Serra founds the mission. It is the fifth California mission."
+        },
+        {
+          "date_display": "1776",
+          "text": "A burning arrow starts a fire. The priests begin making clay roof tiles."
+        },
+        {
+          "date_display": "1792–1794",
+          "text": "The adobe church that stands today is built."
+        },
+        {
+          "date_display": "1835",
+          "text": "The government takes the mission away from the Church."
+        },
+        {
+          "date_display": "1880s",
+          "text": "The church is covered with wooden boards and given a steeple."
+        },
+        {
+          "date_display": "1930s",
+          "text": "Father John Harnett removes the boards and rebuilds the bell tower."
+        }
+      ],
+      "fun_facts": [
+        "The mission's valley was named for the grizzly bears that explorers saw there.",
+        "Bear meat from this valley helped feed the first missions when food ran low.",
+        "The priests here began making clay roof tiles after a fire in 1776.",
+        "The church is shaped like the letter L. No other California mission church is.",
+        "The Chumash village where the city now stands was called tiłhini, \"place of the full moon.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Chumash",
+          "definition": "The Native people of the central California coast. The Northern Chumash homeland is the San Luis Obispo area."
+        },
+        {
+          "word": "Tile",
+          "definition": "A thin piece of baked clay used to cover a roof."
+        },
+        {
+          "word": "Vineyard",
+          "definition": "A field where grapes are grown."
+        },
+        {
+          "word": "Adobe",
+          "definition": "Bricks made of mud and straw, dried in the sun."
+        }
+      ],
+      "think_about_it": "Rosario Cooper shared the words and songs of her people so they would not be lost. What is something you know that you could teach to someone younger?",
+      "reflection_question": "The Chumash people's lives changed completely when the mission came. How can learning their side of the story help you treat others fairly?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Northern Chumash people. One tribe of their descendants is called yak tityu tityu yak tiłhini. The name means \"the people of the full moon.\" Their villages reached from the places now called Cambria and Morro Bay to Avila Beach and Nipomo. They fished, gathered abalone and other food from the sea, traded shell beads, and wove baskets with very fine designs. When the mission came, many Chumash people were baptized. Mission life also brought forced work, strict rules, sickness, and the loss of land and freedom. The last person who grew up speaking the tribe's language was a woman named Rosario Cooper. She shared her words and songs with a visitor who wrote them down between 1912 and 1917. Because of her, the tribe is learning its language again today.",
+        "mission_life": "The mission buildings stood around a square courtyard. The church was on one side, the priests' rooms on another, and workshops and storehouses on the rest. Bells told everyone when to pray, work, and eat. A priest named Luis Antonio Martínez led the mission for 34 years and planted a large vineyard. Chumash people did the farming and building. For them, mission life was a big change from their own way of life.",
+        "architecture": "The church is made of adobe with a roof of clay tiles. It is shaped like the letter L, with a second long room joining the main one at a corner. No other California mission church has this shape. At the front, the bells hang in openings above the entry porch instead of in a separate tower. The three bells were first made in Peru in 1818. The adobe church is from 1792 to 1794, but the front is not. The bell openings and porch were torn down in the 1880s and rebuilt in the 1930s. The inside was repaired in the 1940s, when workers uncovered the old wooden ceiling beams."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "3rd"
+            },
+            {
+              "text": "5th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Luis Obispo de Tolosa, founded on September 1, 1772, was the fifth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Tongva"
+            },
+            {
+              "text": "Northern Chumash",
+              "correct": true
+            },
+            {
+              "text": "Kumeyaay"
+            },
+            {
+              "text": "Salinan"
+            }
+          ],
+          "explanation": "The Northern Chumash people have lived in the San Luis Obispo area for more than 10,000 years, and they still live there today."
+        },
+        {
+          "prompt": "Which animals gave the nearby valley its Spanish name?",
+          "choices": [
+            {
+              "text": "Horses"
+            },
+            {
+              "text": "Whales"
+            },
+            {
+              "text": "Bears",
+              "correct": true
+            }
+          ],
+          "explanation": "Spanish explorers saw grizzly bears there in 1769 and named it the Valley of the Bears."
+        },
+        {
+          "prompt": "Why did the priests start making clay roof tiles?",
+          "choices": [
+            {
+              "text": "Clay tiles do not catch fire",
+              "correct": true
+            },
+            {
+              "text": "Clay tiles were lighter than reeds"
+            },
+            {
+              "text": "The king ordered it"
+            }
+          ],
+          "explanation": "In 1776, a burning arrow set a reed roof on fire and many buildings burned. Baked clay tiles kept the roofs safe from fire."
+        },
+        {
+          "prompt": "What letter is the church shaped like?",
+          "choices": [
+            {
+              "text": "T"
+            },
+            {
+              "text": "L",
+              "correct": true
+            },
+            {
+              "text": "O"
+            },
+            {
+              "text": "S"
+            }
+          ],
+          "explanation": "A second long room joins the main church at a corner, making the shape of the letter L."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mission San Luis Obispo",
+          "publisher": "California Missions Foundation",
+          "url": "https://californiamissionsfoundation.org/mission-san-luis-obispo/",
+          "note": "September 1, 1772; Serra; St. Louis, Bishop of Toulouse; the Valley of the Bears and the 1772 hunt; meat traded for seeds; the 1776 fire and the tiles; the L-shaped church; Father Martínez and the vineyard"
+        },
+        {
+          "title": "Lifeways",
+          "publisher": "yak titʸu titʸu yak tiłhini Northern Chumash Tribe",
+          "url": "https://yttnorthernchumashtribe.com/lifeways",
+          "note": "more than 10,000 years; \"The People of the Full Moon\"; the tiłhini language; Rosario Cooper, her songs, and J. P. Harrington's notes of 1912–1917"
+        },
+        {
+          "title": "Stories of the Land",
+          "publisher": "Cal Poly University Housing; village narratives by the yak titʸu titʸu yak tiłhini Northern Chumash Tribe",
+          "url": "https://housing.calpoly.edu/stories-land",
+          "note": "tiłhini, \"place of the full moon,\" at San Luis Obispo; other villages; fish and abalone"
+        },
+        {
+          "title": "Cultural Resources",
+          "publisher": "California State Parks (Oceano Dunes)",
+          "url": "https://www.parks.ca.gov/?page_id=30646",
+          "note": "Northern Chumash here more than 10,000 years; trade in shell beads; baskets; the ytt tribe today"
+        },
+        {
+          "title": "Mission San Luis Obispo de Tolosa",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanluisobispo.html",
+          "note": "Father José Cavaller; \"Chumash Indians of this area\"; 1769 naming of the valley; church of 1792–1794; courtyard layout; the 1818 bells; 1835 and 1845; the 1880s changes; Father Harnett's work in 1933; the 1940s interior"
+        },
+        {
+          "title": "Mission San Luis Obispo de Tolosa",
+          "publisher": "Tricia Weber, Californias-Missions.org",
+          "url": "https://www.californias-missions.org/individual/mission_slo.htm",
+          "note": "832 people at the mission in 1804; the Chumash as the local tribe; clay tiles after the roof fires"
+        }
+      ]
+    },
+    {
+      "kind": "mission",
+      "parent_index": "california-missions",
+      "slug": "mission-san-francisco-de-asis",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Mission San Francisco de Asís (Mission Dolores)",
+        "production_id_hint": 1315
+      },
+      "student_title": "Mission San Francisco de Asís",
+      "subtitle": "The sixth California mission, often called Mission Dolores, built on the homeland of the Ramaytush Ohlone people in what is now San Francisco.",
+      "story_label": "The Mission Story",
+      "founding_number": 6,
+      "founding_date": "1776",
+      "founding_date_display": "1776",
+      "founding_source_note": "Year only, as the missions hub shows it. The mission's own site gives October 9, 1776; other sources give June 29, 1776.",
+      "quick_facts": [
+        {
+          "icon": "number",
+          "label": "Founding #",
+          "value": "6 of 21"
+        },
+        {
+          "icon": "calendar",
+          "label": "Founded",
+          "value": "1776"
+        },
+        {
+          "icon": "person",
+          "label": "Founded by",
+          "value": "Father Francisco Palóu"
+        },
+        {
+          "icon": "star",
+          "label": "Named for",
+          "value": "Saint Francis of Assisi"
+        },
+        {
+          "icon": "people",
+          "label": "Native people",
+          "value": "Ramaytush Ohlone (Yelamu)"
+        }
+      ],
+      "intro": "Mission San Francisco de Asís was the sixth California mission. Most people call it Mission Dolores. A priest named Francisco Palóu founded it in 1776 on the homeland of the Ramaytush Ohlone people. Its small adobe church is the oldest building still standing in San Francisco. The mission's story is also one of the saddest, because so many Native people died there.",
+      "story_paragraphs": [
+        "The Ramaytush Ohlone are the first people of the San Francisco Peninsula. Before the Spanish came, there were about 1,500 to 2,000 of them, living in about ten separate tribes. The tribe that lived where the city of San Francisco is now is called the Yelamu today.",
+        "In 1776, a Spanish officer named Juan Bautista de Anza led settlers overland from Mexico. He chose one place for a fort and another for a mission. That same year, Father Francisco Palóu, a friend of Father Serra, founded the mission. It was the sixth in California.",
+        "The mission was named for Saint Francis of Assisi, who started the Franciscan order. Nearby ran a stream that the Spanish had named for Our Lady of Sorrows. The Spanish word for sorrows is \"dolores,\" so people began calling the church Mission Dolores.",
+        "In 1782, the mission moved a short way to the west. A new adobe church was dedicated there in 1791. It is the same church that stands today.",
+        "For the Native people, the mission brought terrible loss. By 1801, all of the Native people of the San Francisco Peninsula had been brought into the mission. Sickness spread fast in the crowded rooms, and living and working there was very hard. By 1801, about eight out of every ten Ramaytush people had died. In 1795, a large group of people from across the bay ran away from the mission.",
+        "As the years passed, people from other tribes around the bay were brought to the mission too. When the government took the mission away from the Church in 1834, only 136 Native people still lived there. About 5,000 Native people are buried in the mission cemetery, most in graves with no markers.",
+        "In 1906, a great earthquake shook San Francisco. The big brick church next door was ruined, but the little adobe church was not harmed.",
+        "Today, only one Ramaytush family line is known to have living descendants. They lead a group called the Association of Ramaytush Ohlone. They care for the land and teach others about their people."
+      ],
+      "timeline": [
+        {
+          "date_display": "Long before 1776",
+          "text": "The Ramaytush Ohlone people live in about ten tribes on the San Francisco Peninsula."
+        },
+        {
+          "date_display": "1776",
+          "text": "Father Francisco Palóu founds the mission. It is the sixth California mission."
+        },
+        {
+          "date_display": "1782",
+          "text": "The mission moves a short way to the west."
+        },
+        {
+          "date_display": "1791",
+          "text": "The adobe church is dedicated. It still stands today."
+        },
+        {
+          "date_display": "1795",
+          "text": "A large group of Native people from across the bay runs away from the mission."
+        },
+        {
+          "date_display": "1801",
+          "text": "By now, all the Native people of the peninsula have been brought into the mission, and most of the Ramaytush have died."
+        },
+        {
+          "date_display": "1834",
+          "text": "The government takes the mission away from the Church. Only 136 Native people still live there."
+        },
+        {
+          "date_display": "1906",
+          "text": "A great earthquake ruins the church next door, but the adobe church is not harmed."
+        }
+      ],
+      "fun_facts": [
+        "The mission's real name honors Saint Francis of Assisi. The city of San Francisco has the same name.",
+        "\"Dolores\" is the Spanish word for sorrows. The nickname comes from a nearby stream named for Our Lady of Sorrows.",
+        "The adobe church is the oldest building still standing in San Francisco.",
+        "The ceiling beams were tied together with strips of rawhide.",
+        "The little adobe church came through the great earthquake of 1906 without harm."
+      ],
+      "words_to_know": [
+        {
+          "word": "Mission",
+          "definition": "A settlement where missionaries lived and taught the Catholic faith. In California, missions also helped Spain control the land."
+        },
+        {
+          "word": "Ramaytush Ohlone",
+          "definition": "The first people of the San Francisco Peninsula."
+        },
+        {
+          "word": "Franciscan",
+          "definition": "A member of the religious family started by Saint Francis of Assisi. The priests at the California missions were Franciscans."
+        },
+        {
+          "word": "Rawhide",
+          "definition": "Animal skin that has been dried but not made into soft leather. It is very strong."
+        },
+        {
+          "word": "Descendant",
+          "definition": "A person who comes from a family that lived long ago, such as a great-great-grandchild."
+        }
+      ],
+      "think_about_it": "Thousands of Native people are buried at this mission in graves with no names on them. Why is it important to remember people even when we do not know their names?",
+      "reflection_question": "The Ramaytush people who are living today care for the land of their ancestors. What is one way you can care for the place where you live?",
+      "type_specific": {
+        "native_peoples_and_history": "This mission stands on the homeland of the Ramaytush (say it rah-my-toosh) Ohlone, the first people of the San Francisco Peninsula. The local tribe at San Francisco is called the Yelamu today. No one knows what name they used for themselves. The National Park Service says that sickness and poor living and working conditions at the mission killed most of the Ramaytush people, and that by 1850 only about five Ramaytush families were still living. Later, people from other Native nations around the bay were also brought here, so the mission held people who spoke many different languages. The mission's own website says the cemetery is the resting place of about 5,000 Ohlone, Miwok, and other first Californians. The Ramaytush people who are living today say that they lost most of their culture and language, and they are working to care for their homeland once more.",
+        "mission_life": "The buildings around the mission courtyard were finished in 1798. People from many different tribes lived there close together. The rooms were crowded, and there was no separate place for people who were ill, so sickness passed quickly from one person to the next. Native people did the building, farming, and other work of the mission. For them it was a very different life from the one they had known in their own villages.",
+        "architecture": "The adobe church is 114 feet long and only 22 feet wide, with walls four feet thick. Look up, and you will see the most famous part. The ceiling beams are made of redwood, and they were tied together with strips of rawhide instead of nails. The beams are painted with bright Native designs. This church is the real one from 1791. It has not been rebuilt. Steel supports were added in 1917 to make it stronger, and more repairs were made after an earthquake in 1989. The large church next door, called Mission Dolores Basilica, is much newer."
+      },
+      "quiz": [
+        {
+          "prompt": "What number was this mission in the order the missions were founded?",
+          "choices": [
+            {
+              "text": "1st"
+            },
+            {
+              "text": "4th"
+            },
+            {
+              "text": "6th",
+              "correct": true
+            },
+            {
+              "text": "21st"
+            }
+          ],
+          "explanation": "Mission San Francisco de Asís, founded in 1776, was the sixth of the 21 California missions."
+        },
+        {
+          "prompt": "Which Native people's homeland is the mission built on?",
+          "choices": [
+            {
+              "text": "Salinan"
+            },
+            {
+              "text": "Chumash"
+            },
+            {
+              "text": "Ramaytush Ohlone",
+              "correct": true
+            },
+            {
+              "text": "Tongva"
+            }
+          ],
+          "explanation": "The Ramaytush Ohlone are the first people of the San Francisco Peninsula. Their descendants still care for this land today."
+        },
+        {
+          "prompt": "Where does the nickname \"Mission Dolores\" come from?",
+          "choices": [
+            {
+              "text": "A priest named Dolores"
+            },
+            {
+              "text": "A nearby stream named for Our Lady of Sorrows",
+              "correct": true
+            },
+            {
+              "text": "A kind of flower"
+            }
+          ],
+          "explanation": "\"Dolores\" means sorrows in Spanish. A stream near the mission was named for Our Lady of Sorrows."
+        },
+        {
+          "prompt": "What held the ceiling beams together?",
+          "choices": [
+            {
+              "text": "Iron nails"
+            },
+            {
+              "text": "Glue"
+            },
+            {
+              "text": "Strips of rawhide",
+              "correct": true
+            }
+          ],
+          "explanation": "The redwood ceiling beams were tied together with strips of rawhide, and they are painted with bright Native designs."
+        },
+        {
+          "prompt": "What happened to the adobe church in the earthquake of 1906?",
+          "choices": [
+            {
+              "text": "It fell down"
+            },
+            {
+              "text": "It burned"
+            },
+            {
+              "text": "It was not harmed",
+              "correct": true
+            }
+          ],
+          "explanation": "The big church next door was ruined, but the adobe church from 1791 was not harmed. It is the oldest building still standing in San Francisco."
+        }
+      ],
+      "sources": [
+        {
+          "title": "home page",
+          "publisher": "Association of Ramaytush Ohlone",
+          "url": "https://www.ramaytush.org/",
+          "note": "the original peoples of the San Francisco Peninsula; how to say the name; about 1,500 to 2,000 people; one lineage with living descendants; the Association's work today"
+        },
+        {
+          "title": "About",
+          "publisher": "Association of Ramaytush Ohlone",
+          "url": "https://ramaytush.org/about.html",
+          "note": "loss of culture and language; care of the land today"
+        },
+        {
+          "title": "Impact of Spanish Colonization",
+          "publisher": "Jonathan Cordero, National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/articles/impact-of-spanish-colonization.htm",
+          "note": "ten tribes; Father Palóu; all peninsula people in the mission by 1801; about 80 percent dead by 1801; disease and poor living and working conditions; five families by 1850"
+        },
+        {
+          "title": "Ohlone/Costanoan Indians of the San Francisco Peninsula and their Neighbors, chapter 7",
+          "publisher": "National Park Service, Golden Gate NRA",
+          "url": "https://www.nps.gov/goga/learn/historyculture/upload/Chapter-7.pdf",
+          "note": "the 1795 runaways; 136 people in 1834 and the many languages they spoke"
+        },
+        {
+          "title": "Old Mission",
+          "publisher": "Mission Dolores",
+          "url": "https://www.missiondolores.org/old-mission",
+          "note": "named for St. Francis of Assisi; the creek and the nickname; about 5,000 Ohlone, Miwok and other First Californians in the cemetery; \"the oldest intact building in the City of San Francisco\""
+        },
+        {
+          "title": "Mission San Francisco de Asís",
+          "publisher": "Toucan Valley Publications, Social Studies Fact Cards",
+          "url": "https://factcards.califa.org/mis/sanfranciscodeasis.html",
+          "note": "Anza; Palóu; the stream's full name; the 1782 move; the 1791 church, its size, rawhide and painted beams; 1798; 1834; 1906; the 1917 steel and later repairs"
+        }
+      ]
+    }
+  ]
+}
