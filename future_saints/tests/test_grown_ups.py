@@ -1,5 +1,5 @@
-""""A Note for Grown-Ups": the approved wording word for word, the two placeholder fields and the
-publish guard, the tree command, the footer link and the Privacy Policy link inside the page."""
+""""A Note for Grown-Ups": the approved wording word for word, the two placeholder fields (the
+mailing address optional, the effective date required to publish) and the publish guard, the tree command, the footer link and the Privacy Policy link inside the page."""
 import datetime
 import html as html_lib
 import re
@@ -82,6 +82,20 @@ class WordingTests(GrownUpsTestCase):
         self.assertNotIn("[EFFECTIVE DATE]", text)
         self.assertNotIn("Notes for Steven", text, "the reviewer notes are not part of the page")
 
+    def test_without_an_address_only_the_mail_line_is_left_out(self):
+        self.note.effective_date = datetime.date(2026, 12, 1)
+        self.note.save_revision().publish()
+        with FS_ON:
+            html = self.html(URL)
+        text = page_text(html)
+        for line in approved_lines():
+            if "[MAILING ADDRESS]" in line:
+                continue
+            self.assertIn(" ".join(line.replace("[EFFECTIVE DATE]", "December 1, 2026").split()), text)
+        self.assertNotIn("Mail:", text)
+        self.assertNotIn("data-fs-mailing-address", html)
+        self.assertIn("Email: support@sitesofgrace.com", text)
+
     def test_banned_words_only_in_the_approved_negations(self):
         self.fill_and_publish()
         with FS_ON:
@@ -104,12 +118,10 @@ class PlaceholderTests(GrownUpsTestCase):
         self.assertIn('href="mailto:support@sitesofgrace.com"', html)
 
     def test_publish_problem(self):
-        self.assertIn("Mailing address, Effective date", self.note.publish_problem())
-        self.note.mailing_address = ADDRESS
-        self.assertIn("Effective date", self.note.publish_problem())
-        self.assertNotIn("Mailing address", self.note.publish_problem())
+        self.assertIn("filled in: Effective date.", self.note.publish_problem())
+        self.assertNotIn("Mailing address", self.note.publish_problem(), "the address is optional")
         self.note.effective_date = datetime.date(2026, 12, 1)
-        self.assertEqual(self.note.publish_problem(), "")
+        self.assertEqual(self.note.publish_problem(), "", "publishable without an address")
 
     def post_edit(self, action, **fields):
         admin = type(self.staff).objects.create_superuser("fs-admin", "admin@example.com", "x")
@@ -119,7 +131,7 @@ class PlaceholderTests(GrownUpsTestCase):
         data[action] = "1"
         return self.client.post(reverse("wagtailadmin_pages:edit", args=[self.note.pk]), data)
 
-    def test_publishing_is_refused_while_a_field_is_blank_and_the_draft_is_kept(self):
+    def test_publishing_is_refused_while_the_effective_date_is_blank_and_the_draft_is_kept(self):
         response = self.post_edit("action-publish", mailing_address=ADDRESS)
         self.assertEqual(response.status_code, 302)
         self.note.refresh_from_db()
@@ -132,10 +144,17 @@ class PlaceholderTests(GrownUpsTestCase):
         self.assertTrue(self.note.live)
         self.assertEqual(self.note.effective_date, datetime.date(2026, 12, 1))
 
-    def test_submitting_to_review_is_refused_while_a_field_is_blank(self):
-        response = self.post_edit("action-submit", effective_date="2026-12-01")
+    def test_publishing_works_with_only_the_effective_date(self):
+        self.post_edit("action-publish", effective_date="2026-12-01")
+        self.note.refresh_from_db()
+        self.assertTrue(self.note.live)
+        self.assertEqual(self.note.mailing_address, "")
+
+    def test_submitting_to_review_is_refused_while_the_effective_date_is_blank(self):
+        response = self.post_edit("action-submit", mailing_address=ADDRESS)
         self.assertEqual(response.status_code, 200, "the form comes back with the error")
-        self.assertContains(response, "Mailing address is required before this page goes to review or is published.")
+        self.assertContains(response, "Effective date is required before this page goes to review or is published.")
+        self.assertNotContains(response, "Mailing address is required")
         self.note.refresh_from_db()
         self.assertFalse(self.note.live)
 

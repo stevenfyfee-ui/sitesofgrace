@@ -3,9 +3,11 @@
 The page's wording is the approved text in docs/future-saints/content/
 future-saints-note-for-grown-ups.md, set in the template word for word (test_grown_ups checks it
 against that file). Only its two placeholders are fields: [MAILING ADDRESS] and [EFFECTIVE DATE].
-The page can be saved as a draft with either blank, but it can't be published (or submitted to
-the review workflow, whose approval publishes it) until both are filled in: the edit form refuses
-a submit, and future_saints/wagtail_hooks.py refuses a publish or bulk publish, keeping the draft.
+The mailing address is optional (owner decision, 2026-11-15): when it's blank the page hides the
+"Mail:" line and keeps the email. The effective date is required: the page can be saved as a draft
+without it, but it can't be published (or submitted to the review workflow, whose approval
+publishes it) until it's filled in: the edit form refuses a submit, and
+future_saints/wagtail_hooks.py refuses a publish or bulk publish, keeping the draft.
 """
 from django.db import models
 from wagtail.admin.forms import WagtailAdminPageForm
@@ -17,7 +19,7 @@ from .models import FutureSaintsGateMixin
 # Edit-form actions that lead to the page going live: submitting to the workflow (its approval
 # publishes the submitted revision) and acting on a workflow task from the edit view.
 SUBMIT_ACTIONS = ("action-submit", "action-workflow-action", "action-restart-workflow")
-REQUIRED_TO_PUBLISH = (("mailing_address", "Mailing address"), ("effective_date", "Effective date"))
+REQUIRED_TO_PUBLISH = (("effective_date", "Effective date"),)
 
 
 def missing_fields(values):
@@ -38,7 +40,8 @@ class GrownUpsNotePageForm(WagtailAdminPageForm):
 
 class GrownUpsNotePage(FutureSaintsGateMixin, Page):
     mailing_address = models.TextField(
-        blank=True, help_text="Fills [MAILING ADDRESS]. Required to publish. One line per line of the address.",
+        blank=True, help_text="Fills [MAILING ADDRESS]. Optional: when blank, the page hides the Mail line. "
+                               "One line per line of the address.",
     )
     effective_date = models.DateField(null=True, blank=True, help_text="Fills [EFFECTIVE DATE]. Required to publish.")
 

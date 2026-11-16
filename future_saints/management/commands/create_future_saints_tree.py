@@ -110,7 +110,7 @@ class Command(BaseCommand):
 
             if NOTE_SLUG not in children and not (fs_home and fs_home.pk and GrownUpsNotePage.objects.child_of(fs_home).exists()):
                 created.append(f"GrownUpsNotePage  title '{NOTE_TITLE}'  slug '{NOTE_SLUG}'  path {fs_path}{NOTE_SLUG}/  "
-                               f"parent {fs_path}  (mailing address and effective date blank: can't be published yet)")
+                               f"parent {fs_path}  (effective date blank: can't be published yet)")
                 if not dry_run:
                     note = GrownUpsNotePage(title=NOTE_TITLE, slug=NOTE_SLUG, live=False, show_in_menus=False)
                     fs_home.add_child(instance=note)
