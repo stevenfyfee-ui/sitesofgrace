@@ -11,20 +11,38 @@ def future_saints_enabled(context):
     return _future_saints_enabled(context.get("request"))
 
 
-@register.simple_tag(takes_context=True)
-def future_saints_menu_url(context):
-    """The adult site's link to Future Saints (the "Future Saints — for Kids"
-    strip under the header, base.html), or "".
+# The banner's four features: (text field, line icon, page path under the Future Saints home).
+BANNER_FEATURES = (
+    ("feature_1", "book", "saints/"),
+    ("feature_2", "globe", "map/"),
+    ("feature_3", "pencil", "california-missions/projects/"),
+    ("feature_4", "heart", "for-grown-ups/"),
+)
 
-    "" unless the switch allows this request AND the Future Saints home page
-    is live. With the switch off it returns before touching the database, so
-    adult pages render exactly as before. Not a wagtailmenus item on purpose:
-    a menu item would show whenever the page is live, ignoring the switch.
+
+@register.simple_tag(takes_context=True)
+def future_saints_banner(context, page):
+    """The adult homepage's Future Saints banner (home/includes/_future_saints_banner.html), or None.
+
+    None unless the switch allows this request AND the Future Saints home page is live. With the
+    switch off it returns before touching the database, so the homepage renders exactly as before.
+    Each feature links to its page only while that page is live; otherwise its label shows unlinked.
     """
     request = context.get("request")
     if not _future_saints_enabled(request):
-        return ""
+        return None
+    from wagtail.models import Page
+
     from future_saints.models import FutureSaintsHomePage
 
-    page = FutureSaintsHomePage.objects.live().first()
-    return page.get_url(request) if page else ""
+    home = FutureSaintsHomePage.objects.live().first()
+    if home is None:
+        return None
+    live = {p.url_path: p for p in Page.objects.live().filter(
+        url_path__in=[home.url_path + path for _, _, path in BANNER_FEATURES])}
+    texts = page.fs_banner_texts()
+    features = []
+    for name, icon, path in BANNER_FEATURES:
+        target = live.get(home.url_path + path)
+        features.append({"label": texts[name], "icon": icon, "url": target.get_url(request) if target else ""})
+    return {"url": home.get_url(request), "texts": texts, "features": features}

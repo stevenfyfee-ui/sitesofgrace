@@ -94,12 +94,11 @@ class GateTests(FutureSaintsTestCase):
             self.assertIn("/future-saints/saints/", body)
 
     def test_never_in_site_search(self):
-        # The only /future-saints/ links on a search page may be the adult
-        # header's own menu item (main + mobile), never a result.
+        # A search page has no /future-saints/ link at all: never a result, and
+        # the adult layout has no Future Saints link (only the homepage banner).
         for mode in (FS_OFF, FS_STAFF, FS_ON):
             with mode:
                 for user in (None, self.staff):
-                    menu_links = self.get("/", user).content.decode().count("/future-saints/")
                     for q in ("Future Saints", "Saints", "Holy Land"):
                         html = self.get("/search/", user, q=q).content.decode()
-                        self.assertEqual(html.count("/future-saints/"), menu_links, (q, user))
+                        self.assertEqual(html.count("/future-saints/"), 0, (q, user))
