@@ -14,7 +14,7 @@ def future_saints_enabled(context):
 # The banner's four features: (text field, line icon, page path under the Future Saints home).
 BANNER_FEATURES = (
     ("feature_1", "book", "saints/"),
-    ("feature_2", "globe", "map/"),
+    ("feature_2", "pin", "map/"),
     ("feature_3", "pencil", "california-missions/projects/"),
     ("feature_4", "heart", "for-grown-ups/"),
 )

@@ -5,18 +5,19 @@
   and the Future Saints home is live), so with the switch off the homepage is byte-for-byte
   unchanged. Texts and the picture are edited on the homepage ("Future Saints banner" panel); a
   blank text shows its default. Without a picture, a drawn frame stands in. No credit is shown.
-  Desktop: picture | title, ribbon, features | heading, text, button. 900px and under: stacked.
+  Desktop: picture (edge to edge) | title, ribbon, features | heading, text, button. 900px and under:
+  stacked.
 {% endcomment %}
 <section class="fs-promo" aria-labelledby="fs-promo-title">
   <div class="container">
     <div class="fs-promo-card">
       <div class="fs-promo-art">
         {% if page.fs_banner_image %}
-          {% image page.fs_banner_image fill-480x400 as art %}
+          {% image page.fs_banner_image fill-760x460 as art %}
           <img src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt="{{ page.fs_banner_image_alt }}" loading="lazy">
         {% else %}
           <div class="fs-promo-frame" aria-hidden="true">
-            <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M60 14v10M55 19h10"/><path d="M34 98V58l26-20 26 20v40"/><path d="M26 98h68"/><path d="M52 98V78a8 8 0 0 1 16 0v20"/><path d="M60 50v8M56 54h8"/><path d="M18 40l3-7 3 7-7-3 7-3M96 30l2.5-6 2.5 6-6-2.5 6-2.5M100 70l2-5 2 5-5-2 5-2"/></svg>
+            <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M60 14v10M55 19h10"/><path d="M34 98V58l26-20 26 20v40"/><path d="M26 98h68"/><path d="M52 98V78a8 8 0 0 1 16 0v20"/><path d="M60 50v8M56 54h8"/><path d="M18 40l3-7 3 7-7-3 7-3M96 30l2.5-6 2.5 6-6-2.5 6-2.5M100 70l2-5 2 5-5-2 5-2"/></svg>
           </div>
         {% endif %}
       </div>
