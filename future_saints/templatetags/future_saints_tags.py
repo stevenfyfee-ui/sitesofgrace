@@ -11,12 +11,13 @@ def future_saints_enabled(context):
     return _future_saints_enabled(context.get("request"))
 
 
-# The banner's four features: (text field, line icon, page path under the Future Saints home).
+# The banner's four features: (text field, icon in home/includes/_fs_banner_icon.html, page path
+# under the Future Saints home).
 BANNER_FEATURES = (
     ("feature_1", "book", "saints/"),
-    ("feature_2", "pin", "map/"),
-    ("feature_3", "pencil", "california-missions/projects/"),
-    ("feature_4", "heart", "for-grown-ups/"),
+    ("feature_2", "marker", "map/"),
+    ("feature_3", "palette", "california-missions/projects/"),
+    ("feature_4", "group", "for-grown-ups/"),
 )
 
 

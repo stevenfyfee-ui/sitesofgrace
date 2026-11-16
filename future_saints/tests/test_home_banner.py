@@ -62,7 +62,9 @@ class BannerTests(FutureSaintsTestCase):
                      "Discover amazing saints, holy places, and true stories of faith, with maps, quizzes, "
                      "printables, and resources for parents, teachers, and homeschool families."):
             self.assertIn(text, b)
-        self.assertIn('<a class="fs-promo-btn" href="/future-saints/">Visit Future Saints →</a>', b)
+        button = b.split('<a class="fs-promo-btn" href="/future-saints/">', 1)[1].split("</a>", 1)[0]
+        self.assertIn("<span>Visit Future Saints →</span>", button)
+        self.assertLess(button.index("<svg"), button.index("Visit Future Saints"), "the people icon comes first")
         self.assertIn('class="fs-promo-frame" aria-hidden="true"', b, "placeholder art without a picture")
         self.assertNotIn("credit", b.lower())
 
@@ -73,7 +75,7 @@ class BannerTests(FutureSaintsTestCase):
         with FS_ON:
             b = banner(self.html("/"))
         self.assertIn("Edited heading (sample)", b)
-        self.assertIn(">Visit Future Saints →</a>", b, "a blank label shows its default")
+        self.assertIn("<span>Visit Future Saints →</span></a>", b, "a blank label shows its default")
 
     def test_feature_links_only_to_live_pages(self):
         with FS_ON:

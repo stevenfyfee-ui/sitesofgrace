@@ -30,14 +30,14 @@
         <p class="fs-promo-ribbon"><span>{{ fs_banner.texts.tagline }}</span></p>
         <ul class="fs-promo-features">
           {% for feature in fs_banner.features %}
-            <li>{% if feature.url %}<a class="fs-promo-feature" href="{{ feature.url }}">{% else %}<span class="fs-promo-feature">{% endif %}<span class="fs-promo-icon">{% include "includes/_line_icon.html" with icon=feature.icon %}</span><span>{{ feature.label }}</span>{% if feature.url %}</a>{% else %}</span>{% endif %}</li>
+            <li>{% if feature.url %}<a class="fs-promo-feature" href="{{ feature.url }}">{% else %}<span class="fs-promo-feature">{% endif %}<span class="fs-promo-icon">{% include "home/includes/_fs_banner_icon.html" with icon=feature.icon %}</span><span>{{ feature.label }}</span>{% if feature.url %}</a>{% else %}</span>{% endif %}</li>
           {% endfor %}
         </ul>
       </div>
       <div class="fs-promo-pitch">
         <h3 class="fs-promo-heading">{{ fs_banner.texts.heading }}</h3>
         <p class="fs-promo-text">{{ fs_banner.texts.text }}</p>
-        <a class="fs-promo-btn" href="{{ fs_banner.url }}">{{ fs_banner.texts.button_label }}</a>
+        <a class="fs-promo-btn" href="{{ fs_banner.url }}"><span class="fs-promo-btn-icon">{% include "home/includes/_fs_banner_icon.html" with icon="group" %}</span><span>{{ fs_banner.texts.button_label }}</span></a>
       </div>
     </div>
   </div>
