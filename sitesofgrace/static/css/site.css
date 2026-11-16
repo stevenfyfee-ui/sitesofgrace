@@ -274,25 +274,6 @@ body.nav-open { overflow: hidden; }
 .mobile-signout { border-top: 1px solid var(--gold-soft); }
 .mobile-signout button { padding: 14px 20px; font-size: 16px; border-radius: 0; }
 
-/* ---------- Future Saints strip (includes/_future_saints_strip.html) ----------
-   Under the adult header, not sticky. Fixed height, server-rendered: no layout
-   shift. Navy on gold for contrast (white on gold is too light). */
-.fs-kids-strip {
-  display: flex; justify-content: center;
-  padding: 8px 16px;
-  background: var(--parchment);
-  border-bottom: 1px solid var(--gold-soft);
-}
-.fs-kids-pill {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  min-height: 44px; max-width: 100%; padding: 0 22px;
-  border-radius: 999px; background: var(--gold); color: var(--navy);
-  font-family: var(--sans); font-size: 15px; font-weight: 600; line-height: 1.2;
-  text-align: center; text-decoration: none;
-}
-.fs-kids-pill:hover { filter: brightness(1.06); }
-.fs-kids-pill:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
-
 /* ---------- Footer ---------- */
 .site-footer { background: var(--navy); color: rgba(253,249,242,.82); margin-top: 64px; }
 .footer-grid {
