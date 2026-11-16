@@ -3,7 +3,8 @@
   "A Note for Grown-Ups": the approved text in docs/future-saints/content/
   future-saints-note-for-grown-ups.md, word for word (test_grown_ups checks it). Don't edit the
   wording here without an approved change to that file. Only [MAILING ADDRESS] and
-  [EFFECTIVE DATE] are fields; the page can't be published while either is blank. The Privacy
+  [EFFECTIVE DATE] are fields. The address is optional: when it's blank the Mail line is hidden.
+  The page can't be published while the effective date is blank. The Privacy
   Policy link goes to the live site-wide Privacy Policy; until it's live, the words show unlinked.
 {% endcomment %}
 {% block body_class %}fs-grown-ups{% endblock %}
@@ -46,7 +47,7 @@
     <p>If you have a question about Future Saints, or think something on a page is wrong, please contact us:</p>
     <ul>
       <li>Email: <strong><a href="mailto:support@sitesofgrace.com">support@sitesofgrace.com</a></strong></li>
-      <li>Mail: <strong data-fs-mailing-address>{{ page.mailing_address|linebreaksbr }}</strong></li>
+      {% if page.mailing_address.strip %}<li>Mail: <strong data-fs-mailing-address>{{ page.mailing_address|linebreaksbr }}</strong></li>{% endif %}
     </ul>
     <p>For how the rest of Sites of Grace handles information (including adult accounts on the main site), see our <strong>{% if fs_privacy_url %}<a href="{{ fs_privacy_url }}">Privacy Policy</a>{% else %}Privacy Policy{% endif %}</strong>.</p>
     {% if not fs_privacy_url and request.user.is_staff %}<p><span class="fs-chip-staff">Staff only: the Privacy Policy isn't live yet, so "Privacy Policy" has no link.</span></p>{% endif %}

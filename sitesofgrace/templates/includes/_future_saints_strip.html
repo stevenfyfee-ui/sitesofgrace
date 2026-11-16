@@ -1,0 +1,10 @@
+{% comment %}
+  "Future Saints — for Kids" strip, directly under the adult header on every adult page (Future
+  Saints pages use their own base and header, so it never shows there). base.html renders it only
+  when future_saints_menu_url gives a link: the switch allows this request
+  (future_saints_enabled) and the Future Saints home is live. With the switch off the adult
+  site is byte-for-byte unchanged.
+{% endcomment %}
+<div class="fs-kids-strip">
+  <a class="fs-kids-pill" href="{{ fs_strip_url }}">Future Saints — for Kids <span aria-hidden="true">→</span></a>
+</div>
