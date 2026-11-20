@@ -280,7 +280,10 @@ class SacredSitePage(RoutablePageMixin, Page):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     date_display = models.CharField(max_length=160, blank=True)
     feast_day = models.CharField(max_length=120, blank=True)
-    summary_short = models.TextField(blank=True)
+    summary_short = models.TextField(
+        blank=True,
+        help_text="One or two sentences, about 160 characters. Shown on directory cards, map popups and search results — the full story goes in the narrative sections.",
+    )
     the_story = RichTextField(blank=True)
     church_recognition = RichTextField(blank=True)
     catholic_teaching = RichTextField(blank=True)
@@ -1349,7 +1352,10 @@ class PilgrimageTrailPage(Page):
         max_length=80, blank=True, help_text='e.g. "Yellow arrows and scallop shells"'
     )
 
-    summary_short = models.TextField(blank=True)
+    summary_short = models.TextField(
+        blank=True,
+        help_text="One or two sentences, about 160 characters. Shown on directory cards, map popups and search results — the full story goes in the narrative sections.",
+    )
     the_story = RichTextField(blank=True)
     church_recognition = RichTextField(blank=True)
     catholic_teaching = RichTextField(blank=True)

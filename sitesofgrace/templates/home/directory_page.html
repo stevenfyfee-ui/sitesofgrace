@@ -22,16 +22,19 @@
 
 <section class="container">
   {% if directory_cards %}
-    <div class="directory-grid">
+    <div class="directory-grid directory-grid--uniform">
       {% for card in directory_cards %}
         <a class="directory-card" href="{{ card.url }}">
           {% if card.chip %}
             <span class="badge badge-category" style="background:{{ card.style.fill }};border-color:{{ card.style.stroke }};color:{{ card.style.dot }};">{{ card.chip }}</span>
           {% elif card.meta %}
             <span class="tag">{{ card.meta }}</span>
+          {% else %}
+            <span class="tag directory-card-tag-space" aria-hidden="true"></span>
           {% endif %}
           <strong>{{ card.title }}</strong>
-          {% if card.bio %}<p>{{ card.bio }}</p>{% endif %}
+          <p>{{ card.bio }}</p>
+          <span class="directory-card-more">Read more <span aria-hidden="true">→</span></span>
         </a>
       {% endfor %}
     </div>
