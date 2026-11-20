@@ -24,7 +24,7 @@
   {% if directory_cards %}
     <div class="directory-grid directory-grid--uniform">
       {% for card in directory_cards %}
-        <a class="directory-card" href="{{ card.url }}">
+        <a class="directory-card" href="{{ card.url }}" title="{{ card.title }}">
           {% if card.chip %}
             <span class="badge badge-category" style="background:{{ card.style.fill }};border-color:{{ card.style.stroke }};color:{{ card.style.dot }};">{{ card.chip }}</span>
           {% elif card.meta %}

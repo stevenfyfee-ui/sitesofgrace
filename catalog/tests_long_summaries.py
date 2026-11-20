@@ -10,6 +10,7 @@ import re
 from io import StringIO
 
 from django.core.management import call_command
+from django.utils.text import slugify
 from wagtail.models import Site
 
 from catalog.models import PilgrimageTrailPage, SacredSitePage, SaintPage
@@ -29,7 +30,7 @@ class LongSummaryTestCase(SacredSitePageTestCase):
     def add(self, model, title, live=True, **fields):
         if model is SacredSitePage:
             fields.setdefault("category", "Marian Apparition")
-        page = model(title=title, slug=title.lower().replace(" ", "-"), live=live, **fields)
+        page = model(title=title, slug=slugify(title), live=live, **fields)
         self.directory.add_child(instance=page)
         return page
 
@@ -71,12 +72,15 @@ class DirectoryCardTests(LongSummaryTestCase):
     def test_every_card_is_uniform_with_full_text_and_one_read_more_cue(self):
         long_text = "A long summary. " * 40
         self.add(SacredSitePage, "Long Site", summary_short=long_text)
+        self.add(SacredSitePage, "Chapel of a Very Long Name (Tomb of St. Someone & Companions)", summary_short="Short.")
         self.add(SacredSitePage, "Short Site", summary_short="One sentence.")
         self.add(SacredSitePage, "Blank Site", summary_short="")
         html = self.client.get(StandardPage.objects.get(pk=self.directory.pk).url).content.decode()
         self.assertIn('class="directory-grid directory-grid--uniform"', html)
         cards = re.findall(r'<a class="directory-card"[^>]*>(.*?)</a>', html, re.S)
-        self.assertEqual(len(cards), 3)
+        self.assertEqual(len(cards), 4)
+        self.assertIn('title="Chapel of a Very Long Name (Tomb of St. Someone &amp; Companions)"', html,
+                      "the full name shows on hover when the title is clamped")
         for card in cards:
             self.assertEqual(card.count('class="directory-card-more"'), 1)
             self.assertEqual(card.count("<p>"), 1, "a blank bio still keeps the card's shape")
