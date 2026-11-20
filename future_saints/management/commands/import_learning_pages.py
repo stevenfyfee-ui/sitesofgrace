@@ -25,7 +25,10 @@ Per page:
   short kind names to the model's content_kind, "type_specific" keys to the type's fields, and
   each Bible reference split into book / chapter / verses that read back as the same text.
 - --review-note "text" sets the internal review_note on every page in the file (it is never
-  shown on the site); without it, review_note is left as it is.
+  shown on the site); without it, review_note is left as it is. --review-note-for SLUG=TEXT
+  (repeatable) sets that one page's note instead; SLUG must be a page in the file.
+- A null "production_id_hint" is allowed: the page is linked by its exact title alone, and the
+  report says so next to the resolved id.
 - A year-only founding_date ("1776", when the sources disagree on the day) is stored as an
   empty date; founding_date_display and founding_source_note carry it as given. No month or
   day is ever invented, and --verify counts the empty date as a match.
@@ -102,6 +105,8 @@ TYPE_FIELDS = {
     MissionLearningPage: {"native_peoples_and_history": "native_peoples", "mission_life": "mission_life",
                           "architecture": "architecture"},
 }
+# Saint headings with no saint choice, and the choice each is stored as.
+SAINT_STORY_LABEL_FALLBACK = {"Their Story": "the"}
 # Types with a free-text story heading (empty shows "The Story").
 FREE_STORY_LABEL = (HolyLandLearningPage, MissionLearningPage)
 YEAR_ONLY = re.compile(r"^\d{4}$")
@@ -146,18 +151,33 @@ class Command(BaseCommand):
                             help="Compare each page's latest revision with the file; write nothing.")
         parser.add_argument("--review-note",
                             help="Internal review note set on every page in the file (never shown on the site).")
+        parser.add_argument("--review-note-for", action="append", default=[], metavar="SLUG=TEXT",
+                            help="Internal review note for one page (overrides --review-note); repeatable.")
 
     # --- entry ---------------------------------------------------------------
     def handle(self, *args, **options):
         if options["dry_run"] and options["verify"]:
             raise CommandError("Use --dry-run or --verify, not both.")
+        limit = SaintLearningPage._meta.get_field("review_note").max_length
+
+        def checked_note(note, name):
+            if not note.strip():
+                raise CommandError(f"{name} can't be empty.")
+            if len(note) > limit:
+                raise CommandError(f"{name} is {len(note)} characters; review_note allows {limit}.")
+            return note
+
         self.review_note = options.get("review_note")
         if self.review_note is not None:
-            limit = SaintLearningPage._meta.get_field("review_note").max_length
-            if not self.review_note.strip():
-                raise CommandError("--review-note can't be empty.")
-            if len(self.review_note) > limit:
-                raise CommandError(f"--review-note is {len(self.review_note)} characters; review_note allows {limit}.")
+            checked_note(self.review_note, "--review-note")
+        self.review_notes_for = {}
+        for item in options.get("review_note_for") or []:
+            slug, sep, note = item.partition("=")
+            if not sep or not slug:
+                raise CommandError(f"--review-note-for must be SLUG=TEXT (got {item!r}).")
+            if slug in self.review_notes_for:
+                raise CommandError(f"--review-note-for {slug} is given twice.")
+            self.review_notes_for[slug] = checked_note(note, f"--review-note-for {slug}")
         matches = sorted(glob.glob(options["path"]))
         if len(matches) != 1:
             raise CommandError(f"{options['path']!r} matches {len(matches)} files; it must match exactly one.")
@@ -169,6 +189,9 @@ class Command(BaseCommand):
         pages = data.get("pages")
         if not isinstance(pages, list) or not pages:
             raise CommandError(f'{path}: "pages" must be a non-empty list.')
+        unknown = set(self.review_notes_for) - {row.get("slug") for row in pages if isinstance(row, dict)}
+        if unknown:
+            raise CommandError(f"--review-note-for names page(s) not in {path}: {', '.join(sorted(unknown))}")
 
         mode = "VERIFY" if options["verify"] else ("DRY RUN" if options["dry_run"] else "IMPORT")
         self.stdout.write(f"{mode}: {path} ({len(pages)} page(s); approved by {data.get('approved_by', '?')} "
@@ -234,6 +257,8 @@ class Command(BaseCommand):
         if errors:
             raise PageError("\n".join(errors))
         warnings = []
+        if model is SaintLearningPage and row.get("story_label") in SAINT_STORY_LABEL_FALLBACK:
+            warnings.append(f'story_label {row["story_label"]!r} has no saint choice; the heading shows "The Story"')
         intro_words = _words(row.get("intro"))
         story_words = sum(_words(p) for p in row.get("story_paragraphs", []))
         if not INTRO_WORDS[0] <= intro_words <= INTRO_WORDS[1]:
@@ -241,8 +266,9 @@ class Command(BaseCommand):
         if not STORY_WORDS[0] <= story_words <= STORY_WORDS[1]:
             warnings.append(f"story is {story_words} words (target {STORY_WORDS[0]}–{STORY_WORDS[1]})")
         scalars["canonical_id"] = canonical.pk
-        if self.review_note is not None:
-            scalars["review_note"] = self.review_note
+        note = self.review_notes_for.get(row["slug"], self.review_note)
+        if note is not None:
+            scalars["review_note"] = note
         return {
             "row": row, "model": model, "parent": parent, "canonical": canonical, "hint_note": hint_note,
             "scalars": scalars, "children": children, "warnings": warnings,
@@ -278,7 +304,7 @@ class Command(BaseCommand):
             errors.append(f"canonical: #{match.pk} {match.title!r} isn't an allowed canonical page for {model.__name__}")
         hint = spec.get("production_id_hint")
         if hint is None:
-            hint_note = "no production_id_hint"
+            hint_note = "no production_id_hint: resolved by exact title, 1 live match"
         elif hint == match.pk:
             hint_note = f"production_id_hint {hint}: matches"
         else:
@@ -305,6 +331,8 @@ class Command(BaseCommand):
         scalars["slug"] = row["slug"]
 
         # story_label: the saint pages' existing choice (the/his/her); other types always say "The Story".
+        # "Their Story" has no saint choice: it is stored as "the" (owner decision, 2026-11-19, no
+        # migration) and reported as a warning on the page.
         label = row.get("story_label") or ""
         if model is SaintLearningPage:
             by_label = {lbl: key for key, lbl in STORY_HEADING_CHOICES}
@@ -313,6 +341,8 @@ class Command(BaseCommand):
                 scalars["story_label"] = "the"
             elif label in by_label or label in keys:
                 scalars["story_label"] = by_label.get(label, label)
+            elif label in SAINT_STORY_LABEL_FALLBACK:
+                scalars["story_label"] = SAINT_STORY_LABEL_FALLBACK[label]
             else:
                 errors.append(f'story_label {label!r} must be one of {", ".join(by_label)}')
         elif model in FREE_STORY_LABEL:

@@ -1,0 +1,1365 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "basilica-of-the-nativity",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Basilica of the Nativity",
+        "production_id_hint": null
+      },
+      "student_title": "The Basilica of the Nativity",
+      "subtitle": "The very old church in Bethlehem built over the place where Christians remember Jesus was born.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Bethlehem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "The birth of Jesus"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "300s, in the time of Emperor Constantine"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans, Greek Orthodox and Armenian Christians"
+        }
+      ],
+      "intro": "In the town of Bethlehem stands one of the oldest churches in the world, the Basilica of the Nativity. \"Nativity\" means birth. Under the church is a cave called the Grotto of the Nativity. For many centuries, Christians have honored this cave as the place where Mary gave birth to Jesus and laid him in a manger.",
+      "story_paragraphs": [
+        "The Gospel of Luke tells us that the Roman emperor ordered everyone to be counted. So Joseph traveled from Nazareth to Bethlehem, the town of King David, with Mary, who was expecting a baby.",
+        "While they were in Bethlehem, Mary gave birth to her son, Jesus. She wrapped him in cloths and laid him in a manger, because there was no room for them in the inn. That night, angels told shepherds in the fields the good news, and the shepherds hurried to see the baby. The Gospel of Matthew tells us that wise men from the East later followed a star to Bethlehem to honor him.",
+        "Long after, a Roman emperor named Hadrian built a pagan shrine over the cave. But Christians remembered the place. In the 300s, Emperor Constantine and his mother, Saint Helena, had a great church built over the cave.",
+        "In the 500s, the church was damaged. Emperor Justinian rebuilt it even bigger. Much of the church he built still stands today, making it one of the oldest churches still in use anywhere in the world.",
+        "To enter, people go through a very small doorway called the Door of Humility. It was made low long ago to keep people from riding in on horses. Today, almost everyone has to bow down to go through it.",
+        "Below the church, in the grotto, a silver star with fourteen points marks the place where Christians remember Jesus was born. Nearby, Saint Jerome lived in a cave in the 300s while he translated the Bible into Latin.",
+        "Today, Catholic Franciscans, Greek Orthodox and Armenian Christians share the care of the church. Christians from around the world come here to pray and to remember that God came to us as a little child."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 6–4 BC",
+          "text": "Jesus is born in Bethlehem."
+        },
+        {
+          "date_display": "100s",
+          "text": "Emperor Hadrian builds a pagan shrine over the cave."
+        },
+        {
+          "date_display": "300s",
+          "text": "A church is built over the cave in the time of Constantine and Saint Helena."
+        },
+        {
+          "date_display": "384",
+          "text": "Saint Jerome comes to live in Bethlehem."
+        },
+        {
+          "date_display": "500s",
+          "text": "Emperor Justinian rebuilds the church, and much of it still stands."
+        },
+        {
+          "date_display": "2012",
+          "text": "The church is named a World Heritage Site."
+        },
+        {
+          "date_display": "Today",
+          "text": "Several Christian communities share the church and pray there."
+        }
+      ],
+      "fun_facts": [
+        "\"Bethlehem\" means \"house of bread.\" Jesus later called himself the Bread of Life.",
+        "The silver star in the grotto has fourteen points.",
+        "The main door is so low that most grown-ups must bow to go through it.",
+        "Saint Jerome lived in a cave next to the grotto while he worked on the Bible.",
+        "The church built by Justinian in the 500s still stands today."
+      ],
+      "words_to_know": [
+        {
+          "word": "Nativity",
+          "definition": "The birth of Jesus."
+        },
+        {
+          "word": "Grotto",
+          "definition": "A small cave."
+        },
+        {
+          "word": "Manger",
+          "definition": "A box that holds food for animals."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        },
+        {
+          "word": "Humility",
+          "definition": "Knowing that we are small before God and not thinking we are better than others."
+        }
+      ],
+      "think_about_it": "Jesus, the Son of God, was born in a simple place and laid in a manger. What does that tell us about how God loves us?",
+      "reflection_question": "People have to bow to go through the Door of Humility. How can you show humility at home or at school this week?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Luke 2:1–20",
+            "url": "https://bible.usccb.org/bible/luke/2"
+          },
+          {
+            "reference": "Matthew 2:1–12",
+            "url": "https://bible.usccb.org/bible/matthew/2"
+          }
+        ],
+        "then": "Bethlehem was a small town. Many houses there were built against caves in the hillside, and caves were sometimes used to shelter animals.",
+        "now": "A large stone church stands over the cave, and the town of Bethlehem has grown all around it.",
+        "what_historians_know": "Christians were honoring this cave very early, and the church built under Justinian in the 500s still stands. It is one of the oldest churches still in use.",
+        "what_comes_from_tradition": "that this is the exact cave where Jesus was born. The Bible tells us Jesus was born in Bethlehem, but it does not describe a cave. The tradition is very old, but no one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "What does the word \"nativity\" mean?",
+          "choices": [
+            {
+              "text": "A star"
+            },
+            {
+              "text": "Birth",
+              "correct": true
+            },
+            {
+              "text": "A long trip"
+            },
+            {
+              "text": "A song"
+            }
+          ],
+          "explanation": "\"Nativity\" means birth. The church is named for the birth of Jesus."
+        },
+        {
+          "prompt": "In what town is the Basilica of the Nativity?",
+          "choices": [
+            {
+              "text": "Nazareth"
+            },
+            {
+              "text": "Bethlehem",
+              "correct": true
+            },
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Cana"
+            }
+          ],
+          "explanation": "The church is in Bethlehem, where the Gospels tell us Jesus was born."
+        },
+        {
+          "prompt": "Where did Mary lay baby Jesus?",
+          "choices": [
+            {
+              "text": "In a cradle"
+            },
+            {
+              "text": "In a manger",
+              "correct": true
+            },
+            {
+              "text": "In a basket"
+            }
+          ],
+          "explanation": "Saint Luke tells us that Mary laid Jesus in a manger because there was no room for them in the inn."
+        },
+        {
+          "prompt": "What is the Door of Humility?",
+          "choices": [
+            {
+              "text": "A very low door that people bow to go through",
+              "correct": true
+            },
+            {
+              "text": "A golden gate"
+            },
+            {
+              "text": "A secret tunnel"
+            }
+          ],
+          "explanation": "The main entrance is very small, so almost everyone has to bow down to enter."
+        },
+        {
+          "prompt": "What marks the place in the grotto where Christians remember Jesus was born?",
+          "choices": [
+            {
+              "text": "A wooden cross"
+            },
+            {
+              "text": "A silver star",
+              "correct": true
+            },
+            {
+              "text": "A candle shaped like a lamb"
+            }
+          ],
+          "explanation": "A silver star with fourteen points marks the spot."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 2 and Matthew 2",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/luke/2",
+          "note": "the census, the manger, the shepherds, the Magi"
+        },
+        {
+          "title": "The church that stands at the spot of Christ's birth",
+          "publisher": "Catholic World Report (2019)",
+          "url": "https://www.catholicworldreport.com/2019/12/23/the-church-that-stands-at-the-spot-of-christs-birth/",
+          "note": "Hadrian's shrine; Helena's church; the 529 damage and Justinian's rebuilding; \"oldest surviving church\"; the 14-point star; the Door of Humility and why it is low; Saint Jerome in 384; the Franciscan Custody, Greek Orthodox and Armenians; UNESCO 2012; the restoration"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "basilica-of-the-annunciation",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Basilica of the Annunciation",
+        "production_id_hint": null
+      },
+      "student_title": "The Basilica of the Annunciation",
+      "subtitle": "The church in Nazareth where Christians remember the angel Gabriel's message to Mary.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Nazareth, in Galilee"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "The angel Gabriel's message to Mary"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "By the 500s; today's basilica in 1969"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans"
+        }
+      ],
+      "intro": "In the town of Nazareth stands a large church called the Basilica of the Annunciation. \"Annunciation\" means an announcement. Here, Christians remember the day the angel Gabriel came to Mary and told her she would be the mother of Jesus, the Son of God. Inside the church is a small cave, and on its altar are the words, \"Here the Word was made flesh.\"",
+      "story_paragraphs": [
+        "Mary was a young Jewish woman who lived in Nazareth, a small village in Galilee. She was engaged to marry a carpenter named Joseph.",
+        "One day, God sent the angel Gabriel to Mary. The angel said, \"Hail, favored one! The Lord is with you.\" Mary was confused and wondered what the greeting meant. The angel told her not to be afraid. She would have a son, and she would name him Jesus. He would be called the Son of the Most High.",
+        "Mary asked how this could happen. The angel explained that the Holy Spirit would come upon her, and that nothing is impossible for God. Then Mary said, \"Behold, I am the handmaid of the Lord. May it be done to me according to your word.\" Mary said yes to God.",
+        "Christians have honored a small cave in Nazareth as part of Mary's home. Below the church today are the remains of a building used for worship in the 300s. A pilgrim wrote about a church here in about the year 570. Later, Crusaders built a huge cathedral, but it was destroyed in the 1200s.",
+        "For a long time, only ruins were left. In 1620, Franciscan friars came to stay in Nazareth for good, and they have cared for the holy place ever since.",
+        "The church that stands today was finished in 1969. It is built in two levels. The lower church surrounds the cave. The upper church is decorated with pictures of Mary sent by Catholics from many countries, showing Mary in the clothing and styles of their own people.",
+        "When Catholics pray the Hail Mary or the Angelus, they repeat the angel's greeting and remember Mary's yes."
+      ],
+      "timeline": [
+        {
+          "date_display": "Before Jesus was born",
+          "text": "The angel Gabriel brings God's message to Mary in Nazareth."
+        },
+        {
+          "date_display": "300s",
+          "text": "A building used for worship stands over the cave."
+        },
+        {
+          "date_display": "About 570",
+          "text": "A pilgrim writes about a church in Nazareth."
+        },
+        {
+          "date_display": "1100s",
+          "text": "Crusaders build a large cathedral at the site."
+        },
+        {
+          "date_display": "1263",
+          "text": "The cathedral is destroyed and left in ruins."
+        },
+        {
+          "date_display": "1620",
+          "text": "Franciscan friars settle in Nazareth for good."
+        },
+        {
+          "date_display": "March 25, 1969",
+          "text": "The new Basilica of the Annunciation is consecrated."
+        }
+      ],
+      "fun_facts": [
+        "The basilica was consecrated on March 25, the feast of the Annunciation.",
+        "The altar in the cave says, \"Here the Word was made flesh.\"",
+        "The dome of the basilica is shaped like an upside-down lily, a flower that stands for Mary.",
+        "Pictures of Mary from many countries decorate the church.",
+        "The Hail Mary begins with the angel Gabriel's greeting to Mary."
+      ],
+      "words_to_know": [
+        {
+          "word": "Annunciation",
+          "definition": "The angel Gabriel's announcement to Mary that she would be the mother of Jesus."
+        },
+        {
+          "word": "Angel",
+          "definition": "A spirit created by God who serves him and brings his messages."
+        },
+        {
+          "word": "Handmaid",
+          "definition": "A servant. Mary called herself the handmaid of the Lord."
+        },
+        {
+          "word": "Incarnation",
+          "definition": "God the Son becoming a human being in Jesus."
+        },
+        {
+          "word": "Galilee",
+          "definition": "The northern region of the Holy Land, where Nazareth is."
+        }
+      ],
+      "think_about_it": "Mary did not understand everything, but she trusted God and said yes. When is it hard for you to trust God?",
+      "reflection_question": "Mary said, \"May it be done to me according to your word.\" What is one way you can say yes to God today?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Luke 1:26–38",
+            "url": "https://bible.usccb.org/bible/luke/1"
+          },
+          {
+            "reference": "Matthew 1:18–25",
+            "url": "https://bible.usccb.org/bible/matthew/1"
+          }
+        ],
+        "then": "Nazareth was a tiny farming village. Some homes were built in front of caves cut into the soft rock of the hillside.",
+        "now": "Nazareth is a busy city, and the basilica's dome rises high above it. The cave is still there, inside the lower church.",
+        "what_historians_know": "a building used for worship stood here in the 300s, and a pilgrim described a church here in about 570. Crusaders later built a large cathedral on the same spot.",
+        "what_comes_from_tradition": "that this cave was part of Mary's home and the exact place where the angel spoke to her. The tradition is very old, but no one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "What does \"annunciation\" mean?",
+          "choices": [
+            {
+              "text": "An announcement",
+              "correct": true
+            },
+            {
+              "text": "A birthday"
+            },
+            {
+              "text": "A journey"
+            },
+            {
+              "text": "A garden"
+            }
+          ],
+          "explanation": "\"Annunciation\" means an announcement. The angel Gabriel announced that Mary would be the mother of Jesus."
+        },
+        {
+          "prompt": "Which angel came to Mary?",
+          "choices": [
+            {
+              "text": "Michael"
+            },
+            {
+              "text": "Gabriel",
+              "correct": true
+            },
+            {
+              "text": "Raphael"
+            }
+          ],
+          "explanation": "Saint Luke tells us that God sent the angel Gabriel to Mary in Nazareth."
+        },
+        {
+          "prompt": "What did Mary answer?",
+          "choices": [
+            {
+              "text": "\"I need more time.\""
+            },
+            {
+              "text": "\"May it be done to me according to your word.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Ask someone else.\""
+            }
+          ],
+          "explanation": "Mary said yes to God: \"Behold, I am the handmaid of the Lord. May it be done to me according to your word.\""
+        },
+        {
+          "prompt": "What do the words on the altar in the cave say?",
+          "choices": [
+            {
+              "text": "\"Peace be with you\""
+            },
+            {
+              "text": "\"Here the Word was made flesh\"",
+              "correct": true
+            },
+            {
+              "text": "\"Jesus was born here\""
+            }
+          ],
+          "explanation": "The words remember that here, God the Son became a human being in Mary's womb."
+        },
+        {
+          "prompt": "Which prayer begins with the angel's greeting to Mary?",
+          "choices": [
+            {
+              "text": "The Our Father"
+            },
+            {
+              "text": "The Hail Mary",
+              "correct": true
+            },
+            {
+              "text": "The Glory Be"
+            }
+          ],
+          "explanation": "The Hail Mary begins with the words the angel Gabriel spoke to Mary."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 1 and Matthew 1",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/luke/1",
+          "note": "the Annunciation, Gabriel's words, Mary's answer"
+        },
+        {
+          "title": "Where the Word became flesh",
+          "publisher": "Vatican News (March 2026)",
+          "url": "https://www.vaticannews.va/en/church/news/2026-03/where-the-word-became-flesh-fr-francesco-patton.html",
+          "note": "the grotto; \"Here the Word was made flesh\"; the fourth-century building; the pilgrim of about 570; the Crusader cathedral; ruins after 1187 and 1263; Franciscans settled in 1620; Giovanni Muzio's basilica, consecrated March 25, 1969; the inverted-lily shape; cared for by the Custody"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "cana",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Wedding Church of Cana",
+        "production_id_hint": null
+      },
+      "student_title": "The Wedding Church of Cana",
+      "subtitle": "The church in Galilee where Christians remember Jesus' first miracle, at a wedding feast.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Kafr Kanna, in Galilee"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus turns water into wine at a wedding"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Today's church was finished in 1879"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans"
+        }
+      ],
+      "intro": "In a town in Galilee called Kafr Kanna stands the Wedding Church of Cana. Here, Christians remember Jesus' very first miracle. At a wedding feast, the wine ran out, and Mary asked Jesus to help. Jesus turned water into wine. Every year, many married couples come to this church to pray and to renew the promises they made on their wedding day.",
+      "story_paragraphs": [
+        "The Gospel of John tells us that there was a wedding in the village of Cana in Galilee. Mary, the mother of Jesus, was there. Jesus and his disciples were invited too.",
+        "In those days, a wedding feast could last for days. But during this feast, the wine ran out. That would have been very embarrassing for the bride and groom.",
+        "Mary noticed. She went to Jesus and said, \"They have no wine.\" Then she said to the servants, \"Do whatever he tells you.\"",
+        "Nearby stood six large stone water jars. Jesus told the servants to fill them with water, and they filled them to the brim. Then he told them to draw some out and take it to the headwaiter. When the headwaiter tasted it, the water had become wine. He was amazed. He told the groom that he had saved the best wine for last.",
+        "Saint John says this was the first of Jesus' signs. It showed his glory, and his disciples began to believe in him.",
+        "Christians in the Byzantine period wrote that the wedding took place in Kafr Kanna. In 1641, Franciscan friars acquired land there, and the church that stands today was finished in 1879. Under the church, people can see the remains of an old house, which tradition says is where the wedding took place.",
+        "Today, three Franciscan friars care for the church and the parish. On the feast that remembers the wedding, many couples from the parish renew their wedding promises. Mary's words still ring out at Cana: \"Do whatever he tells you.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 28–30",
+          "text": "Jesus turns water into wine at a wedding in Cana."
+        },
+        {
+          "date_display": "Byzantine period",
+          "text": "Christian writers say the wedding took place at Kafr Kanna."
+        },
+        {
+          "date_display": "1641",
+          "text": "Franciscan friars acquire land in Kafr Kanna."
+        },
+        {
+          "date_display": "1862",
+          "text": "The Franciscans take possession of the site."
+        },
+        {
+          "date_display": "1879",
+          "text": "The Franciscan church is finished."
+        },
+        {
+          "date_display": "1969 and 1997",
+          "text": "Diggers uncover old buildings near the church."
+        },
+        {
+          "date_display": "Today",
+          "text": "Franciscans care for the church, and couples renew their wedding promises there."
+        }
+      ],
+      "fun_facts": [
+        "Turning water into wine was Jesus' first miracle.",
+        "Jesus did this miracle after his mother asked him to help.",
+        "There were six stone water jars at the wedding.",
+        "The apostle Nathanael came from Cana.",
+        "Many married couples renew their wedding promises at the church."
+      ],
+      "words_to_know": [
+        {
+          "word": "Miracle",
+          "definition": "A wonderful sign that only God can do."
+        },
+        {
+          "word": "Sign",
+          "definition": "Something that points to something greater. In John's Gospel, Jesus' miracles are called signs."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower of Jesus who learns from him."
+        },
+        {
+          "word": "Marriage",
+          "definition": "The lifelong promise a man and a woman make to love each other, with God's help."
+        },
+        {
+          "word": "Intercession",
+          "definition": "Asking God for help for someone else. Mary interceded for the couple at Cana."
+        }
+      ],
+      "think_about_it": "Mary noticed that the couple needed help, and she asked Jesus. Who around you might need help that you could pray for?",
+      "reflection_question": "Mary said, \"Do whatever he tells you.\" What do you think Jesus is asking you to do this week?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "John 2:1–11",
+            "url": "https://bible.usccb.org/bible/john/2"
+          },
+          {
+            "reference": "John 21:2",
+            "url": "https://bible.usccb.org/bible/john/21"
+          }
+        ],
+        "then": "Cana was a small village in the hills of Galilee, not far from Nazareth, where Jesus grew up.",
+        "now": "Kafr Kanna is a busy town. The Franciscan church, with its two bell towers, stands near the center.",
+        "what_historians_know": "Christians in the Byzantine period pointed to Kafr Kanna as the place of the wedding. Diggers have found the remains of old buildings under and near the church.",
+        "what_comes_from_tradition": "that this is the exact village and house of the wedding. Some scholars think the Cana of the Bible might be a different village nearby, called Khirbet Qana. No one can know for certain."
+      },
+      "quiz": [
+        {
+          "prompt": "What was Jesus' first miracle?",
+          "choices": [
+            {
+              "text": "Calming a storm"
+            },
+            {
+              "text": "Turning water into wine",
+              "correct": true
+            },
+            {
+              "text": "Feeding five thousand people"
+            }
+          ],
+          "explanation": "Saint John tells us that turning water into wine at Cana was the first of Jesus' signs."
+        },
+        {
+          "prompt": "Who noticed that the wine had run out?",
+          "choices": [
+            {
+              "text": "The groom"
+            },
+            {
+              "text": "Mary",
+              "correct": true
+            },
+            {
+              "text": "Peter"
+            }
+          ],
+          "explanation": "Mary noticed and told Jesus, \"They have no wine.\""
+        },
+        {
+          "prompt": "What did Mary tell the servants?",
+          "choices": [
+            {
+              "text": "\"Do whatever he tells you.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Go home and rest.\""
+            },
+            {
+              "text": "\"Close the doors.\""
+            }
+          ],
+          "explanation": "Mary told the servants to listen to Jesus and do whatever he told them."
+        },
+        {
+          "prompt": "How many stone water jars were there?",
+          "choices": [
+            {
+              "text": "Two"
+            },
+            {
+              "text": "Four"
+            },
+            {
+              "text": "Six",
+              "correct": true
+            },
+            {
+              "text": "Twelve"
+            }
+          ],
+          "explanation": "Saint John tells us there were six stone water jars, and the servants filled them to the brim."
+        },
+        {
+          "prompt": "What do many married couples do at the church today?",
+          "choices": [
+            {
+              "text": "Plant trees"
+            },
+            {
+              "text": "Renew their wedding promises",
+              "correct": true
+            },
+            {
+              "text": "Write their names on the walls"
+            }
+          ],
+          "explanation": "Many couples come to the church to pray and to renew the promises they made when they married."
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 2",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/john/2",
+          "note": "the wedding at Cana, Mary's words, the six jars, \"the beginning of his signs\""
+        },
+        {
+          "title": "Cana of Galilee: remembering Jesus's first miracle",
+          "publisher": "Custody of the Holy Land",
+          "url": "https://www.custodia.org/en/news/cana-galilee-remembering-jesuss-first-miracle",
+          "note": "church completed in 1879 on the ruins of an older basilica; bought in 1641, possessed in 1862; excavations of 1969 and 1997; the house under the church; three friars; couples renewing their vows"
+        },
+        {
+          "title": "Cana",
+          "publisher": "See the Holy Land",
+          "url": "https://www.seetheholyland.net/cana/",
+          "note": "Nathanael \"came from Cana of Galilee\"; the scholars who prefer Khirbet Qana"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "mount-tabor",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Church of the Transfiguration (Mount Tabor)",
+        "production_id_hint": null
+      },
+      "student_title": "The Church of the Transfiguration on Mount Tabor",
+      "subtitle": "The church on a mountain in Galilee where Christians remember Jesus shining with God's glory.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Mount Tabor, in Galilee"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "The Transfiguration of Jesus"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Byzantine times; today's basilica in 1924"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans"
+        }
+      ],
+      "intro": "Mount Tabor is a round mountain that rises above the plains of Galilee. On top of it stands the Church of the Transfiguration. Here, Christians remember the day Jesus took three of his apostles up a high mountain. His face shone like the sun, and his clothes became white as light. A voice from heaven said, \"This is my beloved Son.\"",
+      "story_paragraphs": [
+        "One day, Jesus took three of his apostles, Peter, James and John, and led them up a high mountain to pray.",
+        "While Jesus was praying, he was transfigured, which means his appearance was changed. His face shone like the sun, and his clothes became dazzling white. Then two great men from long ago appeared and talked with Jesus. They were Moses, who gave God's Law to the people, and Elijah, the great prophet.",
+        "Peter was so amazed that he did not know what to say. He offered to build three tents, one for Jesus, one for Moses and one for Elijah. While he was still speaking, a bright cloud covered them. A voice came from the cloud: \"This is my beloved Son, with whom I am well pleased; listen to him.\"",
+        "The apostles fell to the ground in fear. But Jesus came and touched them and said, \"Rise, and do not be afraid.\" When they looked up, they saw only Jesus.",
+        "The Gospels do not name the mountain. Since early times, Christians have remembered Mount Tabor as the place. People have prayed here since the Byzantine era, and Crusaders and Benedictine monks later built churches and a monastery on the mountain.",
+        "In the 1870s, Franciscan friars built a monastery on Tabor. Then, from 1921 to 1924, they built the beautiful basilica that stands there today. It was designed by an Italian architect named Antonio Barluzzi. Its two towers stand over old chapels honoring Moses and Elijah.",
+        "The Transfiguration gave the apostles a glimpse of who Jesus truly is: the Son of God. It helped prepare them for the hard days ahead, when Jesus would suffer and die before rising again."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 29–30",
+          "text": "Jesus is transfigured before Peter, James and John."
+        },
+        {
+          "date_display": "Byzantine era",
+          "text": "Christians begin to honor Mount Tabor as the place of the Transfiguration."
+        },
+        {
+          "date_display": "Middle Ages",
+          "text": "Crusaders and Benedictine monks build on the mountain."
+        },
+        {
+          "date_display": "1873–1875",
+          "text": "Franciscan friars build a monastery on Mount Tabor."
+        },
+        {
+          "date_display": "1921–1924",
+          "text": "The Franciscans build the Basilica of the Transfiguration."
+        },
+        {
+          "date_display": "Today",
+          "text": "Franciscans care for the basilica and pray there."
+        }
+      ],
+      "fun_facts": [
+        "\"Transfiguration\" means a change in how someone looks.",
+        "Moses and Elijah both appeared with Jesus on the mountain.",
+        "Peter wanted to build three tents.",
+        "The basilica's two towers stand over old chapels honoring Moses and Elijah.",
+        "The Church celebrates the feast of the Transfiguration on August 6."
+      ],
+      "words_to_know": [
+        {
+          "word": "Transfiguration",
+          "definition": "When Jesus' appearance changed and he shone with God's glory before three apostles."
+        },
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Prophet",
+          "definition": "A person chosen by God to speak his message."
+        },
+        {
+          "word": "Glory",
+          "definition": "The great beauty, light and goodness of God."
+        },
+        {
+          "word": "Beloved",
+          "definition": "Dearly loved."
+        }
+      ],
+      "think_about_it": "God the Father said, \"Listen to him.\" Where can you hear Jesus speaking to you?",
+      "reflection_question": "Jesus told his frightened apostles, \"Do not be afraid.\" What is something you can trust Jesus with today?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Matthew 17:1–9",
+            "url": "https://bible.usccb.org/bible/matthew/17"
+          },
+          {
+            "reference": "Mark 9:2–8",
+            "url": "https://bible.usccb.org/bible/mark/9"
+          },
+          {
+            "reference": "Luke 9:28–36",
+            "url": "https://bible.usccb.org/bible/luke/9"
+          },
+          {
+            "reference": "2 Peter 1:16–18",
+            "url": "https://bible.usccb.org/bible/2peter/1"
+          }
+        ],
+        "then": "Mount Tabor stood alone above the green plains of Galilee, with no buildings on top.",
+        "now": "A stone basilica and a Franciscan monastery stand on the summit, with ruins from earlier churches and walls all around.",
+        "what_historians_know": "Christians have honored Mount Tabor since the Byzantine era, and remains of Byzantine and Crusader churches have been found on the summit.",
+        "what_comes_from_tradition": "that Mount Tabor is the mountain of the Transfiguration. The Gospels call it only \"a high mountain.\" Some people think it could have been a different mountain, such as Mount Hermon. No one can know for certain."
+      },
+      "quiz": [
+        {
+          "prompt": "Which three apostles went up the mountain with Jesus?",
+          "choices": [
+            {
+              "text": "Andrew, Thomas and Matthew"
+            },
+            {
+              "text": "Peter, James and John",
+              "correct": true
+            },
+            {
+              "text": "Philip, Jude and Simon"
+            }
+          ],
+          "explanation": "Jesus took Peter, James and John up the mountain to pray."
+        },
+        {
+          "prompt": "Who appeared and talked with Jesus?",
+          "choices": [
+            {
+              "text": "Moses and Elijah",
+              "correct": true
+            },
+            {
+              "text": "Abraham and Noah"
+            },
+            {
+              "text": "David and Solomon"
+            }
+          ],
+          "explanation": "Moses and Elijah appeared and talked with Jesus."
+        },
+        {
+          "prompt": "What did the voice from the cloud say?",
+          "choices": [
+            {
+              "text": "\"Build a church here.\""
+            },
+            {
+              "text": "\"This is my beloved Son ... listen to him.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Go back home.\""
+            }
+          ],
+          "explanation": "God the Father spoke from the cloud and told the apostles to listen to Jesus, his beloved Son."
+        },
+        {
+          "prompt": "What did Peter want to build?",
+          "choices": [
+            {
+              "text": "A wall"
+            },
+            {
+              "text": "Three tents",
+              "correct": true
+            },
+            {
+              "text": "A boat"
+            },
+            {
+              "text": "A tower"
+            }
+          ],
+          "explanation": "Peter offered to build three tents, one for Jesus, one for Moses and one for Elijah."
+        },
+        {
+          "prompt": "Who designed the basilica on Mount Tabor?",
+          "choices": [
+            {
+              "text": "Saint Helena"
+            },
+            {
+              "text": "Antonio Barluzzi",
+              "correct": true
+            },
+            {
+              "text": "Emperor Justinian"
+            }
+          ],
+          "explanation": "The Italian architect Antonio Barluzzi designed the basilica, which the Franciscans built from 1921 to 1924."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Matthew 17",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/matthew/17",
+          "note": "the Transfiguration, Moses and Elijah, the three tents, the voice from the cloud, \"Rise, and do not be afraid\" ; Mark 9 and Luke 9 give the same account"
+        },
+        {
+          "title": "Mount Tabor",
+          "publisher": "Custody of the Holy Land",
+          "url": "https://custodia.org/en/sanctuaries/mount-tabor",
+          "note": "venerated since the Byzantine era; Crusader and Benedictine remains; the Franciscan monastery of 1873–75; the basilica built 1921–24 by Antonio Barluzzi; the bell towers over the oratories of Moses and Elijah"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "cenacle",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "The Cenacle (Upper Room)",
+        "production_id_hint": null
+      },
+      "student_title": "The Cenacle, the Upper Room",
+      "subtitle": "The room in Jerusalem where Christians remember the Last Supper and the coming of the Holy Spirit.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Mount Zion, Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "The Last Supper and, by tradition, Pentecost"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Today's room comes from a Crusader chapel of the 1100s"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "The government of Israel; Franciscans pray there on special days"
+        }
+      ],
+      "intro": "On Mount Zion in Jerusalem is a stone room called the Cenacle, or the Upper Room. Here, Christians remember the Last Supper, when Jesus gave us the Eucharist and washed his apostles' feet. By tradition, it is also where the Holy Spirit came down on the apostles at Pentecost. Some call it the place where the Church was born.",
+      "story_paragraphs": [
+        "On the night before he died, Jesus wanted to celebrate the Passover meal with his apostles. He sent two of them into Jerusalem, where a man showed them a large upper room, ready for the meal.",
+        "During the supper, Jesus did something surprising. He got up, tied a towel around his waist, and washed his apostles' feet, the job of a servant. He told them, \"I have given you a model to follow, so that as I have done for you, you should also do.\"",
+        "Then Jesus took bread, blessed it, broke it, and gave it to them, saying, \"This is my body.\" He took a cup of wine and said, \"This is my blood.\" This was the first Eucharist. At every Mass, Catholics remember and celebrate what Jesus did that night.",
+        "After Jesus rose from the dead and went up to heaven, the apostles gathered in the upper room with Mary to pray. On the feast of Pentecost, a sound like a strong wind filled the house, and tongues like fire rested on each of them. They were filled with the Holy Spirit and began to tell everyone about Jesus.",
+        "The room on Mount Zion that stands today is not the same room from Jesus' time. It was restored from a chapel the Crusaders built in the 1100s. In the 1300s, the Franciscan friars received the site, and it became their first home in the Holy Land.",
+        "In 1551, the Franciscans were forced to leave. Over the centuries, the room was used as a mosque. Below it is a shrine that Jewish tradition honors as the tomb of King David.",
+        "Today, the government of Israel cares for the building. The Franciscans may gather there to pray on Holy Thursday and Pentecost, remembering what happened in the upper room."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus celebrates the Last Supper with his apostles in an upper room."
+        },
+        {
+          "date_display": "About AD 30",
+          "text": "At Pentecost, the Holy Spirit comes upon the apostles."
+        },
+        {
+          "date_display": "1100s",
+          "text": "Crusaders build a chapel on Mount Zion."
+        },
+        {
+          "date_display": "1330s",
+          "text": "The site is given to the Franciscan friars."
+        },
+        {
+          "date_display": "1551",
+          "text": "The Franciscans are forced to leave Mount Zion."
+        },
+        {
+          "date_display": "Today",
+          "text": "The Franciscans gather to pray in the room on Holy Thursday and Pentecost."
+        }
+      ],
+      "fun_facts": [
+        "\"Cenacle\" comes from a Latin word for a dining room.",
+        "Jesus washed his apostles' feet in the upper room.",
+        "The first Mass was the Last Supper.",
+        "The Cenacle was the first home of the Franciscans in the Holy Land.",
+        "Mary prayed with the apostles in the upper room before Pentecost."
+      ],
+      "words_to_know": [
+        {
+          "word": "Cenacle",
+          "definition": "Another name for the Upper Room, where Jesus ate the Last Supper."
+        },
+        {
+          "word": "Last Supper",
+          "definition": "The meal Jesus shared with his apostles the night before he died, when he gave us the Eucharist."
+        },
+        {
+          "word": "Passover",
+          "definition": "The Jewish feast that remembers how God freed his people from slavery in Egypt."
+        },
+        {
+          "word": "Pentecost",
+          "definition": "The day the Holy Spirit came down on the apostles and Mary, fifty days after Easter."
+        },
+        {
+          "word": "Eucharist",
+          "definition": "The Body and Blood of Jesus, which he gave us at the Last Supper."
+        }
+      ],
+      "think_about_it": "Jesus washed his apostles' feet to show them how to serve. What is one way you can serve your family this week?",
+      "reflection_question": "At every Mass, we remember what Jesus did at the Last Supper. What would you like to thank Jesus for the next time you receive or adore him in the Eucharist?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Mark 14:12–26",
+            "url": "https://bible.usccb.org/bible/mark/14"
+          },
+          {
+            "reference": "Luke 22:7–20",
+            "url": "https://bible.usccb.org/bible/luke/22"
+          },
+          {
+            "reference": "John 13:1–15",
+            "url": "https://bible.usccb.org/bible/john/13"
+          },
+          {
+            "reference": "Acts 1:12–14",
+            "url": "https://bible.usccb.org/bible/acts/1"
+          },
+          {
+            "reference": "Acts 2:1–4",
+            "url": "https://bible.usccb.org/bible/acts/2"
+          }
+        ],
+        "then": "In Jesus' time, a large house on the hill would have had a big room upstairs where guests could share a meal.",
+        "now": "A Gothic-style stone hall with pointed arches stands on Mount Zion. Many different people come to it: Christians to pray in the upper room, and Jews to pray at the shrine of David below.",
+        "what_historians_know": "the room we see today was restored from a Crusader chapel of the 1100s. The Franciscans lived here in the 1300s and were forced to leave in 1551.",
+        "what_comes_from_tradition": "that this is the place of the Last Supper and of Pentecost. The Bible does not say exactly where the upper room was. The tradition is very old, but no one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "What meal did Jesus share with his apostles in the upper room?",
+          "choices": [
+            {
+              "text": "A birthday party"
+            },
+            {
+              "text": "The Last Supper",
+              "correct": true
+            },
+            {
+              "text": "A wedding feast"
+            }
+          ],
+          "explanation": "Jesus celebrated the Passover meal with his apostles. We call it the Last Supper."
+        },
+        {
+          "prompt": "What did Jesus do to show his apostles how to serve?",
+          "choices": [
+            {
+              "text": "He built a table"
+            },
+            {
+              "text": "He washed their feet",
+              "correct": true
+            },
+            {
+              "text": "He cooked a meal"
+            }
+          ],
+          "explanation": "Jesus washed his apostles' feet, the job of a servant, and told them to do the same for one another."
+        },
+        {
+          "prompt": "What did Jesus give us at the Last Supper?",
+          "choices": [
+            {
+              "text": "The Eucharist",
+              "correct": true
+            },
+            {
+              "text": "The Ten Commandments"
+            },
+            {
+              "text": "A new house"
+            }
+          ],
+          "explanation": "Jesus took bread and wine and said, \"This is my body\" and \"This is my blood.\" This was the first Eucharist."
+        },
+        {
+          "prompt": "What happened at Pentecost?",
+          "choices": [
+            {
+              "text": "Jesus was born"
+            },
+            {
+              "text": "The Holy Spirit came upon the apostles",
+              "correct": true
+            },
+            {
+              "text": "The apostles went fishing"
+            }
+          ],
+          "explanation": "On Pentecost, the Holy Spirit came upon the apostles and Mary, and they began to tell everyone about Jesus."
+        },
+        {
+          "prompt": "When may the Franciscans gather in the Cenacle to pray?",
+          "choices": [
+            {
+              "text": "Every Sunday"
+            },
+            {
+              "text": "On Holy Thursday and Pentecost",
+              "correct": true
+            },
+            {
+              "text": "Never"
+            }
+          ],
+          "explanation": "The Franciscans may gather in the room on Holy Thursday and Pentecost."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Mark 14, John 13 and Acts 2",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/mark/14",
+          "note": "the upper room; the Last Supper; the washing of the feet, John 13:15; Pentecost, Acts 2:1–4; Mary with the apostles, Acts 1:14"
+        },
+        {
+          "title": "The Cenacle and the Franciscans (March 28, 2024)",
+          "publisher": "Catholic World Report / CNA",
+          "url": "https://www.catholicworldreport.com/?p=274883",
+          "note": "the Last Supper, foot washing and the Eucharist; the land acquired in 1333 and given to the friars; the first headquarters of the Custody; the 1551 expulsion; the mosque; Holy Thursday and Pentecost; owned by the State of Israel; the tradition of David's tomb"
+        },
+        {
+          "title": "Cenacle",
+          "publisher": "See the Holy Land",
+          "url": "https://www.seetheholyland.net/cenacle/",
+          "note": "the Gothic room is a restoration of a 12th-century Crusader chapel; Pentecost, Acts 2:1–4; the Franciscans bought it in 1335; David's tomb \"immediately beneath\""
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "gethsemane",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Church of All Nations (Gethsemane)",
+        "production_id_hint": null
+      },
+      "student_title": "The Church of All Nations in Gethsemane",
+      "subtitle": "The church in an olive garden in Jerusalem where Christians remember Jesus praying the night before he died.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "The Mount of Olives, Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus prays in the Garden of Gethsemane"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "300s, in the time of Emperor Theodosius"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans"
+        }
+      ],
+      "intro": "At the foot of the Mount of Olives in Jerusalem is a garden of very old olive trees called Gethsemane. Next to it stands the Church of All Nations. Christians remember that Jesus came here to pray on the night before he died. Inside the church is a large rock where, by tradition, Jesus knelt and prayed to his Father.",
+      "story_paragraphs": [
+        "After the Last Supper, Jesus and his apostles sang a hymn and walked out of the city. They crossed a valley and came to a garden on the Mount of Olives called Gethsemane.",
+        "Jesus asked his apostles to wait and pray. He took Peter, James and John a little farther with him. He told them his heart was full of sorrow, and he asked them to stay awake with him.",
+        "Then Jesus went a short distance away and fell to the ground to pray. He knew that he was about to suffer. He prayed, \"My Father, if it is possible, let this cup pass from me; yet, not as I will, but as you will.\" Jesus trusted his Father completely.",
+        "When Jesus came back, he found the apostles asleep. They were tired and sad. He asked them again to stay awake and pray. Three times he went off to pray, and three times he found them sleeping.",
+        "Then Judas, one of the twelve, came into the garden with a crowd, and Jesus was arrested. Even then, Jesus was calm and peaceful, because he had given himself completely to his Father's will.",
+        "In the 300s, a church was built over the rock where Christians remembered Jesus praying. Later, the Crusaders built another church there. The church that stands today was finished in 1924. It was designed by Antonio Barluzzi, and Catholics from many countries helped pay for it. That is why it is called the Church of All Nations.",
+        "Inside, purple and blue windows let in only a little light, so the church feels like a garden at night. Around the rock is a metal crown of thorns. Outside, Franciscan friars care for the olive trees, some of them hundreds of years old."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus prays in the Garden of Gethsemane and is arrested there."
+        },
+        {
+          "date_display": "Late 300s",
+          "text": "A church is built over the rock in the time of Emperor Theodosius."
+        },
+        {
+          "date_display": "1100s",
+          "text": "Crusaders build a church called Saint Savior."
+        },
+        {
+          "date_display": "1919",
+          "text": "Work begins on a new church."
+        },
+        {
+          "date_display": "June 15, 1924",
+          "text": "The Church of All Nations is consecrated."
+        },
+        {
+          "date_display": "2012",
+          "text": "Scientists study the ancient olive trees."
+        },
+        {
+          "date_display": "Today",
+          "text": "Franciscans care for the church and the garden."
+        }
+      ],
+      "fun_facts": [
+        "\"Gethsemane\" means \"oil press.\"",
+        "The church is also called the Basilica of the Agony.",
+        "Coats of arms of many countries decorate the ceiling.",
+        "A metal crown of thorns surrounds the rock inside the church.",
+        "Some olive trees in the garden are about 900 years old."
+      ],
+      "words_to_know": [
+        {
+          "word": "Gethsemane",
+          "definition": "The olive garden on the Mount of Olives where Jesus prayed the night before he died."
+        },
+        {
+          "word": "Agony",
+          "definition": "Very great sorrow or suffering. Jesus' prayer in the garden is called the Agony in the Garden."
+        },
+        {
+          "word": "Will",
+          "definition": "What someone wants or chooses. Jesus prayed that his Father's will be done."
+        },
+        {
+          "word": "Olive",
+          "definition": "A small fruit that grows on trees and is pressed to make oil."
+        },
+        {
+          "word": "Nations",
+          "definition": "Countries and their peoples."
+        }
+      ],
+      "think_about_it": "Jesus asked his friends to stay awake and pray with him. How can you be a good friend to someone who is sad?",
+      "reflection_question": "Jesus prayed, \"Not as I will, but as you will.\" Is there something you need to trust God with today?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Matthew 26:36–46",
+            "url": "https://bible.usccb.org/bible/matthew/26"
+          },
+          {
+            "reference": "Mark 14:32–42",
+            "url": "https://bible.usccb.org/bible/mark/14"
+          },
+          {
+            "reference": "Luke 22:39–46",
+            "url": "https://bible.usccb.org/bible/luke/22"
+          },
+          {
+            "reference": "John 18:1–2",
+            "url": "https://bible.usccb.org/bible/john/18"
+          }
+        ],
+        "then": "Gethsemane was an olive grove on the hillside, across the valley from Jerusalem's walls. Its name means \"oil press,\" a place where olives were crushed for oil.",
+        "now": "A large church with a bright mosaic on its front stands beside the garden, and some of the olive trees are hundreds of years old.",
+        "what_historians_know": "a church was built over the rock in the 300s, and a pilgrim named Egeria described an \"elegant church\" here. Scientists studied the oldest olive trees in 2012 and found that their trunks go back about 900 years.",
+        "what_comes_from_tradition": "that this is the exact garden and the exact rock where Jesus prayed. The Gospels say he went to the Mount of Olives, but no one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "What does \"Gethsemane\" mean?",
+          "choices": [
+            {
+              "text": "Garden of flowers"
+            },
+            {
+              "text": "Oil press",
+              "correct": true
+            },
+            {
+              "text": "Quiet place"
+            },
+            {
+              "text": "Hill of stones"
+            }
+          ],
+          "explanation": "\"Gethsemane\" means \"oil press,\" a place where olives were crushed to make oil."
+        },
+        {
+          "prompt": "What did Jesus do in the garden?",
+          "choices": [
+            {
+              "text": "He planted trees"
+            },
+            {
+              "text": "He prayed to his Father",
+              "correct": true
+            },
+            {
+              "text": "He taught a crowd"
+            }
+          ],
+          "explanation": "Jesus went to the garden to pray the night before he died."
+        },
+        {
+          "prompt": "What were the apostles doing when Jesus came back?",
+          "choices": [
+            {
+              "text": "Praying"
+            },
+            {
+              "text": "Sleeping",
+              "correct": true
+            },
+            {
+              "text": "Singing"
+            }
+          ],
+          "explanation": "Three times Jesus came back and found the apostles asleep."
+        },
+        {
+          "prompt": "Why is it called the Church of All Nations?",
+          "choices": [
+            {
+              "text": "It is very large"
+            },
+            {
+              "text": "Catholics from many countries helped pay for it",
+              "correct": true
+            },
+            {
+              "text": "It has many doors"
+            }
+          ],
+          "explanation": "Catholics from many countries helped pay for the church, and their coats of arms decorate the ceiling."
+        },
+        {
+          "prompt": "What did Jesus pray?",
+          "choices": [
+            {
+              "text": "\"Not as I will, but as you will.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Please take me home.\""
+            },
+            {
+              "text": "\"Make me a king.\""
+            }
+          ],
+          "explanation": "Jesus trusted his Father completely and prayed that his Father's will be done."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Matthew 26",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/matthew/26",
+          "note": "the hymn, Gethsemane, Peter, James and John, \"My Father, if it is possible...\", the sleeping disciples three times, Judas and the arrest ; Mark 14, Luke 22 and John 18 give the same account"
+        },
+        {
+          "title": "The Church of All Nations in Jerusalem's Garden of Gethsemane was consecrated 100 years ago",
+          "publisher": "Catholic World Report (2024)",
+          "url": "https://www.catholicworldreport.com/2024/06/14/the-church-of-all-nations-in-jerusalems-garden-of-gethsemane-was-consecrated-100-years-ago",
+          "note": "consecrated June 15, 1924; begun 1919; Barluzzi; coats of arms; the rock and its crown of thorns; Theodosius' church and Egeria's \"elegant church\"; the Crusader St. Savior; the olive trees dated to the 12th century in 2012; violet-blue windows; Franciscans"
+        }
+      ]
+    }
+  ]
+}

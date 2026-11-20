@@ -1,0 +1,1675 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "catherine-laboure",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Catherine Labouré",
+        "production_id_hint": 2251
+      },
+      "student_title": "Saint Catherine Labouré",
+      "subtitle": "A quiet sister in Paris who saw Mary and was asked to make the Miraculous Medal.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1806 to 1876"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Burgundy, France; lived in Paris"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "November 28"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "The Miraculous Medal and her quiet, humble service"
+        }
+      ],
+      "intro": "Catherine Labouré grew up on a farm in France. When she was a young sister with the Daughters of Charity in Paris, Mary appeared to her and asked her to have a medal made. Millions of people now wear the Miraculous Medal. But Catherine spent the rest of her life quietly caring for elderly people, and almost no one knew her secret.",
+      "story_paragraphs": [
+        "Catherine was born on May 2, 1806, in France. She was the ninth of eleven children. When she was nine years old, her mother died. Catherine picked up a statue of Mary, held it close, and said, \"Now you will be my mother.\"",
+        "As she grew up, Catherine took care of her family's home. She wanted to give her life to God. In 1830, she joined the Daughters of Charity, sisters who serve the poor, at their house on the Rue du Bac in Paris.",
+        "On the night of July 18, 1830, a child woke Catherine and led her to the chapel. There she saw Mary, seated in a chair. Catherine knelt and rested her hands on Mary's lap. Mary told her that graces would be given to all who ask with confidence at the foot of the altar.",
+        "On November 27, 1830, Mary appeared to Catherine again, during evening prayer. Mary stood with rays of light shining from her hands. Around her were the words, \"O Mary, conceived without sin, pray for us who have recourse to thee.\" Mary asked Catherine to have a medal made with this picture. On the back would be a cross, the letter M, and two hearts, for Jesus and Mary.",
+        "Catherine told only her priest. After about two years, the archbishop allowed the medals to be made. So many people received graces through it that it came to be called the Miraculous Medal.",
+        "Catherine never told anyone else that she was the sister who had seen Mary. For about 46 years, she quietly cared for elderly people near Paris. She died on December 31, 1876. Only then did people learn her secret."
+      ],
+      "timeline": [
+        {
+          "date_display": "May 2, 1806",
+          "text": "Catherine is born in France."
+        },
+        {
+          "date_display": "1815",
+          "text": "Her mother dies, and Catherine asks Mary to be her mother."
+        },
+        {
+          "date_display": "1830",
+          "text": "Catherine joins the Daughters of Charity in Paris."
+        },
+        {
+          "date_display": "July 18, 1830",
+          "text": "Mary appears to Catherine in the chapel at night."
+        },
+        {
+          "date_display": "November 27, 1830",
+          "text": "Mary shows Catherine the picture for the medal."
+        },
+        {
+          "date_display": "December 31, 1876",
+          "text": "Catherine dies after many years of quiet service."
+        },
+        {
+          "date_display": "July 27, 1947",
+          "text": "Pope Pius XII declares her a saint."
+        }
+      ],
+      "fun_facts": [
+        "Catherine was the ninth of eleven children.",
+        "The first medals were made about two years after Mary's request.",
+        "Catherine kept her secret from almost everyone for more than 40 years.",
+        "The chapel where Mary appeared is on a street in Paris called the Rue du Bac.",
+        "Catherine spent about 40 years caring for elderly and sick people."
+      ],
+      "words_to_know": [
+        {
+          "word": "Daughters of Charity",
+          "definition": "A community of sisters who serve people who are poor and sick."
+        },
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Medal",
+          "definition": "A small piece of metal with a holy picture, worn to remind us to pray."
+        },
+        {
+          "word": "Conceived without sin",
+          "definition": "Free from sin from the first moment of life. This is what the Church teaches about Mary."
+        },
+        {
+          "word": "Humble",
+          "definition": "Not showing off; happy to serve quietly."
+        }
+      ],
+      "think_about_it": "Catherine saw Mary, but she did not tell everyone. She kept serving quietly. Why do you think she kept it a secret?",
+      "reflection_question": "When Catherine's mother died, she asked Mary to be her mother. How can Mary help you when you are sad?",
+      "kindness_prompt": "Catherine spent her life caring for elderly people. Make a card or call an older person in your family or parish to tell them you are thinking of them.",
+      "quiz": [
+        {
+          "prompt": "What did Catherine say when she held the statue of Mary after her mother died?",
+          "choices": [
+            {
+              "text": "\"I want to go home.\""
+            },
+            {
+              "text": "\"Now you will be my mother.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I will become a queen.\""
+            }
+          ],
+          "explanation": "Catherine was nine when her mother died, and she asked Mary to be her mother."
+        },
+        {
+          "prompt": "Which community of sisters did Catherine join?",
+          "choices": [
+            {
+              "text": "The Poor Clares"
+            },
+            {
+              "text": "The Daughters of Charity",
+              "correct": true
+            },
+            {
+              "text": "The Missionaries of Charity"
+            }
+          ],
+          "explanation": "Catherine joined the Daughters of Charity, who serve the poor, in Paris in 1830."
+        },
+        {
+          "prompt": "What did Mary ask Catherine to have made?",
+          "choices": [
+            {
+              "text": "A church"
+            },
+            {
+              "text": "A medal",
+              "correct": true
+            },
+            {
+              "text": "A painting"
+            },
+            {
+              "text": "A bell"
+            }
+          ],
+          "explanation": "Mary asked Catherine to have a medal made. It became known as the Miraculous Medal."
+        },
+        {
+          "prompt": "What words were written around Mary on the medal?",
+          "choices": [
+            {
+              "text": "\"O Mary, conceived without sin, pray for us who have recourse to thee.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Hail, holy Queen.\""
+            },
+            {
+              "text": "\"Peace be with you.\""
+            }
+          ],
+          "explanation": "The prayer around Mary asks her to pray for us and honors her as conceived without sin."
+        },
+        {
+          "prompt": "What did Catherine do for the rest of her life?",
+          "choices": [
+            {
+              "text": "She traveled the world."
+            },
+            {
+              "text": "She quietly cared for elderly people.",
+              "correct": true
+            },
+            {
+              "text": "She wrote famous books."
+            }
+          ],
+          "explanation": "For about 46 years, Catherine quietly cared for elderly people, and almost no one knew her secret."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Catherine Laboure",
+          "publisher": "Catholic Online",
+          "url": "https://www.catholic.org/saints/saint.php?saint_id=266",
+          "note": "born May 2, 1806; ninth of eleven; mother's death in 1815 and \"Now you will be my mother\"; novitiate in 1830; the medal and its prayer; the archbishop's approval after about two years; about 40 years with the elderly; death December 31, 1876; beatified 1933; canonized July 27, 1947"
+        },
+        {
+          "title": "The Apparitions at the Rue du Bac",
+          "publisher": "Marie de Nazareth",
+          "url": "https://www.mariedenazareth.com/en/marian-encyclopedia/mary-fills-the-world/europe/france/sanctuaires-du-diocese-de-paris/paris-the-miraculous-medal-rue-du-bac/the-apparitions-at-the-rue-du-bac",
+          "note": "the night of July 18–19, 1830 and the child; Mary in the chair; graces \"at the foot of the altar\"; November 27, 1830; the reverse with the cross, M and two hearts; Father Aladel; 46 years at Enghien"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "john-neumann",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. John Neumann",
+        "production_id_hint": 990
+      },
+      "student_title": "Saint John Neumann",
+      "subtitle": "A young priest from Bohemia who crossed the ocean and became a bishop who built Catholic schools in America.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1811 to 1860"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Bohemia (now the Czech Republic); served in the United States"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 5"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Building Catholic schools and caring for immigrant families"
+        }
+      ],
+      "intro": "John Neumann was born in Bohemia, in what is now the Czech Republic. He wanted to be a priest in America, so he crossed the ocean when he was 25. He traveled long distances to serve families who had moved to America from other countries. As bishop of Philadelphia, he built a whole system of Catholic schools.",
+      "story_paragraphs": [
+        "John Neumann was born on March 28, 1811, in a small town in Bohemia. He was a bright student and studied in the city of Prague. He wanted to become a priest and serve as a missionary.",
+        "In Bohemia, there were already plenty of priests. But in America, many Catholic families had no priest at all. So when he was 25, John crossed the Atlantic Ocean to New York. Soon after he arrived, he was ordained a priest.",
+        "Father Neumann served German-speaking immigrant families in New York, Maryland, Virginia and Ohio. Many of them were poor farmers and workers living far apart. He walked and rode long distances to reach them, to celebrate Mass, and to teach the children.",
+        "When he was 29, he joined the Redemptorists, a community of priests who preach to people in need. He was the first Redemptorist to make his vows in the United States.",
+        "In 1852, when he was 41, John was made bishop of Philadelphia. He was a small man and very humble, but he worked very hard. He organized the parish schools of Philadelphia into one system, so that more children could go to Catholic school. In a short time, the number of students grew almost twenty times.",
+        "On January 5, 1860, Bishop Neumann died suddenly in Philadelphia. He was only 48 years old. People remembered him as a holy, hardworking shepherd who loved children and families.",
+        "In 1977, Pope Paul VI declared John Neumann a saint. He was the first man who was a citizen of the United States to be named a saint. He is buried in Philadelphia."
+      ],
+      "timeline": [
+        {
+          "date_display": "March 28, 1811",
+          "text": "John Neumann is born in Bohemia."
+        },
+        {
+          "date_display": "1836",
+          "text": "At age 25, he arrives in New York and is ordained a priest."
+        },
+        {
+          "date_display": "1840s",
+          "text": "He joins the Redemptorists and serves immigrant families."
+        },
+        {
+          "date_display": "1852",
+          "text": "He becomes bishop of Philadelphia."
+        },
+        {
+          "date_display": "January 5, 1860",
+          "text": "Bishop Neumann dies in Philadelphia."
+        },
+        {
+          "date_display": "1963",
+          "text": "He is the first American bishop to be beatified."
+        },
+        {
+          "date_display": "1977",
+          "text": "Pope Paul VI declares him a saint."
+        }
+      ],
+      "fun_facts": [
+        "John Neumann was the first male U.S. citizen to be named a saint.",
+        "He was the first Redemptorist to make his vows in the United States.",
+        "He crossed the ocean to America when he was 25.",
+        "He is a patron saint of teachers.",
+        "He is buried at Saint Peter the Apostle Church in Philadelphia."
+      ],
+      "words_to_know": [
+        {
+          "word": "Immigrant",
+          "definition": "A person who moves to a new country to live."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person sent to share the faith in another place."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader of the Church who takes the place of the apostles and cares for the people of a whole area."
+        },
+        {
+          "word": "Redemptorists",
+          "definition": "A community of priests and brothers who preach to people in need."
+        },
+        {
+          "word": "Parish school",
+          "definition": "A Catholic school that belongs to a parish."
+        }
+      ],
+      "think_about_it": "John Neumann left his home to serve people who needed a priest. Why do you think he was willing to go so far?",
+      "reflection_question": "Bishop Neumann wanted every child to learn about God. What is something you are thankful to have learned about God?",
+      "kindness_prompt": "Bishop Neumann cared for families new to America. Welcome someone new at school, church or in your neighborhood by inviting them to play or sit with you.",
+      "quiz": [
+        {
+          "prompt": "Where was John Neumann born?",
+          "choices": [
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Bohemia",
+              "correct": true
+            },
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Italy"
+            }
+          ],
+          "explanation": "John Neumann was born in Bohemia, which is now part of the Czech Republic."
+        },
+        {
+          "prompt": "How old was John when he crossed the ocean to America?",
+          "choices": [
+            {
+              "text": "12"
+            },
+            {
+              "text": "25",
+              "correct": true
+            },
+            {
+              "text": "50"
+            }
+          ],
+          "explanation": "John was 25 when he arrived in New York, and he was ordained a priest soon after."
+        },
+        {
+          "prompt": "What city did John Neumann serve as bishop?",
+          "choices": [
+            {
+              "text": "Boston"
+            },
+            {
+              "text": "Philadelphia",
+              "correct": true
+            },
+            {
+              "text": "Chicago"
+            }
+          ],
+          "explanation": "In 1852, John Neumann became bishop of Philadelphia."
+        },
+        {
+          "prompt": "What did Bishop Neumann build?",
+          "choices": [
+            {
+              "text": "A system of Catholic schools",
+              "correct": true
+            },
+            {
+              "text": "A railroad"
+            },
+            {
+              "text": "A castle"
+            }
+          ],
+          "explanation": "He organized the parish schools into one system, and the number of students grew almost twenty times."
+        },
+        {
+          "prompt": "What was special about John Neumann becoming a saint?",
+          "choices": [
+            {
+              "text": "He was the first pope from America"
+            },
+            {
+              "text": "He was the first male U.S. citizen to be named a saint",
+              "correct": true
+            },
+            {
+              "text": "He was the youngest saint ever"
+            }
+          ],
+          "explanation": "When Pope Paul VI declared him a saint in 1977, he became the first male U.S. citizen to be canonized."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint John Neumann",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-john-neumann/",
+          "note": "born March 28, 1811; studied in Prague; came to New York at 25 and ordained there; Maryland, Virginia, Ohio and German Catholics; Redemptorist at 29, first to profess vows in the U.S.; bishop at 41; diocesan school system and enrollment \"almost twentyfold\"; died January 5, 1860; beatified 1963; canonized 1977; buried at St. Peter the Apostle; patron of teachers"
+        },
+        {
+          "title": "St. John Neumann",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-John-Neumann",
+          "note": "Prachatice, Bohemia; bishop of Philadelphia; the parochial school system; beatified 1963; canonized 1977; \"first male U.S. citizen to be canonized\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "rose-philippine-duchesne",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Rose Philippine Duchesne",
+        "production_id_hint": 1068
+      },
+      "student_title": "Saint Rose Philippine Duchesne",
+      "subtitle": "A French sister who opened the first free school west of the Mississippi, and whom the Potawatomi called \"Woman-Who-Prays-Always.\"",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1769 to 1852"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Grenoble, France; served in Missouri and Kansas"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "November 18"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her schools on the American frontier and her life of prayer"
+        }
+      ],
+      "intro": "Rose Philippine Duchesne grew up in France and dreamed of being a missionary. When she was 49, she finally sailed to America. In a log cabin in St. Charles, Missouri, she opened the first free school west of the Mississippi River. When she was 72, she went to live among the Potawatomi people, who gave her a beautiful name.",
+      "story_paragraphs": [
+        "Philippine Duchesne was born on August 29, 1769, in Grenoble, France. Her father taught her about public life, and her mother taught her to love the poor. When she was a teenager, she joined a convent of sisters called the Visitation nuns, even though her family did not want her to.",
+        "Then the French Revolution came. The convent was closed, and the sisters were sent away. Philippine took care of the poor and the sick, opened a school for homeless children, and bravely helped priests who were hiding.",
+        "Later, Philippine joined a new community called the Society of the Sacred Heart. Its leader, Mother Madeleine Sophie Barat, became her lifelong friend.",
+        "Ever since she was a girl, Philippine had wanted to be a missionary in America. In 1818, when she was 49, her dream came true. She and four sisters sailed for eleven weeks across the ocean to New Orleans.",
+        "The bishop sent them to St. Charles, Missouri, a tiny village on the frontier. There, in a log cabin, Philippine opened the first free school for girls west of the Mississippi River. Life was very hard. It was cold, money was scarce, and she struggled to learn English. But she kept going and opened more schools.",
+        "When she was 72, Philippine finally went to serve Native people at Sugar Creek, Kansas, where the sisters opened a school for the Potawatomi. She was too old to learn their language, so she spent many hours praying. The Potawatomi called her \"Woman-Who-Prays-Always.\"",
+        "After about a year, she returned to St. Charles. She died there on November 18, 1852, at age 83. In 1988, Pope John Paul II declared her a saint."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 29, 1769",
+          "text": "Philippine Duchesne is born in Grenoble, France."
+        },
+        {
+          "date_display": "About 1788",
+          "text": "She joins the Visitation nuns."
+        },
+        {
+          "date_display": "1790s",
+          "text": "During the French Revolution, the convent is closed, and she serves the poor."
+        },
+        {
+          "date_display": "1804",
+          "text": "She joins the Society of the Sacred Heart."
+        },
+        {
+          "date_display": "1818",
+          "text": "She comes to America and opens a free school in St. Charles, Missouri."
+        },
+        {
+          "date_display": "1841",
+          "text": "At age 72, she goes to serve the Potawatomi at Sugar Creek, Kansas."
+        },
+        {
+          "date_display": "November 18, 1852",
+          "text": "She dies in St. Charles, Missouri."
+        },
+        {
+          "date_display": "July 3, 1988",
+          "text": "Pope John Paul II declares her a saint."
+        }
+      ],
+      "fun_facts": [
+        "Philippine waited many years before she could become a missionary in America.",
+        "The trip across the ocean took eleven weeks.",
+        "Her first school in Missouri was in a log cabin.",
+        "She opened the first free school west of the Mississippi River.",
+        "The Potawatomi named her \"Woman-Who-Prays-Always.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Missionary",
+          "definition": "A person sent to share the faith in another place."
+        },
+        {
+          "word": "Frontier",
+          "definition": "The edge of a settled area, where few people live yet."
+        },
+        {
+          "word": "Convent",
+          "definition": "A home where sisters live, pray and work together."
+        },
+        {
+          "word": "Potawatomi",
+          "definition": "A Native American nation. Some Potawatomi lived at Sugar Creek, Kansas, when Philippine served there."
+        },
+        {
+          "word": "Perseverance",
+          "definition": "Keeping on even when something is hard."
+        }
+      ],
+      "think_about_it": "Philippine waited a very long time for her dream, and she never gave up. What is something you need patience for?",
+      "reflection_question": "The Potawatomi saw that Philippine prayed always. When during your day could you spend a few quiet minutes with God?",
+      "kindness_prompt": "Philippine helped children learn. Help a younger child with reading or homework, or read a story aloud to a younger brother, sister or friend.",
+      "quiz": [
+        {
+          "prompt": "In what country was Philippine born?",
+          "choices": [
+            {
+              "text": "France",
+              "correct": true
+            },
+            {
+              "text": "Spain"
+            },
+            {
+              "text": "Canada"
+            },
+            {
+              "text": "Ireland"
+            }
+          ],
+          "explanation": "Philippine Duchesne was born in Grenoble, France, in 1769."
+        },
+        {
+          "prompt": "How old was Philippine when she finally came to America?",
+          "choices": [
+            {
+              "text": "18"
+            },
+            {
+              "text": "30"
+            },
+            {
+              "text": "49",
+              "correct": true
+            }
+          ],
+          "explanation": "Philippine had dreamed of America since she was a girl. She finally sailed there when she was 49."
+        },
+        {
+          "prompt": "What did she open in St. Charles, Missouri?",
+          "choices": [
+            {
+              "text": "A bakery"
+            },
+            {
+              "text": "The first free school west of the Mississippi",
+              "correct": true
+            },
+            {
+              "text": "A hospital"
+            }
+          ],
+          "explanation": "In a log cabin in St. Charles, she opened the first free school for girls west of the Mississippi River."
+        },
+        {
+          "prompt": "What did the Potawatomi call her?",
+          "choices": [
+            {
+              "text": "\"Teacher of Many\""
+            },
+            {
+              "text": "\"Woman-Who-Prays-Always\"",
+              "correct": true
+            },
+            {
+              "text": "\"The Traveler\""
+            }
+          ],
+          "explanation": "She was too old to learn their language, so she prayed for hours, and the Potawatomi named her \"Woman-Who-Prays-Always.\""
+        },
+        {
+          "prompt": "Which community did Philippine join, led by Madeleine Sophie Barat?",
+          "choices": [
+            {
+              "text": "The Daughters of Charity"
+            },
+            {
+              "text": "The Society of the Sacred Heart",
+              "correct": true
+            },
+            {
+              "text": "The Franciscans"
+            }
+          ],
+          "explanation": "Philippine joined the Society of the Sacred Heart, and its leader, Madeleine Sophie Barat, became her lifelong friend."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Rose Philippine Duchesne",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-rose-philippine-duchesne/",
+          "note": "Grenoble, 1769; her father and mother; the Visitation at 19; the Revolution; Madeleine Sophie Barat; 49 years old; 11 weeks at sea to New Orleans; St. Charles; the first free school west of the Mississippi; Sugar Creek at 72; \"Woman-Who-Prays-Always\"; died 1852 at 83; canonized 1988"
+        },
+        {
+          "title": "Rose Philippine Duchesne (1769–1852), canonization biography, July 3, 1988",
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19880703_duchesne_en.html",
+          "note": "born August 29, 1769; Visitation at 18; Sacred Heart in 1804; the log cabin at St. Charles in 1818; the free school; Sugar Creek at 72 for about a year; died November 18, 1852, at 83"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "isaac-jogues",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Isaac Jogues",
+        "production_id_hint": 972
+      },
+      "student_title": "Saint Isaac Jogues",
+      "subtitle": "A French Jesuit missionary in North America who returned to the place where he had suffered, hoping to make peace.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1607 to 1646"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Orléans, France; served in Canada and New York"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 19"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His courage and forgiveness as a missionary and martyr"
+        }
+      ],
+      "intro": "Isaac Jogues was a Jesuit priest from France who came to North America to share the faith. He was captured and held prisoner for more than a year. After he escaped, he could have stayed safe in France. Instead, he came back to North America to work for peace. He gave his life there in 1646 and is honored as a martyr.",
+      "story_paragraphs": [
+        "Isaac Jogues was born in Orléans, France, in 1607. He joined the Jesuits, a community of priests, and became a teacher. But he longed to be a missionary.",
+        "In 1636, Isaac was ordained a priest and sent to New France, which is now Canada. For six years, he lived and worked among the Huron people, also called the Wendat, near Georgian Bay. He learned about their lives and shared the Gospel with them.",
+        "At that time, the Huron and the nations of the Iroquois were at war. In 1642, Iroquois warriors captured Father Jogues, a lay helper named René Goupil, and a group of Huron Christians. They were taken to a Mohawk village. René Goupil was killed. Father Jogues was badly hurt and was kept as a prisoner for thirteen months.",
+        "With help from Dutch settlers, Father Jogues escaped and sailed home to France. His hands had been so badly injured that a priest was not normally allowed to say Mass that way. But the pope gave him special permission, saying it would be shameful to stop a martyr of Christ from offering Mass.",
+        "Father Jogues could have stayed in France. Instead, he went back to North America. In 1646, the French and the Mohawk had made peace, and he was sent to the Mohawk village of Ossernenon, in what is now New York, to help keep it.",
+        "But some Mohawk blamed the French and the missionaries for sickness and other troubles. On October 18, 1646, Father Jogues was killed. A young Frenchman named Jean de Lalande was killed the next day.",
+        "In 1930, the Church declared Isaac Jogues, René Goupil, Jean de Lalande and five other Jesuit missionaries saints. Together they are called the North American Martyrs."
+      ],
+      "timeline": [
+        {
+          "date_display": "1607",
+          "text": "Isaac Jogues is born in Orléans, France."
+        },
+        {
+          "date_display": "1624",
+          "text": "He joins the Jesuits."
+        },
+        {
+          "date_display": "1636",
+          "text": "He is ordained a priest and sent to New France."
+        },
+        {
+          "date_display": "1642",
+          "text": "He is captured and held as a prisoner for thirteen months."
+        },
+        {
+          "date_display": "1643",
+          "text": "He escapes with help from the Dutch and returns to France."
+        },
+        {
+          "date_display": "1646",
+          "text": "He returns to the Mohawk village of Ossernenon to help keep the peace."
+        },
+        {
+          "date_display": "October 18, 1646",
+          "text": "Father Jogues is killed at Ossernenon."
+        },
+        {
+          "date_display": "1930",
+          "text": "He is declared a saint with the other North American Martyrs."
+        }
+      ],
+      "fun_facts": [
+        "Isaac Jogues was the first Catholic priest to come to New Amsterdam, which later became New York City.",
+        "The pope gave him special permission to say Mass with his injured hands.",
+        "He is one of the eight North American Martyrs.",
+        "Before he was a missionary, he taught literature in France.",
+        "The North American Martyrs are remembered together on October 19."
+      ],
+      "words_to_know": [
+        {
+          "word": "Jesuit",
+          "definition": "A member of the Society of Jesus, a community of priests and brothers."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person sent to share the faith in another place."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Huron (Wendat)",
+          "definition": "A Native nation that lived near Georgian Bay, in what is now Ontario, Canada."
+        },
+        {
+          "word": "Mohawk",
+          "definition": "One of the nations of the Iroquois (Haudenosaunee), whose homeland is in what is now New York."
+        }
+      ],
+      "think_about_it": "Father Jogues went back to the place where he had suffered, hoping to bring peace. Why do you think he was willing to go back?",
+      "reflection_question": "Making peace can be hard. Is there someone you need to make peace with?",
+      "kindness_prompt": "Father Jogues worked for peace between people. If two friends are arguing, help them make up, or be the first to say \"I'm sorry\" when you have a disagreement.",
+      "quiz": [
+        {
+          "prompt": "What religious community did Isaac Jogues join?",
+          "choices": [
+            {
+              "text": "The Franciscans"
+            },
+            {
+              "text": "The Jesuits",
+              "correct": true
+            },
+            {
+              "text": "The Dominicans"
+            }
+          ],
+          "explanation": "Isaac Jogues joined the Jesuits, also called the Society of Jesus."
+        },
+        {
+          "prompt": "What was New France?",
+          "choices": [
+            {
+              "text": "The land that is now Canada",
+              "correct": true
+            },
+            {
+              "text": "A city in France"
+            },
+            {
+              "text": "A ship"
+            }
+          ],
+          "explanation": "New France was the French colony in North America. Much of it is now Canada."
+        },
+        {
+          "prompt": "How long was Father Jogues held as a prisoner?",
+          "choices": [
+            {
+              "text": "One week"
+            },
+            {
+              "text": "Thirteen months",
+              "correct": true
+            },
+            {
+              "text": "Ten years"
+            }
+          ],
+          "explanation": "Father Jogues was held prisoner for thirteen months before he escaped with help from the Dutch."
+        },
+        {
+          "prompt": "Why did Father Jogues go back to the Mohawk village in 1646?",
+          "choices": [
+            {
+              "text": "To find gold"
+            },
+            {
+              "text": "To help keep the peace",
+              "correct": true
+            },
+            {
+              "text": "To build a fort"
+            }
+          ],
+          "explanation": "The French and the Mohawk had made peace, and Father Jogues was sent to help keep it."
+        },
+        {
+          "prompt": "What are Isaac Jogues and his companions called?",
+          "choices": [
+            {
+              "text": "The Desert Fathers"
+            },
+            {
+              "text": "The North American Martyrs",
+              "correct": true
+            },
+            {
+              "text": "The Twelve Apostles"
+            }
+          ],
+          "explanation": "Isaac Jogues and seven other missionaries are honored together as the North American Martyrs."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saints Isaac Jogues, Jean de Brébeuf, and Companions",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saints-isaac-jogues-jean-de-brebeuf-and-companions/",
+          "note": "taught literature in France; Quebec in 1636; the Huron missions; captured in 1642 and held 13 months; René Goupil; the Dutch and his escape; papal permission for Mass; the 1646 peace mission with Jean de Lalande; died October 18; Lalande the next day at Ossernenon; canonized 1930 as one of eight; feast October 19"
+        },
+        {
+          "title": "St. Isaac Jogues",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Isaac-Jogues",
+          "note": "born 1607, Orléans; Jesuit 1624; ordained and sent to Canada 1636; six years with the Huron near Georgian Bay; captured 1642 by Iroquois; escaped 1643 with Dutch help; first priest in New Amsterdam; sent to Ossernenon for peace with the Mohawk; killed October 18, 1646; the accusation of witchcraft; canonized 1930"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "rose-of-lima",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Rose of Lima",
+        "production_id_hint": 1067
+      },
+      "student_title": "Saint Rose of Lima",
+      "subtitle": "The first saint born in the Americas, who worked in her garden, prayed, and cared for the sick and poor in her home.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1586 to 1617"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Lima, Peru"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "August 23"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Being the first saint born in the Americas, and caring for the poor and sick"
+        }
+      ],
+      "intro": "Rose of Lima was born in Lima, Peru, in 1586. Her real name was Isabel, but everyone called her Rose. She loved God with her whole heart. She grew flowers and sewed to help her family, prayed in a little hut in the garden, and turned a room of her home into a place to care for the poor and sick. She was the first saint born in the Americas.",
+      "story_paragraphs": [
+        "Isabel Flores de Oliva was born in Lima, Peru, on April 20, 1586. Her family called her Rosa, or Rose, and that is the name the world remembers.",
+        "From the time she was small, Rose loved to pray. She admired Saint Catherine of Siena, and she wanted to give her whole life to God, just as Catherine had.",
+        "Rose's family had money troubles. So Rose worked hard to help. During the day, she grew flowers in the garden. At night, she sewed beautiful lace and embroidery. She sold the flowers and the sewing to help her family and to give to the poor.",
+        "Her parents wanted her to marry, and they would not let her join a convent. So in 1606, Rose joined the Third Order of Saint Dominic. That meant she could follow the Dominican way of prayer while still living at home.",
+        "Rose built a small hut in her family's garden. There she spent many hours alone with God in prayer. She also made many sacrifices to grow closer to Jesus.",
+        "Rose never forgot people in need. In her last years, she set up a room in her family's house to care for homeless children, elderly people and the sick. Some people call this the beginning of social services in Peru.",
+        "Rose died on August 24, 1617, when she was only 31 years old. The whole city of Lima mourned her. In 1671, Pope Clement X declared her a saint. She was the first person born in the Americas to be named a saint. She is a patron saint of Peru, of South America, and of gardeners and florists."
+      ],
+      "timeline": [
+        {
+          "date_display": "April 20, 1586",
+          "text": "Isabel Flores de Oliva, called Rose, is born in Lima, Peru."
+        },
+        {
+          "date_display": "1606",
+          "text": "Rose joins the Third Order of Saint Dominic."
+        },
+        {
+          "date_display": "Her last years",
+          "text": "Rose cares for homeless children, elderly people and the sick in her family's home."
+        },
+        {
+          "date_display": "August 24, 1617",
+          "text": "Rose dies in Lima at age 31."
+        },
+        {
+          "date_display": "1668",
+          "text": "Pope Clement IX declares her Blessed."
+        },
+        {
+          "date_display": "1671",
+          "text": "Pope Clement X declares her a saint."
+        }
+      ],
+      "fun_facts": [
+        "Rose was the first person born in the Americas to be named a saint.",
+        "Her real name was Isabel.",
+        "She grew flowers and sewed lace to help her family.",
+        "She is a patron saint of gardeners and florists.",
+        "Her hero was Saint Catherine of Siena."
+      ],
+      "words_to_know": [
+        {
+          "word": "Third Order",
+          "definition": "A way for people who live at home to follow the prayer and spirit of a religious community, like the Dominicans."
+        },
+        {
+          "word": "Dominican",
+          "definition": "Belonging to the Order of Preachers, founded by Saint Dominic."
+        },
+        {
+          "word": "Embroidery",
+          "definition": "Designs sewn onto cloth with needle and thread."
+        },
+        {
+          "word": "Sacrifice",
+          "definition": "Giving up something good out of love for God or others."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays in a special way for a place, a job or a group of people."
+        }
+      ],
+      "think_about_it": "Rose worked hard to help her family and still made time to pray. How can you make time for both work and prayer?",
+      "reflection_question": "Rose turned a room in her home into a place to care for people in need. How could your family help someone in need?",
+      "kindness_prompt": "Rose grew flowers to help others. Plant a seed, pick a flower, or draw a picture of flowers and give it to someone who is lonely or sick.",
+      "quiz": [
+        {
+          "prompt": "What was Rose's real name?",
+          "choices": [
+            {
+              "text": "Isabel",
+              "correct": true
+            },
+            {
+              "text": "Maria"
+            },
+            {
+              "text": "Catherine"
+            },
+            {
+              "text": "Teresa"
+            }
+          ],
+          "explanation": "Her real name was Isabel Flores de Oliva, but her family called her Rosa, or Rose."
+        },
+        {
+          "prompt": "How did Rose help her family earn money?",
+          "choices": [
+            {
+              "text": "She sold horses"
+            },
+            {
+              "text": "She grew flowers and sewed lace",
+              "correct": true
+            },
+            {
+              "text": "She taught school"
+            }
+          ],
+          "explanation": "Rose grew flowers in the garden by day and sewed at night, and she sold them to help her family and the poor."
+        },
+        {
+          "prompt": "Which saint was Rose's hero?",
+          "choices": [
+            {
+              "text": "Saint Francis"
+            },
+            {
+              "text": "Saint Catherine of Siena",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick"
+            }
+          ],
+          "explanation": "Rose admired Saint Catherine of Siena and wanted to give her whole life to God, as Catherine had."
+        },
+        {
+          "prompt": "Where did Rose go to pray alone?",
+          "choices": [
+            {
+              "text": "A tall tower"
+            },
+            {
+              "text": "A small hut in her family's garden",
+              "correct": true
+            },
+            {
+              "text": "A cave in the mountains"
+            }
+          ],
+          "explanation": "Rose built a small hut in the garden, where she spent many hours in prayer."
+        },
+        {
+          "prompt": "Why is Rose of Lima special among the saints?",
+          "choices": [
+            {
+              "text": "She was the oldest saint"
+            },
+            {
+              "text": "She was the first person born in the Americas to be named a saint",
+              "correct": true
+            },
+            {
+              "text": "She was a queen"
+            }
+          ],
+          "explanation": "Rose was the first person born in the Western Hemisphere to be canonized."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Rose of Lima",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-rose-of-lima/",
+          "note": "born April 20, 1586, Lima; family money troubles; garden by day and sewing by night; parents wanted her to marry; Third Order of Saint Dominic; a room in the house for homeless children, the elderly and the sick, \"a beginning of social services in Peru\"; died August 24, 1617, at 31; \"first canonized saint of the New World\"; patron of florists, Peru, South America"
+        },
+        {
+          "title": "St. Rose of Lima",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Rose-of-Lima",
+          "note": "Isabel Flores de Oliva, known as Rosa; Catherine of Siena as her model; the Dominican third order in 1606; the hut in the family garden; sold lace, embroidery and flowers; beatified 1668 by Clement IX; canonized 1671 by Clement X; \"first person born in the Western Hemisphere to be canonized\"; patron of gardeners and florists"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "peter-claver",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Peter Claver",
+        "production_id_hint": 1051
+      },
+      "student_title": "Saint Peter Claver",
+      "subtitle": "A Jesuit priest in Colombia who spent 40 years caring for enslaved Africans as they arrived by ship.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "1580 to 1654"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Catalonia, Spain; served in Cartagena, Colombia"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "September 9"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for enslaved Africans and treating every person with dignity"
+        }
+      ],
+      "intro": "Peter Claver was a Jesuit priest from Spain who served in Cartagena, Colombia. In his time, ships carried enslaved people from Africa to Cartagena. Slavery was a terrible wrong. Peter met the ships, brought food and medicine, and told the people that God loved them. He called himself \"the slave of the Africans forever.\"",
+      "story_paragraphs": [
+        "Peter Claver was born in Spain in 1580 or 1581. In 1602, he joined the Jesuits. He wanted to serve God as a missionary in the Americas.",
+        "In 1610, Peter sailed to Cartagena, a port city in what is now Colombia. He was ordained a priest there in 1616.",
+        "At that time, Cartagena was one of the biggest slave markets in the Americas. Ships brought thousands of African men, women and children who had been taken from their homes and forced across the ocean. They were treated as if they were not people at all. This was a terrible injustice, a great sin.",
+        "Another Jesuit, Father Alfonso de Sandoval, had already spent many years serving the enslaved people of Cartagena. Peter joined his work. He made a promise and called himself \"the slave of the Africans forever.\"",
+        "Whenever a ship arrived, Peter went down into the crowded ship to care for people who were sick and weak. When they came ashore, he brought them food, fresh water, medicine and fruit. With the help of interpreters, he taught them about Jesus and reminded them that every one of them was a child of God, deeply loved.",
+        "For about 40 years, Peter cared for enslaved people. He is thought to have taught and baptized about 300,000 people. When he went to the countryside, he chose to stay in the huts of enslaved workers instead of in the owners' big houses.",
+        "In his last years, Peter was very sick and could hardly move. He died in Cartagena in September 1654. In 1888, Pope Leo XIII declared him a saint. He is the patron saint of Colombia and of people of the African diaspora."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 1580",
+          "text": "Peter Claver is born in Catalonia, Spain."
+        },
+        {
+          "date_display": "1602",
+          "text": "He joins the Jesuits."
+        },
+        {
+          "date_display": "1610",
+          "text": "He sails to Cartagena in the Americas."
+        },
+        {
+          "date_display": "1616",
+          "text": "He is ordained a priest in Cartagena."
+        },
+        {
+          "date_display": "About 1616–1650",
+          "text": "He cares for enslaved Africans arriving by ship."
+        },
+        {
+          "date_display": "September 1654",
+          "text": "Peter Claver dies in Cartagena."
+        },
+        {
+          "date_display": "1888",
+          "text": "Pope Leo XIII declares him a saint."
+        }
+      ],
+      "fun_facts": [
+        "Peter Claver is the patron saint of Colombia.",
+        "He is thought to have baptized about 300,000 people.",
+        "He worked with interpreters so he could speak with people from many African nations.",
+        "He chose to stay with enslaved workers instead of with the rich owners.",
+        "He served enslaved people for about 40 years."
+      ],
+      "words_to_know": [
+        {
+          "word": "Slavery",
+          "definition": "When people are owned by others and forced to work without freedom. Slavery is always wrong."
+        },
+        {
+          "word": "Dignity",
+          "definition": "The great worth every person has because God made them and loves them."
+        },
+        {
+          "word": "Interpreter",
+          "definition": "A person who helps people who speak different languages understand each other."
+        },
+        {
+          "word": "Jesuit",
+          "definition": "A member of the Society of Jesus, a community of priests and brothers."
+        },
+        {
+          "word": "Diaspora",
+          "definition": "People who live far from the homeland of their ancestors."
+        }
+      ],
+      "think_about_it": "Peter Claver treated people with love when others treated them cruelly. How can you stand up for someone who is being treated unfairly?",
+      "reflection_question": "Every person has dignity because God made them. How can you show someone today that they matter?",
+      "kindness_prompt": "Peter brought food and water to people who were hungry and thirsty. With your family, collect food or bottled water for a food pantry or a shelter.",
+      "quiz": [
+        {
+          "prompt": "In what city did Peter Claver serve?",
+          "choices": [
+            {
+              "text": "Madrid"
+            },
+            {
+              "text": "Cartagena",
+              "correct": true
+            },
+            {
+              "text": "Lima"
+            },
+            {
+              "text": "Rome"
+            }
+          ],
+          "explanation": "Peter served in Cartagena, a port city in what is now Colombia."
+        },
+        {
+          "prompt": "Who did Peter care for?",
+          "choices": [
+            {
+              "text": "Sailors only"
+            },
+            {
+              "text": "Enslaved Africans arriving by ship",
+              "correct": true
+            },
+            {
+              "text": "Kings and queens"
+            }
+          ],
+          "explanation": "Peter met the ships that brought enslaved Africans and cared for them with food, medicine and love."
+        },
+        {
+          "prompt": "What did Peter call himself?",
+          "choices": [
+            {
+              "text": "\"The king of the harbor\""
+            },
+            {
+              "text": "\"The slave of the Africans forever\"",
+              "correct": true
+            },
+            {
+              "text": "\"The great teacher\""
+            }
+          ],
+          "explanation": "Peter promised his life to serving enslaved people and called himself \"the slave of the Africans forever.\""
+        },
+        {
+          "prompt": "Why did Peter use interpreters?",
+          "choices": [
+            {
+              "text": "So he could speak with people who spoke many different languages",
+              "correct": true
+            },
+            {
+              "text": "To write books"
+            },
+            {
+              "text": "To sing songs"
+            }
+          ],
+          "explanation": "The people came from many African nations. Interpreters helped Peter speak with them and teach them about God."
+        },
+        {
+          "prompt": "What does \"dignity\" mean?",
+          "choices": [
+            {
+              "text": "Being rich"
+            },
+            {
+              "text": "The great worth every person has because God made them",
+              "correct": true
+            },
+            {
+              "text": "Being famous"
+            }
+          ],
+          "explanation": "Every person has dignity. Peter Claver reminded enslaved people that they were children of God, deeply loved."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Peter Claver",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-peter-claver/",
+          "note": "born June 26, 1581, Spain; Jesuit; Cartagena 1610; Father Alfonso de Sandoval; \"the slave of the Negroes forever\"; the ship holds; food, medicine, bread, lemons; interpreters and human dignity; 300,000 over 40 years; slave quarters, not planters' houses; four years of sickness; died September 8, 1654; canonized 1888 by Leo XIII; patron of Colombia and the African diaspora"
+        },
+        {
+          "title": "Saint Peter Claver",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Peter-Claver",
+          "note": "born 1581, Verdú, Spain; Jesuit 1602; Cartagena; ordained 1616; \"the slave of the Negroes forever\"; about 300,000 over 38 years; died September 1654, Cartagena; canonized 1888; patron of Colombia; feast September 9"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "charles-lwanga-and-companions",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Charles Lwanga and Companions",
+        "production_id_hint": 929
+      },
+      "student_title": "Saint Charles Lwanga and Companions",
+      "subtitle": "Young Christians in Uganda who stayed faithful to Jesus, led by a brave young man who protected them.",
+      "story_label": "Their Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1860 to 1886"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Buganda, in what is now Uganda"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Protecting the young pages and staying faithful to Jesus"
+        }
+      ],
+      "intro": "Charles Lwanga was a young man who served at the court of the king of Buganda, in what is now Uganda. He helped lead the king's pages, boys and young men who worked in the royal household. When the king demanded that they do wrong and give up their faith, Charles protected them and taught them about Jesus. They gave their lives in 1886.",
+      "story_paragraphs": [
+        "In 1879, Catholic missionaries called the White Fathers came to the kingdom of Buganda, in East Africa. Many people there were glad to learn about Jesus. Some of them worked at the royal court as pages, serving the king.",
+        "At first, the old king allowed Christians to live in peace. But the new king, Mwanga, began to turn against them. In 1885, Joseph Mukasa, the head of the pages and a Catholic, told the king he was doing wrong. The king had him put to death.",
+        "Charles Lwanga, Joseph's assistant, became the leader of the pages. The pages were boys and young men, from about 13 to 30 years old. The king wanted them to do things that were wrong and against God's law. Charles protected them and encouraged them to stay faithful.",
+        "On the night Joseph Mukasa died, Charles asked to be baptized. Later, when he knew the king would soon arrest the pages, Charles secretly baptized the young men who had been preparing to become Christians, so they could die as members of the Church.",
+        "The king ordered the Christian pages to give up their faith. They refused. They were marched to a place called Namugongo. On June 3, 1886, Charles Lwanga and many of his companions were put to death there. Anglican Christians were martyred with them. The youngest of the Catholic martyrs, Kizito, was only a boy.",
+        "The martyrs died praying and forgiving. Their courage did not stop the Church in Uganda. It grew stronger.",
+        "In 1964, Pope Paul VI declared 22 of the Ugandan martyrs saints. Today, a great basilica stands at Namugongo, and Christians from across Africa come there to honor them every June 3."
+      ],
+      "timeline": [
+        {
+          "date_display": "1879",
+          "text": "Catholic missionaries, the White Fathers, arrive in Buganda."
+        },
+        {
+          "date_display": "November 15, 1885",
+          "text": "Joseph Mukasa, head of the pages, is put to death. Charles Lwanga is baptized."
+        },
+        {
+          "date_display": "May 1886",
+          "text": "King Mwanga orders the Christian pages arrested. Charles baptizes the young catechumens."
+        },
+        {
+          "date_display": "June 3, 1886",
+          "text": "Charles Lwanga and many companions are put to death at Namugongo."
+        },
+        {
+          "date_display": "1920",
+          "text": "Pope Benedict XV declares them Blessed."
+        },
+        {
+          "date_display": "October 18, 1964",
+          "text": "Pope Paul VI declares 22 Ugandan martyrs saints."
+        },
+        {
+          "date_display": "1975",
+          "text": "A basilica in their honor opens at Namugongo."
+        }
+      ],
+      "fun_facts": [
+        "The 22 Ugandan martyrs were the first saints from sub-Saharan Africa.",
+        "The pages were between about 13 and 30 years old.",
+        "Anglican Christians were also martyred alongside the Catholics.",
+        "The basilica at Namugongo is round, like a traditional African hut.",
+        "Charles Lwanga is a patron saint of young people in Africa."
+      ],
+      "words_to_know": [
+        {
+          "word": "Page",
+          "definition": "A boy or young man who served in a royal household."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Catechumen",
+          "definition": "A person preparing to be baptized."
+        },
+        {
+          "word": "Missionary",
+          "definition": "A person sent to share the faith in another place."
+        },
+        {
+          "word": "Courage",
+          "definition": "Doing what is right even when you are afraid."
+        }
+      ],
+      "think_about_it": "Charles protected the younger pages and helped them stay faithful. How can you look out for kids who are younger than you?",
+      "reflection_question": "The Ugandan martyrs said no to doing wrong, even when a king commanded it. When is it hard for you to say no to something wrong?",
+      "kindness_prompt": "Charles Lwanga looked out for the younger pages. Look out for a younger child this week: help them, include them, or stand up for them if someone is unkind.",
+      "quiz": [
+        {
+          "prompt": "What job did Charles Lwanga have at the royal court?",
+          "choices": [
+            {
+              "text": "Cook"
+            },
+            {
+              "text": "Leader of the king's pages",
+              "correct": true
+            },
+            {
+              "text": "Soldier"
+            },
+            {
+              "text": "Farmer"
+            }
+          ],
+          "explanation": "Charles was assistant to the head of the pages and became their leader after Joseph Mukasa died."
+        },
+        {
+          "prompt": "In what country did these martyrs live?",
+          "choices": [
+            {
+              "text": "Kenya"
+            },
+            {
+              "text": "Uganda",
+              "correct": true
+            },
+            {
+              "text": "Egypt"
+            },
+            {
+              "text": "Nigeria"
+            }
+          ],
+          "explanation": "They lived in the kingdom of Buganda, which is now part of Uganda."
+        },
+        {
+          "prompt": "What did Charles do for the young men preparing for baptism?",
+          "choices": [
+            {
+              "text": "He sent them home"
+            },
+            {
+              "text": "He baptized them secretly",
+              "correct": true
+            },
+            {
+              "text": "He hid them in a cave"
+            }
+          ],
+          "explanation": "Charles secretly baptized those who were still preparing, so they could die as members of the Church."
+        },
+        {
+          "prompt": "On what date are these martyrs remembered?",
+          "choices": [
+            {
+              "text": "January 1"
+            },
+            {
+              "text": "June 3",
+              "correct": true
+            },
+            {
+              "text": "December 25"
+            }
+          ],
+          "explanation": "Charles Lwanga and many companions gave their lives at Namugongo on June 3, 1886."
+        },
+        {
+          "prompt": "Which pope declared the 22 Ugandan martyrs saints?",
+          "choices": [
+            {
+              "text": "Pope John Paul II"
+            },
+            {
+              "text": "Pope Paul VI",
+              "correct": true
+            },
+            {
+              "text": "Pope Leo XIII"
+            }
+          ],
+          "explanation": "Pope Paul VI declared them saints on October 18, 1964."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Charles Lwanga and Companions",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-charles-lwanga-and-companions/",
+          "note": "22 martyrs; Mwanga; Joseph Mukasa, head of the pages, and Charles his assistant; pages aged 13 to 30 protected from the ruler's demands; Charles baptized the night Mukasa died; Namugongo, June 3, 1886; Anglican pages also martyred; canonized October 18, 1964, by Paul VI"
+        },
+        {
+          "title": "Martyrs of Uganda",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/event/Martyrs-of-Uganda",
+          "note": "Anglican and Catholic martyrs under Mwanga, 1885–87; White Fathers 1879; Mukasa beheaded November 15, 1885; Charles Lwanga secretly baptized the catechumens; Namugongo, June 3, 1886; Kizito; beatified 1920 by Benedict XV; canonized 1964; the round basilica opened in 1975"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "paul-miki-and-companions",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Paul Miki and Companions",
+        "production_id_hint": 1043
+      },
+      "student_title": "Saint Paul Miki and Companions",
+      "subtitle": "Twenty-six Christians in Japan, including a Japanese Jesuit and some boys, who forgave and stayed faithful to Jesus.",
+      "story_label": "Their Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 1562 to 1597"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Japan"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "February 6"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Forgiving his persecutors and staying faithful to Jesus"
+        }
+      ],
+      "intro": "Paul Miki was a Japanese Jesuit and a gifted preacher. In 1597, Christians in Japan were being persecuted. Paul Miki and 25 companions, priests, brothers and lay people, including some boys, were marched to the city of Nagasaki. There they gave their lives for Jesus. Paul said he forgave the people who put them to death, just as Jesus did.",
+      "story_paragraphs": [
+        "In 1549, Saint Francis Xavier brought the Gospel to Japan. Over the next years, many Japanese people became Christians.",
+        "Paul Miki was born in Japan. He became a Jesuit brother and was known as a wonderful preacher. He loved to tell people about Jesus.",
+        "But Japan's ruler, Toyotomi Hideyoshi, began to see the Christians as a danger. In 1587, he ordered the missionaries to leave. Ten years later, he ordered Christians to be arrested.",
+        "Twenty-six Christians were arrested, among them Paul Miki. Six were Franciscan friars. Three were Japanese Jesuits. Seventeen were lay people: catechists, doctors, workers, servants, old men, and some boys. They were made to walk a very long way, from the cities of Kyoto and Osaka all the way to Nagasaki.",
+        "On February 5, 1597, the twenty-six were put to death on crosses on a hill above Nagasaki, like Jesus.",
+        "Even then, Paul Miki kept preaching. He said, \"I am a true Japanese.\" He told the crowd that he was dying because he had taught about Jesus. Then he said, \"After Christ's example I forgive my persecutors.\" The martyrs sang and prayed as they died.",
+        "For more than 200 years after that, it was against the law to be a Christian in Japan. When missionaries came back in the 1860s, they thought no Christians were left. But they discovered that thousands of Christians near Nagasaki had kept the faith in secret, passing it on in their families. The seeds planted by the martyrs had grown.",
+        "In 1862, Pope Pius IX declared Paul Miki and his 25 companions saints."
+      ],
+      "timeline": [
+        {
+          "date_display": "1549",
+          "text": "Saint Francis Xavier brings the Gospel to Japan."
+        },
+        {
+          "date_display": "1587",
+          "text": "Japan's ruler orders the missionaries to leave."
+        },
+        {
+          "date_display": "Early 1597",
+          "text": "Twenty-six Christians are arrested and made to walk to Nagasaki."
+        },
+        {
+          "date_display": "February 5, 1597",
+          "text": "Paul Miki and 25 companions are put to death in Nagasaki."
+        },
+        {
+          "date_display": "1627",
+          "text": "The Church declares them Blessed."
+        },
+        {
+          "date_display": "1862",
+          "text": "Pope Pius IX declares them saints."
+        },
+        {
+          "date_display": "1860s",
+          "text": "Missionaries return and find Christians who kept the faith in secret."
+        }
+      ],
+      "fun_facts": [
+        "Paul Miki was a Japanese Jesuit brother and a gifted preacher.",
+        "Some of the 26 martyrs were boys.",
+        "The martyrs walked all the way from Kyoto and Osaka to Nagasaki.",
+        "Christians in Japan kept the faith in secret for more than 200 years.",
+        "A large bronze monument to the 26 martyrs stands in Nagasaki."
+      ],
+      "words_to_know": [
+        {
+          "word": "Persecution",
+          "definition": "When people are treated cruelly because of what they believe."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Lay people",
+          "definition": "Members of the Church who are not priests, brothers or sisters."
+        },
+        {
+          "word": "Catechist",
+          "definition": "A person who teaches others about the faith."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To let go of anger and stop holding a wrong against someone."
+        }
+      ],
+      "think_about_it": "Paul Miki forgave the people who put him to death, just as Jesus did. Why is it so hard, and so important, to forgive?",
+      "reflection_question": "The hidden Christians of Japan passed on their faith in their families. How does your family help you know and love Jesus?",
+      "kindness_prompt": "Paul Miki forgave his persecutors. Think of someone who hurt your feelings. Pray for them today, and if you can, tell them you forgive them.",
+      "quiz": [
+        {
+          "prompt": "Who first brought the Gospel to Japan in 1549?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint Francis Xavier",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick"
+            }
+          ],
+          "explanation": "Saint Francis Xavier brought the Gospel to Japan in 1549."
+        },
+        {
+          "prompt": "How many martyrs died in Nagasaki in 1597, counting Paul Miki?",
+          "choices": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "12"
+            },
+            {
+              "text": "26",
+              "correct": true
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "explanation": "Paul Miki and 25 companions, 26 in all, gave their lives in Nagasaki in 1597."
+        },
+        {
+          "prompt": "What did Paul Miki say about the people who put him to death?",
+          "choices": [
+            {
+              "text": "\"I will get even.\""
+            },
+            {
+              "text": "\"After Christ's example I forgive my persecutors.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I am not afraid of anything.\""
+            }
+          ],
+          "explanation": "Like Jesus on the cross, Paul Miki forgave the people who put him to death."
+        },
+        {
+          "prompt": "What did missionaries find when they returned to Japan in the 1860s?",
+          "choices": [
+            {
+              "text": "Empty churches only"
+            },
+            {
+              "text": "Thousands of Christians who had kept the faith in secret",
+              "correct": true
+            },
+            {
+              "text": "A new king"
+            }
+          ],
+          "explanation": "For more than 200 years, Christians near Nagasaki had secretly kept the faith and passed it on in their families."
+        },
+        {
+          "prompt": "Who were the 26 martyrs?",
+          "choices": [
+            {
+              "text": "Priests, brothers and lay people, including some boys",
+              "correct": true
+            },
+            {
+              "text": "Only soldiers"
+            },
+            {
+              "text": "Only priests"
+            }
+          ],
+          "explanation": "The 26 included Franciscan friars, Japanese Jesuits, and lay people such as catechists, doctors, workers and boys."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Paul Miki and Companions",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-paul-miki-and-companions/",
+          "note": "26 martyrs crucified on a hill overlooking Nagasaki in 1597; Paul Miki, a Jesuit brother and native of Japan; priests, brothers and laymen, catechists, doctors, artisans, servants, old men and children; \"I am a true Japanese\"; \"After Christ's example I forgive my persecutors\"; the hidden Christians found in the 1860s; beatified 1627; canonized 1862"
+        },
+        {
+          "title": "26 Martyrs of Japan",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/topic/26-Martyrs-of-Japan",
+          "note": "crucified in Nagasaki February 5, 1597, on Hideyoshi's orders; Francis Xavier in 1549; the 1587 edict; six Franciscans, three Japanese Jesuits including Paul Miki, seventeen laymen including boys; the walk from Kyoto and Osaka; Nishizaka hill; canonized 1862; the bronze monument"
+        }
+      ]
+    }
+  ]
+}
