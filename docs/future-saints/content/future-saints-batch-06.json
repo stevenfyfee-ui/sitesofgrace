@@ -1,0 +1,2475 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "ignatius-of-antioch",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Ignatius of Antioch",
+        "production_id_hint": 969
+      },
+      "student_title": "Saint Ignatius of Antioch",
+      "subtitle": "An early bishop who wrote seven letters on his way to Rome, and the first to call the Church \"catholic.\"",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 35 to about 107"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Antioch, in Syria, where he was bishop"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "October 17"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His seven letters and his great love for Jesus and the Church"
+        }
+      ],
+      "intro": "Ignatius was one of the very first bishops of the Church. He led the Christians of Antioch, the city where followers of Jesus were first called Christians. When he was arrested for his faith, he was taken all the way to Rome. On the journey, he wrote seven letters full of love for Jesus. We can still read them today.",
+      "story_paragraphs": [
+        "Ignatius lived in the time right after the apostles. He was the bishop of Antioch, a great city in Syria. Antioch was special. The Bible says it was there that the followers of Jesus were first called Christians.",
+        "Ignatius called himself Theophorus. That name means \"God-bearer,\" someone who carries God inside him.",
+        "Around the year 107, Ignatius was arrested because he was a Christian. Roman soldiers led him on a long journey from Antioch to Rome, where he was to be put to death.",
+        "Along the way, the soldiers stopped in different cities. Christians came out to meet their bishop and to pray with him. In the city of Smyrna, he was welcomed by its bishop, Saint Polycarp.",
+        "On the journey, Ignatius wrote seven letters. Six went to churches in different cities, and one went to his friend Polycarp. In them, he begged Christians to stay united, to love one another, and to stay close to their bishop. He called the Eucharist \"the medicine of immortality.\"",
+        "In one letter, Ignatius wrote, \"Wherever Jesus Christ is, there is the Catholic Church.\" He is the first Christian writer we know of to use the word \"catholic.\" It means \"universal,\" or \"for everyone everywhere.\"",
+        "Ignatius was not afraid to die. He wrote to the Christians in Rome and asked them not to try to save him. He wanted to give his whole life to Jesus. He said he was like wheat, ready to become bread for Christ.",
+        "In Rome, Ignatius was put to death in the great arena. He gave his life for Jesus, just as he had hoped. His letters have been treasured by Christians for more than 1,900 years."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 35",
+          "text": "Ignatius is born, around the time of Jesus' apostles."
+        },
+        {
+          "date_display": "About 70",
+          "text": "Ignatius becomes bishop of Antioch."
+        },
+        {
+          "date_display": "About 107",
+          "text": "He is arrested and taken toward Rome by Roman soldiers."
+        },
+        {
+          "date_display": "On the journey",
+          "text": "He meets Saint Polycarp in Smyrna and writes seven letters."
+        },
+        {
+          "date_display": "About 107",
+          "text": "Ignatius is put to death in Rome for his faith."
+        }
+      ],
+      "fun_facts": [
+        "Ignatius is the first Christian writer we know of to call the Church \"catholic.\"",
+        "He called himself Theophorus, which means \"God-bearer.\"",
+        "He wrote seven letters while traveling as a prisoner. All seven still exist.",
+        "His friend Saint Polycarp gathered his letters and shared them with other churches.",
+        "Pope Benedict XVI called Ignatius the \"Doctor of Unity.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Bishop",
+          "definition": "A leader of the Church who takes the place of the apostles and cares for the people of a whole area."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Catholic",
+          "definition": "A word that means \"universal,\" or \"for everyone everywhere.\""
+        },
+        {
+          "word": "Eucharist",
+          "definition": "The Body and Blood of Jesus, which we receive at Mass."
+        },
+        {
+          "word": "Unity",
+          "definition": "Being joined together as one."
+        }
+      ],
+      "think_about_it": "Ignatius used his long, hard journey to write letters that helped others. How can you turn a hard time into a chance to help someone?",
+      "reflection_question": "Ignatius asked Christians to stay united and love one another. Who is someone you could make peace with this week?",
+      "kindness_prompt": "Ignatius encouraged people with his letters. Write a short note to someone in your family or a friend telling them why you are glad they are in your life.",
+      "quiz": [
+        {
+          "prompt": "What city was Ignatius the bishop of?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Antioch",
+              "correct": true
+            },
+            {
+              "text": "Jerusalem"
+            },
+            {
+              "text": "Athens"
+            }
+          ],
+          "explanation": "Ignatius was the bishop of Antioch, the city where followers of Jesus were first called Christians."
+        },
+        {
+          "prompt": "What did Ignatius write on his journey to Rome?",
+          "choices": [
+            {
+              "text": "A book of songs"
+            },
+            {
+              "text": "Seven letters",
+              "correct": true
+            },
+            {
+              "text": "A map of the world"
+            }
+          ],
+          "explanation": "Ignatius wrote seven letters to churches and to his friend Polycarp. We can still read them today."
+        },
+        {
+          "prompt": "What does the word \"catholic\" mean?",
+          "choices": [
+            {
+              "text": "Universal, or for everyone everywhere",
+              "correct": true
+            },
+            {
+              "text": "Very old"
+            },
+            {
+              "text": "Made of stone"
+            }
+          ],
+          "explanation": "Ignatius was the first Christian writer we know of to call the Church \"catholic,\" which means universal."
+        },
+        {
+          "prompt": "What did Ignatius call himself?",
+          "choices": [
+            {
+              "text": "The Traveler"
+            },
+            {
+              "text": "Theophorus, or \"God-bearer\"",
+              "correct": true
+            },
+            {
+              "text": "The Wise One"
+            },
+            {
+              "text": "The Shepherd"
+            }
+          ],
+          "explanation": "The name Theophorus means \"God-bearer,\" someone who carries God inside."
+        },
+        {
+          "prompt": "Which saint welcomed Ignatius in the city of Smyrna?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint Paul"
+            },
+            {
+              "text": "Saint Polycarp",
+              "correct": true
+            }
+          ],
+          "explanation": "Polycarp, the bishop of Smyrna, welcomed Ignatius on his journey and later shared his letters."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Ignatius of Antioch, Bishop, Martyr in Rome",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/17/st--ignatius-of-antioch--bishop--martyr-in-rome.html",
+          "note": "Theophorus, \"God-bearer\"; arrest under Trajan, 107–110; seven letters; \"God's wheat\"; \"Wherever Jesus Christ is, there is the catholic Church\"; \"the medicine of immortality\""
+        },
+        {
+          "title": "Saint Ignatius of Antioch",
+          "publisher": "Benedict XVI, General Audience, March 14, 2007",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2007/documents/hf_ben-xvi_aud_20070314.html",
+          "note": "third bishop of Antioch, 70–107; Antioch where disciples were first called Christians; the stops at Smyrna and Troas; the seven letters and where they went; \"Doctor of Unity\"; death in the Flavian Amphitheatre"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "polycarp",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Polycarp",
+        "production_id_hint": 1060
+      },
+      "student_title": "Saint Polycarp",
+      "subtitle": "A bishop who learned from Saint John the Apostle and stayed faithful to Jesus for 86 years.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 69 to 155"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Smyrna, in what is now Turkey"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "February 23"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Learning from Saint John and staying faithful to Jesus his whole life"
+        }
+      ],
+      "intro": "Polycarp grew up in a Christian family not long after Jesus lived. He learned about Jesus from Saint John, one of the twelve apostles. He became the bishop of Smyrna and cared for his people for many years. When he was an old man, he was told to give up his faith. He answered that Jesus had always been good to him.",
+      "story_paragraphs": [
+        "Polycarp was born around the year 69, into a family that already believed in Jesus. As a young man, he became a disciple of Saint John the Apostle, the friend of Jesus who wrote one of the Gospels. Imagine learning about Jesus from someone who had walked with him!",
+        "Polycarp became the bishop of Smyrna, a busy city by the sea in what is now Turkey. He led the Christians there for many years.",
+        "In the year 107, a bishop named Ignatius came through Smyrna as a prisoner on his way to Rome. Polycarp welcomed him. Later, Polycarp gathered the letters Ignatius had written and sent them to other Christians so they could learn from them.",
+        "Polycarp wrote a letter of his own to the Christians of Philippi. He told them to serve God, to hope in the resurrection, and to live good and fair lives.",
+        "When he was very old, Polycarp traveled all the way to Rome to meet Pope Anicetus. Christians in the East and in Rome celebrated Easter on different days. The two leaders talked it over. They did not agree, but they stayed friends.",
+        "Then a time of persecution came to Smyrna. Polycarp was arrested. The Roman official told him to curse Christ and save himself. Polycarp answered, \"I have served Him for eighty-six years, and he has done me no harm.\" He would not turn away from Jesus.",
+        "Polycarp was put to death in the year 155. An old account, written by people who were there, says that when the soldiers lit a fire around him, the flames did not touch him. In the end, he gave his life for Jesus.",
+        "That account is one of the oldest stories of a martyr that we have."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 69",
+          "text": "Polycarp is born into a Christian family."
+        },
+        {
+          "date_display": "As a young man",
+          "text": "He becomes a disciple of Saint John the Apostle."
+        },
+        {
+          "date_display": "Later",
+          "text": "He becomes the bishop of Smyrna."
+        },
+        {
+          "date_display": "107",
+          "text": "He welcomes Saint Ignatius of Antioch and later shares his letters."
+        },
+        {
+          "date_display": "About 154",
+          "text": "He travels to Rome to meet Pope Anicetus."
+        },
+        {
+          "date_display": "February 23, 155",
+          "text": "Polycarp is put to death for his faith."
+        }
+      ],
+      "fun_facts": [
+        "Polycarp learned about Jesus from Saint John, one of the twelve apostles.",
+        "He was about 86 years old when he died.",
+        "He traveled from Smyrna all the way to Rome as an old man.",
+        "The story of his death is one of the oldest martyr stories we have.",
+        "He was a friend of Saint Ignatius of Antioch."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apostle",
+          "definition": "One of the twelve men Jesus chose to be his closest followers and to lead his Church."
+        },
+        {
+          "word": "Disciple",
+          "definition": "A follower and student of a teacher."
+        },
+        {
+          "word": "Bishop",
+          "definition": "A leader of the Church who takes the place of the apostles and cares for the people of a whole area."
+        },
+        {
+          "word": "Persecution",
+          "definition": "When people are treated cruelly because of what they believe."
+        },
+        {
+          "word": "Faithful",
+          "definition": "Staying true and loyal, even when it is hard."
+        }
+      ],
+      "think_about_it": "Polycarp and the Pope did not agree about Easter, but they stayed friends. How can you stay kind to someone when you disagree?",
+      "reflection_question": "Polycarp said Jesus had always been good to him. What are some ways God has been good to you?",
+      "kindness_prompt": "Polycarp shared Ignatius's letters so others could learn from them. Share something good with someone today, like a favorite book, a game, or a snack.",
+      "quiz": [
+        {
+          "prompt": "Which apostle taught Polycarp about Jesus?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint John",
+              "correct": true
+            },
+            {
+              "text": "Saint Thomas"
+            },
+            {
+              "text": "Saint Andrew"
+            }
+          ],
+          "explanation": "Polycarp was a disciple of Saint John the Apostle, who knew Jesus personally."
+        },
+        {
+          "prompt": "What city was Polycarp the bishop of?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Antioch"
+            },
+            {
+              "text": "Smyrna",
+              "correct": true
+            }
+          ],
+          "explanation": "Polycarp led the Christians of Smyrna, a city in what is now Turkey."
+        },
+        {
+          "prompt": "How many years did Polycarp say he had served Jesus?",
+          "choices": [
+            {
+              "text": "10"
+            },
+            {
+              "text": "40"
+            },
+            {
+              "text": "86",
+              "correct": true
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "explanation": "He said, \"I have served Him for eighty-six years, and he has done me no harm.\""
+        },
+        {
+          "prompt": "Why did Polycarp travel to Rome?",
+          "choices": [
+            {
+              "text": "To find a new home"
+            },
+            {
+              "text": "To meet Pope Anicetus",
+              "correct": true
+            },
+            {
+              "text": "To become a soldier"
+            }
+          ],
+          "explanation": "Polycarp went to Rome to talk with Pope Anicetus about the date of Easter."
+        },
+        {
+          "prompt": "What did Polycarp do with Saint Ignatius's letters?",
+          "choices": [
+            {
+              "text": "He hid them"
+            },
+            {
+              "text": "He gathered them and shared them with other Christians",
+              "correct": true
+            },
+            {
+              "text": "He threw them away"
+            }
+          ],
+          "explanation": "Polycarp collected the letters of Ignatius so that other Christians could read them."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Polycarp, Bishop of Smyrna and Martyr",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/23/st--polycarp--bishop-of--smirne-and-martiyr.html",
+          "note": "born 69–70 to Christian parents; disciple of St John; bishop of Smyrna; welcomed Ignatius in 107 and gathered his letters; letter to the Philippians; visit to Pope Anicetus about 154 and the Easter date; \"I have served Him for eighty-six years, and he has done me no harm\"; the flames; February 23, 155; the Martyrium Polycarpi"
+        },
+        {
+          "title": "Saint Ignatius of Antioch",
+          "publisher": "Benedict XVI, General Audience, March 14, 2007",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2007/documents/hf_ben-xvi_aud_20070314.html",
+          "note": "Ignatius stopped at Smyrna, \"where Polycarp was bishop,\" and wrote one letter to Polycarp"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "justin-martyr",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Justin Martyr",
+        "production_id_hint": 1007
+      },
+      "student_title": "Saint Justin Martyr",
+      "subtitle": "A thinker who searched everywhere for the truth, found it in Jesus, and taught it for free.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 100 to about 165"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Flavia Neapolis, in Samaria, in the Holy Land"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "June 1"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Searching for truth and explaining the faith to others"
+        }
+      ],
+      "intro": "Justin loved to ask big questions. Where does the world come from? What is true? He studied with many teachers, but none of their answers satisfied him. Then an old man told him about the prophets and about Jesus. Justin became a Christian and opened a school to teach about Jesus. He wrote the oldest description of the Mass that we have.",
+      "story_paragraphs": [
+        "Justin was born around the year 100 in Samaria, in the Holy Land. His family did not believe in the one true God. They worshiped many false gods.",
+        "Justin was very curious. He wanted to know what was really true. He went to different teachers called philosophers, people who think deeply about life and the world. He studied with one teacher, then another, then another. Each one taught him something, but none of them gave him the answers he was looking for.",
+        "One day, Justin went off alone to think. Near the seashore, he met a mysterious old man. They talked for a long time. The old man told Justin that people cannot find God by their own thinking alone. He told him to read the prophets of the Bible, who spoke about Jesus.",
+        "Justin read the Scriptures, and his heart was set on fire. He became a Christian and was baptized. He said that the Christian faith was \"the only sure and profitable philosophy.\"",
+        "Justin moved to Rome and opened a school. He taught about Jesus for free to anyone who wanted to learn. He also wrote books to defend Christians, who were being treated unfairly. In one of them, he described what Christians did when they gathered for the Eucharist. It is the oldest description of the Mass that we have.",
+        "Justin believed that everything good and true in the world comes from God. He wrote, \"Everything beautiful, no matter who said it, belongs to us Christians.\"",
+        "Around the year 165, a man who disliked Christians had Justin arrested. Justin and six other Christians refused to give up their faith. They were put to death together in Rome. That is why he is called Justin Martyr."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 100",
+          "text": "Justin is born in Samaria, in a family that worships false gods."
+        },
+        {
+          "date_display": "As a young man",
+          "text": "He studies with many philosophers, searching for the truth."
+        },
+        {
+          "date_display": "Later",
+          "text": "An old man tells him about the prophets and Jesus."
+        },
+        {
+          "date_display": "About 130",
+          "text": "Justin is baptized and becomes a Christian."
+        },
+        {
+          "date_display": "Later",
+          "text": "He opens a free school in Rome and writes books defending Christians."
+        },
+        {
+          "date_display": "About 165",
+          "text": "Justin and six companions are put to death for their faith in Rome."
+        }
+      ],
+      "fun_facts": [
+        "Justin wrote the oldest description of the Mass that we still have.",
+        "He taught about Jesus for free.",
+        "He is called \"Martyr\" as part of his name because he died for his faith.",
+        "He believed that everything good and true in the world comes from God.",
+        "His school was in Rome."
+      ],
+      "words_to_know": [
+        {
+          "word": "Philosopher",
+          "definition": "A person who thinks deeply about big questions, like what is true and what is good."
+        },
+        {
+          "word": "Prophet",
+          "definition": "A person who speaks for God. The prophets of the Old Testament spoke about the Savior who was coming."
+        },
+        {
+          "word": "Baptized",
+          "definition": "Made a member of God's family through the sacrament of Baptism."
+        },
+        {
+          "word": "Eucharist",
+          "definition": "The Body and Blood of Jesus, which we receive at Mass."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        }
+      ],
+      "think_about_it": "Justin kept asking questions until he found the truth. What is a big question you have about God or the world?",
+      "reflection_question": "Justin taught about Jesus for free because he wanted everyone to know him. What is something good you could share with others for free?",
+      "kindness_prompt": "Justin was a teacher. Help someone younger than you learn something today, like tying a shoe, reading a word, or saying a prayer.",
+      "quiz": [
+        {
+          "prompt": "What was Justin searching for when he went to many teachers?",
+          "choices": [
+            {
+              "text": "Gold"
+            },
+            {
+              "text": "The truth",
+              "correct": true
+            },
+            {
+              "text": "A new house"
+            }
+          ],
+          "explanation": "Justin studied with many philosophers because he wanted to know what was really true."
+        },
+        {
+          "prompt": "Who told Justin to read the prophets?",
+          "choices": [
+            {
+              "text": "A Roman soldier"
+            },
+            {
+              "text": "A mysterious old man",
+              "correct": true
+            },
+            {
+              "text": "His brother"
+            },
+            {
+              "text": "A king"
+            }
+          ],
+          "explanation": "An old man Justin met near the seashore told him to read the prophets, who spoke about Jesus."
+        },
+        {
+          "prompt": "What did Justin do in Rome?",
+          "choices": [
+            {
+              "text": "He built a palace"
+            },
+            {
+              "text": "He opened a school and taught about Jesus for free",
+              "correct": true
+            },
+            {
+              "text": "He became an emperor"
+            }
+          ],
+          "explanation": "Justin taught anyone who wanted to learn about Jesus, without charging money."
+        },
+        {
+          "prompt": "What is special about one of Justin's writings?",
+          "choices": [
+            {
+              "text": "It is the oldest description of the Mass we have",
+              "correct": true
+            },
+            {
+              "text": "It is the first map of Rome"
+            },
+            {
+              "text": "It is a book of jokes"
+            }
+          ],
+          "explanation": "Justin described what Christians did when they gathered for the Eucharist. It is the oldest description of the Mass we have."
+        },
+        {
+          "prompt": "Why is he called Justin \"Martyr\"?",
+          "choices": [
+            {
+              "text": "It was his family name"
+            },
+            {
+              "text": "Because he died for his faith",
+              "correct": true
+            },
+            {
+              "text": "Because he was a soldier"
+            }
+          ],
+          "explanation": "Justin was put to death with six other Christians because he would not give up his faith."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Justin, Philosopher and Martyr",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/01/st--justin--philosopher-and-martyr.html",
+          "note": "Flavia Neapolis in Samaria; came from paganism; studied many philosophies; the old man; baptism about 130 at Ephesus; school in Rome; Apologies; the oldest description of the Eucharistic liturgy; \"Everything beautiful...\"; Crescentius; six companions; about 165 under Marcus Aurelius"
+        },
+        {
+          "title": "Saint Justin, Philosopher and Martyr",
+          "publisher": "Benedict XVI, General Audience, March 21, 2007",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2007/documents/hf_ben-xvi_aud_20070321.html",
+          "note": "born about 100 near Shechem in Samaria; Greek philosophy; the old man on the seashore; \"the only sure and profitable philosophy\"; the free school in Rome; martyred about 165"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "perpetua-and-felicity",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "Sts. Perpetua and Felicity",
+        "production_id_hint": 1046
+      },
+      "student_title": "Saints Perpetua and Felicity",
+      "subtitle": "Two young mothers in North Africa, one rich and one a slave, who stood together as sisters in Christ.",
+      "story_label": "Their Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died in 203"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Carthage, in North Africa"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "March 7"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Their courage and the prison diary Perpetua wrote"
+        }
+      ],
+      "intro": "Perpetua was a young mother from a well-off family. Felicity was a slave who worked in her household. In the eyes of the world they were very different, but in Christ they were sisters. In the year 203, they were arrested together for being Christians. In prison, Perpetua wrote down what happened. Her diary is one of the oldest writings by a woman that we have.",
+      "story_paragraphs": [
+        "Long ago, in the city of Carthage in North Africa, lived a young woman named Perpetua. She came from a family with money. She was married and had a baby son, only a few months old. Her servant, Felicity, was a slave. Felicity was going to have a baby too.",
+        "Perpetua and Felicity were preparing to be baptized. At that time, the Roman emperor had made a law against becoming a Christian. In the year 203, they were arrested together with three young men who were also learning about the faith. Their teacher, Saturus, chose to join them in prison.",
+        "Perpetua's father was not a Christian. He came to the prison and begged her to give up her faith. He even brought her baby to her. Perpetua loved her father and her son very much. But she answered simply, \"I am a Christian.\"",
+        "In prison, Perpetua kept a diary. She wrote down what happened and also the dreams God gave her. In one dream, she saw a golden ladder that reached up to heaven. A serpent lay at the bottom, but she was not afraid. She said it would not hurt her, \"because Jesus Christ is in me.\"",
+        "While they were in prison, Felicity's baby was born. Christians in the city took care of the little one.",
+        "On March 7, 203, Perpetua, Felicity, and their friends were put to death in the arena. They went bravely and calmly, like people already on their way to heaven.",
+        "Today, Perpetua and Felicity are remembered together. A rich woman and a slave woman, they show us that in God's family, everyone is equal."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 182",
+          "text": "Perpetua is born in Carthage, in North Africa."
+        },
+        {
+          "date_display": "Early 203",
+          "text": "Perpetua, Felicity, and three young men are arrested while preparing for baptism."
+        },
+        {
+          "date_display": "In prison",
+          "text": "Perpetua's father begs her to give up her faith. She answers, \"I am a Christian.\""
+        },
+        {
+          "date_display": "In prison",
+          "text": "Perpetua writes her diary, and Felicity's baby is born."
+        },
+        {
+          "date_display": "March 7, 203",
+          "text": "Perpetua and Felicity are put to death for their faith."
+        }
+      ],
+      "fun_facts": [
+        "Perpetua's prison diary is one of the very few writings by a woman from the ancient world that still exist.",
+        "Perpetua and Felicity were preparing to be baptized when they were arrested.",
+        "Their teacher, Saturus, chose to join them in prison.",
+        "Perpetua was only about 21 years old.",
+        "Perpetua and Felicity are always remembered together, on the same feast day."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Slave",
+          "definition": "A person who is owned by someone else and is not free."
+        },
+        {
+          "word": "Diary",
+          "definition": "A book where a person writes down what happens each day."
+        },
+        {
+          "word": "Catechumen",
+          "definition": "A person who is learning about the faith and getting ready to be baptized."
+        },
+        {
+          "word": "Equal",
+          "definition": "Having the same worth and value."
+        }
+      ],
+      "think_about_it": "Perpetua was rich and Felicity was a slave, but they became sisters in Christ. Why does everyone have the same worth in God's eyes?",
+      "reflection_question": "Perpetua said simply, \"I am a Christian.\" When is it hard for you to show that you love Jesus?",
+      "kindness_prompt": "Perpetua and Felicity stood by each other. Sit with or play with someone today who is often left out.",
+      "quiz": [
+        {
+          "prompt": "In what city did Perpetua and Felicity live?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Carthage",
+              "correct": true
+            },
+            {
+              "text": "Jerusalem"
+            },
+            {
+              "text": "Paris"
+            }
+          ],
+          "explanation": "They lived in Carthage, a city in North Africa."
+        },
+        {
+          "prompt": "Who was Felicity?",
+          "choices": [
+            {
+              "text": "Perpetua's sister"
+            },
+            {
+              "text": "A slave in Perpetua's household",
+              "correct": true
+            },
+            {
+              "text": "A queen"
+            }
+          ],
+          "explanation": "Felicity was a slave, but she and Perpetua became sisters in Christ."
+        },
+        {
+          "prompt": "What did Perpetua write in prison?",
+          "choices": [
+            {
+              "text": "A cookbook"
+            },
+            {
+              "text": "A diary",
+              "correct": true
+            },
+            {
+              "text": "A list of laws"
+            }
+          ],
+          "explanation": "Perpetua wrote down what happened in prison and the dreams God gave her."
+        },
+        {
+          "prompt": "What did Perpetua say when her father begged her to give up her faith?",
+          "choices": [
+            {
+              "text": "\"I will go home.\""
+            },
+            {
+              "text": "\"I am a Christian.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I am afraid.\""
+            }
+          ],
+          "explanation": "Perpetua loved her father, but she answered simply, \"I am a Christian.\""
+        },
+        {
+          "prompt": "What did Perpetua see in one of her dreams?",
+          "choices": [
+            {
+              "text": "A golden ladder reaching to heaven",
+              "correct": true
+            },
+            {
+              "text": "A big ship"
+            },
+            {
+              "text": "A castle in the clouds"
+            }
+          ],
+          "explanation": "Perpetua dreamed of a golden ladder reaching up to heaven. She was not afraid, because Jesus was with her."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Perpetua",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Perpetua-Christian-martyr",
+          "note": "died March 7, 203, Carthage; born about 182; prosperous family; father's plea; Felicity a pregnant slave who gave birth in prison; catechumens; her diary among rare writings by a woman; visions; Septimius Severus's law against conversion"
+        },
+        {
+          "title": "Sante Perpetua e Felicita, martiri",
+          "publisher": "Vatican News (Italian)",
+          "url": "https://www.vaticannews.va/it/santo-del-giorno/03/07/sante-perpetua-e-felicita--martiri.html",
+          "note": "a baby a few months old; her father showed her the baby; \"I am a Christian\"; Felicity her servant and expecting; Saturninus, Secundulus and Revocatus; Saturus gave himself up; the diary written in secret; the ladder and the serpent; \"It will not bite me, because Jesus Christ is in me\""
+        },
+        {
+          "title": "Perpetua and Felicity",
+          "publisher": "Vatican, Pontifical Academy Cultorum Martyrum",
+          "url": "https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/009.html",
+          "note": "Carthage; under Septimius Severus; catechumens; went to the amphitheater \"happy and serene\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "lawrence",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Lawrence",
+        "production_id_hint": 1010
+      },
+      "student_title": "Saint Lawrence",
+      "subtitle": "A deacon of Rome who showed an emperor the real treasure of the Church: the poor.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 225 to 258"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Spain, according to tradition"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "August 10"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Caring for the poor and calling them the treasures of the Church"
+        }
+      ],
+      "intro": "Lawrence was a deacon in Rome. His job was to care for the Church's money and to help orphans, widows, and people who were poor. When the emperor demanded the treasures of the Church, Lawrence brought him the poor and the sick. These, he said, were the Church's real treasures. Lawrence gave his life for Jesus in the year 258.",
+      "story_paragraphs": [
+        "Lawrence was born in Spain in the 200s. He came to Rome, where he served the Church as a deacon. Deacons help the bishop, and in Rome there were seven of them.",
+        "When Sixtus II became pope, he trusted Lawrence with a very important job. Lawrence took care of the Church's goods and used them to help people in need. He looked after orphans, widows, and families who were poor. He knew them by name.",
+        "In the year 258, the Roman emperor Valerian made a cruel law. All bishops, priests, and deacons were to be put to death. Pope Sixtus was arrested and was killed on August 6.",
+        "Lawrence was arrested too. The emperor's officials believed the Church had hidden riches. They told Lawrence they would spare his life if he handed over \"the treasures of the Church.\"",
+        "Lawrence asked for a little time. Then he gathered the people he served: the sick, the hungry, the poor, and people no one else cared about. He brought them before the officials. \"These are the treasures of the Church,\" he said.",
+        "The officials were furious. Four days after the Pope died, on August 10, Lawrence was put to death. He stayed faithful and brave until the end. He had given his life to serving the poor, and now he gave it to Jesus.",
+        "The emperor Constantine later built a church over Lawrence's tomb in Rome. Christians have honored him ever since.",
+        "In August, when Lawrence's feast comes around, shooting stars often streak across the night sky. An old folk tradition calls them the tears of Saint Lawrence."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 225",
+          "text": "Lawrence is born in Spain, according to tradition."
+        },
+        {
+          "date_display": "257",
+          "text": "Pope Sixtus II asks Lawrence to care for the Church's goods and the poor of Rome."
+        },
+        {
+          "date_display": "258",
+          "text": "Emperor Valerian orders that bishops, priests, and deacons be put to death."
+        },
+        {
+          "date_display": "August 6, 258",
+          "text": "Pope Sixtus II is killed."
+        },
+        {
+          "date_display": "August 10, 258",
+          "text": "Lawrence is put to death for his faith."
+        },
+        {
+          "date_display": "300s",
+          "text": "Emperor Constantine builds a church over Lawrence's tomb."
+        }
+      ],
+      "fun_facts": [
+        "Lawrence called the poor and the sick \"the treasures of the Church.\"",
+        "He is a patron saint of deacons, chefs, and firefighters.",
+        "Shooting stars in August are sometimes called the tears of Saint Lawrence.",
+        "A church was built over his tomb in Rome by Emperor Constantine.",
+        "Lawrence was put to death just four days after his friend, Pope Sixtus II."
+      ],
+      "words_to_know": [
+        {
+          "word": "Deacon",
+          "definition": "A man ordained to serve the Church, especially by helping the poor and proclaiming the Gospel."
+        },
+        {
+          "word": "Treasure",
+          "definition": "Something very precious and valuable."
+        },
+        {
+          "word": "Orphan",
+          "definition": "A child whose parents have died."
+        },
+        {
+          "word": "Widow",
+          "definition": "A woman whose husband has died."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        }
+      ],
+      "think_about_it": "Lawrence said the poor were the Church's treasure. Why do you think people are worth more than gold?",
+      "reflection_question": "Lawrence knew the poor people of Rome by name. Who is someone in your school or neighborhood who might feel forgotten?",
+      "kindness_prompt": "Lawrence shared what he had with people in need. With a grown-up, pick out a toy, a book, or some food to give to someone who needs it.",
+      "quiz": [
+        {
+          "prompt": "What was Lawrence's job in the Church?",
+          "choices": [
+            {
+              "text": "He was a soldier"
+            },
+            {
+              "text": "He was a deacon who cared for the poor",
+              "correct": true
+            },
+            {
+              "text": "He was a king"
+            }
+          ],
+          "explanation": "Lawrence was a deacon in Rome. He took care of the Church's goods and used them to help people in need."
+        },
+        {
+          "prompt": "What did Lawrence call \"the treasures of the Church\"?",
+          "choices": [
+            {
+              "text": "Gold coins"
+            },
+            {
+              "text": "Jewels"
+            },
+            {
+              "text": "The poor and the sick",
+              "correct": true
+            }
+          ],
+          "explanation": "When the officials demanded the Church's treasures, Lawrence brought them the poor and the sick."
+        },
+        {
+          "prompt": "Which pope did Lawrence serve?",
+          "choices": [
+            {
+              "text": "Pope Peter"
+            },
+            {
+              "text": "Pope Sixtus II",
+              "correct": true
+            },
+            {
+              "text": "Pope Francis"
+            },
+            {
+              "text": "Pope Leo"
+            }
+          ],
+          "explanation": "Pope Sixtus II trusted Lawrence to care for the Church's goods and the poor of Rome."
+        },
+        {
+          "prompt": "What is Lawrence's feast day?",
+          "choices": [
+            {
+              "text": "December 25"
+            },
+            {
+              "text": "August 10",
+              "correct": true
+            },
+            {
+              "text": "March 17"
+            }
+          ],
+          "explanation": "Lawrence died on August 10, 258, and his feast is celebrated on that day."
+        },
+        {
+          "prompt": "What are the shooting stars of August sometimes called?",
+          "choices": [
+            {
+              "text": "The stars of Rome"
+            },
+            {
+              "text": "The tears of Saint Lawrence",
+              "correct": true
+            },
+            {
+              "text": "The Pope's candles"
+            }
+          ],
+          "explanation": "An old folk tradition calls the August shooting stars the tears of Saint Lawrence."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Lawrence, Deacon and Martyr",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/10/st--lawrence-deacon--and-martyr.html",
+          "note": "born in Spain; trusted by Sixtus II; care of orphans, widows and the poor; Valerian's edict of 258; Sixtus killed August 6, Lawrence four days later; \"the treasures of the Church\"; Constantine's basilica; the \"falling stars\" as his tears; patron of deacons, chefs and firefighters"
+        },
+        {
+          "title": "St. Lawrence",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Lawrence",
+          "note": "one of the seven deacons of Rome under Sixtus II; died in Rome in 258 under Valerian, a few days after Sixtus; the tradition that he gave the Church's goods to the poor and sick; the gridiron story and that he was probably beheaded; the basilica over his burial place"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "agnes",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Agnes",
+        "production_id_hint": 884
+      },
+      "student_title": "Saint Agnes",
+      "subtitle": "A girl of about twelve who gave her whole heart to Jesus.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died about 304"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Rome"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 21"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her brave faith as a young girl, and the lamb that is her symbol"
+        }
+      ],
+      "intro": "Agnes was a young girl in Rome, only about twelve or thirteen years old. She loved Jesus with her whole heart. During a time when Christians were persecuted, she would not turn away from him, even when grown-ups pressured her. Agnes became one of the best-loved saints of Rome. Every year on her feast day, two lambs are blessed in her honor.",
+      "story_paragraphs": [
+        "Agnes lived in Rome long ago, at a time when it was against the law to be a Christian. Many Christians were arrested and put to death for their faith.",
+        "We do not know many facts about Agnes's life. We know that she was very young, only about twelve or thirteen years old, and that she gave her life for Jesus. We know she was buried near Rome, and that Christians began to honor her very soon after she died.",
+        "Old stories tell us more. They say Agnes was beautiful and that many young men wanted to marry her. But Agnes had already given her heart to Jesus, and she said no to all of them. One of the young men was angry. He told the officials that Agnes was a Christian.",
+        "Agnes was arrested. The officials tried to frighten her into giving up her faith. But this young girl was braver than the grown-ups around her. She would not turn away from Jesus. In the end, she was put to death.",
+        "Agnes's name sounds like the Latin word \"agnus,\" which means \"lamb.\" The lamb has become her symbol. An old story says that after she died, her parents saw her in a vision, holding a pure white lamb in her arms.",
+        "The daughter of the emperor Constantine built a church in her honor in Rome. Agnes is buried there today.",
+        "Every year on January 21, two lambs are brought to the Pope and blessed at the church of Saint Agnes. Their wool is later used to make the pallium, a special white band worn by archbishops."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 291",
+          "text": "Agnes is born in Rome, according to tradition."
+        },
+        {
+          "date_display": "About 304",
+          "text": "During a time of persecution, Agnes is arrested for being a Christian."
+        },
+        {
+          "date_display": "About 304",
+          "text": "At about twelve or thirteen, Agnes gives her life for Jesus."
+        },
+        {
+          "date_display": "300s",
+          "text": "The daughter of Emperor Constantine builds a church in her honor."
+        },
+        {
+          "date_display": "500s",
+          "text": "The first record of lambs being blessed on her feast day."
+        },
+        {
+          "date_display": "Every January 21",
+          "text": "Two lambs are blessed in her honor, and their wool is used for archbishops' palliums."
+        }
+      ],
+      "fun_facts": [
+        "Agnes was only about twelve or thirteen years old when she died.",
+        "Her name sounds like \"agnus,\" the Latin word for lamb.",
+        "Every year on her feast, two lambs are blessed in her honor in Rome.",
+        "The lambs' wool is used to make the pallium, a white band worn by archbishops.",
+        "Agnes is a patron saint of girls and of Girl Scouts."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Persecution",
+          "definition": "When people are treated cruelly because of what they believe."
+        },
+        {
+          "word": "Symbol",
+          "definition": "A picture or object that stands for something else."
+        },
+        {
+          "word": "Pallium",
+          "definition": "A narrow white band of wool, with six black crosses, worn by the Pope and by archbishops."
+        },
+        {
+          "word": "Legend",
+          "definition": "An old story that is passed down. Parts of it may or may not have really happened."
+        }
+      ],
+      "think_about_it": "Agnes was younger than many of the grown-ups around her, but she was the bravest one there. How can a young person be a hero for Jesus?",
+      "reflection_question": "Agnes gave her whole heart to Jesus. What is one way you can show Jesus that you love him today?",
+      "kindness_prompt": "Agnes was brave about doing what was right. If you see someone being left out or teased today, be brave and be kind to them.",
+      "quiz": [
+        {
+          "prompt": "About how old was Agnes when she died?",
+          "choices": [
+            {
+              "text": "Five"
+            },
+            {
+              "text": "Twelve or thirteen",
+              "correct": true
+            },
+            {
+              "text": "Thirty"
+            },
+            {
+              "text": "Seventy"
+            }
+          ],
+          "explanation": "Agnes was very young, only about twelve or thirteen years old, when she gave her life for Jesus."
+        },
+        {
+          "prompt": "What animal is the symbol of Saint Agnes?",
+          "choices": [
+            {
+              "text": "A lion"
+            },
+            {
+              "text": "A dove"
+            },
+            {
+              "text": "A lamb",
+              "correct": true
+            },
+            {
+              "text": "An eagle"
+            }
+          ],
+          "explanation": "Agnes's name sounds like \"agnus,\" the Latin word for lamb, and the lamb is her symbol."
+        },
+        {
+          "prompt": "In what city did Agnes live?",
+          "choices": [
+            {
+              "text": "Rome",
+              "correct": true
+            },
+            {
+              "text": "Paris"
+            },
+            {
+              "text": "Jerusalem"
+            }
+          ],
+          "explanation": "Agnes lived in Rome, and she is buried there today."
+        },
+        {
+          "prompt": "What happens every year on Agnes's feast day?",
+          "choices": [
+            {
+              "text": "A parade of horses"
+            },
+            {
+              "text": "Two lambs are blessed in her honor",
+              "correct": true
+            },
+            {
+              "text": "Bells ring all day"
+            }
+          ],
+          "explanation": "Every January 21, two lambs are blessed at the church of Saint Agnes in Rome."
+        },
+        {
+          "prompt": "What is made from the lambs' wool?",
+          "choices": [
+            {
+              "text": "Blankets for the poor"
+            },
+            {
+              "text": "The pallium worn by archbishops",
+              "correct": true
+            },
+            {
+              "text": "Coats for soldiers"
+            }
+          ],
+          "explanation": "The wool is used to make the pallium, a white band worn by archbishops."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Agnes",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-agnes/",
+          "note": "very young, 12 or 13; arrested and executed; buried near Rome; the suitors and the report to the officials, labeled legend; Constantine's daughter built a basilica; patron of girls and Girl Scouts"
+        },
+        {
+          "title": "Pope Leo XIV presented with lambs on feast of St. Agnes",
+          "publisher": "Vatican News (January 2026)",
+          "url": "https://www.vaticannews.va/en/pope/news/2026-01/pope-leo-xiv-sheep-st-agnes-tradition-palliums-archbishops-rome.html",
+          "note": "two lambs presented and blessed at the Basilica of St. Agnes Outside the Walls, where she is buried; the vision of Agnes with a lamb; first mention in the 500s; wool for palliums; the pallium's six black crosses"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "cecilia",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Cecilia",
+        "production_id_hint": 927
+      },
+      "student_title": "Saint Cecilia",
+      "subtitle": "A young woman of Rome who \"sang in her heart to the Lord\" and became the patron saint of music.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died about 230"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Rome"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "November 22"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her faith, her courage, and being the patron saint of music"
+        }
+      ],
+      "intro": "Cecilia was a young woman from a noble family in Rome. She gave her life to Jesus, and the old stories say she led her husband and his brother to the faith too. She is the patron saint of music and musicians. Her feast day prayer says that she \"sang in her heart only to the Lord.\" Many choirs and music schools are named for her.",
+      "story_paragraphs": [
+        "Cecilia lived in Rome about 1,800 years ago. Tradition says she came from a noble family. She died as a martyr, probably around the year 230.",
+        "Much of what we know about Cecilia comes from an old story written long after she died. The Church says this story is more like a legend than history. But it has inspired Christians for hundreds of years.",
+        "The story says Cecilia had promised her life to God. Her parents arranged for her to marry a young man named Valerian. On their wedding day, Cecilia told Valerian that she loved Jesus with her whole heart. Valerian was moved. He was baptized, and so was his brother, Tiburtius. Later, both brothers were put to death for being Christians.",
+        "Then Cecilia was arrested. The story says she stayed brave and kept her faith. Before she died, she gave all she had to the poor and gave her house to the Church.",
+        "Today, a church stands in Rome where her house is said to have been. In the year 1600, workers there found her body. It was in a surprisingly good state. An artist named Stefano Maderno carved a statue of her lying just as she was found. The statue is still in the church.",
+        "Why is Cecilia the patron saint of music? The prayer for her feast day says that while the instruments played, \"she sang in her heart only to the Lord.\" Artists began to paint her with an organ and other instruments. Today, singers and musicians all over the world ask for her prayers."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 230",
+          "text": "Cecilia dies as a martyr in Rome, according to tradition."
+        },
+        {
+          "date_display": "Before 313",
+          "text": "A church is built in Rome in her honor."
+        },
+        {
+          "date_display": "545",
+          "text": "Christians are already celebrating her feast day."
+        },
+        {
+          "date_display": "821",
+          "text": "Pope Paschal I moves her body to the church named for her."
+        },
+        {
+          "date_display": "1584",
+          "text": "A school of music in Rome is named for her."
+        },
+        {
+          "date_display": "1600",
+          "text": "Her body is found, and Stefano Maderno carves a statue of her."
+        }
+      ],
+      "fun_facts": [
+        "Cecilia is the patron saint of music, musicians, and singers.",
+        "Her feast day prayer says she \"sang in her heart only to the Lord.\"",
+        "A famous school of music in Rome was named for her in 1584.",
+        "A statue shows her lying just as her body was found in 1600.",
+        "Her church in Rome stands where her house is said to have been."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays for a certain group of people, place, or kind of work."
+        },
+        {
+          "word": "Noble",
+          "definition": "Belonging to an important, wealthy family."
+        },
+        {
+          "word": "Legend",
+          "definition": "An old story that is passed down. Parts of it may or may not have really happened."
+        },
+        {
+          "word": "Choir",
+          "definition": "A group of people who sing together, often in church."
+        }
+      ],
+      "think_about_it": "Cecilia \"sang in her heart\" to God. How can you praise God even when you are quiet?",
+      "reflection_question": "Cecilia's faith helped her husband and his brother come to know Jesus. Who has helped you know Jesus better?",
+      "kindness_prompt": "Cecilia is the patron saint of music. Sing or hum a song to cheer up someone today, or sing a hymn with your family.",
+      "quiz": [
+        {
+          "prompt": "What is Saint Cecilia the patron saint of?",
+          "choices": [
+            {
+              "text": "Sailors"
+            },
+            {
+              "text": "Music and musicians",
+              "correct": true
+            },
+            {
+              "text": "Farmers"
+            },
+            {
+              "text": "Doctors"
+            }
+          ],
+          "explanation": "Cecilia is the patron saint of music, musicians, and singers."
+        },
+        {
+          "prompt": "What does her feast day prayer say she did?",
+          "choices": [
+            {
+              "text": "She danced all night"
+            },
+            {
+              "text": "She sang in her heart only to the Lord",
+              "correct": true
+            },
+            {
+              "text": "She wrote many books"
+            }
+          ],
+          "explanation": "The prayer says that while the instruments played, Cecilia \"sang in her heart only to the Lord.\""
+        },
+        {
+          "prompt": "What city did Cecilia live in?",
+          "choices": [
+            {
+              "text": "Athens"
+            },
+            {
+              "text": "Rome",
+              "correct": true
+            },
+            {
+              "text": "Carthage"
+            }
+          ],
+          "explanation": "Cecilia lived in Rome. A church there stands where her house is said to have been."
+        },
+        {
+          "prompt": "According to the old story, who came to believe in Jesus because of Cecilia?",
+          "choices": [
+            {
+              "text": "Her husband, Valerian, and his brother",
+              "correct": true
+            },
+            {
+              "text": "The emperor"
+            },
+            {
+              "text": "A king of Spain"
+            }
+          ],
+          "explanation": "The story says Valerian and his brother, Tiburtius, were baptized because of Cecilia's faith."
+        },
+        {
+          "prompt": "What did workers find in her church in the year 1600?",
+          "choices": [
+            {
+              "text": "A treasure chest"
+            },
+            {
+              "text": "Her body",
+              "correct": true
+            },
+            {
+              "text": "A golden organ"
+            }
+          ],
+          "explanation": "Workers found her body in the year 1600, and the artist Stefano Maderno carved a statue showing her as she was found."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Cecilia, Virgin and Martyr",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/22/st--cecilia--virgin-and-martyr-in-the-cemitery-of--callistus.html",
+          "note": "noble Roman girl, martyred about 230, by tradition; the basilica built before 313; feast celebrated by 545; Paschal I in 821; the body found before the 1600 Jubilee; Maderno's statue; the 1584 Academy of Music; the Passio \"more literary than historical\"; Valerian and Tiburtius; goods to the poor and house to the Church; \"while the organs played, she sang in her heart only to the Lord\""
+        },
+        {
+          "title": "St. Cecilia",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/Saint-Cecilia",
+          "note": "3rd-century Rome; the marriage and conversion story is a late 5th-century legend; Valerian and Tiburtius martyred before her; buried in the catacomb of St. Callistus; relics moved by Paschal I to her basilica in Trastevere; patron of music; \"sang in her heart to the Lord\""
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "lucy",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Lucy",
+        "production_id_hint": 1015
+      },
+      "student_title": "Saint Lucy",
+      "subtitle": "A young woman of Sicily whose name is linked with light, and who gave her riches to the poor.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died December 13, 304"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Syracuse, on the island of Sicily"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "December 13"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Giving her riches to the poor, and being honored as a saint of light"
+        }
+      ],
+      "intro": "Lucy lived on the island of Sicily long ago. She came from a wealthy family, but she chose to give her riches to people who were poor. During a time of persecution, she would not give up her faith in Jesus. Her name is linked with light, and her feast falls in December, when the days are darkest. Many people celebrate her with candles.",
+      "story_paragraphs": [
+        "Lucy was born near the end of the 200s in Syracuse, a city on the island of Sicily. Her family was wealthy and important. Her father had died, and she lived with her mother, Eutychia.",
+        "Most of what we know about Lucy comes from old stories, passed down and written long after she lived. They tell us a lot about her faith.",
+        "The stories say Lucy's mother was very sick. Doctors could not help her. In the year 301, Lucy and her mother traveled to the city of Catania to pray at the tomb of another saint, Agatha. There, Lucy had a vision. Saint Agatha told her that her own faith had helped her mother, and that her mother was already healed.",
+        "Lucy was thankful. She asked her mother if she could sell the money and goods saved up for her wedding and give them to the poor. Her mother agreed.",
+        "But the young man Lucy was supposed to marry was angry. He reported Lucy to the governor as a Christian. At that time, the emperor Diocletian had made a law against Christians.",
+        "Lucy was arrested and told to worship false gods. She refused. On December 13, 304, Lucy was put to death for her faith.",
+        "Lucy's name is linked with light, and she is honored as a patron of sight. Her feast comes in December, close to the longest night of the year. In Sweden and other countries, girls dress in white and wear crowns of candles on Saint Lucy's Day."
+      ],
+      "timeline": [
+        {
+          "date_display": "Late 200s",
+          "text": "Lucy is born into a wealthy family in Syracuse, Sicily."
+        },
+        {
+          "date_display": "301",
+          "text": "Lucy and her mother pray at the tomb of Saint Agatha, and her mother is healed, according to tradition."
+        },
+        {
+          "date_display": "After 301",
+          "text": "Lucy gives her wedding money and goods to the poor."
+        },
+        {
+          "date_display": "304",
+          "text": "Lucy is reported as a Christian and arrested."
+        },
+        {
+          "date_display": "December 13, 304",
+          "text": "Lucy is put to death for her faith."
+        }
+      ],
+      "fun_facts": [
+        "Lucy's name is linked with light.",
+        "On Saint Lucy's Day, girls in Sweden wear white dresses and crowns of candles.",
+        "Lucy is honored as a patron of sight and of people who are blind.",
+        "She prayed at the tomb of another saint, Saint Agatha, who also lived in Sicily.",
+        "Her feast comes close to the longest night of the year."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Persecution",
+          "definition": "When people are treated cruelly because of what they believe."
+        },
+        {
+          "word": "Vision",
+          "definition": "Something holy that a person sees in a special way, like in a dream."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays for a certain group of people, place, or kind of work."
+        },
+        {
+          "word": "Charity",
+          "definition": "Love shown by helping others, especially people in need."
+        }
+      ],
+      "think_about_it": "Lucy gave away riches she could have kept. Why do you think giving to others made her happy?",
+      "reflection_question": "Lucy is a saint of light. How can you bring light to someone who is sad?",
+      "kindness_prompt": "Lucy gave to the poor. With a grown-up, find a way to help a family in need, like donating food or clothes.",
+      "quiz": [
+        {
+          "prompt": "On what island did Lucy live?",
+          "choices": [
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Sicily",
+              "correct": true
+            },
+            {
+              "text": "Cuba"
+            },
+            {
+              "text": "Crete"
+            }
+          ],
+          "explanation": "Lucy lived in Syracuse, a city on the island of Sicily."
+        },
+        {
+          "prompt": "What did Lucy do with the money saved for her wedding?",
+          "choices": [
+            {
+              "text": "She bought a house"
+            },
+            {
+              "text": "She gave it to the poor",
+              "correct": true
+            },
+            {
+              "text": "She buried it"
+            }
+          ],
+          "explanation": "After her mother was healed, Lucy asked to give her wedding money and goods to the poor."
+        },
+        {
+          "prompt": "At whose tomb did Lucy and her mother pray?",
+          "choices": [
+            {
+              "text": "Saint Peter's"
+            },
+            {
+              "text": "Saint Agatha's",
+              "correct": true
+            },
+            {
+              "text": "Saint Paul's"
+            }
+          ],
+          "explanation": "They traveled to Catania to pray at the tomb of Saint Agatha."
+        },
+        {
+          "prompt": "What is Lucy's name linked with?",
+          "choices": [
+            {
+              "text": "Water"
+            },
+            {
+              "text": "Light",
+              "correct": true
+            },
+            {
+              "text": "Flowers"
+            }
+          ],
+          "explanation": "Lucy's name is linked with light, and she is celebrated with candles."
+        },
+        {
+          "prompt": "What do girls in Sweden wear on Saint Lucy's Day?",
+          "choices": [
+            {
+              "text": "Gold crowns"
+            },
+            {
+              "text": "Crowns of candles",
+              "correct": true
+            },
+            {
+              "text": "Hats with feathers"
+            }
+          ],
+          "explanation": "On Saint Lucy's Day, girls in Sweden dress in white and wear crowns of candles."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. Lucy, Virgin and Martyr of Syracuse",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/13/st--lucy--virgin-and-martyr-of--syracuse.html",
+          "note": "born at the end of the 3rd century in Syracuse to a wealthy family; mother Eutychia; the 301 pilgrimage to St Agatha's tomb in Catania; the vision and healing; the dowry given to the poor; the suitor's report; Diocletian's edict; died December 13, 304; the Acts are traditions and legends"
+        },
+        {
+          "title": "St. Lucy",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/biography/St-Lucy",
+          "note": "died 304 in Syracuse, Sicily; traditions link her name with light; patron of sight"
+        },
+        {
+          "title": "St. Lucia's Day",
+          "publisher": "Britannica",
+          "url": "https://www.britannica.com/topic/St-Lucias-Day",
+          "note": "December 13 in Sweden, Norway and Swedish-speaking Finland; a festival of lights; girls in white with lighted wreaths on their heads; hope and light in the darkest time of the year"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "agatha",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Agatha",
+        "production_id_hint": 883
+      },
+      "student_title": "Saint Agatha",
+      "subtitle": "A brave young woman of Sicily whose people still ask for her prayers when the volcano rumbles.",
+      "story_label": "Her Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 231 to 251"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Sicily"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "February 5"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "Her courage, and the prayers of the people of Catania"
+        }
+      ],
+      "intro": "Agatha was a young Christian woman who lived on the island of Sicily long ago. During a time of persecution, she would not give up her faith in Jesus, and she gave her life for him in the city of Catania. The people of Catania have loved her ever since. When the nearby volcano, Mount Etna, erupts, they ask for her prayers.",
+      "story_paragraphs": [
+        "Agatha lived on the island of Sicily, in the south of Italy, about 1,800 years ago. She was a young woman who loved Jesus.",
+        "In the year 250, the Roman emperor Decius ordered everyone in the empire to worship the Roman gods. Christians who refused could be arrested. Many Christians in Sicily were.",
+        "Almost nothing about Agatha's life is known for certain. What we do know is that she was arrested for being a Christian and that she would not turn away from Jesus. She died as a martyr in Catania, a city in Sicily, around the year 251.",
+        "Old stories say more. They say Agatha had given her life to God and that a powerful man wanted her to give up her faith. She was put in prison and treated very cruelly. Vatican News says that, through it all, she \"proved a brave fidelity to Christ.\" That means she stayed faithful to Jesus, no matter what.",
+        "After Agatha died, the people of Catania began to ask for her prayers. Catania sits near Mount Etna, a very large volcano. About a year after Agatha died, Etna erupted. The people prayed to God through Agatha's help, and the eruption stopped. They believed her prayers had protected them.",
+        "Ever since, the people of Sicily have asked Agatha to pray for them, especially for protection from fire. Both Catania and Palermo, two cities of Sicily, call her their patron saint.",
+        "Agatha was so loved that another young woman, Saint Lucy, later traveled to her tomb to pray."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 231",
+          "text": "Agatha is born in Sicily."
+        },
+        {
+          "date_display": "250",
+          "text": "Emperor Decius orders everyone to worship the Roman gods."
+        },
+        {
+          "date_display": "About 251",
+          "text": "Agatha is arrested and gives her life for Jesus in Catania."
+        },
+        {
+          "date_display": "About 252",
+          "text": "Mount Etna erupts, and the people ask for Agatha's prayers."
+        },
+        {
+          "date_display": "301",
+          "text": "Saint Lucy and her mother pray at Agatha's tomb, according to tradition."
+        }
+      ],
+      "fun_facts": [
+        "Agatha is the patron saint of Catania and Palermo, two cities in Sicily.",
+        "People ask for her prayers for protection from fire.",
+        "Catania is near Mount Etna, one of the largest volcanoes in Europe.",
+        "Saint Lucy prayed at Agatha's tomb, according to the old stories.",
+        "Agatha's feast is February 5, the day she died."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Persecution",
+          "definition": "When people are treated cruelly because of what they believe."
+        },
+        {
+          "word": "Volcano",
+          "definition": "A mountain that can send out hot melted rock, ash, and smoke."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays for a certain group of people, place, or kind of work."
+        },
+        {
+          "word": "Fidelity",
+          "definition": "Faithfulness, or staying true and loyal."
+        }
+      ],
+      "think_about_it": "The people of Catania have asked Agatha to pray for them for hundreds of years. Why do we ask the saints to pray for us?",
+      "reflection_question": "Agatha stayed faithful to Jesus no matter what. What helps you stay close to Jesus when things are hard?",
+      "kindness_prompt": "The people of Catania pray for one another through Agatha. Ask someone in your family what they would like you to pray for, and pray for it today.",
+      "quiz": [
+        {
+          "prompt": "On what island did Agatha live?",
+          "choices": [
+            {
+              "text": "Ireland"
+            },
+            {
+              "text": "Sicily",
+              "correct": true
+            },
+            {
+              "text": "Hawaii"
+            },
+            {
+              "text": "Malta"
+            }
+          ],
+          "explanation": "Agatha lived on the island of Sicily, in the south of Italy."
+        },
+        {
+          "prompt": "What large volcano is near the city of Catania?",
+          "choices": [
+            {
+              "text": "Mount Fuji"
+            },
+            {
+              "text": "Mount Etna",
+              "correct": true
+            },
+            {
+              "text": "Mount Vesuvius"
+            }
+          ],
+          "explanation": "Catania sits near Mount Etna. The people there ask for Agatha's prayers when it erupts."
+        },
+        {
+          "prompt": "What do people ask Agatha to pray for them about?",
+          "choices": [
+            {
+              "text": "Sunny weather"
+            },
+            {
+              "text": "Protection from fire",
+              "correct": true
+            },
+            {
+              "text": "Finding lost keys"
+            }
+          ],
+          "explanation": "Since an eruption of Etna stopped after people prayed through her help, people have asked her prayers for protection from fire."
+        },
+        {
+          "prompt": "Which emperor ordered everyone to worship the Roman gods in Agatha's time?",
+          "choices": [
+            {
+              "text": "Constantine"
+            },
+            {
+              "text": "Decius",
+              "correct": true
+            },
+            {
+              "text": "Augustus"
+            }
+          ],
+          "explanation": "Emperor Decius made that order in the year 250, and Agatha was arrested soon after."
+        },
+        {
+          "prompt": "Which saint later traveled to Agatha's tomb to pray?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "Saint Lucy",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick"
+            }
+          ],
+          "explanation": "The old stories say Saint Lucy and her mother prayed at Agatha's tomb in Catania."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Agatha",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-agatha/",
+          "note": "martyred in Sicily in 251 under Decius; \"almost nothing is historically certain\"; the legend; patroness of Palermo and Catania; Etna stilled the year after her death, \"attributed to her intercession\"; prayers for protection against fire"
+        },
+        {
+          "title": "Saint of the Day, February 5",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/05.html",
+          "note": "feast February 5, the day she died a martyr in Catania; \"subjected to horrible torture, proved a brave fidelity to Christ\""
+        },
+        {
+          "title": "St. Lucy, Virgin and Martyr of Syracuse",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/13/st--lucy--virgin-and-martyr-of--syracuse.html",
+          "note": "Lucy's 301 pilgrimage to St Agatha's tomb in Catania"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "sebastian",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Sebastian",
+        "production_id_hint": 1070
+      },
+      "student_title": "Saint Sebastian",
+      "subtitle": "A Roman martyr remembered as a brave soldier who secretly helped Christians in prison.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died about 288"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Rome, where he died"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "January 20"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His courage, and being a patron saint of athletes and soldiers"
+        }
+      ],
+      "intro": "Sebastian was a Christian in Rome who gave his life for Jesus long ago. Old stories say he was an officer in the Roman army who secretly helped Christians in prison. When the emperor found out, Sebastian was sentenced to be shot with arrows. He is a patron saint of athletes, and his church in Rome is visited by pilgrims from all over the world.",
+      "story_paragraphs": [
+        "Sebastian lived in Rome near the end of the 200s, when the emperor Diocletian ruled. It was a dangerous time to be a Christian.",
+        "We know for sure that Sebastian was a martyr in Rome. Christians were already honoring him by the year 350, and Saint Ambrose, a great bishop, wrote about him. He was buried in a Christian burial place under the ground, called a catacomb, on the edge of Rome.",
+        "The rest of his story comes from old legends. They say Sebastian joined the Roman army and became an officer. Because he was a soldier, no one suspected him of being a Christian. That let him visit Christians in prison and give them courage.",
+        "One day his secret was discovered. He was brought before the emperor, who sentenced him to be shot with arrows. The legend says that when friends came to bury him, they found him still alive. They took care of him until he was well again.",
+        "Sebastian could have run away to safety, but he did not. He went back and told the emperor bravely that it was wrong to treat Christians so cruelly. This time, the emperor had him put to death.",
+        "A church was later built over Sebastian's burial place. Today it is one of seven great churches that pilgrims in Rome visit. An arrow said to be from his martyrdom is kept there.",
+        "Because Sebastian was strong and brave, he is a patron saint of athletes and soldiers. Artists have painted him for hundreds of years."
+      ],
+      "timeline": [
+        {
+          "date_display": "Late 200s",
+          "text": "Sebastian lives in Rome during the rule of Emperor Diocletian."
+        },
+        {
+          "date_display": "According to legend",
+          "text": "He serves as an officer in the army and secretly helps Christians in prison."
+        },
+        {
+          "date_display": "According to legend",
+          "text": "He is sentenced to be shot with arrows, but survives."
+        },
+        {
+          "date_display": "About 288",
+          "text": "Sebastian is put to death for his faith in Rome."
+        },
+        {
+          "date_display": "About 350",
+          "text": "Sebastian's remains are placed in the catacombs, and Christians already honor him."
+        },
+        {
+          "date_display": "1672",
+          "text": "A statue of Sebastian is carved for his church in Rome."
+        }
+      ],
+      "fun_facts": [
+        "Sebastian is a patron saint of athletes.",
+        "His church in Rome is one of the seven pilgrim churches of the city.",
+        "An arrow said to be from his martyrdom is kept in his church.",
+        "Saint Ambrose wrote about Sebastian in the 300s.",
+        "Sebastian is one of the saints most often painted by artists."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Catacomb",
+          "definition": "An underground place where early Christians buried their dead."
+        },
+        {
+          "word": "Officer",
+          "definition": "A leader in the army."
+        },
+        {
+          "word": "Legend",
+          "definition": "An old story that is passed down. Parts of it may or may not have really happened."
+        },
+        {
+          "word": "Pilgrim",
+          "definition": "A person who travels to a holy place to pray."
+        }
+      ],
+      "think_about_it": "Sebastian used his job as a soldier to help Christians in prison. How can you use your own talents to help others?",
+      "reflection_question": "Sebastian could have run away, but he spoke up for what was right. When is it hard for you to speak up?",
+      "kindness_prompt": "Sebastian encouraged people who were having a hard time. Say something encouraging to a teammate, classmate, or friend today.",
+      "quiz": [
+        {
+          "prompt": "According to legend, what was Sebastian's job?",
+          "choices": [
+            {
+              "text": "Fisherman"
+            },
+            {
+              "text": "An officer in the Roman army",
+              "correct": true
+            },
+            {
+              "text": "A farmer"
+            },
+            {
+              "text": "A baker"
+            }
+          ],
+          "explanation": "The old stories say Sebastian was an officer in the army, which let him help Christians in prison without being suspected."
+        },
+        {
+          "prompt": "Who did Sebastian secretly help?",
+          "choices": [
+            {
+              "text": "Christians in prison",
+              "correct": true
+            },
+            {
+              "text": "The emperor's family"
+            },
+            {
+              "text": "Sailors at sea"
+            }
+          ],
+          "explanation": "The legend says he visited Christians in prison and gave them courage."
+        },
+        {
+          "prompt": "What is Sebastian a patron saint of?",
+          "choices": [
+            {
+              "text": "Cooks"
+            },
+            {
+              "text": "Athletes",
+              "correct": true
+            },
+            {
+              "text": "Writers"
+            }
+          ],
+          "explanation": "Because he was strong and brave, Sebastian is a patron saint of athletes and soldiers."
+        },
+        {
+          "prompt": "What is a catacomb?",
+          "choices": [
+            {
+              "text": "A kind of cat"
+            },
+            {
+              "text": "A castle"
+            },
+            {
+              "text": "An underground place where early Christians buried their dead",
+              "correct": true
+            }
+          ],
+          "explanation": "Sebastian was buried in a catacomb on the edge of Rome. A church was later built over it."
+        },
+        {
+          "prompt": "What did Sebastian do after he got well?",
+          "choices": [
+            {
+              "text": "He ran away"
+            },
+            {
+              "text": "He went back and spoke up to the emperor",
+              "correct": true
+            },
+            {
+              "text": "He became a king"
+            }
+          ],
+          "explanation": "The legend says Sebastian bravely told the emperor it was wrong to treat Christians cruelly."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Sebastian",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-sebastian/",
+          "note": "a Roman martyr; venerated in Milan in St Ambrose's time; buried on the Appian Way near the catacombs; in martyrologies by 350; the army, the arrows, being found alive, refusing to flee and confronting the emperor, all labeled legend; patron of athletes"
+        },
+        {
+          "title": "The Seven Churches Pilgrimage: Basilica of Saint Sebastian",
+          "publisher": "Vatican News (2022)",
+          "url": "https://www.vaticannews.va/en/church/news/2022-09/seven-churches-pilgrimage-saint-sebastian.html",
+          "note": "high military rank, secretly helped imprisoned Christians; sentenced by Diocletian to be shot with arrows; relics placed about 350; one of the Seven Churches; the arrow relic; Giorgetti's statue of 1672"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "george",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. George",
+        "production_id_hint": 958
+      },
+      "student_title": "Saint George",
+      "subtitle": "A soldier who would not give up his faith, and the hero of a famous legend about a dragon.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "about 280 to about 303"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Cappadocia, in what is now Turkey"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "April 23"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "His brave faith, and the legend of George and the dragon"
+        }
+      ],
+      "intro": "George was a Christian soldier who gave his life for Jesus around the year 303. He is one of the most famous saints in the world. He is the patron saint of England and of many other places. Most people know him from a famous legend in which he defeats a dragon. The real George was brave in a different way: he would not deny Jesus.",
+      "story_paragraphs": [
+        "George was born around the year 280 in Cappadocia, in what is now Turkey. His family was Christian. His name comes from a Greek word that means \"farmer.\" Later he moved to Palestine, in the Holy Land.",
+        "George became a soldier in the army of the emperor Diocletian. In the year 303, Diocletian made a cruel law against Christians. George would not obey it. He gave away what he owned to the poor. Then, the story says, he tore up the emperor's order right in front of the emperor. He said out loud that he was a Christian.",
+        "For this, George was arrested and put to death. He was buried at Lydda, a town in the Holy Land now called Lod. A church was built over his grave.",
+        "We do not know much more about George's life for certain. In 1969, the Church noted that many facts about him are missing. But Christians have loved him for more than 1,600 years.",
+        "Later, people told a famous legend about George. In it, a dragon lived in a pond near a town in Libya. The people had to feed it sheep. One day the king's daughter was chosen to be given to the dragon. George rode up on his horse, struck the dragon with his spear, and saved her. Then the king and his people promised to be baptized.",
+        "The dragon is not a real animal, but the story has a real lesson. It shows good defeating evil with God's help.",
+        "George became the patron saint of England, and of knights, soldiers, and scouts."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 280",
+          "text": "George is born into a Christian family in Cappadocia."
+        },
+        {
+          "date_display": "Later",
+          "text": "George becomes a soldier in the army of Emperor Diocletian."
+        },
+        {
+          "date_display": "303",
+          "text": "Diocletian makes a law against Christians, and George refuses to obey it."
+        },
+        {
+          "date_display": "About 303",
+          "text": "George is put to death for his faith and buried at Lydda."
+        },
+        {
+          "date_display": "368",
+          "text": "A Greek inscription mentions a church of \"the saints and triumphant martyrs George and companions.\""
+        },
+        {
+          "date_display": "1200s",
+          "text": "The legend of George and the dragon becomes famous."
+        },
+        {
+          "date_display": "1300s",
+          "text": "King Edward III makes George the patron of his order of knights in England."
+        }
+      ],
+      "fun_facts": [
+        "George is the patron saint of England.",
+        "His name comes from a Greek word that means \"farmer.\"",
+        "He is a patron saint of knights, soldiers, and scouts.",
+        "In art, George is often shown in armor with a red cross.",
+        "The story of George and the dragon was written down in the 1200s."
+      ],
+      "words_to_know": [
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Soldier",
+          "definition": "A person who serves in an army."
+        },
+        {
+          "word": "Legend",
+          "definition": "An old story that is passed down. Parts of it may or may not have really happened."
+        },
+        {
+          "word": "Knight",
+          "definition": "A soldier of long ago who rode a horse and promised to protect others."
+        },
+        {
+          "word": "Patron saint",
+          "definition": "A saint who prays for a certain group of people, place, or kind of work."
+        }
+      ],
+      "think_about_it": "The dragon in the legend stands for evil. What are some \"dragons\" in the world today that need courage to fight?",
+      "reflection_question": "George stood up and said he was a Christian in front of the emperor. How can you show that you follow Jesus?",
+      "kindness_prompt": "George gave what he owned to the poor. Pick one thing you don't use anymore and, with a grown-up, give it to someone who needs it.",
+      "quiz": [
+        {
+          "prompt": "What was George's job?",
+          "choices": [
+            {
+              "text": "A fisherman"
+            },
+            {
+              "text": "A soldier",
+              "correct": true
+            },
+            {
+              "text": "A shepherd"
+            },
+            {
+              "text": "A teacher"
+            }
+          ],
+          "explanation": "George was a soldier in the army of Emperor Diocletian."
+        },
+        {
+          "prompt": "What does George's name mean?",
+          "choices": [
+            {
+              "text": "King"
+            },
+            {
+              "text": "Brave"
+            },
+            {
+              "text": "Farmer",
+              "correct": true
+            }
+          ],
+          "explanation": "George's name comes from a Greek word that means \"farmer.\""
+        },
+        {
+          "prompt": "What country is George the patron saint of?",
+          "choices": [
+            {
+              "text": "France"
+            },
+            {
+              "text": "England",
+              "correct": true
+            },
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Japan"
+            }
+          ],
+          "explanation": "George is the patron saint of England, and of many other places too."
+        },
+        {
+          "prompt": "Is the story of George and the dragon history or a legend?",
+          "choices": [
+            {
+              "text": "A legend",
+              "correct": true
+            },
+            {
+              "text": "History"
+            },
+            {
+              "text": "A song"
+            }
+          ],
+          "explanation": "The dragon story is a legend that teaches how good can defeat evil with God's help."
+        },
+        {
+          "prompt": "What did George do when the emperor made a law against Christians?",
+          "choices": [
+            {
+              "text": "He ran away"
+            },
+            {
+              "text": "He refused to obey and said he was a Christian",
+              "correct": true
+            },
+            {
+              "text": "He hid in a cave"
+            }
+          ],
+          "explanation": "George gave his goods to the poor and openly said he was a Christian, so he was arrested."
+        }
+      ],
+      "sources": [
+        {
+          "title": "St. George, Martyr",
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/23/st--george--martyr.html",
+          "note": "born about 280 in Cappadocia to a Christian family; name means \"farmer\"; moved to Palestine; Diocletian's army; the 303 edict; gave his goods to the poor and \"tore the document apart\"; beheaded; buried at Lydda (Lod); the 368 inscription; the 1969 calendar change; the dragon \"legend\"; Edward III's Order of the Knights of St George; patron of knights, soldiers and scouts"
+        },
+        {
+          "title": "Saint George",
+          "publisher": "Britannica Kids",
+          "url": "https://kids.britannica.com/kids/article/Saint-George/601890",
+          "note": "\"Not much is known about his life\"; the dragon story from a 1200s collection, with the Libyan king's daughter; patron saint of England; Edward III and the Order of the Garter in the 1300s; often shown in armor with a \"scarlet cross\"; feast April 23"
+        }
+      ]
+    },
+    {
+      "kind": "saint",
+      "parent_index": "saints",
+      "slug": "blaise",
+      "canonical": {
+        "model": "catalog.SaintPage",
+        "match_title": "St. Blase",
+        "production_id_hint": 913
+      },
+      "student_title": "Saint Blaise",
+      "subtitle": "A bishop remembered for saving a boy who was choking, and for the blessing of throats each February.",
+      "story_label": "His Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "Lived",
+          "inherit": "life_dates",
+          "fallback_value": "died about 316"
+        },
+        {
+          "icon": "marker",
+          "label": "From",
+          "value": "Sebaste, in Armenia, where he was bishop"
+        },
+        {
+          "icon": "calendar-cross",
+          "label": "Feast Day",
+          "inherit": "feast_day",
+          "fallback_value": "February 3"
+        },
+        {
+          "icon": "star",
+          "label": "Known for",
+          "value": "The blessing of throats on his feast day"
+        }
+      ],
+      "intro": "Blaise was a bishop in Armenia who gave his life for Jesus around the year 316. An old story says he once saved a boy who was choking on a fish bone. That is why, on his feast day, February 3, many Catholics go to church to have their throats blessed. The priest holds two crossed candles against each person's throat and prays for them.",
+      "story_paragraphs": [
+        "Blaise lived about 1,700 years ago. He was the bishop of Sebaste, a city in Armenia. He cared for his people's souls and also for their health.",
+        "In the year 311, the Roman Empire made a law that allowed Christians to worship freely. But in Armenia, Christians were still being persecuted.",
+        "Most of what we know about Blaise comes from a story written about 400 years after he lived. It is a legend, but it has inspired Christians for many centuries.",
+        "The legend says Blaise had to flee from his city. He lived alone as a hermit in the wild countryside. There he made friends with the wild animals. One day, hunters came looking for animals. They found Blaise kneeling in prayer, with wolves, lions, and bears all around him, and none of them hurt him.",
+        "The hunters arrested Blaise. On the way to prison, a worried mother ran up to him. Her young son had a fish bone stuck in his throat and could not breathe. Blaise prayed over the boy, and the boy coughed up the bone. He was saved!",
+        "The governor told Blaise to worship false gods. Blaise refused, and he was put to death around the year 316.",
+        "Because of the story of the boy, Catholics ask Blaise to pray for them when they have throat sicknesses. Every year on February 3, priests bless people's throats. They hold two candles, crossed like an X, against each person's throat and pray, \"Through the intercession of Saint Blaise, bishop and martyr, may God deliver you from every disease of the throat and from every other illness.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "Late 200s",
+          "text": "Blaise is born, and later becomes bishop of Sebaste in Armenia."
+        },
+        {
+          "date_display": "311",
+          "text": "A new law allows Christians to worship freely in the Roman Empire."
+        },
+        {
+          "date_display": "After 311",
+          "text": "Christians in Armenia are still persecuted. Blaise flees to the countryside, according to legend."
+        },
+        {
+          "date_display": "About 316",
+          "text": "Blaise is put to death for his faith."
+        },
+        {
+          "date_display": "About 700s",
+          "text": "A story of Blaise's life, the Acts of Saint Blaise, is written down."
+        },
+        {
+          "date_display": "Every February 3",
+          "text": "Catholics have their throats blessed on his feast day."
+        }
+      ],
+      "fun_facts": [
+        "On Saint Blaise's Day, priests bless people's throats with two crossed candles.",
+        "The candles used are blessed the day before, on the feast of the Presentation of the Lord.",
+        "According to legend, wild animals came to Blaise and did not hurt him.",
+        "He is a patron saint of people with throat sicknesses.",
+        "Long ago, in 1222, people in England were not allowed to do heavy work on his feast day."
+      ],
+      "words_to_know": [
+        {
+          "word": "Bishop",
+          "definition": "A leader of the Church who takes the place of the apostles and cares for the people of a whole area."
+        },
+        {
+          "word": "Martyr",
+          "definition": "A person who is put to death because of their faith in Jesus."
+        },
+        {
+          "word": "Hermit",
+          "definition": "A person who lives alone to pray."
+        },
+        {
+          "word": "Blessing",
+          "definition": "A prayer asking God to care for someone or something."
+        },
+        {
+          "word": "Intercession",
+          "definition": "Praying to God for someone else. When saints pray for us, we call it their intercession."
+        }
+      ],
+      "think_about_it": "Blaise took time to help a worried mother and her son, even while he was being arrested. How can you help someone even when you are having a hard day?",
+      "reflection_question": "Saints like Blaise pray for us. Who is someone you could pray for today?",
+      "kindness_prompt": "Blaise cared for people who were sick. Make a card or say a prayer for someone you know who is sick.",
+      "quiz": [
+        {
+          "prompt": "What was Blaise's job in the Church?",
+          "choices": [
+            {
+              "text": "A deacon"
+            },
+            {
+              "text": "A bishop",
+              "correct": true
+            },
+            {
+              "text": "A pope"
+            },
+            {
+              "text": "A monk"
+            }
+          ],
+          "explanation": "Blaise was the bishop of Sebaste, a city in Armenia."
+        },
+        {
+          "prompt": "According to the legend, what did Blaise do for a boy?",
+          "choices": [
+            {
+              "text": "He taught him to read"
+            },
+            {
+              "text": "He saved him from choking on a fish bone",
+              "correct": true
+            },
+            {
+              "text": "He gave him a horse"
+            }
+          ],
+          "explanation": "A mother brought her son, who had a fish bone stuck in his throat. Blaise prayed, and the boy coughed up the bone."
+        },
+        {
+          "prompt": "What do priests use to bless throats on Saint Blaise's Day?",
+          "choices": [
+            {
+              "text": "A cup of water"
+            },
+            {
+              "text": "Two crossed candles",
+              "correct": true
+            },
+            {
+              "text": "A golden cross"
+            }
+          ],
+          "explanation": "The priest holds two candles, crossed like an X, against each person's throat and prays."
+        },
+        {
+          "prompt": "What is Saint Blaise's feast day?",
+          "choices": [
+            {
+              "text": "January 1"
+            },
+            {
+              "text": "February 3",
+              "correct": true
+            },
+            {
+              "text": "July 4"
+            }
+          ],
+          "explanation": "Blaise's feast is on February 3, the day of the blessing of throats."
+        },
+        {
+          "prompt": "Which animals does the legend say gathered around Blaise?",
+          "choices": [
+            {
+              "text": "Dogs and cats"
+            },
+            {
+              "text": "Wolves, lions, and bears",
+              "correct": true
+            },
+            {
+              "text": "Horses and cows"
+            }
+          ],
+          "explanation": "The legend says hunters found Blaise praying with wolves, lions, and bears around him, and none of them hurt him."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Saint Blaise",
+          "publisher": "Franciscan Media",
+          "url": "https://www.franciscanmedia.org/saint-of-the-day/saint-blaise/",
+          "note": "bishop and martyr of Sebastea in Armenia, martyred 316; the Edict of Toleration of 311 and persecution continuing in Armenia; the Acts written about 400 years later; the hermit, the animals, the hunters, the boy and the fish bone, the governor; the 1222 Council of Oxford; patron for throat ailments"
+        },
+        {
+          "title": "Book of Blessings: Blessing of Throats on the Feast of Saint Blaise",
+          "publisher": "Catholic Culture",
+          "url": "https://www.catholicculture.org/culture/liturgicalyear/prayers/view.cfm?id=733",
+          "note": "the prayer \"Through the intercession of Saint Blase, bishop and martyr...\"; two candles blessed on the Presentation of the Lord, joined in the form of a cross; given by a priest, deacon or lay minister"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1041 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-santarem",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Santarem",
+        "production_id_hint": 1108
+      },
+      "student_title": "The Eucharistic Miracle of Santarém",
+      "subtitle": "A woman took a host for a wrong reason, and a light shining in the night led her to say she was sorry.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "The 1200s, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Santarém, Portugal"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A stolen host was reported to bleed and to shine with light"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Shrine of the Holy Miracle (Church of Saint Stephen) in Santarém"
+        }
+      ],
+      "intro": "In the 1200s, in the town of Santarém, Portugal, a woman took a consecrated host from church to use in a spell. That was a very wrong thing to do. According to tradition, the host began to bleed, and that night a bright light shone from where she had hidden it. She told the truth, and the host was carried back to church, where it is still honored today.",
+      "story_paragraphs": [
+        "Long ago, in the town of Santarém, Portugal, there lived a woman who was unhappy in her marriage. She was jealous and wanted her husband to love her more.",
+        "She went to a sorceress, a woman who claimed to do magic. The sorceress told her to bring back a consecrated host from church to use in a spell. Using the Body of Jesus for magic is a terrible wrong, but the woman did it anyway. At Mass, she received the host but did not consume it. She wrapped it in a cloth and hurried away.",
+        "According to the story, the host began to bleed, and the cloth was stained. Frightened, the woman hid the host in a drawer in her bedroom.",
+        "That night, a bright light shone from the drawer and filled the room. Her husband saw the light and asked what was happening. The woman told him everything.",
+        "In the morning, they went to their parish priest. The priest came to their house, took the host, and carried it back in a procession to the Church of Saint Stephen. People came from all around to see it.",
+        "The host was placed in a container of beeswax. Years later, the story says, the wax container was found broken, and the blood was inside a crystal container instead. Church investigations in 1340 and 1612 studied the event.",
+        "Today, the relic is kept above the main altar of the Church of Saint Stephen, now called the Shrine of the Holy Miracle. The couple's house became a chapel. Every year, people carry the relic in a procession from the house to the church. The woman's story reminds us that it is never too late to tell the truth and turn back to God."
+      ],
+      "timeline": [
+        {
+          "date_display": "1200s",
+          "text": "According to tradition, a woman takes a host from church, and it bleeds."
+        },
+        {
+          "date_display": "The next morning",
+          "text": "The host is carried back to the Church of Saint Stephen."
+        },
+        {
+          "date_display": "1340",
+          "text": "A Church investigation studies the event."
+        },
+        {
+          "date_display": "1612",
+          "text": "Another Church investigation studies the event."
+        },
+        {
+          "date_display": "1684",
+          "text": "The couple's house becomes a chapel."
+        },
+        {
+          "date_display": "Today",
+          "text": "The relic is kept above the main altar of the Shrine of the Holy Miracle."
+        }
+      ],
+      "fun_facts": [
+        "The church where the relic is kept is now called the Shrine of the Holy Miracle.",
+        "The couple's house became a chapel.",
+        "Every year, the relic is carried in a procession from the house to the church.",
+        "Saint Francis Xavier is said to have prayed at the shrine before his missions.",
+        "Saint Carlo Acutis included Santarém in his exhibit about Eucharistic miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Consecrated",
+          "definition": "Made holy. At Mass, the bread and wine are consecrated and become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Sorceress",
+          "definition": "A woman who claims to use magic. The Church teaches that magic and spells are wrong."
+        },
+        {
+          "word": "Procession",
+          "definition": "A group of people walking together in prayer, often carrying something holy."
+        },
+        {
+          "word": "Relic",
+          "definition": "Something holy that is kept and honored, like an object connected to a saint or a miracle."
+        },
+        {
+          "word": "Repentance",
+          "definition": "Being sorry for sin and turning back to God."
+        }
+      ],
+      "think_about_it": "The woman did something very wrong, but she told the truth when she was asked. Why is it important to tell the truth even when we have done something wrong?",
+      "reflection_question": "God always welcomes us back when we are sorry. When can you go to God to ask for forgiveness?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a host taken for a spell bled, and a bright light shone from where it was hidden.",
+        "what_the_church_says": "Church investigations studied the event, and several popes granted special blessings to people who pray at the shrine. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "This story is very old, and sources give different years for it. No modern scientific study of the relic is described in the sources. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Santarém?",
+          "choices": [
+            {
+              "text": "Spain"
+            },
+            {
+              "text": "Portugal",
+              "correct": true
+            },
+            {
+              "text": "France"
+            },
+            {
+              "text": "Italy"
+            }
+          ],
+          "explanation": "Santarém is a town in Portugal."
+        },
+        {
+          "prompt": "Why did the woman take the host?",
+          "choices": [
+            {
+              "text": "To give it to a sick friend"
+            },
+            {
+              "text": "To use it in a spell",
+              "correct": true
+            },
+            {
+              "text": "To keep it safe"
+            }
+          ],
+          "explanation": "A sorceress told her to bring back a host for a spell. Using the Eucharist that way is a terrible wrong."
+        },
+        {
+          "prompt": "What did her husband see that night?",
+          "choices": [
+            {
+              "text": "A storm"
+            },
+            {
+              "text": "A bright light shining from the drawer",
+              "correct": true
+            },
+            {
+              "text": "A friend at the door"
+            }
+          ],
+          "explanation": "A bright light shone from the drawer where the host was hidden, and the woman told her husband everything."
+        },
+        {
+          "prompt": "Where is the relic kept today?",
+          "choices": [
+            {
+              "text": "The Shrine of the Holy Miracle in Santarém",
+              "correct": true
+            },
+            {
+              "text": "A museum in Lisbon"
+            },
+            {
+              "text": "It was lost"
+            }
+          ],
+          "explanation": "The relic is kept above the main altar of the Church of Saint Stephen, now called the Shrine of the Holy Miracle."
+        },
+        {
+          "prompt": "What do Catholics believe about every consecrated host?",
+          "choices": [
+            {
+              "text": "It is only a symbol"
+            },
+            {
+              "text": "Jesus is truly present in it",
+              "correct": true
+            },
+            {
+              "text": "It is only special in Santarém"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in every consecrated host, at every Mass."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Santarém",
+          "publisher": "Eucharistic Miracles of the World (Carlo Acutis's exhibit)",
+          "url": "https://www.miracolieucaristici.org/en/portogallo/santarem.html",
+          "note": "the jealous woman and the sorceress; the host hidden in a linen cloth and in a bedroom drawer; the light at night; the husband; the pastor and the procession to St. Stephen's; the beeswax and the crystal vessel in 1340; indulgences from several popes; St. Francis Xavier; the 18th-century throne above the altar; the house a chapel in 1684; the April procession"
+        },
+        {
+          "title": "This Eucharistic host still contains fresh blood over 770 years later",
+          "publisher": "Aleteia (2019)",
+          "url": "https://www.aleteia.org/2019/06/20/this-eucharistic-host-still-contains-fresh-blood-over-770-years-later/",
+          "note": "1247; the love potion; the light from the trunk; the priest; the reliquary above the main altar; investigations in 1340 and 1612"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-amsterdam",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Amsterdam",
+        "production_id_hint": 1109
+      },
+      "student_title": "The Eucharistic Miracle of Amsterdam",
+      "subtitle": "A host was found unharmed in a fire in 1345, and people in Amsterdam still walk in silent prayer to remember it.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "March 1345, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Amsterdam, the Netherlands"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A host was reported found unharmed in the ashes of a fire"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Silent Walk (Stille Omgang) through Amsterdam each March"
+        }
+      ],
+      "intro": "In March 1345, a very sick man in Amsterdam received Holy Communion. He was too ill to keep the host down, and, as was the custom, it was put into the fire. The next morning, the host was found whole in the ashes. For centuries since, Catholics in Amsterdam have honored the miracle, and today they still walk through the city at night in silent prayer.",
+      "story_paragraphs": [
+        "Amsterdam is a city in the Netherlands, known for its canals. In March 1345, a man who lived on a street called the Kalverstraat was very sick. He thought he was dying, so he asked for a priest to give him the last sacraments, including Holy Communion.",
+        "The priest came and gave him the host. But the man was so sick that he could not keep it down. The people caring for him did what was the custom at that time: they put what he could not keep down into the fire.",
+        "The next morning, according to the story, they found the host lying in the ashes. It was whole and unharmed. They were amazed.",
+        "A priest carried the host back to the parish church. But twice, the story says, the host was found back at the house on the Kalverstraat. So the people carried it in a solemn procession to the church, where it stayed.",
+        "A chapel was built where the house had stood. Amsterdam became a great place of pilgrimage, and every year people walked in procession to honor the miracle.",
+        "In 1578, the leaders of the city became Protestant and banned Catholic services and processions. But Catholics did not forget. They kept praying in hidden churches. Some walked the old procession route quietly, without singing or carrying anything, so no one could stop them.",
+        "That quiet walk became the Stille Omgang, which means \"Silent Walk.\" Today, every March, thousands of Catholics walk through the streets of Amsterdam at night in silence, praying. They remember the miracle and pray for their city and their faith."
+      ],
+      "timeline": [
+        {
+          "date_display": "March 15, 1345",
+          "text": "According to tradition, a host is found unharmed in the ashes of a fire."
+        },
+        {
+          "date_display": "After 1345",
+          "text": "A chapel is built where the house stood, and Amsterdam becomes a place of pilgrimage."
+        },
+        {
+          "date_display": "1578",
+          "text": "The city bans Catholic services and processions."
+        },
+        {
+          "date_display": "1600s–1700s",
+          "text": "Catholics keep the tradition alive in hidden churches and quiet walks."
+        },
+        {
+          "date_display": "1908",
+          "text": "The old chapel is torn down."
+        },
+        {
+          "date_display": "Today",
+          "text": "Thousands join the Silent Walk through Amsterdam each March."
+        }
+      ],
+      "fun_facts": [
+        "The Silent Walk takes place at night.",
+        "People walk in silence, without singing or talking.",
+        "Amsterdam has been called the \"Miracle City.\"",
+        "The miracle happened on a street called the Kalverstraat, still one of Amsterdam's busiest streets.",
+        "Catholics kept the tradition alive even when it was against the law."
+      ],
+      "words_to_know": [
+        {
+          "word": "Last sacraments",
+          "definition": "The sacraments given to someone who is very sick or near death, including Holy Communion."
+        },
+        {
+          "word": "Procession",
+          "definition": "A group of people walking together in prayer, often carrying something holy."
+        },
+        {
+          "word": "Pilgrimage",
+          "definition": "A journey to a holy place to pray."
+        },
+        {
+          "word": "Protestant",
+          "definition": "A Christian whose church separated from the Catholic Church at the time of the Reformation."
+        },
+        {
+          "word": "Faithful",
+          "definition": "Staying true to God and to what you believe."
+        }
+      ],
+      "think_about_it": "When they were not allowed to have processions, Catholics in Amsterdam found a quiet way to keep praying. How can you keep praying when things are hard?",
+      "reflection_question": "The Silent Walk is a prayer in silence. Can you spend a few quiet minutes with Jesus today?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a host put into a fire in 1345 was found whole in the ashes the next morning, and twice returned to the house.",
+        "what_the_church_says": "the Church allowed a chapel and processions in honor of the miracle, and Catholics in Amsterdam still honor it today. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "This story comes to us through tradition, and the original host is no longer kept. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what city did this miracle happen?",
+          "choices": [
+            {
+              "text": "Paris"
+            },
+            {
+              "text": "Amsterdam",
+              "correct": true
+            },
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "London"
+            }
+          ],
+          "explanation": "It happened in Amsterdam, in the Netherlands, in 1345."
+        },
+        {
+          "prompt": "Where was the host found the next morning?",
+          "choices": [
+            {
+              "text": "Under a bed"
+            },
+            {
+              "text": "In the ashes of a fire",
+              "correct": true
+            },
+            {
+              "text": "On the church step"
+            }
+          ],
+          "explanation": "The host had been put into the fire, and the next morning it was found whole in the ashes."
+        },
+        {
+          "prompt": "What happened in 1578?",
+          "choices": [
+            {
+              "text": "The city banned Catholic services and processions",
+              "correct": true
+            },
+            {
+              "text": "A big cathedral was built"
+            },
+            {
+              "text": "The canals froze"
+            }
+          ],
+          "explanation": "In 1578, the city's leaders became Protestant and banned Catholic services and processions."
+        },
+        {
+          "prompt": "What is the Stille Omgang?",
+          "choices": [
+            {
+              "text": "A boat race"
+            },
+            {
+              "text": "A silent walk of prayer at night",
+              "correct": true
+            },
+            {
+              "text": "A Christmas market"
+            }
+          ],
+          "explanation": "\"Stille Omgang\" means \"Silent Walk.\" Thousands of Catholics walk through Amsterdam at night in silent prayer."
+        },
+        {
+          "prompt": "What do Catholics believe about every consecrated host?",
+          "choices": [
+            {
+              "text": "It is only bread"
+            },
+            {
+              "text": "Jesus is truly present in it",
+              "correct": true
+            },
+            {
+              "text": "It is only special in Amsterdam"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in every consecrated host, at every Mass."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Miracle",
+          "publisher": "Stille Omgang",
+          "url": "https://www.stille-omgang.nl/the-miracle/",
+          "note": "March 15, 1345; the sick man on the Kalverstraat and the last rites; the host thrown on the fire and found undamaged; the parish church (Oude Kerk) and the two returns; the chapel and pilgrimage; 1578 and the ban on Catholic services; the clandestine churches and the individuals walking the route"
+        },
+        {
+          "title": "Miracle of Amsterdam",
+          "publisher": "De Krijtberg (Jesuit parish, Amsterdam)",
+          "url": "https://krijtberg.nl/en/miracle-of-amsterdam/",
+          "note": "the same account; the Miracle Procession; \"Miracle City\"; the Silent Walk at night"
+        },
+        {
+          "title": "Amsterdam Miracle and the Stille Omgang",
+          "publisher": "Amsterdamian",
+          "url": "https://amsterdamian.com/see/photos/amsterdam-miracle-and-the-stille-omgang/",
+          "note": "the solemn procession; the chapel; the 1578 ban; the chapel used by Protestants until 1890 and demolished in 1908; the silent procession"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-faverney",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Faverney",
+        "production_id_hint": 1111
+      },
+      "student_title": "The Eucharistic Miracle of Faverney",
+      "subtitle": "In 1608, a fire burned the altar of an abbey church, but the monstrance holding the Eucharist was found hanging in the air.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "Pentecost, 1608"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Faverney, France"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A monstrance was reported to hang in the air after a fire, for 33 hours"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The abbey church of Faverney"
+        }
+      ],
+      "intro": "In 1608, at a monastery in Faverney, France, the Eucharist was displayed on the altar for people to pray before it at Pentecost. During the night, a fire burned the altar. When the monks came in, they found the monstrance, the holder for the Eucharist, hanging in the air above the ashes. According to the reports, it stayed there for 33 hours while thousands watched.",
+      "story_paragraphs": [
+        "Faverney is a small town in the east of France. In 1608, monks lived there in an abbey, a large monastery with a church.",
+        "On the eve of Pentecost, the monks placed the Eucharist on a special altar in the church so that people could come and pray before it. The host was in a monstrance, a beautiful holder that lets people see the Eucharist. Candles were lit all around it.",
+        "During the night, while the church was empty, a fire broke out. It burned the altar and everything on it, including the cloths and decorations.",
+        "In the morning, the monks rushed in. To their amazement, the monstrance had not burned. It was hanging in the air, with nothing holding it up, above the ruins of the altar.",
+        "News spread quickly. People came from the town and the villages around to see. According to the reports, the monstrance stayed in the air for about 33 hours, and thousands of people saw it. Then, during a Mass, it came gently down onto a new altar.",
+        "The Church leaders of the area studied what had happened. They spoke with many witnesses and wrote down what they said.",
+        "One of the hosts from the monstrance is still kept at Faverney today. In 2008, for the 400th anniversary of the miracle, more than 7,000 people came to Faverney to pray. The cardinal who preached that day said, \"It is not a hoax, it is a wonder.\" He reminded people that the most important miracle happens at every Mass, when Jesus comes to us in the Eucharist."
+      ],
+      "timeline": [
+        {
+          "date_display": "Eve of Pentecost, 1608",
+          "text": "The Eucharist is displayed on an altar in the abbey church at Faverney."
+        },
+        {
+          "date_display": "That night",
+          "text": "A fire burns the altar."
+        },
+        {
+          "date_display": "The next morning",
+          "text": "The monks find the monstrance hanging in the air."
+        },
+        {
+          "date_display": "About 33 hours later",
+          "text": "The monstrance comes down onto a new altar during Mass."
+        },
+        {
+          "date_display": "1608",
+          "text": "Church leaders question the witnesses."
+        },
+        {
+          "date_display": "2008",
+          "text": "More than 7,000 people come to Faverney for the 400th anniversary."
+        }
+      ],
+      "fun_facts": [
+        "According to the reports, the monstrance hung in the air for about 33 hours.",
+        "Thousands of people are said to have seen it.",
+        "The miracle happened at Pentecost.",
+        "One of the hosts is still kept at Faverney.",
+        "More than 7,000 people came to celebrate the 400th anniversary in 2008."
+      ],
+      "words_to_know": [
+        {
+          "word": "Monstrance",
+          "definition": "A special holder, often shaped like a sun, that shows the Eucharist so people can pray before it."
+        },
+        {
+          "word": "Abbey",
+          "definition": "A large monastery where monks or nuns live, pray and work."
+        },
+        {
+          "word": "Monk",
+          "definition": "A man who lives in a monastery and gives his life to prayer and work."
+        },
+        {
+          "word": "Pentecost",
+          "definition": "The feast fifty days after Easter, when the Holy Spirit came upon the apostles."
+        },
+        {
+          "word": "Witness",
+          "definition": "A person who sees something happen and can tell others about it."
+        }
+      ],
+      "think_about_it": "The fire burned everything around the Eucharist. What does this story tell us about how precious the Eucharist is?",
+      "reflection_question": "People came from all around to pray before the Eucharist. When could you spend time praying before Jesus in the Eucharist?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "after a fire burned the altar, the monstrance holding the Eucharist was seen hanging in the air for about 33 hours by thousands of witnesses.",
+        "what_the_church_says": "the local Church studied the event and allowed it to be honored, and it is still celebrated at Faverney. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "The accounts say thousands of people saw it, but nothing remains that could be studied today. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Faverney?",
+          "choices": [
+            {
+              "text": "France",
+              "correct": true
+            },
+            {
+              "text": "Germany"
+            },
+            {
+              "text": "Spain"
+            },
+            {
+              "text": "Belgium"
+            }
+          ],
+          "explanation": "Faverney is a small town in the east of France."
+        },
+        {
+          "prompt": "What happened during the night?",
+          "choices": [
+            {
+              "text": "A flood"
+            },
+            {
+              "text": "A fire burned the altar",
+              "correct": true
+            },
+            {
+              "text": "A thief came in"
+            }
+          ],
+          "explanation": "During the night, a fire burned the altar and everything on it."
+        },
+        {
+          "prompt": "What did the monks find in the morning?",
+          "choices": [
+            {
+              "text": "The monstrance had melted"
+            },
+            {
+              "text": "The monstrance was hanging in the air",
+              "correct": true
+            },
+            {
+              "text": "The church was empty"
+            }
+          ],
+          "explanation": "The monstrance had not burned. It was hanging in the air above the ruins of the altar."
+        },
+        {
+          "prompt": "What is a monstrance?",
+          "choices": [
+            {
+              "text": "A kind of bell"
+            },
+            {
+              "text": "A holder that shows the Eucharist so people can pray before it",
+              "correct": true
+            },
+            {
+              "text": "A candle"
+            }
+          ],
+          "explanation": "A monstrance is a special holder that lets people see the Eucharist and pray before it."
+        },
+        {
+          "prompt": "What do Catholics believe happens at every Mass?",
+          "choices": [
+            {
+              "text": "Nothing changes"
+            },
+            {
+              "text": "The bread and wine become the Body and Blood of Jesus",
+              "correct": true
+            },
+            {
+              "text": "Only special Masses are holy"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in the Eucharist at every Mass."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Eucharistic miracles 1600–1700",
+          "publisher": "The Miracle Hunter",
+          "url": "https://miraclehunter.com/eucharistic-miracles/1600-1700.html",
+          "note": "Faverney, 1608, the Vigil of Pentecost; the monks; a fire \"destroyed the altar and the sacred furnishings, but not the monstrance\"; the monstrance found \"suspended in the air perfectly intact\"; \"the miraculous Host is still kept today\""
+        },
+        {
+          "title": "Homily at Faverney for the fourth centenary (May 25, 2008)",
+          "publisher": "Cardinal André Vingt-Trois, Diocese of Paris",
+          "url": "https://dioceseparis.fr/677-Homelie-de-la-Fete-du-Saint.html",
+          "note": "in French; the hosts saved from the flames and suspended in the air for 33 hours before thousands of witnesses; \"Ce n'est pas une supercherie, c'est un prodige\"; more than 7,000 pilgrims"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-turin",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Turin",
+        "production_id_hint": 1113
+      },
+      "student_title": "The Eucharistic Miracle of Turin",
+      "subtitle": "In 1453, a soldier stole a monstrance, and in the city square the Eucharist rose into the air.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "June 6, 1453"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Turin, Italy"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A stolen host was reported to rise into the air and shine"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Basilica of Corpus Domini in Turin"
+        }
+      ],
+      "intro": "In 1453, during a war in the mountains of northern Italy, a soldier stole a monstrance holding the Eucharist from a village church. He carried it to the city of Turin on a mule. In the city square, the mule stumbled. According to the story, the Eucharist rose high into the air, shining, until the bishop came and it came down into his chalice.",
+      "story_paragraphs": [
+        "In 1453, there was fighting in the mountain valleys west of Turin, in northern Italy. Soldiers came into the village of Exilles and robbed its church.",
+        "One soldier broke open the tabernacle. Inside was a monstrance, a beautiful holder for the Eucharist, with a consecrated host in it. The soldier stuffed it into a sack with other stolen things, loaded it onto a mule, and set off for the city of Turin to sell what he had taken.",
+        "On June 6, 1453, the soldier and his mule came into the main square of Turin, near the church of Saint Sylvester. Suddenly, the mule stumbled and fell. The sack fell open.",
+        "According to the story, the monstrance rose up out of the sack, high above the houses around the square. People stopped and stared. Then the monstrance came down, but the host stayed in the air, shining like the sun.",
+        "Someone ran to tell the bishop of Turin, Ludovico of Romagnano. He hurried to the square with priests and people. The bishop knelt and prayed. Then he held up a chalice, and the host came gently down into it.",
+        "The people carried the host into the cathedral with great joy. At the place where the mule fell, they first built a small shrine. Later, a beautiful church was built there. It is called Corpus Domini, which means \"the Body of the Lord.\"",
+        "In 1853, for the 400th anniversary, Pope Pius IX approved a special Mass for Turin to celebrate the miracle. The host of 1453 is no longer kept, but people still pray at the place in the square where the miracle is remembered."
+      ],
+      "timeline": [
+        {
+          "date_display": "1453",
+          "text": "Soldiers rob the church of Exilles, and one steals a monstrance with the Eucharist."
+        },
+        {
+          "date_display": "June 6, 1453",
+          "text": "In the square in Turin, the host rises into the air and comes down into the bishop's chalice."
+        },
+        {
+          "date_display": "After 1453",
+          "text": "A small shrine is built where the mule fell."
+        },
+        {
+          "date_display": "Later",
+          "text": "The Church of Corpus Domini is built at the spot."
+        },
+        {
+          "date_display": "1853",
+          "text": "Pope Pius IX approves a special Mass for the 400th anniversary."
+        },
+        {
+          "date_display": "1928",
+          "text": "Pope Pius XI names Corpus Domini a basilica."
+        }
+      ],
+      "fun_facts": [
+        "The miracle began when a mule stumbled in the city square.",
+        "The church built at the spot is called Corpus Domini, \"the Body of the Lord.\"",
+        "The host came down into a chalice held by the bishop.",
+        "Turin is also home to Saint John Bosco's basilica.",
+        "Saint Carlo Acutis included Turin in his exhibit about Eucharistic miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Monstrance",
+          "definition": "A special holder, often shaped like a sun, that shows the Eucharist so people can pray before it."
+        },
+        {
+          "word": "Tabernacle",
+          "definition": "The special box in church where the Eucharist is kept."
+        },
+        {
+          "word": "Chalice",
+          "definition": "The cup used at Mass for the wine that becomes the Blood of Jesus."
+        },
+        {
+          "word": "Corpus Domini",
+          "definition": "Latin for \"the Body of the Lord.\""
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        }
+      ],
+      "think_about_it": "The soldier treated the Eucharist like something to sell. How do we show that the Eucharist is the most precious gift of all?",
+      "reflection_question": "The bishop knelt and prayed before he lifted the chalice. How can you show reverence when you pray before Jesus?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a stolen host rose into the air above the square in Turin, shining, and came down into the bishop's chalice.",
+        "what_the_church_says": "the Church allowed a church to be built at the spot, and in 1853 Pope Pius IX approved a special Mass to honor the miracle. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "This story was written down by people of the time, and the host is no longer kept, so it cannot be studied today. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what city did this miracle happen?",
+          "choices": [
+            {
+              "text": "Rome"
+            },
+            {
+              "text": "Turin",
+              "correct": true
+            },
+            {
+              "text": "Venice"
+            },
+            {
+              "text": "Milan"
+            }
+          ],
+          "explanation": "The miracle happened in the main square of Turin, in northern Italy."
+        },
+        {
+          "prompt": "How did the soldier carry the stolen monstrance?",
+          "choices": [
+            {
+              "text": "In a cart"
+            },
+            {
+              "text": "In a sack on a mule",
+              "correct": true
+            },
+            {
+              "text": "In his hands"
+            }
+          ],
+          "explanation": "The soldier put the monstrance in a sack and loaded it onto a mule."
+        },
+        {
+          "prompt": "What did the host do after the mule fell?",
+          "choices": [
+            {
+              "text": "It rose into the air, shining",
+              "correct": true
+            },
+            {
+              "text": "It rolled away"
+            },
+            {
+              "text": "It disappeared"
+            }
+          ],
+          "explanation": "According to the story, the host rose high into the air and shone like the sun."
+        },
+        {
+          "prompt": "What did the bishop hold up for the host to come down into?",
+          "choices": [
+            {
+              "text": "A basket"
+            },
+            {
+              "text": "A chalice",
+              "correct": true
+            },
+            {
+              "text": "A book"
+            }
+          ],
+          "explanation": "The bishop knelt, prayed, and held up a chalice, and the host came gently down into it."
+        },
+        {
+          "prompt": "What does \"Corpus Domini\" mean?",
+          "choices": [
+            {
+              "text": "Holy city"
+            },
+            {
+              "text": "The Body of the Lord",
+              "correct": true
+            },
+            {
+              "text": "The great square"
+            }
+          ],
+          "explanation": "\"Corpus Domini\" is Latin for \"the Body of the Lord.\" It is the name of the church built at the spot."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Turin, 1453",
+          "publisher": "Eucharistic Miracles of the World (Carlo Acutis's exhibit)",
+          "url": "https://miracolieucaristici.org/en/italia/torinoa.html",
+          "note": "June 6, 1453; soldiers looting the church at Exilles; the monstrance on a mule; the fall near St. Sylvester's; the monstrance rising over the houses; Bishop Ludovico of Romagnano and the chalice; the aedicule, then the Corpus Domini church; Pius IX's Mass and Office in 1853; minor basilica under Pius XI in 1928; the host later consumed by order of the Holy See"
+        },
+        {
+          "title": "Eucharistic miracles 1400–1500",
+          "publisher": "The Miracle Hunter",
+          "url": "https://miraclehunter.com/eucharistic-miracles/1400-1500.html",
+          "note": "Turin, 1453; the mule's fall; the monstrance rising \"over the surrounding houses\"; the iron railing in Corpus Domini marking the spot"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-o-cebreiro",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of O Cebreiro",
+        "production_id_hint": 1158
+      },
+      "student_title": "The Eucharistic Miracle of O Cebreiro",
+      "subtitle": "A farmer walked through a snowstorm to get to Mass, and a priest who doubted saw something he never forgot.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "About 1300, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "O Cebreiro, Galicia, Spain"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "The bread and wine were reported to change into flesh and blood"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Church of Santa María la Real in O Cebreiro"
+        }
+      ],
+      "intro": "High in the mountains of northern Spain is a tiny village called O Cebreiro. About the year 1300, according to tradition, a farmer walked through a terrible snowstorm to get to Mass. The priest thought he was foolish to come so far for a little bread and wine. But at the consecration, the story says, the bread and wine changed to look like real flesh and blood.",
+      "story_paragraphs": [
+        "O Cebreiro is a little village high on a mountain in Galicia, in the northwest of Spain. It sits on the Camino de Santiago, the old pilgrim road to the tomb of Saint James. Long ago, monks there cared for the pilgrims who passed by.",
+        "About the year 1300, a monk there was celebrating Mass on a cold winter day. He had lost much of his faith. He said Mass out of habit, without really believing that Jesus becomes present in the Eucharist.",
+        "That day, a great snowstorm was blowing. No one was expected at Mass. But a farmer named Juan Santín, from the nearby village of Barxamaior, had walked through the deep snow and wind to be there.",
+        "When the priest saw him, he scoffed. He thought the farmer was foolish to risk so much just for \"a bit of bread and wine.\"",
+        "Then the priest said the words of consecration. According to the story, the host in his hands changed and looked like real flesh. The wine in the chalice became blood, and it spilled onto the altar cloth. The priest was amazed and ashamed. Juan Santín's strong faith had been rewarded, and the priest's doubt was turned to faith.",
+        "The chalice and paten from that Mass are still kept at O Cebreiro. In 1486, Queen Isabella of Spain gave a silver reliquary to hold the relics. The next year, in 1487, Pope Innocent VIII recognized the miracle.",
+        "Today, people walking the Camino de Santiago stop at the old stone church of Santa María la Real to pray. The chalice and host even appear on the coat of arms of Galicia."
+      ],
+      "timeline": [
+        {
+          "date_display": "About 1300",
+          "text": "According to tradition, the bread and wine change during Mass at O Cebreiro."
+        },
+        {
+          "date_display": "1486",
+          "text": "Queen Isabella gives a silver reliquary for the relics."
+        },
+        {
+          "date_display": "1487",
+          "text": "Pope Innocent VIII recognizes the miracle."
+        },
+        {
+          "date_display": "1965–1971",
+          "text": "The church of Santa María la Real is restored."
+        },
+        {
+          "date_display": "Today",
+          "text": "Pilgrims on the Camino de Santiago stop to pray before the relics."
+        }
+      ],
+      "fun_facts": [
+        "O Cebreiro sits high on a mountain on the Camino de Santiago.",
+        "The farmer in the story, Juan Santín, walked through a snowstorm to get to Mass.",
+        "Queen Isabella of Spain gave a silver reliquary for the relics.",
+        "A chalice and host appear on the coat of arms of Galicia.",
+        "The chalice from the miracle is still kept in the church."
+      ],
+      "words_to_know": [
+        {
+          "word": "Consecration",
+          "definition": "The moment at Mass when the priest says Jesus' words, and the bread and wine become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Paten",
+          "definition": "The small plate that holds the host at Mass."
+        },
+        {
+          "word": "Reliquary",
+          "definition": "A special container that holds a relic."
+        },
+        {
+          "word": "Camino de Santiago",
+          "definition": "The old pilgrim road to the tomb of Saint James in Santiago, Spain."
+        },
+        {
+          "word": "Doubt",
+          "definition": "Not being sure whether something is true."
+        }
+      ],
+      "think_about_it": "Juan Santín walked through a snowstorm to get to Mass. What makes it hard for you to go to Mass, and how can you overcome it?",
+      "reflection_question": "The priest said Mass out of habit. How can you pay attention to Jesus at Mass, even when it feels ordinary?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "during a Mass in a snowstorm, the host and wine changed to look like flesh and blood before a doubting priest and a faithful farmer.",
+        "what_the_church_says": "Pope Innocent VIII recognized the miracle in 1487, and the relics are honored at O Cebreiro. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "This story comes to us through tradition, and no scientific study of the relics is described in the sources. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "What was the weather like on the day of the miracle?",
+          "choices": [
+            {
+              "text": "Hot and sunny"
+            },
+            {
+              "text": "A great snowstorm",
+              "correct": true
+            },
+            {
+              "text": "Foggy"
+            }
+          ],
+          "explanation": "A great snowstorm was blowing, but the farmer walked through it to get to Mass."
+        },
+        {
+          "prompt": "What did the priest think of the farmer at first?",
+          "choices": [
+            {
+              "text": "That he was foolish to come so far",
+              "correct": true
+            },
+            {
+              "text": "That he was a king"
+            },
+            {
+              "text": "That he was lost"
+            }
+          ],
+          "explanation": "The priest scoffed and thought the farmer was foolish to risk so much for \"a bit of bread and wine.\""
+        },
+        {
+          "prompt": "What happened at the consecration?",
+          "choices": [
+            {
+              "text": "The candles went out"
+            },
+            {
+              "text": "The bread and wine changed to look like flesh and blood",
+              "correct": true
+            },
+            {
+              "text": "The bell rang by itself"
+            }
+          ],
+          "explanation": "According to the story, the host looked like real flesh and the wine became blood."
+        },
+        {
+          "prompt": "Which pope recognized the miracle in 1487?",
+          "choices": [
+            {
+              "text": "Pope Pius IX"
+            },
+            {
+              "text": "Pope Innocent VIII",
+              "correct": true
+            },
+            {
+              "text": "Pope Urban IV"
+            }
+          ],
+          "explanation": "Pope Innocent VIII recognized the miracle in 1487, the year after Queen Isabella gave the reliquary."
+        },
+        {
+          "prompt": "What is the Camino de Santiago?",
+          "choices": [
+            {
+              "text": "A river"
+            },
+            {
+              "text": "An old pilgrim road to the tomb of Saint James",
+              "correct": true
+            },
+            {
+              "text": "A mountain"
+            }
+          ],
+          "explanation": "O Cebreiro sits on the Camino de Santiago, the old pilgrim road to the tomb of Saint James."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Eucharistic miracle along the Camino de Santiago",
+          "publisher": "Catholic World Report (2024)",
+          "url": "https://www.catholicworldreport.com/2024/06/02/the-eucharistic-miracle-along-the-camino-de-santiago/",
+          "note": "about 1300; the doubting Benedictine monk; Juan Santín of Barxamaior in a snowstorm; \"a bit of bread and wine\"; flesh and blood; the flesh, linens, paten and chalice preserved; Queen Isabella's reliquary of 1486; Innocent VIII's bull of 1487; Galicia's coat of arms; Santa María la Real, rebuilt 1965–71"
+        },
+        {
+          "title": "Youth Matters: To Christ through the Snow",
+          "publisher": "Archdiocese of Hobart (2024)",
+          "url": "https://hobart.catholic.org.au/2024/06/18/youth-matters-to-christ-through-the-snow",
+          "note": "around 1300; a Benedictine monk about to say Mass alone; the snowstorm; a farmer, Juan Santín, who walked hours to Mass; the account recorded by Fray Antonio de Yepes; the monk and Juan Santín buried side by side in the church"
+        }
+      ]
+    }
+  ]
+}

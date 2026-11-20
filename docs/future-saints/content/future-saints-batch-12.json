@@ -1,0 +1,1132 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "via-dolorosa",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Via Dolorosa",
+        "production_id_hint": null
+      },
+      "student_title": "The Via Dolorosa",
+      "subtitle": "The \"Way of Sorrows\" through Jerusalem, where Christians pray the Stations of the Cross.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "The Old City of Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus carries his cross to Calvary"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Not a church: a prayer route, set in the 1700s"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Franciscans lead prayer along it every Friday"
+        }
+      ],
+      "intro": "The Via Dolorosa is a route through the narrow streets of Jerusalem's Old City. Its name means \"the Way of Sorrows.\" Christians walk it to remember Jesus carrying his cross to Calvary. Along the way are fourteen Stations of the Cross. The last five are inside the Church of the Holy Sepulchre, where Jesus died and rose again.",
+      "story_paragraphs": [
+        "After Jesus was arrested, he was brought before Pontius Pilate, the Roman governor. Pilate had Jesus whipped, and soldiers put a crown of thorns on his head. Then Pilate brought Jesus out to the crowd and said, \"Behold, the man!\" The crowd shouted for Jesus to be crucified, and Pilate handed him over.",
+        "Jesus carried his cross out of the city toward a hill called Golgotha. The Gospels tell us that the soldiers made a man named Simon of Cyrene, who was coming in from the country, carry the cross behind Jesus. A large crowd followed, including women who were weeping for him. Jesus turned and spoke to them with love, even in his suffering.",
+        "At Golgotha, Jesus was crucified. He died, was buried, and on the third day he rose from the dead.",
+        "From the earliest centuries, Christians in Jerusalem walked and prayed along the way they believed Jesus had taken. Over time, this became the prayer called the Stations of the Cross. Today, Catholics all over the world pray the Stations in their own parish churches, especially during Lent.",
+        "The route we call the Via Dolorosa today was set in the 1700s. It begins near the Lions' Gate and winds west through the busy streets of the Old City. Nine stations are along the street, marked by small signs and chapels. The last five are inside the Church of the Holy Sepulchre.",
+        "Every Friday afternoon, Franciscan friars lead people in praying the Stations along the Via Dolorosa. Neighbors, workers and pilgrims from many countries share the narrow streets with them, just as the crowds did on the day Jesus walked to Calvary."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus carries his cross to Golgotha and is crucified."
+        },
+        {
+          "date_display": "Early centuries",
+          "text": "Christians in Jerusalem pray along the way to the cross."
+        },
+        {
+          "date_display": "1200s",
+          "text": "Franciscan friars begin caring for the holy places."
+        },
+        {
+          "date_display": "1700s",
+          "text": "The route of today's Via Dolorosa is set."
+        },
+        {
+          "date_display": "1800s",
+          "text": "Some stations are given their present places."
+        },
+        {
+          "date_display": "Today",
+          "text": "Franciscans lead the Stations of the Cross along the Via Dolorosa every Friday."
+        }
+      ],
+      "fun_facts": [
+        "\"Via Dolorosa\" is Latin for \"the Way of Sorrows.\"",
+        "There are fourteen Stations of the Cross. Five of them are inside the Church of the Holy Sepulchre.",
+        "An old arch over the street is called the Ecce Homo Arch, from Pilate's words, \"Behold, the man.\"",
+        "Franciscans lead the Stations along the Via Dolorosa every Friday.",
+        "Catholics around the world pray the Stations of the Cross, especially on the Fridays of Lent."
+      ],
+      "words_to_know": [
+        {
+          "word": "Via Dolorosa",
+          "definition": "Latin for \"the Way of Sorrows,\" the route in Jerusalem where Christians remember Jesus carrying his cross."
+        },
+        {
+          "word": "Stations of the Cross",
+          "definition": "A prayer with fourteen stops that remember Jesus' journey to the cross."
+        },
+        {
+          "word": "Calvary",
+          "definition": "Another name for Golgotha, the hill where Jesus was crucified."
+        },
+        {
+          "word": "Lent",
+          "definition": "The forty days before Easter, a time of prayer, sacrifice and giving."
+        },
+        {
+          "word": "Pilate",
+          "definition": "Pontius Pilate, the Roman governor who handed Jesus over to be crucified."
+        }
+      ],
+      "think_about_it": "Simon of Cyrene helped Jesus carry his cross. How can you help someone who is carrying something heavy, like a worry or a sadness?",
+      "reflection_question": "Jesus carried his cross out of love for us. What would you like to say to Jesus when you pray the Stations of the Cross?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Matthew 27:27–32",
+            "url": "https://bible.usccb.org/bible/matthew/27"
+          },
+          {
+            "reference": "Mark 15:16–22",
+            "url": "https://bible.usccb.org/bible/mark/15"
+          },
+          {
+            "reference": "Luke 23:26–32",
+            "url": "https://bible.usccb.org/bible/luke/23"
+          },
+          {
+            "reference": "John 19:1–17",
+            "url": "https://bible.usccb.org/bible/john/19"
+          }
+        ],
+        "then": "In Jesus' time, Golgotha was just outside the city walls. The streets of Jerusalem were busy with people who had come for the Passover feast.",
+        "now": "The city has grown, and the Via Dolorosa runs through a busy market neighborhood. The streets are much higher than in Jesus' time, because the city was rebuilt on top of itself many times.",
+        "what_historians_know": "the route we walk today was set in the 1700s, and some stations were placed in the 1800s. Historians are not sure where Pilate judged Jesus, so they cannot say exactly which streets Jesus walked.",
+        "what_comes_from_tradition": "the exact places of the stations, such as where Jesus fell or met his mother. Some of these come from loving tradition rather than the Bible. What matters most is that Jesus truly carried his cross for us."
+      },
+      "quiz": [
+        {
+          "prompt": "What does \"Via Dolorosa\" mean?",
+          "choices": [
+            {
+              "text": "The Happy Road"
+            },
+            {
+              "text": "The Way of Sorrows",
+              "correct": true
+            },
+            {
+              "text": "The King's Highway"
+            },
+            {
+              "text": "The River Path"
+            }
+          ],
+          "explanation": "\"Via Dolorosa\" is Latin for \"the Way of Sorrows.\""
+        },
+        {
+          "prompt": "Who helped Jesus carry his cross?",
+          "choices": [
+            {
+              "text": "Peter"
+            },
+            {
+              "text": "Simon of Cyrene",
+              "correct": true
+            },
+            {
+              "text": "Pilate"
+            }
+          ],
+          "explanation": "The Gospels tell us the soldiers made Simon of Cyrene carry the cross behind Jesus."
+        },
+        {
+          "prompt": "How many Stations of the Cross are there?",
+          "choices": [
+            {
+              "text": "Seven"
+            },
+            {
+              "text": "Ten"
+            },
+            {
+              "text": "Fourteen",
+              "correct": true
+            },
+            {
+              "text": "Twenty"
+            }
+          ],
+          "explanation": "There are fourteen Stations. Nine are along the street, and five are inside the Church of the Holy Sepulchre."
+        },
+        {
+          "prompt": "Who leads prayer along the Via Dolorosa every Friday?",
+          "choices": [
+            {
+              "text": "Franciscan friars",
+              "correct": true
+            },
+            {
+              "text": "Roman soldiers"
+            },
+            {
+              "text": "No one"
+            }
+          ],
+          "explanation": "Every Friday afternoon, Franciscan friars lead people in praying the Stations of the Cross."
+        },
+        {
+          "prompt": "What did Pilate say when he brought Jesus out to the crowd?",
+          "choices": [
+            {
+              "text": "\"Let him go.\""
+            },
+            {
+              "text": "\"Behold, the man!\"",
+              "correct": true
+            },
+            {
+              "text": "\"He is a king.\""
+            }
+          ],
+          "explanation": "Pilate said, \"Behold, the man!\" An arch on the Via Dolorosa is named for these words in Latin, \"Ecce Homo.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 19 and Luke 23",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/john/19",
+          "note": "Pilate, the crown of thorns, \"Behold, the man!\" (John 19:5), Jesus carrying the cross; Simon of Cyrene and the women of Jerusalem in Luke 23:26–31"
+        },
+        {
+          "title": "Via Dolorosa",
+          "publisher": "See the Holy Land",
+          "url": "https://www.seetheholyland.net/via-dolorosa/",
+          "note": "the \"Way of Sorrows\"; nine stations on the street and five inside the Holy Sepulchre; the start near the Lions' Gate; the route set in the 18th century, some stations in the 19th; Franciscans since the 13th century; the Friday procession; the Praetorium unknown; the Ecce Homo arch \"built after Jesus stood before Pilate\""
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "dormition-abbey",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Dormition Abbey (Mount Zion)",
+        "production_id_hint": null
+      },
+      "student_title": "Dormition Abbey on Mount Zion",
+      "subtitle": "The church in Jerusalem where, by tradition, Mary \"fell asleep\" at the end of her life on earth.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Mount Zion, Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Mary with the apostles in Jerusalem; by tradition, the end of her life on earth"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "300s (Hagia Sion); today's church in 1910"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Benedictine monks"
+        }
+      ],
+      "intro": "On Mount Zion in Jerusalem, near the Upper Room, stands a big round church with a tall bell tower. It is called Dormition Abbey. \"Dormition\" means \"falling asleep.\" By an old tradition, this is where Mary, the Mother of Jesus, came to the end of her life on earth. Catholics believe that God then took Mary, body and soul, into heaven.",
+      "story_paragraphs": [
+        "As Jesus was dying on the cross, he saw his mother, Mary, standing nearby with the disciple John. Jesus said to Mary, \"Woman, behold, your son.\" Then he said to John, \"Behold, your mother.\" From that hour, John took Mary into his home.",
+        "After Jesus rose from the dead and returned to his Father in heaven, the apostles gathered in Jerusalem to pray. The Acts of the Apostles tells us that Mary, the mother of Jesus, was with them. She prayed with the first Christians as they waited for the Holy Spirit.",
+        "The Bible does not tell us what happened to Mary at the end of her life. But Christians have long remembered that she \"fell asleep\" peacefully, surrounded by love. The Church teaches that when Mary's life on earth was finished, God took her, body and soul, into the glory of heaven. This is called the Assumption, and Catholics celebrate it every year on August 15.",
+        "An old tradition says that Mary lived her last days on Mount Zion. In the 300s, a great church called Hagia Sion was built there. It was called \"the Mother of all Churches.\" It was destroyed in 614.",
+        "In 1898, the land was given to the German emperor, Wilhelm II, who presented it to the Catholic Church. The new church was finished in 1910. Benedictine monks live there and pray in it every day.",
+        "In the lower church, called the crypt, there is a life-size statue of Mary lying peacefully asleep. Above her, the dome shows Jesus with his arms open, welcoming his mother into heaven."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus gives Mary to John's care from the cross."
+        },
+        {
+          "date_display": "After AD 30",
+          "text": "Mary prays with the apostles in Jerusalem."
+        },
+        {
+          "date_display": "300s",
+          "text": "The great church of Hagia Sion is built on Mount Zion."
+        },
+        {
+          "date_display": "614",
+          "text": "Hagia Sion is destroyed."
+        },
+        {
+          "date_display": "1898",
+          "text": "The land is given to Kaiser Wilhelm II, who presents it to the Catholic Church."
+        },
+        {
+          "date_display": "1910",
+          "text": "The Dormition church is finished."
+        },
+        {
+          "date_display": "1950",
+          "text": "Pope Pius XII declares the Assumption of Mary a dogma of the faith."
+        }
+      ],
+      "fun_facts": [
+        "\"Dormition\" comes from a Latin word meaning \"sleep.\"",
+        "A life-size statue of Mary, sleeping peacefully, is in the crypt.",
+        "The church was given to the Catholic Church by the German emperor.",
+        "The dome shows six brave women from the Old Testament, including Ruth and Esther.",
+        "The feast of the Assumption is celebrated on August 15."
+      ],
+      "words_to_know": [
+        {
+          "word": "Dormition",
+          "definition": "The \"falling asleep\" of Mary at the end of her life on earth."
+        },
+        {
+          "word": "Assumption",
+          "definition": "The Church's teaching that God took Mary, body and soul, into heaven."
+        },
+        {
+          "word": "Abbey",
+          "definition": "A large monastery where monks or nuns live, pray and work."
+        },
+        {
+          "word": "Benedictine",
+          "definition": "A member of the religious order founded by Saint Benedict."
+        },
+        {
+          "word": "Crypt",
+          "definition": "A room below the main floor of a church."
+        }
+      ],
+      "think_about_it": "From the cross, Jesus gave Mary to John, and to all of us, as our mother. How can you love Mary as your mother?",
+      "reflection_question": "Mary prayed with the apostles as they waited for the Holy Spirit. Who could you pray with this week?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "John 19:25–27",
+            "url": "https://bible.usccb.org/bible/john/19"
+          },
+          {
+            "reference": "Acts 1:12–14",
+            "url": "https://bible.usccb.org/bible/acts/1"
+          },
+          {
+            "reference": "Revelation 12:1",
+            "url": "https://bible.usccb.org/bible/revelation/12"
+          }
+        ],
+        "then": "Mount Zion was a neighborhood in the southwest of Jerusalem, where the early Christians often gathered.",
+        "now": "The Dormition Abbey, with its round shape and tall bell tower, is one of the most easily seen buildings on Jerusalem's skyline.",
+        "what_historians_know": "a great church called Hagia Sion stood on Mount Zion from the 300s until it was destroyed in 614. The present church was finished in 1910.",
+        "what_comes_from_tradition": "that Mary lived her last days here. Another tradition points to the city of Ephesus, in what is now Turkey. The earliest traditions point to Jerusalem, but no one can prove the exact place."
+      },
+      "quiz": [
+        {
+          "prompt": "What does \"Dormition\" mean?",
+          "choices": [
+            {
+              "text": "Falling asleep",
+              "correct": true
+            },
+            {
+              "text": "Going home"
+            },
+            {
+              "text": "A great feast"
+            },
+            {
+              "text": "A tall tower"
+            }
+          ],
+          "explanation": "\"Dormition\" means \"falling asleep.\" It is the old name for the end of Mary's life on earth."
+        },
+        {
+          "prompt": "To whom did Jesus give Mary from the cross?",
+          "choices": [
+            {
+              "text": "Peter"
+            },
+            {
+              "text": "John",
+              "correct": true
+            },
+            {
+              "text": "Joseph"
+            }
+          ],
+          "explanation": "Jesus said to John, \"Behold, your mother,\" and John took Mary into his home."
+        },
+        {
+          "prompt": "What is the Assumption?",
+          "choices": [
+            {
+              "text": "Mary's birthday"
+            },
+            {
+              "text": "God taking Mary, body and soul, into heaven",
+              "correct": true
+            },
+            {
+              "text": "The day Mary met Elizabeth"
+            }
+          ],
+          "explanation": "The Church teaches that when Mary's life on earth was finished, God took her, body and soul, into heaven."
+        },
+        {
+          "prompt": "Who lives at Dormition Abbey and prays there every day?",
+          "choices": [
+            {
+              "text": "Franciscan friars"
+            },
+            {
+              "text": "Benedictine monks",
+              "correct": true
+            },
+            {
+              "text": "Carmelite sisters"
+            }
+          ],
+          "explanation": "Benedictine monks care for the church and pray there every day."
+        },
+        {
+          "prompt": "What is in the crypt of the church?",
+          "choices": [
+            {
+              "text": "A golden throne"
+            },
+            {
+              "text": "A statue of Mary sleeping peacefully",
+              "correct": true
+            },
+            {
+              "text": "A river"
+            }
+          ],
+          "explanation": "The crypt holds a life-size statue of Mary lying peacefully asleep."
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 19 and Acts 1",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/john/19",
+          "note": "\"Woman, behold, your son ... Behold, your mother,\" John 19:26–27; Mary with the apostles, Acts 1:14"
+        },
+        {
+          "title": "Church of the Dormition",
+          "publisher": "See the Holy Land",
+          "url": "https://www.seetheholyland.net/church-of-the-dormition/",
+          "note": "the tradition that Mary \"fell asleep\" on Mount Zion; Hagia Sion under Constantine, \"Mother of all Churches,\" destroyed in 614; the land given in 1898 to Kaiser Wilhelm II and presented to the Catholic Church; finished in 1910; the Benedictines; the statue of Mary in the crypt; the six Old Testament women in the dome; the Ephesus tradition"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "pater-noster",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Church of the Pater Noster (Mount of Olives)",
+        "production_id_hint": null
+      },
+      "student_title": "The Church of the Pater Noster",
+      "subtitle": "The church on the Mount of Olives where Christians remember Jesus teaching the Our Father, written on its walls in many languages.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "The Mount of Olives, Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus teaches the Our Father"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "About 330, by Emperor Constantine"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Carmelite sisters"
+        }
+      ],
+      "intro": "On the Mount of Olives, looking out over Jerusalem, is a church with a quiet courtyard whose walls are covered with colorful tiles. Each tile shows the Our Father, the prayer Jesus taught us, in a different language. There are about 140 of them! \"Pater Noster\" is Latin for \"Our Father.\" Christians remember this as a place where Jesus taught his disciples.",
+      "story_paragraphs": [
+        "Jesus often went out to the Mount of Olives, a hill just east of Jerusalem, to pray and to teach his disciples.",
+        "One day, Jesus was praying. When he finished, one of his disciples said, \"Lord, teach us to pray.\" So Jesus taught them a prayer: \"Father, hallowed be your name, your kingdom come.\" He taught them to ask God for their daily bread, for forgiveness, and for help in times of trial.",
+        "In the Gospel of Matthew, Jesus gives this prayer as part of his great teaching on the mountain. He says, \"This is how you are to pray: Our Father in heaven, hallowed be your name.\" We still pray these words today, at every Mass and in the Rosary. We call it the Our Father, or the Lord's Prayer.",
+        "The Gospels also tell us that Jesus taught his disciples on the Mount of Olives about the end of time, and that from near this hill he returned to his Father in heaven.",
+        "Around the year 330, Emperor Constantine built a large church here, over a cave where Christians remembered Jesus teaching. It was called the Eleona, from the Greek word for \"olive grove.\" Later, the Crusaders built a church here and called it Pater Noster, Latin for \"Our Father.\"",
+        "In the 1800s, a French princess, Aurélie de Bossi, bought the land. She built a church and a cloister, and she put up the Our Father in many languages. She also built a convent for Carmelite sisters, who still live and pray there.",
+        "Today, the Our Father appears on the walls in about 140 languages, from English and Spanish to Swahili, Hawaiian and Korean. It is a beautiful reminder that God is the Father of people everywhere."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus teaches his disciples to pray the Our Father."
+        },
+        {
+          "date_display": "About 330",
+          "text": "Emperor Constantine builds the Eleona church over a cave on the Mount of Olives."
+        },
+        {
+          "date_display": "1100s",
+          "text": "The Crusaders build a church and name it Pater Noster."
+        },
+        {
+          "date_display": "1874",
+          "text": "Princess Aurélie de Bossi finishes the present church and cloister."
+        },
+        {
+          "date_display": "1911",
+          "text": "Diggers find the old cave again."
+        },
+        {
+          "date_display": "1920",
+          "text": "Work begins on a large new church, but it is never finished."
+        },
+        {
+          "date_display": "Today",
+          "text": "The Our Father is shown on the walls in about 140 languages."
+        }
+      ],
+      "fun_facts": [
+        "The Our Father appears on the walls in about 140 languages.",
+        "\"Pater Noster\" is Latin for \"Our Father.\"",
+        "\"Eleona\" comes from the Greek word for \"olive grove.\"",
+        "A French princess built the present church and cloister.",
+        "A big church begun in 1920 was never finished."
+      ],
+      "words_to_know": [
+        {
+          "word": "Pater Noster",
+          "definition": "Latin for \"Our Father,\" the first words of the Lord's Prayer."
+        },
+        {
+          "word": "Hallowed",
+          "definition": "Holy, treated with great respect."
+        },
+        {
+          "word": "Cloister",
+          "definition": "A covered walkway around a courtyard, found in monasteries and convents."
+        },
+        {
+          "word": "Carmelite",
+          "definition": "A member of the Order of Carmel, a religious family devoted to prayer."
+        },
+        {
+          "word": "Mount of Olives",
+          "definition": "A hill just east of Jerusalem, where Jesus often prayed and taught."
+        }
+      ],
+      "think_about_it": "The Our Father is prayed in many languages all over the world. What does it mean to you that God is the Father of people everywhere?",
+      "reflection_question": "Jesus taught us to call God \"Father.\" Which line of the Our Father means the most to you, and why?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Luke 11:1–4",
+            "url": "https://bible.usccb.org/bible/luke/11"
+          },
+          {
+            "reference": "Matthew 6:9–13",
+            "url": "https://bible.usccb.org/bible/matthew/6"
+          },
+          {
+            "reference": "Matthew 24:3",
+            "url": "https://bible.usccb.org/bible/matthew/24"
+          },
+          {
+            "reference": "Acts 1:9–12",
+            "url": "https://bible.usccb.org/bible/acts/1"
+          }
+        ],
+        "then": "The Mount of Olives was covered with olive trees. From its top, Jesus and his disciples could look across the valley at the city and its great Temple.",
+        "now": "A church, a cloister and a Carmelite convent stand on the hill. A large church begun in the 1920s was never finished, and its walls stand open to the sky.",
+        "what_historians_know": "Constantine built a church here around 330, over a cave. The cave was found again in 1911. The present church and cloister were finished in 1874.",
+        "what_comes_from_tradition": "that Jesus taught the Our Father in this cave. Luke says only that Jesus was praying \"in a certain place.\" The tradition is old, but no one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "What does \"Pater Noster\" mean?",
+          "choices": [
+            {
+              "text": "Holy Mountain"
+            },
+            {
+              "text": "Our Father",
+              "correct": true
+            },
+            {
+              "text": "Olive Grove"
+            },
+            {
+              "text": "Good Shepherd"
+            }
+          ],
+          "explanation": "\"Pater Noster\" is Latin for \"Our Father,\" the first words of the Lord's Prayer."
+        },
+        {
+          "prompt": "What did a disciple ask Jesus?",
+          "choices": [
+            {
+              "text": "\"Lord, teach us to pray.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Lord, where are we going?\""
+            },
+            {
+              "text": "\"Lord, when will we eat?\""
+            }
+          ],
+          "explanation": "Luke tells us that a disciple asked, \"Lord, teach us to pray,\" and Jesus taught them the Our Father."
+        },
+        {
+          "prompt": "About how many languages is the Our Father written in on the walls?",
+          "choices": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "20"
+            },
+            {
+              "text": "About 140",
+              "correct": true
+            }
+          ],
+          "explanation": "Tiles show the Our Father in about 140 languages."
+        },
+        {
+          "prompt": "Who first built a church here, around the year 330?",
+          "choices": [
+            {
+              "text": "King David"
+            },
+            {
+              "text": "Emperor Constantine",
+              "correct": true
+            },
+            {
+              "text": "Saint Peter"
+            }
+          ],
+          "explanation": "Emperor Constantine built the Eleona church here around the year 330."
+        },
+        {
+          "prompt": "Who lives and prays at the church today?",
+          "choices": [
+            {
+              "text": "Benedictine monks"
+            },
+            {
+              "text": "Carmelite sisters",
+              "correct": true
+            },
+            {
+              "text": "Nobody"
+            }
+          ],
+          "explanation": "The princess who built the present church also built a convent for Carmelite sisters, who still live there."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 11 and Matthew 6",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/luke/11",
+          "note": "\"Lord, teach us to pray\" and the prayer in Luke 11:1–4; \"This is how you are to pray: Our Father in heaven\" in Matthew 6:9"
+        },
+        {
+          "title": "Church of Pater Noster",
+          "publisher": "See the Holy Land",
+          "url": "https://seetheholyland.net/church-of-pater-noster/",
+          "note": "plaques in 140 languages; the cave of the tradition, found in 1911; Constantine's three-level church of 330, the Eleona; the Crusaders' Pater Noster in the 12th century; Aurélie de Bossi finished the church and cloister in 1874 and built the Carmelite convent; the unfinished Sacred Heart church, 1920–27"
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "tomb-of-lazarus",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Tomb of Lazarus (Bethany)",
+        "production_id_hint": null
+      },
+      "student_title": "The Tomb of Lazarus in Bethany",
+      "subtitle": "The town where Jesus visited his friends Martha, Mary and Lazarus, and called Lazarus out of the tomb.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Bethany, on the Mount of Olives"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Jesus raises Lazarus from the dead"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Late 300s; today's church in 1954"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans care for the church"
+        }
+      ],
+      "intro": "Bethany is a small town on the far side of the Mount of Olives, near Jerusalem. Jesus had three close friends there: Martha, Mary and their brother Lazarus. When Lazarus died, Jesus wept. Then he called, \"Lazarus, come out!\" and Lazarus walked out of his tomb alive. People still go down the steps into the rock tomb that tradition remembers as his.",
+      "story_paragraphs": [
+        "Jesus loved Martha, Mary and Lazarus, who lived in the village of Bethany. He often stayed at their home.",
+        "One day, Lazarus became very sick. His sisters sent a message to Jesus: \"Master, the one you love is ill.\" By the time Jesus arrived in Bethany, Lazarus had died and had been in the tomb for four days.",
+        "Martha ran out to meet Jesus. Jesus told her, \"I am the resurrection and the life; whoever believes in me, even if he dies, will live.\" Martha answered, \"Yes, Lord. I have come to believe that you are the Messiah, the Son of God.\"",
+        "Then Mary came and fell at Jesus' feet, crying. When Jesus saw her weeping, and the friends weeping with her, he was deeply moved. The Bible says, \"Jesus wept.\" He loved his friend very much.",
+        "Jesus went to the tomb, a cave with a stone across it. He told them to take the stone away. He prayed to his Father. Then he cried out in a loud voice, \"Lazarus, come out!\" And Lazarus came out, still wrapped in burial cloths. Jesus said, \"Untie him and let him go.\"",
+        "Many people who saw this believed in Jesus. A few days later, Jesus went up to Jerusalem for the Passover, where he would die and rise again.",
+        "By the 300s, Christians were coming to Bethany to pray at the tomb of Lazarus, and a church was built nearby. Today, a Franciscan church built in 1954 stands beside it. It is sometimes called the Sanctuary of Friendship. The Arabic name of the town, al-Azariya, comes from the name Lazarus."
+      ],
+      "timeline": [
+        {
+          "date_display": "About AD 30",
+          "text": "Jesus raises Lazarus from the dead in Bethany."
+        },
+        {
+          "date_display": "300s",
+          "text": "Christians come to pray at the tomb."
+        },
+        {
+          "date_display": "Late 300s",
+          "text": "A church with mosaics is built near the tomb."
+        },
+        {
+          "date_display": "1100s",
+          "text": "The Crusaders restore the holy place."
+        },
+        {
+          "date_display": "1500s",
+          "text": "The old entrance to the tomb is closed, and the Franciscans later open a new one."
+        },
+        {
+          "date_display": "1954",
+          "text": "A new Franciscan church is built, designed by Antonio Barluzzi."
+        },
+        {
+          "date_display": "Today",
+          "text": "People pray at the tomb and in the Sanctuary of Friendship."
+        }
+      ],
+      "fun_facts": [
+        "\"Jesus wept\" is one of the shortest verses in the Bible.",
+        "The town's Arabic name, al-Azariya, comes from the name Lazarus.",
+        "People go down 24 steep steps to reach the tomb.",
+        "The Franciscan church is sometimes called the Sanctuary of Friendship.",
+        "Martha, Mary and Lazarus were among Jesus' closest friends."
+      ],
+      "words_to_know": [
+        {
+          "word": "Tomb",
+          "definition": "A place where a person who has died is buried, often a cave cut into rock."
+        },
+        {
+          "word": "Resurrection",
+          "definition": "Rising from the dead to new life."
+        },
+        {
+          "word": "Messiah",
+          "definition": "The Savior God promised to send. Jesus is the Messiah."
+        },
+        {
+          "word": "Burial cloths",
+          "definition": "Strips of cloth wrapped around the body of someone who has died."
+        },
+        {
+          "word": "Friendship",
+          "definition": "A loving bond between friends who care for each other."
+        }
+      ],
+      "think_about_it": "Jesus wept when his friend died. What does that tell you about how Jesus feels when we are sad?",
+      "reflection_question": "Jesus had close friends and spent time at their home. How can you be a good friend, like Jesus?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "John 11:1–44",
+            "url": "https://bible.usccb.org/bible/john/11"
+          },
+          {
+            "reference": "John 12:1–3",
+            "url": "https://bible.usccb.org/bible/john/12"
+          },
+          {
+            "reference": "Luke 10:38–42",
+            "url": "https://bible.usccb.org/bible/luke/10"
+          }
+        ],
+        "then": "Bethany was a small village about two miles from Jerusalem, on the road that went down to Jericho.",
+        "now": "Bethany is a busy town called al-Azariya. People go down 24 steep steps cut into the rock to reach the tomb.",
+        "what_historians_know": "Christians were praying here by the 300s, and a church with mosaics was built near the tomb at the end of that century. The Crusaders later restored it.",
+        "what_comes_from_tradition": "that this rock tomb is the very one Lazarus came out of. The tradition is very old, but no one can prove it for certain."
+      },
+      "quiz": [
+        {
+          "prompt": "Who were Jesus' friends in Bethany?",
+          "choices": [
+            {
+              "text": "Peter, James and John"
+            },
+            {
+              "text": "Martha, Mary and Lazarus",
+              "correct": true
+            },
+            {
+              "text": "Joseph and Nicodemus"
+            }
+          ],
+          "explanation": "Martha, Mary and their brother Lazarus lived in Bethany and were close friends of Jesus."
+        },
+        {
+          "prompt": "How long had Lazarus been in the tomb when Jesus arrived?",
+          "choices": [
+            {
+              "text": "One hour"
+            },
+            {
+              "text": "One day"
+            },
+            {
+              "text": "Four days",
+              "correct": true
+            }
+          ],
+          "explanation": "John's Gospel tells us Lazarus had been in the tomb for four days."
+        },
+        {
+          "prompt": "What did Jesus do when he saw Mary and the others weeping?",
+          "choices": [
+            {
+              "text": "He wept too",
+              "correct": true
+            },
+            {
+              "text": "He left"
+            },
+            {
+              "text": "He laughed"
+            }
+          ],
+          "explanation": "Jesus was deeply moved, and the Bible says, \"Jesus wept.\""
+        },
+        {
+          "prompt": "What did Jesus call out at the tomb?",
+          "choices": [
+            {
+              "text": "\"Peace be with you!\""
+            },
+            {
+              "text": "\"Lazarus, come out!\"",
+              "correct": true
+            },
+            {
+              "text": "\"Wake up!\""
+            }
+          ],
+          "explanation": "Jesus cried out in a loud voice, \"Lazarus, come out!\" and Lazarus came out alive."
+        },
+        {
+          "prompt": "What did Jesus tell Martha?",
+          "choices": [
+            {
+              "text": "\"Go home.\""
+            },
+            {
+              "text": "\"I am the resurrection and the life.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I am too late.\""
+            }
+          ],
+          "explanation": "Jesus told Martha, \"I am the resurrection and the life; whoever believes in me, even if he dies, will live.\""
+        }
+      ],
+      "sources": [
+        {
+          "title": "John 11",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/john/11",
+          "note": "Lazarus's illness; \"Master, the one you love is ill\"; four days; \"I am the resurrection and the life\"; Martha's answer; \"Jesus wept\"; \"Lazarus, come out!\"; \"Untie him and let him go\""
+        },
+        {
+          "title": "The tomb of Lazarus in Bethany",
+          "publisher": "Pro Terra Sancta",
+          "url": "https://www.proterrasancta.org/en/the-tomb-of-lazarus-in-bethany",
+          "note": "Bethany about 3 km from Jerusalem; al-Azariya, \"City of Lazarus\"; the 24-step staircase opened by the Franciscans after the old entrance was sealed in the 16th century; pilgrims from the 4th century; the church with mosaics at the end of the 4th century; Crusader restoration; the church of 1954 by Antonio Barluzzi, the \"Sanctuary of Friendship\""
+        }
+      ]
+    },
+    {
+      "kind": "holy_land",
+      "parent_index": "holy-land",
+      "slug": "church-of-the-visitation",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Church of the Visitation (Ein Karem)",
+        "production_id_hint": null
+      },
+      "student_title": "The Church of the Visitation in Ein Karem",
+      "subtitle": "The church in a hillside village where Christians remember Mary visiting her relative Elizabeth and singing the Magnificat.",
+      "story_label": "The Bible Story",
+      "quick_facts": [
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Ein Karem, near Jerusalem"
+        },
+        {
+          "icon": "scroll",
+          "label": "Bible event",
+          "value": "Mary visits Elizabeth and sings the Magnificat"
+        },
+        {
+          "icon": "calendar",
+          "label": "First church built",
+          "value": "Remembered here from the 500s; today's church finished in 1955"
+        },
+        {
+          "icon": "people",
+          "label": "Cared for by",
+          "value": "Catholic Franciscans"
+        }
+      ],
+      "intro": "Ein Karem is a pretty village in the hills west of Jerusalem. Here, Christians remember the day Mary, who was expecting Jesus, hurried to visit her relative Elizabeth. When Elizabeth heard Mary's greeting, the baby in Elizabeth's womb, John the Baptist, leaped for joy. Mary answered with a song of praise called the Magnificat, which is written on the church walls in many languages.",
+      "story_paragraphs": [
+        "After the angel Gabriel visited Mary in Nazareth, he told her some other surprising news. Her relative Elizabeth, who was old, was going to have a baby too. Nothing is impossible for God!",
+        "Mary set out at once and traveled to a town in the hill country of Judea to visit Elizabeth. When Mary came into the house and greeted her, Elizabeth's baby leaped inside her. Elizabeth was filled with the Holy Spirit. She cried out, \"Most blessed are you among women, and blessed is the fruit of your womb.\" We still pray these words in the Hail Mary.",
+        "Mary answered with a beautiful song of praise: \"My soul proclaims the greatness of the Lord; my spirit rejoices in God my savior.\" This song is called the Magnificat, from its first word in Latin. In it, Mary praises God for lifting up the lowly and filling the hungry with good things.",
+        "Mary stayed with Elizabeth for about three months. Then Elizabeth's son was born. His father, Zechariah, named him John. He grew up to be John the Baptist, who prepared the way for Jesus.",
+        "By the 500s, Christians remembered Ein Karem as the place where Elizabeth lived. Churches were built here over the centuries. The Franciscans began restoring the holy places here in 1679.",
+        "The Church of the Visitation that stands today was designed by Antonio Barluzzi and finished in 1955. In its courtyard, the Magnificat is written on tiles in more than 40 languages. Down the hill is a spring called Mary's Spring, and in the village is another church that remembers the birth of John the Baptist."
+      ],
+      "timeline": [
+        {
+          "date_display": "Before Jesus was born",
+          "text": "Mary visits Elizabeth, and John the Baptist leaps for joy."
+        },
+        {
+          "date_display": "A few months later",
+          "text": "John the Baptist is born."
+        },
+        {
+          "date_display": "500s",
+          "text": "A pilgrim writes that Elizabeth lived about five miles from Jerusalem."
+        },
+        {
+          "date_display": "Middle Ages",
+          "text": "A church is built over the place."
+        },
+        {
+          "date_display": "1679",
+          "text": "The Franciscans begin restoring the holy places in Ein Karem."
+        },
+        {
+          "date_display": "1955",
+          "text": "The present Church of the Visitation is finished."
+        },
+        {
+          "date_display": "Today",
+          "text": "The Magnificat is shown on tiles in more than 40 languages."
+        }
+      ],
+      "fun_facts": [
+        "The Magnificat is written on tiles in more than 40 languages.",
+        "Elizabeth's words to Mary are part of the Hail Mary.",
+        "John the Baptist leaped for joy before he was born.",
+        "A spring in the village is called Mary's Spring.",
+        "The Church celebrates the Visitation every year on May 31."
+      ],
+      "words_to_know": [
+        {
+          "word": "Visitation",
+          "definition": "Mary's visit to her relative Elizabeth."
+        },
+        {
+          "word": "Magnificat",
+          "definition": "Mary's song of praise, which begins, \"My soul proclaims the greatness of the Lord.\""
+        },
+        {
+          "word": "Relative",
+          "definition": "A member of your family, like a cousin or an aunt."
+        },
+        {
+          "word": "Womb",
+          "definition": "The place inside a mother where a baby grows before birth."
+        },
+        {
+          "word": "Proclaim",
+          "definition": "To announce something joyfully so others can hear."
+        }
+      ],
+      "think_about_it": "Mary hurried to help Elizabeth, even though she was expecting a baby herself. Who in your family could use your help this week?",
+      "reflection_question": "Mary praised God with joy. What is one thing you want to thank and praise God for today?",
+      "type_specific": {
+        "bible_references": [
+          {
+            "reference": "Luke 1:36–56",
+            "url": "https://bible.usccb.org/bible/luke/1"
+          },
+          {
+            "reference": "Luke 1:57–80",
+            "url": "https://bible.usccb.org/bible/luke/1"
+          }
+        ],
+        "then": "Elizabeth and Zechariah lived in a small town in the hill country of Judea, a journey of several days from Nazareth.",
+        "now": "Ein Karem is a green village on the edge of the city of Jerusalem, with two Franciscan churches: one for the Visitation and one for the birth of John the Baptist.",
+        "what_historians_know": "in the 500s, a pilgrim wrote that Elizabeth's home was about five miles from Jerusalem, which matches Ein Karem. Remains of a medieval church lie under the present church.",
+        "what_comes_from_tradition": "that this is the very place where Mary greeted Elizabeth. Luke says only that it was \"a town of Judah\" in the hill country. No one can prove the exact spot."
+      },
+      "quiz": [
+        {
+          "prompt": "Whom did Mary go to visit?",
+          "choices": [
+            {
+              "text": "Her mother, Anne"
+            },
+            {
+              "text": "Her relative Elizabeth",
+              "correct": true
+            },
+            {
+              "text": "The shepherds"
+            }
+          ],
+          "explanation": "Mary traveled to the hill country of Judea to visit her relative Elizabeth."
+        },
+        {
+          "prompt": "What did Elizabeth's baby do when Mary greeted her?",
+          "choices": [
+            {
+              "text": "He leaped for joy",
+              "correct": true
+            },
+            {
+              "text": "He slept"
+            },
+            {
+              "text": "He cried"
+            }
+          ],
+          "explanation": "When Elizabeth heard Mary's greeting, her baby, John the Baptist, leaped inside her."
+        },
+        {
+          "prompt": "What is the Magnificat?",
+          "choices": [
+            {
+              "text": "A kind of tower"
+            },
+            {
+              "text": "Mary's song of praise",
+              "correct": true
+            },
+            {
+              "text": "Elizabeth's house"
+            }
+          ],
+          "explanation": "The Magnificat is Mary's song of praise. It begins, \"My soul proclaims the greatness of the Lord.\""
+        },
+        {
+          "prompt": "Which prayer includes Elizabeth's words to Mary?",
+          "choices": [
+            {
+              "text": "The Our Father"
+            },
+            {
+              "text": "The Hail Mary",
+              "correct": true
+            },
+            {
+              "text": "The Glory Be"
+            }
+          ],
+          "explanation": "\"Blessed are you among women, and blessed is the fruit of your womb\" is part of the Hail Mary."
+        },
+        {
+          "prompt": "Who was Elizabeth's son?",
+          "choices": [
+            {
+              "text": "Saint Peter"
+            },
+            {
+              "text": "John the Baptist",
+              "correct": true
+            },
+            {
+              "text": "Saint Joseph"
+            }
+          ],
+          "explanation": "Elizabeth's son was John the Baptist, who prepared the way for Jesus."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Luke 1",
+          "publisher": "USCCB New American Bible",
+          "url": "https://bible.usccb.org/bible/luke/1",
+          "note": "Elizabeth's pregnancy; Mary's journey to the hill country; the baby leaping; \"Most blessed are you among women\"; the Magnificat; about three months; John's birth and naming"
+        },
+        {
+          "title": "Ain Karem, the holy place of Mary's visitation to her relative Elizabeth",
+          "publisher": "Pro Terra Sancta",
+          "url": "https://www.proterrasancta.org/en/ain-karem-the-holy-place-of-the-marys-visitation-to-her-relative-elizabeth/",
+          "note": "the 6th-century pilgrim Theodosius and \"five miles from Jerusalem\"; Barluzzi's church; the medieval structure beneath; Mary's Spring; the Magnificat at vespers"
+        },
+        {
+          "title": "Ain Karem: The Visitation and the Birth of Saint John the Baptist",
+          "publisher": "Marie de Nazareth",
+          "url": "https://mariedenazareth.com/en/marian-encyclopedia/mary-fills-the-world/the-holy-land/sanctuaires-marials-de-judee/ain-karem-the-visitation-and-the-birth-of-saint-john-the-baptist",
+          "note": "the reconstruction finished in 1955; the 42 Magnificat tiles; the Franciscans from 1679; the church of John the Baptist's birth in the village"
+        }
+      ]
+    }
+  ]
+}

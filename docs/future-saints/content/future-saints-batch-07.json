@@ -1,0 +1,1682 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-pontmain",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Pontmain",
+        "production_id_hint": 1097
+      },
+      "student_title": "Our Lady of Pontmain",
+      "subtitle": "On a snowy night during a war, Mary appeared in the sky over a small French village with a message of hope.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "January 17, 1871"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Pontmain, France"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Four children, ages 9 to 12"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1872"
+        }
+      ],
+      "intro": "In January 1871, France was at war, and the enemy army was coming closer. In the small village of Pontmain, the families were afraid. Their young men had gone to fight, and no one had heard from them. Then, one snowy evening, four children saw a beautiful lady in the night sky. Words in gold letters appeared beneath her: \"But pray, my children.\"",
+      "story_paragraphs": [
+        "In the winter of 1871, France was fighting a war against Prussia. Thirty-eight young men from the village of Pontmain had gone off to war, and their families had heard nothing from them for months. A sickness was spreading too. The enemy army was getting close.",
+        "On the evening of January 17, a twelve-year-old boy named Eugène Barbedette stepped outside his family's barn. He looked up at the starry sky. There, above a neighbor's house, he saw a beautiful lady smiling at him. She wore a blue dress covered with golden stars, a black veil, and a golden crown.",
+        "Eugène's younger brother, Joseph, saw her too. Their parents saw nothing. Soon two girls from the village school, Françoise Richer and Jeanne-Marie Lebossé, came and saw the lady as well. The grown-ups could not see her, but they believed the children. A sister from the school led everyone in praying the Rosary.",
+        "As the villagers prayed, the children watched. A white banner slowly unrolled beneath the lady's feet. Gold letters appeared on it, one by one: \"But pray, my children. God will answer you very soon. My Son allows himself to be touched.\" Later, the lady held a red cross. Her face was sad, but she did not cry. At last, a white veil rose up and covered her, and she was gone.",
+        "That same evening, the enemy army stopped its advance. The soldiers did not come into the region, and a few days later a peace agreement was signed. All thirty-eight young men of Pontmain came home safely.",
+        "A year later, the bishop declared that Mary had truly appeared. A large church was built in Pontmain, and people began to call Mary there \"Our Lady of Hope.\""
+      ],
+      "timeline": [
+        {
+          "date_display": "September 1870",
+          "text": "Thirty-eight young men from Pontmain leave to fight in the war."
+        },
+        {
+          "date_display": "January 17, 1871",
+          "text": "Four children see Mary in the sky above Pontmain."
+        },
+        {
+          "date_display": "That evening",
+          "text": "The enemy army stops its advance."
+        },
+        {
+          "date_display": "January 28, 1871",
+          "text": "A peace agreement is announced. All the young men of Pontmain later come home."
+        },
+        {
+          "date_display": "February 2, 1872",
+          "text": "The Bishop of Laval declares that Mary truly appeared at Pontmain."
+        },
+        {
+          "date_display": "1905",
+          "text": "Pope Pius X names the church in Pontmain a basilica."
+        }
+      ],
+      "fun_facts": [
+        "Mary at Pontmain never spoke. Her message appeared in gold letters on a white banner.",
+        "Her blue dress was covered with golden stars.",
+        "Only the children could see Mary. The grown-ups saw nothing, but they prayed with the children.",
+        "Mary at Pontmain is called \"Our Lady of Hope.\"",
+        "All thirty-eight young men from Pontmain came home safely from the war."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Banner",
+          "definition": "A long strip of cloth with words or pictures on it."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we think about the lives of Jesus and Mary."
+        },
+        {
+          "word": "Hope",
+          "definition": "Trusting that God will take care of us, even in hard times."
+        },
+        {
+          "word": "Basilica",
+          "definition": "A special title the Pope gives to an important church."
+        }
+      ],
+      "think_about_it": "The children could see Mary, but the grown-ups could not. The grown-ups still trusted the children and prayed with them. When have you trusted someone even though you could not see what they saw?",
+      "reflection_question": "Mary's message was \"But pray, my children.\" What is something you would like to pray for today?",
+      "type_specific": {
+        "who_saw_her": "Four children saw Mary: the brothers Eugène Barbedette, age 12, and Joseph Barbedette, age 10, and two schoolgirls, Françoise Richer, age 11, and Jeanne-Marie Lebossé, age 9. The adults who gathered saw nothing.",
+        "marys_message": "Mary did not speak. Her message appeared in gold letters on a banner: \"But pray, my children. God will answer you very soon. My Son allows himself to be touched.\" She asked for prayer and gave the village hope.",
+        "prayer": "Our Lady of Hope, pray for us.",
+        "church_recognition": "The Bishop of Laval questioned the children and the villagers. On February 2, 1872, he wrote that \"the Immaculate Virgin Mary, Mother of God, genuinely appeared\" to the children at Pontmain. He approved devotion to Our Lady of Hope. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Pontmain."
+      },
+      "quiz": [
+        {
+          "prompt": "What was happening in France when Mary appeared at Pontmain?",
+          "choices": [
+            {
+              "text": "A big festival"
+            },
+            {
+              "text": "A war",
+              "correct": true
+            },
+            {
+              "text": "A flood"
+            },
+            {
+              "text": "A royal wedding"
+            }
+          ],
+          "explanation": "France was at war with Prussia, and the enemy army was coming close to Pontmain."
+        },
+        {
+          "prompt": "How did Mary give her message at Pontmain?",
+          "choices": [
+            {
+              "text": "She spoke out loud"
+            },
+            {
+              "text": "Gold letters appeared on a banner",
+              "correct": true
+            },
+            {
+              "text": "She wrote a letter to the bishop"
+            }
+          ],
+          "explanation": "Mary did not speak. Her words appeared in gold letters, one by one, on a white banner beneath her feet."
+        },
+        {
+          "prompt": "Who saw Mary at Pontmain?",
+          "choices": [
+            {
+              "text": "The whole village"
+            },
+            {
+              "text": "Four children",
+              "correct": true
+            },
+            {
+              "text": "Only the priest"
+            }
+          ],
+          "explanation": "Four children saw Mary. The grown-ups saw nothing, but they prayed with the children."
+        },
+        {
+          "prompt": "What were the first words of Mary's message?",
+          "choices": [
+            {
+              "text": "\"But pray, my children.\"",
+              "correct": true
+            },
+            {
+              "text": "\"I am the Queen of Heaven.\""
+            },
+            {
+              "text": "\"Build a church here.\""
+            }
+          ],
+          "explanation": "The banner began, \"But pray, my children. God will answer you very soon.\""
+        },
+        {
+          "prompt": "What title is Mary given at Pontmain?",
+          "choices": [
+            {
+              "text": "Our Lady of the Snows"
+            },
+            {
+              "text": "Our Lady of Hope",
+              "correct": true
+            },
+            {
+              "text": "Our Lady of the Sea"
+            },
+            {
+              "text": "Our Lady of Peace"
+            }
+          ],
+          "explanation": "People in Pontmain called Mary \"Our Lady of Hope,\" because her message gave them hope in a hard time."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Our Lady of Pontmain",
+          "publisher": "Marie de Nazareth",
+          "url": "https://www.mariedenazareth.com/en/our-lady-of-pontmain",
+          "note": "January 17, 1871, about 5:30 p.m.; the four children and their ages; her dress, veil and crown; the banner \"But pray my children, God will answer you very soon\" and \"My Son lets his heart be touched\"; the 38 young men; the Prussians did not enter Laval; armistice published January 28; all 38 returned; the bishop's pastoral letter of February 2, 1872; Our Lady of Hope; basilica 1905"
+        },
+        {
+          "title": "Pontmain",
+          "publisher": "The Miracle Hunter",
+          "url": "https://www.miraclehunter.com/marian_apparitions/approved_apparitions/pontmain/",
+          "note": "the children and adults; the red cross; the white veil; \"My Son allows himself to be moved\"; General Schmidt halted his army at about 5:30 p.m.; Bishop Wicart's inquiry and his February 2, 1872 declaration"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-gietrzwald",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Gietrzwald",
+        "production_id_hint": 1149
+      },
+      "student_title": "Our Lady of Gietrzwałd",
+      "subtitle": "Mary appeared to two Polish girls and spoke to them in their own language, when that language was being forbidden.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "June 27 – September 16, 1877"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Gietrzwałd, Poland"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Justyna Szafryńska, 13, and Barbara Samulowska, 12"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1977"
+        }
+      ],
+      "intro": "In 1877, two girls in a Polish village saw Mary sitting near a maple tree by their church. Mary spoke to them in Polish, the language their families spoke at home. At that time, the government was trying to stop people from using Polish in school. Mary asked everyone to pray the Rosary every day. Gietrzwałd is the only place in Poland where the Church has approved an apparition of Mary.",
+      "story_paragraphs": [
+        "In 1877, the village of Gietrzwałd was part of Prussia, a German country. Poland did not exist as its own country then. The government wanted everyone to speak German, and it had forbidden Polish in schools. It was also making life hard for the Catholic Church. Many parishes had no priests.",
+        "On June 27, 1877, a thirteen-year-old girl named Justyna Szafryńska was walking home from a test she had taken before her First Communion. Near the church, she saw a lady dressed in white, shining with light.",
+        "Three days later, a twelve-year-old girl named Barbara Samulowska was praying the Rosary with Justyna. She saw the lady too. The lady was sitting on a throne at the foot of a maple tree in front of the church. Angels were around her, and she held the child Jesus on her knee.",
+        "The girls asked the lady who she was. She answered in Polish, \"I am the Most Blessed Virgin Mary, the Immaculate Conception.\" When they asked what she wanted, she said she wanted them to pray the Rosary every day.",
+        "The girls also asked about their Church and about the parishes that had no priests. Mary said that if people prayed with all their hearts, the Church would not be persecuted, and the parishes would have priests again.",
+        "Mary appeared to the girls many times that summer. On the last day, September 16, she blessed a spring of water near the village. Pilgrims came from all over, even though the government fined some of them.",
+        "One hundred years later, in 1977, the bishop declared that the apparitions were real. Barbara grew up to be a religious sister. She spent most of her life serving the poor in Guatemala."
+      ],
+      "timeline": [
+        {
+          "date_display": "June 27, 1877",
+          "text": "Justyna Szafryńska sees a shining lady near the church."
+        },
+        {
+          "date_display": "June 30, 1877",
+          "text": "Barbara Samulowska sees her too, at the foot of a maple tree."
+        },
+        {
+          "date_display": "Summer 1877",
+          "text": "Mary appears to the girls many times and asks for the daily Rosary."
+        },
+        {
+          "date_display": "September 16, 1877",
+          "text": "On the last day, Mary blesses a spring of water."
+        },
+        {
+          "date_display": "1970",
+          "text": "Pope Paul VI names the church in Gietrzwałd a basilica."
+        },
+        {
+          "date_display": "September 11, 1977",
+          "text": "One hundred years later, the bishop approves the apparitions."
+        }
+      ],
+      "fun_facts": [
+        "Mary spoke Polish to the girls at a time when Polish was forbidden in schools.",
+        "Gietrzwałd is the only place in Poland where the Church has approved an apparition of Mary.",
+        "A cross was made from the maple tree where Mary appeared.",
+        "The Church approved the apparitions exactly one hundred years after they happened.",
+        "Barbara became a religious sister and served the poor in Guatemala."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Immaculate Conception",
+          "definition": "The Church's teaching that Mary was free from sin from the first moment of her life."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we think about the lives of Jesus and Mary."
+        },
+        {
+          "word": "Parish",
+          "definition": "A community of Catholics who worship together at their church."
+        },
+        {
+          "word": "Persecuted",
+          "definition": "Treated cruelly because of what you believe."
+        }
+      ],
+      "think_about_it": "Mary spoke to the girls in their own language when it was being taken away from them. Why do you think that mattered so much to the people of Poland?",
+      "reflection_question": "Mary asked the girls to pray the Rosary every day. When could you pray a decade of the Rosary this week?",
+      "type_specific": {
+        "who_saw_her": "Two girls saw Mary: Justyna Szafryńska, who was 13, and Barbara Samulowska, who was 12. Justyna saw her first, and Barbara three days later.",
+        "marys_message": "Mary told the girls, \"I am the Most Blessed Virgin Mary, the Immaculate Conception.\" She asked them to pray the Rosary every day. She promised that if people prayed with their whole hearts, the Church would not be persecuted and the parishes would have priests again.",
+        "prayer": "Our Lady of Gietrzwałd, pray for us.",
+        "church_recognition": "On September 11, 1977, exactly one hundred years after the apparitions, Bishop Józef Drzazga of Warmia approved them. Gietrzwałd is the only place in Poland where the Church has approved an apparition of Mary. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Gietrzwałd."
+      },
+      "quiz": [
+        {
+          "prompt": "What language did Mary speak to the girls?",
+          "choices": [
+            {
+              "text": "German"
+            },
+            {
+              "text": "Polish",
+              "correct": true
+            },
+            {
+              "text": "Latin"
+            },
+            {
+              "text": "English"
+            }
+          ],
+          "explanation": "Mary spoke Polish, the girls' own language, at a time when the government had forbidden Polish in schools."
+        },
+        {
+          "prompt": "Where was Mary sitting when Barbara saw her?",
+          "choices": [
+            {
+              "text": "On a rooftop"
+            },
+            {
+              "text": "At the foot of a maple tree",
+              "correct": true
+            },
+            {
+              "text": "On a boat"
+            }
+          ],
+          "explanation": "Mary was sitting on a throne at the foot of a maple tree in front of the church."
+        },
+        {
+          "prompt": "What did Mary ask the girls to do every day?",
+          "choices": [
+            {
+              "text": "Bake bread"
+            },
+            {
+              "text": "Pray the Rosary",
+              "correct": true
+            },
+            {
+              "text": "Sing a song"
+            }
+          ],
+          "explanation": "When the girls asked what she wanted, Mary said she wanted them to pray the Rosary every day."
+        },
+        {
+          "prompt": "What did Mary bless on the last day?",
+          "choices": [
+            {
+              "text": "A spring of water",
+              "correct": true
+            },
+            {
+              "text": "A school"
+            },
+            {
+              "text": "A horse"
+            }
+          ],
+          "explanation": "On September 16, 1877, the last day, Mary blessed a spring near the village."
+        },
+        {
+          "prompt": "How many years later did the Church approve the apparitions?",
+          "choices": [
+            {
+              "text": "5 years"
+            },
+            {
+              "text": "20 years"
+            },
+            {
+              "text": "100 years",
+              "correct": true
+            }
+          ],
+          "explanation": "The bishop approved the apparitions in 1977, exactly one hundred years after they happened."
+        }
+      ],
+      "sources": [
+        {
+          "title": "40 Years Before Fatima, Our Lady Appeared in Poland",
+          "publisher": "National Catholic Register",
+          "url": "https://www.ncregister.com/blog/40-years-before-fatima-our-lady-appeared-in-poland",
+          "note": "Prussia and the Kulturkampf; Justyna, 13, and Barbara, 12; the maple tree, throne, angels and Child; \"I am the Most Blessed Virgin Mary, the Immaculate Conception\"; daily Rosary; the parishes without priests; the spring; fines; approval September 11, 1977 by Bishop Józef Drzazga; basilica 1970; Barbara's life in Guatemala"
+        },
+        {
+          "title": "Poland celebrates the 140th anniversary of the Marian apparitions in Gietrzwałd",
+          "publisher": "Polish Bishops' Conference (2017)",
+          "url": "https://episkopat.pl/doc/179121.poland-celebrates-the-140th-anniversary-of-the-marian-apparitions-in-gietrzwald",
+          "note": "June 27 to September 16, 1877; nearly 160 appearances; Polish forbidden in schools; the daily Rosary; \"the Immaculate Conception\"; among the apparitions recognized by the Church"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-siluva",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Siluva",
+        "production_id_hint": 1148
+      },
+      "student_title": "Our Lady of Šiluva",
+      "subtitle": "In Lithuania, Mary was seen weeping where a church had once stood, and a lost treasure was found.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1608"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Šiluva, Lithuania"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Children from the village, then many villagers"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Devotion approved by Pope Pius VI in 1775"
+        }
+      ],
+      "intro": "In 1608, children watching sheep near the village of Šiluva in Lithuania saw a beautiful lady holding a baby. She was weeping. She stood on the very spot where a Catholic church had stood before it was taken away and destroyed. Her tears led the people to find a buried treasure: an old painting of Mary and the papers that proved the land belonged to the church.",
+      "story_paragraphs": [
+        "Long ago, in the village of Šiluva, in Lithuania, there was a Catholic church with a painting of Mary holding the child Jesus. People came from far away to pray there.",
+        "In the 1500s, many people in the area left the Catholic Church and became Protestants called Calvinists. The church in Šiluva was taken away and later burned down. Before it was lost, the last priest hid the painting of Mary and the church's important papers in a strong chest. He buried it in the ground near a large rock.",
+        "Many years passed. People forgot where the chest was hidden.",
+        "Then, in 1608, some children were watching their sheep at the edge of the village. They saw a beautiful lady standing on a rock, holding a baby in her arms. She was weeping bitterly.",
+        "The next day, many villagers came to see. A Calvinist teacher came too, and he asked her why she was crying. The old account says she answered that her Son had once been worshipped on this very spot, and now people plowed and planted there instead.",
+        "Then, the story says, an old blind man who had helped bury the chest long ago came to the field. There, he could see again. He pointed to the place where the chest was buried. The people dug, and they found the painting and the papers, still safe.",
+        "With those papers, the Catholics of Šiluva got their church land back. A new church was built, and the painting was placed in it. In 1775, Pope Pius VI approved the devotion. Today, a great church stands in Šiluva, and it is the largest place of pilgrimage to Mary in Lithuania."
+      ],
+      "timeline": [
+        {
+          "date_display": "1500s",
+          "text": "The church in Šiluva is taken away. The priest buries a painting and papers in a chest."
+        },
+        {
+          "date_display": "1608",
+          "text": "Children see Mary weeping on a rock where the church once stood."
+        },
+        {
+          "date_display": "After 1608",
+          "text": "The buried chest is found, with the painting still safe."
+        },
+        {
+          "date_display": "1622",
+          "text": "A court returns the church land to the Catholics."
+        },
+        {
+          "date_display": "1775",
+          "text": "Pope Pius VI approves the devotion to Our Lady of Šiluva."
+        },
+        {
+          "date_display": "1993",
+          "text": "Pope John Paul II comes to pray at Šiluva."
+        }
+      ],
+      "fun_facts": [
+        "At Šiluva, Mary appeared to people who were not Catholic as well as to Catholics.",
+        "A painting buried in a chest was found safe after many years underground.",
+        "Šiluva is the largest place of pilgrimage to Mary in Lithuania.",
+        "Pope John Paul II visited Šiluva in 1993.",
+        "Lithuania has been called \"the Land of Mary.\""
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Protestant",
+          "definition": "A Christian who belongs to one of the churches that separated from the Catholic Church about 500 years ago."
+        },
+        {
+          "word": "Pilgrimage",
+          "definition": "A journey to a holy place to pray."
+        },
+        {
+          "word": "Devotion",
+          "definition": "Special love and prayer for God, Mary, or a saint."
+        },
+        {
+          "word": "Weep",
+          "definition": "To cry."
+        }
+      ],
+      "think_about_it": "Mary wept for a holy place that had been forgotten. Why is it important to keep our churches and holy places special?",
+      "reflection_question": "Our Lady of Šiluva is a special help for people who have lost their faith. Who is someone you could pray for, that they would come back to God?",
+      "type_specific": {
+        "who_saw_her": "First, children from the village who were watching sheep saw Mary. The next day, many villagers saw her too, including a Calvinist teacher who was not Catholic.",
+        "marys_message": "Mary wept because her Son had once been worshipped on that very spot, and now the place was forgotten. Her tears led the people back to their church and to the painting that had been hidden.",
+        "prayer": "Our Lady of Šiluva, pray for us.",
+        "church_recognition": "In 1775, Pope Pius VI approved devotion to Our Lady of Šiluva. He allowed the painting to be crowned and granted special blessings to pilgrims who come to pray there. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Šiluva."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Šiluva?",
+          "choices": [
+            {
+              "text": "Poland"
+            },
+            {
+              "text": "Lithuania",
+              "correct": true
+            },
+            {
+              "text": "Spain"
+            },
+            {
+              "text": "Ireland"
+            }
+          ],
+          "explanation": "Šiluva is a small town in Lithuania."
+        },
+        {
+          "prompt": "What was Mary doing when the children saw her?",
+          "choices": [
+            {
+              "text": "Singing"
+            },
+            {
+              "text": "Smiling and waving"
+            },
+            {
+              "text": "Weeping",
+              "correct": true
+            }
+          ],
+          "explanation": "The children saw a beautiful lady holding a baby, and she was weeping bitterly."
+        },
+        {
+          "prompt": "What was found buried in a chest?",
+          "choices": [
+            {
+              "text": "Gold coins"
+            },
+            {
+              "text": "A painting of Mary and the church's papers",
+              "correct": true
+            },
+            {
+              "text": "A sword"
+            }
+          ],
+          "explanation": "The last priest had buried the painting and the papers. They were found safe, and the papers helped the Catholics get their land back."
+        },
+        {
+          "prompt": "According to the story, who showed the people where the chest was buried?",
+          "choices": [
+            {
+              "text": "A soldier"
+            },
+            {
+              "text": "An old blind man who could see again",
+              "correct": true
+            },
+            {
+              "text": "A dog"
+            }
+          ],
+          "explanation": "The old account says an old blind man who had helped bury the chest could see again, and he pointed to the place."
+        },
+        {
+          "prompt": "Which pope approved devotion to Our Lady of Šiluva?",
+          "choices": [
+            {
+              "text": "Pope Francis"
+            },
+            {
+              "text": "Pope Pius VI",
+              "correct": true
+            },
+            {
+              "text": "Pope Peter"
+            }
+          ],
+          "explanation": "Pope Pius VI approved the devotion in 1775."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Siluva",
+          "publisher": "The Miracle Hunter",
+          "url": "https://miraclehunter.com/marian_apparitions/approved_apparitions/siluva/index.html",
+          "note": "1608; shepherd children; a woman weeping on a rock holding a child; the Calvinist catechist; \"There was a time when my beloved Son was worshipped by my people on this very spot\"; the chest buried near a rock; the old blind man; 1622 court ruling; Pope Pius VI's 1775 decree; 1786 coronation; John Paul II's 1993 visit"
+        },
+        {
+          "title": "Our Lady of Šiluva, the Lithuanian Fatima",
+          "publisher": "Aleteia (2025)",
+          "url": "https://aleteia.org/2025/08/30/our-lady-of-siluva-the-lithuanian-fatima/",
+          "note": "the church confiscated and burned; the icon and deeds buried; \"a beautiful lady holding a baby in her arms and weeping bitterly\"; a Protestant pastor also saw her; the land recovered; Pius VI approved the devotion, the coronation and indulgences; John Paul II in 1993; Lithuania's largest Marian pilgrimage site; invoked for those who have lost their faith; \"Terra Mariana\""
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-akita",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Akita",
+        "production_id_hint": 1102
+      },
+      "student_title": "Our Lady of Akita",
+      "subtitle": "In a small convent in Japan, a sister heard Mary's voice, and a wooden statue of Mary was seen to weep.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1973, with the statue weeping from 1975 to 1981"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Akita, Japan"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Sister Agnes Sasagawa"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "The local bishop recognized the events in 1984"
+        }
+      ],
+      "intro": "In 1973, in a small convent near the city of Akita, Japan, a sister named Agnes Sasagawa heard a voice coming from a wooden statue of Mary. The voice asked for prayer, especially the Rosary, and prayer for the Pope, bishops, and priests. Later, the statue was seen to weep, again and again, for six years. The local bishop studied it carefully and saw the tears himself.",
+      "story_paragraphs": [
+        "Agnes Sasagawa grew up in Japan as a Buddhist. She became a Catholic as a young woman. She was often sick. Just a few months before she joined a small community of sisters near Akita, she lost her hearing and became completely deaf.",
+        "The sisters belonged to a community called the Handmaids of the Eucharist. In their chapel stood a wooden statue of Mary, about three feet tall, carved from a single block of wood.",
+        "In the summer of 1973, Sister Agnes was praying in the chapel. She heard a gentle voice coming from the statue. It was Mary. Mary spoke to her three times that year, in July, August, and October.",
+        "Mary asked Sister Agnes and the other sisters to pray. She asked them to pray the Rosary often, and to pray for the Pope, the bishops, and the priests. She also told Agnes that her deafness would be healed. Some of Mary's words were serious. She asked people to turn back to God and to make sacrifices for others.",
+        "Then something even more surprising happened. Starting in January 1975, the wooden statue began to shed tears. It wept on and off for more than six years, 101 times in all. The sisters saw it, and hundreds of visitors saw it too. It was even shown on Japanese television.",
+        "The bishop of the area, John Shojiro Ito, saw the tears with his own eyes. Scientists at a university studied them. In 1984, after eight years of study, the bishop recognized that the events were supernatural.",
+        "Sister Agnes lived quietly with her community for many years. She died on August 15, 2024, the feast of the Assumption of Mary, at age 93."
+      ],
+      "timeline": [
+        {
+          "date_display": "May 1973",
+          "text": "Agnes Sasagawa joins the sisters near Akita. She is deaf."
+        },
+        {
+          "date_display": "July 6, 1973",
+          "text": "Sister Agnes hears Mary's voice from the wooden statue for the first time."
+        },
+        {
+          "date_display": "October 13, 1973",
+          "text": "Mary speaks to Sister Agnes for the third time."
+        },
+        {
+          "date_display": "January 4, 1975",
+          "text": "The statue begins to weep."
+        },
+        {
+          "date_display": "1981",
+          "text": "The statue weeps for the 101st and last time."
+        },
+        {
+          "date_display": "April 22, 1984",
+          "text": "Bishop John Shojiro Ito recognizes the events as supernatural."
+        },
+        {
+          "date_display": "August 15, 2024",
+          "text": "Sister Agnes dies at age 93, on the feast of the Assumption."
+        }
+      ],
+      "fun_facts": [
+        "The statue of Mary at Akita is carved from a single block of wood.",
+        "The statue wept 101 times over more than six years.",
+        "Sister Agnes had been a Buddhist before she became a Catholic.",
+        "The weeping statue was shown on Japanese television.",
+        "Mary at Akita asked for prayers for the Pope, bishops, and priests."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Convent",
+          "definition": "A home where religious sisters live, work, and pray together."
+        },
+        {
+          "word": "Statue",
+          "definition": "A figure carved or shaped to look like a person."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we think about the lives of Jesus and Mary."
+        },
+        {
+          "word": "Supernatural",
+          "definition": "Something that comes from God and cannot be explained by nature alone."
+        }
+      ],
+      "think_about_it": "Mary's tears at Akita showed how much she cares about the world. What do you think makes Mary sad, and what makes her happy?",
+      "reflection_question": "Mary asked for prayers for the Pope, bishops, and priests. Can you name a priest you could pray for this week?",
+      "type_specific": {
+        "who_saw_her": "Sister Agnes Sasagawa heard Mary's voice coming from the statue. The tears of the statue were seen by her sisters, by the bishop, and by hundreds of visitors.",
+        "marys_message": "Mary asked for prayer, especially the Rosary, and for prayers for the Pope, the bishops, and the priests. She asked people to turn back to God and to offer sacrifices for others. She said, \"Those who place their confidence in me will be saved.\"",
+        "prayer": "Most holy Mother of God, never let me be separated from your divine Son.",
+        "church_recognition": "Bishop John Shojiro Ito studied the events at Akita for eight years. On April 22, 1984, he recognized \"the supernatural character\" of the events and allowed devotion to the Holy Mother of Akita in his diocese. The Holy See has not made its own judgment. Catholics are not required to believe in any particular apparition, but the Church allows devotion to Our Lady of Akita."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Akita?",
+          "choices": [
+            {
+              "text": "China"
+            },
+            {
+              "text": "Japan",
+              "correct": true
+            },
+            {
+              "text": "Korea"
+            },
+            {
+              "text": "Vietnam"
+            }
+          ],
+          "explanation": "Akita is a city in Japan. The convent where the events happened is nearby."
+        },
+        {
+          "prompt": "What was the statue of Mary at Akita made of?",
+          "choices": [
+            {
+              "text": "Gold"
+            },
+            {
+              "text": "Stone"
+            },
+            {
+              "text": "A single block of wood",
+              "correct": true
+            }
+          ],
+          "explanation": "The statue was carved from a single block of wood. It is about three feet tall."
+        },
+        {
+          "prompt": "How many times did the statue weep?",
+          "choices": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "12"
+            },
+            {
+              "text": "101",
+              "correct": true
+            },
+            {
+              "text": "1,000"
+            }
+          ],
+          "explanation": "Starting in 1975, the statue wept on and off for more than six years, 101 times in all."
+        },
+        {
+          "prompt": "What did Mary ask people to pray for at Akita?",
+          "choices": [
+            {
+              "text": "The Pope, the bishops, and the priests",
+              "correct": true
+            },
+            {
+              "text": "Good weather"
+            },
+            {
+              "text": "A new school"
+            }
+          ],
+          "explanation": "Mary asked for the Rosary and for prayers for the Pope, the bishops, and the priests."
+        },
+        {
+          "prompt": "Who studied the events and saw the tears himself?",
+          "choices": [
+            {
+              "text": "A king"
+            },
+            {
+              "text": "Bishop John Shojiro Ito",
+              "correct": true
+            },
+            {
+              "text": "A news reporter"
+            }
+          ],
+          "explanation": "Bishop Ito studied the events for eight years, saw the tears himself, and recognized them in 1984."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Message From Our Lady – Akita, Japan",
+          "publisher": "EWTN",
+          "url": "https://origin.ewtn.com/catholicism/library/message-from-our-lady--akita-japan-5167",
+          "note": "the statue from a single block of Katsura wood, about three feet; the July 6, August 3 and October 13, 1973 messages; \"Pray very much the prayers of the Rosary\"; prayers for the Pope, bishops and priests; \"Those who place their confidence in me will be saved\"; \"never let me be separated from Your Divine Son\"; weeping from January 4, 1975, 101 times; Bishop Ito's April 22, 1984 recognition; no definitive Holy See judgment"
+        },
+        {
+          "title": "Woman religious who was Our Lady of Akita visionary dies at 93 on feast of Assumption",
+          "publisher": "Global Sisters Report / OSV News (2024)",
+          "url": "https://globalsistersreport.org/spirituality/woman-religious-who-was-our-lady-akita-visionary-dies-93-feast-assumption",
+          "note": "convert from Buddhism; entered the order in May 1973; lost her hearing; the statue of Our Lady of All Nations; 101 times until 1981; hundreds of witnesses; Japanese television; Bishop Ito saw the tears; the university study; died August 15, 2024, age 93"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-betania",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Betania",
+        "production_id_hint": 1104
+      },
+      "student_title": "Our Lady of Betania",
+      "subtitle": "On a farm in Venezuela, Mary came as the Reconciler of all peoples, and many people saw her at once.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1976 – 1988"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Betania, Venezuela"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Maria Esperanza de Bianchini, and later many pilgrims"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 1987"
+        }
+      ],
+      "intro": "On a farm called Betania in Venezuela, a mother named Maria Esperanza saw Mary beside a waterfall in 1976. Mary called herself the Reconciler of all peoples and nations. She came to help people make peace with God and with one another. In 1984, more than a hundred people saw Mary at the same time. The local bishop studied it carefully and approved it.",
+      "story_paragraphs": [
+        "Maria Esperanza was born in Venezuela in 1928. From the time she was a little girl, she loved God very much. She married a man named Geo Bianchini, and they had seven children.",
+        "Maria and her family had a farm in the hills of Venezuela called Betania. On the farm there was a grotto with a waterfall.",
+        "On March 25, 1976, the feast of the Annunciation, Maria Esperanza was at the grotto when she saw the Virgin Mary. Mary called herself \"Mary, Virgin and Mother, Reconciler of all Peoples and Nations.\" To reconcile means to bring people back together in peace. Mary came to help people make peace with God and with one another.",
+        "Mary appeared to Maria several more times. Then something special happened. On March 25, 1984, a large group of pilgrims was praying at the farm. That afternoon, about 108 people saw Mary appear near the waterfall. Many of them were ordinary families, and some had come out of curiosity.",
+        "The bishop of the area, Pío Bello Ricardo, began a careful study. He talked with hundreds of people who said they had seen Mary. In 1987, he wrote that the apparitions \"are authentic and have a supernatural character,\" and he approved them. He also allowed a chapel to be built at Betania.",
+        "Maria Esperanza spent the rest of her life helping people come closer to God. She said the biggest problem in the world was the division between people. She died in 2004 in New Jersey. The Church has opened her cause for sainthood, so she is now called a Servant of God."
+      ],
+      "timeline": [
+        {
+          "date_display": "1928",
+          "text": "Maria Esperanza is born in Venezuela."
+        },
+        {
+          "date_display": "March 25, 1976",
+          "text": "Maria Esperanza sees Mary at the grotto on the Betania farm."
+        },
+        {
+          "date_display": "March 25, 1984",
+          "text": "About 108 people see Mary at Betania at the same time."
+        },
+        {
+          "date_display": "1984",
+          "text": "Bishop Pío Bello Ricardo begins his study."
+        },
+        {
+          "date_display": "November 21, 1987",
+          "text": "The bishop approves the apparitions."
+        },
+        {
+          "date_display": "2004",
+          "text": "Maria Esperanza dies in New Jersey."
+        },
+        {
+          "date_display": "2010",
+          "text": "Her cause for sainthood is opened."
+        }
+      ],
+      "fun_facts": [
+        "Mary at Betania first appeared on March 25, the feast of the Annunciation.",
+        "In 1984, about 108 people saw Mary at the same time.",
+        "Mary appeared near a waterfall in a grotto on a farm.",
+        "Maria Esperanza was the mother of seven children.",
+        "Maria Esperanza is now called a Servant of God, the first step toward sainthood."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Reconcile",
+          "definition": "To bring people back together in peace after they have been apart."
+        },
+        {
+          "word": "Grotto",
+          "definition": "A small cave or opening in a rock."
+        },
+        {
+          "word": "Pilgrim",
+          "definition": "A person who travels to a holy place to pray."
+        },
+        {
+          "word": "Servant of God",
+          "definition": "The title given to a person when the Church begins to study whether they could be named a saint."
+        }
+      ],
+      "think_about_it": "Mary came as a \"Reconciler,\" someone who brings people back together. Is there someone you need to make peace with?",
+      "reflection_question": "Maria Esperanza said the biggest problem in the world is division between people. What is one way you can help people get along?",
+      "type_specific": {
+        "who_saw_her": "Maria Esperanza de Bianchini first saw Mary in 1976. On March 25, 1984, about 108 people gathered at the farm also saw Mary.",
+        "marys_message": "Mary called herself the Reconciler of all peoples and nations. She asked people to make peace with God and with one another, and to come back together as one family.",
+        "prayer": "Mary, Reconciler of all peoples and nations, pray for us.",
+        "church_recognition": "Bishop Pío Bello Ricardo of Los Teques studied the events for three years and spoke with many witnesses. On November 21, 1987, he declared that the apparitions \"are authentic and have a supernatural character,\" and he officially approved them. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of Betania."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Betania?",
+          "choices": [
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Venezuela",
+              "correct": true
+            },
+            {
+              "text": "Brazil"
+            },
+            {
+              "text": "Peru"
+            }
+          ],
+          "explanation": "Betania is a farm in the hills of Venezuela."
+        },
+        {
+          "prompt": "What did Mary call herself at Betania?",
+          "choices": [
+            {
+              "text": "Queen of the Angels"
+            },
+            {
+              "text": "Reconciler of all Peoples and Nations",
+              "correct": true
+            },
+            {
+              "text": "Lady of the Lake"
+            }
+          ],
+          "explanation": "Mary called herself \"Mary, Virgin and Mother, Reconciler of all Peoples and Nations.\""
+        },
+        {
+          "prompt": "What does \"reconcile\" mean?",
+          "choices": [
+            {
+              "text": "To build a house"
+            },
+            {
+              "text": "To bring people back together in peace",
+              "correct": true
+            },
+            {
+              "text": "To count money"
+            }
+          ],
+          "explanation": "To reconcile means to make peace and come back together after being apart."
+        },
+        {
+          "prompt": "About how many people saw Mary at the same time in 1984?",
+          "choices": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "12"
+            },
+            {
+              "text": "108",
+              "correct": true
+            },
+            {
+              "text": "10,000"
+            }
+          ],
+          "explanation": "On March 25, 1984, about 108 people at the farm saw Mary at the same time."
+        },
+        {
+          "prompt": "What is Maria Esperanza called now?",
+          "choices": [
+            {
+              "text": "A Servant of God",
+              "correct": true
+            },
+            {
+              "text": "A queen"
+            },
+            {
+              "text": "An angel"
+            }
+          ],
+          "explanation": "The Church has opened her cause for sainthood, so she is called a Servant of God."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Betania",
+          "publisher": "The Miracle Hunter",
+          "url": "https://miraclehunter.com/marian_apparitions/approved_apparitions/betania/index.html",
+          "note": "Maria Esperanza Medrano de Bianchini, born 1928, died August 7, 2004 in New Jersey; first apparition March 25, 1976 at the grotto; the waterfall; \"Reconciler of People and Nations\"; 108 people saw the Virgin on March 25, 1984; Bishop Pío Bello Ricardo's investigation from 1984; the November 21, 1987 Pastoral Instruction: \"authentic and have a supernatural character\" and \"I therefore approve, officially\""
+        },
+        {
+          "title": "'She had a heart for souls': The life and cause of Servant of God Maria Esperanza de Bianchini",
+          "publisher": "Catholic World Report (2019)",
+          "url": "https://www.catholicworldreport.com/?p=129012",
+          "note": "married Geo Bianchini, seven children; the 1984 apparition; \"Mary, Virgin and Mother, Reconciler of all Peoples and Nations\"; 1987 approval; died 2004 in New Jersey; cause opened 2010; \"the fundamental problem in society is the terrible division between people\""
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-cuapa",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Cuapa",
+        "production_id_hint": 1146
+      },
+      "student_title": "Our Lady of Cuapa",
+      "subtitle": "In a small town in Nicaragua, Mary asked a church caretaker to pray the Rosary and to tell people to love and forgive.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "May – October 1980"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Cuapa, Nicaragua"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Bernardo Martínez, the church's sacristan"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "The local bishop allowed the account to be published"
+        }
+      ],
+      "intro": "In 1980, Nicaragua was a country full of fighting and fear. In the small town of Cuapa, a man named Bernardo Martínez took care of the church. One day, he saw a lady dressed in white standing on a cloud. She said, \"I come from heaven. I am the Mother of Jesus.\" She asked people to pray the Rosary, to love one another, and to forgive.",
+      "story_paragraphs": [
+        "Cuapa is a small farming town in Nicaragua, in Central America. In 1980, Nicaragua had just been through a war, and many people were angry and afraid.",
+        "Bernardo Martínez was a farmer in Cuapa. He was also the sacristan of the town's little church. A sacristan takes care of the church and gets things ready for Mass. In April 1980, Bernardo noticed that a statue of Mary in the church was glowing with light, all by itself.",
+        "A few weeks later, on May 8, Bernardo was down by a river near the town. Suddenly, he saw a lady standing on a bright white cloud. She wore a white dress and a cream-colored veil, and her feet were bare. She looked like the statue of Our Lady of Fatima.",
+        "The lady said, \"I come from heaven. I am the Mother of Jesus.\" She told Bernardo, \"I want you to pray the Rosary every day.\" She also said, \"I want you to love one another.\" She asked people to make peace and not to ask God for peace without making peace themselves.",
+        "Mary appeared to Bernardo several more times that year. On October 13, 1980, about fifty people came with Bernardo to pray. They saw a circle of light on the ground, and Bernardo saw Mary again. She asked everyone to \"forgive one another.\"",
+        "Bernardo told the bishop everything. The bishop allowed Bernardo's account to be printed so that others could read it, and many people began to come to Cuapa to pray.",
+        "Later, Bernardo felt God calling him to be a priest. On August 20, 1995, when he was 63 years old, Bernardo was ordained a priest."
+      ],
+      "timeline": [
+        {
+          "date_display": "April 15, 1980",
+          "text": "Bernardo Martínez sees the statue of Mary in Cuapa's church glowing with light."
+        },
+        {
+          "date_display": "May 8, 1980",
+          "text": "Bernardo sees Mary by a river near Cuapa."
+        },
+        {
+          "date_display": "Summer 1980",
+          "text": "Bernardo sees Mary several more times."
+        },
+        {
+          "date_display": "October 13, 1980",
+          "text": "About fifty people pray with Bernardo, and he sees Mary again."
+        },
+        {
+          "date_display": "1982",
+          "text": "The bishop allows Bernardo's account to be published."
+        },
+        {
+          "date_display": "August 20, 1995",
+          "text": "Bernardo is ordained a priest."
+        }
+      ],
+      "fun_facts": [
+        "Bernardo Martínez was the sacristan of his town's church before Mary appeared to him.",
+        "Mary at Cuapa stood on a bright white cloud.",
+        "Bernardo said she looked like the statue of Our Lady of Fatima.",
+        "Bernardo became a priest when he was 63 years old.",
+        "About fifty people were with Bernardo when Mary appeared on October 13, 1980."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Sacristan",
+          "definition": "A person who takes care of a church and gets it ready for Mass."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we think about the lives of Jesus and Mary."
+        },
+        {
+          "word": "Forgive",
+          "definition": "To stop being angry at someone who has hurt you and to wish them well."
+        },
+        {
+          "word": "Ordained",
+          "definition": "Made a priest or deacon through the sacrament of Holy Orders."
+        }
+      ],
+      "think_about_it": "Mary said not to ask God for peace without making peace yourself. What could you do to make peace at home or at school?",
+      "reflection_question": "Bernardo took care of his church every day before Mary appeared to him. What small job can you do faithfully for God?",
+      "type_specific": {
+        "who_saw_her": "Bernardo Martínez, a farmer and the sacristan of Cuapa's church, saw Mary. On October 13, 1980, about fifty people were with him, and they saw a circle of light on the ground.",
+        "marys_message": "Mary said, \"I want you to pray the Rosary every day,\" and \"I want you to love one another.\" She asked people to forgive one another and to make peace in their own lives, and not only to ask God for peace.",
+        "prayer": "Holy Mary, Mother of Jesus, help us to love one another and make peace.",
+        "church_recognition": "Bishop Pablo Antonio Vega of Juigalpa studied Bernardo's account and allowed it to be published in 1982. Sources describe his decision in different ways: some say he affirmed that the events were authentic, and others say he allowed the account to be shared without making a judgment on it. Catholics are not required to believe in any particular apparition, and the Church allows people to pray to Mary under the title Our Lady of Cuapa."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Cuapa?",
+          "choices": [
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Nicaragua",
+              "correct": true
+            },
+            {
+              "text": "Chile"
+            },
+            {
+              "text": "Cuba"
+            }
+          ],
+          "explanation": "Cuapa is a small farming town in Nicaragua, in Central America."
+        },
+        {
+          "prompt": "What was Bernardo's job at the church?",
+          "choices": [
+            {
+              "text": "He was the bishop"
+            },
+            {
+              "text": "He was the sacristan",
+              "correct": true
+            },
+            {
+              "text": "He played the organ"
+            }
+          ],
+          "explanation": "Bernardo was the sacristan, the person who takes care of the church and gets it ready for Mass."
+        },
+        {
+          "prompt": "What did Mary say first to Bernardo?",
+          "choices": [
+            {
+              "text": "\"I come from heaven. I am the Mother of Jesus.\"",
+              "correct": true
+            },
+            {
+              "text": "\"Build me a castle.\""
+            },
+            {
+              "text": "\"Go home.\""
+            }
+          ],
+          "explanation": "Mary told Bernardo, \"I come from heaven. I am the Mother of Jesus.\""
+        },
+        {
+          "prompt": "What did Mary ask people to do?",
+          "choices": [
+            {
+              "text": "Move to a new town"
+            },
+            {
+              "text": "Pray the Rosary, love one another, and forgive",
+              "correct": true
+            },
+            {
+              "text": "Stop going to school"
+            }
+          ],
+          "explanation": "Mary asked people to pray the Rosary every day, to love one another, and to forgive one another."
+        },
+        {
+          "prompt": "What did Bernardo become later in life?",
+          "choices": [
+            {
+              "text": "A soldier"
+            },
+            {
+              "text": "A doctor"
+            },
+            {
+              "text": "A priest",
+              "correct": true
+            }
+          ],
+          "explanation": "Bernardo was ordained a priest on August 20, 1995, when he was 63 years old."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Cuapa",
+          "publisher": "The Miracle Hunter",
+          "url": "https://miraclehunter.com/marian_apparitions/approved_apparitions/cuapa/index.html",
+          "note": "Bernardo Martinez, sacristan, born August 20, 1931; the statue lit up, April 15, 1980; the May 8 apparition; her dress, veil, bare feet and the white cloud; \"looked like the statue of the Virgin of Fatima\"; the daily Rosary; October 13 with about 50 witnesses and a circle of light; Bishop Vega, November 13, 1982: \"an obligation to assure the authenticity of the events\""
+        },
+        {
+          "title": "Cuapa: a message of peace",
+          "publisher": "Marie de Nazareth (from Laurentin and Sbalchiero, Dictionnaire encyclopédique des apparitions de la Vierge)",
+          "url": "https://www.mariedenazareth.com/en/marian-encyclopedia/mary-fills-the-world/americas/nicaragua/cuapa-a-message-of-peace",
+          "note": "\"I come from heaven, I am the Mother of Jesus\"; \"I want you to pray the Rosary every day\"; \"I want you to love one another\"; October 13, about 50 people; \"Forgive one another\"; the bishop approved publication without taking a position; Bernardo ordained August 20, 1995"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-the-rosary-of-san-nicolas",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of the Rosary of San Nicolas",
+        "production_id_hint": 1145
+      },
+      "student_title": "Our Lady of the Rosary of San Nicolás",
+      "subtitle": "In Argentina, Mary led a grandmother to a forgotten statue and asked for a shrine where people could come to pray.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1983 – 1990"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "San Nicolás de los Arroyos, Argentina"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Gladys Quiroga de Motta"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Approved by the local bishop in 2016"
+        }
+      ],
+      "intro": "In 1983, rosaries in several homes in the city of San Nicolás, Argentina, began to glow. Then a grandmother named Gladys Motta saw Mary, dressed in blue and holding the baby Jesus. Mary asked her to find a forgotten statue and to have a shrine built. In 2016, the local bishop recognized that the events were supernatural. Today, huge crowds of pilgrims come there to pray.",
+      "story_paragraphs": [
+        "San Nicolás de los Arroyos is a city in Argentina, in South America. In 1983, Gladys Quiroga de Motta lived there. She was a wife, a mother of two daughters, and a grandmother. She had only gone to school for a few years.",
+        "That year, something strange began to happen in her city. In several homes, rosaries started to glow with light.",
+        "On September 25, 1983, Gladys saw Mary for the first time. Mary wore a blue gown and veil, and she held the baby Jesus in her arms. About a month later, Mary gave Gladys a white rosary and said, \"Receive this Rosary from my hands.\"",
+        "Mary asked Gladys to find an old statue of her. The statue had been blessed by Pope Leo XIII and brought all the way from Rome, but it had been damaged and forgotten. On November 27, 1983, Gladys found it, hidden away in the bell tower of the cathedral. It looked just like the lady she had seen.",
+        "Mary also asked for a shrine to be built, a special church where people could come to pray. The bishop agreed, and work began in 1987. The statue was placed inside.",
+        "Over the years, Gladys received many messages. Mary asked people to pray, to turn back to God, and to go to the sacraments. Every year on May 22, crowds of pilgrims walk to the shrine to pray.",
+        "On May 22, 2016, at the end of the yearly pilgrimage Mass, Bishop Héctor Cardelli announced that he recognized \"the supernatural nature\" of the events. Gladys has lived quietly and has always obeyed the bishops."
+      ],
+      "timeline": [
+        {
+          "date_display": "1983",
+          "text": "Rosaries begin to glow in several homes in San Nicolás."
+        },
+        {
+          "date_display": "September 25, 1983",
+          "text": "Gladys Motta sees Mary for the first time."
+        },
+        {
+          "date_display": "November 27, 1983",
+          "text": "Gladys finds the forgotten statue in the cathedral's bell tower."
+        },
+        {
+          "date_display": "1987",
+          "text": "Work begins on the shrine Mary asked for."
+        },
+        {
+          "date_display": "1990",
+          "text": "The shrine is consecrated."
+        },
+        {
+          "date_display": "May 22, 2016",
+          "text": "Bishop Héctor Cardelli recognizes the events as supernatural."
+        }
+      ],
+      "fun_facts": [
+        "The events at San Nicolás began when rosaries in several homes started to glow.",
+        "The forgotten statue had been blessed by Pope Leo XIII.",
+        "Gladys found the statue in the bell tower of the cathedral.",
+        "Every year on May 22, crowds of pilgrims come to the shrine.",
+        "Mary gave Gladys a white rosary."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Rosary",
+          "definition": "A prayer using beads, in which we think about the lives of Jesus and Mary."
+        },
+        {
+          "word": "Shrine",
+          "definition": "A holy place where people come to pray, often built in honor of Jesus, Mary, or a saint."
+        },
+        {
+          "word": "Cathedral",
+          "definition": "The main church of a diocese, where the bishop has his chair."
+        },
+        {
+          "word": "Sacraments",
+          "definition": "Special signs Jesus gave us to share God's life and love, like Baptism and the Eucharist."
+        }
+      ],
+      "think_about_it": "Mary led Gladys to a statue that had been forgotten and damaged. What is something good that has been forgotten that you could bring back?",
+      "reflection_question": "Mary gave Gladys a rosary. Do you have a rosary? When could you pray with it this week?",
+      "type_specific": {
+        "who_saw_her": "Gladys Quiroga de Motta, a wife, mother, and grandmother from San Nicolás, saw Mary.",
+        "marys_message": "Mary asked people to pray the Rosary, to turn back to God, and to receive the sacraments. She asked for a shrine where people could come to pray, and she gave Gladys a rosary, saying, \"Receive this Rosary from my hands.\"",
+        "prayer": "Our Lady of the Rosary of San Nicolás, pray for us.",
+        "church_recognition": "On May 22, 2016, Bishop Héctor Cardelli of San Nicolás said, \"I recognize the supernatural nature of the happy events,\" for the events through 1990. Catholics are not required to believe in any particular apparition, but the Church allows and encourages devotion to Our Lady of the Rosary of San Nicolás."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is San Nicolás?",
+          "choices": [
+            {
+              "text": "Spain"
+            },
+            {
+              "text": "Argentina",
+              "correct": true
+            },
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Mexico"
+            }
+          ],
+          "explanation": "San Nicolás de los Arroyos is a city in Argentina."
+        },
+        {
+          "prompt": "What strange thing happened in homes before Mary appeared?",
+          "choices": [
+            {
+              "text": "Bells rang"
+            },
+            {
+              "text": "Rosaries began to glow",
+              "correct": true
+            },
+            {
+              "text": "Flowers grew indoors"
+            }
+          ],
+          "explanation": "In several homes in San Nicolás, rosaries started to glow with light."
+        },
+        {
+          "prompt": "Where did Gladys find the forgotten statue?",
+          "choices": [
+            {
+              "text": "In a river"
+            },
+            {
+              "text": "In the cathedral's bell tower",
+              "correct": true
+            },
+            {
+              "text": "Under her bed"
+            }
+          ],
+          "explanation": "Mary asked Gladys to find the statue, and she found it in the bell tower of the cathedral."
+        },
+        {
+          "prompt": "What did Mary ask to be built?",
+          "choices": [
+            {
+              "text": "A school"
+            },
+            {
+              "text": "A shrine where people could pray",
+              "correct": true
+            },
+            {
+              "text": "A bridge"
+            }
+          ],
+          "explanation": "Mary asked for a shrine. Work began in 1987, and the statue was placed inside."
+        },
+        {
+          "prompt": "What did Mary give Gladys?",
+          "choices": [
+            {
+              "text": "A crown"
+            },
+            {
+              "text": "A candle"
+            },
+            {
+              "text": "A white rosary",
+              "correct": true
+            }
+          ],
+          "explanation": "About a month after the first apparition, Mary gave Gladys a white rosary."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Marian apparition has been approved in Argentina, and it's a big deal",
+          "publisher": "EWTN News (2016)",
+          "url": "https://www.ewtnnews.com/world/americas/a-marian-apparition-has-been-approved-in-argentina-and-its-a-big-deal",
+          "note": "Gladys Quiroga de Motta, wife, mother of two, grandmother; glowing rosaries; first apparition September 25; the blue gown and the infant Jesus; the white rosary; the statue blessed by Leo XIII found November 27, 1983 in the cathedral belfry; shrine begun 1987, consecrated 1990; the May 22 pilgrimage; \"I recognize the supernatural nature of the happy events\""
+        },
+        {
+          "title": "Local bishop: Ongoing messages at Argentine apparition will be kept private",
+          "publisher": "Catholic World Report (2017)",
+          "url": "https://www.catholicworldreport.com/2017/03/21/local-bishop-ongoing-messages-at-argentine-apparition-will-be-kept-private/",
+          "note": "September 25, 1983; little schooling; \"Receive this Rosary from my hands\"; the 2016 decision covered the events through 1990; themes of prayer, conversion and the sacraments; she has been obedient to Church authorities; further messages not to be published, 2017"
+        }
+      ]
+    },
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-good-success",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Good Success (Quito)",
+        "production_id_hint": 1147
+      },
+      "student_title": "Our Lady of Good Success",
+      "subtitle": "In a convent in Quito, Ecuador, a nun told of seeing Mary, and a beloved statue of Mary was made.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1594 – 1634, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Quito, Ecuador"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Mother Mariana de Jesús Torres"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Devotion to the statue is approved; the apparitions are not formally approved"
+        }
+      ],
+      "intro": "Long ago, a girl named Mariana sailed from Spain to Quito, in South America, to help start a convent of sisters. She became the leader of the convent. According to tradition, Mary appeared to her and asked for a statue to be made. That statue, Our Lady of Good Success, has been loved in Quito for more than 400 years. The Church is still studying Mother Mariana's life.",
+      "story_paragraphs": [
+        "Mariana de Jesús Torres was born in Spain in 1563. When she was about thirteen years old, she sailed across the ocean with a small group of sisters. They went to Quito, a city high in the mountains of what is now Ecuador. There they started the first convent in the city.",
+        "Mariana grew up in the convent and became a sister herself. Later, she became the abbess, the leader of the sisters.",
+        "The story of what happened next comes to us from people who loved Mother Mariana and wrote about her. They say that on February 2, 1594, Mary appeared to her. Mary held the child Jesus in her right arm. In her other hand, she held a staff, like the one an abbess carries, and the keys of the convent.",
+        "According to the story, Mary asked Mother Mariana to have a statue made of her, just as she appeared. Mary wanted the statue placed above the abbess's chair, as a sign that she was the true leader and protector of the convent.",
+        "A sculptor named Francisco del Castillo carved the statue. On February 2, 1611, the bishop of Quito blessed it. The statue was given the name Our Lady of Good Success. It still stands in the convent today.",
+        "Mother Mariana died on January 16, 1635. The sisters have honored her ever since.",
+        "In 1986, the Church opened a study of Mother Mariana's life, to see if she might one day be named a saint. In 1991, the archbishop made the convent a sanctuary of Mary for the whole city, and people still come to pray before the statue."
+      ],
+      "timeline": [
+        {
+          "date_display": "1563",
+          "text": "Mariana de Jesús Torres is born in Spain."
+        },
+        {
+          "date_display": "1577",
+          "text": "Mariana sails to Quito with the sisters who start the city's first convent."
+        },
+        {
+          "date_display": "February 2, 1594",
+          "text": "According to tradition, Mary appears to Mother Mariana."
+        },
+        {
+          "date_display": "February 2, 1611",
+          "text": "The bishop of Quito blesses the statue of Our Lady of Good Success."
+        },
+        {
+          "date_display": "January 16, 1635",
+          "text": "Mother Mariana dies."
+        },
+        {
+          "date_display": "1986",
+          "text": "The Church opens the cause for Mother Mariana's beatification."
+        },
+        {
+          "date_display": "1991",
+          "text": "The convent becomes a sanctuary of Mary for the archdiocese of Quito."
+        }
+      ],
+      "fun_facts": [
+        "Mother Mariana sailed from Spain to South America when she was about thirteen.",
+        "The statue of Our Lady of Good Success holds the keys of the convent.",
+        "The statue stands above the abbess's chair, as a sign that Mary leads the convent.",
+        "The statue has been in the same convent in Quito for more than 400 years.",
+        "Mother Mariana was the abbess, the leader of her convent."
+      ],
+      "words_to_know": [
+        {
+          "word": "Convent",
+          "definition": "A home where religious sisters live, work, and pray together."
+        },
+        {
+          "word": "Abbess",
+          "definition": "The sister who leads a convent."
+        },
+        {
+          "word": "Statue",
+          "definition": "A figure carved or shaped to look like a person."
+        },
+        {
+          "word": "Tradition",
+          "definition": "Beliefs and stories passed down from one generation to the next."
+        },
+        {
+          "word": "Beatification",
+          "definition": "A step the Church takes on the way to naming someone a saint."
+        }
+      ],
+      "think_about_it": "Mary is shown holding the convent's keys, like the leader of the house. How is Mary like a mother who looks after her family?",
+      "reflection_question": "Mother Mariana crossed an ocean as a young girl to serve God. What is something brave you could do for God?",
+      "type_specific": {
+        "who_saw_her": "According to tradition, Mother Mariana de Jesús Torres, the abbess of the convent, saw Mary.",
+        "marys_message": "According to the story, Mary asked for a statue to be made of her, holding the child Jesus and the keys of the convent, and placed above the abbess's chair. It was a sign that she would care for and protect the sisters.",
+        "prayer": "Our Lady of Good Success, pray for us.",
+        "church_recognition": "The bishop of Quito blessed the statue of Our Lady of Good Success in 1611, and the Church has long allowed devotion to Mary under this title. In 1991, the archbishop made the convent a sanctuary of Mary. The Church has not formally approved the apparitions to Mother Mariana, and it is still studying her life. Catholics are not required to believe in any particular apparition."
+      },
+      "quiz": [
+        {
+          "prompt": "In what city is the statue of Our Lady of Good Success?",
+          "choices": [
+            {
+              "text": "Lima"
+            },
+            {
+              "text": "Quito",
+              "correct": true
+            },
+            {
+              "text": "Madrid"
+            },
+            {
+              "text": "Rome"
+            }
+          ],
+          "explanation": "The statue is in a convent in Quito, Ecuador."
+        },
+        {
+          "prompt": "Where did Mariana come from?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Spain",
+              "correct": true
+            },
+            {
+              "text": "Ireland"
+            }
+          ],
+          "explanation": "Mariana was born in Spain and sailed to Quito when she was about thirteen."
+        },
+        {
+          "prompt": "What is Mary holding in the statue?",
+          "choices": [
+            {
+              "text": "A lamb and a candle"
+            },
+            {
+              "text": "The child Jesus and the keys of the convent",
+              "correct": true
+            },
+            {
+              "text": "A book and a pen"
+            }
+          ],
+          "explanation": "The statue shows Mary holding the child Jesus, a staff, and the keys of the convent."
+        },
+        {
+          "prompt": "Where was the statue placed?",
+          "choices": [
+            {
+              "text": "Above the abbess's chair",
+              "correct": true
+            },
+            {
+              "text": "In the town square"
+            },
+            {
+              "text": "On a ship"
+            }
+          ],
+          "explanation": "The statue was placed above the abbess's chair as a sign that Mary leads and protects the convent."
+        },
+        {
+          "prompt": "What is an abbess?",
+          "choices": [
+            {
+              "text": "A kind of bell"
+            },
+            {
+              "text": "The sister who leads a convent",
+              "correct": true
+            },
+            {
+              "text": "A type of prayer"
+            }
+          ],
+          "explanation": "Mother Mariana became the abbess, the leader of the sisters in her convent."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Quito (Our Lady of Good Success)",
+          "publisher": "The Miracle Hunter",
+          "url": "https://www.miraclehunter.com/marian_apparitions/approved_apparitions/quito/",
+          "note": "Mariana born in Spain, 1563; the 1577 voyage to found the first convent in Quito; February 2, 1594; the statue request of January 16, 1599 and its description; Francisco del Castillo; consecration by Bishop Salvador de Ribera, February 2, 1611; placed above the Abbess's chair; died January 16, 1635; cause opened 1986; archdiocesan Marian sanctuary 1991"
+        },
+        {
+          "title": "Is Our Lady of Good Success approved?",
+          "publisher": "Catholic Answers",
+          "url": "https://catholic.com/qa/is-our-lady-of-good-success-approved",
+          "note": "the apparitions lack credible documentation; most information comes from groups promoting her cause; a coronation recognizes devotion, not an apparition"
+        }
+      ]
+    }
+  ]
+}

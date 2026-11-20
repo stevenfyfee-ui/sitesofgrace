@@ -1,0 +1,1262 @@
+{
+  "format": "future-saints-learning-pages/v1",
+  "approved_by": "Steven",
+  "approved_on": "2026-11-19",
+  "pages": [
+    {
+      "kind": "marian",
+      "parent_index": "marian-apparitions",
+      "slug": "our-lady-of-medjugorje",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Our Lady of Medjugorje (Queen of Peace)",
+        "production_id_hint": 1101
+      },
+      "student_title": "Our Lady of Medjugorje, Queen of Peace",
+      "subtitle": "Since 1981, millions of people have come to a small village to pray, and the Church sees the good fruit of their prayer.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "Since June 1981"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Medjugorje, Bosnia and Herzegovina"
+        },
+        {
+          "icon": "person",
+          "label": "Who saw her",
+          "value": "Six young people from the village, who say they still see her"
+        },
+        {
+          "icon": "star",
+          "label": "Church says",
+          "value": "Devotion allowed (2024); the apparitions are not confirmed"
+        }
+      ],
+      "intro": "In June 1981, six young people in the village of Medjugorje said they saw Mary on a hill. They said she called herself the Queen of Peace and asked for prayer, fasting, and peace. Since then, millions of people have come there to pray. The Church has not said that Mary really appeared, but it recognizes the many graces and the renewed faith that have come from Medjugorje.",
+      "story_paragraphs": [
+        "Medjugorje is a small village in the mountains of Bosnia and Herzegovina, a country in southeastern Europe. Its parish church is named for Saint James.",
+        "On June 24 and 25, 1981, six young people from the village said they saw a beautiful lady on a rocky hill called Podbrdo. They said she was Mary, the Mother of Jesus. Their names are Marija, Ivan, Vicka, Jakov, Mirjana, and Ivanka. Today, they are grown-ups.",
+        "The young people said Mary called herself the Queen of Peace. They said she asked people to pray every day, to pray the Rosary, to fast, to read the Bible, to go to Confession, and to go to Mass. Peace, they said, begins in each person's heart and comes through prayer.",
+        "The six say that Mary has kept appearing to them, and that some of them still see her often. Many messages have been shared over the years.",
+        "News of Medjugorje spread around the world. About 40 million people have come there to pray. Many have gone to Confession for the first time in years. Many families have made peace. Some young people have decided to become priests or religious sisters.",
+        "For many years, the Church studied Medjugorje carefully. In 2024, with the approval of Pope Francis, the Vatican wrote a document called \"The Queen of Peace.\" It said that the Church sees \"abundant conversions\" and \"a frequent return to the sacraments\" at Medjugorje. It said Catholics may pray there and be encouraged in their faith.",
+        "But the Church did not say that Mary really appeared. That question is still open. The Church reminds pilgrims that they come to Medjugorje to meet Mary, the Queen of Peace, and her Son, not to meet the people who say they see her."
+      ],
+      "timeline": [
+        {
+          "date_display": "June 24–25, 1981",
+          "text": "Six young people say they see Mary on Podbrdo hill."
+        },
+        {
+          "date_display": "1980s and 1990s",
+          "text": "Pilgrims from around the world begin to come to Medjugorje to pray."
+        },
+        {
+          "date_display": "1991",
+          "text": "The bishops of the region say they have not decided whether the apparitions are supernatural, but they allow pilgrims to come and pray."
+        },
+        {
+          "date_display": "2018",
+          "text": "Pope Francis sends an archbishop to care for the pilgrims at Medjugorje."
+        },
+        {
+          "date_display": "2019",
+          "text": "Pope Francis allows parishes and dioceses to organize pilgrimages there."
+        },
+        {
+          "date_display": "September 19, 2024",
+          "text": "The Vatican's note \"The Queen of Peace\" gives a nihil obstat: devotion is allowed, but the apparitions are not confirmed."
+        }
+      ],
+      "fun_facts": [
+        "The young people said Mary called herself the Queen of Peace.",
+        "The parish church in Medjugorje is named for Saint James.",
+        "About 40 million people have come to Medjugorje to pray.",
+        "The hill where the young people first said they saw Mary is called Podbrdo, or Apparition Hill.",
+        "The Church calls Medjugorje a place of many conversions and a return to the sacraments."
+      ],
+      "words_to_know": [
+        {
+          "word": "Apparition",
+          "definition": "When a holy person, like Mary, appears to someone in a special way."
+        },
+        {
+          "word": "Nihil obstat",
+          "definition": "Latin for \"nothing stands in the way.\" The Church uses it to say people may pray and take part in a devotion."
+        },
+        {
+          "word": "Conversion",
+          "definition": "Turning your heart back to God."
+        },
+        {
+          "word": "Fasting",
+          "definition": "Giving up some food for a time, as a prayer and an offering to God."
+        },
+        {
+          "word": "Grace",
+          "definition": "God's gift of his own life and love in our souls."
+        }
+      ],
+      "think_about_it": "The Church says the most important thing at Medjugorje is meeting Mary and her Son in prayer. Why do you think prayer matters more than seeing something amazing?",
+      "reflection_question": "The message of Medjugorje is about peace that starts in your own heart. What could you do today to bring peace to your home?",
+      "type_specific": {
+        "who_saw_her": "Six young people from the village say they saw Mary: Marija, Ivan, Vicka, Jakov, Mirjana, and Ivanka. They say some of them still see her today. The Church has not confirmed that these apparitions really happen.",
+        "marys_message": "The young people say Mary asks for peace, prayer, fasting, conversion, and a return to God. The Church's 2024 note says the most special title in the messages is \"Queen of Peace,\" and that this peace comes most of all through prayer.",
+        "prayer": "Mary, Queen of Peace, pray for us.",
+        "church_recognition": "In 2024, with the approval of Pope Francis, the Vatican gave Medjugorje a \"nihil obstat.\" This means the Church recognizes the good spiritual fruit and the graces connected with Medjugorje, such as \"abundant conversions\" and \"a frequent return to the sacraments,\" and Catholics may pray there. But the Church has not said that Mary really appeared. The Vatican's note says it \"does not imply a declaration of the supernatural character\" of the events. Catholics are not required to believe in any particular apparition."
+      },
+      "quiz": [
+        {
+          "prompt": "What title is used for Mary at Medjugorje?",
+          "choices": [
+            {
+              "text": "Our Lady of the Snows"
+            },
+            {
+              "text": "Queen of Peace",
+              "correct": true
+            },
+            {
+              "text": "Star of the Sea"
+            },
+            {
+              "text": "Lady of Light"
+            }
+          ],
+          "explanation": "The young people said Mary called herself the Queen of Peace, and the Church's 2024 note uses that title too."
+        },
+        {
+          "prompt": "In what country is Medjugorje?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "France"
+            },
+            {
+              "text": "Bosnia and Herzegovina",
+              "correct": true
+            },
+            {
+              "text": "Spain"
+            }
+          ],
+          "explanation": "Medjugorje is a small village in Bosnia and Herzegovina, in southeastern Europe."
+        },
+        {
+          "prompt": "What does the Church recognize about Medjugorje?",
+          "choices": [
+            {
+              "text": "The good fruit of prayer there, like conversions and a return to the sacraments",
+              "correct": true
+            },
+            {
+              "text": "That Mary really appeared"
+            },
+            {
+              "text": "That everyone must go there"
+            }
+          ],
+          "explanation": "The Church recognizes the graces and renewed faith connected with Medjugorje, but it has not said that Mary really appeared."
+        },
+        {
+          "prompt": "What does \"nihil obstat\" mean?",
+          "choices": [
+            {
+              "text": "\"Mary is here\""
+            },
+            {
+              "text": "\"Nothing stands in the way\"",
+              "correct": true
+            },
+            {
+              "text": "\"Go home\""
+            }
+          ],
+          "explanation": "It is Latin for \"nothing stands in the way.\" The Church uses it to say people may take part in a devotion."
+        },
+        {
+          "prompt": "According to the Church, why do pilgrims go to Medjugorje?",
+          "choices": [
+            {
+              "text": "To meet the visionaries"
+            },
+            {
+              "text": "To meet Mary and her Son in prayer",
+              "correct": true
+            },
+            {
+              "text": "To see a famous building"
+            }
+          ],
+          "explanation": "The Church's note says pilgrims come to encounter Mary, the Queen of Peace, not to meet the people who say they see her."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Queen of Peace: Note About the Spiritual Experience Connected with Medjugorje",
+          "publisher": "Dicastery for the Doctrine of the Faith (September 19, 2024)",
+          "url": "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20240919_nota-esperienza-medjugorje_en.html",
+          "note": "\"abundant conversions, a frequent return to the sacraments\"; \"the most original title in the messages is that of 'Queen of Peace'\"; peace through prayer; \"does not imply a declaration of the supernatural character\"; \"the faithful are not obliged to believe in it\"; pilgrimages are to encounter Mary, not the alleged visionaries"
+        },
+        {
+          "title": "Pope Francis grants approval for Medjugorje devotion",
+          "publisher": "Vatican News (2024)",
+          "url": "https://www.vaticannews.va/en/vatican-city/news/2024-09/pope-francis-ddf-note-nulla-osta-approval-medjugorje-devotion.html",
+          "note": "approved by Pope Francis on August 28; authorizes public acts of devotion; no judgment on the supernatural origin; renewed faith, return to confession and communion, vocations; the faithful are not obliged to believe"
+        },
+        {
+          "title": "Medjugorje: What Catholics should know about the alleged Marian apparitions",
+          "publisher": "Catholic World Report / CNA (2024)",
+          "url": "https://www.catholicworldreport.com/2024/09/19/medjugorje-what-catholics-should-know-about-the-alleged-marian-apparitions/",
+          "note": "June 24–25, 1981; the six visionaries' names; Podbrdo; \"Queen of Peace\"; the five practices: prayer and the Rosary, fasting, the Bible, confession, the Eucharist; ongoing apparitions; the 1991 bishops' statement; the Apostolic Visitor in 2018; organized pilgrimages authorized in 2019"
+        },
+        {
+          "title": "Vatican approves devotion at Medjugorje while not pronouncing on authenticity of 'alleged messages'",
+          "publisher": "Catholic World Report / CNA (2024)",
+          "url": "https://www.catholicworldreport.com/?p=310513",
+          "note": "about 40 million visitors; Pope Francis's approval; Cardinal Fernández's comments; some messages called misleading"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-bolsena-orvieto",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Bolsena-Orvieto",
+        "production_id_hint": 1106
+      },
+      "student_title": "The Eucharistic Miracle of Bolsena and Orvieto",
+      "subtitle": "A priest who doubted, a host that bled, and the beginning of the feast of Corpus Christi.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1263, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Bolsena and Orvieto, Italy"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "Blood was reported to flow from the host onto the altar cloth"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "Orvieto Cathedral and the Church of Saint Christina in Bolsena"
+        }
+      ],
+      "intro": "In 1263, a priest on his way to Rome stopped in the town of Bolsena, Italy, to celebrate Mass. He had doubts about whether Jesus is truly present in the Eucharist. According to tradition, when he said the words of consecration, blood began to flow from the host. The next year, the Pope began the feast of Corpus Christi, which honors the Body of Christ.",
+      "story_paragraphs": [
+        "Long ago, pilgrims traveling to Rome often stopped in Bolsena, a small town by a lake in Italy. In 1263, a priest named Peter, who was said to come from Prague, stopped there. He was praying for stronger faith. He struggled to believe that the bread and wine at Mass truly become the Body and Blood of Jesus.",
+        "Peter celebrated Mass in the church of Saint Christina, near her tomb. According to tradition, when he said the words of consecration, blood began to flow from the host. It fell onto his hands, onto the white linen cloth on the altar called the corporal, and onto the stone floor.",
+        "Pope Urban IV was staying in the nearby city of Orvieto. Peter went to him and told him what had happened. The Pope sent a bishop to Bolsena to look into it. The host and the bloodstained cloth were carried to Orvieto, where they were shown to the people.",
+        "The next year, in 1264, Pope Urban IV declared a new feast for the whole Church: the Solemnity of the Most Holy Body and Blood of Christ, also called Corpus Christi. The Pope asked a great teacher, Saint Thomas Aquinas, to write the prayers and songs for this feast. Some of his hymns, like the \"Tantum Ergo,\" are still sung today when Jesus in the Eucharist is adored.",
+        "The oldest written account of the miracle that we have comes from Orvieto in the early 1300s, many years after 1263.",
+        "Today, the corporal is kept in the cathedral of Orvieto. The stones from the altar are still in the church of Saint Christina in Bolsena. Every year on Corpus Christi, Catholics around the world remember that Jesus is truly present in the Eucharist."
+      ],
+      "timeline": [
+        {
+          "date_display": "1263",
+          "text": "According to tradition, a host bleeds during Mass in Bolsena."
+        },
+        {
+          "date_display": "1263",
+          "text": "The host and the bloodstained corporal are brought to Pope Urban IV in Orvieto."
+        },
+        {
+          "date_display": "August 11, 1264",
+          "text": "Pope Urban IV begins the feast of Corpus Christi."
+        },
+        {
+          "date_display": "1264",
+          "text": "Saint Thomas Aquinas writes the prayers and hymns for the new feast."
+        },
+        {
+          "date_display": "Early 1300s",
+          "text": "The oldest written account of the miracle that we have is written in Orvieto."
+        },
+        {
+          "date_display": "1964",
+          "text": "Pope Paul VI celebrates Mass in Orvieto for the feast's 700th anniversary."
+        }
+      ],
+      "fun_facts": [
+        "This miracle is connected with the beginning of the feast of Corpus Christi.",
+        "Saint Thomas Aquinas wrote the hymns for the new feast, including the \"Tantum Ergo.\"",
+        "Corpus Christi is Latin for \"the Body of Christ.\"",
+        "The bloodstained altar cloth is kept in the cathedral of Orvieto.",
+        "Saint Carlo Acutis included Bolsena and Orvieto in his exhibit about Eucharistic miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Consecration",
+          "definition": "The moment at Mass when the priest says Jesus' words, and the bread and wine become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Corporal",
+          "definition": "A square white cloth placed on the altar under the bread and wine during Mass."
+        },
+        {
+          "word": "Real Presence",
+          "definition": "The Catholic belief that Jesus is truly present in the Eucharist."
+        },
+        {
+          "word": "Corpus Christi",
+          "definition": "Latin for \"the Body of Christ,\" and the name of the feast that honors the Eucharist."
+        },
+        {
+          "word": "Relic",
+          "definition": "Something holy that is kept and honored, like an object connected to a saint or a miracle."
+        }
+      ],
+      "think_about_it": "The priest at Bolsena had doubts, but he kept praying. What can you do when it is hard to believe?",
+      "reflection_question": "On the feast of Corpus Christi, many parishes carry the Eucharist in a procession. How can you honor Jesus in the Eucharist this week?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a priest who doubted, and a host that bled onto the altar cloth and the floor during Mass in 1263.",
+        "what_the_church_says": "Pope Urban IV began the feast of Corpus Christi in 1264, and the Church has honored the relics in Orvieto and Bolsena for centuries. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "The oldest written account we have comes from the early 1300s. Some details, such as the priest's name, come from later tradition. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "What feast began after the miracle of Bolsena?",
+          "choices": [
+            {
+              "text": "Christmas"
+            },
+            {
+              "text": "Corpus Christi",
+              "correct": true
+            },
+            {
+              "text": "Easter"
+            },
+            {
+              "text": "All Saints"
+            }
+          ],
+          "explanation": "In 1264, Pope Urban IV began the feast of Corpus Christi, which honors the Body and Blood of Jesus."
+        },
+        {
+          "prompt": "What was the priest struggling with?",
+          "choices": [
+            {
+              "text": "He was lost."
+            },
+            {
+              "text": "He doubted that Jesus is truly present in the Eucharist.",
+              "correct": true
+            },
+            {
+              "text": "He forgot his prayers."
+            }
+          ],
+          "explanation": "The priest prayed for stronger faith because he found it hard to believe in the Real Presence."
+        },
+        {
+          "prompt": "What is a corporal?",
+          "choices": [
+            {
+              "text": "A soldier"
+            },
+            {
+              "text": "A white cloth placed on the altar during Mass",
+              "correct": true
+            },
+            {
+              "text": "A kind of candle"
+            }
+          ],
+          "explanation": "The corporal is the white cloth on the altar. According to tradition, the blood fell onto it."
+        },
+        {
+          "prompt": "Who wrote the hymns for the new feast?",
+          "choices": [
+            {
+              "text": "Saint Francis"
+            },
+            {
+              "text": "Saint Thomas Aquinas",
+              "correct": true
+            },
+            {
+              "text": "Saint Patrick"
+            }
+          ],
+          "explanation": "Pope Urban IV asked Saint Thomas Aquinas to write the prayers and hymns for Corpus Christi."
+        },
+        {
+          "prompt": "Where is the bloodstained corporal kept today?",
+          "choices": [
+            {
+              "text": "In the cathedral of Orvieto",
+              "correct": true
+            },
+            {
+              "text": "In a museum in Paris"
+            },
+            {
+              "text": "It was lost"
+            }
+          ],
+          "explanation": "The corporal is kept in Orvieto Cathedral. The stones from the altar are in the church of Saint Christina in Bolsena."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Miracle of Bolsena",
+          "publisher": "Basilica of Saint Christina, Bolsena",
+          "url": "https://basilicasantacristina.it/index.php/en/the-eucharistic-miracle",
+          "note": "1263, day unknown; Peter from Prague, by tradition; blood on the corporal and the floor and altar steps; Pope Urban IV in Orvieto; Bishop Giacomo; the relics shown in Orvieto; the bull Transiturus, August 11, 1264; Thomas Aquinas charged with the office and Mass; the oldest account an Orvieto chronicle of the early 1300s"
+        },
+        {
+          "title": "What Eucharistic miracle inspired the Feast of Corpus Christi?",
+          "publisher": "Catholic Straight Answers",
+          "url": "https://catholicstraightanswers.com/what-eucharistic-miracle-inspired-the-feast-of-corpus-christi/",
+          "note": "Peter of Prague; Mass at St Christina's tomb; Urban IV's investigation; Corpus Christi in 1264; Aquinas's hymns including the \"Tantum Ergo\"; the corporal in Orvieto Cathedral and the stones at St Christina's; Paul VI at Orvieto in 1964"
+        },
+        {
+          "title": "Blessed Carlo Acutis Listed 32 Eucharistic Miracles — Here Are the Top 5",
+          "publisher": "National Catholic Register",
+          "url": "https://www.ncregister.com/blog/five-eucharistic-miracles",
+          "note": "Bolsena, 1263, \"according to the legend\"; the relic in Orvieto; the link to Corpus Christi; in Carlo's list"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-siena",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Siena",
+        "production_id_hint": 1107
+      },
+      "student_title": "The Eucharistic Miracle of Siena",
+      "subtitle": "Hosts stolen in 1730 were found three days later, and they have stayed fresh for almost 300 years.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "August 1730"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Siena, Italy"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "Stolen hosts were found, and they have not spoiled for almost 300 years"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Basilica of Saint Francis in Siena"
+        }
+      ],
+      "intro": "In 1730, thieves stole a silver container full of consecrated hosts from a church in Siena, Italy. Three days later, the hosts were found in a church collection box, dusty but whole. The friars kept them to honor them instead of giving them out at Communion. Bread usually spoils quickly, but these hosts have stayed fresh for almost 300 years.",
+      "story_paragraphs": [
+        "Siena is an old city in Italy. On August 14, 1730, the night before the feast of the Assumption of Mary, most of the people of Siena were praying at the cathedral. The Basilica of Saint Francis was almost empty.",
+        "During that time, thieves crept into the basilica. They opened the tabernacle and stole the ciborium, a silver container holding hundreds of consecrated hosts. The people of Siena were heartbroken.",
+        "Three days later, on August 17, a priest in another church in Siena, Saint Mary of Provenzano, noticed something white in the collection box. Inside were the stolen hosts. They were dusty and some were tangled in cobwebs, but they were all there.",
+        "The hosts were carried back to the Basilica of Saint Francis. The friars decided not to give them out at Communion. Instead, they kept them so people could honor Jesus in them. They expected the hosts to crumble and spoil over time, as bread does.",
+        "But they did not spoil. Fifty years later, in 1780, a priest tasted one and found that it was still fresh. Later, in 1789, a bishop sealed some ordinary, unconsecrated hosts in a box to compare. Ten years later, those hosts had rotted away, while the hosts of 1730 were still whole.",
+        "In 1914, Pope Pius X allowed a team of scientists to study the hosts. They found that the hosts were made of ordinary flour and had not been specially treated. They could not explain why they had not spoiled.",
+        "In 1980, Pope John Paul II knelt before the hosts in Siena. He said, \"This is the Presence!\" Today, 223 of the hosts are still kept in the Basilica of Saint Francis."
+      ],
+      "timeline": [
+        {
+          "date_display": "August 14, 1730",
+          "text": "Thieves steal hundreds of consecrated hosts from the Basilica of Saint Francis."
+        },
+        {
+          "date_display": "August 17, 1730",
+          "text": "The hosts are found in a collection box at Saint Mary of Provenzano."
+        },
+        {
+          "date_display": "1780",
+          "text": "A priest tastes a host and finds it still fresh."
+        },
+        {
+          "date_display": "1789",
+          "text": "A test with ordinary hosts shows that bread kept the same way spoils."
+        },
+        {
+          "date_display": "1914",
+          "text": "Scientists study the hosts with the permission of Pope Pius X."
+        },
+        {
+          "date_display": "September 14, 1980",
+          "text": "Pope John Paul II prays before the hosts in Siena."
+        }
+      ],
+      "fun_facts": [
+        "The hosts of Siena are nearly 300 years old.",
+        "They were found in a church collection box, some tangled in cobwebs.",
+        "The hosts were made of ordinary flour, but they have not spoiled.",
+        "Pope John Paul II knelt before the hosts in 1980.",
+        "On the 17th of every month, people in Siena gather to adore Jesus in these hosts."
+      ],
+      "words_to_know": [
+        {
+          "word": "Host",
+          "definition": "The bread used at Mass, which becomes the Body of Jesus at the consecration."
+        },
+        {
+          "word": "Consecrated",
+          "definition": "Made holy. At Mass, the bread and wine are consecrated and become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Ciborium",
+          "definition": "A special cup with a lid that holds the consecrated hosts."
+        },
+        {
+          "word": "Tabernacle",
+          "definition": "The special box in church where the Eucharist is kept."
+        },
+        {
+          "word": "Adoration",
+          "definition": "Praying to Jesus present in the Eucharist, to love and worship him."
+        }
+      ],
+      "think_about_it": "The people of Siena were heartbroken when the hosts were stolen. How do you show respect for Jesus in the Eucharist at church?",
+      "reflection_question": "Pope John Paul II said, \"This is the Presence!\" When you are near the tabernacle, what would you like to say to Jesus?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "hosts stolen in 1730 were found three days later, and they have stayed fresh and whole for almost 300 years, even though ordinary hosts kept the same way spoiled.",
+        "what_the_church_says": "the Church allows the hosts to be honored and adored, and popes have prayed before them. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "The hosts were studied several times, including in 1914 with the permission of Pope Pius X. The scientists reported that they could not explain why the hosts had not spoiled. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "What happened to the hosts in Siena in 1730?",
+          "choices": [
+            {
+              "text": "They were eaten by mice"
+            },
+            {
+              "text": "They were stolen",
+              "correct": true
+            },
+            {
+              "text": "They were burned"
+            }
+          ],
+          "explanation": "Thieves stole the ciborium with hundreds of consecrated hosts from the Basilica of Saint Francis."
+        },
+        {
+          "prompt": "Where were the hosts found?",
+          "choices": [
+            {
+              "text": "In a river"
+            },
+            {
+              "text": "In a church collection box",
+              "correct": true
+            },
+            {
+              "text": "In a castle"
+            }
+          ],
+          "explanation": "Three days later, the hosts were found in the collection box of another church in Siena."
+        },
+        {
+          "prompt": "What is surprising about the hosts?",
+          "choices": [
+            {
+              "text": "They turned into gold"
+            },
+            {
+              "text": "They have stayed fresh for almost 300 years",
+              "correct": true
+            },
+            {
+              "text": "They glow in the dark"
+            }
+          ],
+          "explanation": "Bread usually spoils, but the hosts of 1730 have stayed fresh and whole."
+        },
+        {
+          "prompt": "Which pope knelt before the hosts in 1980?",
+          "choices": [
+            {
+              "text": "Pope John Paul II",
+              "correct": true
+            },
+            {
+              "text": "Pope Pius X"
+            },
+            {
+              "text": "Pope Urban IV"
+            }
+          ],
+          "explanation": "Pope John Paul II prayed before the hosts in Siena and said, \"This is the Presence!\""
+        },
+        {
+          "prompt": "What do Catholics believe about every consecrated host?",
+          "choices": [
+            {
+              "text": "It is only a symbol"
+            },
+            {
+              "text": "Jesus is truly present in it",
+              "correct": true
+            },
+            {
+              "text": "It is only special in Siena"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in every consecrated host, at every Mass. This is the Real Presence."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Lost and Found in a Walled Medieval Town",
+          "publisher": "National Catholic Register",
+          "url": "https://ncregister.com/features/lost-and-found-in-a-walled-medieval-town",
+          "note": "August 14, 1730, during the Assumption vigil; the ciborium stolen from St. Francis; found August 17 in the poor box at St. Mary of Provenzano, some hanging from cobwebs; kept for veneration; 1780 tasting; 1789 investigation and the control hosts; 1914 commission under Pius X, ordinary flour; 223 after 1950; John Paul II, September 14, 1980, \"This is the Presence!\""
+        },
+        {
+          "title": "The miraculous hosts of Siena: the Body of Christ ever new",
+          "publisher": "Aleteia (2015)",
+          "url": "https://aleteia.org/2015/06/20/the-miraculous-hosts-of-siena-the-body-of-christ-ever-new/",
+          "note": "351 hosts; found three days later in the alms box; the 1780, 1789 and 1914 studies; \"grain flour is the best breeding ground for microorganisms\"; the Corpus Christi procession and adoration on the 17th of each month"
+        },
+        {
+          "title": "Blessed Carlo Acutis Listed 32 Eucharistic Miracles — Here Are the Top 5",
+          "publisher": "National Catholic Register",
+          "url": "https://www.ncregister.com/blog/five-eucharistic-miracles",
+          "note": "the 1914 report called it \"a singular phenomenon\"; John Paul II's 1980 words"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-cascia",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Cascia",
+        "production_id_hint": 1110
+      },
+      "student_title": "The Eucharistic Miracle of Cascia",
+      "subtitle": "A priest carried the Eucharist carelessly in his prayer book, and the pages were stained with blood.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "1330, according to tradition"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Near Siena, Italy; the relic is in Cascia"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A host was reported to bleed onto the pages of a prayer book"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The Basilica of Saint Rita in Cascia"
+        }
+      ],
+      "intro": "In 1330, a priest in Italy was called to bring Holy Communion to a man who was very sick. Instead of carrying the host in a special container, he tucked it between the pages of his prayer book. When he opened the book, according to the story, the host had bled and stained the pages. One of those pages is kept today in the basilica of Saint Rita in Cascia.",
+      "story_paragraphs": [
+        "In the year 1330, near the city of Siena in Italy, a farmer was very sick. He asked for a priest to come and bring him Holy Communion.",
+        "When a priest brings Communion to someone at home, he usually carries the consecrated host in a small gold case called a pyx. This shows great respect for Jesus in the Eucharist.",
+        "But this priest did not use a pyx. Instead, he slipped the host between two pages of his breviary, the book of prayers that priests pray every day. Then he set off down the road to the sick man's home, carrying the book with him.",
+        "At the farmer's home, the priest heard the man's confession and forgave his sins in God's name. Then he opened his breviary to take out the host and give the man Communion.",
+        "According to the story, the priest was amazed. The host had begun to bleed, and it had stained both pages of the book with blood. The priest was sorry that he had not treated the Eucharist with more care.",
+        "The stained pages were kept with great care, and people came to honor them as a sign of Jesus' presence. One of them is now in the town of Cascia, in the basilica of Saint Rita. The miracle happened about fifty years before Saint Rita was born.",
+        "For hundreds of years, people have come to pray before this small, old page. The story of Cascia reminds us that the Eucharist is not ordinary bread. It is Jesus himself, and he should always be treated with love and respect."
+      ],
+      "timeline": [
+        {
+          "date_display": "1330",
+          "text": "According to tradition, a host bleeds onto the pages of a priest's prayer book near Siena."
+        },
+        {
+          "date_display": "After 1330",
+          "text": "The stained pages are kept and honored."
+        },
+        {
+          "date_display": "1381",
+          "text": "Saint Rita is born near Cascia, about fifty years after the miracle."
+        },
+        {
+          "date_display": "Later",
+          "text": "One of the pages is kept in Cascia."
+        },
+        {
+          "date_display": "Today",
+          "text": "The relic is honored in the Basilica of Saint Rita in Cascia."
+        }
+      ],
+      "fun_facts": [
+        "The host was carried in a breviary, a priest's book of daily prayers.",
+        "Both pages of the book were stained.",
+        "The relic is kept in the same basilica as Saint Rita of Cascia.",
+        "The miracle happened about fifty years before Saint Rita was born.",
+        "Saint Carlo Acutis included Cascia in his exhibit about Eucharistic miracles."
+      ],
+      "words_to_know": [
+        {
+          "word": "Breviary",
+          "definition": "A book of prayers that priests pray every day."
+        },
+        {
+          "word": "Pyx",
+          "definition": "A small case, usually gold, used to carry the Eucharist to people who are sick."
+        },
+        {
+          "word": "Consecrated",
+          "definition": "Made holy. At Mass, the bread and wine are consecrated and become the Body and Blood of Jesus."
+        },
+        {
+          "word": "Relic",
+          "definition": "Something holy that is kept and honored, like an object connected to a saint or a miracle."
+        },
+        {
+          "word": "Reverence",
+          "definition": "Deep respect and love, especially for God and holy things."
+        }
+      ],
+      "think_about_it": "The priest at Cascia did not treat the Eucharist with enough care. What are some ways we show reverence for Jesus in church?",
+      "reflection_question": "The sick man received Jesus in Communion at home. Who is someone sick that you could pray for today?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a host carried in a prayer book bled and stained the pages in 1330.",
+        "what_the_church_says": "the Church allows the relic to be honored, and it has been venerated for centuries in Cascia. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "This story comes to us through tradition, and the sources I found do not describe a scientific study of the relic. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "Why was the priest going to the farmer's home?",
+          "choices": [
+            {
+              "text": "To sell a cow"
+            },
+            {
+              "text": "To bring Holy Communion to a sick man",
+              "correct": true
+            },
+            {
+              "text": "To fix the roof"
+            }
+          ],
+          "explanation": "The farmer was very sick and asked for a priest to bring him Holy Communion."
+        },
+        {
+          "prompt": "Where did the priest put the host?",
+          "choices": [
+            {
+              "text": "Between the pages of his prayer book",
+              "correct": true
+            },
+            {
+              "text": "In a gold pyx"
+            },
+            {
+              "text": "In his pocket"
+            }
+          ],
+          "explanation": "Instead of using a pyx, the priest slipped the host between two pages of his breviary."
+        },
+        {
+          "prompt": "What did the priest see when he opened the book?",
+          "choices": [
+            {
+              "text": "The host was gone"
+            },
+            {
+              "text": "The host had bled and stained the pages",
+              "correct": true
+            },
+            {
+              "text": "The pages had turned to gold"
+            }
+          ],
+          "explanation": "According to the story, the host had bled and stained both pages with blood."
+        },
+        {
+          "prompt": "Whose basilica holds the relic today?",
+          "choices": [
+            {
+              "text": "Saint Peter's"
+            },
+            {
+              "text": "Saint Rita's",
+              "correct": true
+            },
+            {
+              "text": "Saint Francis's"
+            }
+          ],
+          "explanation": "One of the stained pages is kept in the Basilica of Saint Rita in Cascia."
+        },
+        {
+          "prompt": "What is a pyx?",
+          "choices": [
+            {
+              "text": "A kind of bird"
+            },
+            {
+              "text": "A small case for carrying the Eucharist to the sick",
+              "correct": true
+            },
+            {
+              "text": "A prayer book"
+            }
+          ],
+          "explanation": "A pyx is a small case, usually gold, that priests use to carry the Eucharist to people who are sick."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Blessed Carlo Acutis Listed 32 Eucharistic Miracles — Here Are the Top 5",
+          "publisher": "National Catholic Register",
+          "url": "https://www.ncregister.com/blog/five-eucharistic-miracles",
+          "note": "1330; a priest near Siena carried a host in his breviary instead of a pyx to a dying parishioner; heard his confession; found the host bleeding and both pages stained; one page kept in Cascia beneath St. Rita's basilica"
+        },
+        {
+          "title": "Cascia",
+          "publisher": "Prime Matters",
+          "url": "https://primematters.com/foundations/enrichment/cascia",
+          "note": "1330; Communion for a sick peasant; the host between two pages of the breviary; \"the host had begun to bleed and stained the pages with blood\"; the pages venerated for centuries in the Basilica of St. Rita; about fifty years before Rita's birth in 1381"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-sokolka",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Sokolka",
+        "production_id_hint": 1164
+      },
+      "student_title": "The Eucharistic Miracle of Sokółka",
+      "subtitle": "In 2008, in a small town in Poland, a red mark appeared on a host that had fallen during Communion.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "October 2008"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Sokółka, Poland"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A red mark was reported on a host that had been placed in water"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "The parish church in Sokółka"
+        }
+      ],
+      "intro": "In October 2008, during Communion at Mass in Sokółka, Poland, a consecrated host fell to the floor. The priest placed it in water to dissolve, as the Church directs. A week later, a red mark was found on the host. The archbishop asked scientists and a Church commission to study what happened, and the host is now honored by the people of Sokółka.",
+      "story_paragraphs": [
+        "Sokółka is a small town in the northeast of Poland. On October 12, 2008, during Communion at Mass, a consecrated host fell from the priest's hands onto the floor.",
+        "When a host falls and cannot be received, the Church asks the priest to place it in water until it dissolves. The priest picked up the host and put it in a small container of water. He placed it in the tabernacle. After Mass, the container was moved to a safe in the sacristy.",
+        "Seven days later, the safe was opened. Inside, the people saw that the host had not dissolved. Instead, there was a red mark on it.",
+        "The archbishop of the area, Edward Ozorowski, was told. In January 2009, he asked two doctors from the medical university in the nearby city of Białystok to study a tiny piece of the red mark.",
+        "The two doctors reported that the sample looked most like heart muscle. Other people disagreed and suggested that the red color might come from a kind of bacteria. The doctors said they did not agree with that idea.",
+        "The archbishop also set up a Church commission. It talked with the people who had been there and checked whether anyone had tampered with the host. It found no sign that anyone had. The case was then sent on to the Vatican's representative in Poland.",
+        "Today, the host is kept in the parish church in Sokółka, and people come to pray before it. But the most important thing is not the red mark. It is the faith that Jesus is truly present in every host, at every Mass, in every church in the world."
+      ],
+      "timeline": [
+        {
+          "date_display": "October 12, 2008",
+          "text": "A consecrated host falls during Communion and is placed in water."
+        },
+        {
+          "date_display": "October 19, 2008",
+          "text": "A red mark is found on the host."
+        },
+        {
+          "date_display": "January 7, 2009",
+          "text": "A sample is taken to be studied by two doctors in Białystok."
+        },
+        {
+          "date_display": "March 30, 2009",
+          "text": "The archbishop sets up a Church commission to study the event."
+        },
+        {
+          "date_display": "2009",
+          "text": "The commission finds no sign that anyone tampered with the host."
+        },
+        {
+          "date_display": "Today",
+          "text": "The host is honored in the parish church in Sokółka."
+        }
+      ],
+      "fun_facts": [
+        "When a host falls and cannot be received, it is placed in water until it dissolves.",
+        "The host at Sokółka did not dissolve.",
+        "The red mark was found seven days after the host fell.",
+        "The Church set up a commission to talk with the people who were there.",
+        "Sokółka is in the northeast of Poland."
+      ],
+      "words_to_know": [
+        {
+          "word": "Host",
+          "definition": "The bread used at Mass, which becomes the Body of Jesus at the consecration."
+        },
+        {
+          "word": "Tabernacle",
+          "definition": "The special box in church where the Eucharist is kept."
+        },
+        {
+          "word": "Sacristy",
+          "definition": "The room in a church where the priest gets ready for Mass and holy things are kept."
+        },
+        {
+          "word": "Commission",
+          "definition": "A group of people chosen to study something carefully."
+        },
+        {
+          "word": "Real Presence",
+          "definition": "The Catholic belief that Jesus is truly present in the Eucharist."
+        }
+      ],
+      "think_about_it": "The people of Sokółka were careful with the host even after it fell. How can you show care and respect for the Eucharist?",
+      "reflection_question": "The most important thing is that Jesus is present in every host at every Mass. How does knowing that change the way you go to Mass?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a host that had fallen during Communion did not dissolve in water, and a red mark appeared on it. Two doctors reported that a sample looked like heart muscle.",
+        "what_the_church_says": "the local Church studied the event with a commission and allowed the host to be honored. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "Two doctors reported that the sample looked like heart muscle. Other experts have disagreed, and no independent study has settled the question. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "In what country is Sokółka?",
+          "choices": [
+            {
+              "text": "Italy"
+            },
+            {
+              "text": "Poland",
+              "correct": true
+            },
+            {
+              "text": "Mexico"
+            },
+            {
+              "text": "Ireland"
+            }
+          ],
+          "explanation": "Sokółka is a small town in the northeast of Poland."
+        },
+        {
+          "prompt": "What happened to the host during Communion?",
+          "choices": [
+            {
+              "text": "It broke"
+            },
+            {
+              "text": "It fell to the floor",
+              "correct": true
+            },
+            {
+              "text": "It was lost"
+            }
+          ],
+          "explanation": "A consecrated host fell from the priest's hands during Communion, so it was placed in water."
+        },
+        {
+          "prompt": "What was found on the host seven days later?",
+          "choices": [
+            {
+              "text": "A gold cross"
+            },
+            {
+              "text": "A red mark",
+              "correct": true
+            },
+            {
+              "text": "Writing"
+            }
+          ],
+          "explanation": "The host had not dissolved, and there was a red mark on it."
+        },
+        {
+          "prompt": "What did the archbishop do?",
+          "choices": [
+            {
+              "text": "He asked doctors and a Church commission to study it",
+              "correct": true
+            },
+            {
+              "text": "He hid the host"
+            },
+            {
+              "text": "He did nothing"
+            }
+          ],
+          "explanation": "The archbishop asked two doctors to study a sample and set up a commission to talk with the people who were there."
+        },
+        {
+          "prompt": "What is the most important thing the Church teaches about every host?",
+          "choices": [
+            {
+              "text": "It might turn red"
+            },
+            {
+              "text": "Jesus is truly present in it",
+              "correct": true
+            },
+            {
+              "text": "It is only bread"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in every consecrated host. This is the Real Presence."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Eucharistic Miracle: 2009?",
+          "publisher": "National Catholic Register",
+          "url": "https://www.ncregister.com/blog/eucharistic-miracle-2009-cngi7yxn",
+          "note": "October 12, 2008; the host fell from the priest's hands; placed in water in the tabernacle and then the sacristy safe; the red stain seen seven days later; sample sent January 7, 2009; the two professors; Archbishop Ozorowski's commission of March 30, 2009 and \"no third-party intervention\"; the case sent to the Apostolic Nunciature"
+        },
+        {
+          "title": "Sokółka",
+          "publisher": "Eucharistic Miracles of the World (Carlo Acutis's exhibit)",
+          "url": "https://miracolieucaristici.org/en/polonia/sokolka.html",
+          "note": "the Białystok pathologists Maria Sobaniec-Łotowska and Stanisław Sulkowski; their report of cardiac muscle tissue; the claim of bacteria (prodigiosin) and their rejection of it; the Curia's communication of October 14, 2009; the commission's finding"
+        }
+      ]
+    },
+    {
+      "kind": "eucharistic",
+      "parent_index": "eucharistic-miracles",
+      "slug": "eucharistic-miracle-of-legnica",
+      "canonical": {
+        "model": "catalog.SacredSitePage",
+        "match_title": "Eucharistic Miracle of Legnica",
+        "production_id_hint": 1163
+      },
+      "student_title": "The Eucharistic Miracle of Legnica",
+      "subtitle": "On Christmas Day in 2013, a host that fell during Communion was found with a red mark, and the Church studied it carefully.",
+      "story_label": "The Story",
+      "quick_facts": [
+        {
+          "icon": "calendar",
+          "label": "When",
+          "value": "December 25, 2013"
+        },
+        {
+          "icon": "marker",
+          "label": "Where",
+          "value": "Legnica, Poland"
+        },
+        {
+          "icon": "chalice",
+          "label": "What happened",
+          "value": "A red mark was reported on a host that had been placed in water"
+        },
+        {
+          "icon": "church",
+          "label": "Remembered at",
+          "value": "Saint Hyacinth's Church in Legnica"
+        }
+      ],
+      "intro": "On Christmas Day in 2013, at Saint Hyacinth's Church in Legnica, Poland, a consecrated host fell to the floor during Communion. It was placed in water, as the Church directs. A few days later, a red mark appeared on it. The bishop asked scientists and theologians to study it. In 2016, after asking the Vatican, he allowed the host to be honored.",
+      "story_paragraphs": [
+        "Legnica is a city in the southwest of Poland. On December 25, 2013, Christmas Day, people were receiving Communion at Saint Hyacinth's Church. A consecrated host fell to the floor.",
+        "The priest followed what the Church asks in such cases. He picked up the host and placed it in a container of water, so it would dissolve. Then he put the container in the tabernacle.",
+        "In early January 2014, the priests checked on it. The host had not dissolved. A red mark now covered about one fifth of it.",
+        "Bishop Stefan Cichy, the bishop of Legnica at the time, set up a commission of scientists and theologians to study what had happened. Scientists took a tiny sample. Two laboratories studied it. They reported that it looked like pieces of human heart muscle.",
+        "In January 2016, the new bishop, Zbigniew Kiernikowski, sent the results to the Vatican office that studies such questions. The Vatican recommended that a suitable place be prepared for the host so that people could come to pray before it.",
+        "In April 2016, the bishop announced this to his people. He said he hoped it would \"serve to deepen the cult of the Eucharist.\" That means he hoped it would help people love and honor Jesus in the Eucharist more.",
+        "The host is now kept at Saint Hyacinth's Church. People come to pray before it. But the bishop's hope reminds us what matters most: every host at every Mass is Jesus himself, whether or not anything unusual can be seen."
+      ],
+      "timeline": [
+        {
+          "date_display": "December 25, 2013",
+          "text": "A consecrated host falls during Communion and is placed in water."
+        },
+        {
+          "date_display": "Early January 2014",
+          "text": "A red mark is found on the host. Bishop Stefan Cichy sets up a commission."
+        },
+        {
+          "date_display": "January 26, 2014",
+          "text": "Scientists take a sample to study."
+        },
+        {
+          "date_display": "January 2016",
+          "text": "Bishop Zbigniew Kiernikowski sends the results to the Vatican."
+        },
+        {
+          "date_display": "April 2016",
+          "text": "The bishop announces that the host may be honored by the faithful."
+        },
+        {
+          "date_display": "Today",
+          "text": "The host is kept at Saint Hyacinth's Church in Legnica."
+        }
+      ],
+      "fun_facts": [
+        "The host fell on Christmas Day.",
+        "The church in Legnica is named for Saint Hyacinth, a Polish saint.",
+        "The red mark covered about one fifth of the host.",
+        "Two different laboratories studied the sample.",
+        "The bishop asked the Vatican for advice before allowing the host to be honored."
+      ],
+      "words_to_know": [
+        {
+          "word": "Host",
+          "definition": "The bread used at Mass, which becomes the Body of Jesus at the consecration."
+        },
+        {
+          "word": "Tabernacle",
+          "definition": "The special box in church where the Eucharist is kept."
+        },
+        {
+          "word": "Theologian",
+          "definition": "A person who studies God and the teachings of the Church."
+        },
+        {
+          "word": "Commission",
+          "definition": "A group of people chosen to study something carefully."
+        },
+        {
+          "word": "Venerate",
+          "definition": "To honor something holy with deep respect and prayer."
+        }
+      ],
+      "think_about_it": "The bishop asked for help from the Vatican before he decided anything. Why is it wise to ask for advice before making a big decision?",
+      "reflection_question": "The bishop hoped this event would help people love Jesus in the Eucharist more. How can you grow in love for Jesus in the Eucharist?",
+      "type_specific": {
+        "what_catholics_believe": "At every Mass, the priest says the words Jesus spoke at the Last Supper: \"This is my body\" and \"This is my blood.\" Catholics believe that the bread and wine truly become the Body and Blood of Jesus, even though they still look and taste like bread and wine. This is called the Real Presence.",
+        "what_was_reported": "a host that fell during Communion on Christmas Day 2013 did not dissolve in water, and a red mark appeared on it. Laboratories reported that a sample looked like heart muscle.",
+        "what_the_church_says": "after consulting the Vatican, the bishop allowed the host to be placed where people could honor it, hoping it would deepen love for the Eucharist. The Church never asks Catholics to believe in a particular miracle. What it teaches as true is that Jesus is really present in every Eucharist.",
+        "evidence_note": "The lab results were reported by the bishop and the scientists involved, but the full reports have not been widely published, and other experts have not studied the sample. We share what was reported without saying it proves the miracle."
+      },
+      "quiz": [
+        {
+          "prompt": "On what day did the host fall in Legnica?",
+          "choices": [
+            {
+              "text": "Easter"
+            },
+            {
+              "text": "Christmas Day",
+              "correct": true
+            },
+            {
+              "text": "New Year's Day"
+            }
+          ],
+          "explanation": "The host fell during Communion on December 25, 2013, Christmas Day."
+        },
+        {
+          "prompt": "What is Saint Hyacinth's Church?",
+          "choices": [
+            {
+              "text": "A school"
+            },
+            {
+              "text": "The church in Legnica where it happened",
+              "correct": true
+            },
+            {
+              "text": "A museum"
+            }
+          ],
+          "explanation": "The event happened at Saint Hyacinth's Church in Legnica, Poland, where the host is kept today."
+        },
+        {
+          "prompt": "Who did the bishop ask for advice?",
+          "choices": [
+            {
+              "text": "A newspaper"
+            },
+            {
+              "text": "The Vatican",
+              "correct": true
+            },
+            {
+              "text": "A king"
+            }
+          ],
+          "explanation": "Bishop Kiernikowski sent the results to the Vatican, which recommended a place where people could pray before the host."
+        },
+        {
+          "prompt": "What did the bishop hope the event would do?",
+          "choices": [
+            {
+              "text": "Deepen people's love for the Eucharist",
+              "correct": true
+            },
+            {
+              "text": "Make the church famous"
+            },
+            {
+              "text": "Build a new road"
+            }
+          ],
+          "explanation": "The bishop said he hoped it would \"serve to deepen the cult of the Eucharist,\" helping people love and honor Jesus more."
+        },
+        {
+          "prompt": "What do Catholics believe about every host at every Mass?",
+          "choices": [
+            {
+              "text": "It is just bread"
+            },
+            {
+              "text": "It is Jesus himself",
+              "correct": true
+            },
+            {
+              "text": "It is only special on Christmas"
+            }
+          ],
+          "explanation": "Catholics believe Jesus is truly present in every consecrated host at every Mass."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Legnica",
+          "publisher": "Eucharistic Miracles of the World (Carlo Acutis's exhibit)",
+          "url": "https://www.miracolieucaristici.org/en/polonia/legnica.html",
+          "note": "December 25, 2013 at St. Hyacinth's; the host placed in water and in the tabernacle; the red stain on about a fifth of it in early January 2014; Bishop Stefan Cichy's commission; the sample of January 26, 2014; the two laboratories and their reports; Bishop Kiernikowski's announcement of April 2016; a suitable place for veneration"
+        },
+        {
+          "title": "Eucharistic miracle in Poland",
+          "publisher": "Catholic Online (2016)",
+          "url": "https://catholic.org/news/hf/faith/story.php?id=68497",
+          "note": "Bishop Kiernikowski: \"I hope that this will serve to deepen the cult of the Eucharist\"; the Congregation for the Doctrine of the Faith consulted in January 2016 and recommended \"a suitable place for the host so that the faithful could venerate it\"; the forensic findings as reported"
+        }
+      ]
+    }
+  ]
+}
