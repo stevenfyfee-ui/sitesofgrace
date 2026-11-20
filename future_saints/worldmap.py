@@ -16,6 +16,12 @@ Pins go through future_saints.geo.world_viewbox (Equal Earth), the same function
 the outline (sitesofgrace/static/future_saints/svg/world-outline.svg). Where markers would
 overlap on the desktop map, a reviewed offset (WORLD_MARKER_OFFSETS) moves the marker and a
 thin line anchors it to its true spot; staff see any remaining overlap.
+
+Countries (future_saints.countries): each pinned site's country comes from Natural Earth's
+U.S.-point-of-view shapes (point in polygon, never guessed; a reviewed override file for the
+rare exception). It shows in the card and the list as "Country: Italy". Borders and English
+country names are drawn on the map from the same source (tools/build_world_borders.py);
+the names are decorative (aria-hidden), placed so they never cover a pin.
 """
 import json
 from functools import lru_cache
@@ -25,10 +31,12 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
+from .countries import site_country
 from .geo import WORLD_VIEWBOX, WORLD_VIEWBOX_HEIGHT, WORLD_VIEWBOX_WIDTH, point_in_polygon, world_viewbox
 from .models import FutureSaintsGateMixin
 
 OUTLINE_FILE = Path(__file__).resolve().parent / "data" / "world_outline.json"
+LABELS_FILE = Path(__file__).resolve().parent / "data" / "world_labels.json"
 
 # (content_kind, filter label, type label on cards and markers, sprite icon), in nav order.
 KINDS = [
@@ -44,7 +52,17 @@ CALLOUT_KEY = "california-missions"
 CALIFORNIA = (37.2, -119.6)               # the callout's spot: central California
 MARKER_PX = 34                            # the drawn marker disc (CSS .fs-wm-disc)
 CARD_ART_SPEC = "fill-800x600"            # the story card's picture (_art_frame.html, variant "thumb")
-DESKTOP_MAP_PX = 691.2                    # the map's width at 1440 (panel beside it), as on the missions hub
+DESKTOP_MAP_PX = 1184.0                   # the whole world's width on the 1440 map (full content width, card below)
+DESKTOP_1X_SCALE = DESKTOP_MAP_PX / WORLD_VIEWBOX_WIDTH   # px per map unit there: the labels' and detail's reference
+DETAIL_SCALE = 2 * DESKTOP_1X_SCALE      # past this scale both the land outline and the borders swap to the finer level
+HOME_CENTER = (30.0, -30.0)              # phones and tablets open on the Atlantic, filling the map's height
+# No-JavaScript country names: the map's width decides its scale, so each label carries the width
+# bands it shows in (CSS container queries), placed at each band's narrowest width (the most crowded).
+LABEL_BANDS = [("a", 320), ("b", 450), ("c", 700), ("d", 900), ("e", 1100)]
+PIN_HIT_PX = 44                          # a marker's button (CSS .fs-wm-pin)
+LABEL_CHAR_EM = 0.58                     # Future Saints Serif: a generous average advance (no-JS estimate only)
+LABEL_PAD_PX = 2
+COMPASS_BOX = (28.0, 304.0, 112.0, 412.0)   # the compass rose and its N, in map units (translate(70 370) scale(.8))
 # Reviewed offsets (CSS px, desktop >= 1024 only) for markers that would overlap at 1440.
 # Keyed by the place a marker sits on (the sacred site's exact title, or the callout's key),
 # so an offset stays with its spot whatever page links there. A thin line and a dot anchor
@@ -114,6 +132,68 @@ def on_land(x, y):
                for p in world_outline()["polygons"])
 
 
+@lru_cache(maxsize=1)
+def label_data():
+    """The country names (tools/build_world_borders.py), in placement order: largest countries first."""
+    return json.loads(LABELS_FILE.read_text(encoding="utf-8"))["labels"]
+
+
+def label_obstacles():
+    """Boxes (map units) no country name may touch: the compass rose and the ocean art."""
+    return [COMPASS_BOX] + [(a["x"], a["y"], a["x"] + a["w"], a["y"] + a["h"]) for a in world_art()]
+
+
+def label_box(label, scale, pad_px=LABEL_PAD_PX):
+    """A label's box in map units at `scale` px per unit (centred on its point; estimated width)."""
+    w = (len(label["name"]) * LABEL_CHAR_EM * label["px"] + 2 * pad_px) / scale
+    h = (label["px"] * 1.3 + 2 * pad_px) / scale
+    return (label["x"] - w / 2, label["y"] - h / 2, label["x"] + w / 2, label["y"] + h / 2)
+
+
+def _touch(a, b):
+    return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
+
+
+def label_may_show(label, zoom, scale):
+    """Its rank allows it at this zoom (1 = the whole world) and the name fits at this scale (px per unit)."""
+    return label["fit_scale"] is not None and label["rank_zoom"] <= zoom + 1e-6 and label["fit_scale"] <= scale + 1e-6
+
+
+def place_labels(labels, items, scale, offsets=False, zoom=1.0):
+    """The labels that may show at `scale` and `zoom`, greedily in order: pins always win, then the
+    art, then earlier labels. `offsets` adds each marker's reviewed desktop offset position as well."""
+    half = PIN_HIT_PX / 2 / scale
+    taken = list(label_obstacles())
+    for i in items:
+        if not i["pinned"]:
+            continue
+        spots = [(i["x"], i["y"])] + ([(i["x"] + i["dx"] / scale, i["y"] + i["dy"] / scale)] if offsets else [])
+        taken += [(x - half, y - half, x + half, y + half) for x, y in spots]
+    shown = []
+    for lab in labels:
+        if not label_may_show(lab, zoom, scale):
+            continue
+        box = label_box(lab, scale)
+        if box[0] < 0 or box[1] < 0 or box[2] > WORLD_VIEWBOX_WIDTH or box[3] > WORLD_VIEWBOX_HEIGHT:
+            continue
+        if any(_touch(box, t) for t in taken):
+            continue
+        taken.append(box)
+        shown.append(lab)
+    return shown
+
+
+def world_labels(items):
+    """Every label for the template, each with the no-JavaScript width bands it shows in (the static
+    map is the whole world, so zoom 1, at the band's narrowest width)."""
+    labels = label_data()
+    bands = {lab["iso"]: [] for lab in labels}
+    for band, width in LABEL_BANDS:
+        for lab in place_labels(labels, items, width / WORLD_VIEWBOX_WIDTH, offsets=width >= 900):
+            bands[lab["iso"]].append(band)
+    return [{**lab, "bands": " ".join(f"is-{b}" for b in bands[lab["iso"]])} for lab in labels]
+
+
 class WorldMapPage(FutureSaintsGateMixin, Page):
     subtitle = models.CharField(max_length=200, blank=True, help_text="One line under the title.")
     intro = models.TextField(max_length=800, blank=True, help_text="A short introduction above the map.")
@@ -179,7 +259,7 @@ def world_items(home, request):
                 warnings.append(f"{title}: #{site.pk} {site.title!r} has no latitude/longitude, so no pin")
                 site = None
             if site is not None:
-                place_line, country = _site_place(site), (site.country or "").strip()
+                place_line = _site_place(site)
         else:
             site, reason = saint_place(page)
             if site is None:
@@ -188,9 +268,12 @@ def world_items(home, request):
                 warnings.append(f"{title}: #{site.pk} {site.title!r} has no latitude/longitude, so no pin")
                 site = None
             if site is not None:
-                place_line, country = f"A place connected to {title}: {site.title}", (site.country or "").strip()
+                place_line = f"A place connected to {title}: {site.title}"
         if site is not None:
             x, y = world_viewbox(site.latitude, site.longitude)
+            country, why = site_country(site)
+            if why:
+                warnings.append(f"{title}: #{site.pk} {site.title!r}: {why}")
         items.append(_item(kind, page.slug, title, page.subtitle, page.get_url(request), page.card_art(),
                            place_line, country, x, y, "Read the Story", place=site.title if site else ""))
     for page in missions:
@@ -217,6 +300,7 @@ def _item(kind, key, title, subtitle, url, art, place_line, country, x, y, link_
         "kind": kind, "key": key, "title": title, "subtitle": subtitle, "url": url, "art": art,
         "type_label": KIND_LABELS[kind], "icon": dict((k, i) for k, _, _, i in KINDS)[kind],
         "place_line": place_line, "link_label": link_label, "count": count, "in_callout": in_callout,
+        "country_line": f"Country: {country}" if country and kind != "california_mission" else "",
         "pinned": pinned, "x": x, "y": y,
         "left": f"{100 * x / WORLD_VIEWBOX_WIDTH:.3f}" if pinned else "",
         "top": f"{100 * y / WORLD_VIEWBOX_HEIGHT:.3f}" if pinned else "",
@@ -262,9 +346,13 @@ def world_context(home, request):
         "fs_world_kinds": KINDS, "fs_world_viewbox": WORLD_VIEWBOX, "fs_world_warnings": warnings,
         "fs_world_regions": world_regions(), "fs_world_zoom_max": WORLD_ZOOM_MAX,
         "fs_world_vb_w": WORLD_VIEWBOX_WIDTH, "fs_world_vb_h": WORLD_VIEWBOX_HEIGHT, **art_context(),
+        "fs_world_labels": world_labels(items), "fs_world_detail_scale": f"{DETAIL_SCALE:.3f}",
+        "fs_world_home_x": f"{world_viewbox(*HOME_CENTER)[0]:.1f}",
+        "fs_world_obstacles": ";".join(",".join(f"{v:.1f}" for v in b) for b in label_obstacles()),
         "fs_world_card_data": [
             {"key": i["key"], "kind": i["kind"], "type_label": i["type_label"], "title": i["title"],
-             "subtitle": i["subtitle"], "place_line": i["place_line"], "url": i["url"], "link_label": i["link_label"],
+             "subtitle": i["subtitle"], "place_line": i["place_line"], "country_line": i["country_line"],
+             "url": i["url"], "link_label": i["link_label"],
              "icon": i["icon"], "in_callout": i["in_callout"], "art": art_json(i["art"], CARD_ART_SPEC)}
             for i in items],
     }

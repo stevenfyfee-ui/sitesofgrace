@@ -1,21 +1,29 @@
 {% comment %}
   The world map. Two layers in one fixed Equal Earth viewBox, inside a zoomable stage:
-  1. .fs-map-art (aria-hidden): _world_art.html (textures, outline, ocean-only art, compass).
-     No country labels.
+  1. .fs-map-art (aria-hidden): a sea margin (the ocean texture past the map's edges, for a box
+     taller or wider than the world), _world_art.html (textures, outline, ocean-only art,
+     compass) and _world_countries.html (borders and English country names, decorative).
   2. .fs-wmap-pins: one marker per pinned story, a real submit button of a GET form
      (?story=<key>), at its true spot (future_saints.worldmap); data-x/y are its map units.
      On desktop near 1x a reviewed offset may move a marker clear of its neighbours, with a
      thin line to its spot; zooming past 2x fades the offsets out (the pins separate).
-  Zoom (future-saints.js): 1x-6x, region shortcuts, +/-/reset, drag and pinch, the wheel only
-  once the map is clicked or focused; markers keep their size. Without JavaScript nothing
-  zooms and the shortcuts and controls stay hidden.
+  Zoom (future-saints.js): 1x (the whole world, fitted and centred in the box) to 6x, region
+  shortcuts, +/-/reset, drag and pinch, the wheel only once the map is clicked or focused;
+  markers and names keep their size. Under 1024px the map opens filling its height, centred on
+  the Atlantic (data-fs-home-x); "Whole World" still fits the whole map. Full screen uses the
+  Fullscreen API where there is one (.fs-wmap-frame keeps the map's place in the page). Without
+  JavaScript nothing zooms and the shortcuts and controls stay hidden.
 {% endcomment %}
+<div class="fs-wmap-frame">
 <div class="fs-wmap" id="world-map">
   <div class="fs-zoom-viewport" data-fs-zoom data-fs-zoom-max="{{ fs_world_zoom_max }}" data-fs-vb-w="{{ fs_world_vb_w }}" data-fs-vb-h="{{ fs_world_vb_h }}"
+       data-fs-home-x="{{ fs_world_home_x }}" data-fs-home-fill-below="1024" data-fs-detail-scale="{{ fs_world_detail_scale }}"
        aria-label="World map of the stories. Use the + and − keys to zoom, the arrow keys to move, and 0 to reset.">
     <div class="fs-zoom-stage">
       <svg class="fs-map-art" viewBox="{{ fs_world_viewbox }}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+        <rect class="fs-wmap-sea" x="-2000" y="-2000" width="5000" height="4445" fill="url(#fs-world-ocean-tex)"/>
         {% include "future_saints/includes/_world_art.html" %}
+        {% include "future_saints/includes/_world_countries.html" %}
       </svg>
 
       <form class="fs-wmap-pins" method="get" action="#story-card" data-fs-world data-fs-pin-radius="24" aria-label="Stories on the map">
@@ -34,10 +42,12 @@
       </form>
     </div>
   </div>
-  {% include "future_saints/includes/_zoom_controls.html" %}
+  {% include "future_saints/includes/_zoom_controls.html" with fullscreen=True %}
+  <button type="button" class="fs-button fs-wmap-close" hidden data-fs-fullscreen-close>Close</button>
   <div class="fs-pin-chooser" role="dialog" aria-modal="false" aria-labelledby="fs-world-chooser-h" hidden data-fs-chooser>
     <p id="fs-world-chooser-h" class="fs-pin-chooser-title">Which story?</p>
     <div class="fs-pin-chooser-list" data-fs-chooser-list></div>
     <button type="button" class="fs-button fs-button--quiet" data-fs-chooser-close>Close</button>
   </div>
+</div>
 </div>

@@ -8,7 +8,7 @@ Needs Playwright with Chromium (the local sog-shots image has both). Writes PNGs
 out_dir; exits 1 if any check fails.
 
 Checks: the map at 1440/1024/768/430/390/360 (200, no cookies, nothing from another host,
-the story card never over the map, beside it at >=1024 and below it under; no two markers
+the story card never over the map, and below it at every width; no two markers
 overlap at 1440); keyboard: Tab walks the markers in list order and Enter selects one
 (aria-pressed, the card and ?story= update); filters hide markers and list items together and
 "Show all" brings them back; touch: a tap between two close markers opens "Which story?";
@@ -73,10 +73,8 @@ def main():
             check(len(markers) >= 3, f"map {width}: markers drawn ({len(markers)})")
             b = page.evaluate(BOXES_JS)
             check(not boxes_overlap(b["map"], b["card"]), f"map {width}: the story card never covers the map")
-            if width >= 1024:
-                check(b["card"][0] >= b["map"][2] - .5, f"map {width}: card to the right of the map")
-            else:
-                check(b["card"][1] >= b["map"][3] - .5, f"map {width}: card below the map")
+            # Since future-saints-map-countries the map has the full content width and the card is below it at every width.
+            check(b["card"][1] >= b["map"][3] - .5, f"map {width}: card below the map")
             if width == 1440:
                 clashes = [(m["key"], n["key"]) for i, m in enumerate(markers) for n in markers[i + 1:] if discs_touch(m["box"], n["box"])]
                 check(not clashes, f"map 1440: no two markers overlap {clashes}")

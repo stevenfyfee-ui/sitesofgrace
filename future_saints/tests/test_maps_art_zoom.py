@@ -135,7 +135,9 @@ class WorldArtAndZoomTests(WorldTestCase):
         self.assertIn(f'data-fs-zoom data-fs-zoom-max="{WORLD_ZOOM_MAX}"', html)
         self.assertEqual(WORLD_ZOOM_MAX, 6)
         self.assertIn("world-outline-50m.svg#fs-world-land", html, "the 1:50m detail is named, loaded only past 2x")
-        self.assertEqual(html.count('data-fs-detail="'), 4)
+        # 4 land outline uses, plus the land clip and the borders (future-saints-map-countries).
+        self.assertEqual(html.count('data-fs-detail="'), 6)
+        self.assertEqual(html.count('data-fs-detail="/static/future_saints/svg/world-outline-50m.svg#fs-world-land"'), 5)
         self.assertIn("hidden data-fs-regions", html)
         for label in ("Europe", "Holy Land", "The Americas", "Whole World"):
             self.assertIn(f">{label}</button>", html)

@@ -207,7 +207,8 @@ Only **published** stories appear.
 A saint with no principal site, or with two or more, is listed but not pinned, and staff see it as
 needing a map place.
 
-**Offsets.** Markers are 34 px discs. At 1440 the map is 691 px wide. Where markers would overlap
+**Offsets.** Markers are 34 px discs. At 1440 the whole world is 1,184 px wide (691 px before the
+map was enlarged; see "Country borders and names"). Where markers would overlap
 there, a reviewed offset in `worldmap.WORLD_MARKER_OFFSETS` moves the marker on desktop (1024 and
 wider) only. A thin line and a dot anchor it to its true spot.
 
@@ -315,7 +316,8 @@ One component zooms both maps (`future-saints.js`, `initZoom`).
 **Zooming to a story.** Choosing a story from the list, or arriving with `?story=` (or `?mission=`
 on California), zooms and pans to it. With reduced motion it jumps instead of animating.
 
-**Detail.** The first time the world map passes 2×, it swaps to the Natural Earth **1:50m** outline
+**Detail.** The first time the world map passes 2× (since the map was enlarged: the first time it is
+drawn at more than 2.368 px per map unit, which is 2× on the 1440 map), it swaps to the Natural Earth **1:50m** outline
 (`world-outline-50m.svg`: simplified at 0.12 units, 532 polygons, 233 KB, about 86 KB gzipped).
 - It's built with `tools/build_world_outline.py --detail <ne_50m_land.geojson>`.
 - Natural Earth is public domain.
@@ -335,3 +337,190 @@ Measured on the first load at 1440 wide:
 | Future Saints homepage | 831 KB | 532 KB |
 
 The CSS and JS grew by 2 KB and 10 KB.
+
+---
+
+# Country borders and names (World Discovery Map)
+
+The world map is larger and shows country borders and English country names. Each story's card and
+list entry also say which country it is in ("Country: Italy"). Everything stays behind
+`SOG_FUTURE_SAINTS`. The homepage preview is unchanged.
+
+## Source
+
+- **Natural Earth, Admin 0 – Countries, point of view: United States (`ne_10m_admin_0_countries_usa`),
+  version 5.1.2** (the latest release).
+  https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
+  The build used the GeoJSON copy at
+  https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries_usa.geojson.
+  That download isn't committed.
+- Licence: public domain (Natural Earth terms of use).
+- Natural Earth publishes the U.S. point of view only at 1:10m. The build simplifies it with the
+  land outline's own Douglas-Peucker routine and tolerances, so no border is drawn or moved by hand.
+- Built with `python tools/build_world_borders.py <ne_10m_admin_0_countries_usa.geojson>`. It uses
+  only the standard library.
+
+**Disputed areas, as this edition draws them** (decided before the build, 2026-11-20):
+
+| Area | Drawn and named |
+|---|---|
+| Israel / West Bank and Gaza | Israel, and "Palestine" (one feature: the West Bank and Gaza). Jerusalem is in Israel. |
+| Western Sahara | Its own shape, "Western Sahara". |
+| Kosovo | Its own country, "Kosovo". |
+| Taiwan | Its own shape, "Taiwan". |
+| Crimea | Ukraine. |
+| Kashmir | Split along the Line of Control; Aksai Chin in China. Every border is the same soft line (no dashed lines). |
+
+**Folded pieces.** Every "Breakaway" and "Lease" feature, and the UK sovereign base areas, is folded
+into its sovereign by Natural Earth's `SOV_A3`. A folded piece gets no label, and no line is drawn
+where both sides share a sovereign:
+- Abkhazia and South Ossetia → Georgia (no line, no label).
+- Guantánamo Bay → Cuba (`CU1`; no line, no label).
+- Akrotiri and Dhekelia → United Kingdom (`GB1`). Cyprus is a different sovereign, so a small line
+  around each base stays (no label).
+
+## Borders
+
+- **One path of shared boundaries.** Every edge two different countries share, chained between
+  junctions and drawn **once**. Coasts aren't borders: the coastline stays the land outline's.
+- **Two levels**, each built with the land outline's tolerances. Junctions stay put, so the chains still
+  meet. A segment that two chains simplify to the same line is dropped the second time; a test checks
+  that no segment is drawn twice.
+
+| File | Tolerance | Chains | Points | Size (gzipped) |
+|---|---|---|---|---|
+| `static/future_saints/svg/world-borders.svg` | 0.4 units | 363 | 2,949 | 42 KB (16.3 KB) |
+| `static/future_saints/svg/world-borders-50m.svg` | 0.12 units | 373 | 7,526 | 106 KB (39.2 KB) |
+
+- **Clipped** to the land outline (`#fs-world-land-clip`), so no border runs into the sea.
+- **Detail swap:** the finer level loads with the 1:50m land outline (`data-fs-detail`). Both swap the
+  first time the map is drawn at more than **2.368 px per map unit**, which is 2× on the 1440 map.
+  It's a scale, not a zoom factor, so a phone that opens filling its height doesn't load the finer
+  level before it needs it.
+- **Style:** `#8a7550` (the coastline's warm brown) at 50% opacity, `0.8px × --lu`. `--lu` is map
+  units per screen pixel, set by the zoom, so the line is about 0.8 px on screen at every zoom.
+  Decorative: inside the aria-hidden art, under the markers, not clickable.
+
+## Names
+
+- **What gets a name:** 199 countries. That's each sovereign state's home part, plus Kosovo, Taiwan,
+  Palestine, Western Sahara and Greenland. Dependencies, territories and the folded pieces get none,
+  and nor do two Indeterminate reef and island features that aren't countries (Scarborough Shoal,
+  and the Spratly Islands feature Natural Earth names "Wake Island").
+- **Text:** Natural Earth's `NAME_EN`, with five reviewed plain names (`PLAIN_NAMES`):
+  - United States of America → United States
+  - People's Republic of China → China
+  - The Gambia → Gambia
+  - The Bahamas → Bahamas
+  - Federated States of Micronesia → Micronesia
+
+  Czech Republic, Ivory Coast, East Timor, Turkey, Cape Verde, Republic of the Congo and Palestine
+  stay as Natural Earth has them.
+- **Place:** SVG text at Natural Earth's `LABEL_X` / `LABEL_Y`, through `world_viewbox`.
+  Written to `future_saints/data/world_labels.json`.
+- **Style:** Future Saints Serif (Lora; it is both the heading and the body face), `#4f4537` with a
+  parchment halo. 13 px for `LABELRANK` ≤ 2 (36 countries), 11 px for the rest, never smaller. The
+  size is `px × --lu`, so it stays constant on screen while zooming. aria-hidden, not interactive.
+- **When a name may show:** both of these, from Natural Earth's data.
+  - **`rank_zoom`** — the map's zoom (1 = the whole world) at which the country's rank lets it show:
+    its `MIN_LABEL`, one step earlier, with 1× taken as the 1440 map (about web zoom 2.2). So at 1×
+    only large countries, and more as you zoom in, on every screen.
+  - **`fit_scale`** — the scale (px per map unit, so the screen's size counts) at which the name fits
+    across the country's main part and its height.
+
+  A name that never fits by 6× on the 1440 map (Vatican City, San Marino, Monaco, Andorra,
+  Liechtenstein, Malta and others) has no `fit_scale`. It may show only at the largest zoom. So may a
+  name too long for a small screen even at its largest zoom.
+- **Collisions:** names are placed greedily, largest countries first. A name is hidden at that zoom if
+  it would touch:
+  - a marker's 44 px button (pins always win);
+  - the compass rose, the ship or the whale;
+  - the zoom buttons or the full-screen "Close";
+  - another name, or the map's edge.
+- **With JavaScript,** `future-saints.js` does the placement at the real scale after every zoom,
+  pan, resize, filter change and marker spread.
+- **Without JavaScript,** the server runs the same placement for five width bands (`LABEL_BANDS`: 320,
+  450, 700, 900 and 1100 px), each at zoom 1 (the static map is the whole world) and at its narrowest
+  width. On desktop bands it also counts the
+  markers' reviewed offset positions. CSS container queries on `.fs-wmap` then show each name in its
+  bands and set `--lu` for that band.
+
+## The country in text
+
+`future_saints.countries` finds each pinned site's country by point in polygon against the same
+U.S.-point-of-view countries (`future_saints/data/world_countries.json`, server-side only, about
+0.8 MB gzipped). A pin gets a country only when the answer is clear:
+
+- it's inside exactly one country's shape, **and**
+- it's at least **1 km** from every other country's shape.
+
+Otherwise it gets no country line, and staff see why on the map page ("outside every country's
+shape", "inside two countries' shapes", "on the border of …"). Nothing is guessed.
+
+**Lookup shapes.** Each ring is simplified in runs:
+- land borders at 0.003° (about 330 m);
+- coasts at 0.03° (about 3.3 km);
+- island parts under 0.001 deg² (about 12 km²) are left out unless they're all a country has.
+
+Against the 242 sacred sites in the local catalog, plus the ten control cities, this gives **the
+same country as the unsimplified 1:10m shapes for every point**. One coastal site falls just outside
+its coast and so gets a staff warning instead.
+
+**Reviewed overrides** (`future_saints/data/pin_country_overrides.json`):
+- Each entry names a site by **slug and title**, the country, the date it was reviewed and why.
+- An entry is used only when both slug and title match. A slug whose title has changed is ignored,
+  and staff see that.
+- Overrides are for points the rule can't settle. Everything else follows point in polygon.
+
+| Site (slug) | Country | Why |
+|---|---|---|
+| St. Peter's Basilica (`st-peters-basilica`) | Vatican City | Its coordinates fall 0.1 km from Natural Earth's simplified Vatican outline. |
+
+- **Saints** use their `map_place` site (or single principal site), as for the pin. No place means
+  no country line.
+- **California missions** stay "California, United States" through the one callout, with no
+  separate country line.
+- **Marker labels** for screen readers end with the same country ("Church of the Holy Sepulchre,
+  Holy Land, Israel").
+
+| Control city | Country |
+|---|---|
+| Rome, Lanciano | Italy |
+| Lourdes | France |
+| Fátima | Portugal |
+| Mexico City | Mexico |
+| Jerusalem | Israel |
+| Amsterdam | Netherlands |
+| Kraków | Poland |
+| Akita | Japan |
+| Kibeho | Rwanda |
+
+## Layout and zoom
+
+- **Size.** The map has the full content width, and the story card always sits below it, never
+  over it.
+  - Desktop (≥ 1024): height `clamp(560px, 70vh, 820px)`.
+  - Tablet and phone: height `max(360px, 60vh)`.
+  - `.fs-wmap-frame` holds the height, so full screen never moves the page.
+- **Fitting.** The box is taller than the world (1000 : 445). The stage keeps the viewBox's shape:
+  - with JavaScript, it's fitted and centred in the box;
+  - without JavaScript, CSS centres it.
+
+  A sea margin (the ocean texture past the edges) fills the rest. Pins, region shortcuts and
+  `?story=` use the same viewBox and Equal Earth projection, unchanged.
+- **1×** is the whole world, fitted. "Whole World" returns to it.
+- **Under 1024 px** the map opens filling the box's height, centred on 30°N 30°W (the Atlantic), so
+  the Americas and Europe both partly show. The reset button and the 0 key return to this view.
+- **Full screen.** A 44 px button ("Show the map full screen") sits next to the zoom buttons and
+  uses the Fullscreen API. It's hidden where the API isn't available (for example iPhone Safari).
+  "Close" and Esc leave, and focus returns to the button.
+
+**Page weight** (the World Discovery Map, first load at 1440, nothing cached, uncompressed, measured
+the same way on both builds): **950 KB before, 1,041 KB after** (+91 KB):
+- borders: +42 KB (16 KB gzipped);
+- the page HTML with the names: +31 KB;
+- `future-saints.js`: +9 KB;
+- `future-saints.css`: +4 KB.
+
+Zooming past 2.368 px per map unit later loads the 1:50m borders (106 KB, 39 KB gzipped) with the
+1:50m land outline. The pin-country shapes (2.4 MB, 0.8 MB gzipped) stay on the server.
