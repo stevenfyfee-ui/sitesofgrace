@@ -167,7 +167,8 @@ class PinRuleTests(WorldTestCase):
         labels = dict(self.markers(self.map_html()))
         self.assertEqual(labels["our-lady-of-lourdes"], "Our Lady of Lourdes, Marian apparition, France")
         self.assertEqual(labels["eucharistic-miracle-of-lanciano"], "Eucharistic Miracle of Lanciano, Eucharistic miracle, Italy")
-        self.assertEqual(labels["church-of-the-holy-sepulchre"], "Church of the Holy Sepulchre, Holy Land")
+        # The country comes from the map's country shapes (future_saints.countries), not the site's text field.
+        self.assertEqual(labels["church-of-the-holy-sepulchre"], "Church of the Holy Sepulchre, Holy Land, Israel")
 
     def test_a_site_without_coordinates_is_list_only_with_a_staff_warning(self):
         SacredSitePage.objects.filter(pk=self.sepulchre.pk).update(latitude=None, longitude=None)

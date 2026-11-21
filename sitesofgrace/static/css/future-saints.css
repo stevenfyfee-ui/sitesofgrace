@@ -825,6 +825,56 @@ a.fs-project-tile:hover { box-shadow: 0 8px 22px rgba(3, 37, 83, .12); }
 .fs-world-preview-text { display: grid; gap: .6rem; justify-items: start; }
 @media print { .fs-world .fs-wmap, .fs-world-filters { display: none !important; } }
 
+/* ---------- World map: larger, with country borders and names (future-saints-map-countries) ----------
+   The map has the full content width and the story card always sits below it. The box is taller
+   than the world (1000 : 445), so the stage keeps the world's shape and is centred in it: without
+   JavaScript by CSS, with it by future-saints.js (which fits the whole world at 1x and, under 1024px,
+   opens filling the height). The sea margin carries the ocean texture past the map's edges.
+   .fs-wmap-frame holds the map's place in the page, so full screen never shifts the layout. */
+.fs-world-explore.fs-hub-explore { grid-template-columns: minmax(0, 1fr); }
+.fs-wmap-frame { position: relative; height: max(360px, 60vh); height: max(360px, 60svh); }
+@media (min-width: 1024px) { .fs-wmap-frame { height: clamp(560px, 70vh, 820px); height: clamp(560px, 70svh, 820px); } }
+.fs-wmap-frame .fs-wmap { aspect-ratio: auto; height: 100%; container: fs-wmap / inline-size; }
+.fs-wmap .fs-zoom-stage { inset: auto; left: 0; top: 50%; width: 100%; height: auto; aspect-ratio: 1000 / 445; margin-top: -22.25%; }
+.fs-wmap .fs-zoom-stage.is-fitted { top: 0; margin-top: 0; width: var(--sw); height: var(--sh); aspect-ratio: auto; }
+.fs-wmap .fs-map-art { overflow: visible; border-radius: 0; }
+.fs-wmap-sea { pointer-events: none; }
+
+/* Borders: thin, soft and warm, about 0.8px on screen at every zoom (--lu: map units per screen px). */
+.fs-wm-borders { fill: none; stroke: #8a7550; stroke-opacity: .5; stroke-width: calc(.8px * var(--lu, 1));
+  stroke-linejoin: round; stroke-linecap: round; pointer-events: none; }
+/* Country names: decorative (the art is aria-hidden), constant on screen: 13px or 11px, never smaller. */
+.fs-wm-label { display: none; font-family: var(--fs-serif); font-size: calc(11px * var(--lu, 1)); letter-spacing: .02em;
+  fill: #4f4537; stroke: var(--fs-parchment); stroke-opacity: .9; stroke-width: calc(3px * var(--lu, 1)); stroke-linejoin: round;
+  paint-order: stroke; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.fs-wm-label--big { font-size: calc(13px * var(--lu, 1)); }
+/* Without JavaScript: the map's width decides its scale; each name carries the bands it fits in. */
+@container fs-wmap (min-width: 320px) and (max-width: 449.98px) { .fs-wmap .fs-map-art { --lu: 3.125; } .fs-wm-label.is-a { display: inline; } }
+@container fs-wmap (min-width: 450px) and (max-width: 699.98px) { .fs-wmap .fs-map-art { --lu: 2.2222; } .fs-wm-label.is-b { display: inline; } }
+@container fs-wmap (min-width: 700px) and (max-width: 899.98px) { .fs-wmap .fs-map-art { --lu: 1.4286; } .fs-wm-label.is-c { display: inline; } }
+@container fs-wmap (min-width: 900px) and (max-width: 1099.98px) { .fs-wmap .fs-map-art { --lu: 1.1111; } .fs-wm-label.is-d { display: inline; } }
+@container fs-wmap (min-width: 1100px) { .fs-wmap .fs-map-art { --lu: .9091; } .fs-wm-label.is-e { display: inline; } }
+/* With JavaScript: future-saints.js marks the names that fit and touch nothing. */
+.fs-wmap.is-labels-live .fs-wm-label { display: none; }
+.fs-wmap.is-labels-live .fs-wm-label.is-on { display: inline; }
+
+/* The story card below a full-width map: picture beside the text on wider screens. */
+@media (min-width: 768px) {
+  .fs-world-explore .fs-world-card { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: 1.5rem; }
+  .fs-world-explore .fs-world-card .fs-art--thumb { border-radius: var(--fs-radius); }
+}
+.fs-world-card-country { margin: 0; font-weight: 700; color: var(--fs-blue); }
+.fs-world-country { margin-inline-start: .5rem; }
+
+/* Full screen (Fullscreen API): the map fills the screen; "Close" and Esc leave. */
+.fs-wmap-close { position: absolute; top: 10px; left: 10px; z-index: 7; min-height: 44px; }
+.fs-wmap-close[hidden] { display: none; }
+.fs-wmap:fullscreen { width: 100vw; height: 100vh; border-radius: 0; }
+.fs-wmap:fullscreen .fs-zoom-viewport { border-radius: 0; }
+.fs-wmap:fullscreen .fs-pin-chooser { top: auto; bottom: 12px; }
+.fs-wmap:-webkit-full-screen { width: 100vw; height: 100vh; border-radius: 0; }
+.fs-wmap:-webkit-full-screen .fs-pin-chooser { top: auto; bottom: 12px; }
+
 /* ---------- Map zoom (both maps): a clipped viewport around a transformed stage ---------- */
 .fs-zoom-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: var(--fs-radius); touch-action: pan-y; }
 .fs-zoom-viewport.is-zoomed { touch-action: none; cursor: grab; }

@@ -1,0 +1,17 @@
+{% load static %}{% comment %}
+  Country borders and English country names on the World Discovery Map (inside its aria-hidden art
+  SVG, under the markers). Natural Earth, U.S. point of view (tools/build_world_borders.py).
+  - Borders: ONE path of shared boundaries (each drawn once), clipped to the land outline so none
+    runs into the sea. Both <use>s carry data-fs-detail: the finer level loads with the land's.
+  - Names: SVG text at Natural Earth's label point. Without JavaScript each shows in the width bands
+    named by its is-a ... is-e classes (container queries; the server placed them clear of the pins);
+    with JavaScript future-saints.js shows them by zoom (data-z, the country's rank) and scale (data-s,
+    where the name fits; empty: only at the largest zoom) and hides any that would touch a pin, the
+    compass, the ship or whale, the zoom buttons or another name. Not interactive.
+{% endcomment %}<defs>
+  <clipPath id="fs-world-land-clip"><use href="{% static 'future_saints/svg/world-outline.svg' %}#fs-world-land" data-fs-detail="{% static 'future_saints/svg/world-outline-50m.svg' %}#fs-world-land"/></clipPath>
+</defs>
+<use class="fs-wm-borders" href="{% static 'future_saints/svg/world-borders.svg' %}#fs-world-borders" data-fs-detail="{% static 'future_saints/svg/world-borders-50m.svg' %}#fs-world-borders" clip-path="url(#fs-world-land-clip)"/>
+<g class="fs-wm-labels" data-fs-labels data-fs-obstacles="{{ fs_world_obstacles }}">
+  {% for l in fs_world_labels %}<text class="fs-wm-label{% if l.px == 13 %} fs-wm-label--big{% endif %} {{ l.bands }}" x="{{ l.x }}" y="{{ l.y }}" data-z="{{ l.rank_zoom }}" data-s="{% if l.fit_scale is not None %}{{ l.fit_scale }}{% endif %}">{{ l.name }}</text>{% endfor %}
+</g>

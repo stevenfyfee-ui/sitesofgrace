@@ -57,6 +57,7 @@
           {% for i in group.items %}
             <li data-fs-kind="{{ i.kind }}">
               <a href="{{ i.url }}">{{ i.title }}</a>
+              {% if i.country_line %}<span class="fs-list-meta fs-world-country">{{ i.country_line }}</span>{% endif %}
               {% if i.pinned %}<a class="fs-world-show" href="?story={{ i.key }}#story-card" aria-label="Show {{ i.title }} on the map">Show on the map</a>
               {% elif i.in_callout %}<span class="fs-list-meta">On the map with the California Missions</span>
               {% else %}<span class="fs-list-meta">Not on the map yet</span>{% endif %}

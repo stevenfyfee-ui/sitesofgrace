@@ -127,36 +127,70 @@
   // clicked or focused (page scrolling is never taken over), and + − arrows 0 while the map
   // has focus. The stage is scaled and moved; markers are counter-scaled in CSS, so they
   // keep their size and their true spots. Panning is clamped to the map. Without this the
-  // static map and the lists still work and the controls stay hidden. ----
+  // static map and the lists still work and the controls stay hidden.
+  // The stage keeps the viewBox's shape and is fitted into the box (1x = the whole map); a stage
+  // smaller than the box on an axis is centred on it (the world map's box is taller than the
+  // world). data-fs-home-x / data-fs-home-fill-below: below that window width the map opens
+  // filling the box's height, centred on that x. data-fs-detail-scale: swap in the finer outline
+  // past that many px per map unit (else past 2x). --lu on the art is map units per screen px,
+  // for strokes and names that keep their screen size. ----
   var initZoom = function (vp) {
     var stage = vp.querySelector(".fs-zoom-stage");
+    var art = vp.querySelector(".fs-map-art");
     var box = vp.parentNode;
     var max = parseFloat(vp.getAttribute("data-fs-zoom-max")) || 4;
     var vbw = parseFloat(vp.getAttribute("data-fs-vb-w")) || 1000;
     var vbh = parseFloat(vp.getAttribute("data-fs-vb-h")) || 1000;
+    var homeX = parseFloat(vp.getAttribute("data-fs-home-x"));
+    var fillBelow = parseFloat(vp.getAttribute("data-fs-home-fill-below")) || 0;
+    var detailScale = parseFloat(vp.getAttribute("data-fs-detail-scale")) || 0;
     var z = 1, tx = 0, ty = 0, armed = false, dragged = false, detailed = false;
+    var sw = 0, sh = 0;
     var pointers = {}, gesture = null;
     var size = function () { return { w: vp.clientWidth, h: vp.clientHeight }; };
+    var lastSize = size();
+    var fitStage = function () {
+      var s = size();
+      if (s.w / Math.max(1, s.h) <= vbw / vbh) { sw = s.w; sh = s.w * vbh / vbw; } else { sh = s.h; sw = s.h * vbw / vbh; }
+      stage.style.setProperty("--sw", sw + "px");
+      stage.style.setProperty("--sh", sh + "px");
+      stage.classList.add("is-fitted");
+    };
+    var clampAxis = function (t, view, content) {
+      return content <= view ? (view - content) / 2 : Math.min(0, Math.max(view - content, t));
+    };
     var apply = function (animate) {
       var s = size();
       z = Math.min(max, Math.max(1, z));
-      tx = Math.min(0, Math.max(s.w - s.w * z, tx));
-      ty = Math.min(0, Math.max(s.h - s.h * z, ty));
+      tx = clampAxis(tx, s.w, sw * z);
+      ty = clampAxis(ty, s.h, sh * z);
       stage.classList.toggle("is-animating", Boolean(animate) && !reduceMotion);
       stage.style.setProperty("--z", z);
       stage.style.setProperty("--tx", tx + "px");
       stage.style.setProperty("--ty", ty + "px");
+      var scale = sw * z / vbw;
+      if (art) { art.style.setProperty("--lu", (1 / scale).toFixed(5)); }
       vp.style.setProperty("--nudge", Math.max(0, Math.min(1, 2 - z)));
       vp.classList.toggle("is-zoomed", z > 1.001);
       vp.setAttribute("data-fs-zoom-level", z.toFixed(3));
+      vp.setAttribute("data-fs-scale", scale.toFixed(4));
       vp.dispatchEvent(new CustomEvent("fs-zoom"));
-      if (z > 2 && !detailed) {
-        // The finer outline (world map: Natural Earth 1:50m), fetched only now.
+      if (!detailed && (detailScale ? scale > detailScale : z > 2)) {
+        // The finer outline and borders (world map: Natural Earth 1:50m), fetched only now.
         detailed = true;
         Array.prototype.forEach.call(vp.querySelectorAll("[data-fs-detail]"), function (use) {
           use.setAttribute("href", use.getAttribute("data-fs-detail"));
         });
       }
+    };
+    var home = function (animate) {
+      var s = size();
+      if (fillBelow && !isNaN(homeX) && window.innerWidth < fillBelow && sh < s.h) {
+        z = s.h / sh;
+        tx = s.w / 2 - homeX / vbw * sw * z;
+        ty = 0;
+      } else { z = 1; tx = 0; ty = 0; }
+      apply(animate);
     };
     var zoomAt = function (nz, cx, cy, animate) {
       nz = Math.min(max, Math.max(1, nz));
@@ -167,24 +201,40 @@
     };
     var api = {
       zoomBy: function (factor, animate) { var s = size(); zoomAt(z * factor, s.w / 2, s.h / 2, animate); },
+      // The whole map, fitted and centred ("Whole World").
       reset: function (animate) { z = 1; tx = 0; ty = 0; apply(animate); },
+      // The opening view (the reset button and the 0 key): the whole map, or below
+      // data-fs-home-fill-below the box's height filled, centred on data-fs-home-x.
+      home: home,
       // Fit a box given in map (viewBox) units.
       fit: function (x1, y1, x2, y2, animate) {
         var s = size();
-        z = Math.min(max, Math.max(1, Math.min(vbw / (x2 - x1), vbh / (y2 - y1))));
-        tx = s.w / 2 - (x1 + x2) / 2 / vbw * s.w * z;
-        ty = s.h / 2 - (y1 + y2) / 2 / vbh * s.h * z;
+        z = Math.min(max, Math.max(1, Math.min(s.w / ((x2 - x1) / vbw * sw), s.h / ((y2 - y1) / vbh * sh))));
+        tx = s.w / 2 - (x1 + x2) / 2 / vbw * sw * z;
+        ty = s.h / 2 - (y1 + y2) / 2 / vbh * sh * z;
         apply(animate);
       },
       // Bring a spot (map units) into view, zooming in to at least minZoom.
       focus: function (x, y, minZoom) {
         var s = size();
         z = Math.min(max, Math.max(z, minZoom || 1));
-        tx = s.w / 2 - x / vbw * s.w * z;
-        ty = s.h / 2 - y / vbh * s.h * z;
+        tx = s.w / 2 - x / vbw * sw * z;
+        ty = s.h / 2 - y / vbh * sh * z;
         apply(true);
       },
-      state: function () { return { z: z, tx: tx, ty: ty }; }
+      // After the box changes size (a resize, full screen): refit, keeping the centre where it was.
+      refresh: function () {
+        var v = size();
+        var cx = sw ? (lastSize.w / 2 - tx) / (sw * z) * vbw : vbw / 2;
+        var cy = sh ? (lastSize.h / 2 - ty) / (sh * z) * vbh : vbh / 2;
+        fitStage();
+        tx = v.w / 2 - cx / vbw * sw * z;
+        ty = v.h / 2 - cy / vbh * sh * z;
+        lastSize = v;
+        apply(false);
+      },
+      max: max,
+      state: function () { return { z: z, tx: tx, ty: ty, sw: sw, sh: sh, scale: sw * z / vbw }; }
     };
     vp.fsZoom = api;
 
@@ -192,7 +242,7 @@
     if (controls) {
       controls.querySelector("[data-fs-zoom-in]").addEventListener("click", function () { api.zoomBy(1.5, true); });
       controls.querySelector("[data-fs-zoom-out]").addEventListener("click", function () { api.zoomBy(1 / 1.5, true); });
-      controls.querySelector("[data-fs-zoom-reset]").addEventListener("click", function () { api.reset(true); });
+      controls.querySelector("[data-fs-zoom-reset]").addEventListener("click", function () { api.home(true); });
       controls.hidden = false;
     }
     vp.tabIndex = 0;
@@ -256,7 +306,7 @@
       var step = 60, k = event.key;
       if (k === "+" || k === "=") { api.zoomBy(1.5, true); }
       else if (k === "-" || k === "_") { api.zoomBy(1 / 1.5, true); }
-      else if (k === "0") { api.reset(true); }
+      else if (k === "0") { api.home(true); }
       else if (k === "ArrowLeft") { tx += step; apply(false); }
       else if (k === "ArrowRight") { tx -= step; apply(false); }
       else if (k === "ArrowUp") { ty += step; apply(false); }
@@ -264,8 +314,10 @@
       else { return; }
       event.preventDefault();
     });
-    window.addEventListener("resize", function () { apply(false); });
-    apply(false);
+    window.addEventListener("resize", function () { api.refresh(); });
+    fitStage();
+    lastSize = size();
+    home(false);
     return api;
   };
   Array.prototype.forEach.call(document.querySelectorAll("[data-fs-zoom]"), initZoom);
@@ -443,6 +495,8 @@
       cardPart("subtitle").hidden = !s.subtitle;
       cardPart("place-text").textContent = s.place_line || "";
       cardPart("place").hidden = !s.place_line;
+      cardPart("country").textContent = s.country_line || "";
+      cardPart("country").hidden = !s.country_line;
       cardPart("link").setAttribute("href", s.url);
       cardPart("link-text").textContent = s.link_label;
       swapArt(worldCard, s.art, "thumb", s.icon);
@@ -466,10 +520,11 @@
     var worldVp = world.closest("[data-fs-zoom]");
     var spreadMarkers = function () {
       if (!worldVp) { return; }
-      var w = worldVp.clientWidth, h = worldVp.clientHeight;
+      var st = worldZoom ? worldZoom.state() : null;
+      var w = st ? st.sw : worldVp.clientWidth, h = st ? st.sh : worldVp.clientHeight;
       var vbw = parseFloat(worldVp.getAttribute("data-fs-vb-w")) || 1000;
       var vbh = parseFloat(worldVp.getAttribute("data-fs-vb-h")) || 1000;
-      var z = worldZoom ? worldZoom.state().z : 1;
+      var z = st ? st.z : 1;
       var pts = markers.map(function (m) {
         return { el: m.closest(".fs-wm-marker"), x: parseFloat(m.getAttribute("data-x")) / vbw * w * z,
                  y: parseFloat(m.getAttribute("data-y")) / vbh * h * z, dx: 0, dy: 0 };
@@ -502,10 +557,122 @@
         if (line) { line.setAttribute("x2", dx); line.setAttribute("y2", dy); }
       });
       world.classList.add("is-spread");
+      queueLabels();
     };
+
+    // Country names: a name may show once the zoom reaches its rank (data-z; 1 = the whole world)
+    // and the map is drawn large enough for it to fit (data-s, px per map unit). At the largest
+    // zoom, a name that can't fit there (data-s empty, or larger than this screen reaches: Vatican
+    // City, Monaco, ...) may show too. Then they are placed greedily in the server's order
+    // (largest countries first). A name is hidden at this zoom if it would touch a marker's button
+    // (pins always win), the compass, the ship or whale, the zoom buttons, the full-screen "Close",
+    // another name, or the map's edge. Positions come from the zoom's state, so they are right
+    // even while the stage animates.
+    var labelLayer = worldBox.querySelector("[data-fs-labels]");
+    var labels = [], labelObstacles = [], labelsQueued = false;
+    var measureCtx = document.createElement("canvas").getContext("2d");
+    var measureLabels = function () {
+      labels.forEach(function (l) {
+        var cs = window.getComputedStyle(l.el);
+        measureCtx.font = l.px + "px " + cs.fontFamily;
+        l.w = measureCtx.measureText(l.el.textContent).width + 0.02 * l.px * l.el.textContent.length;
+      });
+    };
+    var LABEL_PAD = 2, PIN_HIT = 44;
+    var touches = function (a, b) { return !(a[2] <= b[0] || b[2] <= a[0] || a[3] <= b[1] || b[3] <= a[1]); };
+    var placeLabels = function () {
+      labelsQueued = false;
+      if (!labels.length || !worldZoom) { return; }
+      var st = worldZoom.state(), vw = worldVp.clientWidth, vh = worldVp.clientHeight;
+      var atMax = st.z >= worldZoom.max - 0.001, maxScale = st.sw * worldZoom.max / 1000;
+      var taken = [];
+      markers.forEach(function (m) {
+        var el = m.closest(".fs-wm-marker");
+        if (el.hidden) { return; }
+        var cx = st.tx + parseFloat(m.getAttribute("data-x")) * st.scale + (parseFloat(el.style.getPropertyValue("--dx")) || 0);
+        var cy = st.ty + parseFloat(m.getAttribute("data-y")) * st.scale + (parseFloat(el.style.getPropertyValue("--dy")) || 0);
+        taken.push([cx - PIN_HIT / 2, cy - PIN_HIT / 2, cx + PIN_HIT / 2, cy + PIN_HIT / 2]);
+      });
+      var vr = worldVp.getBoundingClientRect();
+      Array.prototype.forEach.call(worldBox.querySelectorAll("[data-fs-zoom-controls], [data-fs-fullscreen-close]"), function (c) {
+        if (c.hidden) { return; }
+        var r = c.getBoundingClientRect();
+        taken.push([r.left - vr.left, r.top - vr.top, r.right - vr.left, r.bottom - vr.top]);
+      });
+      labelObstacles.forEach(function (b) {
+        taken.push([st.tx + b[0] * st.scale, st.ty + b[1] * st.scale, st.tx + b[2] * st.scale, st.ty + b[3] * st.scale]);
+      });
+      labels.forEach(function (l) {
+        var on = (l.s !== null && l.rz <= st.z + 1e-6 && l.s <= st.scale + 1e-6) ||
+                 (atMax && (l.s === null || l.s > maxScale + 1e-6));
+        if (on) {
+          var cx = st.tx + l.x * st.scale, cy = st.ty + l.y * st.scale;
+          var hw = l.w / 2 + LABEL_PAD, hh = l.px * 0.65 + LABEL_PAD;
+          var b = [cx - hw, cy - hh, cx + hw, cy + hh];
+          on = b[0] >= 0 && b[1] >= 0 && b[2] <= vw && b[3] <= vh && !taken.some(function (t) { return touches(b, t); });
+          if (on) { taken.push(b); }
+        }
+        l.el.classList.toggle("is-on", on);
+      });
+      worldBox.classList.add("is-labels-live");
+    };
+    var queueLabels = function () {
+      if (labelsQueued) { return; }
+      labelsQueued = true;
+      (window.requestAnimationFrame || setTimeout)(placeLabels);
+    };
+    if (labelLayer && worldZoom) {
+      labels = Array.prototype.map.call(labelLayer.querySelectorAll(".fs-wm-label"), function (el) {
+        var sAttr = el.getAttribute("data-s");
+        return { el: el, x: parseFloat(el.getAttribute("x")), y: parseFloat(el.getAttribute("y")),
+                 s: sAttr === "" ? null : parseFloat(sAttr), rz: parseFloat(el.getAttribute("data-z")) || 1, px: el.classList.contains("fs-wm-label--big") ? 13 : 11, w: 0 };
+      });
+      labelObstacles = (labelLayer.getAttribute("data-fs-obstacles") || "").split(";").filter(Boolean).map(function (b) {
+        return b.split(",").map(parseFloat);
+      });
+      measureLabels();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { measureLabels(); queueLabels(); });
+      }
+    }
+
     if (worldVp) { worldVp.addEventListener("fs-zoom", spreadMarkers); }
     window.addEventListener("resize", spreadMarkers);
     spreadMarkers();
+
+    // Full screen (the Fullscreen API, where the browser has it; otherwise the button stays
+    // hidden). The map box goes full screen; .fs-wmap-frame keeps its place in the page, so
+    // nothing below moves. "Close" and Esc leave; focus returns to the button.
+    var fsOpen = worldBox.querySelector("[data-fs-fullscreen]");
+    var fsClose = worldBox.querySelector("[data-fs-fullscreen-close]");
+    var fsRequest = worldBox.requestFullscreen || worldBox.webkitRequestFullscreen;
+    var fsExit = document.exitFullscreen || document.webkitExitFullscreen;
+    var fsElement = function () { return document.fullscreenElement || document.webkitFullscreenElement || null; };
+    if (fsOpen && fsClose && fsRequest && fsExit && (document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+      fsOpen.hidden = false;
+      fsOpen.addEventListener("click", function () {
+        var r = fsRequest.call(worldBox);
+        if (r && r.catch) { r.catch(function () {}); }
+      });
+      var leave = function () {
+        if (fsElement() === worldBox) {
+          var r = fsExit.call(document);
+          if (r && r.catch) { r.catch(function () {}); }
+        }
+      };
+      fsClose.addEventListener("click", leave);
+      worldBox.addEventListener("keydown", function (event) { if (event.key === "Escape") { leave(); } });
+      var fsChanged = function () {
+        var on = fsElement() === worldBox;
+        fsClose.hidden = !on;
+        fsOpen.hidden = on;
+        worldBox.classList.toggle("is-fullscreen", on);
+        if (worldZoom) { worldZoom.refresh(); }
+        (on ? fsClose : fsOpen).focus({ preventScroll: true });
+      };
+      document.addEventListener("fullscreenchange", fsChanged);
+      document.addEventListener("webkitfullscreenchange", fsChanged);
+    }
 
     var closeWorldChooser = function (returnTo) {
       worldChooser.hidden = true;
