@@ -371,13 +371,14 @@ list entry also say which country it is in ("Country: Italy"). Everything stays 
 | Crimea | Ukraine. |
 | Kashmir | Split along the Line of Control; Aksai Chin in China. Every border is the same soft line (no dashed lines). |
 
-**Folded pieces.** Every "Breakaway" and "Lease" feature, and the UK sovereign base areas, is folded
-into its sovereign by Natural Earth's `SOV_A3`. A folded piece gets no label, and no line is drawn
+**Folded pieces.** Every "Breakaway" and "Lease" feature is folded into its sovereign by Natural
+Earth's `SOV_A3`, and the UK sovereign base areas into Cyprus (reviewed, `FOLD_INTO`). A folded piece gets no label, and no line is drawn
 where both sides share a sovereign:
 - Abkhazia and South Ossetia → Georgia (no line, no label).
 - Guantánamo Bay → Cuba (`CU1`; no line, no label).
-- Akrotiri and Dhekelia → United Kingdom (`GB1`). Cyprus is a different sovereign, so a small line
-  around each base stays (no label).
+- Akrotiri and Dhekelia → Cyprus (no line, no label; reviewed 2026-11-20). By `SOV_A3` they would go
+  to the United Kingdom (`GB1`) and keep a small line around each base, so they're mapped to `CYP`
+  directly. This edition has one Cyprus feature (no separate north or buffer zone).
 
 ## Borders
 
@@ -389,8 +390,8 @@ where both sides share a sovereign:
 
 | File | Tolerance | Chains | Points | Size (gzipped) |
 |---|---|---|---|---|
-| `static/future_saints/svg/world-borders.svg` | 0.4 units | 363 | 2,949 | 42 KB (16.3 KB) |
-| `static/future_saints/svg/world-borders-50m.svg` | 0.12 units | 373 | 7,526 | 106 KB (39.2 KB) |
+| `static/future_saints/svg/world-borders.svg` | 0.4 units | 360 | 2,942 | 42 KB (16.3 KB) |
+| `static/future_saints/svg/world-borders-50m.svg` | 0.12 units | 370 | 7,514 | 106 KB (39.1 KB) |
 
 - **Clipped** to the land outline (`#fs-world-land-clip`), so no border runs into the sea.
 - **Detail swap:** the finer level loads with the 1:50m land outline (`data-fs-detail`). Both swap the
@@ -475,6 +476,9 @@ its coast and so gets a staff warning instead.
 | Site (slug) | Country | Why |
 |---|---|---|
 | St. Peter's Basilica (`st-peters-basilica`) | Vatican City | Its coordinates fall 0.1 km from Natural Earth's simplified Vatican outline. |
+| Tomb of St. John Paul II (St. Peter's Basilica) (`tomb-of-st-john-paul-ii`) | Vatican City | The same coordinates as the basilica. |
+| St. Peter's Basilica (Tomb of St. Gregory the Great) (`st-peter-s-basilica`) | Vatican City | The same coordinates as the basilica. |
+| Tomb of Lazarus (Bethany) (`tomb-of-lazarus`) | Palestine | Bethany (al-Eizariya) is in the West Bank; its coordinates are within 1 km of the line with Israel. |
 
 - **Saints** use their `map_place` site (or single principal site), as for the pin. No place means
   no country line.

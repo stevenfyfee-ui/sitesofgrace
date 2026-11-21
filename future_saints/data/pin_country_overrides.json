@@ -7,6 +7,27 @@
       "country": "Vatican City",
       "reviewed_on": "2026-11-20",
       "why": "The basilica is inside Vatican City, but its coordinates fall 0.1 km from Natural Earth's simplified Vatican outline, so the point-in-polygon rule treats it as on the border."
+    },
+    {
+      "site_slug": "tomb-of-st-john-paul-ii",
+      "site_title": "Tomb of St. John Paul II (St. Peter's Basilica)",
+      "country": "Vatican City",
+      "reviewed_on": "2026-11-20",
+      "why": "Inside St. Peter's Basilica, in Vatican City; the coordinates are the basilica's, 0.1 km from Natural Earth's simplified Vatican outline, so the point-in-polygon rule treats them as on the border."
+    },
+    {
+      "site_slug": "st-peter-s-basilica",
+      "site_title": "St. Peter's Basilica (Tomb of St. Gregory the Great)",
+      "country": "Vatican City",
+      "reviewed_on": "2026-11-20",
+      "why": "Inside St. Peter's Basilica, in Vatican City; the coordinates are the basilica's, 0.1 km from Natural Earth's simplified Vatican outline, so the point-in-polygon rule treats them as on the border."
+    },
+    {
+      "site_slug": "tomb-of-lazarus",
+      "site_title": "Tomb of Lazarus (Bethany)",
+      "country": "Palestine",
+      "reviewed_on": "2026-11-20",
+      "why": "Bethany (al-Eizariya) is in the West Bank, shown as Palestine; its coordinates are within 1 km of the line with Israel, so the point-in-polygon rule treats them as on the border."
     }
   ]
 }

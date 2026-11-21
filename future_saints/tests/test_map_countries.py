@@ -95,6 +95,10 @@ class CountryDataTests(SimpleTestCase):
         self.assertEqual(country_at(25.0330, 121.5654)[0], "Taiwan")
         self.assertEqual(country_at(31.9038, 35.2034)[0], "Palestine")     # Ramallah
         self.assertEqual(country_at(43.0015, 41.0234)[0], "Georgia")      # Sukhumi (Abkhazia, folded)
+        # The UK sovereign base areas are folded into Cyprus (reviewed), so no line is drawn around them.
+        self.assertEqual(country_at(34.5880, 32.9860)[0], "Cyprus")       # RAF Akrotiri
+        self.assertEqual(country_at(34.9850, 33.7300)[0], "Cyprus")       # Dhekelia
+        self.assertNotIn("United Kingdom", {country_at(34.5880, 32.9860)[0], country_at(34.9850, 33.7300)[0]})
 
     def test_names_are_the_approved_english_names(self):
         names = {lab["name"] for lab in label_data()}
@@ -126,7 +130,9 @@ class CountryDataTests(SimpleTestCase):
         for slug, o in countries.overrides().items():
             self.assertIn(o["country"], known, slug)
             self.assertTrue(o["reviewed_on"] and o["why"] and o["site_title"], slug)
-        self.assertEqual(countries.overrides()["st-peters-basilica"]["country"], "Vatican City")
+        self.assertEqual({slug: o["country"] for slug, o in countries.overrides().items()},
+                         {"st-peters-basilica": "Vatican City", "tomb-of-st-john-paul-ii": "Vatican City",
+                          "st-peter-s-basilica": "Vatican City", "tomb-of-lazarus": "Palestine"})
 
     def test_source_and_licence_are_documented(self):
         doc = (BASE / "docs" / "future-saints" / "map-calibration.md").read_text(encoding="utf-8")

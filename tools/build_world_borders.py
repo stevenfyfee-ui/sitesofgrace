@@ -13,8 +13,8 @@ https://www.naturalearthdata.com/about/terms-of-use/
 
 What it does (no border is drawn or moved by hand):
 - Folds every "Breakaway" and "Lease" feature into the feature of its sovereign (SOV_A3), and the UK
-  sovereign base areas (Akrotiri, Dhekelia) into theirs, the same way: no line where both sides share a
-  sovereign, and no label for the folded piece.
+  sovereign base areas (Akrotiri, Dhekelia) into Cyprus (FOLD_INTO, reviewed): no line where both sides
+  are folded together, and no label for the folded piece.
 - Borders: every edge two different countries share, chained between junctions, each drawn ONCE
   (no doubled lines), projected with future_saints.geo.world_viewbox, simplified per chain (junctions
   stay put, so chains still meet), with any segment repeated after simplifying dropped.
@@ -61,7 +61,9 @@ LOOKUP_COAST_TOLERANCE_DEG = 0.03   # pin-country shapes, coasts: about 3.3 km (
 LOOKUP_MIN_PART_DEG2 = 0.001        # pin-country shapes: island parts smaller than this (about 12 km²) are left out,
                                     # unless they are all the country has
 FOLD_TYPES = {"Breakaway", "Lease"}
-FOLD_ALSO = {"WSB", "ESB"}     # Akrotiri and Dhekelia (UK sovereign base areas): folded by SOV_A3 too
+# Reviewed 2026-11-20: Akrotiri and Dhekelia (UK sovereign base areas) are folded into Cyprus, not by SOV_A3
+# (which would give the United Kingdom and leave a small line around each base).
+FOLD_INTO = {"WSB": "CYP", "ESB": "CYP"}
 LABEL_TYPES = {"Sovereign country", "Sovereignty", "Country", "Disputed", "Indeterminate"}
 LABEL_ALSO = {"KOS", "TWN", "PSX", "SAH", "GRL"}
 # Indeterminate reef and island features that are not countries (no label, no pin country):
@@ -93,13 +95,17 @@ def fold_map(features):
     by_sov = {}
     for f in features:
         p = f["properties"]
-        if p["TYPE"] not in FOLD_TYPES and p["ADM0_A3"] not in FOLD_ALSO and p["HOMEPART"] == 1:
+        if p["TYPE"] not in FOLD_TYPES and p["ADM0_A3"] not in FOLD_INTO and p["HOMEPART"] == 1:
             by_sov.setdefault(p["SOV_A3"], p["ADM0_A3"])
     out = {}
     for f in features:
         p = f["properties"]
-        folded = p["TYPE"] in FOLD_TYPES or p["ADM0_A3"] in FOLD_ALSO
-        out[p["ADM0_A3"]] = by_sov[p["SOV_A3"]] if folded else p["ADM0_A3"]
+        if p["ADM0_A3"] in FOLD_INTO:
+            out[p["ADM0_A3"]] = FOLD_INTO[p["ADM0_A3"]]
+        elif p["TYPE"] in FOLD_TYPES:
+            out[p["ADM0_A3"]] = by_sov[p["SOV_A3"]]
+        else:
+            out[p["ADM0_A3"]] = p["ADM0_A3"]
     return out
 
 
